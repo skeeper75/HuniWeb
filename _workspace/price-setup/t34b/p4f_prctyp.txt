@@ -1,0 +1,7 @@
+$ psql <DATABASE_URL> -c "select cd_id, cd_nm from t_bas_basecodes where cd_id like 'PRICE_TYPE%' order by 1;"
+
+
+[STDERR]
+ERROR:  relation "t_bas_basecodes" does not exist
+LINE 1: select cd_id, cd_nm from t_bas_basecodes where cd_id like 'P...
+                                 ^

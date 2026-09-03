@@ -1,0 +1,19 @@
+$ psql <DATABASE_URL> -c "select proc_cd, proc_nm, upr_proc_cd from t_proc_processes where upr_proc_cd in ('PROC_000085','PROC_000121','PROC_000026','PROC_000029','PROC_000030') or proc_cd in ('PROC_000085','PROC_000121') order by upr_proc_cd nulls first, proc_cd;"
+
+   proc_cd   |      proc_nm      | upr_proc_cd 
+-------------+-------------------+-------------
+ PROC_000085 | 가변데이타        | 
+ PROC_000121 | 커팅              | 
+ PROC_000027 | 직각모서리        | PROC_000026
+ PROC_000028 | 둥근모서리(4방4R) | PROC_000026
+ PROC_000152 | 둥근모서리(2방4R) | PROC_000026
+ PROC_000090 | 오시              | PROC_000029
+ PROC_000086 | 미싱              | PROC_000030
+ PROC_000031 | 가변텍스트        | PROC_000085
+ PROC_000032 | 가변이미지        | PROC_000085
+ PROC_000122 | 반칼커팅          | PROC_000121
+ PROC_000123 | 완칼커팅          | PROC_000121
+ PROC_000124 | 레이저커팅        | PROC_000121
+ PROC_000125 | 시트커팅          | PROC_000121
+(13 rows)
+

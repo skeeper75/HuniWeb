@@ -1,0 +1,13 @@
+$ psql <DATABASE_URL> -c "select p.comp_cd, count(*) rows, coalesce(string_agg(distinct p.proc_cd,','),'-') procs, coalesce(string_agg(distinct p.plt_siz_cd,','),'-') plts, coalesce(string_agg(distinct p.siz_cd,','),'-') sizs, count(p.mat_cd) matn, count(p.dim_vals) dv, count(distinct p.min_qty) qty from t_prc_component_prices p where p.comp_cd in ('COMP_PP_CORNER_RIGHT','COMP_PP_CREASE_1L','COMP_PP_PERF_1L','COMP_PP_VARTEXT_1EA','COMP_PP_VARIMG_1EA','COMP_CUT_FULL_DIECUT','COMP_ENV_MAKING') group by 1 order by 1;"
+
+       comp_cd        | rows |          procs          |         plts          |                    sizs                     | matn | dv | qty 
+----------------------+------+-------------------------+-----------------------+---------------------------------------------+------+----+-----
+ COMP_CUT_FULL_DIECUT |   72 | PROC_000123             | SIZ_000499,SIZ_000535 | -                                           |    0 |  0 |  36
+ COMP_ENV_MAKING      |   60 | -                       | -                     | SIZ_000191,SIZ_000192,SIZ_000193,SIZ_000194 |   60 |  0 |   5
+ COMP_PP_CORNER_RIGHT |   18 | PROC_000027,PROC_000028 | -                     | -                                           |    0 |  0 |   9
+ COMP_PP_CREASE_1L    |   30 | PROC_000090             | -                     | -                                           |    0 | 30 |  10
+ COMP_PP_PERF_1L      |   30 | PROC_000086             | -                     | -                                           |    0 | 30 |  10
+ COMP_PP_VARIMG_1EA   |   72 | PROC_000032             | -                     | -                                           |    0 | 72 |  24
+ COMP_PP_VARTEXT_1EA  |   72 | PROC_000031             | -                     | -                                           |    0 | 72 |  24
+(7 rows)
+

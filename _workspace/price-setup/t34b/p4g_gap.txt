@@ -1,0 +1,12 @@
+$ psql <DATABASE_URL> -c "select comp_cd, proc_cd, min_qty, unit_price, coalesce(dim_vals::text,'') dv from t_prc_component_prices where comp_cd in ('COMP_PP_CORNER_RIGHT','COMP_PP_PERF_1L') and min_qty in (100,300,500) and (proc_cd='PROC_000028' or dim_vals::text like '%"줄수": 1%') order by comp_cd, min_qty;"
+
+       comp_cd        |   proc_cd   | min_qty | unit_price |     dv      
+----------------------+-------------+---------+------------+-------------
+ COMP_PP_CORNER_RIGHT | PROC_000028 |     100 |    2000.00 | 
+ COMP_PP_CORNER_RIGHT | PROC_000028 |     300 |    4000.00 | 
+ COMP_PP_CORNER_RIGHT | PROC_000028 |     500 |    6000.00 | 
+ COMP_PP_PERF_1L      | PROC_000086 |     100 |   10000.00 | {"줄수": 1}
+ COMP_PP_PERF_1L      | PROC_000086 |     300 |   15000.00 | {"줄수": 1}
+ COMP_PP_PERF_1L      | PROC_000086 |     500 |   17000.00 | {"줄수": 1}
+(6 rows)
+

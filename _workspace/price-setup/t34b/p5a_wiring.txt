@@ -1,0 +1,17 @@
+$ psql <DATABASE_URL> -c "select fc.comp_cd, count(distinct fc.frm_cd) n, string_agg(distinct fc.frm_cd, ', ' order by fc.frm_cd) frms from t_prc_formula_components fc where fc.comp_cd in ('COMP_PRINT_DIGITAL_S1','COMP_PRINT_SPOT_WHITE_S1','COMP_COAT_MATTE','COMP_COAT_GLOSSY','COMP_FOLD_CARD_2H','COMP_FOLD_CARD_6CR','COMP_FOLD_LEAF_HALF','COMP_FOLD_LEAF_3FOLD','COMP_FOLD_LEAF_4ACC','COMP_FOLD_LEAF_4GATE','COMP_CUT_PERF_1H6') group by 1 order by 1;"
+
+         comp_cd          | n  |                                                                                                 frms                                                                                                  
+--------------------------+----+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ COMP_COAT_GLOSSY         |  5 | PRF_DGP_A, PRF_DGP_A_FOIL, PRF_DGP_D, PRF_DGP_E, PRF_DGP_E_FOIL
+ COMP_COAT_MATTE          |  6 | PRF_BOOK_COVER, PRF_DGP_A, PRF_DGP_A_FOIL, PRF_DGP_D, PRF_DGP_E, PRF_DGP_E_FOIL
+ COMP_CUT_PERF_1H6        |  5 | PRF_DGP_C, PRF_DGP_C_6CR, PRF_DGP_D, PRF_DGP_E, PRF_DGP_E_FOIL
+ COMP_FOLD_CARD_2H        |  1 | PRF_FOLD_SUM
+ COMP_FOLD_CARD_6CR       |  1 | PRF_DGP_C_6CR
+ COMP_FOLD_LEAF_3FOLD     |  2 | PRF_DGP_E, PRF_DGP_E_FOIL
+ COMP_FOLD_LEAF_4ACC      |  2 | PRF_DGP_E, PRF_DGP_E_FOIL
+ COMP_FOLD_LEAF_4GATE     |  2 | PRF_DGP_E, PRF_DGP_E_FOIL
+ COMP_FOLD_LEAF_HALF      |  2 | PRF_DGP_E, PRF_DGP_E_FOIL
+ COMP_PRINT_DIGITAL_S1    | 14 | PRF_BOOK_COVER, PRF_DGP_A, PRF_DGP_A_FOIL, PRF_DGP_B, PRF_DGP_C, PRF_DGP_C_6CR, PRF_DGP_CAL_DESK, PRF_DGP_CAL_WIDE, PRF_DGP_D, PRF_DGP_E, PRF_DGP_E_FOIL, PRF_DGP_F, PRF_DGP_INNER, PRF_DGP_INNER_CAL
+ COMP_PRINT_SPOT_WHITE_S1 |  2 | PRF_DGP_A, PRF_DGP_A_FOIL
+(11 rows)
+

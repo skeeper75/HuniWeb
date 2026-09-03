@@ -1,0 +1,13 @@
+$ psql <DATABASE_URL> -c "select comp_cd, coalesce(dim_vals::text,'') dv, max(min_qty) maxq, max(unit_price) filter (where min_qty=(select max(min_qty) from t_prc_component_prices x where x.comp_cd=p.comp_cd)) v_at_max from t_prc_component_prices p where comp_cd in ('COMP_PP_CORNER_RIGHT','COMP_PP_CREASE_1L','COMP_PP_PERF_1L') group by 1,2 order by 1,2;"
+
+       comp_cd        |     dv      | maxq | v_at_max  
+----------------------+-------------+------+-----------
+ COMP_PP_CORNER_RIGHT |             | 5000 |  51000.00
+ COMP_PP_CREASE_1L    | {"줄수": 1} | 5000 | 105000.00
+ COMP_PP_CREASE_1L    | {"줄수": 2} | 5000 | 109000.00
+ COMP_PP_CREASE_1L    | {"줄수": 3} | 5000 | 113000.00
+ COMP_PP_PERF_1L      | {"줄수": 1} | 5000 | 105000.00
+ COMP_PP_PERF_1L      | {"줄수": 2} | 5000 | 109000.00
+ COMP_PP_PERF_1L      | {"줄수": 3} | 5000 | 113000.00
+(7 rows)
+

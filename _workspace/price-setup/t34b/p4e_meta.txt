@@ -1,0 +1,13 @@
+$ psql <DATABASE_URL> -c "select c.comp_cd, c.comp_nm, c.prc_typ_cd, c.comp_typ_cd, (select count(*) from t_prc_formula_components f where f.comp_cd=c.comp_cd) formulas from t_prc_price_components c where c.comp_cd in ('COMP_PP_CORNER_RIGHT','COMP_PP_CREASE_1L','COMP_PP_PERF_1L','COMP_PP_VARTEXT_1EA','COMP_PP_VARIMG_1EA','COMP_CUT_FULL_DIECUT','COMP_ENV_MAKING') order by 1;"
+
+       comp_cd        |               comp_nm               |  prc_typ_cd   |      comp_typ_cd      | formulas 
+----------------------+-------------------------------------+---------------+-----------------------+----------
+ COMP_CUT_FULL_DIECUT | 커팅 완제품가 완칼(모양엽서·라벨택) | PRICE_TYPE.03 | PRC_COMPONENT_TYPE.06 |        3
+ COMP_ENV_MAKING      | 봉투제작(합판)                      | PRICE_TYPE.02 | PRC_COMPONENT_TYPE.06 |        1
+ COMP_PP_CORNER_RIGHT | 귀돌이                              | PRICE_TYPE.03 | PRC_COMPONENT_TYPE.04 |       11
+ COMP_PP_CREASE_1L    | 오시비                              | PRICE_TYPE.03 | PRC_COMPONENT_TYPE.04 |        4
+ COMP_PP_PERF_1L      | 미싱비                              | PRICE_TYPE.03 | PRC_COMPONENT_TYPE.04 |        3
+ COMP_PP_VARIMG_1EA   | 가변이미지                          | PRICE_TYPE.03 | PRC_COMPONENT_TYPE.04 |        7
+ COMP_PP_VARTEXT_1EA  | 가변텍스트                          | PRICE_TYPE.03 | PRC_COMPONENT_TYPE.04 |        7
+(7 rows)
+

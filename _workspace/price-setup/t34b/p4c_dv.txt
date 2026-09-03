@@ -1,0 +1,18 @@
+$ psql <DATABASE_URL> -c "select p.comp_cd, p.dim_vals::text dv, count(*) n, min(p.min_qty) q0, max(p.min_qty) q1 from t_prc_component_prices p where p.comp_cd in ('COMP_PP_CREASE_1L','COMP_PP_PERF_1L','COMP_PP_VARTEXT_1EA','COMP_PP_VARIMG_1EA') group by 1,2 order by 1,2;"
+
+       comp_cd       |     dv      | n  | q0 |  q1   
+---------------------+-------------+----+----+-------
+ COMP_PP_CREASE_1L   | {"줄수": 1} | 10 |  1 |  5000
+ COMP_PP_CREASE_1L   | {"줄수": 2} | 10 |  1 |  5000
+ COMP_PP_CREASE_1L   | {"줄수": 3} | 10 |  1 |  5000
+ COMP_PP_PERF_1L     | {"줄수": 1} | 10 |  1 |  5000
+ COMP_PP_PERF_1L     | {"줄수": 2} | 10 |  1 |  5000
+ COMP_PP_PERF_1L     | {"줄수": 3} | 10 |  1 |  5000
+ COMP_PP_VARIMG_1EA  | {"개수": 1} | 24 |  1 | 10000
+ COMP_PP_VARIMG_1EA  | {"개수": 2} | 24 |  1 | 10000
+ COMP_PP_VARIMG_1EA  | {"개수": 3} | 24 |  1 | 10000
+ COMP_PP_VARTEXT_1EA | {"개수": 1} | 24 |  1 | 10000
+ COMP_PP_VARTEXT_1EA | {"개수": 2} | 24 |  1 | 10000
+ COMP_PP_VARTEXT_1EA | {"개수": 3} | 24 |  1 | 10000
+(12 rows)
+
