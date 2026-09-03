@@ -4,7 +4,7 @@ title: 가격표 code/name 기준 가격구성요소 재정립 (아크릴·스�
 version: "0.5.1"
 status: draft
 created: 2026-09-02
-updated: 2026-09-02
+updated: 2026-09-03
 author: manager-spec
 priority: P1
 phase: "v1.0.0 target"

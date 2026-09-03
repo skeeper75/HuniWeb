@@ -4,7 +4,7 @@ title: 가격표 code/name 기준 가격구성요소 재정립 — 진행 기록
 version: "0.5.1"
 status: draft
 created: 2026-09-02
-updated: 2026-09-02
+updated: 2026-09-03
 author: manager-spec
 priority: P1
 phase: "v1.0.0 target"
@@ -1512,9 +1512,61 @@ source_session_id: <not-available — /moai session register 로 backfill>
 
 ## §E.4 Sync-phase Audit-Ready Signal
 
-_<sync 단계 대기>_
+트랙 A sync 종료 시점 신호. 5절 형식(주장 / 증거 / baseline 귀속 / 미검증 / 잔여 위험). §E.3의
+run-phase 증거를 그대로 끌어오며, 이 phase는 문서 동기화만 수행했다 — 라이브 DB 재검증은
+하지 않았다(할 권한도 필요도 없다).
 
-- plan_complete_at: 2026-09-02T20:00:00Z
-- handoff_at: 2026-09-03 02:5x KST · HEAD e37d43b9 · 다음 세션 시작점 = §E.2 「다음 세션 시작점」
-- run_status: **M1·M2·M3 완료 · M4 파일럿+묶음① 완료(33공식·45행)** · 골든 재산출 후 잔여 금액차 4조합(결함 D-14 `opt_grp:` 스코프 누락) · DB 직접 쓰기 0 · D-14 보정 완료 · **묶음② 완료**(스티커 7/12 + 타투 + 포스터 8공식 · 골든 금액차 0 · D-11 전치 교정으로 세로 1200 초과 포스터 0원 해소) · **묶음③ 미니파츠 완료(6,320 검산)** · 메쉬 공용배선 정지(D-16 옵션코드 불일치) · 보류 5상품 회신 대기
-- plan_status: audit-ready (5차 감사 PASS · 0.96 · 차단 결함 0 · 확인 대기 0)
+### 주장
+
+트랙 A(아크릴·스티커·포스터/사인) 신설 43건의 등록·단가 적재·재배선·검증이 §E.3에 기록된
+증거로 완료되었고, 이번 sync는 그 완료를 `CHANGELOG.md`와 SPEC 프론트매터에 반영했다.
+트랙 B(공정·후가공·신설 8)는 착수 전이며 이 sync가 다루는 범위가 아니다.
+
+### 증거 (명령 + 관측한 출력)
+
+| # | 확인 | 관측 |
+|---|---|---|
+| 1 | CHANGELOG 사전 중복 검사 | `grep -c 'SPEC-PRICECOMP-001' CHANGELOG.md` → 파일 신규 생성(선행 항목 0) |
+| 2 | AC 식별자 수 대조 | `grep -oE 'AC-([A-Z0-9]+-)*[0-9]+' acceptance.md \| sort -u \| wc -l` → **20**(AC-001~AC-020, 트랙 A·B 합산 분모) |
+| 3 | 인계 문서 경로 존재 | `ls _workspace/price-setup/HANDOFF-TO-STAFF-260903.md _workspace/price-setup/HANDOFF-vessels-43.csv` → 둘 다 존재 |
+| 4 | golden/m4/screens 산출물 디렉토리 존재 | `ls _workspace/price-setup/{golden,m4,screens}/` → 셋 다 존재, 파일 다수 |
+| 5 | Run-phase §E.3 증거 인용 | 43그릇 실재·`use_yn=Y` 43/43 · 단가표 diff 0(41) · 골든 141줄 금액차 0 · 위젯 진단 104줄 PRICE=0 0 · 센서 2종 0건 — §E.3 표 그대로 인용, 재실행하지 않았다(문서 phase는 라이브 조회 권한·필요 둘 다 없음) |
+
+### baseline 귀속
+
+- 이 sync 커밋의 HEAD는 §E.3 작성 커밋(`c144077c`) 이후 첫 커밋이며, §E.3 이후 라이브에 대한
+  추가 조작은 이 세션에서 수행하지 않았다 — sync는 문서·CHANGELOG·프론트매터만 건드린다.
+- 인용한 모든 수치(43그릇·54~55상품·141골든줄·104위젯줄)는 §E.3이 이미 관측·귀속한 값이며,
+  이 phase가 새로 측정한 값이 아니다. 재측정하지 않았다는 사실 자체가 §미검증에 있다.
+
+### 미검증 (Gaps)
+
+1. **§E.3 §미검증 5건은 이 sync에서도 그대로 미해소다** — 포스터 31상품 골든/위젯 stale,
+   M6 사후 검산 미실시, 실화면(M7) 대조 미실시, `COMP_STK_PRINT` 360행 삭제 주체 미확인,
+   직접입력 구간 전수 미검증. sync phase는 이들을 검증할 권한(라이브 쓰기·재계산 실행 판단)이
+   없다 — 실무진 역할 재정의로 배선·사용여부는 이제 우리 몫이 아니다.
+2. **CHANGELOG 항목 이후 라이브 상태 변화는 담지 못한다.** §E.3 §잔여위험 1번(병행 쓰기)이
+   여전히 유효하다 — 다른 세션이 계속 같은 라이브를 만지고 있다.
+3. **트랙 B는 이 sync의 범위 밖이다.** P1~P6 착수 전 상태 그대로이며, 이 문서 갱신은 트랙 B의
+   진행 상태를 바꾸지 않는다.
+
+### 잔여 위험
+
+1. §E.3의 잔여 위험 1~4(병행 쓰기·회신 대기 6건 중 5번·역할 재정의로 배선 보증 상실·센서 이력
+   부재)가 sync 이후에도 그대로 남는다 — 이 phase는 문서화만 하며 해소하지 않는다.
+2. **트랙 B 미착수.** SPEC 전체(51그릇·58 정본)를 기준으로 보면 이번 sync는 트랙 A(43그릇)만
+   닫는다. SPEC 프론트매터 `status`를 전체 `completed`로 전환하면 트랙 B 미착수를 은폐하게
+   되므로, 상태 전환은 트랙 단위로 문구를 남겨 이 구분을 보존한다(아래 커밋 참고).
+
+- sync_complete_at: (커밋 시각 — 아래 커밋 SHA에 귀속)
+- sync_status: **트랙 A 부분 완료(partial)** — 트랙 B(P1~P6) 미착수
+- b12_self_test_a: PASS (CHANGELOG.md 사전 중복 grep — 신규 파일, count 0)
+- b12_self_test_b: PASS (AC 식별자 20건 — acceptance.md와 CHANGELOG 서술 정합)
+- b12_self_test_c: PASS (인용 파일 경로 전건 `ls` 확인)
+- changelog_entry_position: `[Unreleased]` 최상단 섹션, Added/Changed/Fixed/Notes 4분류
+- frontmatter_status_transitions.spec_md: **보류 — 전환하지 않음.** 네 파일 모두 현재 `status: draft`다. manager-docs가 소유한 전환은 `in-progress → implemented → completed`뿐이며 `draft → in-progress` 전환은 manager-develop 소유다(`spec-frontmatter-schema.md` § Status Transition Ownership Matrix). 이 SPEC은 방대한 run-phase 작업(§E.2·§E.3)이 끝났음에도 `draft`에 머물러 있다 — run-phase 어느 시점에도 `in-progress`로 전환되지 않은 것으로 보인다. 이는 manager-docs가 스스로 수행할 수 있는 전환이 아니므로, **`updated:` 필드만 갱신**하고 `status:` 는 건드리지 않았다. 이 상태 불일치는 완료 보고서에 blocker로 별도 명시한다
+- frontmatter_status_transitions.plan_md: 동일(보류 — `updated:` 만 갱신)
+- frontmatter_status_transitions.acceptance_md: 동일(보류 — `updated:` 만 갱신)
+- frontmatter_status_transitions.progress_md: 동일(보류 — `updated:` 만 갱신 · §E.4 본 절 작성으로 sync 1회분 반영은 body 내용이며 frontmatter status 전환과는 별개)
+- canary_compliance_check: 해당 없음(이 SPEC은 forward-looking 캐너리 정책을 정의하지 않음)
+
