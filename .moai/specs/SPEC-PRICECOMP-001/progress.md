@@ -1228,6 +1228,79 @@ D-17 은 「0원이 아니면 통과」하는 검사와 「before/after 비교�
 `COMP_STK_PRINT` 를 다룰 때 함께 판단해야 한다 — 보류 5상품은 `PRF_STK_FIXED` **하나만**
 쓰므로 M6-1(사용중지 금지)은 그대로 유효하다.
 
+### 트랙 A · M6 명세표 (초안 · **지니 승인 대기 · 라이브 쓰기 0**)
+
+리드 지시로 대기 중 준비한 초안이다. **아직 아무것도 내리지 않았다** — 전부 실측·기록뿐이다.
+
+#### 처분 대상 34개 — 전부 `use_yn=N`(행 보존 · 삭제 금지)
+
+| # | 그릇 | 행수 | 현재 참조 | 처분 |
+|---|---|---|---|---|
+| 1 | `COMP_POSTER_ARTPRINT_PHOTO` | 52 | 공식 PRF_POSTER_FIXED (상품 0 · 고아) | `use_yn=N` |
+| 2 | `CLR_ACRYL_1.5T` | 81 | 없음 | `use_yn=N` |
+| 3 | `COMP_ACRYL_CARABINER` | 4 | 없음 | `use_yn=N` |
+| 4 | `COMP_ACRYL_CLEAR3T` | 277 | 없음 · 할인행 1(죽은 행) | `use_yn=N` |
+| 5 | `COMP_ACRYL_COROTTO` | 36 | 없음 | `use_yn=N` |
+| 6 | `COMP_ACRYL_FINISH` | 17 | 없음 | `use_yn=N` |
+| 7 | `COMP_ACRYL_MIRROR3T` | 81 | 없음 | `use_yn=N` |
+| 8 | `COMP_BANNER_ADDON` | 4 | 없음 | `use_yn=N` |
+| 9 | `COMP_BANNER_OPTION` | 6 | 없음 | `use_yn=N` |
+| 10 | `COMP_POSTEROPT_CANVAS_HANGING_WOODHANGER` | 3 | 없음 | `use_yn=N` |
+| 11 | `COMP_POSTEROPT_LINEN_FINISH` | 5 | 없음 | `use_yn=N` |
+| 12 | `COMP_POSTEROPT_LINEN_WOODBONG_WOODBONG` | 3 | 없음 | `use_yn=N` |
+| 13 | `COMP_POSTER_ACRYLSTK_GLOSS` | 4 | 없음 | `use_yn=N` |
+| 14 | `COMP_POSTER_ACRYLSTK_MIRROR` | 4 | 없음 | `use_yn=N` |
+| 15 | `COMP_POSTER_ADH_CLEAR_PVC` | 52 | 없음 | `use_yn=N` |
+| 16 | `COMP_POSTER_ARTPAPER_MATTE` | 39 | 없음 | `use_yn=N` |
+| 17 | `COMP_POSTER_BANNER_MESH` | 48 | 없음 | `use_yn=N` |
+| 18 | `COMP_POSTER_BANNER_NORMAL` | 80 | 없음 | `use_yn=N` |
+| 19 | `COMP_POSTER_CANVAS_FABRIC` | 52 | 없음 | `use_yn=N` |
+| 20 | `COMP_POSTER_CANVAS_HANGING` | 3 | 없음 | `use_yn=N` |
+| 21 | `COMP_POSTER_FOAMBOARD_BOARD` | 4 | 없음 | `use_yn=N` |
+| 22 | `COMP_POSTER_FOMEXBOARD_BOARD` | 4 | 없음 | `use_yn=N` |
+| 23 | `COMP_POSTER_FRAMELESS_WOOD` | 2 | 없음 | `use_yn=N` |
+| 24 | `COMP_POSTER_JOKJA` | 5 | 없음 | `use_yn=N` |
+| 25 | `COMP_POSTER_LEATHER_FRAME` | 6 | 없음 | `use_yn=N` |
+| 26 | `COMP_POSTER_LINEN_FABRIC` | 52 | 없음 | `use_yn=N` |
+| 27 | `COMP_POSTER_LINEN_WOODBONG` | 3 | 없음 | `use_yn=N` |
+| 28 | `COMP_POSTER_MESH_BANNER` | 1 | 없음 | `use_yn=N` |
+| 29 | `COMP_POSTER_MINI_BANNER` | 10 | 없음 | `use_yn=N` |
+| 30 | `COMP_POSTER_MINI_STANDBOARD` | 15 | 없음 | `use_yn=N` |
+| 31 | `COMP_POSTER_PET_BANNER` | 1 | 없음 | `use_yn=N` |
+| 32 | `COMP_POSTER_SHEETCUT_HOLO` | 3 | 없음 | `use_yn=N` |
+| 33 | `COMP_POSTER_SHEETCUT_MATTE` | 6 | 없음 | `use_yn=N` |
+| 34 | `COMP_STK_TATTOO` | 333 | 없음 | `use_yn=N` |
+
+#### 예외 — 유지 4개
+
+| 그릇 | 행수 | 현재 참조 | 유지 사유 |
+|---|---|---|---|
+| `COMP_ACRYL_NAMETAG_GS` | 3 | PRF_ACRYL_NAMETAG_GS | PRF_ACRYL_NAMETAG_GS 본체로 계속 쓰임 |
+| `COMP_BANNER_MESH_ADDON` | 2 | PRF_POSTER_BANNER_M | D-16 구조 제약 — 메쉬 전용 유지 확정 |
+| `COMP_BANNER_MESH_OPTION` | 4 | PRF_POSTER_BANNER_M | D-16 구조 제약 — 메쉬 전용 유지 확정 |
+| `COMP_STK_PRINT` | 5424 | PRF_STK_FIXED | 회신⑤ 대기 — 보류 5상품이 이 그릇만 쓴다 |
+
+#### 되돌림
+
+`use_yn=Y` 로 복귀하면 끝이다. 단가행은 하나도 지우지 않으므로 되돌림에 손실이 없다.
+스냅샷 = `rollback/m6-vessels-before.csv`(38행 · 그릇별 `use_yn`·참조·행수) ·
+`rollback/m6-discount-comp-before.csv`(127행 · 구성요소를 지목한 할인 행 전체).
+
+#### 착수 전 확인한 것 (실측)
+
+| 확인 | 결과 |
+|---|---|
+| 할인이 끊길 위험 | 구성요소를 지목한 할인 행 127개 중 처분 대상을 가리키는 것은 **1개**(`COMP_ACRYL_CLEAR3T` → `PRD_000146` 아크릴키링, 08-23). 같은 상품에 새 행(`ACRYLIC_CLEAR3T_PRINT`, 09-02)이 **이미 붙어 있고** 옛 행은 공식에 없는 그릇을 가리키는 **죽은 행**이라 사용중지해도 할인이 끊기지 않는다. 옛 행 정리는 별건 |
+| `COMP_STK_PRINT` 를 쓰는 상품 | 13개 — 보류 5(`052`·`053`·`054`·`062`·`063`, 공식 1개만) + 스티커 7(`055`~`061`, 새 공식과 **함께** 걸린 죽은 배선) + `PRD_000064` 소량자유형스티커(**이미 사용중지 상품** `in_scope=N`). 보류 대상은 5에서 늘지 않는다 |
+| `COMP_POSTER_ARTPRINT_PHOTO` | 참조 공식 `PRF_POSTER_FIXED` 1개뿐이고 그 공식을 쓰는 **상품 0** — 고아. 함께 내린다 |
+| 메쉬 2그릇 · 명찰GS | 후보 목록 **밖**(각각 `PRF_POSTER_BANNER_M`·`PRF_ACRYL_NAMETAG_GS` 가 실제로 참조 중) — 예외로 명시 |
+
+#### M6 착수 시 함께 판단할 것
+
+1. 스티커 7상품(`055`~`061`)의 **죽은 `PRF_STK_FIXED` 배선** 제거 여부 (M5 부수 발견 · 지금은 무해)
+2. 아크릴키링의 **죽은 할인 행**(`COMP_ACRYL_CLEAR3T`) 정리 여부
+3. `PRF_POSTER_FIXED` 고아 공식 자체의 처분
+
 #### 다음 세션 시작점 (paste-ready · 2026-09-03 02:5x KST)
 
 지니 화면 기준 레인 컨텍스트 70% 도달 → 리드 지시로 `/clear` 인계.

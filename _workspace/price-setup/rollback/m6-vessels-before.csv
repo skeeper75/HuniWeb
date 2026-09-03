@@ -1,0 +1,39 @@
+comp_cd,comp_nm,use_yn,del_yn,prc_typ_cd,use_dims,price_rows,frm_refs,frms,dsc_refs
+CLR_ACRYL_1.5T,투명아크릴1.5T 인쇄가공비,Y,N,PRICE_TYPE.01,"[""mat_cd""  ""siz_width""  ""siz_height""  ""min_qty""]",81,0,"",0
+COMP_ACRYL_CARABINER,아크릴카라비너 본체(3T+3T접합),Y,N,PRICE_TYPE.02,"[""siz_cd""  ""min_qty""]",4,0,"",0
+COMP_ACRYL_CLEAR3T,투명아크릴 인쇄가공비,Y,N,PRICE_TYPE.02,"[""mat_cd""  ""siz_width""  ""siz_height""  ""min_qty""]",277,0,"",1
+COMP_ACRYL_COROTTO,아크릴코롯토(투명8T) 인쇄가공비,Y,N,PRICE_TYPE.01,"[""siz_width""  ""siz_height""  ""min_qty""]",36,0,"",0
+COMP_ACRYL_FINISH,아크릴 후가공 부속(통합),Y,N,PRICE_TYPE.01,"[""opt_cd""  ""min_qty""]",17,0,"",0
+COMP_ACRYL_MIRROR3T,미러아크릴3T 인쇄가공비,Y,N,PRICE_TYPE.01,"[""siz_width""  ""siz_height""]",81,0,"",0
+COMP_ACRYL_NAMETAG_GS,아크릴명찰(골드실버) 본체,Y,N,PRICE_TYPE.02,"[""siz_cd""  ""min_qty""]",3,1,PRF_ACRYL_NAMETAG_GS,0
+COMP_BANNER_ADDON,일반 현수막 부자재,Y,N,PRICE_TYPE.01,"[""opt_cd""  ""min_qty""  ""opt_grp:OPT_000004""]",4,0,"",0
+COMP_BANNER_MESH_ADDON,메쉬현수막 부자재,Y,N,PRICE_TYPE.01,"[""opt_cd""  ""min_qty""  ""opt_grp:OPT_000023""]",2,1,PRF_POSTER_BANNER_M,0
+COMP_BANNER_MESH_OPTION,메쉬현수막 가공옵션,Y,N,PRICE_TYPE.01,"[""opt_cd""  ""min_qty""  ""opt_grp:OPT_000285""]",4,1,PRF_POSTER_BANNER_M,0
+COMP_BANNER_OPTION,일반현수막 가공옵션,Y,N,PRICE_TYPE.01,"[""opt_cd""  ""min_qty""  ""opt_grp:OPT_000003""]",6,0,"",0
+COMP_POSTER_ACRYLSTK_GLOSS,유광아크릴스티커 완제품가,Y,N,PRICE_TYPE.01,"[""siz_cd""  ""min_qty""]",4,0,"",0
+COMP_POSTER_ACRYLSTK_MIRROR,미러아크릴스티커 완제품가,Y,N,PRICE_TYPE.01,"[""siz_cd""  ""min_qty""]",4,0,"",0
+COMP_POSTER_ADH_CLEAR_PVC,실사 완제품가 (접착투명포스터),Y,N,PRICE_TYPE.01,"[""siz_width""  ""siz_height""]",52,0,"",0
+COMP_POSTER_ARTPAPER_MATTE,실사 완제품가 (아트페이퍼포스터),Y,N,PRICE_TYPE.01,"[""siz_width""  ""siz_height""]",39,0,"",0
+COMP_POSTER_ARTPRINT_PHOTO,실사 완제품가 (아트프린트포스터·접착방수포스터·아트패브릭포스터·방수포스터),Y,N,PRICE_TYPE.01,"[""siz_width""  ""siz_height""  ""min_qty""]",52,1,PRF_POSTER_FIXED,0
+COMP_POSTER_BANNER_MESH,메쉬현수막 출력,Y,N,PRICE_TYPE.01,"[""siz_width""  ""siz_height""  ""min_qty""]",48,0,"",0
+COMP_POSTER_BANNER_NORMAL,일반현수막 출력,Y,N,PRICE_TYPE.01,"[""siz_width""  ""siz_height""  ""min_qty""]",80,0,"",0
+COMP_POSTER_CANVAS_FABRIC,실사 완제품가 (캔버스패브릭포스터·레더아트프린트·메쉬프린트·타이벡프린트),Y,N,PRICE_TYPE.01,"[""siz_width""  ""siz_height""  ""min_qty""]",52,0,"",0
+COMP_POSTER_CANVAS_HANGING,캔버스 행잉포스터 완제품가,Y,N,PRICE_TYPE.01,"[""siz_width""  ""siz_height""  ""siz_cd""  ""min_qty""]",3,0,"",0
+COMP_POSTER_FOAMBOARD_BOARD,폼보드(보드칼라×사이즈) 완제품가,Y,N,PRICE_TYPE.01,"[""opt_cd""  ""siz_cd""  ""min_qty""]",4,0,"",0
+COMP_POSTER_FOMEXBOARD_BOARD,포맥스보드(두께×사이즈) 완제품가,Y,N,PRICE_TYPE.01,"[""opt_cd""  ""siz_cd""  ""min_qty""]",4,0,"",0
+COMP_POSTER_FRAMELESS_WOOD,프레임리스우드액자 완제품가,Y,N,PRICE_TYPE.01,"[""siz_cd""  ""min_qty""]",2,0,"",0
+COMP_POSTER_JOKJA,족자포스터 완제품가,Y,N,PRICE_TYPE.01,"[""siz_cd""  ""min_qty""]",5,0,"",0
+COMP_POSTER_LEATHER_FRAME,레더아트액자 완제품가,Y,N,PRICE_TYPE.01,"[""siz_cd""  ""min_qty""]",6,0,"",0
+COMP_POSTER_LINEN_FABRIC,실사 완제품가 (린넨패브릭포스터),Y,N,PRICE_TYPE.01,"[""siz_width""  ""siz_height""]",52,0,"",0
+COMP_POSTER_LINEN_WOODBONG,린넨우드봉족자 출력 가공,Y,N,PRICE_TYPE.01,"[""siz_cd""  ""min_qty""]",3,0,"",0
+COMP_POSTER_MESH_BANNER,메쉬배너 출력가공,Y,N,PRICE_TYPE.01,"[""siz_cd""  ""min_qty""]",1,0,"",0
+COMP_POSTER_MINI_BANNER,미니배너 완제품가,Y,N,PRICE_TYPE.01,"[""siz_cd""  ""min_qty""]",10,0,"",0
+COMP_POSTER_MINI_STANDBOARD,미니보드스탠딩 완제품가,Y,N,PRICE_TYPE.01,"[""siz_cd""  ""min_qty""]",15,0,"",0
+COMP_POSTEROPT_CANVAS_HANGING_WOODHANGER,캔버스행잉포스터 우드행거+면끈 추가가격,Y,N,PRICE_TYPE.01,"[""opt_cd""  ""siz_cd""  ""min_qty""  ""opt_grp:OPT_000283""]",3,0,"",0
+COMP_POSTEROPT_LINEN_FINISH,린넨 마감가공비,Y,N,PRICE_TYPE.01,"[""opt_cd""  ""min_qty""]",5,0,"",0
+COMP_POSTEROPT_LINEN_WOODBONG_WOODBONG,린넨우드봉족자 우드봉+면끈,Y,N,PRICE_TYPE.01,"[""opt_cd""  ""siz_cd""  ""min_qty""  ""opt_grp:OPT_000266""]",3,0,"",0
+COMP_POSTER_PET_BANNER,PET배너 출력가공,Y,N,PRICE_TYPE.01,"[""siz_cd""  ""min_qty""]",1,0,"",0
+COMP_POSTER_SHEETCUT_HOLO,홀로그램 시트커팅 완제품가,Y,N,PRICE_TYPE.01,"[""siz_cd""  ""min_qty""]",3,0,"",0
+COMP_POSTER_SHEETCUT_MATTE,무광시트커팅 완제품가,Y,N,PRICE_TYPE.01,"[""siz_cd""  ""min_qty""]",6,0,"",0
+COMP_STK_PRINT,스티커 완제품가(소재·규격),Y,N,PRICE_TYPE.01,"[""siz_cd""  ""mat_cd""  ""min_qty""]",5424,1,PRF_STK_FIXED,0
+COMP_STK_TATTOO,타투스티커 완제품가(3장세트),Y,N,PRICE_TYPE.02,"[""siz_cd""  ""mat_cd""  ""min_qty""]",333,0,"",0
