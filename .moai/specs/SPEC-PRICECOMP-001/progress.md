@@ -1301,6 +1301,79 @@ D-17 은 「0원이 아니면 통과」하는 검사와 「before/after 비교�
 2. 아크릴키링의 **죽은 할인 행**(`COMP_ACRYL_CLEAR3T`) 정리 여부
 3. `PRF_POSTER_FIXED` 고아 공식 자체의 처분
 
+### 트랙 A · M6 실행 + 병행 쓰기 원장 (2026-09-03 · **리드 HOLD 로 검산 중단**)
+
+#### M6 조작 — 완료 (지니 직접 승인 후 착수)
+
+| # | 화면 | 대상 | 결과 |
+|---|---|---|---|
+| 1 | 가격구성요소 | 옛 그릇 **34개** | `use_yn` Y → N (34/34) |
+| 2 | 가격공식 | `PRF_POSTER_FIXED` | `use_yn` Y → N |
+
+화면 조작 **35건** (누계 36 → **71**) · SQL 직접 쓰기 0 · 단가행 삭제 0 · `del_yn` 변경 0.
+스크린샷 `screens/m6/` · 스냅샷 `rollback/m6-all-components-before.csv`(269행) ·
+`m6-all-formulas-before.csv`(155행) · `m6-vessels-before.csv`(38행) · `m6-discount-comp-before.csv`(127행).
+되돌림 = `use_yn=Y` 복귀(단가행 무손실).
+
+#### 가격 경로 실증 — 골든과 무관하게 성립
+
+병행 쓰기(아래) 때문에 골든 대조로는 M6 를 귀속할 수 없다. 그래서 **경로 자체가 없음**을 직접 실증했다.
+
+| 실증 | 결과 |
+|---|---|
+| M6 대상 34개를 참조하는 공식 | `COMP_POSTER_ARTPRINT_PHOTO → PRF_POSTER_FIXED` 1건뿐 — 그 공식도 `use_yn=N` 이고 쓰는 상품 **0** |
+| 대상을 지목한 할인 행 | 1건(`PRD_000146` → `COMP_ACRYL_CLEAR3T`) — 같은 상품에 새 행이 이미 있는 **죽은 행** |
+| 내 작업으로 **새로 고아가 된** 그릇 | **0** (남은 고아 16개 중 15개는 카드 범위 밖 기존 고아, 1개는 의도적 고아 `ACRYLIC_MIRROR3T_PRINT`) |
+| 예외 4개 | `COMP_STK_PRINT` · 메쉬 2 · 명찰GS 전부 `use_yn=Y` 유지 |
+| 새 `FORM_*` 공식이 내가 내린 그릇을 물고 있나 | **0건** — M6 가 새 배선을 깨지 않았다 |
+
+#### 병행 쓰기 원장 — 다른 주체가 같은 라이브를 고쳤다
+
+**시각 기준**: 내 M6 스냅샷 `09:09:33 KST` · 내 그릇 조작 `14:56~14:59` · 확인 시점 `15:02`.
+
+| 시각(KST) | 대상 | 변화 | 주체 | 우리 작업과의 관계 |
+|---|---|---|---|---|
+| 11:23~14:59 | 공식 **29개 신설**(`FORM_POSTER_*` 25 + `FORM_GOODS_MUG`·`FORM_ACC_*` 등) | 신설 | `django_admin_log` user id 6 **`huniprinting`**(리드 실측) | 카드와 겹침 |
+| 〃 | 포스터 상품 **31개** 공식 바인딩 | `PRF_*` → `FORM_*` **교체** | 〃 | **겹침 — 우리 공식이 상품에서 떨어졌다** |
+| 11:27 | `COMP_ENV_MAKING` | 단가행 +20 | 불명(봉투 트랙) | 카드 밖 |
+| 12:04 | `COMP_POSTEROPT_LINEN_FINISH` | 단가행 +2 (5 → 7) | 불명 | **M6 대상 목록에 있던 그릇** |
+| 12:12 | `POSTER_LINEN_FINISHING` | 단가행 +2 | 불명 | 카드 밖 |
+| 14:57 | `GOODS_MUG` | 단가행 +3 | 불명(굿즈 트랙) | 카드 밖 · **내 조작과 같은 분** |
+| 불명 | `COMP_STK_PRINT` | 단가행 **−360**(5,424 → 5,064) | 불명 | **[HARD] 예외 그릇** |
+
+**바인딩 교체 실측(레인 자체 확인).** 리드는 「+29행 재바인딩」으로 전했으나, 실측하면 **덧붙임이
+아니라 교체**다 — `PRD_000138` 은 현재 공식이 `FORM_POSTER_PLACARD` **하나뿐**이고
+`PRF_POSTER_BANNER_N` 은 상품 0. 옛 `PRF_*` 공식은 `use_yn=Y` 로 남아 있으나 쓰는 상품이 없다.
+
+**다행인 점 — 배선 내용은 보존됐다.** 새 `FORM_*` 공식이 쓰는 구성요소는 **우리가 만든 새 그릇
+그대로**다(`FORM_POSTER_PLACARD` = `POSTER_PLACARD_PRINT` + `_FINISHING` + `_ADDON` ·
+`FORM_POSTER_MESHPLACARD` = `POSTER_MESHPLACARD_PRINT` + 메쉬 2그릇). **D-17 교정과 D-16
+결정이 새 공식에도 그대로 살아 있다.**
+
+**금액 대조(조회만 · 7상품).** M5 `widget-diag-m5.csv` 기본조합 대비 현재 금액.
+
+| 상품 | M5 공식 → 현재 공식 | 금액 |
+|---|---|---|
+| `118` 아트프린트 | `PRF_POSTER_ARTPRINT` → `FORM_POSTER_PHOTOPAPER_PRINT` | 12,000 = 12,000 ✓ |
+| `133` 캔버스행잉 | `PRF_POSTER_CANVAS_HANGING` → `FORM_POSTER_HANGINGCANVAS` | 22,000 = 22,000 ✓ |
+| `134` 린넨우드봉 | `PRF_POSTER_LINEN_WOODBONG` → `FORM_POSTER_HANGINGLINEN` | 13,000 = 13,000 ✓ |
+| `138` 일반현수막 | `PRF_POSTER_BANNER_N` → `FORM_POSTER_PLACARD` | 11,000 = 11,000 ✓ |
+| `139` 메쉬현수막 | `PRF_POSTER_BANNER_M` → `FORM_POSTER_MESHPLACARD` | 20,000 = 20,000 ✓ |
+| `144` 미니보드 | `PRF_POSTER_MINI_STANDBOARD` → `FORM_POSTER_MINIBOARD` | 3,500 = 3,500 ✓ |
+| `145` 미니배너 | `PRF_POSTER_MINI_BANNER` → `FORM_POSTER_MINIBANNER` | 6,500 = 6,500 ✓ |
+
+**`COMP_STK_PRINT` 360행 삭제.** 사라진 것은 `SIZ_000520` 한 사이즈 전체. 리드 실측으로 그
+사이즈 마스터가 `del_yn=Y`(07-07)라 **죽은 행 정리로 보이며 고객 영향 0**(주체 미상 유지).
+보류 5상품 기본조합 재계산 = 45,600 / 58,400 / 53,600 / 46,400 / 54,400 — **골든 before 전건 동일**.
+
+#### 현재 상태 — HOLD
+
+리드 지시로 **M6 검산·M7 착수 중단**. 미완 산출물(`golden-m6` · `widget-diag-m6`)은 지웠다.
+M5 골든·위젯 진단(09:06 산출)은 포스터 31상품에 대해 **stale** 하다 — 그 시점 이후 공식이
+교체됐기 때문이다. 다만 위 금액 대조가 보여 주듯 **금액은 바뀌지 않았다**.
+
+주체(`huniprinting`) 확인과 처리 방향은 리드가 지니께 확인 중. 라이브 쓰기 0 유지.
+
 #### 다음 세션 시작점 (paste-ready · 2026-09-03 02:5x KST)
 
 지니 화면 기준 레인 컨텍스트 70% 도달 → 리드 지시로 `/clear` 인계.
