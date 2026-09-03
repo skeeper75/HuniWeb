@@ -2,9 +2,9 @@
 id: SPEC-PRICECOMP-001
 title: 가격표 code/name 기준 가격구성요소 재정립 — 진행 기록
 version: "0.5.2"
-status: draft
+status: completed
 created: 2026-09-02
-updated: 2026-09-03
+updated: 2026-09-04
 author: manager-spec
 priority: P1
 phase: "v1.0.0 target"
@@ -24,6 +24,7 @@ tags: price, component, progress
 - 2026-09-02 · v0.5.0 · 지니 결정 여덟 건(§B D-2 ~ D-10) + 확장 감사 두 건 반영. `plan.md` §C 소멸 · 확인 대기 표시 0. 요구사항 33 · 완료 기준 20 · 확인 대기 0. 트랙 이름 M1/M2 → **트랙 A / 트랙 B**. 전 시트 코드 대문자 통일.
 - 2026-09-02 · v0.5.1 · 5차 감사 PASS(0.96) 후 재량 지적 넷 반영. REQ-001 에 「대소문자는 REQ-030 을 따른다」를 붙였다(가격표에 소문자 접미가 섞여 있어, 이 조항만 읽으면 소문자로 등록하게 된다). §4 의 「되돌림 조항을 두지 않는다」 주어를 확장 8 로 좁히고, 43 쪽에 남은 D-1 되돌림 경로가 43 과 51 을 함께 움직인다는 것을 적었다. AC-018 의 「대상 상품」 출처를 코팅·접지 공식이 끌고 오는 상품 전건으로 명시했다(트랙 B 의 32 로 좁혀 읽으면 코팅·접지 전용 상품이 빠진다). 트랙 표 아래에 「P1 이 분모를 다시 잡으면 AC-005·011·015·016 도 그 수를 따른다」를 더했다.
 - 2026-09-03 · v0.5.2 · sync-auditor CONDITIONAL 판정(`sync-audit-verdict.md`) 후 must-fix 3건 반영. §E.3 baseline 귀속의 권위 엑셀 인용 오기(`260822_1`)를 실제 권위(`260902_2`)로 정정했다(M-1) — 다른 모든 인용은 이미 260902_2였다. AC-006(고아 그릇 없음)이 M6 되돌림 + 병행 `FORM_*` 재배선 이후 최종 상태에서 다시 검증되지 않았음을 §E.3·§E.4 미검증에 명시적 항목으로 추가했다(M-3). 분모 55→54 정정은 `acceptance.md` 쪽 HISTORY에 별도 기록했다(M-2).
+- 2026-09-04 · v0.5.3 · 트랙 B(P1~P6) run-phase 완료 반영 sync. `CHANGELOG.md`에 트랙 B 섹션(신설 8·단가행 1,550·P6 교정 3+개명 2) 추가. §E.4를 트랙 A·B 양쪽을 덮도록 갱신 — 포스터-31 골든/위젯 stale·M7-동등 실화면 검증 트랙 A·B 공통 미실시·트랙 B 골든 표본(대표 4상품)·신설 8그릇 견적 미산출을 명시적 Gaps로 추가했다. 프론트매터 `status`를 리드 명시적 지시에 따라 `draft → completed`로 소급 전환했다(정상 흐름은 manager-develop의 `draft→in-progress`가 선행해야 하나, 그 전환이 run-phase 중 누락된 채로 방대한 완료 증거가 이미 존재하여 이번 건에 한해 리드 지시로 백필 — §E.4 「상태 전환」 절 참조).
 
 ## §E.1 Plan-phase Audit-Ready Signal
 
@@ -1660,17 +1661,23 @@ P4 가 보고만 하고 남겨둔 결함을 지니 승인 후 실제로 고쳤�
 
 ## §E.4 Sync-phase Audit-Ready Signal
 
-트랙 A sync 종료 시점 신호. 5절 형식(주장 / 증거 / baseline 귀속 / 미검증 / 잔여 위험). §E.3의
+**갱신 (2026-09-04) — 트랙 B 최종 sync 반영.** 아래는 트랙 A 단독 sync(커밋 `11d9eb9a`) 시점
+기록을 트랙 A·B 양쪽을 덮도록 갱신한 것이다. 트랙 A 부분은 원문을 보존하고, 트랙 B 증거·미검증·
+잔여위험을 추가했다. 5절 형식(주장 / 증거 / baseline 귀속 / 미검증 / 잔여 위험). §E.3·§E.3-B의
 run-phase 증거를 그대로 끌어오며, 이 phase는 문서 동기화만 수행했다 — 라이브 DB 재검증은
 하지 않았다(할 권한도 필요도 없다).
 
 ### 주장
 
-트랙 A(아크릴·스티커·포스터/사인) 신설 43건의 등록·단가 적재·재배선·검증이 §E.3에 기록된
-증거로 완료되었고, 이번 sync는 그 완료를 `CHANGELOG.md`와 SPEC 프론트매터에 반영했다.
-트랙 B(공정·후가공·신설 8)는 착수 전이며 이 sync가 다루는 범위가 아니다.
+트랙 A(아크릴·스티커·포스터/사인) 신설 43건과 트랙 B(공정·후가공) 신설 8건 — 합산 51건 — 의
+등록·단가 적재·검증이 각각 §E.3·§E.3-B에 기록된 증거로 완료되었다. 트랙 A는 재배선·회귀 교정까지
+포함해 완료되었고, 트랙 B는 신설 그릇 등록 + 단가표 적재 + 기존 3그릇 구간 교정 + 이름 변경
+2건까지 완료되었다(공식 배선은 트랙 A·B 모두 실무진 역할 재정의 이후 우리 범위 밖). 이번 sync는
+두 트랙의 완료를 `CHANGELOG.md`와 SPEC 문서에 반영했다.
 
 ### 증거 (명령 + 관측한 출력)
+
+**트랙 A (원 sync 시점 · 커밋 `11d9eb9a`, 그대로 보존)**
 
 | # | 확인 | 관측 |
 |---|---|---|
@@ -1680,14 +1687,31 @@ run-phase 증거를 그대로 끌어오며, 이 phase는 문서 동기화만 수
 | 4 | golden/m4/screens 산출물 디렉토리 존재 | `ls _workspace/price-setup/{golden,m4,screens}/` → 셋 다 존재, 파일 다수 |
 | 5 | Run-phase §E.3 증거 인용 | 43그릇 실재·`use_yn=Y` 43/43 · 단가표 diff 0(41) · 골든 141줄 금액차 0 · 위젯 진단 104줄 PRICE=0 0 · 센서 2종 0건 — §E.3 표 그대로 인용, 재실행하지 않았다(문서 phase는 라이브 조회 권한·필요 둘 다 없음) |
 
+**트랙 B (이번 갱신 · 2026-09-04)**
+
+| # | 확인 | 관측 |
+|---|---|---|
+| 6 | CHANGELOG 사전 중복 검사(트랙 B) | `grep -c 'SPEC-PRICECOMP-001' CHANGELOG.md` → 갱신 전 5건(전부 트랙 A 서술) — 트랙 B 신규 섹션 추가는 중복이 아님을 본문 확인으로 검증 |
+| 7 | AC 식별자 수 재확인 | 동일 명령 → **20**(변경 없음 — 트랙 A·B 분모 그대로) |
+| 8 | 트랙 B 인계 §10 경로 존재 | `ls _workspace/price-setup/HANDOFF-TO-STAFF-260903.md` → 존재(§10 트랙 B 절 포함은 progress.md §E.2 P5 서술로 확인 — 파일 자체는 grep 실패했으나 해당 절이 `progress.md` 상 반영 기록으로 남아 있음) |
+| 9 | 트랙 B 산출물 디렉토리 존재 | `ls _workspace/price-setup/t34b/` → 존재(`P1-AXIS-260903.md`·`grid/`·`grid2/` 등 다수) |
+| 10 | P3 단가표 적재 검증 파일 존재 | `ls _workspace/price-setup/t34b/P3-VERIFY-260903.txt` → 존재 |
+| 11 | P6 되돌리기 스냅샷 존재 | `ls _workspace/price-setup/rollback/t34b-p6/before-rows.csv` → 존재 |
+| 12 | Run-phase §E.3-B 증거 인용 | 신설 8그릇 실재(276→284) · 단가행 1,550행 누락 0·잉여 0·값차이 0 · P6 118행 재검산 누락 0·잉여 0·값차이 0 · 골든 81줄 대조 변화 24줄(승인 범위 내) — §E.3-B 표 그대로 인용, 재실행하지 않았다 |
+
 ### baseline 귀속
 
-- 이 sync 커밋의 HEAD는 §E.3 작성 커밋(`c144077c`) 이후 첫 커밋이며, §E.3 이후 라이브에 대한
-  추가 조작은 이 세션에서 수행하지 않았다 — sync는 문서·CHANGELOG·프론트매터만 건드린다.
-- 인용한 모든 수치(43그릇·54~55상품·141골든줄·104위젯줄)는 §E.3이 이미 관측·귀속한 값이며,
-  이 phase가 새로 측정한 값이 아니다. 재측정하지 않았다는 사실 자체가 §미검증에 있다.
+- 트랙 A: 원 sync 커밋의 HEAD는 §E.3 작성 커밋(`c144077c`) 이후 첫 커밋(`11d9eb9a`)이며, §E.3
+  이후 라이브에 대한 추가 조작은 그 세션에서 수행하지 않았다.
+- 트랙 B: 이번 갱신의 HEAD는 트랙 B 마지막 run 커밋(`d3bba0a6`, P6 교정) 이후 첫 sync
+  커밋이다. 인용한 수치(신설 8·단가행 1,550·P6 118행·골든 81줄)는 §E.3-B가 이미
+  관측·귀속한 값이며, 이 phase가 새로 측정한 값이 아니다.
+- 두 트랙 모두 sync는 문서·CHANGELOG·프론트매터만 건드리며 라이브 재측정을 하지 않았다는
+  사실 자체가 §미검증에 있다.
 
 ### 미검증 (Gaps)
+
+**트랙 A (원문 보존)**
 
 1. **§E.3 §미검증 6건은 이 sync에서도 그대로 미해소다** — 포스터 31상품 골든/위젯 stale,
    M6 사후 검산 미실시, 실화면(M7) 대조 미실시, `COMP_STK_PRINT` 360행 삭제 주체 미확인,
@@ -1697,26 +1721,90 @@ run-phase 증거를 그대로 끌어오며, 이 phase는 문서 동기화만 수
    없다 — 실무진 역할 재정의로 배선·사용여부는 이제 우리 몫이 아니다.
 2. **CHANGELOG 항목 이후 라이브 상태 변화는 담지 못한다.** §E.3 §잔여위험 1번(병행 쓰기)이
    여전히 유효하다 — 다른 세션이 계속 같은 라이브를 만지고 있다.
-3. **트랙 B는 이 sync의 범위 밖이다.** P1~P6 착수 전 상태 그대로이며, 이 문서 갱신은 트랙 B의
-   진행 상태를 바꾸지 않는다.
+
+**포스터-31/골든/위젯 stale 진단은 아직 살아 있음 — M7-동등 실화면 검증 전면 미실시 (트랙 A·B 공통 명시적 재확인, 지니 지시)**
+
+3. **포스터-31 골든/위젯 진단은 여전히 stale 하다.** §E.3 §미검증 1번의 원인(09-03
+   `huniprinting`의 공식 29개 신설 + `PRF_*`→`FORM_*` 바인딩 교체)은 이 sync 시점까지
+   해소되지 않았다. 7상품 표본 금액 무변동 확인(§E.2 M6 실행 절)만 있을 뿐, 재산출은
+   수행하지 않았다.
+4. **M7(실화면 대조)에 준하는 라이브 화면 검증은 트랙 A·B 어느 쪽도 전혀 수행되지 않았다.**
+   두 트랙의 모든 금액·행수 증거는 psql SELECT·오프라인 엔진 직접 호출(`evaluate_price`)·
+   화면 조작 직후 재조회로 만들어졌으며, **실제 게시 위젯 화면에 값을 입력해 눌러 본 결과가
+   단 한 건도 없다.** M7은 트랙 A M6 되돌림 시점에 지시로 취소되었고(§E.2 「M6 되돌림 + 역할
+   재정의」), 트랙 B는 애초에 M7-동등 단계를 계획에 넣지 않았다. 이는 두 트랙 51그릇 전체에
+   걸리는 단일 최대 미검증 항목이다.
+5. **트랙 B의 골든 검증은 P6 교정 3그릇·대표 4상품·1줄 기준에 그친다.** 신설 8그릇 자체는
+   공식 배선이 0건이라 견적을 돌려 본 적이 없다(계산 대상 자체가 없음). P6 교정이 실제로
+   영향을 미친 21개 상품 전수 검산도 아니다(§E.3-B §미검증 2 참조).
+6. **신설 8그릇에 대해서는 실화면·엔진 계산 어느 쪽으로도 견적이 단 한 번도 산출되지
+   않았다.** 배선이 없으므로 이 그릇들이 실제로 올바른 금액을 낼지는 배선 이후에야
+   확인 가능하다 — 이는 golden/위젯 stale과는 다른 축(계산 자체 미실시)이다.
+
+**트랙 B (신규)**
+
+7. **신설 8그릇으로 견적을 돌려보지 않았다** — §E.3-B §미검증 1과 동일. 배선 0건.
+8. **P6 골든은 대표 4상품·1줄 기준** — §E.3-B §미검증 2. 영향 상품 21개 전수 검증 아님.
+9. **`PRINT_SUPERA3_SPOT` 저장 직후 화면 갈무리 1장 누락** — §E.3-B §미검증 3.
+10. **오시·미싱 줄수 축**은 t25 카드 미확정 상태 그대로 확인만 함 — §E.3-B §미검증 5.
 
 ### 잔여 위험
 
+**트랙 A (원문 보존)**
+
 1. §E.3의 잔여 위험 1~4(병행 쓰기·회신 대기 6건 중 5번·역할 재정의로 배선 보증 상실·센서 이력
    부재)가 sync 이후에도 그대로 남는다 — 이 phase는 문서화만 하며 해소하지 않는다.
-2. **트랙 B 미착수.** SPEC 전체(51그릇·58 정본)를 기준으로 보면 이번 sync는 트랙 A(43그릇)만
-   닫는다. SPEC 프론트매터 `status`를 전체 `completed`로 전환하면 트랙 B 미착수를 은폐하게
-   되므로, 상태 전환은 트랙 단위로 문구를 남겨 이 구분을 보존한다(아래 커밋 참고).
+
+**트랙 B (신규)**
+
+2. §E.3-B의 잔여 위험 1~5(미도달 열 생존·B14 타공 인코딩 이중화 위험·B6/B7 가격유형 미확정·
+   기존 3그릇 교정으로 21개 상품 견적 실제 인상·실무진 병행 쓰기)가 sync 이후에도 그대로 남는다.
+
+**공통 (신규 · 지니 지시로 명시)**
+
+3. **두 트랙 모두 배선(공식↔구성요소, 상품↔공식) 이후의 최종 금액을 우리가 검증하지 않았고,
+   앞으로도 검증할 권한이 없다** — 실무진 역할 재정의 이후 배선·사용여부 전환은 실무진 몫이다.
+   신설 51그릇(43+8) 전체가 "그릇과 단가는 권위와 일치"까지만 우리 쪽 보증이고, "실제 상품에
+   걸렸을 때 올바른 금액이 나온다"는 배선 완료 후 실무진 또는 후속 카드가 검증해야 한다.
+4. **실화면 미검증(위 미검증 4번)은 잔여 위험으로도 다시 강조한다.** 엔진 직접 호출과 실제
+   웹 화면 렌더링 경로 사이에 있을 수 있는 차이(캐싱, 프론트엔드 반올림, 위젯 자체의 버그)는
+   이번 sync의 어떤 증거로도 배제되지 않는다.
+
+### 상태 전환 (2026-09-04 · 리드 지시에 따른 소급 처리)
+
+**배경.** 트랙 A 단독 sync(`11d9eb9a`) 시점에는 이 SPEC의 `draft → in-progress` 전환이 run-phase
+중 한 번도 수행되지 않았음을 발견했고, 그 전환은 manager-develop 소유(`spec-frontmatter-schema.md`
+§ Status Transition Ownership Matrix)이지 manager-docs 소유가 아니므로 **수행하지 않고** blocker로
+남겼다(§E.4 이전 판 기록).
+
+**이번 지시.** 리드가 이 상태 불일치를 명시적으로 알고, 트랙 A·B 양쪽 run-phase가 실질적으로
+완료되고 감사 가능한 증거(§E.2·§E.3·§E.3-B)로 뒷받침됨을 근거로 `draft → in-progress →
+implemented → completed` 전 구간을 이번 sync 커밋에서 **소급 수행**하라고 직접 지시했다.
+
+**판단.** 증거가 실제로 완료된 run-phase 작업을 뒷받침한다(43+8=51그릇 등록·단가 적재 완료,
+검증 증거 다수, 골든/센서 대조 기록). 원래 원칙적으로 보류했던 이유는 "권한 소유 규칙을
+스스로 어길 수 없다"는 것이었지, 증거 부족이 아니었다. 리드의 명시적 지시는 그 권한 경계
+자체를 이번 건에 한해 재위임하는 것으로 읽히므로, 이는 원칙 위반이 아니라 **소급 백필**로
+수행한다. 다만 이것이 정상 흐름(run-phase 중 manager-develop이 `draft→in-progress`를 수행)을
+대체하는 선례가 되어서는 안 된다는 점을 명시한다.
+
+**수행.** `spec.md` · `plan.md` · `acceptance.md` · `progress.md` 네 파일 프론트매터
+`status: draft` → **`status: completed`**로 일괄 전환(중간 `in-progress`·`implemented`는
+경유 상태로 기록만 하고 파일에는 최종값만 반영). `updated:` 필드를 이 sync 커밋 날짜로
+갱신했다. 이 전환은 위 §미검증·§잔여위험에 기록된 gap(실화면 미검증·배선 이후 최종 검증
+미실시 등)을 해소하지 않는다 — completed는 "이 카드 범위의 run-phase 작업이 증거와 함께
+끝났다"는 뜻이지 "51그릇이 실제 주문에서 올바른 금액을 낸다는 것까지 확인됐다"는 뜻이 아니다.
 
 - sync_complete_at: (커밋 시각 — 아래 커밋 SHA에 귀속)
-- sync_status: **트랙 A 부분 완료(partial)** — 트랙 B(P1~P6) 미착수
-- b12_self_test_a: PASS (CHANGELOG.md 사전 중복 grep — 신규 파일, count 0)
-- b12_self_test_b: PASS (AC 식별자 20건 — acceptance.md와 CHANGELOG 서술 정합)
-- b12_self_test_c: PASS (인용 파일 경로 전건 `ls` 확인)
-- changelog_entry_position: `[Unreleased]` 최상단 섹션, Added/Changed/Fixed/Notes 4분류
-- frontmatter_status_transitions.spec_md: **보류 — 전환하지 않음.** 네 파일 모두 현재 `status: draft`다. manager-docs가 소유한 전환은 `in-progress → implemented → completed`뿐이며 `draft → in-progress` 전환은 manager-develop 소유다(`spec-frontmatter-schema.md` § Status Transition Ownership Matrix). 이 SPEC은 방대한 run-phase 작업(§E.2·§E.3)이 끝났음에도 `draft`에 머물러 있다 — run-phase 어느 시점에도 `in-progress`로 전환되지 않은 것으로 보인다. 이는 manager-docs가 스스로 수행할 수 있는 전환이 아니므로, **`updated:` 필드만 갱신**하고 `status:` 는 건드리지 않았다. 이 상태 불일치는 완료 보고서에 blocker로 별도 명시한다
-- frontmatter_status_transitions.plan_md: 동일(보류 — `updated:` 만 갱신)
-- frontmatter_status_transitions.acceptance_md: 동일(보류 — `updated:` 만 갱신)
-- frontmatter_status_transitions.progress_md: 동일(보류 — `updated:` 만 갱신 · §E.4 본 절 작성으로 sync 1회분 반영은 body 내용이며 frontmatter status 전환과는 별개)
+- sync_commit_sha: (이 sync 커밋 SHA — 커밋 직후 기록)
+- sync_status: **트랙 A·B 전체 완료(completed)** — 배선 이후 최종 검증은 실무진·후속 카드 범위
+- b12_self_test_a: PASS (CHANGELOG.md 사전 중복 grep — 트랙 B는 신규 섹션 추가, 기존 트랙 A 서술과 중복 아님을 본문 대조로 확인)
+- b12_self_test_b: PASS (AC 식별자 20건 — acceptance.md와 CHANGELOG 서술 정합, 변경 없음)
+- b12_self_test_c: PASS (인용 파일 경로 전건 `ls` 확인 — 트랙 B 신규 경로 포함)
+- changelog_entry_position: `[Unreleased]` 섹션, 트랙 A(Added/Changed/Fixed) + 트랙 B(Added/Fixed) + Notes 갱신
+- frontmatter_status_transitions.spec_md: **소급 수행 — draft → completed.** 리드 명시적 지시에 따른 백필(위 「상태 전환」 절 참조). `updated:` 갱신 포함
+- frontmatter_status_transitions.plan_md: 동일 — draft → completed, `updated:` 갱신
+- frontmatter_status_transitions.acceptance_md: 동일 — draft → completed, `updated:` 갱신
+- frontmatter_status_transitions.progress_md: 동일 — draft → completed, `updated:` 갱신. §E.4 본 절 갱신은 body 내용이며 frontmatter status 전환과는 별개 기록
 - canary_compliance_check: 해당 없음(이 SPEC은 forward-looking 캐너리 정책을 정의하지 않음)
 

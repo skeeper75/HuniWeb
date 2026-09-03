@@ -2,9 +2,9 @@
 id: SPEC-PRICECOMP-001
 title: 가격표 code/name 기준 가격구성요소 재정립 (아크릴·스티커·포스터/사인)
 version: "0.5.1"
-status: draft
+status: completed
 created: 2026-09-02
-updated: 2026-09-03
+updated: 2026-09-04
 author: manager-spec
 priority: P1
 phase: "v1.0.0 target"
