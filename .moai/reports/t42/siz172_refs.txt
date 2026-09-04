@@ -1,0 +1,16 @@
+$ psql <URL> -c "select 'prd_sizes' src, ps.prd_cd, p.prd_nm, p.use_yn, ps.del_yn from t_prd_product_sizes ps join t_prd_products p on p.prd_cd=ps.prd_cd where ps.siz_cd='SIZ_000172' and ps.del_yn='N' union all select 'opt_item', i.prd_cd, i.opt_cd||' seq'||i.item_seq||' dim='||coalesce(i.ref_dim_cd,'-'), '', i.del_yn from t_prd_product_option_items i where i.ref_key1='SIZ_000172' union all select 'edicus_tmpl', prd_cd, siz_cd, '', '' from t_prd_edicus_templates where siz_cd='SIZ_000172' union all select 'comp_price', comp_cd, count(*)::text, '', '' from t_prc_component_prices where siz_cd='SIZ_000172' group by comp_cd order by 1,2;"
+
+     src     |           prd_cd           |               prd_nm               | use_yn | del_yn 
+-------------+----------------------------+------------------------------------+--------+--------
+ comp_price  | COMP_POSTER_LEATHER_FRAME  | 1                                  |        | 
+ comp_price  | COMP_POSTER_SHEETCUT_MATTE | 1                                  |        | 
+ comp_price  | COMP_STK_PRINT             | 30                                 |        | 
+ comp_price  | POSTER_LEATHERPANEL_PRINT  | 1                                  |        | 
+ edicus_tmpl | PRD_000132                 | SIZ_000172                         |        | 
+ opt_item    | PRD_000068                 | OPV_000285 seq1 dim=OPT_REF_DIM.01 |        | Y
+ opt_item    | PRD_000069                 | OPV_000320 seq1 dim=OPT_REF_DIM.01 |        | Y
+ opt_item    | PRD_000071                 | OPV_000352 seq1 dim=OPT_REF_DIM.01 |        | Y
+ prd_sizes   | PRD_000132                 | 레더아트액자                       | Y      | N
+ prd_sizes   | PRD_000286                 | 하드커버 링책자-내지               | Y      | N
+(10 rows)
+

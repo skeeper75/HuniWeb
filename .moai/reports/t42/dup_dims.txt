@@ -1,0 +1,12 @@
+$ psql <URL> -c "select siz_cd, siz_nm, work_width, work_height, cut_width, cut_height, use_yn, del_yn, note from t_siz_sizes where (cut_width=100 and cut_height=148) or (cut_width=148 and cut_height=100) or (cut_width=90 and cut_height=110) or (cut_width=110 and cut_height=90) or siz_nm like '%100x148%' or siz_nm like '%90x110%' or siz_nm like '%307x430%' or siz_nm like '%330x470%' order by siz_cd;"
+
+   siz_cd   | siz_nm  | work_width | work_height | cut_width | cut_height | use_yn | del_yn |                                   note                                    
+------------+---------+------------+-------------+-----------+------------+--------+--------+---------------------------------------------------------------------------
+ SIZ_000518 | 100x148 |            |             |           |            | Y      | N      | 판걸이=8.0 / 적용=반칼스티커
+ SIZ_000519 | 90x110  |            |             |           |            | Y      | N      | 판걸이=12.0 / 적용=반칼스티커
+ SIZ_000521 | 330x470 |     330.00 |      470.00 |    320.00 |     460.00 | Y      | N      | 전지(46계열)·반칼 스티커 표준전지 / 출처: 상품마스터260610·출력소재IMPORT
+ SIZ_000538 | 307x430 |            |             |           |            | Y      | N      | 
+ SIZ_000539 | 330x470 |     330.00 |      470.00 |           |            | Y      | N      | 
+ SIZ_000541 | 330x470 |     330.00 |      470.00 |           |            | Y      | N      | 
+(6 rows)
+

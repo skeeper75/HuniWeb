@@ -1,0 +1,9 @@
+$ psql <URL> -c "select pf.prd_cd, pf.frm_cd, fc.comp_cd, pc.use_dims::text ud, pc.comp_nm from t_prd_product_price_formulas pf join t_prc_formula_components fc on fc.frm_cd=pf.frm_cd join t_prc_price_components pc on pc.comp_cd=fc.comp_cd where pf.prd_cd in ('PRD_000286','PRD_000132') order by pf.prd_cd, fc.comp_cd;"
+
+   prd_cd   |          frm_cd          |          comp_cd          |                                      ud                                      |          comp_nm           
+------------+--------------------------+---------------------------+------------------------------------------------------------------------------+----------------------------
+ PRD_000132 | FORM_POSTER_LEATHERPANEL | POSTER_LEATHERPANEL_PRINT | ["siz_cd", "min_qty"]                                                        | 포스터_레더아트액자_출력가
+ PRD_000286 | PRF_DGP_INNER            | COMP_PAPER                | ["mat_cd", "plt_siz_cd", "min_qty"]                                          | 용지비(종이별 절가)
+ PRD_000286 | PRF_DGP_INNER            | COMP_PRINT_DIGITAL_S1     | ["proc_cd", "plt_siz_cd", "print_opt_cd", "min_qty", "proc_grp:PROC_000001"] | 디지털인쇄
+(3 rows)
+

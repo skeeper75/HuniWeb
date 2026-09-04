@@ -1,0 +1,9 @@
+$ psql <URL> -c "select ps.prd_cd, ps.siz_cd, s.siz_nm, s.work_width, s.work_height, pl.siz_cd plate, fn_calc_pansu(pl.siz_cd, ps.siz_cd) pansu from t_prd_product_sizes ps join t_siz_sizes s on s.siz_cd=ps.siz_cd left join t_prd_product_plate_sizes pl on pl.prd_cd=ps.prd_cd and pl.del_yn='N' where ps.prd_cd='PRD_000286' and ps.del_yn='N' order by ps.siz_cd;"
+
+   prd_cd   |   siz_cd   |    siz_nm     | work_width | work_height |   plate    | pansu 
+------------+------------+---------------+------------+-------------+------------+-------
+ PRD_000286 | SIZ_000007 | 148x210mm     |     150.00 |      212.00 | SIZ_000499 |     4
+ PRD_000286 | SIZ_000172 | A4(210x297mm) |     290.00 |      377.00 | SIZ_000499 |     1
+ PRD_000286 | SIZ_000380 | B5(182X257mm) |     182.00 |      257.00 | SIZ_000499 |     2
+(3 rows)
+
