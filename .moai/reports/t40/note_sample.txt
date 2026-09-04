@@ -1,0 +1,9 @@
+$ psql <URL> -c "select siz_cd, mat_cd, min_qty, unit_price, note from t_prc_component_prices where comp_cd='STK_KISSCUT_PRINT' and siz_cd='SIZ_000057' and mat_cd='MAT_000584' order by min_qty limit 3;"
+
+   siz_cd   |   mat_cd   | min_qty | unit_price |                    note                    
+------------+------------+---------+------------+--------------------------------------------
+ SIZ_000057 | MAT_000584 |       1 |    6700.00 | 권위 스티커 r7 c14 · 묶음 유포/비코팅/미색
+ SIZ_000057 | MAT_000584 |       2 |    6700.00 | 권위 스티커 r8 c14 · 묶음 유포/비코팅/미색
+ SIZ_000057 | MAT_000584 |       3 |    6500.00 | 권위 스티커 r9 c14 · 묶음 유포/비코팅/미색
+(3 rows)
+

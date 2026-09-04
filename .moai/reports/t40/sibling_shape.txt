@@ -1,0 +1,7 @@
+$ psql <URL> -c "select count(*) total, count(plt_siz_cd) plt, count(clr_cd) clr, count(proc_cd) proc, count(opt_cd) opt, count(print_opt_cd) popt, count(coat_side_cnt) coat, count(spot_side_cnt) spot, count(bdl_qty) bdl, count(page_cnt) page, count(siz_width) w, count(siz_height) h, count(dim_vals) dv, count(note) note from t_prc_component_prices where comp_cd='STK_KISSCUT_PRINT';"
+
+ total | plt | clr | proc | opt | popt | coat | spot | bdl | page | w | h | dv | note 
+-------+-----+-----+------+-----+------+------+------+-----+------+---+---+----+------
+  1944 |   0 |   0 |    0 |   0 |    0 |    0 |    0 |   0 |    0 | 0 | 0 |  0 | 1944
+(1 row)
+

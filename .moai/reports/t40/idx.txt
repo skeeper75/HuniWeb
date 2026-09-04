@@ -1,0 +1,15 @@
+$ psql <URL> -c "select indexname, indexdef from pg_indexes where tablename='t_prc_component_prices';"
+
+            indexname            |                                                                                                                                                                  indexdef                                                                                                                                                                  
+---------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ t_prc_component_prices_pkey     | CREATE UNIQUE INDEX t_prc_component_prices_pkey ON public.t_prc_component_prices USING btree (comp_price_id)
+ ix_t_prc_comp_prices_comp_cd    | CREATE INDEX ix_t_prc_comp_prices_comp_cd ON public.t_prc_component_prices USING btree (comp_cd)
+ ix_t_prc_comp_prices_comp_apply | CREATE INDEX ix_t_prc_comp_prices_comp_apply ON public.t_prc_component_prices USING btree (comp_cd, apply_ymd DESC)
+ ix_t_prc_comp_prices_siz_cd     | CREATE INDEX ix_t_prc_comp_prices_siz_cd ON public.t_prc_component_prices USING btree (siz_cd)
+ ix_t_prc_comp_prices_clr_cd     | CREATE INDEX ix_t_prc_comp_prices_clr_cd ON public.t_prc_component_prices USING btree (clr_cd)
+ ix_t_prc_comp_prices_mat_cd     | CREATE INDEX ix_t_prc_comp_prices_mat_cd ON public.t_prc_component_prices USING btree (mat_cd)
+ ix_t_prc_comp_prices_proc_cd    | CREATE INDEX ix_t_prc_comp_prices_proc_cd ON public.t_prc_component_prices USING btree (proc_cd)
+ ix_t_prc_comp_prices_opt_cd     | CREATE INDEX ix_t_prc_comp_prices_opt_cd ON public.t_prc_component_prices USING btree (opt_cd)
+ ux_t_prc_comp_prices_nat_key    | CREATE UNIQUE INDEX ux_t_prc_comp_prices_nat_key ON public.t_prc_component_prices USING btree (comp_cd, apply_ymd, siz_cd, plt_siz_cd, clr_cd, mat_cd, proc_cd, opt_cd, print_opt_cd, coat_side_cnt, spot_side_cnt, bdl_qty, COALESCE(page_cnt, '-1'::integer), siz_width, siz_height, min_qty, ((COALESCE(dim_vals, '{}'::jsonb))::text))
+(9 rows)
+
