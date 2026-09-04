@@ -1,0 +1,115 @@
+{
+ "screen_size_options": [
+  {
+   "v": "SIZ_000007",
+   "t": "148x210mm (SIZ_000007)",
+   "dflt": true,
+   "cut_w": 148,
+   "cut_h": 210,
+   "work_w": 150,
+   "work_h": 212,
+   "mt": 1,
+   "mb": 1,
+   "ml": 1,
+   "mr": 1
+  },
+  {
+   "v": "SIZ_000380",
+   "t": "B5(182X257mm) (SIZ_000380)",
+   "dflt": false,
+   "cut_w": 182,
+   "cut_h": 257,
+   "work_w": 182,
+   "work_h": 257
+  },
+  {
+   "v": "SIZ_000252",
+   "t": "A4세로 (210x297mm) (SIZ_000252)",
+   "dflt": false,
+   "cut_w": 210,
+   "cut_h": 297,
+   "work_w": 213,
+   "work_h": 303
+  }
+ ],
+ "cases": [
+  {
+   "case": "A4 100매 — 교정 후 SIZ_000252 (work 213x303)",
+   "siz_cd": "SIZ_000252",
+   "http": "200",
+   "ok": true,
+   "errors": [],
+   "final_price": 56537,
+   "supply": 56536,
+   "plt_siz_nm": "316x467",
+   "pansu": 2,
+   "excluded": [],
+   "lines": [
+    {
+     "comp": "COMP_PRINT_DIGITAL_S1",
+     "unit": "1100.00",
+     "qty": 50,
+     "subtotal": "55000"
+    },
+    {
+     "comp": "COMP_PAPER",
+     "unit": "30.73",
+     "qty": 50,
+     "subtotal": "1537"
+    }
+   ]
+  },
+  {
+   "case": "A5 100매 — SIZ_000007 (무변경)",
+   "siz_cd": "SIZ_000007",
+   "http": "200",
+   "ok": true,
+   "errors": [],
+   "final_price": 40769,
+   "supply": 40764,
+   "plt_siz_nm": "316x467",
+   "pansu": 4,
+   "excluded": [],
+   "lines": [
+    {
+     "comp": "COMP_PRINT_DIGITAL_S1",
+     "unit": "1600.00",
+     "qty": 25,
+     "subtotal": "40000"
+    },
+    {
+     "comp": "COMP_PAPER",
+     "unit": "30.73",
+     "qty": 25,
+     "subtotal": "769"
+    }
+   ]
+  },
+  {
+   "case": "B5 100매 — SIZ_000380 (무변경)",
+   "siz_cd": "SIZ_000380",
+   "http": "200",
+   "ok": true,
+   "errors": [],
+   "final_price": 56537,
+   "supply": 56536,
+   "plt_siz_nm": "316x467",
+   "pansu": 2,
+   "excluded": [],
+   "lines": [
+    {
+     "comp": "COMP_PRINT_DIGITAL_S1",
+     "unit": "1100.00",
+     "qty": 50,
+     "subtotal": "55000"
+    },
+    {
+     "comp": "COMP_PAPER",
+     "unit": "30.73",
+     "qty": 50,
+     "subtotal": "1537"
+    }
+   ]
+  }
+ ]
+}

@@ -1,0 +1,8 @@
+$ psql <URL> -c "select 'edicus_tmpl' src, prd_cd, siz_cd, '' d from t_prd_edicus_templates where prd_cd='PRD_000286' union all select 'opt_item', prd_cd, coalesce(ref_key1,'-'), opt_cd||'/'||coalesce(ref_dim_cd,'-')||'/del='||del_yn from t_prd_product_option_items where prd_cd='PRD_000286' union all select 'constraint', prd_cd, '', logic::text from t_prd_product_constraints where prd_cd='PRD_000286' union all select 'tmpl', tmpl_cd, '', dim_sels::text from t_prd_templates where dim_sels::text like '%SIZ_000172%' union all select 'plate', prd_cd, siz_cd, 'dflt='||dflt_plt_yn||' del='||del_yn from t_prd_product_plate_sizes where prd_cd='PRD_000286' order by 1,2;"
+
+  src  |   prd_cd    |   siz_cd   |            d             
+-------+-------------+------------+--------------------------
+ plate | PRD_000286  | SIZ_000499 | dflt=N del=N
+ tmpl  | TMPL-000129 |            | {"siz_cd": "SIZ_000172"}
+(2 rows)
+
