@@ -1,0 +1,17 @@
+$ psql <URL> -c "select ps.prd_cd, pr.prd_nm, coalesce(pr.use_yn,'Y') use_yn, ps.siz_cd, ps.dflt_plt_yn, coalesce(ps.del_yn,'N') del_yn from t_prd_product_plate_sizes ps join t_prd_products pr on pr.prd_cd=ps.prd_cd where coalesce(ps.del_yn,'N')='N' and ps.prd_cd in ('PRD_000052','PRD_000053','PRD_000054','PRD_000058','PRD_000059','PRD_000060','PRD_000061','PRD_000062','PRD_000063','PRD_000064','PRD_000065') order by ps.prd_cd;"
+
+   prd_cd   |          prd_nm          | use_yn |   siz_cd   | dflt_plt_yn | del_yn 
+------------+--------------------------+--------+------------+-------------+--------
+ PRD_000052 | 반칼자유형스티커         | Y      | SIZ_000521 | Y           | N
+ PRD_000053 | 반칼자유형투명스티커     | Y      | SIZ_000521 | Y           | N
+ PRD_000054 | 반칼자유형홀로그램스티커 | Y      | SIZ_000521 | Y           | N
+ PRD_000058 | 반칼원형스티커           | Y      | SIZ_000521 | Y           | N
+ PRD_000059 | 반칼정사각스티커         | Y      | SIZ_000521 | Y           | N
+ PRD_000060 | 반칼직사각스티커         | Y      | SIZ_000521 | Y           | N
+ PRD_000061 | 반칼띠지스티커           | Y      | SIZ_000521 | Y           | N
+ PRD_000062 | 반칼팬시스티커           | Y      | SIZ_000521 | Y           | N
+ PRD_000063 | 반칼팬시투명스티커       | Y      | SIZ_000521 | Y           | N
+ PRD_000064 | 소량자유형스티커         | N      | SIZ_000521 | Y           | N
+ PRD_000065 | 스티커팩                 | Y      | SIZ_000521 | Y           | N
+(11 rows)
+

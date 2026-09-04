@@ -1,0 +1,9 @@
+$ psql <URL> -c "select 'plate' what, ps.siz_cd val, count(*) rows from t_prd_product_plate_sizes ps where coalesce(ps.del_yn,'N')='N' and ps.prd_cd in ('PRD_000052','PRD_000053','PRD_000054','PRD_000058','PRD_000059','PRD_000060','PRD_000061','PRD_000062','PRD_000063','PRD_000064','PRD_000065') group by 2 union all select 'use_dims', use_dims::text, 1 from t_prc_price_components where comp_cd='STK_KISSCUT_PRINT' union all select 'price_rows','total',count(*) from t_prc_component_prices where comp_cd='STK_KISSCUT_PRINT';"
+
+    what    |               val               | rows 
+------------+---------------------------------+------
+ plate      | SIZ_000521                      |   11
+ use_dims   | ["siz_cd", "mat_cd", "min_qty"] |    1
+ price_rows | total                           | 1944
+(3 rows)
+

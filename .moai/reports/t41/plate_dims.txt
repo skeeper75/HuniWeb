@@ -1,0 +1,8 @@
+$ psql <URL> -c "select s.siz_cd, s.siz_nm, s.work_width w, s.work_height h from t_siz_sizes s where s.siz_cd in ('SIZ_000498','SIZ_000521');"
+
+   siz_cd   | siz_nm  |   w    |   h    
+------------+---------+--------+--------
+ SIZ_000521 | 330x470 | 330.00 | 470.00
+ SIZ_000498 | 317x440 | 317.00 | 440.00
+(2 rows)
+
