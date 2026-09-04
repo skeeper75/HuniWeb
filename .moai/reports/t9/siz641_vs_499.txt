@@ -1,0 +1,24 @@
+$ psql <URL> -c "
+SELECT a.mat_cd, m.mat_nm, a.unit_price AS p_480x320, b.unit_price AS p_316x467,
+       round(a.unit_price - b.unit_price, 2) AS diff,
+       round(b.unit_price * 153600.0/147572.0, 2) AS area_scaled_expect
+FROM t_prc_component_prices a
+LEFT JOIN t_prc_component_prices b
+  ON b.comp_cd='COMP_PAPER' AND b.plt_siz_cd='SIZ_000499'
+ AND b.mat_cd=a.mat_cd AND b.min_qty=a.min_qty
+LEFT JOIN t_mat_materials m ON m.mat_cd=a.mat_cd
+WHERE a.comp_cd='COMP_PAPER' AND a.plt_siz_cd='SIZ_000641'
+ORDER BY a.mat_cd;
+"
+
+   mat_cd   |     mat_nm      | p_480x320 | p_316x467 | diff | area_scaled_expect 
+------------+-----------------+-----------+-----------+------+--------------------
+ MAT_000074 | 백색모조지 220g |     70.64 |     70.64 | 0.00 |              73.53
+ MAT_000080 | 아트지 200g     |     62.20 |     62.20 | 0.00 |              64.74
+ MAT_000081 | 아트지 250g     |     77.75 |     77.75 | 0.00 |              80.93
+ MAT_000082 | 아트지 300g     |     93.30 |     93.30 | 0.00 |              97.11
+ MAT_000091 | 스노우지 250g   |     77.75 |     77.75 | 0.00 |              80.93
+ MAT_000092 | 스노우지 300g   |     93.30 |     93.30 | 0.00 |              97.11
+ MAT_000109 | 몽블랑 240g     |    142.20 |    142.20 | 0.00 |             148.01
+(7 rows)
+

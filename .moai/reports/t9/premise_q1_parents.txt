@@ -1,0 +1,19 @@
+$ psql <URL> -c "
+SELECT p.prd_cd, p.prd_nm, p.prd_typ_cd, p.use_yn, p.del_yn,
+       (SELECT count(*) FROM t_prd_product_plate_sizes ps WHERE ps.prd_cd=p.prd_cd AND ps.del_yn='N') AS plate_n,
+       (SELECT count(*) FROM t_prd_product_sets s WHERE s.prd_cd=p.prd_cd AND s.del_yn='N') AS child_n
+FROM t_prd_products p
+WHERE p.prd_cd IN ('PRD_000068','PRD_000069','PRD_000070','PRD_000072','PRD_000077','PRD_000100')
+ORDER BY p.prd_cd;
+"
+
+   prd_cd   |      prd_nm       | prd_typ_cd  | use_yn | del_yn | plate_n | child_n 
+------------+-------------------+-------------+--------+--------+---------+---------
+ PRD_000068 | 중철책자          | PRD_TYPE.01 | Y      | N      |       1 |       2
+ PRD_000069 | 무선책자          | PRD_TYPE.01 | Y      | N      |       1 |       2
+ PRD_000070 | PUR책자           | PRD_TYPE.01 | Y      | N      |       2 |       2
+ PRD_000072 | 하드커버책자      | PRD_TYPE.01 | Y      | N      |       1 |       3
+ PRD_000077 | 레더하드커버책자  | PRD_TYPE.01 | Y      | N      |       1 |       3
+ PRD_000100 | 포토북 [디자인명] | PRD_TYPE.01 | Y      | N      |       0 |       5
+(6 rows)
+

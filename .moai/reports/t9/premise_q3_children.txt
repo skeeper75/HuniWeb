@@ -1,0 +1,33 @@
+$ psql <URL> -c "
+SELECT s.prd_cd, pp.prd_nm AS parent, s.sub_prd_cd, c.prd_nm AS child, c.prd_typ_cd,
+       c.semi_role_cd, s.sub_prd_qty, s.disp_seq, s.spine_calc_yn, s.del_yn,
+       (SELECT count(*) FROM t_prd_product_plate_sizes z WHERE z.prd_cd=s.sub_prd_cd AND z.del_yn='N') AS child_plate_n,
+       (SELECT count(*) FROM t_prd_product_sizes z WHERE z.prd_cd=s.sub_prd_cd AND z.del_yn='N') AS child_size_n
+FROM t_prd_product_sets s
+JOIN t_prd_products pp ON pp.prd_cd=s.prd_cd
+JOIN t_prd_products c ON c.prd_cd=s.sub_prd_cd
+WHERE s.prd_cd IN ('PRD_000068','PRD_000069','PRD_000070','PRD_000072','PRD_000077','PRD_000100')
+ORDER BY s.prd_cd, s.disp_seq;
+"
+
+   prd_cd   |      parent       | sub_prd_cd |             child              | prd_typ_cd  | semi_role_cd | sub_prd_qty | disp_seq | spine_calc_yn | del_yn | child_plate_n | child_size_n 
+------------+-------------------+------------+--------------------------------+-------------+--------------+-------------+----------+---------------+--------+---------------+--------------
+ PRD_000068 | 중철책자          | PRD_000288 | 중철책자-표지                  | PRD_TYPE.02 | SEMI_ROLE.02 |           1 |        1 |               | N      |             1 |            2
+ PRD_000068 | 중철책자          | PRD_000287 | 중철책자-내지                  | PRD_TYPE.02 | SEMI_ROLE.01 |           1 |        2 |               | N      |             1 |            2
+ PRD_000069 | 무선책자          | PRD_000290 | 무선책자-표지                  | PRD_TYPE.02 | SEMI_ROLE.02 |           1 |        1 | Y             | N      |             2 |            2
+ PRD_000069 | 무선책자          | PRD_000289 | 무선책자-내지                  | PRD_TYPE.02 | SEMI_ROLE.01 |          24 |        2 |               | N      |             1 |            2
+ PRD_000070 | PUR책자           | PRD_000292 | PUR책자-표지                   | PRD_TYPE.02 | SEMI_ROLE.02 |           1 |        1 | Y             | N      |             2 |            2
+ PRD_000070 | PUR책자           | PRD_000291 | PUR책자-내지                   | PRD_TYPE.02 | SEMI_ROLE.01 |           1 |          |               | N      |             1 |            2
+ PRD_000072 | 하드커버책자      | PRD_000073 | 하드커버책자-표지              | PRD_TYPE.02 | SEMI_ROLE.02 |           1 |        1 |               | N      |             2 |            2
+ PRD_000072 | 하드커버책자      | PRD_000074 | 하드커버책자-면지              | PRD_TYPE.02 | SEMI_ROLE.03 |           1 |        3 |               | N      |             0 |            0
+ PRD_000072 | 하드커버책자      | PRD_000291 | PUR책자-내지                   | PRD_TYPE.02 | SEMI_ROLE.01 |           1 |          |               | N      |             1 |            2
+ PRD_000077 | 레더하드커버책자  | PRD_000078 | 레더하드커버책자-표지          | PRD_TYPE.02 | SEMI_ROLE.02 |           1 |        1 |               | N      |             2 |            2
+ PRD_000077 | 레더하드커버책자  | PRD_000074 | 하드커버책자-면지              | PRD_TYPE.02 | SEMI_ROLE.03 |           1 |        2 |               | N      |             0 |            0
+ PRD_000077 | 레더하드커버책자  | PRD_000291 | PUR책자-내지                   | PRD_TYPE.02 | SEMI_ROLE.01 |           1 |        3 |               | N      |             1 |            2
+ PRD_000100 | 포토북 [디자인명] | PRD_000101 | 포토북 [디자인명]-내지         | PRD_TYPE.02 | SEMI_ROLE.01 |           1 |        1 |               | N      |             1 |            4
+ PRD_000100 | 포토북 [디자인명] | PRD_000102 | 포토북 [디자인명]-하드커버     | PRD_TYPE.02 | SEMI_ROLE.02 |           1 |        2 |               | N      |             0 |            0
+ PRD_000100 | 포토북 [디자인명] | PRD_000105 | 포토북 [디자인명]-레더하드커버 | PRD_TYPE.02 | SEMI_ROLE.02 |           1 |        4 |               | N      |             0 |            0
+ PRD_000100 | 포토북 [디자인명] | PRD_000107 | 포토북 [디자인명]-소프트커버   | PRD_TYPE.02 | SEMI_ROLE.02 |           1 |        6 |               | N      |             0 |            0
+ PRD_000100 | 포토북 [디자인명] | PRD_000104 | 포토북 [디자인명]-면지         | PRD_TYPE.02 | SEMI_ROLE.03 |           1 |        7 |               | N      |             0 |            0
+(17 rows)
+

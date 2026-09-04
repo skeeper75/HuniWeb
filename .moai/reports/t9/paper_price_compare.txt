@@ -1,0 +1,21 @@
+$ psql <URL> -c "
+SELECT cp.mat_cd, m.mat_nm, cp.plt_siz_cd, z.siz_nm,
+       (z.work_width*z.work_height)::int AS area,
+       cp.unit_price, cp.min_qty, cp.apply_ymd, cp.reg_dt
+FROM t_prc_component_prices cp
+LEFT JOIN t_siz_sizes z ON z.siz_cd=cp.plt_siz_cd
+LEFT JOIN t_mat_materials m ON m.mat_cd=cp.mat_cd
+WHERE cp.comp_cd='COMP_PAPER'
+  AND cp.plt_siz_cd IN ('SIZ_000499','SIZ_000640','SIZ_000641')
+  AND cp.mat_cd IN ('MAT_000074','MAT_000078')
+ORDER BY cp.mat_cd, cp.plt_siz_cd, cp.min_qty;
+"
+
+   mat_cd   |     mat_nm      | plt_siz_cd | siz_nm  |  area  | unit_price | min_qty | apply_ymd  |           reg_dt           
+------------+-----------------+------------+---------+--------+------------+---------+------------+----------------------------
+ MAT_000074 | 백색모조지 220g | SIZ_000499 | 316x467 | 147572 |      70.64 |       1 | 2026-06-01 | 2026-06-16 16:29:14.927839
+ MAT_000074 | 백색모조지 220g | SIZ_000641 | 480x320 | 153600 |      70.64 |       1 | 2026-06-01 | 2026-09-01 00:17:12.379876
+ MAT_000078 | 아트지 150g     | SIZ_000499 | 316x467 | 147572 |      46.65 |       1 | 2026-06-01 | 2026-06-16 16:29:14.938295
+ MAT_000078 | 아트지 150g     | SIZ_000640 | 550x375 | 206250 |      67.16 |       1 | 2026-06-01 | 2026-08-31 23:49:18.78887
+(4 rows)
+
