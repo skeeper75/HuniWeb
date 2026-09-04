@@ -1,0 +1,22 @@
+$ psql <URL> -c "select ps.prd_cd, ps.siz_cd, s.siz_nm, ps.del_yn, s.work_width, s.work_height from t_prd_product_sizes ps join t_siz_sizes s on s.siz_cd=ps.siz_cd where ps.prd_cd in ('PRD_000055','PRD_000056') order by ps.prd_cd, ps.del_yn, ps.siz_cd;"
+
+   prd_cd   |   siz_cd   |     siz_nm     | del_yn | work_width | work_height 
+------------+------------+----------------+--------+------------+-------------
+ PRD_000055 | SIZ_000198 | A2 (420X594mm) | N      |     420.00 |      594.00
+ PRD_000055 | SIZ_000258 | A4(210x297mm)  | N      |     210.00 |      297.00
+ PRD_000055 | SIZ_000315 | A3 (297x420mm) | N      |     297.00 |      420.00
+ PRD_000055 | SIZ_000172 | A4(210x297mm)  | Y      |     290.00 |      377.00
+ PRD_000055 | SIZ_000174 | A3(297x420mm)  | Y      |     377.00 |      500.00
+ PRD_000055 | SIZ_000197 | A2(420x594mm)  | Y      |     426.00 |      600.00
+ PRD_000055 | SIZ_000514 | B3 (364X515)   | Y      |            |            
+ PRD_000055 | SIZ_000515 | B4 (257X364)   | Y      |            |            
+ PRD_000056 | SIZ_000198 | A2 (420X594mm) | N      |     420.00 |      594.00
+ PRD_000056 | SIZ_000258 | A4(210x297mm)  | N      |     210.00 |      297.00
+ PRD_000056 | SIZ_000315 | A3 (297x420mm) | N      |     297.00 |      420.00
+ PRD_000056 | SIZ_000172 | A4(210x297mm)  | Y      |     290.00 |      377.00
+ PRD_000056 | SIZ_000174 | A3(297x420mm)  | Y      |     377.00 |      500.00
+ PRD_000056 | SIZ_000197 | A2(420x594mm)  | Y      |     426.00 |      600.00
+ PRD_000056 | SIZ_000514 | B3 (364X515)   | Y      |            |            
+ PRD_000056 | SIZ_000515 | B4 (257X364)   | Y      |            |            
+(16 rows)
+

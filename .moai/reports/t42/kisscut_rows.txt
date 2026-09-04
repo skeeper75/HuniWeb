@@ -1,0 +1,15 @@
+$ psql <URL> -c "select siz_cd, count(*) n, count(*) filter (where exists (select 1 from t_prd_product_sizes ps where ps.siz_cd=t_prc_component_prices.siz_cd and ps.del_yn='N')) live_linked from t_prc_component_prices where comp_cd='STK_KISSCUT_PRINT' group by siz_cd order by siz_cd;"
+
+   siz_cd   |  n  | live_linked 
+------------+-----+-------------
+ SIZ_000057 | 288 |         288
+ SIZ_000058 | 288 |         288
+ SIZ_000059 | 288 |         288
+ SIZ_000060 | 288 |         288
+ SIZ_000067 | 288 |         288
+ SIZ_000258 | 288 |         288
+ SIZ_000426 | 288 |         288
+ SIZ_000518 | 288 |           0
+ SIZ_000519 | 288 |           0
+(9 rows)
+

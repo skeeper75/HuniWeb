@@ -1,0 +1,13 @@
+$ psql <URL> -c "with plate as (select 287.0 pw, 410.0 ph) select ps.siz_cd, s.siz_nm, s.work_width iw, s.work_height ih, greatest(floor(p.pw/s.work_width)::int*floor(p.ph/s.work_height)::int, floor(p.pw/s.work_height)::int*floor(p.ph/s.work_width)::int) pansu_307x430, fn_calc_pansu('SIZ_000498', ps.siz_cd) pansu_317x440, ps.del_yn from t_prd_product_sizes ps join t_siz_sizes s on s.siz_cd=ps.siz_cd, plate p where ps.prd_cd='PRD_000064' order by ps.siz_cd;"
+
+   siz_cd   |  siz_nm  |   iw   |   ih   | pansu_307x430 | pansu_317x440 | del_yn 
+------------+----------+--------+--------+---------------+---------------+--------
+ SIZ_000036 | 94x94mm  |  98.00 |  98.00 |             8 |            12 | N
+ SIZ_000043 | 80x80mm  |  84.00 |  84.00 |            12 |            15 | N
+ SIZ_000061 | 76x100mm |  86.00 | 110.00 |             9 |             9 | N
+ SIZ_000062 | 76x120mm |  86.00 | 130.00 |             9 |             9 | N
+ SIZ_000063 | 86x120mm |  96.00 | 130.00 |             8 |             9 | N
+ SIZ_000064 | 94x94mmm | 104.00 | 104.00 |             6 |             8 | N
+ SIZ_000065 | 62x180mm |  72.00 | 190.00 |             6 |             8 | N
+(7 rows)
+

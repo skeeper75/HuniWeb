@@ -1,0 +1,6 @@
+$ psql <URL> -c "select 'prd_sizes' src, siz_cd, del_yn, count(*) from t_prd_product_sizes where siz_cd in ('SIZ_000539','SIZ_000541','SIZ_000538','SIZ_000518','SIZ_000519') group by 1,2,3 union all select 'plate', siz_cd, del_yn, count(*) from t_prd_product_plate_sizes where siz_cd in ('SIZ_000539','SIZ_000541','SIZ_000538') group by 1,2,3 union all select 'comp_prices.siz', siz_cd, '-', count(*) from t_prc_component_prices where siz_cd in ('SIZ_000539','SIZ_000541','SIZ_000538') group by 1,2,3 union all select 'comp_prices.plt', plt_siz_cd, '-', count(*) from t_prc_component_prices where plt_siz_cd in ('SIZ_000539','SIZ_000541','SIZ_000538','SIZ_000521','SIZ_000498') group by 1,2,3 order by 1,2;"
+
+ src | siz_cd | del_yn | count 
+-----+--------+--------+-------
+(0 rows)
+
