@@ -1,0 +1,19 @@
+$ psql <URL> -c "select pr.prd_cd, pr.prd_nm, (select count(*) from t_prd_product_plate_sizes x where x.prd_cd=pr.prd_cd and coalesce(x.del_yn,'N')='N') alive, (select count(*) from t_prd_product_plate_sizes x where x.prd_cd=pr.prd_cd and x.del_yn='Y') deleted from t_prd_products pr where pr.prd_cd in ('PRD_000052','PRD_000053','PRD_000054','PRD_000055','PRD_000056','PRD_000057','PRD_000058','PRD_000059','PRD_000060','PRD_000061','PRD_000062','PRD_000063','PRD_000064') order by 1;"
+
+   prd_cd   |          prd_nm          | alive | deleted 
+------------+--------------------------+-------+---------
+ PRD_000052 | 반칼자유형스티커         |     1 |       3
+ PRD_000053 | 반칼자유형투명스티커     |     1 |       3
+ PRD_000054 | 반칼자유형홀로그램스티커 |     1 |       3
+ PRD_000055 | 낱장자유형스티커         |     0 |       2
+ PRD_000056 | 낱장자유형투명스티커     |     0 |       2
+ PRD_000057 | 대형자유형스티커         |     0 |       0
+ PRD_000058 | 반칼원형스티커           |     1 |       2
+ PRD_000059 | 반칼정사각스티커         |     1 |       2
+ PRD_000060 | 반칼직사각스티커         |     1 |       2
+ PRD_000061 | 반칼띠지스티커           |     1 |       2
+ PRD_000062 | 반칼팬시스티커           |     1 |       3
+ PRD_000063 | 반칼팬시투명스티커       |     1 |       3
+ PRD_000064 | 소량자유형스티커         |     1 |       7
+(13 rows)
+

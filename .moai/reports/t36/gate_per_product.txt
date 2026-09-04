@@ -1,0 +1,29 @@
+$ psql <URL> -c "select f.frm_cd, pf.prd_cd, pr.prd_nm, count(*) filter (where coalesce(ps.del_yn,'N')='N') alive, count(*) filter (where ps.del_yn='Y') deleted from t_prd_product_price_formulas pf join t_prd_products pr on pr.prd_cd=pf.prd_cd join t_prc_price_formulas f on f.frm_cd=pf.frm_cd left join t_prd_product_plate_sizes ps on ps.prd_cd=pf.prd_cd where pf.frm_cd in ('FORM_STK_KISSCUT','FORM_STK_CUT','PRF_STK_CUT_CLEAR','PRF_STK_CUT_LARGE','PRF_STK_FIXED') group by 1,2,3 order by 1,2;"
+
+      frm_cd       |   prd_cd   |          prd_nm          | alive | deleted 
+-------------------+------------+--------------------------+-------+---------
+ FORM_STK_CUT      | PRD_000055 | 낱장자유형스티커         |     0 |       2
+ FORM_STK_KISSCUT  | PRD_000052 | 반칼자유형스티커         |     1 |       3
+ FORM_STK_KISSCUT  | PRD_000053 | 반칼자유형투명스티커     |     1 |       3
+ FORM_STK_KISSCUT  | PRD_000054 | 반칼자유형홀로그램스티커 |     1 |       3
+ FORM_STK_KISSCUT  | PRD_000058 | 반칼원형스티커           |     1 |       2
+ FORM_STK_KISSCUT  | PRD_000059 | 반칼정사각스티커         |     1 |       2
+ FORM_STK_KISSCUT  | PRD_000060 | 반칼직사각스티커         |     1 |       2
+ FORM_STK_KISSCUT  | PRD_000061 | 반칼띠지스티커           |     1 |       2
+ FORM_STK_KISSCUT  | PRD_000062 | 반칼팬시스티커           |     1 |       3
+ FORM_STK_KISSCUT  | PRD_000063 | 반칼팬시투명스티커       |     1 |       3
+ PRF_STK_CUT_CLEAR | PRD_000056 | 낱장자유형투명스티커     |     0 |       2
+ PRF_STK_CUT_LARGE | PRD_000057 | 대형자유형스티커         |     1 |       0
+ PRF_STK_FIXED     | PRD_000053 | 반칼자유형투명스티커     |     1 |       3
+ PRF_STK_FIXED     | PRD_000054 | 반칼자유형홀로그램스티커 |     1 |       3
+ PRF_STK_FIXED     | PRD_000055 | 낱장자유형스티커         |     0 |       2
+ PRF_STK_FIXED     | PRD_000056 | 낱장자유형투명스티커     |     0 |       2
+ PRF_STK_FIXED     | PRD_000057 | 대형자유형스티커         |     1 |       0
+ PRF_STK_FIXED     | PRD_000059 | 반칼정사각스티커         |     1 |       2
+ PRF_STK_FIXED     | PRD_000060 | 반칼직사각스티커         |     1 |       2
+ PRF_STK_FIXED     | PRD_000061 | 반칼띠지스티커           |     1 |       2
+ PRF_STK_FIXED     | PRD_000062 | 반칼팬시스티커           |     1 |       3
+ PRF_STK_FIXED     | PRD_000063 | 반칼팬시투명스티커       |     1 |       3
+ PRF_STK_FIXED     | PRD_000064 | 소량자유형스티커         |     1 |       7
+(23 rows)
+
