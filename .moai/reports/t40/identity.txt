@@ -1,0 +1,7 @@
+$ psql <URL> -c "select is_identity, identity_generation, data_type from information_schema.columns where table_name='t_prc_component_prices' and column_name='comp_price_id';"
+
+ is_identity | identity_generation | data_type 
+-------------+---------------------+-----------
+ YES         | BY DEFAULT          | bigint
+(1 row)
+

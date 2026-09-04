@@ -1,0 +1,7 @@
+$ psql <URL> -c "select version() as pg, (select indnullsnotdistinct from pg_index i join pg_class c on c.oid=i.indexrelid where c.relname='ux_t_prc_comp_prices_nat_key') as nulls_not_distinct;"
+
+                                                         pg                                                         | nulls_not_distinct 
+--------------------------------------------------------------------------------------------------------------------+--------------------
+ PostgreSQL 18.6 (Debian 18.6-1.pgdg13+2) on x86_64-pc-linux-gnu, compiled by gcc (Debian 14.2.0-19) 14.2.0, 64-bit | f
+(1 row)
+

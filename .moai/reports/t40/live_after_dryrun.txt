@@ -1,0 +1,7 @@
+$ psql <URL> -c "select count(*) as total, count(distinct siz_cd) as sizes from t_prc_component_prices where comp_cd='STK_KISSCUT_PRINT';"
+
+ total | sizes 
+-------+-------
+  1944 |     7
+(1 row)
+

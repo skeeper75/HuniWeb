@@ -1,0 +1,12 @@
+$ psql <URL> -c "select column_name, is_nullable, column_default from information_schema.columns where table_name='t_prc_component_prices' and column_name in ('comp_price_id','note','reg_dt','upd_dt','dim_vals','page_cnt') order by ordinal_position;"
+
+  column_name  | is_nullable | column_default 
+---------------+-------------+----------------
+ comp_price_id | NO          | 
+ note          | YES         | 
+ reg_dt        | NO          | now()
+ upd_dt        | YES         | 
+ dim_vals      | YES         | 
+ page_cnt      | YES         | 
+(6 rows)
+
