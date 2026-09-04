@@ -1,8 +1,10 @@
 # t41 게이트 — 사후 simulate 예측 vs 실측
 
-> 2026-09-04 · 실행 `sim_t41.py before|after` · `predict_calc.py` · 원본 `sim-before.csv` · `sim-after.csv` · `predict_calc.csv`
-> **커밋 없이** 사후 상태를 만들었다: Django 트랜잭션 안에서 `apply.sql` 실행 → 계산 → `set_rollback(True)`.
-> 엔진 = `raw/webadmin/webadmin/catalog/pricing.py` (읽기전용 호출)
+> 2026-09-04 · 실행 `sim_t41.py before|after` · `predict_calc.py`
+> 원본 `sim-before.csv`(적용 전) · `sim-after.csv`(DRY-RUN) · `sim-live-after-commit.csv`(COMMIT 후) · `predict_calc.csv`
+> 아래 「실측」 열은 **COMMIT 전 DRY-RUN 값**이다 — Django 트랜잭션 안에서 `apply.sql` 실행 → 계산 → `set_rollback(True)`.
+> COMMIT 후 라이브에서 재계산한 값도 같았다(§ 라이브 반영 결과).
+> 엔진 = `raw/webadmin/webadmin/catalog/pricing.py`
 
 ## 판정: **5/5 일치 · 불일치 0 — GO**
 
@@ -54,10 +56,15 @@
 스티커 견적이 나오는 건 `use_dims` 에 판형 축이 없어 그 선택이 무시되기 때문이고, 그래서
 4,500,000 원 같은 과다청구가 난다. 적용본이 켜는 것은 「판형 선택」이 아니라 **「선택된 판형을 실제로 쓰기」** 다.
 
-## 라이브 무변경 확인
+## 라이브 반영 결과 (2026-09-04 COMMIT 후)
 
-- `sim after` 는 `transaction.atomic()` 안에서 `apply.sql` 을 실행하고 `set_rollback(True)` 로 되돌렸다.
-- 계산 뒤 라이브 재확인: 판형 `SIZ_000521` × 11행 · `use_dims` 3축 · 단가행 1,944 — **적용 전 그대로**.
+DRY-RUN 단계에서는 라이브를 건드리지 않았다 — `sim after` 는 `transaction.atomic()` 안에서
+`apply.sql` 을 실행하고 `set_rollback(True)` 로 되돌렸고, 계산 뒤 라이브가 적용 전 그대로임을 확인했다
+(판형 `SIZ_000521` × 11 · `use_dims` 3축 · 단가행 1,944).
+
+그 뒤 지니 승인을 받아 COMMIT 했고, **라이브에서 다시 계산한 값이 위 예측과 5/5 일치**했다
+(`sim-live-after-commit.csv` · 712,500 / 6,700 / 81,900 / 637,500 / 235,000).
+즉 DRY-RUN 예측이 라이브에서 그대로 재현됐다.
 
 ## 미검증 (Gap)
 
