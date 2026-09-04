@@ -1,0 +1,14 @@
+$ psql <URL> -c "select c.comp_cd, c.comp_nm, c.prc_typ_cd, c.use_dims::text, (select count(*) from t_prc_component_prices p where p.comp_cd=c.comp_cd) rows, (select count(distinct p.siz_cd) from t_prc_component_prices p where p.comp_cd=c.comp_cd) sizs, (select count(*) from t_prc_component_prices p where p.comp_cd=c.comp_cd and p.plt_siz_cd is not null) plt_notnull from t_prc_price_components c where c.comp_cd in ('STK_KISSCUT_PRINT','STK_CUT_PRINT','STK_CUT_CLEAR_PRINT','STK_CUT_LARGE_PRINT','COMP_STK_PRINT','STK_TATTOO_PRINT','COMP_STK_PACK','COMP_GANGPAN_PRINT') order by 1;"
+
+       comp_cd       |             comp_nm              |  prc_typ_cd   |            use_dims             | rows | sizs | plt_notnull 
+---------------------+----------------------------------+---------------+---------------------------------+------+------+-------------
+ COMP_GANGPAN_PRINT  | 합판도무송 완제품가(형상·소재별) | PRICE_TYPE.02 | ["siz_cd", "mat_cd", "min_qty"] | 1080 |   36 |           0
+ COMP_STK_PACK       | 스티커 완제품가 팩(54장1세트)    | PRICE_TYPE.02 | ["siz_cd", "min_qty"]           |    1 |    1 |           0
+ COMP_STK_PRINT      | 스티커 완제품가(소재·규격)       | PRICE_TYPE.01 | ["siz_cd", "mat_cd", "min_qty"] | 5064 |   25 |           0
+ STK_CUT_CLEAR_PRINT | 스티커_완칼투명_제작가           | PRICE_TYPE.01 | ["siz_cd", "mat_cd", "min_qty"] |   30 |    5 |           0
+ STK_CUT_LARGE_PRINT | 스티커_완칼대형_제작가           | PRICE_TYPE.01 | ["siz_cd", "mat_cd", "min_qty"] |    6 |    1 |           0
+ STK_CUT_PRINT       | 스티커_완칼_제작가               | PRICE_TYPE.01 | ["siz_cd", "mat_cd", "min_qty"] |   30 |    5 |           0
+ STK_KISSCUT_PRINT   | 스티커_반칼_제작가               | PRICE_TYPE.01 | ["siz_cd", "mat_cd", "min_qty"] | 1944 |    7 |           0
+ STK_TATTOO_PRINT    | 스티커_타투_제작가               | PRICE_TYPE.01 | ["siz_cd", "min_qty"]           |    1 |    1 |           0
+(8 rows)
+

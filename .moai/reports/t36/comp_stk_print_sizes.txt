@@ -1,0 +1,31 @@
+$ psql <URL> -c "select p.siz_cd, s.siz_nm, count(*) rows, fn_calc_pansu('SIZ_000499', p.siz_cd) pansu_국4절 from t_prc_component_prices p left join t_siz_sizes s on s.siz_cd=p.siz_cd where p.comp_cd='COMP_STK_PRINT' group by 1,2 order by 4 nulls first, 1;"
+
+   siz_cd   |     siz_nm     | rows | pansu_국4절 
+------------+----------------+------+-------------
+ SIZ_000514 | B3 (364X515)   |   30 |            
+ SIZ_000515 | B4 (257X364)   |   30 |            
+ SIZ_000518 | 100x148        |  360 |            
+ SIZ_000519 | 90x110         |  360 |            
+ SIZ_000174 | A3(297x420mm)  |   30 |           0
+ SIZ_000197 | A2(420x594mm)  |   30 |           0
+ SIZ_000198 | A2 (420X594mm) |   12 |           0
+ SIZ_000199 | 400x600mm      |   18 |           0
+ SIZ_000172 | A4(210x297mm)  |   30 |           1
+ SIZ_000315 | A3 (297x420mm) |   12 |           1
+ SIZ_000258 | A4(210x297mm)  |  300 |           2
+ SIZ_000007 | 148x210mm      |  360 |           4
+ SIZ_000059 | 124x186mm      |  360 |           4
+ SIZ_000426 | A5(148x210mm)  |  288 |           4
+ SIZ_000060 | 90x190mm       |  360 |           6
+ SIZ_000057 | A6 (105x148mm) |  288 |           8
+ SIZ_000058 | 100x140mm      |  252 |           8
+ SIZ_000064 | 94x94mmm       |  252 |           8
+ SIZ_000065 | 62x180mm       |  252 |           8
+ SIZ_000067 | 140x100mm      |  180 |           8
+ SIZ_000063 | 86x120mm       |  252 |           9
+ SIZ_000062 | 76x120mm       |  252 |          10
+ SIZ_000036 | 94x94mm        |  252 |          12
+ SIZ_000061 | 76x100mm       |  252 |          12
+ SIZ_000043 | 80x80mm        |  252 |          15
+(25 rows)
+

@@ -1,0 +1,11 @@
+$ psql <URL> -c "select comp_cd, use_dims::text from t_prc_price_components where comp_cd in ('STK_KISSCUT_PRINT','STK_CUT_PRINT','STK_CUT_CLEAR_PRINT','STK_CUT_LARGE_PRINT','COMP_STK_PRINT') order by 1;"
+
+       comp_cd       |            use_dims             
+---------------------+---------------------------------
+ COMP_STK_PRINT      | ["siz_cd", "mat_cd", "min_qty"]
+ STK_CUT_CLEAR_PRINT | ["siz_cd", "mat_cd", "min_qty"]
+ STK_CUT_LARGE_PRINT | ["siz_cd", "mat_cd", "min_qty"]
+ STK_CUT_PRINT       | ["siz_cd", "mat_cd", "min_qty"]
+ STK_KISSCUT_PRINT   | ["siz_cd", "mat_cd", "min_qty"]
+(5 rows)
+

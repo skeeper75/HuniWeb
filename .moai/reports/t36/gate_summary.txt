@@ -1,0 +1,8 @@
+$ psql <URL> -c "select coalesce(p.del_yn,'N') del_yn, count(*) rows, count(distinct p.prd_cd) prds from t_prd_product_plate_sizes p join t_prd_products pr on pr.prd_cd=p.prd_cd where pr.prd_nm like '%스티커%' or pr.prd_nm like '%타투%' group by 1 order by 1;"
+
+ del_yn | rows | prds 
+--------+------+------
+ N      |   12 |   12
+ Y      |   44 |   16
+(2 rows)
+
