@@ -1,0 +1,64 @@
+$ psql <URL> -c "
+SELECT pm.prd_cd, p.prd_nm, p.semi_role_cd, m.mat_cd, m.mat_nm, m.mat_typ_cd, m.depth,
+       pm.dflt_yn
+FROM t_prd_product_materials pm
+JOIN t_prd_products p ON p.prd_cd=pm.prd_cd
+JOIN t_mat_materials m ON m.mat_cd=pm.mat_cd
+WHERE pm.del_yn='N' AND pm.prd_cd IN ('PRD_000289','PRD_000291','PRD_000290','PRD_000292','PRD_000073','PRD_000078')
+ORDER BY p.semi_role_cd, pm.prd_cd, m.depth DESC NULLS LAST;
+"
+
+   prd_cd   |        prd_nm         | semi_role_cd |   mat_cd   |        mat_nm        | mat_typ_cd  | depth  | dflt_yn 
+------------+-----------------------+--------------+------------+----------------------+-------------+--------+---------
+ PRD_000289 | 무선책자-내지         | SEMI_ROLE.01 | MAT_000105 | 몽블랑 130g          | MAT_TYPE.01 |  0.170 | N
+ PRD_000289 | 무선책자-내지         | SEMI_ROLE.01 | MAT_000104 | 몽블랑 100g          | MAT_TYPE.01 |  0.130 | N
+ PRD_000289 | 무선책자-내지         | SEMI_ROLE.01 | MAT_000073 | 백색모조지 120g      | MAT_TYPE.01 |  0.130 | N
+ PRD_000289 | 무선책자-내지         | SEMI_ROLE.01 | MAT_000095 | 앙상블 100g          | MAT_TYPE.01 |  0.130 | N
+ PRD_000289 | 무선책자-내지         | SEMI_ROLE.01 | MAT_000077 | 아트지 120g          | MAT_TYPE.01 |  0.110 | N
+ PRD_000289 | 무선책자-내지         | SEMI_ROLE.01 | MAT_000087 | 스노우지 120g        | MAT_TYPE.01 |  0.100 | N
+ PRD_000291 | PUR책자-내지          | SEMI_ROLE.01 | MAT_000105 | 몽블랑 130g          | MAT_TYPE.01 |  0.170 | N
+ PRD_000291 | PUR책자-내지          | SEMI_ROLE.01 | MAT_000073 | 백색모조지 120g      | MAT_TYPE.01 |  0.130 | Y
+ PRD_000291 | PUR책자-내지          | SEMI_ROLE.01 | MAT_000095 | 앙상블 100g          | MAT_TYPE.01 |  0.130 | N
+ PRD_000291 | PUR책자-내지          | SEMI_ROLE.01 | MAT_000104 | 몽블랑 100g          | MAT_TYPE.01 |  0.130 | N
+ PRD_000291 | PUR책자-내지          | SEMI_ROLE.01 | MAT_000077 | 아트지 120g          | MAT_TYPE.01 |  0.110 | N
+ PRD_000291 | PUR책자-내지          | SEMI_ROLE.01 | MAT_000087 | 스노우지 120g        | MAT_TYPE.01 |  0.100 | N
+ PRD_000073 | 하드커버책자-표지     | SEMI_ROLE.02 | MAT_000701 | MDF(26x218mm)_A5책등 | MAT_TYPE.04 | 26.000 | N
+ PRD_000073 | 하드커버책자-표지     | SEMI_ROLE.02 | MAT_000691 | MDF(26x304mm)_A4책등 | MAT_TYPE.04 | 26.000 | N
+ PRD_000073 | 하드커버책자-표지     | SEMI_ROLE.02 | MAT_000690 | MDF(24x304mm)_A4책등 | MAT_TYPE.04 | 24.000 | N
+ PRD_000073 | 하드커버책자-표지     | SEMI_ROLE.02 | MAT_000700 | MDF(24x218mm)_A5책등 | MAT_TYPE.04 | 24.000 | N
+ PRD_000073 | 하드커버책자-표지     | SEMI_ROLE.02 | MAT_000699 | MDF(22x218mm)_A5책등 | MAT_TYPE.04 | 22.000 | N
+ PRD_000073 | 하드커버책자-표지     | SEMI_ROLE.02 | MAT_000689 | MDF(22x304mm)_A4책등 | MAT_TYPE.04 | 22.000 | N
+ PRD_000073 | 하드커버책자-표지     | SEMI_ROLE.02 | MAT_000688 | MDF(20x304mm)_A4책등 | MAT_TYPE.04 | 20.000 | N
+ PRD_000073 | 하드커버책자-표지     | SEMI_ROLE.02 | MAT_000698 | MDF(20x218mm)_A5책등 | MAT_TYPE.04 | 20.000 | N
+ PRD_000073 | 하드커버책자-표지     | SEMI_ROLE.02 | MAT_000687 | MDF(18x304mm)_A4책등 | MAT_TYPE.04 | 18.000 | N
+ PRD_000073 | 하드커버책자-표지     | SEMI_ROLE.02 | MAT_000697 | MDF(18x218mm)_A5책등 | MAT_TYPE.04 | 18.000 | N
+ PRD_000073 | 하드커버책자-표지     | SEMI_ROLE.02 | MAT_000645 | MDF(16x218mm)_A5책등 | MAT_TYPE.04 | 16.000 | N
+ PRD_000073 | 하드커버책자-표지     | SEMI_ROLE.02 | MAT_000642 | MDF(16x304mm)_A4책등 | MAT_TYPE.04 | 16.000 | N
+ PRD_000073 | 하드커버책자-표지     | SEMI_ROLE.02 | MAT_000641 | MDF(14x304mm)_A4책등 | MAT_TYPE.04 | 14.000 | N
+ PRD_000073 | 하드커버책자-표지     | SEMI_ROLE.02 | MAT_000644 | MDF(14x218mm)_A5책등 | MAT_TYPE.04 | 14.000 | N
+ PRD_000073 | 하드커버책자-표지     | SEMI_ROLE.02 | MAT_000640 | MDF(12x304mm)_A4책등 | MAT_TYPE.04 | 12.000 | N
+ PRD_000073 | 하드커버책자-표지     | SEMI_ROLE.02 | MAT_000643 | MDF(12x218mm)_A5책등 | MAT_TYPE.04 | 12.000 | N
+ PRD_000073 | 하드커버책자-표지     | SEMI_ROLE.02 | MAT_000627 | MDF(10x218mm)_A5책등 | MAT_TYPE.04 | 10.000 | N
+ PRD_000073 | 하드커버책자-표지     | SEMI_ROLE.02 | MAT_000626 | MDF(10x304mm)_A4책등 | MAT_TYPE.04 | 10.000 | N
+ PRD_000073 | 하드커버책자-표지     | SEMI_ROLE.02 | MAT_000078 | 아트지 150g          | MAT_TYPE.01 |  0.120 | Y
+ PRD_000073 | 하드커버책자-표지     | SEMI_ROLE.02 | MAT_000624 | MDF(204x304mm)_A4    | MAT_TYPE.04 |        | N
+ PRD_000073 | 하드커버책자-표지     | SEMI_ROLE.02 | MAT_000625 | MDF(142x218mm)_A5    | MAT_TYPE.04 |        | N
+ PRD_000078 | 레더하드커버책자-표지 | SEMI_ROLE.02 | MAT_000626 | MDF(10x304mm)_A4책등 | MAT_TYPE.04 | 10.000 | N
+ PRD_000078 | 레더하드커버책자-표지 | SEMI_ROLE.02 | MAT_000627 | MDF(10x218mm)_A5책등 | MAT_TYPE.04 | 10.000 | N
+ PRD_000078 | 레더하드커버책자-표지 | SEMI_ROLE.02 | MAT_000625 | MDF(142x218mm)_A5    | MAT_TYPE.04 |        | N
+ PRD_000078 | 레더하드커버책자-표지 | SEMI_ROLE.02 | MAT_000624 | MDF(204x304mm)_A4    | MAT_TYPE.04 |        | N
+ PRD_000078 | 레더하드커버책자-표지 | SEMI_ROLE.02 | MAT_000379 | 레더(화이트)         | MAT_TYPE.05 |        | Y
+ PRD_000290 | 무선책자-표지         | SEMI_ROLE.02 | MAT_000109 | 몽블랑 240g          | MAT_TYPE.01 |  0.320 | N
+ PRD_000290 | 무선책자-표지         | SEMI_ROLE.02 | MAT_000092 | 스노우지 300g        | MAT_TYPE.01 |  0.310 | N
+ PRD_000290 | 무선책자-표지         | SEMI_ROLE.02 | MAT_000082 | 아트지 300g          | MAT_TYPE.01 |  0.290 | N
+ PRD_000290 | 무선책자-표지         | SEMI_ROLE.02 | MAT_000091 | 스노우지 250g        | MAT_TYPE.01 |  0.240 | N
+ PRD_000290 | 무선책자-표지         | SEMI_ROLE.02 | MAT_000074 | 백색모조지 220g      | MAT_TYPE.01 |  0.230 | Y
+ PRD_000290 | 무선책자-표지         | SEMI_ROLE.02 | MAT_000081 | 아트지 250g          | MAT_TYPE.01 |  0.220 | N
+ PRD_000292 | PUR책자-표지          | SEMI_ROLE.02 | MAT_000109 | 몽블랑 240g          | MAT_TYPE.01 |  0.320 | N
+ PRD_000292 | PUR책자-표지          | SEMI_ROLE.02 | MAT_000092 | 스노우지 300g        | MAT_TYPE.01 |  0.310 | N
+ PRD_000292 | PUR책자-표지          | SEMI_ROLE.02 | MAT_000082 | 아트지 300g          | MAT_TYPE.01 |  0.290 | N
+ PRD_000292 | PUR책자-표지          | SEMI_ROLE.02 | MAT_000091 | 스노우지 250g        | MAT_TYPE.01 |  0.240 | N
+ PRD_000292 | PUR책자-표지          | SEMI_ROLE.02 | MAT_000074 | 백색모조지 220g      | MAT_TYPE.01 |  0.230 | Y
+ PRD_000292 | PUR책자-표지          | SEMI_ROLE.02 | MAT_000080 | 아트지 200g          | MAT_TYPE.01 |  0.170 | N
+(50 rows)
+

@@ -1,0 +1,397 @@
+[
+ {
+  "prd": "PRD_000069",
+  "prd_nm": "무선책자",
+  "proc_cd": "PROC_000019",
+  "spine_cfg": {
+   "cfg": {
+    "spine_mgn_mm": 0.5,
+    "rnd_typ_cd": "SPINE_RND_TYPE.01",
+    "cover_incl_yn": "N"
+   },
+   "specs": []
+  },
+  "page_rules": {
+   "POPT_000002": {
+    "min": 24,
+    "max": 300,
+    "incr": 2
+   }
+  },
+  "inner": "PRD_000289",
+  "inner_sizes": [
+   [
+    "SIZ_000250",
+    "A5세로 (148x210mm) (SIZ_000250)"
+   ],
+   [
+    "SIZ_000252",
+    "A4세로 (210x297mm) (SIZ_000252)"
+   ]
+  ],
+  "inner_mats": [
+   [
+    "MAT_000073",
+    "백색모조지 120g (MAT_000073)"
+   ],
+   [
+    "MAT_000077",
+    "아트지 120g (MAT_000077)"
+   ],
+   [
+    "MAT_000087",
+    "스노우지 120g (MAT_000087)"
+   ],
+   [
+    "MAT_000095",
+    "앙상블 100g (MAT_000095)"
+   ],
+   [
+    "MAT_000104",
+    "몽블랑 100g (MAT_000104)"
+   ],
+   [
+    "MAT_000105",
+    "몽블랑 130g (MAT_000105)"
+   ]
+  ],
+  "cover": "PRD_000290",
+  "cover_sizes": [
+   [
+    "SIZ_000632",
+    "무선/PUR책자 표지A5 (SIZ_000632)"
+   ],
+   [
+    "SIZ_000633",
+    "무선/PUR책자 표지A4 (SIZ_000633)"
+   ]
+  ],
+  "meta_keys": [
+   "addons",
+   "apply_pos",
+   "components",
+   "constraints",
+   "dim_meta",
+   "editor_yn",
+   "file_upload_yn",
+   "frm",
+   "grade_relevant",
+   "grades",
+   "is_set",
+   "nonspec",
+   "opt_groups",
+   "page_rule",
+   "page_rules",
+   "prd_cd",
+   "prd_nm",
+   "prod_dims",
+   "qty_rule",
+   "qty_unit",
+   "set_members",
+   "size_qty_rules",
+   "source_hint",
+   "spine",
+   "templates"
+  ]
+ },
+ {
+  "prd": "PRD_000070",
+  "prd_nm": "PUR책자",
+  "proc_cd": "PROC_000020",
+  "spine_cfg": {
+   "cfg": {
+    "spine_mgn_mm": 0.5,
+    "rnd_typ_cd": "SPINE_RND_TYPE.01",
+    "cover_incl_yn": "N"
+   },
+   "specs": []
+  },
+  "page_rules": {
+   "POPT_000001": {
+    "min": 12,
+    "max": 150,
+    "incr": 1
+   },
+   "POPT_000002": {
+    "min": 24,
+    "max": 300,
+    "incr": 2
+   }
+  },
+  "inner": "PRD_000291",
+  "inner_sizes": [
+   [
+    "SIZ_000250",
+    "A5세로 (148x210mm) (SIZ_000250)"
+   ],
+   [
+    "SIZ_000252",
+    "A4세로 (210x297mm) (SIZ_000252)"
+   ]
+  ],
+  "inner_mats": [
+   [
+    "MAT_000073",
+    "백색모조지 120g (MAT_000073)"
+   ],
+   [
+    "MAT_000077",
+    "아트지 120g (MAT_000077)"
+   ],
+   [
+    "MAT_000087",
+    "스노우지 120g (MAT_000087)"
+   ],
+   [
+    "MAT_000095",
+    "앙상블 100g (MAT_000095)"
+   ],
+   [
+    "MAT_000104",
+    "몽블랑 100g (MAT_000104)"
+   ],
+   [
+    "MAT_000105",
+    "몽블랑 130g (MAT_000105)"
+   ]
+  ],
+  "cover": "PRD_000292",
+  "cover_sizes": [
+   [
+    "SIZ_000632",
+    "무선/PUR책자 표지A5 (SIZ_000632)"
+   ],
+   [
+    "SIZ_000633",
+    "무선/PUR책자 표지A4 (SIZ_000633)"
+   ]
+  ],
+  "meta_keys": [
+   "addons",
+   "apply_pos",
+   "components",
+   "constraints",
+   "dim_meta",
+   "editor_yn",
+   "file_upload_yn",
+   "frm",
+   "grade_relevant",
+   "grades",
+   "is_set",
+   "nonspec",
+   "opt_groups",
+   "page_rule",
+   "page_rules",
+   "prd_cd",
+   "prd_nm",
+   "prod_dims",
+   "qty_rule",
+   "qty_unit",
+   "set_members",
+   "size_qty_rules",
+   "source_hint",
+   "spine",
+   "templates"
+  ]
+ },
+ {
+  "prd": "PRD_000072",
+  "prd_nm": "하드커버책자",
+  "proc_cd": "PROC_000023",
+  "spine_cfg": {
+   "cfg": {
+    "spine_mgn_mm": 0.5,
+    "rnd_typ_cd": "SPINE_RND_TYPE.02",
+    "cover_incl_yn": "N"
+   },
+   "specs": []
+  },
+  "page_rules": {
+   "POPT_000001": {
+    "min": 12,
+    "max": 150,
+    "incr": 1
+   },
+   "POPT_000002": {
+    "min": 24,
+    "max": 300,
+    "incr": 2
+   }
+  },
+  "inner": "PRD_000291",
+  "inner_sizes": [
+   [
+    "SIZ_000250",
+    "A5세로 (148x210mm) (SIZ_000250)"
+   ],
+   [
+    "SIZ_000252",
+    "A4세로 (210x297mm) (SIZ_000252)"
+   ]
+  ],
+  "inner_mats": [
+   [
+    "MAT_000073",
+    "백색모조지 120g (MAT_000073)"
+   ],
+   [
+    "MAT_000077",
+    "아트지 120g (MAT_000077)"
+   ],
+   [
+    "MAT_000087",
+    "스노우지 120g (MAT_000087)"
+   ],
+   [
+    "MAT_000095",
+    "앙상블 100g (MAT_000095)"
+   ],
+   [
+    "MAT_000104",
+    "몽블랑 100g (MAT_000104)"
+   ],
+   [
+    "MAT_000105",
+    "몽블랑 130g (MAT_000105)"
+   ]
+  ],
+  "cover": "PRD_000073",
+  "cover_sizes": [
+   [
+    "SIZ_000634",
+    "하드커버무선책자 표지A5 (SIZ_000634)"
+   ],
+   [
+    "SIZ_000635",
+    "하드커버무선책자 표지A4 (SIZ_000635)"
+   ]
+  ],
+  "meta_keys": [
+   "addons",
+   "apply_pos",
+   "components",
+   "constraints",
+   "dim_meta",
+   "editor_yn",
+   "file_upload_yn",
+   "frm",
+   "grade_relevant",
+   "grades",
+   "is_set",
+   "nonspec",
+   "opt_groups",
+   "page_rule",
+   "page_rules",
+   "prd_cd",
+   "prd_nm",
+   "prod_dims",
+   "qty_rule",
+   "qty_unit",
+   "set_members",
+   "size_qty_rules",
+   "source_hint",
+   "spine",
+   "templates"
+  ]
+ },
+ {
+  "prd": "PRD_000077",
+  "prd_nm": "레더하드커버책자",
+  "proc_cd": "PROC_000023",
+  "spine_cfg": {
+   "cfg": {
+    "spine_mgn_mm": 0.5,
+    "rnd_typ_cd": "SPINE_RND_TYPE.02",
+    "cover_incl_yn": "N"
+   },
+   "specs": []
+  },
+  "page_rules": {
+   "POPT_000001": {
+    "min": 12,
+    "max": 150,
+    "incr": 1
+   },
+   "POPT_000002": {
+    "min": 24,
+    "max": 300,
+    "incr": 2
+   }
+  },
+  "inner": "PRD_000291",
+  "inner_sizes": [
+   [
+    "SIZ_000250",
+    "A5세로 (148x210mm) (SIZ_000250)"
+   ],
+   [
+    "SIZ_000252",
+    "A4세로 (210x297mm) (SIZ_000252)"
+   ]
+  ],
+  "inner_mats": [
+   [
+    "MAT_000073",
+    "백색모조지 120g (MAT_000073)"
+   ],
+   [
+    "MAT_000077",
+    "아트지 120g (MAT_000077)"
+   ],
+   [
+    "MAT_000087",
+    "스노우지 120g (MAT_000087)"
+   ],
+   [
+    "MAT_000095",
+    "앙상블 100g (MAT_000095)"
+   ],
+   [
+    "MAT_000104",
+    "몽블랑 100g (MAT_000104)"
+   ],
+   [
+    "MAT_000105",
+    "몽블랑 130g (MAT_000105)"
+   ]
+  ],
+  "cover": "PRD_000078",
+  "cover_sizes": [
+   [
+    "SIZ_000634",
+    "하드커버무선책자 표지A5 (SIZ_000634)"
+   ],
+   [
+    "SIZ_000635",
+    "하드커버무선책자 표지A4 (SIZ_000635)"
+   ]
+  ],
+  "meta_keys": [
+   "addons",
+   "apply_pos",
+   "components",
+   "constraints",
+   "dim_meta",
+   "editor_yn",
+   "file_upload_yn",
+   "frm",
+   "grade_relevant",
+   "grades",
+   "is_set",
+   "nonspec",
+   "opt_groups",
+   "page_rule",
+   "page_rules",
+   "prd_cd",
+   "prd_nm",
+   "prod_dims",
+   "qty_rule",
+   "qty_unit",
+   "set_members",
+   "size_qty_rules",
+   "source_hint",
+   "spine",
+   "templates"
+  ]
+ }
+]

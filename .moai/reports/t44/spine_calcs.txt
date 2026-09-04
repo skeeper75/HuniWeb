@@ -1,0 +1,15 @@
+$ psql <URL> -c "
+SELECT c.proc_cd, p.proc_nm, c.spine_mgn_mm, c.rnd_typ_cd, c.cover_incl_yn, c.use_yn, c.del_yn, c.note
+FROM t_proc_spine_calcs c LEFT JOIN t_proc_processes p ON p.proc_cd=c.proc_cd
+ORDER BY c.proc_cd;
+"
+
+   proc_cd   |      proc_nm       | spine_mgn_mm |    rnd_typ_cd     | cover_incl_yn | use_yn | del_yn | note 
+-------------+--------------------+--------------+-------------------+---------------+--------+--------+------
+ PROC_000019 | 무선제본           |         0.50 | SPINE_RND_TYPE.01 | N             | Y      | N      | 
+ PROC_000020 | PUR제본            |         0.50 | SPINE_RND_TYPE.01 | N             | Y      | N      | 
+ PROC_000021 | 트윈링제본         |         4.00 | SPINE_RND_TYPE.03 | N             | Y      | N      | 
+ PROC_000023 | 하드커버무선제본   |         0.50 | SPINE_RND_TYPE.02 | N             | Y      | N      | 
+ PROC_000024 | 하드커버트윈링제본 |         4.00 | SPINE_RND_TYPE.03 | Y             | Y      | N      | 
+(5 rows)
+

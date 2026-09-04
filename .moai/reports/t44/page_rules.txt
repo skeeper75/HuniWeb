@@ -1,0 +1,18 @@
+$ psql <URL> -c "
+SELECT r.prd_cd, p.prd_nm, p.semi_role_cd, r.page_min, r.page_max, r.page_incr, r.print_opt_cd, r.note
+FROM t_prd_product_page_rules r JOIN t_prd_products p ON p.prd_cd=r.prd_cd
+WHERE r.prd_cd IN ('PRD_000068','PRD_000069','PRD_000070','PRD_000072','PRD_000077','PRD_000100',
+                   'PRD_000287','PRD_000289','PRD_000291','PRD_000101','PRD_000288','PRD_000290','PRD_000292','PRD_000073','PRD_000078')
+ORDER BY r.prd_cd;
+"
+
+   prd_cd   |         prd_nm         | semi_role_cd | page_min | page_max | page_incr | print_opt_cd | note 
+------------+------------------------+--------------+----------+----------+-----------+--------------+------
+ PRD_000069 | 무선책자               |              |       24 |      300 |         2 |              | 
+ PRD_000101 | 포토북 [디자인명]-내지 | SEMI_ROLE.01 |       24 |      300 |         2 | POPT_000002  | 
+ PRD_000287 | 중철책자-내지          | SEMI_ROLE.01 |        4 |       28 |         4 | POPT_000002  | 
+ PRD_000289 | 무선책자-내지          | SEMI_ROLE.01 |       24 |      300 |         2 | POPT_000002  | 
+ PRD_000291 | PUR책자-내지           | SEMI_ROLE.01 |       24 |      300 |         2 | POPT_000002  | 
+ PRD_000291 | PUR책자-내지           | SEMI_ROLE.01 |       12 |      150 |         1 | POPT_000001  | 
+(6 rows)
+
