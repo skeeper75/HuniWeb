@@ -1,0 +1,16 @@
+$ psql <URL> -c "select ps.prd_cd, pr.prd_nm, coalesce(pr.use_yn,'Y') use_yn, count(*) sizes, string_agg(distinct ps.siz_cd, ',' order by ps.siz_cd) siz_list from t_prd_product_sizes ps join t_prd_products pr on pr.prd_cd=ps.prd_cd where ps.prd_cd in ('PRD_000052','PRD_000053','PRD_000054','PRD_000058','PRD_000059','PRD_000060','PRD_000061','PRD_000062','PRD_000063','PRD_000064') and coalesce(ps.del_yn,'N')='N' group by 1,2,3 order by 1;"
+
+   prd_cd   |          prd_nm          | use_yn | sizes |                                   siz_list                                   
+------------+--------------------------+--------+-------+------------------------------------------------------------------------------
+ PRD_000052 | 반칼자유형스티커         | Y      |     3 | SIZ_000057,SIZ_000258,SIZ_000426
+ PRD_000053 | 반칼자유형투명스티커     | Y      |     3 | SIZ_000057,SIZ_000258,SIZ_000426
+ PRD_000054 | 반칼자유형홀로그램스티커 | Y      |     3 | SIZ_000057,SIZ_000258,SIZ_000426
+ PRD_000058 | 반칼원형스티커           | Y      |     1 | SIZ_000426
+ PRD_000059 | 반칼정사각스티커         | Y      |     1 | SIZ_000426
+ PRD_000060 | 반칼직사각스티커         | Y      |     1 | SIZ_000426
+ PRD_000061 | 반칼띠지스티커           | Y      |     1 | SIZ_000426
+ PRD_000062 | 반칼팬시스티커           | Y      |     3 | SIZ_000059,SIZ_000060,SIZ_000067
+ PRD_000063 | 반칼팬시투명스티커       | Y      |     3 | SIZ_000058,SIZ_000059,SIZ_000060
+ PRD_000064 | 소량자유형스티커         | N      |     7 | SIZ_000036,SIZ_000043,SIZ_000061,SIZ_000062,SIZ_000063,SIZ_000064,SIZ_000065
+(10 rows)
+
