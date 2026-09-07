@@ -1,0 +1,6 @@
+-- (V2-13) 옵션그룹 보유 상품명 (상품명만 select)
+SELECT prd_cd, prd_nm FROM t_prd_products WHERE prd_cd IN ('PRD_000055','PRD_000057','PRD_000071','PRD_000024') ORDER BY prd_cd;
+-- (V2-14) 옵션 3층 실데이터 — PRD_000055 (그룹→옵션→항목, 삭제제외)
+SELECT g.opt_grp_cd, g.opt_grp_nm, g.sel_typ_cd, o.opt_cd, o.opt_nm, o.dflt_yn, i.item_seq, i.ref_dim_cd, i.ref_key1 FROM t_prd_product_option_groups g LEFT JOIN t_prd_product_options o ON o.prd_cd=g.prd_cd AND o.opt_grp_cd=g.opt_grp_cd AND o.del_yn='N' LEFT JOIN t_prd_product_option_items i ON i.prd_cd=o.prd_cd AND i.opt_cd=o.opt_cd AND i.del_yn='N' WHERE g.prd_cd='PRD_000055' AND g.del_yn='N' ORDER BY g.opt_grp_cd, o.opt_cd, i.item_seq LIMIT 40;
+-- (V2-15) 참고 — 옵션그룹 전체 행수(삭제포함)와 삭제제외 비교
+SELECT count(*) AS all_rows, count(*) FILTER (WHERE del_yn='N') AS alive_rows, count(DISTINCT prd_cd) FILTER (WHERE del_yn='N') AS products_with_groups FROM t_prd_product_option_groups;

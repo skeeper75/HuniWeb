@@ -144,3 +144,68 @@ Korean 모듈 · prose · Strict — 원고에 적용, 수치 verbatim 불변을
 - 체결 시각: 2026-09-08
 - 스테이징 패스펙: `.moai/reports/t45/` 산출물 + `.moai/specs/SPEC-STAFFBRIEF-001/` (명시 경로만 — `git add -A`/`git add .` 미사용)
 - 미포함(확인): 스킬 본체 · report.yaml · .env.local (메인 체크아웃 미트래킹 — 워크트리에 복사 자체를 안 함)
+
+---
+
+# v2 보강 판정 기록 — 2026-09-08 (지니 확정 4방향 · findings 8건 반영)
+
+v1(위쪽 기록, AC 23/23)을 git 히스토리 보존 위에서 증개. v2는 리드 dispatch("run-phase v2 보강 재진입")로 수행했고 SPEC 아티팩트(spec/plan/acceptance v0.1.1)는 불변 — 기존 REQ/AC 체계가 v2에 그대로 적용된다(정직 AC·크기 한도·셀프컨테인드 전부 승계). **AC 23건 독립 전량 재판정·completed 전이는 별도 sync dispatch 대기**(§E.4 미수행 항목 승계).
+
+## v2 수행 환경 (v1 환경 고지와 다른 점)
+
+이번 run은 **카드 워크트리(t45)에서 직접** 수행 — 오케스트레이터 세션이 t45에 앵커돼 있어 v1의 격리 워크트리 우회가 불필요. DB·웹어드민 접근은 읽기전용 이중 장치 승계(dbprobe v2: 비-SELECT 거부 + 세션 read-only / gstack: 화면 열람·캡처만, 저장·수정 0건).
+
+## 4방향 반영 내역
+
+| 방향 | 반영 | 근거 |
+|---|---|---|
+| ① 실화면 자료 | 실화면 캡처 3종을 data URI(WebP q55·720px·총 40,165B)로 HTML에 삽입 — 핀버튼 주문위젯 라이브 데모(가격 3,960원·주문불가 사유·이벤트 로그 실측) · 상품 뷰어 · 위젯빌더 | captures/raw-*.png(2026-09-08 gstack)·cmp-*.webp·captures-datauri.txt |
+| ② 깊이·분량 | 컴포넌트 20종 카탈로그 표(원고+코드값 대조) + 실사용 분포(게시 위젯 1,427항목) + 옵션 3층 실데이터 예시(낱장자유형스티커) + 메뉴 8그룹 실화면 라벨·기능 병기 | remeasure-v2b/d-260908.txt · widget_manual_content.py:375-582 · gstack 사이드바 실측 |
+| ③ 오픈 준비·실무 시나리오 | §5 오픈 준비(G0~G5 게이트·505항목·외부 차단 8건·돈/주문 플래그, 2026-09-02 원장 라벨) + §6 실무 시나리오(기준정보→상품→가격→게시→확인 5단계) 신설 | _workspace/huni-launch-runway/07_rebaseline/LEDGER.md(2026-09-02 생성) |
+| ④ 발표 전달력 | 섹션별 핵심 메시지 콜아웃(keymsg) 6개 + 하이라이트 2건 보강(오픈 일정·실화면 수록) + 위젯 라이브 가격을 worked example로 교체 | huni-staffbrief-260909.html |
+
+## findings 8건 반영 (§E.4 권고 → 적용)
+
+| # | 권고 | 적용 |
+|---|---|---|
+| 1 | 고아 제목(1면 하단 h2) | `.keep`(page-break-inside:avoid) 컨테이너 21곳 — h2+리드 문단(또는 첫 콘텐츠) 묶음 구조 해법 |
+| 2 | 9면 고아 Sources | 「출처와 기준 시점」 섹션으로 승격(h2 부여) + SPEC ID `nowrap` 5곡(하이픈 줄바꿈 방지) |
+| 3 | 페이지 번호 부재 | `@page{size:A4;margin:…}` 선언 + PDF footer-template으로 **n/17 형식 페이지번호 실증**(1/17·17/17 텍스트층 확인) — Chromium은 @page margin-box 카운터 미지원이라 인쇄물 PDF에 번호를 싣는 방식으로 해결 |
+| 4 | 5면 하단 공백+섹션 제목 부재 | 신설 섹션(§5·§6)로 재류 + 전 섹션 h2+keymsg 리드 구조화 |
+| 5 | 메뉴 표 5·6 병합 모호 | 8행 분리 + 「실화면 메뉴명」 칼럼 신설(5 고객관리=실화면 '고객' · 6 인증 및 권한=실화면 '사용자' — 2026-09-08 사이드바 실측) |
+| 6 | 회색 캡션 대비 | `--g500` #979797→#6F6F6F(소형 텍스트 전반) + SVG 축 라벨 동일 적용(잔존 #979797 1건=mermaid 라인색, 텍스트 아님·의도) |
+| 7 | 캡션 어절 중간 줄바꿈 | `body{word-break:keep-all;overflow-wrap:break-word}` |
+| 8 | 인포박스 위계·괄호 | keymsg(좌측 바+상단 보더)·notice(좌측 바)·example-box(점선) 3종 시각 위계 분리 · 괄호 반각 통일 |
+
+## v2 기계 검증 (verify-batch-v2-260908.txt 원문)
+
+- HTML **93,895B ≤ 122,880B PASS**(여유 28,985B — 이미지 3종 40,165B 포함)
+- 외부 참조: 예외 2종만(폰트 CDN 3링크·mermaid CDN 1) · `<script>` 1 · `<noscript>` 1
+- `#5538B6` 6건 · `#553886` 0건 · Noto Sans KR 승계
+- 금지 서술 0건("전부 주문 가능"·"가격 없는 상품"·"설계만 됐") · 라이브 문맥 React 0건(재구현 트랙 라벨 문맥만)·shadcn/Zustand 0건
+- PDF 2,896,090B · 17면 · 페이지번호(n/17) 실측 · mermaid 실렌더(라벨 텍스트층 존재) · 이미지 실렌더(4면 PNG 비전 확인: 페이지번호+위젯 스크린샷 렌더링+포인트 색)
+- 수치 소급: v2 신규 수치 전부 v2 재실측 로그·LEDGER(2026-09-02)·widget_manual_content.py로 소급(아래 지도)
+- humanize 수치 diff v2: **PASS**(숫자 토큰 506개 전후 완전 일치 — humanize-numbers-diff-v2-260908.txt)
+
+## v2 재실측 (as-of 2026-09-08 02:47~02:53 KST · SELECT 전용 · 로그 remeasure-v2*-260908.txt)
+
+현재값 4종(269·193·184/198·0) — 02:02 측정과 동일. 가격 규모(128·295·306·34,125) 동일.
+신규: 게시 위젯 컴포넌트 분포(.01 405 · .03 207 · .08 193 · .09 177 · .14 102 · … 합 1,427) · WGT_SRC_TYPE 코드값 20종 · 옵션 3층 실데이터(PRD_000055: 그룹 3·조각수 6값·커팅/소재 항목이 OPT_REF_DIM.03/.04 참조) · 옵션그룹 등록 382행 중 사용 107행(82개 상품) · 임베드 데모 라이브 가격(WGT_000005·원형 58mm·4EA·3,960원=공급가 3,600+부가세 360·주문불가 사유 '원고 업로드 또는 편집기로 만들기'·huni:* 이벤트 시퀀스).
+
+## v2 수치 소급 지도(증분)
+
+- 현재값 4종·가격 규모·컴포넌트 분포·옵션 3층·옵션그룹 사용행: `remeasure-v2-260908.txt`·`remeasure-v2b/c/d-260908.txt`(2026-09-08 02:47~02:48 SELECT — 쿼리 원문 수록)
+- 위젯 라이브 가격 3,960원·이벤트: 2026-09-08 02:53 /sdk/demo/ 실화면 관측(캡처+이벤트 로그 텍스트)
+- 컴포넌트 20종: `raw/webadmin/tools/widget_manual_content.py:375-582`(2026-09-08 판독) + t_cod_base_codes WGT_SRC_TYPE 20종 실측 교차
+- 게이트 G0~G5·505항목·외부 8건·돈/주문 플래그: `_workspace/huni-launch-runway/07_rebaseline/LEDGER.md`(2026-09-02 17:28 생성 라벨)
+- 메뉴 실화면 라벨('고객'·'사용자'): 2026-09-08 gstack 사이드바 스냅샷 관측
+
+## v2 산출물 목록 (증가분)
+
+`huni-staffbrief-260909-draft.md`(v2 원고 30,232B) · `-draft.before-humanize-v2.md` · `huni-staffbrief-260909.html`(93,895B) · `huni-staffbrief-260909.md`(twin v2) · `huni-staffbrief-260909.pdf`(17면·페이지번호·2,896,090B) · `dbprobe_v2_260908.py` · `queries-metrics-v2*.txt` 4종 · `remeasure-v2*.txt` 4종 · `captures/`(raw 3·cmp 3·스크립트 2·datauri·pdfpage 검증) · `mkpdf_v2_260908.py` · `verify-batch-v2-260908.sh/.txt` · `humanize_numbers_diff_v2.py`·`humanize-numbers-diff-v2-260908.txt`
+
+## v2-run-commit
+
+- 브랜치: `WT-widget-webadmin-report`(카드 워크트리 t45 — 이번엔 격리 우회 없음)
+- 스테이징 패스펙: `.moai/reports/t45/` + `.moai/specs/SPEC-STAFFBRIEF-001/` (명시 경로만)
+- 체결 시각: 2026-09-08 (커밋은 아래 §run-commit-v2-sha 항에 주제로 식별 — amend 자기참조 회피 승계)

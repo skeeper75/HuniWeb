@@ -1,0 +1,22 @@
+-- (V2-0) 접속 증명: DB 서버 시각 (as-of 라벨 근거)
+SELECT now() AS db_now, current_database() AS db_name;
+-- (V2-1) 운영 활성 상품 (현재값 1/4)
+SELECT count(*) AS active_products FROM t_prd_products WHERE del_yn='N' AND use_yn='Y';
+-- (V2-2) 게시 위젯 (현재값 2/4)
+SELECT sts_typ_cd, count(*) AS cnt FROM t_wgt_widgets WHERE del_yn='N' AND use_yn='Y' GROUP BY sts_typ_cd ORDER BY cnt DESC;
+-- (V2-3) 공식 바인딩 (현재값 3/4)
+SELECT count(*) AS binding_rows, count(DISTINCT prd_cd) AS bound_products FROM t_prd_product_price_formulas;
+-- (V2-4) 주문 수 (현재값 4/4)
+SELECT count(*) AS total_orders FROM t_ord_orders;
+-- (V2-5) 가격 규모 4종 (재확인)
+SELECT (SELECT count(*) FROM t_prc_price_formulas) AS formulas, (SELECT count(*) FROM t_prc_price_components) AS components, (SELECT count(*) FROM t_prc_formula_components) AS wiring, (SELECT count(*) FROM t_prc_component_prices) AS price_rows;
+-- (V2-D1) 옵션 3층 테이블 스키마 확인 (그룹)
+SELECT column_name, data_type FROM information_schema.columns WHERE table_schema='public' AND table_name='t_prd_product_option_groups' ORDER BY ordinal_position;
+-- (V2-D2) 옵션 3층 테이블 스키마 확인 (옵션)
+SELECT column_name, data_type FROM information_schema.columns WHERE table_schema='public' AND table_name='t_prd_product_options' ORDER BY ordinal_position;
+-- (V2-D3) 옵션 3층 테이블 스키마 확인 (항목)
+SELECT column_name, data_type FROM information_schema.columns WHERE table_schema='public' AND table_name='t_prd_product_option_items' ORDER BY ordinal_position;
+-- (V2-D4) 위젯 항목 테이블 스키마 확인 (컴포넌트 분포용)
+SELECT column_name, data_type FROM information_schema.columns WHERE table_schema='public' AND table_name='t_wgt_widget_items' ORDER BY ordinal_position;
+-- (V2-D5) 대표 상품 후보 (옵션 3층 예시용 — 상품명만 select)
+SELECT prd_cd, prd_nm FROM t_prd_products WHERE del_yn='N' AND use_yn='Y' ORDER BY prd_cd LIMIT 15;

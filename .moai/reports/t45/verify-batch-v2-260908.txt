@@ -1,0 +1,56 @@
+== (1) HTML 크기 (한도 122,880B) ==
+93895 bytes
+PASS (93895 <= 122880, 여유 28985B)
+
+== (2) 외부 참조 (허용 예외: 폰트 CDN 2종·mermaid CDN 1종) ==
+   1 https://fonts.gstatic.com
+   1 https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&family=JetBrains+Mono:wght@400;500&display=swap
+   1 https://fonts.googleapis.com
+   1 https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs
+
+== (3) 브랜드 토큰 ==
+#5538B6 count: 6
+#553886(오기) count: 0
+Noto Sans KR 선언: 1
+
+== (4) 금지 서술 grep (전부 0이어야 PASS) ==
+전부 주문 가능(html): 0
+전부 주문 가능(draft): 0
+가격 없는 상품(html): 0
+가격 없는 상품(draft): 0
+'설계만 됐다'류 감평(html): 0
+
+== (5) findings 8건 적용 확인 ==
+word-break:keep-all: 1
+@page 선언: 1
+.keep 컨테이너(고아 h2 방지): 21
+nowrap(SPEC ID 보호): 5
+keymsg(핵심 메시지): 6
+캡션 색 #6F6F6F(대비 상향): 9 (구 #979797 잔존: 1)
+figure.fig(이미지): 3
+data:image/webp(임베딩): 3
+
+== (6) 스크립트 구조 ==
+<script> 수: 1 · <noscript> 수: 1
+
+== (7) 라이브 위젯 어휘(React 문맥 검사) ==
+React로 다시 만드는 재구현 트랙은 별개 진행 항목이며 라이브 전환 여부는 미확인입니다
+React 재구현 트랙
+shadcn: 0 · Zustand: 0
+
+== (8) PDF ==
+2896090 bytes
+페이지번호(1/17형): 1
+페이지번호(17면): 1
+이미지 캡션 텍스트층: 1
+mermaid 폴백(noscript) 텍스트층: 0
+
+== (9) md twin 무결성(부풀림 제외 확인) ==
+식당 비유 twin 수록(0이어야): 0
+twin에 v2 신규 섹션: 2 · 1 · 1
+
+== (10) 매뉴얼 권위 표기 ==
+'2026-09-06 재생성' 언급(html): 5
+baseline은 동절참조 문맥만: 2026-08-24자 baseline은 동결 참조용).
+2026-08-24자 baseline 파일은 동결 참조용입니다. 단 09-06본도 소스 최신 수정(09-07)보다 약 이틀 뒤진 스냅샷입니다.
+== END ==

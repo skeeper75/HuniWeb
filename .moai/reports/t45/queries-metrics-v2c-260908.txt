@@ -1,0 +1,4 @@
+-- (V2-11) 상품별 옵션그룹 수 상위 (예시 상품 선정)
+SELECT g.prd_cd, count(*) AS grp_cnt FROM t_prd_product_option_groups g WHERE g.del_yn='N' AND g.use_yn='Y' GROUP BY g.prd_cd ORDER BY grp_cnt DESC, g.prd_cd LIMIT 12;
+-- (V2-12) 후보 상품명 확인 (상품명만 select)
+SELECT prd_cd, prd_nm FROM t_prd_products WHERE prd_cd IN ('PRD_000016','PRD_000017','PRD_000018','PRD_000031','PRD_000033','PRD_000310','PRD_000311','PRD_000301','PRD_000293') ORDER BY prd_cd;

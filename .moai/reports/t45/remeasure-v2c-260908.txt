@@ -1,0 +1,37 @@
+# dbprobe_v2_260908.py — mode=metrics (v2 보강 재실측)
+# run started: 2026-09-08 02:48:39 KST
+# connection: host=<redacted> sslmode=require options=-c default_transaction_read_only=on
+# credential source: /Users/innojini/Dev/HuniWeb/.env.local (RAILWAY_DB_* — values never logged)
+
+=== [2026-09-08 02:48:40 KST] QUERY ===
+SELECT g.prd_cd, count(*) AS grp_cnt FROM t_prd_product_option_groups g WHERE g.del_yn='N' AND g.use_yn='Y' GROUP BY g.prd_cd ORDER BY grp_cnt DESC, g.prd_cd LIMIT 12;
+--- RESULT (12 rows) ---
+prd_cd | grp_cnt
+PRD_000055 | 3
+PRD_000057 | 3
+PRD_000071 | 3
+PRD_000024 | 2
+PRD_000056 | 2
+PRD_000063 | 2
+PRD_000066 | 2
+PRD_000082 | 2
+PRD_000108 | 2
+PRD_000109 | 2
+PRD_000112 | 2
+PRD_000133 | 2
+
+=== [2026-09-08 02:48:40 KST] QUERY ===
+SELECT prd_cd, prd_nm FROM t_prd_products WHERE prd_cd IN ('PRD_000016','PRD_000017','PRD_000018','PRD_000031','PRD_000033','PRD_000310','PRD_000311','PRD_000301','PRD_000293') ORDER BY prd_cd;
+--- RESULT (9 rows) ---
+prd_cd | prd_nm
+PRD_000016 | 프리미엄엽서
+PRD_000017 | 코팅엽서
+PRD_000018 | 스탠다드엽서
+PRD_000031 | 프리미엄명함
+PRD_000033 | 스탠다드명함
+PRD_000293 | 만년다이어리(소프트커버)-표지(아트250+무광코팅)
+PRD_000301 | 스프링노트-표지
+PRD_000310 | 트윈링책자-표지
+PRD_000311 | 트윈링책자-내지
+
+# run finished: 2026-09-08 02:48:40 KST

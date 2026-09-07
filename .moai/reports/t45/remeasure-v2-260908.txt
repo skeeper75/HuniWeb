@@ -1,0 +1,147 @@
+# dbprobe_v2_260908.py — mode=metrics (v2 보강 재실측)
+# run started: 2026-09-08 02:47:20 KST
+# connection: host=<redacted> sslmode=require options=-c default_transaction_read_only=on
+# credential source: /Users/innojini/Dev/HuniWeb/.env.local (RAILWAY_DB_* — values never logged)
+
+=== [2026-09-08 02:47:21 KST] QUERY ===
+SELECT now() AS db_now, current_database() AS db_name;
+--- RESULT (1 row) ---
+db_now | db_name
+2026-09-07 17:47:21.631819+00:00 | railway
+
+=== [2026-09-08 02:47:21 KST] QUERY ===
+SELECT count(*) AS active_products FROM t_prd_products WHERE del_yn='N' AND use_yn='Y';
+--- RESULT (1 row) ---
+active_products
+269
+
+=== [2026-09-08 02:47:21 KST] QUERY ===
+SELECT sts_typ_cd, count(*) AS cnt FROM t_wgt_widgets WHERE del_yn='N' AND use_yn='Y' GROUP BY sts_typ_cd ORDER BY cnt DESC;
+--- RESULT (3 rows) ---
+sts_typ_cd | cnt
+WGT_STS_TYPE.01 | 239
+WGT_STS_TYPE.02 | 193
+WGT_STS_TYPE.03 | 4
+
+=== [2026-09-08 02:47:21 KST] QUERY ===
+SELECT count(*) AS binding_rows, count(DISTINCT prd_cd) AS bound_products FROM t_prd_product_price_formulas;
+--- RESULT (1 row) ---
+binding_rows | bound_products
+198 | 184
+
+=== [2026-09-08 02:47:21 KST] QUERY ===
+SELECT count(*) AS total_orders FROM t_ord_orders;
+--- RESULT (1 row) ---
+total_orders
+0
+
+=== [2026-09-08 02:47:22 KST] QUERY ===
+SELECT (SELECT count(*) FROM t_prc_price_formulas) AS formulas, (SELECT count(*) FROM t_prc_price_components) AS components, (SELECT count(*) FROM t_prc_formula_components) AS wiring, (SELECT count(*) FROM t_prc_component_prices) AS price_rows;
+--- RESULT (1 row) ---
+formulas | components | wiring | price_rows
+128 | 295 | 306 | 34125
+
+=== [2026-09-08 02:47:22 KST] QUERY ===
+SELECT column_name, data_type FROM information_schema.columns WHERE table_schema='public' AND table_name='t_prd_product_option_groups' ORDER BY ordinal_position;
+--- RESULT (15 rows) ---
+column_name | data_type
+prd_cd | character varying
+opt_grp_cd | character varying
+opt_grp_nm | character varying
+sel_typ_cd | character varying
+min_sel_cnt | integer
+max_sel_cnt | integer
+mand_yn | character
+disp_seq | integer
+use_yn | character
+del_yn | character
+del_dt | timestamp without time zone
+note | character varying
+reg_dt | timestamp without time zone
+upd_dt | timestamp without time zone
+usr_def_nm | character varying
+
+=== [2026-09-08 02:47:22 KST] QUERY ===
+SELECT column_name, data_type FROM information_schema.columns WHERE table_schema='public' AND table_name='t_prd_product_options' ORDER BY ordinal_position;
+--- RESULT (18 rows) ---
+column_name | data_type
+prd_cd | character varying
+opt_cd | character varying
+opt_grp_cd | character varying
+opt_nm | character varying
+dflt_yn | character
+disp_seq | integer
+use_yn | character
+del_yn | character
+del_dt | timestamp without time zone
+note | character varying
+reg_dt | timestamp without time zone
+upd_dt | timestamp without time zone
+tags | jsonb
+usr_def_cd | character varying
+usr_def_nm | character varying
+cust_desc | character varying
+mand_yn | character varying
+disp_yn | character
+
+=== [2026-09-08 02:47:22 KST] QUERY ===
+SELECT column_name, data_type FROM information_schema.columns WHERE table_schema='public' AND table_name='t_prd_product_option_items' ORDER BY ordinal_position;
+--- RESULT (13 rows) ---
+column_name | data_type
+prd_cd | character varying
+opt_cd | character varying
+item_seq | integer
+ref_dim_cd | character varying
+ref_key1 | character varying
+ref_key2 | character varying
+qty | integer
+use_yn | character
+del_yn | character
+del_dt | timestamp without time zone
+reg_dt | timestamp without time zone
+upd_dt | timestamp without time zone
+dtl_opt | jsonb
+
+=== [2026-09-08 02:47:22 KST] QUERY ===
+SELECT column_name, data_type FROM information_schema.columns WHERE table_schema='public' AND table_name='t_wgt_widget_items' ORDER BY ordinal_position;
+--- RESULT (17 rows) ---
+column_name | data_type
+item_cd | character varying
+wgt_cd | character varying
+parent_item_cd | character varying
+mbr_prd_cd | character varying
+src_typ_cd | character varying
+ref_key | character varying
+ctrl_typ_cd | character varying
+label_nm | character varying
+row_no | integer
+col_no | integer
+visible_yn | character
+dflt_val | jsonb
+block_typ_cd | character varying
+fold_yn | character
+props | jsonb
+reg_dt | timestamp without time zone
+upd_dt | timestamp without time zone
+
+=== [2026-09-08 02:47:22 KST] QUERY ===
+SELECT prd_cd, prd_nm FROM t_prd_products WHERE del_yn='N' AND use_yn='Y' ORDER BY prd_cd LIMIT 15;
+--- RESULT (15 rows) ---
+prd_cd | prd_nm
+PRD_000001 | OPP접착봉투
+PRD_000002 | OPP비접착봉투
+PRD_000004 | 카드봉투
+PRD_000005 | 캘린더봉투
+PRD_000006 | 볼체인
+PRD_000007 | 와이어링
+PRD_000009 | 투명케이스
+PRD_000010 | 행택끈
+PRD_000011 | 자석고정용고무판
+PRD_000012 | 우드거치대
+PRD_000013 | 우드봉
+PRD_000014 | 우드행거
+PRD_000015 | 만년스탬프 리필잉크
+PRD_000016 | 프리미엄엽서
+PRD_000017 | 코팅엽서
+
+# run finished: 2026-09-08 02:47:22 KST

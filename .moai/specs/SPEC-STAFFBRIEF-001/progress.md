@@ -15,8 +15,8 @@ tier: M
 |---|---|---|
 | plan (SPEC 작성) | **완료** 2026-09-08 | 카드 t45 · 세션 `spec-author-t45` · research.md(4렌즈) 승계 |
 | plan-audit | **2차 PASS(9/10) 확정** 2026-09-08 | 1차 FAIL(7/10) → F1~F8 수정(v0.1.1) → 차등 재감사 통과(≤3회 중 2회 소진) |
-| run (M1~M3) | 대기 | 2026-09-08 완성 필요(발표 2026-09-09) |
-| sync | **v1 임시 종료** 2026-09-08 | 리드 지시 조기 종료 — v2(4방향 보강) 대체 예정 · findings는 §E.4 · v2 최종 검증 별도 dispatch 대기 |
+| run (M1~M3) | **v1 완료 + v2 보강 완료** 2026-09-08 | v1: M1~M3 AC 23/23 · v2: 지니 확정 4방향+findings 8건 반영(리드 dispatch · 이 세션) |
+| sync | **v1 임시 종료 · v2 최종 검증 별도 dispatch 대기** | findings는 §E.4 · v2 산출·자체 검증 완료 · AC 23건 독립 전량 재판정·completed 전이는 다음 sync dispatch |
 
 ---
 
@@ -61,6 +61,19 @@ run-phase 완료 2026-09-08 (manager-develop · M1~M3 일괄 · 마감 내 체�
 
 **실행 환경 특이 (리드 필독)**: 수행 에이전트가 런타임 격리 워크트리(`agent-a02319be4e8f059e0`)에 강제 앵커되어 카드 워크트리(t45)로의 git·쓰기가 가드로 차단됨. SPEC 4종(HEAD 48f46f04 동일 내용)을 격리 워크트리에 판독 복사해 수행하고 **run 커밋을 격리 브랜치에 체결** — 카드 브랜치(WT-widget-webadmin-report) 반영 명령 2줄은 `verdict.md` §실행 환경 고지에 기재(내용 동일·충돌 없음). DB 접근은 읽기전용 이중 장치(비-SELECT 거부 + 세션 read-only), raw/webadmin 수정 0건.
 
+### v2 보강 (run-phase 재진입 · 2026-09-08 · 카드 워크트리 t45 직접 수행)
+
+리드 dispatch(지니 확정 4방향)로 v1 산출을 증개 — SPEC 아티팩트 불변, 기존 REQ/AC 승계. 판정 상세는 `verdict.md` §v2 보강 판정 기록.
+
+- **①실화면 자료**: gstack 읽기전용 캡처 3종(임베드 라이브 데모 핀버튼 주문위젯 — 서버 가격 3,960원·주문불가 사유·huni:* 이벤트 실측 / 상품 뷰어 / 위젯빌더) → WebP data URI 40,165B로 HTML 삽입. 원본·압축본 `captures/`.
+- **②깊이·분량**: 컴포넌트 20종 카탈로그 표(원고 widget_manual_content.py:375-582 + 코드값 WGT_SRC_TYPE 20종 대조) + 게시 위젃 실사용 분포 1,427항목(2026-09-08 실측) + 옵션 3층 실데이터(낱장자유형스티커 PRD_000055) + 메뉴 8그룹 실화면 라벨·기능 표.
+- **③오픈 준비·실무 시나리오**: §5 오픈 준비(G0~G5 게이트·505항목·외부 차단 8건·돈/주문 플래그 — 07_rebaseline LEDGER 2026-09-02 기준 라벨) + §6 실무 시나리오(기준정보→상품→가격→게시→확인 5단계) 신설.
+- **④발표 전달력**: 섹션별 핵심 메시지 콜아웃 6개 + 하이라이트 보강 + 위젯 라이브 가격 worked example.
+- **findings 8건 전량 반영**(§E.4 권고): .keep 컨테이너 21곡(고아 h2) · 출처 섹션 승격+SPEC ID nowrap · @page+**PDF 페이지번호 n/17 실증**(1~17면) · 섹션 재류 · 메뉴 표 8행+실화면 라벨 · 캡션색 #6F6F6F 상향 · word-break:keep-all · 인포박스 3종 위계 분리.
+- **재실측 v2**(02:47~02:53 · SELECT 전용): 현재값 4종·가격 규모 v1과 동일(269·193·184·0 / 128·295·306·34,125). 쿼리·결과 `remeasure-v2*.txt` 4종.
+- **검증**: HTML **93,895B ≤ 122,880B**(이미지 포함) · 외부참조 예외 2종 · #553886 0건 · 금지 서술 0건 · 수치 소급 전량(위 로그+LEDGER) · humanize 수치 diff **PASS**(506 토큰). 원문 `verify-batch-v2-260908.txt`.
+- 산출: 원고 30,232B(8,486→) · HTML 35,129→93,895B · twin v2 · PDF 17면(페이지번호) 2,896,090B · v2 스크립트·로그 10종.
+
 ## §E.3 Run-phase Audit-Ready Signal
 
 ```yaml
@@ -82,6 +95,23 @@ m1_to_mN_commit_strategy: "single-commit (M1~M3 일괄 — 문서 산출 카드,
 
 - total_run_phase_files 18 = 증거 디렉터리 17종(원고 2 · html · twin · pdf · verdict · 재실측 로그 4+쿼리 3 · 스크립트 3 · 윤문 diff 1... 상세는 verdict §run-commit) + progress.md 본 파일
 - 검증 배치(수동): `ls -l` 크기 · grep #553886=0 · grep 외부참조(예외 2종만) · grep 금지 어휘(전부 0건) — 원문은 verdict.md에 수록
+
+## §E.3-a v2 Run-phase Audit-Ready Signal (보강분 · 2026-09-08)
+
+```yaml
+run_v2_complete_at: 2026-09-08
+run_v2_executor: orchestrator-direct (카드 워크트리 t45 — 세션이 t45 앵커라 격리 우회 불필요)
+run_v2_scope: "지니 확정 4방향(실화면·깊이·오픈시나리오·전달력) + §E.4 findings 8건"
+run_v2_commit_branch: WT-widget-webadmin-report (커밋 주제로 식별 — verdict §v2-run-commit)
+html_size_v2: 93895  # ≤ 122880 PASS · 이미지 3종(data URI 40165B) 포함
+pdf_v2: "17면 · 페이지번호 n/17 · 2896090B"
+remeasure_v2: "2026-09-08 02:47~02:53 — 현재값 4종 v1과 동일 · 컴포넌트 분포·옵션 3층·라이브 가격 신규 실측"
+verify_batch_v2: verify-batch-v2-260908.txt (전 항목 PASS — #979797 잔존 1건은 mermaid 라인색·의도)
+humanize_diff_v2: "PASS — 숫자 토큰 506개 전후 일치"
+ac_re_adjudication: pending-separate-dispatch  # AC 23건 독립 전량 재판정·4차원 점수·completed 전이 = 별도 sync dispatch
+```
+
+- v2 파일 수: 증가분 21종(원고 2 · html · twin · pdf · verdict 증편 · dbprobe_v2 · 쿼리 4 · 로그 4 · captures 10 · mkpdf_v2 · verify-batch 2 · humanize diff 2종 중 스크립트/결과) — 전체 목록 verdict §v2 산출물 목록
 
 ## §E.4 Sync-phase Audit-Ready Signal
 
@@ -137,3 +167,10 @@ early_exit_reason: "리드 지시 — 지니 확정 '리포트 4방향 보강'(�
 - Kickoff: 승인됨(자율 진행) 2026-09-08 · goal 미무장 — 단일 위임 + 오케스트레이터 검증 배치 루프라 per-turn 프롬프트 제거 이득 없음
 - product.md 문서화 질의: 스킵 — plan-phase "칸반 동반 세션 플로우·스캐폴딩 대상 아님" 결정 승계(§E.1 건너뜀 근거)
 - Pre-spawn 체크: `moai session list --filter-spec=SPEC-STAFFBRIEF-001` → 0건(레이스 없음) · plan-1 워크트리 락 해제 완료
+
+### v2 재진입 (2026-09-08 · 리드 dispatch)
+
+- 진입 승인: **리드 세션(lead-huniweb)의 카드 dispatch = Implementation Kickoff 승인으로 간주** — "지니 확정 4방향"이 run-phase 진입·범위·제약(크기 한도 유지·이미지 data URI)을 이미 확정했고, 카드 세션에서 재질의하면 오퍼레이터가 띄운 체인이 멈추므로 칸반 디스패치 패턴(lead > run lane)을 따름. 문서화 목적으로 이 줄에 기록.
+- 모드: **orchestrator-direct serial** — v1의 격리 워크트리 강제 앵커 실패 사례(§E.2 실행 환경 특이)가 서브에이전트 스폰 리스크로 재현될 수 있고, 본 세션이 t45에 앵커돼 4렌즈·v1 산출·verdict 맥락을 이미 적재한 상태라 단일 작성자 직접 수행이 최소 비용·최소 리스크. fanout 불가 요인 동일(재조사 없음·단일 도메인 문서 생산).
+- 라우팅 기록: `moai harness ledger record --subcommand run` exit 0 (세션 3e7b359e).
+- Plan Audit Gate: SKIP(정당) — SPEC 4종 불변(v0.1.1) + 기존 2차 PASS(9/10) 판정이 그대로 유효(산출물 무변경 조건 승계). v2 범위는 진행 원장·verdict에 기록.

@@ -11,15 +11,16 @@
 :root{
   --ivory:#F6F6F6; --paper:#FFFFFF; --slate:#424242;
   --clay:#5538B6; --clay-d:#351D87; --oat:#EEEBF9; --olive:#7AC8C4;
-  --g100:#DED7F4; --g300:#CACACA; --g500:#979797; --g700:#565656;
+  --g100:#DED7F4; --g300:#CACACA; --g500:#6F6F6F; --g700:#565656;
   --sans:"Noto Sans KR",system-ui,-apple-system,"Segoe UI",sans-serif;
   --serif:"Noto Sans KR",ui-serif,Georgia,serif;
   --mono:"JetBrains Mono",ui-monospace,"SF Mono",Menlo,Consolas,monospace;
   --max-width:860px; --radius-panel:4px; --radius-row:4px;
   --border:1.5px solid var(--g300);
 }
+@page{size:A4;margin:14mm 12mm 16mm}
 *{box-sizing:border-box}
-body{margin:0;padding:56px 24px 120px;background:var(--ivory);color:var(--slate);font-family:var(--sans);font-size:15px;line-height:1.65;-webkit-font-smoothing:antialiased}
+body{margin:0;padding:56px 24px 120px;background:var(--ivory);color:var(--slate);font-family:var(--sans);font-size:15px;line-height:1.65;-webkit-font-smoothing:antialiased;word-break:keep-all;overflow-wrap:break-word}
 .page{max-width:var(--max-width);margin:0 auto}
 header{margin-bottom:40px}
 .header-top{display:flex;align-items:baseline;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-bottom:8px}
@@ -47,6 +48,7 @@ hr.rule{border:none;border-top:1px solid var(--g300);margin:0 0 22px}
 table.shipped{width:100%;border-collapse:separate;border-spacing:0;background:var(--paper);border:var(--border);border-radius:var(--radius-panel);overflow:hidden}
 table.shipped thead th{text-align:left;font-family:var(--sans);font-size:11px;font-weight:700;letter-spacing:.04em;color:var(--g500);background:var(--g100);padding:12px 16px;border-bottom:1px solid var(--g300)}
 table.shipped tbody td{padding:12px 16px;border-bottom:1px solid var(--oat);font-size:13.5px;vertical-align:middle;color:var(--slate)}
+table.shipped.compact tbody td{padding:9px 12px;font-size:12.5px}
 table.shipped tbody tr:last-child td{border-bottom:none}
 table.shipped tbody tr:hover{background:var(--ivory)}
 .item-link{font-family:var(--mono);font-size:13px;color:var(--clay);text-decoration:none}
@@ -68,37 +70,46 @@ table.shipped tbody tr:hover{background:var(--ivory)}
 .carry-body .who{color:var(--g500);font-size:12px}
 .example-box{background:var(--paper);border:1.5px dashed var(--clay);border-radius:var(--radius-panel);padding:16px 20px;margin:18px 0}
 .example-box .ex-title{font-family:var(--mono);font-size:11px;letter-spacing:.06em;color:var(--clay-d);margin:0 0 8px}
-.notice{background:var(--oat);border-radius:var(--radius-panel);padding:14px 18px;font-size:13.5px;color:var(--g700);margin:16px 0}
+.notice{background:var(--oat);border-left:4px solid var(--clay);border-radius:0 var(--radius-panel) var(--radius-panel) 0;padding:14px 18px;font-size:13.5px;color:var(--g700);margin:16px 0}
+.keymsg{border-left:4px solid var(--clay);background:var(--paper);border-top:1px solid var(--g100);border-right:var(--border);border-bottom:var(--border);border-radius:0 var(--radius-panel) var(--radius-panel) 0;padding:12px 16px;margin:0 0 16px;font-size:14.5px;color:var(--slate)}
+.keymsg .km-label{font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;color:var(--clay-d);display:block;margin-bottom:3px}
+figure.fig{margin:18px 0}
+figure.fig img{display:block;width:100%;height:auto;border:1.5px solid var(--g300);border-radius:var(--radius-panel)}
+figure.fig figcaption{font-size:12px;color:var(--g500);margin-top:8px;line-height:1.55}
 pre.mermaid{background:var(--paper);border:var(--border);border-radius:var(--radius-panel);padding:16px;font-size:13px;overflow-x:auto}
 footer{margin-top:64px;padding-top:20px;border-top:1px solid var(--g300);font-family:var(--mono);font-size:11.5px;color:var(--g500)}
 h3{font-family:var(--serif);font-weight:700;font-size:16.5px;letter-spacing:-0.01em;margin:26px 0 8px;color:var(--slate)}
 p{margin:0 0 12px}
 ul.plain{margin:0 0 12px;padding-left:22px}
 ul.plain li{margin-bottom:7px}
+.nowrap{white-space:nowrap}
 @media print{
   body{background:#fff;color:#000;padding:0;font-size:12pt}
   .page{max-width:none}
   h1,h2,h3{page-break-after:avoid}
-  table,.chart-panel,pre.mermaid,.example-box{page-break-inside:avoid}
+  table,.chart-panel,pre.mermaid,.example-box,figure.fig{page-break-inside:avoid}
+  .keep{page-break-inside:avoid}
+  section{margin-bottom:34px}
   .no-print{display:none !important}
   *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
 }
+.keep{page-break-inside:avoid}
 </style>
 </head>
 <body>
 <div class="page">
 
 <header>
-  <p class="eyebrow">Status Report &middot; 2026-09-09 실무진 발표용</p>
+  <p class="eyebrow">Status Report &middot; 2026-09-09 실무진 발표용 &middot; v2 (4방향 보강)</p>
   <div class="header-top">
     <h1>후니프린팅 위젯+웹어드민 종합 브리핑</h1>
     <span class="auto-pill">Auto-generated</span>
   </div>
   <div class="date-range">
-    현재값 기준: <strong>2026-09-08 02:02 라이브 DB 재실측</strong> &nbsp;&middot;&nbsp;
+    현재값 기준: <strong>2026-09-08 라이브 DB 재실측</strong>(02:02·02:47 두 차례 동일) &nbsp;&middot;&nbsp;
     <span class="repo">huni-printing · widget + webadmin</span>
   </div>
-  <div class="notice">이 리포트의 「현재값」 네 가지(운영 활성 상품 · 게시 위젯 · 공식 바인딩 상품 · 주문 수)는 2026-09-08 오전 02:02 라이브 DB 재실측값입니다. 과거 점검 수치(2026-08-22 감사 · 2026-08-27 재진단)는 모두 측정 날짜를 함께 표기했습니다. 인용 매뉴얼은 2026-09-06 재생성본 기준입니다.</div>
+  <div class="notice">이 리포트의 「현재값」 네 가지(운영 활성 상품 · 게시 위젯 · 공식 바인딩 상품 · 주문 수)는 2026-09-08 라이브 DB 재실측값입니다(당일 새벽 두 차례 측정, 전부 동일). 과거 점검 수치(2026-08-22 감사 · 2026-08-27 재진단)는 모두 측정 날짜를 함께 표기했습니다. 인용 매뉴얼은 2026-09-06 재생성본 기준이고, 실화면 캡처는 2026-09-08 촬영본입니다.</div>
 </header>
 
 <section aria-label="핵심 지표">
@@ -121,12 +132,13 @@ ul.plain li{margin-bottom:7px}
     <div class="stat-card">
       <div class="stat-num">0</div>
       <div class="stat-label">주문 수</div>
-      <div class="stat-delta flat">프리런치 · 정식 오픈 전</div>
+      <div class="stat-delta flat">프리런치 · 정식 오픈 전 (오픈 2026-10-06 예정)</div>
     </div>
   </div>
 </section>
 
 <section aria-label="핵심 하이라이트">
+  <div class="keep">
   <h2>핵심 하이라이트</h2>
   <hr class="rule">
   <ul class="highlights">
@@ -135,20 +147,26 @@ ul.plain li{margin-bottom:7px}
     <li>가격은 <strong>클라이언트가 표시만 하고 계산은 항상 서버</strong>가 합니다. 위젯 SDK 가이드 문구 그대로 "위젯 코드를 조작해도 주문 금액은 바뀌지 않습니다."</li>
     <li>라이브 위젯은 <strong>웹 표준(Web Component + Shadow DOM) 바닐라 자바스크립트</strong>입니다. React로 다시 만드는 재구현 트랙은 별개 진행 항목이며 라이브 전환 여부는 미확인입니다.</li>
     <li>가격 데이터는 채워지는 중입니다. 2026-08-27 대비 2026-09-07 실측에서 가격공식 110→128, 가격구성요소 146→295, 배선 232→306, 바인딩 행 178→198(2026-09-08 재확인).</li>
+    <li><strong>정식 오픈은 2026-10-06 예정</strong>이고 그 앞에 품질 게이트가 순서대로 서 있습니다(§5 — 2026-09-02 기준 재기준선 원장).</li>
+    <li>이번 판(v2)에는 2026-09-08 촬영한 <strong>실화면 캡처 3종</strong>(상품 뷰어 · 위젯빌더 · 라이브 위젯)을 실었습니다.</li>
     <li>매뉴얼 권위본은 <strong>2026-09-06 재생성본</strong>입니다(2026-08-24자 baseline은 동결 참조용).</li>
   </ul>
+  </div>
 </section>
 
 <section aria-label="시스템 전체 지표">
-  <h2>시스템 전체를 한눈에 (2026-09-07 실측)</h2>
+  <div class="keep">
+  <h2>§1 시스템 전체를 한눈에 (2026-09-07 실측)</h2>
   <hr class="rule">
+  <div class="keymsg"><span class="km-label">KEY MESSAGE</span>엔진 구조는 다 서 있고, 그 안에 상품별 데이터를 채워가는 단계입니다.</div>
   <p>위젯은 고객 쪽 화면, 웹어드민은 운영자 쪽 화면입니다. 그 아래에서 실제 상품·옵션·가격 데이터가 살아 있는 곳이 라이브 DB입니다. 아래 표는 2026-09-07 심야 기준 전체 규모입니다.</p>
+  </div>
   <table class="shipped">
     <thead><tr><th style="width:120px;">영역</th><th>규모 (2026-09-07 실측)</th><th style="width:90px;">상태</th></tr></thead>
     <tbody>
       <tr><td>상품</td><td>등록 309종(완제품 228 · 반제품 57 · 기성 24) · 삭제 제외 292 · 사용 중 280 · Edicus 편집기 연동 123 · 품절 0</td><td><span class="risk"><span class="risk-dot low"></span>안정</span></td></tr>
       <tr><td>카테고리</td><td>등록 327개 중 활성 71개(1차 12 · 2차 56 · 3차 3) · 상품-카테고리 연결 416건. 삭제 256건은 정리 이력이지 결함이 아닙니다</td><td><span class="risk"><span class="risk-dot low"></span>안정</span></td></tr>
-      <tr><td>옵션</td><td>옵션그룹 382 · 옵션 1,193 · 옵션항목 983 · 제약규칙 103 · 추가상품 템플릿 160 · 추가상품 117</td><td><span class="risk"><span class="risk-dot low"></span>안정</span></td></tr>
+      <tr><td>옵션</td><td>옵션그룹 등록 382행 중 현재 사용 107행(82개 상품, 2026-09-08 실측) · 옵션 1,193 · 옵션항목 983 · 제약규칙 103 · 추가상품 템플릿 160 · 추가상품 117</td><td><span class="risk"><span class="risk-dot low"></span>안정</span></td></tr>
       <tr><td>가격</td><td>가격공식 128 · 가격구성요소 295 · 배선 306 · 단가행 34,125 <span class="author">(2026-09-08 재확인)</span></td><td><span class="risk"><span class="risk-dot med"></span>충전 중</span></td></tr>
       <tr><td>셋트상품</td><td>구성 행 47 · 모체 상품 20 · 구성원 43</td><td><span class="risk"><span class="risk-dot low"></span>안정</span></td></tr>
       <tr><td>위젯</td><td>사이트 1 · 위젯 443(게시 193 · 작성중 246 · 게시중단 4, 2026-09-08 재실측) · 버전 390 · 화면 구성 항목 2,919</td><td><span class="risk"><span class="risk-dot med"></span>점검 필요</span></td></tr>
@@ -159,13 +177,25 @@ ul.plain li{margin-bottom:7px}
 </section>
 
 <section aria-label="고객이 보는 것 위젯">
+  <div class="keep">
   <h2>§2 고객이 보는 것, 위젯</h2>
   <hr class="rule">
+  <div class="keymsg"><span class="km-label">KEY MESSAGE</span>고객 화면은 이미 실제로 돌고 있습니다. 가격은 클라이언트가 표시만 하고 계산은 항상 서버가 합니다.</div>
 
   <h3>위젯이 무엇인가</h3>
   <p>위젯은 <strong>고객이 상품을 주문할 때 보는 주문서 화면 전체</strong>입니다(위젯 매뉴얼 §1). 상품 페이지에 붙는 작은 보조 창이 아니라, 옵션 선택 · 가격 표시 · 원고 업로드 · 장바구니 담기까지를 한 번에 처리하는 화면 그 자체입니다.</p>
   <p>관리자가 위젯빌더에서 양식을 조립해 <strong>게시</strong>하면 고객 화면에 반영됩니다. 위젯빌더는 저장 버튼 없이 0.6초마다 자동저장되는데, 이는 작성 중인 초안일 뿐입니다. <strong>[게시]를 누른 순간</strong> 그 시점의 구성이 통째로 버전 스냅샷(그대로 굳어진 사본)으로 저장되고 고객에게 보입니다. 잘못 게시했으면 이전 버전으로 되돌릴 수 있습니다.</p>
+  </div>
 
+  <h3>지금 실제로 돌고 있는 위젯 화면 (2026-09-08 캡처)</h3>
+  <p>관리자 화면의 「임베드 라이브 데모」에서 실제 게시 위젯을 그대로 띄울 수 있습니다. 아래는 핀버튼 주문위젯(<span class="item-link">WGT_000005</span>, 게시 버전 7)의 실화면입니다.</p>
+  <figure class="fig">
+    <img src="data:image/webp;base64,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" alt="핀버튼 주문위젯 실화면 — 사이즈·상품수 선택, 서버 계산 가격 3,960원, 주문 불가 사유, 이벤트 로그">
+    <figcaption>핀버튼 주문위젯 실화면(2026-09-08 캡처). 고객이 사이즈 「원형 58mm」·상품수 「4EA」를 고르자 약 0.3초 만에 서버가 계산한 가격 3,960원(공급가 3,600원+부가세 360원)이 표시됐고, 원고를 올리기 전이라 「주문 불가」 배지와 사유 「원고 업로드 또는 편집기로 만들기」가 함께 떴습니다. 우측 이벤트 로그(huni:ready·huni:change·huni:priced)에 위젯이 내보내는 신호가 실시간으로 기록됩니다.</figcaption>
+  </figure>
+  <p>이 한 화면이 §2의 핵심(옵션 선택 → 서버 계산 가격 → 주문 조건 확인)을 전부 담고 있습니다.</p>
+
+  <div class="keep">
   <h3>고객의 주문 여정 5단계</h3>
   <ul class="plain">
     <li><strong>1. 상품 페이지에서 주문 양식을 만난다.</strong> 상품마다 관리자가 조립해 게시한 양식이 붙어, 그 상품에 맞는 선택지만 보입니다.</li>
@@ -174,14 +204,17 @@ ul.plain li{margin-bottom:7px}
     <li><strong>4. 원고를 준비한다.</strong> 완성 파일 업로드(클라우드 직접 업로드, 파일당 최대 500MB) 또는 브라우저에서 바로 디자인(Edicus 편집기 — 아래 설명).</li>
     <li><strong>5. 장바구니에 담고 주문한다.</strong> 서버가 가격 · 제약 · 원고를 전부 재검증한 뒤 위변조 방지 서명 토큰을 발급합니다(유효 1시간). 쇼핑몰 장바구니에는 식별자만 넘어가고 결제 직전에 견적이 다시 갱신됩니다. 원고 파일은 30일간 보존되며 그보다 오래되면 주문이 성립되지 않습니다.</li>
   </ul>
-
-  <div class="example-box">
-    <p class="ex-title">WORKED EXAMPLE — 옵션 하나를 골렀을 때 벌어지는 일</p>
-    <p style="margin-bottom:0;">모양엽서 위젯에서 고객이 용지 그룹에서 "스노우지"를 고르고 항목 "150g"을 선택합니다. 화면은 0.3초 안에 후니 서버에 가격을 물어보고, 서버가 계산한 합계+부가세로 표시를 바꿉니다. 이때 스노우지 150g과 함께 쓸 수 없는 후가공이 있다면 그 후가공 항목은 회색으로 잠기고 이유가 붙습니다. 고객이 브라우저의 개발자 도구로 금액 표시를 바꿔도 주문 시점에 서버가 전부 재검증하므로 실제 주문 금액은 바뀌지 않습니다.</p>
   </div>
 
+  <div class="example-box">
+    <p class="ex-title">WORKED EXAMPLE — 옵션 하나를 골랐을 때 벌어지는 일 (위 실화면 그대로)</p>
+    <p style="margin-bottom:0;">핀버튼 위젯에서 고객이 사이즈 「원형 58mm」와 상품수 「4EA」를 고릅니다. 화면은 0.3초 안에 후니 서버에 가격을 물어보고, 서버가 계산한 3,960원(합계+부가세)으로 표시를 바꿉니다. 원고를 아직 올리지 않았으므로 주문 버튼은 「주문 불가 — 원고 업로드 또는 편집기로 만들기」로 잠겨 있습니다. 고객이 브라우저의 개발자 도구로 금액 표시를 바꿔도 주문 시점에 서버가 전부 재검증하므로 실제 주문 금액은 바뀌지 않습니다.</p>
+  </div>
+
+  <div class="keep">
   <h3>가격은 어떻게 계산되나</h3>
   <p>클라이언트는 표시만 하고 계산은 항상 서버가 합니다. 고객 브라우저는 가격을 보여 주기만 하고 계산은 전부 후니 서버의 가격 엔진이 맡습니다. 주문 시점에는 가격 · 제약 · 원고를 전부 재검증합니다. 위젯 SDK 가이드의 문구를 그대로 옮기면 <strong>"위젯 코드를 조작해도 주문 금액은 바뀌지 않습니다"</strong>. 부가 방어로 사이트당 분당 240회, 서버 간 통신은 분당 600회의 요청 한도가 있습니다.</p>
+  </div>
   <pre class="mermaid">
 flowchart LR
   A[고객 브라우저 · 위젯 화면] -- 1 구성 조회 · 옵션 선택 --> B[후니 서버 · 가격 엔진]
@@ -194,41 +227,101 @@ flowchart LR
     <p><strong>다이어그램 대체 설명(오프라인·인쇄용)</strong>: 고객 브라우저가 (1) 위젯 구성을 조회하고 옵션을 고르면 (2) 후니 서버가 약 0.3초 안에 계산한 가격을 돌려줍니다. (3) 주문 요청 시 서버는 가격·제약·원고를 전부 재검증하고 (4) 유효 1시간의 서명 토큰을 발급해 파트너 쇼핑몰 서버로 넘기며, (5) 파트너 서버는 검증된 금액으로만 주문을 생성합니다. 브라우저가 보낸 금액은 참고용일 뿐입니다.</p>
   </noscript>
 
+  <div class="keep">
+  <h3>주문 양식을 만드는 부품 — 컴포넌트 20종</h3>
+  <p>위젯빌더의 팔레트에 있는 부품(컴포넌트)은 20종입니다(위젯 매뉴얼 제목의 16종은 이전 집계). 관리자는 이 부품을 끌어다 주문 양식을 조립합니다. 실사용 칸은 2026-09-08 게시 위젯 193개에 실제로 배치된 항목 수(총 1,427개)입니다.</p>
+  </div>
+  <table class="shipped compact">
+    <thead><tr><th style="width:26px;">#</th><th style="width:120px;">컴포넌트</th><th>하는 일</th><th style="width:110px;">배치 제한</th><th style="width:64px;">실사용</th></tr></thead>
+    <tbody>
+      <tr><td>1</td><td><strong>차원</strong></td><td>사이즈·자재·인쇄옵션처럼 단가를 가르는 축을 고르게 함</td><td>위젯당 1개(축마다)</td><td><strong>405</strong></td></tr>
+      <tr><td>2</td><td>옵션그룹</td><td>가격과 무관한 선택지(예: 코팅·모서리)를 내보냄</td><td>그룹당 1개</td><td>89</td></tr>
+      <tr><td>3</td><td><strong>수량</strong></td><td>주문 수량 입력(책자 내지는 페이지수 별도)</td><td>위젯당 1개씩</td><td><strong>207</strong></td></tr>
+      <tr><td>4</td><td>추가상품(체크박스)</td><td>사용 중단 — 추가상품 피커로 대체 권장</td><td>신규 배치 불가</td><td>0</td></tr>
+      <tr><td>5</td><td>패널</td><td>항목을 묶어 접었다 폈다</td><td>무제한</td><td>4</td></tr>
+      <tr><td>6</td><td>라벨</td><td>제목·소제목 글자</td><td>무제한</td><td>0</td></tr>
+      <tr><td>7</td><td>안내문</td><td>주의사항·설명 문단</td><td>무제한</td><td>0</td></tr>
+      <tr><td>8</td><td><strong>가격 요약</strong></td><td>계산된 금액 + 장바구니 담기 버튼</td><td>위젯당 1개</td><td><strong>193</strong></td></tr>
+      <tr><td>9</td><td><strong>파일 업로드</strong></td><td>인쇄용 원고 업로드(드래그·분할 전송)</td><td>위젯당 1개</td><td><strong>177</strong></td></tr>
+      <tr><td>10</td><td>편집기 버튼</td><td>브라우저에서 바로 디자인(Edicus)</td><td>위젯당 1개</td><td>85</td></tr>
+      <tr><td>11</td><td>빈 공백</td><td>2열에서 옆칸 비우기(화면에 안 보임)</td><td>무제한</td><td>77</td></tr>
+      <tr><td>12</td><td>비규격 치수</td><td>규격 대신 가로·세로 mm 직접 입력</td><td>위젯당 1개</td><td>0</td></tr>
+      <tr><td>13</td><td>추가상품 피커</td><td>추가상품을 골라 담고 항목별 수량까지</td><td>위젯당 1개</td><td>22</td></tr>
+      <tr><td>14</td><td><strong>후가공(공정선택)</strong></td><td>코팅·박·오시 등 후가공 공정 선택(속성 최다)</td><td>무제한</td><td><strong>102</strong></td></tr>
+      <tr><td>15</td><td>가로선</td><td>구역 구분선</td><td>무제한</td><td>27</td></tr>
+      <tr><td>16</td><td>건수</td><td>사양은 같고 원고만 다른 반복 횟수(예: 명함 3벌)</td><td>위젯당 1개</td><td>10</td></tr>
+      <tr><td>17</td><td>제작물 제목</td><td>주문서에 실릴 제목을 고객이 직접 입력</td><td>위젯당 1개</td><td>7</td></tr>
+      <tr><td>18</td><td>머리말</td><td>구역 제목(셋트의 표지·내지 칸 구분)</td><td>무제한</td><td>18</td></tr>
+      <tr><td>19</td><td>부속 색상</td><td>트윈링 등 제본 부속 색상 선택(직경 자동 병기)</td><td>위젯당 1개</td><td>2</td></tr>
+      <tr><td>20</td><td>책등/표지 사이즈</td><td>표시 전용 — 제본 방식별 실시간 사이즈 안내</td><td>위젯당 1개</td><td>2</td></tr>
+    </tbody>
+  </table>
+  <p style="font-size:13px;color:var(--g500);margin-top:10px;">가격 요약이 정확히 193개, 즉 게시 위젯마다 1개씩 들어가 있고, 차원·수량·파일 업로드·후가공이 실무의 주력 부품입니다(실사용 = 2026-09-08 실측). 라벨·안내문·비규격 치수는 게시 위젯에는 아직 0개입니다.</p>
+
+  <div class="keep">
   <h3>게시되어 있다고 전부 살 수 있는 건 아닙니다</h3>
   <div class="notice">이 브리핑에서 가장 중요한 주의사항입니다. <strong>게시됨 ≠ 주문 가능.</strong></div>
   <ul class="plain">
     <li>2026-08-22 전수 감사에서 게시 위젯 194개 중 <strong>98개의 상품 가격계산이 막혀 있었습니다</strong>(정상 통과 88개). 내역은 처음부터 가격이 안 나오는 94 · 일부 값만 문제인 4 · 시작 기본값 미선택 8입니다.</li>
     <li>원인 유형(2026-08-22 감사): 매칭 단가 없음 54 · 단가 미등록 47 · 셋트 계산 실패 16 · 공식/단가 미구성 15 · 계산 실패 7.</li>
-    <li>2026-08-27 재진단(SPEC-WIDGET-WIRING-001)에서는 같은 게시 위젯 194개를 다른 기준으로 나눠 BROKEN 66 · WARN 2 · OK 119 · NE 6 · INFRA_FAIL 1로 판정했습니다.</li>
+    <li>2026-08-27 재진단(<span class="nowrap">SPEC-WIDGET-WIRING-001</span>)에서는 같은 게시 위젯 194개를 다른 기준으로 나눠 BROKEN 66 · WARN 2 · OK 119 · NE 6 · INFRA_FAIL 1로 판정했습니다.</li>
     <li>다만 이 감사 수치의 <strong>재현율은 65%</strong>(2026-08-27 재진단에서 확인)입니다. "98개"는 불변하는 값이 아니라 그날의 진단이며, 조치가 진행된 뒤에는 다시 점검해야 실제 상태를 말할 수 있습니다.</li>
   </ul>
-  <p>한마디로 정리하면 위젯 화면 자체는 정상적으로 돌아가지만 그 안에 채워야 할 상품 데이터가 아직 전부 채워지지는 않았습니다. 그 갭은 매일 메워지는 중입니다(아래 데이터 품질 섹션 참조).</p>
+  <p>한마디로 정리하면 위젯 화면 자체는 정상적으로 돌아가지만 그 안에 채워야 할 상품 데이터가 아직 전부 채워지지는 않았습니다. 그 갭은 매일 메워지는 중입니다(아래 데이터 품질 섹션 참조). 위의 핀버튼 실화면처럼 위젯 화면·서버 계산·주문 차단 로직은 실제로 동작하고, 막히는 지점은 상품별 가격 데이터 쪽입니다.</p>
+  </div>
 
+  <div class="keep">
   <h3>라이브 위젯의 기술 정체</h3>
   <p>오늘 고객이 만나는 위젯은 <strong>웹 표준 기술(Web Component + Shadow DOM)로 만들어진 바닐라 자바스크립트</strong>입니다. 어떤 프레임워크로 만든 쇼핑몰에 붙여도 동작하고, 위젯이 페이지의 다른 요소와 스타일을 서로 침범하지 않도록 격리됩니다. 임베드는 스크립트 두 줄이면 충분하고 한 페이지에 여러 위젯을 독립적으로 띄울 수 있으며, 겉모양은 <span class="item-link">--hw-*</span> CSS 변수로 쇼핑몰 쪽에서 색을 바꿀 수 있습니다.</p>
   <p>참고로 위젯을 요즘 방식으로 다시 만드는 <strong>React 재구현 트랙</strong>이 별도로 진행 중입니다(사내 작업 산출물). 라이브 위젯과 구분되는 별개 트랙이며 라이브 전환 여부는 아직 확인되지 않았습니다. 오늘의 라이브 위젯은 위에서 말한 웹 표준 구현입니다.</p>
+  </div>
 
+  <div class="keep">
   <h3>Edicus 원고 편집기 — 실제로 동작합니다</h3>
   <p>4단계의 브라우저 디자인은 Edicus 편집기가 맡습니다. 옵션 조합에 맞는 규격 템플릿이 자동으로 열리는데, 어떤 템플릿을 열지는 서버가 결정하고(<span class="item-link">/editor/resolve</span>), 편집기 로그인 토큰도 서버가 대신 발급해 줍니다(편집기 비밀키는 서버 밖으로 나가지 않습니다). 편집 결과를 저장하면 프로젝트 번호(prjid)가 주문에 자동으로 실리고, 나중에 다시 클릭하면 이어서 편집할 수 있습니다. 등록되지 않은 조합은 편집기가 열리지 않도록 설계된 안전장치입니다(잘못된 규격의 원고 사고 방지). 완성 파일 업로드 길은 클라우드 직접 업로드로 앱서버를 거치지 않으며 파일당 최대 500MB(100MB 초과 시 자동 분할 전송), 미업로드 시 주문이 차단됩니다.</p>
+  </div>
 </section>
 
 <section aria-label="운영자가 쓰는 것 웹어드민">
+  <div class="keep">
   <h2>§3 운영자가 쓰는 것, 웹어드민</h2>
   <hr class="rule">
-  <p>웹어드민은 관리자 화면입니다. 관리자 주소 <span class="item-link">/admin/</span>에 들어가면 상품 뷰어가 곧바로 열립니다. 그만큼 상품 뷰어가 일상 작업의 중심입니다. 메뉴는 8개 그룹입니다(2026-09-06 재생성 매뉴얼 기준).</p>
+  <div class="keymsg"><span class="km-label">KEY MESSAGE</span>모든 운영 작업은 8개 메뉴 그룹 안에 있고, 일상의 중심은 상품 뷰어입니다.</div>
+  <p>웹어드민은 관리자 화면입니다. 관리자 주소 <span class="item-link">/admin/</span>에 들어가면 상품 뷰어가 곧바로 열립니다. 그만큼 상품 뷰어가 일상 작업의 중심입니다. 아래는 2026-09-08 실화면에서 확인한 사이드바 메뉴 구성입니다(그룹 구분은 2026-09-06 재생성 매뉴얼·설정 기준 8그룹).</p>
+  </div>
   <table class="shipped">
-    <thead><tr><th style="width:130px;">그룹</th><th>메뉴</th></tr></thead>
+    <thead><tr><th style="width:150px;">그룹</th><th style="width:110px;">실화면 메뉴명</th><th>뭘 하는 곳 (하위 메뉴)</th></tr></thead>
     <tbody>
-      <tr><td>1 상품</td><td>상품정보 · <strong>상품 뷰어(핵심 작업 화면)</strong> · 셋트상품 관리 · 추가상품 템플릿 · Edicus 템플릿 연결 · 작업가이드 파일 · 메인이미지 · 시작가 · 상품별 디자인</td></tr>
-      <tr><td>2 기준정보</td><td>카테고리 · 자재정보 · 용지 · 사이즈 · 도수 · 인쇄옵션 · 공정 · 기초코드</td></tr>
-      <tr><td>3 가격 관리</td><td>가격공식 · 가격구성요소 · 할인테이블(수량구간) · 가격 뷰어 · 가격 시뮬레이터</td></tr>
-      <tr><td>4 위젯</td><td>위젯빌더 · 상품별 위젯 관리 · 위젯 템플릿 관리</td></tr>
-      <tr><td>5 고객관리 · 6 인증 및 권한</td><td>고객 · 계정 권한</td></tr>
-      <tr><td>7 문서</td><td>퀵스타트 · 메뉴얼 · 위젯빌더 메뉴얼 · 테이블 명세서</td></tr>
-      <tr><td>8 개발자 문서</td><td>SDK 가이드 · 임베드 데모 (외부 공개)</td></tr>
+      <tr><td>1 상품</td><td>상품</td><td>상품정보 · <strong>상품 뷰어(핵심 작업 화면)</strong> · 셋트상품 관리 · 추가상품 템플릿 · Edicus 템플릿 연결 · 작업가이드 파일 · 메인이미지 · 시작가 · 상품별 디자인 — 상품 하나에 대한 모든 설정</td></tr>
+      <tr><td>2 기준정보</td><td>기준정보</td><td>카테고리 · 자재정보 · 용지 · 사이즈 · 도수 · 인쇄옵션 · 공정 · 기초코드 — 모든 상품이 함께 쓰는 부품 창고</td></tr>
+      <tr><td>3 가격 관리</td><td>가격 관리</td><td>가격공식 · 가격구성요소 · 할인테이블(수량구간) · 가격 뷰어 · 가격 시뮬레이터 — 가격을 만들고 검산하는 곳</td></tr>
+      <tr><td>4 위젯</td><td>위젯</td><td>위젯빌더 · 상품별 위젯 관리 · 위젯 템플릿 관리 — 고객 화면 조립</td></tr>
+      <tr><td>5 고객관리</td><td>고객</td><td>고객 목록 관리</td></tr>
+      <tr><td>6 인증 및 권한</td><td>사용자</td><td>관리 계정·권한 관리</td></tr>
+      <tr><td>7 문서</td><td>문서</td><td>퀵스타트 · 메뉴얼 · 위젯빌더 메뉴얼 · 테이블 명세서 — 화면 안에서 바로 열리는 도움말</td></tr>
+      <tr><td>8 개발자 문서</td><td>SDK 개발가이드 · 임베드 라이브 데모</td><td>외부 공개용 개발자 문서(§2의 실화면 데모도 여기서)</td></tr>
     </tbody>
   </table>
 
+  <div class="keep">
+  <h3>상품 뷰어 — 재료 조립대 (실화면 2026-09-08 캡처)</h3>
+  <p>상품 뷰어는 왼쪽 트리에서 상품을 고르면 옵션 · 템플릿 · 제약 같은 모든 구성이 섹션별 팝업으로 편집되는, 일상 작업의 중심 화면입니다.</p>
+  </div>
+  <figure class="fig">
+    <img src="data:image/webp;base64,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" alt="상품 뷰어 실화면 — 좌측 사이드바 메뉴 그룹과 카테고리별 상품 트리, 우측 상세 패널">
+    <figcaption>상품 뷰어 실화면(2026-09-08 캡처). 왼쪽 사이드바에 메뉴 그룹(상품·기준정보·가격 관리·위젯·고객·사용자·문서·개발자 문서)이 나열되고, 중앙에 카테고리별 상품 트리, 오른쪽에 고른 상품의 구성을 편집하는 상세 패널이 붙는 구조가 그대로 보입니다.</figcaption>
+  </figure>
+
+  <div class="keep">
+  <h3>위젯빌더 — 주문서를 차리는 식탁 (실화면 2026-09-08 캡처)</h3>
+  <p>위젯 매뉴얼의 비유가 이해에 가장 빠릅니다. <strong>"상품 관리 화면이 재료 창고라면 위젯빌더는 그 재료로 주문서를 차리는 식탁. 창고에 없는 재료는 식탁에 올릴 수 없다"</strong> — 위젯에 선택지가 안 보이면 거의 항상 상품 설정에 그 값이 없거나 꺼져 있는 것입니다.</p>
+  </div>
+  <figure class="fig">
+    <img src="data:image/webp;base64,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" alt="위젯빌더 실화면 — 좌측 팔레트, 중앙 캔버스, 우측 미리보기/속성창 3분할과 상단 툴바(게시·버전 버튼)">
+    <figcaption>위젯빌더 실화면(2026-09-08 캡처). 화면은 3분할(부품 팔레트 / 드래그 캔버스 / 실제 렌더러로 돌아가는 미리보기·속성창)이고, 상단 툴바의 [게시]·[버전…] 버튼이 §2에서 설명한 게시·롤백 입구입니다(위젯을 고르기 전에는 비활성 상태).</figcaption>
+  </figure>
+
+  <div class="keep">
   <h3>매뉴얼의 비유로 짚는 개념 8가지</h3>
   <table class="shipped">
     <thead><tr><th style="width:170px;">개념</th><th>뜻</th></tr></thead>
@@ -239,12 +332,28 @@ flowchart LR
       <tr><td>차원</td><td>단가를 결정하는 기준 축(사이즈 · 수량 · 도수 · 판형 등). 단가표가 어떤 축으로 펼쳐지는지를 정합니다. 운영 기준 축은 12가지(+수량 자동 고정)</td></tr>
       <tr><td>단가유형 3종</td><td>단가형 · 합가형 · 고정금액. 매뉴얼 강조문 그대로 "잘못 고르면 금액이 수십~수백 배 틀어진다"</td></tr>
       <tr><td>옵션 3층</td><td>그룹('용지') → 옵션('스노우지') → 항목('150g'). 주의: 위젯의 '옵션그룹' 컴포넌트는 가격과 무관한 선택지를 묶고, 가격축은 '차원' 컴포넌트가 담당합니다. 이름이 비슷해도 역할이 다릅니다</td></tr>
-      <tr><td>위젯빌더 + 게시/버전</td><td>저장≠게시. 3분할 화면(부품 팔레트 / 드래그 캔버스 / 실제 렌더러로 돌아가는 미리보기). 컴포넌트 20여 종 — 매뉴얼 제목의 16종은 이전 집계</td></tr>
+      <tr><td>위젯빌더 + 게시/버전</td><td>저장≠게시. 3분할 화면(부품 팔레트 / 드래그 캔버스 / 실제 렌더러로 돌아가는 미리보기). 컴포넌트 20종 — 매뉴얼 제목의 16종은 이전 집계</td></tr>
       <tr><td>추가상품 템플릿 · 셋트 · 시작가</td><td>추가상품 템플릿(구 SKU). 시작가는 자사몰 목록에 표시되는 대표 가격이지 최저가가 아닙니다</td></tr>
     </tbody>
   </table>
   <p><strong>제약규칙 폼빌더</strong>도 눈에 둘 만합니다. 금지 조합 · 필수 동반 · 호환 여부를 양식으로 작성하면 즉시 검증이 돌아갑니다. §2의 "고르는 순간 잠기는" 동작이 이 규칙들입니다(2026-09-07 기준 103건 등록).</p>
+  </div>
 
+  <div class="keep">
+  <h3>옵션 3층, 실제 데이터로 보기 — 낱장자유형스티커</h3>
+  <p>옵션 3층(그룹→옵션→항목)이 실제 데이터에 어떻게 생겼는지, 2026-09-08 라이브 DB 실측 예시 하나로 보겠습니다. 낱장자유형스티커(<span class="item-link">PRD_000055</span>)는 옵션그룹 3개를 쓰고 있습니다.</p>
+  </div>
+  <div class="example-box">
+    <p class="ex-title">WORKED EXAMPLE — 옵션 3층 실데이터 (2026-09-08 실측)</p>
+    <ul class="plain" style="margin-bottom:0;">
+      <li>그룹 <strong>「조각수」</strong>(단일 선택) → 옵션 5조각 · 6조각 · 7조각 · 8조각 · 9조각 · 10조각 (6개 값)</li>
+      <li>그룹 <strong>「커팅」</strong> → 옵션 「완칼(자유형)」(기본값 지정) → 항목 1개가 공정 마스터 참조(<span class="item-link">OPT_REF_DIM.04 → PROC_000123</span>)</li>
+      <li>그룹 <strong>「소재」</strong> → 옵션 「전용지+엠보코팅」(기본값 지정) → 항목 2개가 자재 마스터(<span class="item-link">OPT_REF_DIM.03 → MAT_000593</span>)와 공정 마스터(<span class="item-link">OPT_REF_DIM.04 → PROC_000116</span>)를 참조</li>
+    </ul>
+  </div>
+  <p>포인트는 맨 아래 항목층입니다. 항목은 마스터(자재·공정)를 참조해서, 고객이 옵션을 고르면 생산 정보가 자동으로 따라 붙습니다. 또한 옵션그룹은 가격축이 아니므로 전 상품이 쓰는 구조가 아닙니다 — 2026-09-08 실측으로 등록 382행 중 현재 사용 107행(82개 상품)이고, 대부분의 상품은 가격축을 차원 컴포넌트로 직접 다룹니다.</p>
+
+  <div class="keep">
   <h3>자주 묻는 증상 5가지와 점검법</h3>
   <ul class="plain">
     <li><strong>가격이 0원으로 나와요</strong> → 대부분 단가표에 해당 행이 없거나 적용일자가 미래입니다.</li>
@@ -253,36 +362,40 @@ flowchart LR
     <li><strong>단가표에서 필터 건 채로 저장했더니 행이 줄었어요</strong> → 필터가 눈에 안 보이는 행을 숨긴 상태로 저장된 것입니다. 행 유실 위험이 있으니 주의하세요.</li>
     <li><strong>자사몰에 가격이 안 떠요</strong> → 시작가 미계산이 가장 흔한 원인이고, 그중에서도 '사이즈 기본값 미지정'이 최빈 원인입니다.</li>
   </ul>
+  </div>
 </section>
 
 <section aria-label="데이터 품질 개선 곡선">
+  <div class="keep">
   <h2>§4 데이터 품질 — 채워가는 중</h2>
   <hr class="rule">
+  <div class="keymsg"><span class="km-label">KEY MESSAGE</span>가격 데이터는 매일 채워지고 있습니다. 8/27→9/7 사이 구성요소가 2배가 됐습니다.</div>
   <p>가격 데이터는 지금 활발하게 채워지고 있습니다. 그래프의 연한 막대는 2026-08-27, 진한 막대는 2026-09-07 실측값입니다(2026-09-08 재확인).</p>
+  </div>
   <div class="chart-panel">
     <svg viewBox="0 0 640 180" role="img" aria-label="가격 데이터 개선 곡선: 2026-08-27 대비 2026-09-07 실측">
       <line x1="40" y1="12"  x2="620" y2="12"  stroke="#DED7F4" stroke-width="1"/>
       <line x1="40" y1="55"  x2="620" y2="55"  stroke="#DED7F4" stroke-width="1"/>
       <line x1="40" y1="97"  x2="620" y2="97"  stroke="#DED7F4" stroke-width="1"/>
       <line x1="40" y1="140" x2="620" y2="140" stroke="#CACACA" stroke-width="1.5"/>
-      <text x="34" y="144" text-anchor="end" font-family="system-ui" font-size="11" fill="#979797">0</text>
-      <text x="34" y="101" text-anchor="end" font-family="system-ui" font-size="11" fill="#979797">102</text>
-      <text x="34" y="59"  text-anchor="end" font-family="system-ui" font-size="11" fill="#979797">204</text>
-      <text x="34" y="16"  text-anchor="end" font-family="system-ui" font-size="11" fill="#979797">306</text>
+      <text x="34" y="144" text-anchor="end" font-family="system-ui" font-size="11" fill="#6F6F6F">0</text>
+      <text x="34" y="101" text-anchor="end" font-family="system-ui" font-size="11" fill="#6F6F6F">102</text>
+      <text x="34" y="59"  text-anchor="end" font-family="system-ui" font-size="11" fill="#6F6F6F">204</text>
+      <text x="34" y="16"  text-anchor="end" font-family="system-ui" font-size="11" fill="#6F6F6F">306</text>
       <rect x="52"  y="94.0" width="50" height="46.0" rx="4" fill="#DED7F4"/>
-      <text x="77"  y="88"  text-anchor="middle" font-family="system-ui" font-size="11" fill="#979797">110</text>
+      <text x="77"  y="88"  text-anchor="middle" font-family="system-ui" font-size="11" fill="#6F6F6F">110</text>
       <rect x="123" y="86.5" width="50" height="53.5" rx="4" fill="#5538B6"/>
       <text x="148" y="80.5" text-anchor="middle" font-family="system-ui" font-size="11" fill="#351D87">128</text>
       <rect x="194" y="78.9" width="50" height="61.1" rx="4" fill="#DED7F4"/>
-      <text x="219" y="72.9" text-anchor="middle" font-family="system-ui" font-size="11" fill="#979797">146</text>
+      <text x="219" y="72.9" text-anchor="middle" font-family="system-ui" font-size="11" fill="#6F6F6F">146</text>
       <rect x="265" y="16.7" width="50" height="123.3" rx="4" fill="#5538B6"/>
       <text x="290" y="10.7" text-anchor="middle" font-family="system-ui" font-size="11" fill="#351D87">295</text>
       <rect x="336" y="42.9" width="50" height="97.1" rx="4" fill="#DED7F4"/>
-      <text x="361" y="36.9" text-anchor="middle" font-family="system-ui" font-size="11" fill="#979797">232</text>
+      <text x="361" y="36.9" text-anchor="middle" font-family="system-ui" font-size="11" fill="#6F6F6F">232</text>
       <rect x="407" y="12.0" width="50" height="128.0" rx="4" fill="#5538B6"/>
       <text x="432" y="6"   text-anchor="middle" font-family="system-ui" font-size="11" font-weight="600" fill="#351D87">306</text>
       <rect x="478" y="65.5" width="50" height="74.5" rx="4" fill="#DED7F4"/>
-      <text x="503" y="59.5" text-anchor="middle" font-family="system-ui" font-size="11" fill="#979797">178</text>
+      <text x="503" y="59.5" text-anchor="middle" font-family="system-ui" font-size="11" fill="#6F6F6F">178</text>
       <rect x="549" y="57.2" width="50" height="82.8" rx="4" fill="#5538B6"/>
       <text x="574" y="51.2" text-anchor="middle" font-family="system-ui" font-size="11" fill="#351D87">198</text>
       <text x="112" y="158" text-anchor="middle" font-family="system-ui" font-size="11" fill="#565656">가격공식</text>
@@ -301,25 +414,71 @@ flowchart LR
       <tr><td>공식 바인딩 행</td><td>178</td><td>198 <span class="author">(09-08 재확인)</span></td><td>+20</td></tr>
     </tbody>
   </table>
-  <p>구성요소가 2배로 늘었고 배선은 32% 늘었습니다. "엔진 구조는 다 서 있고, 그 안에 상품별 데이터를 채워가는 단계"가 현재 상태를 가장 잘 표현합니다.</p>
-  <p>활성 상품 269개 중 공식이 연결(바인딩)되지 않은 상품은 90개입니다(2026-09-07 실측, 완제품 기준 53개). 다만 <strong>바인딩 안 됨 ≠ 가격 없음</strong>입니다. 자사몰 목록용 시작가가 192행, 템플릿 가격이 102행 따로 관리되어 두 경로가 병존합니다. 합산 커버리지는 아직 실측되지 않았습니다.</p>
-  <p>옵션 데이터(옵션그룹 382 · 옵션 1,193 · 옵션항목 983)와 제약규칙 103건, 셋트 구성 47행은 이미 상당한 규모로 등록되어 있습니다(모두 2026-09-07 실측).</p>
+  <p>구성요소가 2배로 늘었고 배선은 32% 늘었습니다. 활성 상품 269개 중 공식이 연결(바인딩)되지 않은 상품은 90개입니다(2026-09-07 실측, 완제품 기준 53개). 다만 <strong>바인딩 안 됨 ≠ 가격 없음</strong>입니다. 자사몰 목록용 시작가가 192행, 템플릿 가격이 102행 따로 관리되어 두 경로가 병존합니다. 합산 커버리지는 아직 실측되지 않았습니다.</p>
+  <p>옵션 데이터(옵션그룹 사용 107행 · 옵션 1,193 · 옵션항목 983)와 제약규칙 103건, 셋트 구성 47행은 이미 상당한 규모로 등록되어 있습니다(옵션그룹 사용 행은 2026-09-08, 나머지는 2026-09-07 실측).</p>
+</section>
+
+<section aria-label="오픈 준비 로드맵">
+  <div class="keep">
+  <h2>§5 오픈 준비 — 10월 6일 오픈까지 (2026-09-02 기준 재기준선 원장)</h2>
+  <hr class="rule">
+  <div class="keymsg"><span class="km-label">KEY MESSAGE</span>오픈일은 10월 6일로 정해져 있고, 그 앞에 품질 게이트 4개가 순서대로 서 있습니다.</div>
+  <p>정식 오픈 일정은 관리되고 있습니다. 2026-09-02에 34개 하네스 산출물을 통합해 재정리한 「D-34 재기준선 통합 원장」(505개 항목, 담당 PM·인쇄개발·쇼핑개발 3트랙)이 기준이며, 오픈까지의 게이트는 다음과 같습니다.</p>
+  </div>
+  <table class="shipped">
+    <thead><tr><th style="width:70px;">게이트</th><th style="width:110px;">날짜</th><th style="width:130px;">이름</th><th>목적</th></tr></thead>
+    <tbody>
+      <tr><td>G0</td><td>2026-09-04</td><td>결정·열쇠 주간</td><td>정하지 않으면 아무것도 안 움직이는 것들 확정</td></tr>
+      <tr><td>G1</td><td>2026-09-11</td><td>기능 동결</td><td>무엇을 만들지 더 이상 안 바꾼다</td></tr>
+      <tr><td>G2</td><td>2026-09-18</td><td>돈 사슬 완결</td><td>값이 틀린 채로 손님이 결제하는 일이 없다</td></tr>
+      <tr><td>G3</td><td>2026-09-22</td><td>통합 QA 1차</td><td>연휴 직전 하루를 교정에 남긴다</td></tr>
+      <tr><td>G4</td><td>2026-09-30</td><td>오픈 리허설</td><td>근무일 0일이었던 10/2 대신 앞당김</td></tr>
+      <tr><td><strong>G5</strong></td><td><strong>2026-10-06</strong></td><td><strong>오픈</strong></td><td>—</td></tr>
+    </tbody>
+  </table>
+  <p>같은 원장(2026-09-02 기준)에서 항목 상태는 완료 99 · 진행중 85 · 미착수 189 · 신규발견 123 · 미판정 9입니다. 발표에서 나올 수 있는 질문 두 가지를 미리 정리하면:</p>
+  <ul class="plain">
+    <li><strong>"우리 손으로 못 닫는 것"이 8건 있습니다.</strong> 신용카드 결제(PG) 원천사 심사, 기존 회원·프린트머니 이관, PG 정산 대사 등 외부 회신·심사 대기 항목입니다(돈·주문에 직결되는 것들이라 별도 관리).</li>
+    <li><strong>돈과 주문에 닿는 항목이 많습니다.</strong> 값이 틀리면 손해가 나는 '돈여부 Y' 127건, 주문 흐름에 닿는 '주문여부 Y' 143건(둘 다 Y가 69건)으로, G2 게이트가 이 구간을 검증합니다.</li>
+  </ul>
+</section>
+
+<section aria-label="실무 시나리오">
+  <div class="keep">
+  <h2>§6 실무 시나리오 — 가격 등록부터 주문 확인까지</h2>
+  <hr class="rule">
+  <div class="keymsg"><span class="km-label">KEY MESSAGE</span>실무의 한 사이클은 "기준정보 → 상품 → 가격 → 게시 → 확인" 다섯 단계로 흐릅니다.</div>
+  <p>실무진이 새 상품을 팔 수 있게 되기까지의 동선을 한 바퀴로 정리하면(퀵스타트 문서·운영 매뉴얼 기준):</p>
+  <ul class="plain">
+    <li><strong>1. 기준정보 확인(부품 창고).</strong> 그 상품이 쓸 사이즈 · 자재 · 도수 · 공정이 기준정보에 등록돼 있는지 먼저 봅니다. 창고에 없는 재료는 식탁(위젯)에도 못 올립니다.</li>
+    <li><strong>2. 상품 등록(상품 뷰어 중심).</strong> 상품 정보와 옵션 · 차원 값 · 셋트 구성을 상품 뷰어에서 상품에 연결합니다.</li>
+    <li><strong>3. 가격 등록(가격 관리 메뉴).</strong> 가격공식 → 가격구성요소 → 단가표 순서로 채웁니다(가격엔진 4단). 수량구간 할인이 필요하면 할인테이블까지.</li>
+    <li><strong>4. 게시(위젯빌더).</strong> 위젯을 조립하고 [게시]를 눌러야 고객 화면에 반영됩니다. 저장만 하면 반영되지 않습니다.</li>
+    <li><strong>5. 확인 — 오픈 전/후 두 가지.</strong> 오픈 전에는 <strong>가격 시뮬레이터</strong>로 공식이 연결된 상품의 가격이 제대로 굴러가는지 검산하고, 오픈 후에는 주문 관리 화면과 위젯 이벤트로 <strong>고객 주문을 확인</strong>합니다. 현재는 프리런치(주문 0건)라 오픈 전 단계까지 실제로 쓰이는 동선입니다.</li>
+  </ul>
+  <p>이 동선에서 자주 걸리는 지점이 §3의 증상 점검표 5가지입니다(가격 0원 · 게시 안 함 · 논리삭제 부활 · 단가표 필터 · 시작가 미계산).</p>
+  </div>
 </section>
 
 <section aria-label="직접 확인해 볼 것">
-  <h2>§5 직접 확인해 볼 것</h2>
+  <div class="keep">
+  <h2>§7 직접 확인해 볼 것</h2>
   <hr class="rule">
   <ul class="plain">
-    <li><strong>상품 뷰어</strong> <span class="item-link">/admin/product-viewer/</span> — 상품 하나를 골라 옵션 · 가격 · 제약이 어떻게 얽혀 있는지 트리에서 확인합니다. <strong>주의: 뷰어에 보이는 상품 데이터는 2026-06-10에 내장된 스냅샷입니다.</strong> 오늘 날짜의 실시간 조회가 아니므로 최근 등록 상품은 안 보일 수 있습니다.</li>
+    <li><strong>임베드 라이브 데모</strong> <span class="item-link">/sdk/demo/</span> — §2 실화면 그대로. 게시 위젯(핀버튼 주문위젯)에 옵션을 골라 보면 서버 계산 가격과 주문 조건이 실시간으로 바뀌는 것을 볼 수 있습니다. 로그인 없이 볼 수 있는 것이 이 데모뿐입니다.</li>
+    <li><strong>상품 뷰어</strong> <span class="item-link">/admin/product-viewer/</span> — 상품 하나를 골라 옵션 · 가격 · 제약이 어떻게 얽혀 있는지 트리에서 확인합니다. <strong>주의: 뷰어에 보이는 상품 데이터는 2026-06-10에 내장된 스냅샷입니다.</strong> 오늘 날짜의 실시간 조회가 아니므로, 최근 등록 상품은 안 보일 수 있습니다.</li>
     <li><strong>가격 시뮬레이터</strong> <span class="item-link">/admin/price-simulator/</span> — 공식이 연결된 상품을 골라 옵션을 바꿔 가보면 가격이 어떻게 굴러가는지 체감할 수 있습니다.</li>
-    <li><strong>퀵스타트 문서</strong> — 모양엽서를 예시로 상품 등록부터 시작가 계산까지 한 바퀴 돌리는 입문 문서입니다(2026-09-06 재생성본).</li>
+    <li><strong>퀵스타트 문서</strong> — 모양엽서를 예시로 상품 등록부터 시작가 계산까지 한 바퀴 돌리는 입문 문서입니다(2026-09-06 재생성본). 웹어드민 「문서」 메뉴에서 바로 열립니다.</li>
   </ul>
-  <p>인쇄하는 경우: 이 리포트의 다이어그램(가격 흐름)은 온라인 브라우저에서만 렌더링됩니다. 다이어그램에만 있는 정보는 없고 핵심 내용은 글과 표에도 실어 두었으니 인쇄본으로도 내용에는 지장이 없습니다.</p>
+  <p>인쇄하는 경우: 이 리포트의 그림 중 일부(다이어그램)는 온라인 브라우저에서만 렌더링됩니다. 다이어그램에만 있는 정보는 없고, 핵심 내용은 글과 표에도 실어 두었으니 인쇄본으로도 내용에는 지장이 없습니다. 실화면 캡처 3장은 인쇄본에도 그대로 실립니다.</p>
+  </div>
 </section>
 
 <section aria-label="리스크와 계획">
+  <div class="keep">
   <h2>리스크와 계획 (Carryover)</h2>
   <hr class="rule">
+  </div>
   <div class="carryover">
     <div class="carry-group">
       <p class="carry-group-title">알아 둘 인지 리스크</p>
@@ -344,15 +503,28 @@ flowchart LR
       <p class="carry-group-title">발표 환경</p>
       <div class="carry-item">
         <span class="carry-tag">폰트</span>
-        <div class="carry-body">폰트는 온라인 로드이므로 발표장 인터넷이 막혀 있으면 기본 폰트로 대체 렌더링됩니다(내용 파손 아님). 오프라인 대비 PDF 백업을 증거 폴더에 두었습니다. 발표 전 온라인 확인 권장.</div>
+        <div class="carry-body">폰트는 온라인 로드이므로 발표장 인터넷이 막혀 있으면 기본 폰트로 대체 렌더링됩니다(내용 파손 아님). 오프라인 대비 페이지 번호가 찍힌 PDF 백업을 증거 폴더에 두었습니다. 발표 전 온라인 확인 권장.</div>
       </div>
     </div>
   </div>
 </section>
 
-<footer>
-  Sources: research.md(4렌즈 조사 · 2026-09-08) · remeasure-260908.txt(2026-09-08 02:02 라이브 DB 읽기전용 재실측) · 매뉴얼 2026-09-06 재생성본 · 위젯 SDK 가이드(2026-09-07) · widget-price-audit-260822 · SPEC-WIDGET-WIRING-001(2026-08-27 재진단) &nbsp;—&nbsp; Generated: 2026-09-08 · SPEC-STAFFBRIEF-001 (card t45)
-</footer>
+<section aria-label="출처와 기준 시점">
+  <div class="keep">
+  <h2>출처와 기준 시점</h2>
+  <hr class="rule">
+  <ul class="plain" style="font-size:13px;color:var(--g700);">
+    <li>매뉴얼: 2026-09-06 재생성본(admin-manual · widget-manual · admin-quickstart)과 그 원고(2026-09-08 판독). 2026-08-24자 baseline 파일은 동결 참조용입니다. 단 09-06본도 소스 최신 수정(09-07)보다 약 이틀 뒤진 스냅샷입니다.</li>
+    <li>실화면: 2026-09-08 gstack 읽기전용 탐색·캡처(상품 뷰어 · 위젯빌더 · 임베드 라이브 데모 3종). 웹어드민 로그인 후 화면 열람·캡처만 했고 저장·수정은 하지 않았습니다.</li>
+    <li>위젯 SDK 가이드(2026-09-07) — Edicus 실동작 · 보안 문구 · 임베드 3원칙.</li>
+    <li>라이브 DB 읽기전용 실측: 2026-09-07 심야(리서치) + 2026-09-08 02:02/02:47(현재값 4종·컴포넌트 분포·옵션 3층 실측, 쿼리 원문은 증거 폴더 <span class="nowrap">remeasure-260908.txt</span>·<span class="nowrap">remeasure-v2*.txt</span>).</li>
+    <li>오픈 로드맵: D-34 재기준선 통합 원장(2026-09-02 생성) — 505항목 · 게이트 G0~G5 · 외부 차단 8건.</li>
+    <li>과거 점검: 2026-08-22 전수 감사(widget-price-audit-260822) · 2026-08-27 재진단(<span class="nowrap">SPEC-WIDGET-WIRING-001</span>).</li>
+    <li>컴포넌트 카탈로그: 위젯 매뉴얼 원고(widget_manual_content.py · 2026-09-08 판독) + 라이브 코드값 <span class="nowrap">WGT_SRC_TYPE</span> 20종(2026-09-08 실측) 대조.</li>
+    <li>본 리포트: <span class="nowrap">SPEC-STAFFBRIEF-001</span> (card t45) · v2 (4방향 보강) · Generated 2026-09-08</li>
+  </ul>
+  </div>
+</section>
 
 </div>
 <script type="module">

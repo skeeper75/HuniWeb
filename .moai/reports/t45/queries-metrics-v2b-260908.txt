@@ -1,0 +1,10 @@
+-- (V2-6) 전체 활성 상품 목록 (예시 상품 선정용 — 상품명만 select)
+SELECT prd_cd, prd_nm FROM t_prd_products WHERE del_yn='N' AND use_yn='Y' ORDER BY prd_cd;
+-- (V2-7) 위젯 항목 컴포넌트 유형 분포 — 게시 위젯만 (실사용 실측)
+SELECT i.src_typ_cd, count(*) AS item_cnt FROM t_wgt_widget_items i JOIN t_wgt_widgets w ON w.wgt_cd=i.wgt_cd WHERE w.sts_typ_cd='WGT_STS_TYPE.02' AND w.del_yn='N' AND w.use_yn='Y' GROUP BY i.src_typ_cd ORDER BY item_cnt DESC;
+-- (V2-8) 위젯 항목 컴포넌트 유형 분포 — 전체(참고)
+SELECT src_typ_cd, count(*) AS item_cnt FROM t_wgt_widget_items GROUP BY src_typ_cd ORDER BY item_cnt DESC;
+-- (V2-9) WGT_SRC_TYPE 코드명 (컴포넌트 20종 공식 명칭)
+SELECT cod_cd, cod_nm, use_yn, del_yn FROM t_cod_base_codes WHERE cod_cd LIKE 'WGT_SRC_TYPE%' ORDER BY cod_cd;
+-- (V2-10) 게시 위젯 샘플 (위젯 실화면 확인용 — 위젯명만)
+SELECT w.wgt_cd, w.wgt_nm, w.sts_typ_cd FROM t_wgt_widgets w WHERE w.sts_typ_cd='WGT_STS_TYPE.02' AND w.del_yn='N' AND w.use_yn='Y' ORDER BY w.upd_dt DESC NULLS LAST LIMIT 10;

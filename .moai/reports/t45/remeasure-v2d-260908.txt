@@ -1,0 +1,35 @@
+# dbprobe_v2_260908.py — mode=metrics (v2 보강 재실측)
+# run started: 2026-09-08 02:48:55 KST
+# connection: host=<redacted> sslmode=require options=-c default_transaction_read_only=on
+# credential source: /Users/innojini/Dev/HuniWeb/.env.local (RAILWAY_DB_* — values never logged)
+
+=== [2026-09-08 02:48:56 KST] QUERY ===
+SELECT prd_cd, prd_nm FROM t_prd_products WHERE prd_cd IN ('PRD_000055','PRD_000057','PRD_000071','PRD_000024') ORDER BY prd_cd;
+--- RESULT (4 rows) ---
+prd_cd | prd_nm
+PRD_000024 | 포토카드
+PRD_000055 | 낱장자유형스티커
+PRD_000057 | 대형자유형스티커
+PRD_000071 | 트윈링책자
+
+=== [2026-09-08 02:48:56 KST] QUERY ===
+SELECT g.opt_grp_cd, g.opt_grp_nm, g.sel_typ_cd, o.opt_cd, o.opt_nm, o.dflt_yn, i.item_seq, i.ref_dim_cd, i.ref_key1 FROM t_prd_product_option_groups g LEFT JOIN t_prd_product_options o ON o.prd_cd=g.prd_cd AND o.opt_grp_cd=g.opt_grp_cd AND o.del_yn='N' LEFT JOIN t_prd_product_option_items i ON i.prd_cd=o.prd_cd AND i.opt_cd=o.opt_cd AND i.del_yn='N' WHERE g.prd_cd='PRD_000055' AND g.del_yn='N' ORDER BY g.opt_grp_cd, o.opt_cd, i.item_seq LIMIT 40;
+--- RESULT (9 rows) ---
+opt_grp_cd | opt_grp_nm | sel_typ_cd | opt_cd | opt_nm | dflt_yn | item_seq | ref_dim_cd | ref_key1
+OPT-000039 | 조각수 | SEL_TYPE.01 | OPV-000076 | 5조각 | N | NULL | NULL | NULL
+OPT-000039 | 조각수 | SEL_TYPE.01 | OPV-000077 | 6조각 | N | NULL | NULL | NULL
+OPT-000039 | 조각수 | SEL_TYPE.01 | OPV-000078 | 7조각 | N | NULL | NULL | NULL
+OPT-000039 | 조각수 | SEL_TYPE.01 | OPV-000079 | 8조각 | N | NULL | NULL | NULL
+OPT-000039 | 조각수 | SEL_TYPE.01 | OPV-000080 | 9조각 | N | NULL | NULL | NULL
+OPT-000039 | 조각수 | SEL_TYPE.01 | OPV-000081 | 10조각 | N | NULL | NULL | NULL
+OPT_000112 | 커팅 | SEL_TYPE.01 | OPV_000525 | 완칼(자유형) | Y | 1 | OPT_REF_DIM.04 | PROC_000123
+OPT_000277 | 소재 | SEL_TYPE.01 | OPV_000980 | 전용지+엠보코팅 | Y | 1 | OPT_REF_DIM.03 | MAT_000593
+OPT_000277 | 소재 | SEL_TYPE.01 | OPV_000980 | 전용지+엠보코팅 | Y | 2 | OPT_REF_DIM.04 | PROC_000116
+
+=== [2026-09-08 02:48:56 KST] QUERY ===
+SELECT count(*) AS all_rows, count(*) FILTER (WHERE del_yn='N') AS alive_rows, count(DISTINCT prd_cd) FILTER (WHERE del_yn='N') AS products_with_groups FROM t_prd_product_option_groups;
+--- RESULT (1 row) ---
+all_rows | alive_rows | products_with_groups
+382 | 107 | 82
+
+# run finished: 2026-09-08 02:48:56 KST

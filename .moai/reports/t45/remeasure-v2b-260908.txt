@@ -1,0 +1,367 @@
+# dbprobe_v2_260908.py — mode=metrics (v2 보강 재실측)
+# run started: 2026-09-08 02:47:56 KST
+# connection: host=<redacted> sslmode=require options=-c default_transaction_read_only=on
+# credential source: /Users/innojini/Dev/HuniWeb/.env.local (RAILWAY_DB_* — values never logged)
+
+=== [2026-09-08 02:47:57 KST] QUERY ===
+SELECT prd_cd, prd_nm FROM t_prd_products WHERE del_yn='N' AND use_yn='Y' ORDER BY prd_cd;
+--- RESULT (269 rows) ---
+prd_cd | prd_nm
+PRD_000001 | OPP접착봉투
+PRD_000002 | OPP비접착봉투
+PRD_000004 | 카드봉투
+PRD_000005 | 캘린더봉투
+PRD_000006 | 볼체인
+PRD_000007 | 와이어링
+PRD_000009 | 투명케이스
+PRD_000010 | 행택끈
+PRD_000011 | 자석고정용고무판
+PRD_000012 | 우드거치대
+PRD_000013 | 우드봉
+PRD_000014 | 우드행거
+PRD_000015 | 만년스탬프 리필잉크
+PRD_000016 | 프리미엄엽서
+PRD_000017 | 코팅엽서
+PRD_000018 | 스탠다드엽서
+PRD_000019 | 투명엽서
+PRD_000020 | 화이트인쇄엽서
+PRD_000021 | 핑크별색엽서
+PRD_000024 | 포토카드
+PRD_000025 | 투명포토카드
+PRD_000026 | 종이슬로건
+PRD_000027 | 2단접지카드
+PRD_000028 | 미니접지카드
+PRD_000029 | 3단접지카드
+PRD_000030 | 지그재그엽서
+PRD_000031 | 프리미엄명함
+PRD_000032 | 코팅명함
+PRD_000033 | 스탠다드명함
+PRD_000034 | 펄명함
+PRD_000035 | 모양명함
+PRD_000036 | 미니모양명함
+PRD_000037 | 오리지널박명함
+PRD_000038 | 형압명함
+PRD_000039 | 투명명함
+PRD_000040 | 화이트인쇄명함
+PRD_000041 | 스탠다드 쿠폰/상품권
+PRD_000042 | 프리미엄 쿠폰/상품권
+PRD_000043 | 인쇄배경지(일반형)
+PRD_000044 | 인쇄배경지(커팅형)
+PRD_000045 | 인쇄헤더택
+PRD_000046 | 라벨/택
+PRD_000047 | 소량전단지
+PRD_000048 | 접지리플렛
+PRD_000049 | 와이드 접지리플렛
+PRD_000050 | 봉투제작
+PRD_000052 | 반칼자유형스티커
+PRD_000053 | 반칼자유형투명스티커
+PRD_000054 | 반칼자유형홀로그램스티커
+PRD_000055 | 낱장자유형스티커
+PRD_000056 | 낱장자유형투명스티커
+PRD_000057 | 대형자유형스티커
+PRD_000058 | 반칼원형스티커
+PRD_000059 | 반칼정사각스티커
+PRD_000060 | 반칼직사각스티커
+PRD_000061 | 반칼띠지스티커
+PRD_000062 | 반칼팬시스티커
+PRD_000063 | 반칼팬시투명스티커
+PRD_000065 | 스티커팩
+PRD_000066 | 합판도무송스티커
+PRD_000067 | 타투스티커
+PRD_000068 | 중철책자
+PRD_000069 | 무선책자
+PRD_000070 | PUR책자
+PRD_000071 | 트윈링책자
+PRD_000072 | 하드커버책자
+PRD_000073 | 하드커버책자-표지
+PRD_000074 | 하드커버책자-면지
+PRD_000077 | 레더하드커버책자
+PRD_000078 | 레더하드커버책자-표지
+PRD_000082 | 하드커버링책자
+PRD_000083 | 하드커버링책자-표지
+PRD_000084 | 하드커버링책자-면지
+PRD_000088 | 레더링바인더
+PRD_000089 | 레더링바인더-표지
+PRD_000090 | 레더링바인더-면지
+PRD_000094 | 엽서북
+PRD_000095 | 엽서북-내지
+PRD_000096 | 엽서북-표지
+PRD_000097 | 떡메모지
+PRD_000100 | 포토북 [디자인명]
+PRD_000101 | 포토북 [디자인명]-내지
+PRD_000102 | 포토북 [디자인명]-하드커버
+PRD_000104 | 포토북 [디자인명]-면지
+PRD_000105 | 포토북 [디자인명]-레더하드커버
+PRD_000107 | 포토북 [디자인명]-소프트커버
+PRD_000108 | 탁상형캘린더
+PRD_000109 | 미니탁상형캘린더
+PRD_000110 | 엽서캘린더
+PRD_000111 | 벽걸이캘린더
+PRD_000112 | 와이드벽걸이캘린더
+PRD_000118 | 아트프린트포스터
+PRD_000119 | 아트페이퍼포스터
+PRD_000120 | 방수포스터
+PRD_000121 | 접착방수포스터
+PRD_000122 | 접착투명포스터
+PRD_000123 | 아트패브릭포스터
+PRD_000124 | 린넨패브릭포스터
+PRD_000125 | 캔버스패브릭포스터
+PRD_000126 | 레더아트프린트
+PRD_000127 | 타이벡프린트
+PRD_000128 | 메쉬프린트
+PRD_000129 | 폼보드
+PRD_000130 | 포맥스보드
+PRD_000131 | 프레임리스우드액자
+PRD_000132 | 레더아트액자
+PRD_000133 | 캔버스 행잉포스터
+PRD_000134 | 린넨우드봉족자
+PRD_000135 | 족자포스터
+PRD_000136 | PET배너
+PRD_000137 | 메쉬배너
+PRD_000138 | 일반현수막
+PRD_000139 | 메쉬현수막
+PRD_000140 | 무광시트커팅
+PRD_000141 | 홀로그램 시트커팅
+PRD_000142 | 유광아크릴스티커
+PRD_000143 | 미러아크릴스티커
+PRD_000144 | 미니보드스탠딩
+PRD_000145 | 미니배너
+PRD_000146 | 아크릴키링
+PRD_000147 | 아크릴마그넷
+PRD_000148 | 아크릴뱃지
+PRD_000149 | 아크릴집게
+PRD_000150 | 아크릴스마트톡
+PRD_000151 | 맥세이프 스마트톡
+PRD_000152 | 아크릴명찰
+PRD_000153 | 아크릴명찰(골드실버)
+PRD_000154 | 아크릴 머리끈
+PRD_000155 | 아크릴볼펜
+PRD_000156 | 아크릴지비츠
+PRD_000157 | 아크릴네임택
+PRD_000158 | 아크릴 포카키링
+PRD_000159 | 아크릴코스터
+PRD_000160 | 아크릴자유형스탠드
+PRD_000161 | 판아크릴
+PRD_000162 | 아크릴포카스탠드
+PRD_000163 | 아크릴미니파츠
+PRD_000164 | 아크릴코롯토
+PRD_000166 | 아크릴카라비너
+PRD_000172 | 만년다이어리(소프트커버)
+PRD_000173 | 만년다이어리(하드커버)
+PRD_000174 | 만년다이어리(레더하드커버)
+PRD_000175 | 만년다이어리(레더소프트커버)
+PRD_000176 | 먼슬리플래너
+PRD_000177 | 스프링노트
+PRD_000178 | 스프링수첩
+PRD_000179 | 메모패드
+PRD_000181 | 중철노트
+PRD_000183 | 틴거울
+PRD_000184 | 컴팩트거울
+PRD_000185 | 카드거울
+PRD_000186 | 사각손거울
+PRD_000187 | 블랙사각손거울
+PRD_000188 | 레더코스터
+PRD_000189 | 코르크코스터
+PRD_000190 | 우드코스터
+PRD_000191 | 린넨패브릭코스터
+PRD_000192 | 규조토코스터
+PRD_000193 | 머그컵
+PRD_000194 | 워터북보틀
+PRD_000195 | 벨벳쿠션
+PRD_000196 | 레더여권케이스
+PRD_000197 | 미니매트
+PRD_000198 | 피크닉매트
+PRD_000200 | 핀버튼
+PRD_000201 | 레더스트랩키링
+PRD_000202 | 키캡키링
+PRD_000203 | LED투명키캡키링
+PRD_000205 | 양말
+PRD_000206 | 반팔티셔츠
+PRD_000208 | 슬로건
+PRD_000209 | 후드티셔츠
+PRD_000210 | 초슬림마우스패드
+PRD_000211 | 장패드
+PRD_000212 | 극세사클리너
+PRD_000213 | 틴케이스
+PRD_000214 | 자석북마크
+PRD_000215 | 클립보드
+PRD_000216 | 투명클립보드
+PRD_000217 | 만년스탬프
+PRD_000218 | 타이벡북커버
+PRD_000219 | 밴드톡
+PRD_000220 | 폰스트랩
+PRD_000221 | 말랑키링
+PRD_000223 | 말랑포카홀더
+PRD_000224 | 말랑네임택
+PRD_000225 | 말랑여권케이스
+PRD_000226 | 아크릴쉐이커코롯토
+PRD_000228 | 이미지피켓(소형)
+PRD_000229 | 이미지피켓
+PRD_000230 | 레더플랫파우치
+PRD_000231 | 레더슬림파우치
+PRD_000232 | 레더삼각파우치
+PRD_000233 | 레더볼륨파우치
+PRD_000234 | 레더스트링파우치
+PRD_000235 | 레더스트링원형파우치
+PRD_000236 | 레더플랫클러치
+PRD_000237 | 레더삼각클러치
+PRD_000238 | 레더아이패드노트북파우치
+PRD_000239 | 캔버스 플랫 파우치
+PRD_000240 | 캔버스 삼각 파우치
+PRD_000241 | 캔버스 스트랩 라벨파우치
+PRD_000242 | 광목 스트링 라벨파우치
+PRD_000243 | 린넨 스트링 파우치
+PRD_000244 | 타이벡플랫파우치
+PRD_000245 | 타이벡슬림파우치
+PRD_000246 | 타이벡삼각파우치
+PRD_000247 | 타이벡스트링파우치
+PRD_000248 | 타이벡플랫클러치
+PRD_000249 | 메쉬슬림파우치
+PRD_000250 | 메쉬볼륨파우치
+PRD_000251 | 레더플랫미니파우치
+PRD_000252 | 레더슬림미니파우치
+PRD_000253 | 레더삼각미니파우치
+PRD_000254 | 레더볼륨미니파우치
+PRD_000255 | 레더원형미니파우치
+PRD_000256 | 레더플랫필통
+PRD_000257 | 레더슬림필통
+PRD_000258 | 레더삼각필통
+PRD_000259 | 레더볼륨필통
+PRD_000260 | 레더원형필통
+PRD_000263 | 레더토트백
+PRD_000264 | 레더숄더백
+PRD_000265 | 린넨 미니에코백
+PRD_000266 | 린넨 토트백
+PRD_000267 | 린넨 에코백
+PRD_000268 | 캔버스심플백
+PRD_000269 | 캔버스 포켓심플백
+PRD_000270 | 캔버스에코백
+PRD_000271 | 캔버스숄더백
+PRD_000272 | 캔버스 포켓숄더백
+PRD_000273 | 타이벡양면백팩
+PRD_000274 | 타이벡보냉보틀백
+PRD_000275 | 타이벡보냉미니백
+PRD_000276 | 타이벡에코백
+PRD_000277 | 타이벡보냉에코백
+PRD_000278 | 메쉬토트백
+PRD_000279 | 메쉬에코백
+PRD_000280 | 레더라벨제작
+PRD_000283 | 트레싱지봉투
+PRD_000287 | 중철책자-내지
+PRD_000288 | 중철책자-표지
+PRD_000289 | 무선책자-내지
+PRD_000290 | 무선책자-표지
+PRD_000291 | PUR책자-내지
+PRD_000292 | PUR책자-표지
+PRD_000293 | 만년다이어리(소프트커버)-표지(아트250+무광코팅)
+PRD_000294 | 만년다이어리(하드커버)-표지(아트250+무광코팅)
+PRD_000295 | 만년다이어리(하드커버)-면지
+PRD_000296 | 만년다이어리(레더하드커버)-표지(레더)
+PRD_000297 | 만년다이어리(레더하드커버)-면지
+PRD_000298 | 만년다이어리(레더소프트커버)-표지(레더)
+PRD_000299 | 먼슬리플래너-표지
+PRD_000300 | 먼슬리플래너-내지
+PRD_000301 | 스프링노트-표지
+PRD_000302 | 스프링노트-내지(무지)
+PRD_000303 | 스프링수첩-표지(아트250+무광코팅)
+PRD_000304 | 스프링수첩-내지(무지)
+PRD_000305 | 메모패드-표지
+PRD_000306 | 메모패드-내지(무지)
+PRD_000307 | 중철노트-표지
+PRD_000308 | 중철노트-내지(무지)
+PRD_000310 | 트윈링책자-표지
+PRD_000311 | 트윈링책자-내지
+PRD_000312 | 미니CD앨범케이스
+PRD_000313 | 미니CD
+PRD_000315 | 배너거치대 (실내용)
+PRD_000316 | 배너거치대 (실외용-단면)
+PRD_000317 | 배너거치대 (실외용-양면)
+
+=== [2026-09-08 02:47:57 KST] QUERY ===
+SELECT i.src_typ_cd, count(*) AS item_cnt FROM t_wgt_widget_items i JOIN t_wgt_widgets w ON w.wgt_cd=i.wgt_cd WHERE w.sts_typ_cd='WGT_STS_TYPE.02' AND w.del_yn='N' AND w.use_yn='Y' GROUP BY i.src_typ_cd ORDER BY item_cnt DESC;
+--- RESULT (16 rows) ---
+src_typ_cd | item_cnt
+WGT_SRC_TYPE.01 | 405
+WGT_SRC_TYPE.03 | 207
+WGT_SRC_TYPE.08 | 193
+WGT_SRC_TYPE.09 | 177
+WGT_SRC_TYPE.14 | 102
+WGT_SRC_TYPE.02 | 89
+WGT_SRC_TYPE.10 | 85
+WGT_SRC_TYPE.11 | 77
+WGT_SRC_TYPE.15 | 27
+WGT_SRC_TYPE.13 | 22
+WGT_SRC_TYPE.18 | 18
+WGT_SRC_TYPE.16 | 10
+WGT_SRC_TYPE.17 | 7
+WGT_SRC_TYPE.05 | 4
+WGT_SRC_TYPE.19 | 2
+WGT_SRC_TYPE.20 | 2
+
+=== [2026-09-08 02:47:57 KST] QUERY ===
+SELECT src_typ_cd, count(*) AS item_cnt FROM t_wgt_widget_items GROUP BY src_typ_cd ORDER BY item_cnt DESC;
+--- RESULT (20 rows) ---
+src_typ_cd | item_cnt
+WGT_SRC_TYPE.01 | 743
+WGT_SRC_TYPE.03 | 464
+WGT_SRC_TYPE.08 | 435
+WGT_SRC_TYPE.09 | 427
+WGT_SRC_TYPE.10 | 212
+WGT_SRC_TYPE.14 | 151
+WGT_SRC_TYPE.02 | 120
+WGT_SRC_TYPE.11 | 84
+WGT_SRC_TYPE.18 | 68
+WGT_SRC_TYPE.13 | 56
+WGT_SRC_TYPE.06 | 53
+WGT_SRC_TYPE.15 | 39
+WGT_SRC_TYPE.12 | 23
+WGT_SRC_TYPE.16 | 12
+WGT_SRC_TYPE.05 | 11
+WGT_SRC_TYPE.07 | 8
+WGT_SRC_TYPE.17 | 8
+WGT_SRC_TYPE.19 | 2
+WGT_SRC_TYPE.20 | 2
+WGT_SRC_TYPE.04 | 1
+
+=== [2026-09-08 02:47:57 KST] QUERY ===
+SELECT cod_cd, cod_nm, use_yn, del_yn FROM t_cod_base_codes WHERE cod_cd LIKE 'WGT_SRC_TYPE%' ORDER BY cod_cd;
+--- RESULT (21 rows) ---
+cod_cd | cod_nm | use_yn | del_yn
+WGT_SRC_TYPE | 위젯소스유형 | Y | N
+WGT_SRC_TYPE.01 | 차원 | Y | N
+WGT_SRC_TYPE.02 | 옵션그룹 | Y | N
+WGT_SRC_TYPE.03 | 수량 | Y | N
+WGT_SRC_TYPE.04 | 추가상품 | Y | N
+WGT_SRC_TYPE.05 | 패널 | Y | N
+WGT_SRC_TYPE.06 | 라벨 | Y | N
+WGT_SRC_TYPE.07 | 안내문 | Y | N
+WGT_SRC_TYPE.08 | 가격요약 | Y | N
+WGT_SRC_TYPE.09 | 파일업로드 | Y | N
+WGT_SRC_TYPE.10 | 편집기버튼 | Y | N
+WGT_SRC_TYPE.11 | 빈공백 | Y | N
+WGT_SRC_TYPE.12 | 비규격치수 | Y | N
+WGT_SRC_TYPE.13 | 추가상품피커 | Y | N
+WGT_SRC_TYPE.14 | 공정선택 | Y | N
+WGT_SRC_TYPE.15 | 가로선 | Y | N
+WGT_SRC_TYPE.16 | 건수 | Y | N
+WGT_SRC_TYPE.17 | 제작물제목 | Y | N
+WGT_SRC_TYPE.18 | 머리말 | Y | N
+WGT_SRC_TYPE.19 | 부속 색상 | Y | N
+WGT_SRC_TYPE.20 | 책등/표지 사이즈 | Y | N
+
+=== [2026-09-08 02:47:57 KST] QUERY ===
+SELECT w.wgt_cd, w.wgt_nm, w.sts_typ_cd FROM t_wgt_widgets w WHERE w.sts_typ_cd='WGT_STS_TYPE.02' AND w.del_yn='N' AND w.use_yn='Y' ORDER BY w.upd_dt DESC NULLS LAST LIMIT 10;
+--- RESULT (10 rows) ---
+wgt_cd | wgt_nm | sts_typ_cd
+WGT_000420 | 중철책자 주문위젯 | WGT_STS_TYPE.02
+WGT_000430 | 하드커버책자 주문위젯 | WGT_STS_TYPE.02
+WGT_000429 | PUR책자 주문위젯 | WGT_STS_TYPE.02
+WGT_000431 | 하드커버링책자 주문위젯 | WGT_STS_TYPE.02
+WGT_000428 | 트윈링책자 주문위젯 | WGT_STS_TYPE.02
+WGT_000005 | 핀버튼 주문위젯 | WGT_STS_TYPE.02
+WGT_000288 | 무선책자 주문위젯 | WGT_STS_TYPE.02
+WGT_000281 | 우드봉 주문위젯 | WGT_STS_TYPE.02
+WGT_000403 | 우드행거 주문위젯 | WGT_STS_TYPE.02
+WGT_000352 | 워터북보틀 주문위젯 | WGT_STS_TYPE.02
+
+# run finished: 2026-09-08 02:47:57 KST
