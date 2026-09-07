@@ -1,0 +1,20 @@
+$ psql <URL> -c "
+SELECT 'siz' AS kind, siz_cd, siz_nm, cut_width::text, cut_height::text, work_width::text, work_height::text, margin_lft::text
+FROM t_siz_sizes WHERE siz_cd IN ('SIZ_000632','SIZ_000633')
+UNION ALL
+SELECT 'plate_link', prd_cd, siz_cd, item_siz_cd, dflt_plt_yn, del_yn, '', ''
+FROM t_prd_product_plate_sizes WHERE siz_cd IN ('SIZ_000641','SIZ_000499')
+  AND prd_cd IN ('PRD_000290','PRD_000292')
+ORDER BY 1 DESC, 2;
+"
+
+    kind    |   siz_cd   |       siz_nm        | cut_width  | cut_height | work_width | work_height | margin_lft 
+------------+------------+---------------------+------------+------------+------------+-------------+------------
+ siz        | SIZ_000632 | 무선/PUR책자 표지A5 | 330.00     | 210.00     | 336.00     | 216.00      | 3.00
+ siz        | SIZ_000633 | 무선/PUR책자 표지A4 | 454.00     | 297.00     | 460.00     | 303.00      | 3.00
+ plate_link | PRD_000290 | SIZ_000499          |            | Y          | N          |             | 
+ plate_link | PRD_000290 | SIZ_000641          | SIZ_000633 | N          | N          |             | 
+ plate_link | PRD_000292 | SIZ_000499          |            | Y          | N          |             | 
+ plate_link | PRD_000292 | SIZ_000641          | SIZ_000633 | N          | N          |             | 
+(6 rows)
+

@@ -1,0 +1,21 @@
+$ psql <URL> -c "
+SELECT pm.mat_cd, m.mat_nm,
+       (SELECT unit_price FROM t_prc_component_prices c WHERE c.comp_cd='COMP_PAPER'
+          AND c.plt_siz_cd='SIZ_000499' AND c.mat_cd=pm.mat_cd AND c.min_qty=1) AS p_316x467,
+       (SELECT unit_price FROM t_prc_component_prices c WHERE c.comp_cd='COMP_PAPER'
+          AND c.plt_siz_cd='SIZ_000641' AND c.mat_cd=pm.mat_cd AND c.min_qty=1) AS p_480x320
+FROM t_prd_product_materials pm JOIN t_mat_materials m ON m.mat_cd=pm.mat_cd
+WHERE pm.prd_cd='PRD_000290' AND pm.del_yn='N' AND m.mat_typ_cd='MAT_TYPE.01'
+ORDER BY pm.mat_cd;
+"
+
+   mat_cd   |     mat_nm      | p_316x467 | p_480x320 
+------------+-----------------+-----------+-----------
+ MAT_000074 | 백색모조지 220g |     70.64 |     70.64
+ MAT_000081 | 아트지 250g     |     77.75 |     77.75
+ MAT_000082 | 아트지 300g     |     93.30 |     93.30
+ MAT_000091 | 스노우지 250g   |     77.75 |     77.75
+ MAT_000092 | 스노우지 300g   |     93.30 |     93.30
+ MAT_000109 | 몽블랑 240g     |    142.20 |    142.20
+(6 rows)
+
