@@ -1,0 +1,22 @@
+-- (M0) 접속 증명 + as-of 기준 시각
+SELECT now() AS db_now, current_database() AS db_name;
+-- (M1) 지표① 운영 활성 상품 — t_prd_products del_yn/use_yn 조합 전수
+SELECT del_yn, use_yn, count(*) AS cnt FROM t_prd_products GROUP BY del_yn, use_yn ORDER BY cnt DESC;
+-- (M1b) 지표① 운영 활성 상품(삭제제외+사용중) 단일 카운트
+SELECT count(*) AS active_products FROM t_prd_products WHERE del_yn='N' AND use_yn='Y';
+-- (M2) 지표② 게시 위젯 — t_wgt_widgets 상태 구분(del/use 조합 포함 전수)
+SELECT sts_typ_cd, del_yn, use_yn, count(*) AS cnt FROM t_wgt_widgets GROUP BY sts_typ_cd, del_yn, use_yn ORDER BY cnt DESC;
+-- (M2b) 지표② 위젯 전체 수
+SELECT count(*) AS total_widgets FROM t_wgt_widgets;
+-- (M2c) 위젯 상태 코드 의미(t_cod_base_codes — cod_cd/cod_nm)
+SELECT cod_cd, cod_nm, upr_cod_cd, use_yn, del_yn FROM t_cod_base_codes WHERE cod_cd LIKE 'WGT_STS_TYPE%' ORDER BY cod_cd;
+-- (M3) 지표③ 공식 바인딩 상품 — t_prd_product_price_formulas
+SELECT count(*) AS binding_rows, count(DISTINCT prd_cd) AS bound_products FROM t_prd_product_price_formulas;
+-- (M3b) 지표③ 활성 상품 중 공식 바인딩 상품(교차 확인)
+SELECT count(DISTINCT f.prd_cd) AS bound_active_products FROM t_prd_product_price_formulas f JOIN t_prd_products p ON p.prd_cd=f.prd_cd WHERE p.del_yn='N' AND p.use_yn='Y';
+-- (M4) 지표④ 주문 수(프리런치 확인 — 카운트만, PII 무관)
+SELECT count(*) AS total_orders FROM t_ord_orders;
+-- (M4b) 위젯 장바구니 행 수(카운트만)
+SELECT count(*) AS total_cart_items FROM t_wgt_cart_items;
+-- (M5) 가격 데이터 규모(개선 곡선 9/7 값 재확인 — 공식/구성요소/배선/단가행)
+SELECT (SELECT count(*) FROM t_prc_price_formulas) AS formulas, (SELECT count(*) FROM t_prc_price_components) AS components, (SELECT count(*) FROM t_prc_formula_components) AS wiring, (SELECT count(*) FROM t_prc_component_prices) AS price_rows;

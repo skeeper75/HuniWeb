@@ -1,0 +1,55 @@
+# dbprobe_260908.py — mode=metrics
+# run started: 2026-09-08 02:00:56 KST
+# connection: host=<redacted> sslmode=require options=-c default_transaction_read_only=on
+# credential source: /Users/innojini/Dev/HuniWeb/.env.local (RAILWAY_DB_* — values never logged)
+
+=== [2026-09-08 02:00:56 KST] QUERY ===
+SELECT table_name FROM information_schema.tables WHERE table_schema='public' AND (table_name LIKE '%bas%' OR table_name LIKE '%code%') ORDER BY table_name;
+--- RESULT (4 rows) ---
+table_name
+bak_prdsiz_basedata_dedup_20260619_0800
+bak_siz_basedata_dedup_20260619_0800
+bak_t_prd_product_prices_gp1base_20260623
+t_cod_base_codes
+
+=== [2026-09-08 02:00:57 KST] QUERY ===
+SELECT column_name, data_type FROM information_schema.columns WHERE table_schema='public' AND table_name='t_prd_product_price_formulas' ORDER BY ordinal_position;
+--- RESULT (6 rows) ---
+column_name | data_type
+prd_cd | character varying
+frm_cd | character varying
+apply_bgn_ymd | character varying
+note | character varying
+reg_dt | timestamp without time zone
+upd_dt | timestamp without time zone
+
+=== [2026-09-08 02:00:57 KST] QUERY ===
+SELECT column_name, data_type FROM information_schema.columns WHERE table_schema='public' AND table_name='t_ord_orders' ORDER BY ordinal_position;
+--- RESULT (13 rows) ---
+column_name | data_type
+ord_id | uuid
+site_cd | character varying
+shop_ord_no | character varying
+shop_line_no | character varying
+wgt_cd | character varying
+prd_cd | character varying
+qty | integer
+tot_amt | numeric
+payload | jsonb
+orig_dt | timestamp without time zone
+ord_sts | character varying
+reg_dt | timestamp without time zone
+upd_dt | timestamp without time zone
+
+=== [2026-09-08 02:00:57 KST] QUERY ===
+SELECT column_name, data_type FROM information_schema.columns WHERE table_schema='public' AND table_name='t_prc_price_formulas' ORDER BY ordinal_position;
+--- RESULT (6 rows) ---
+column_name | data_type
+frm_cd | character varying
+frm_nm | character varying
+note | character varying
+use_yn | character
+reg_dt | timestamp without time zone
+upd_dt | timestamp without time zone
+
+# run finished: 2026-09-08 02:00:57 KST

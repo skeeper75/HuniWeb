@@ -2,7 +2,7 @@
 id: SPEC-STAFFBRIEF-001
 title: "2026-09-09 실무진 발표용 후니프린팅 위젯+웹어드민 종합 브리핑 리포트 (html+md 쌍)"
 version: "0.1.1"
-status: draft
+status: in-progress
 created: 2026-09-08
 updated: 2026-09-08
 author: 지니

@@ -1,0 +1,21 @@
+# dbprobe_260908.py — mode=metrics
+# run started: 2026-09-08 02:01:45 KST
+# connection: host=<redacted> sslmode=require options=-c default_transaction_read_only=on
+# credential source: /Users/innojini/Dev/HuniWeb/.env.local (RAILWAY_DB_* — values never logged)
+
+=== [2026-09-08 02:01:45 KST] QUERY ===
+SELECT column_name, data_type FROM information_schema.columns WHERE table_schema='public' AND table_name='t_cod_base_codes' ORDER BY ordinal_position;
+--- RESULT (10 rows) ---
+column_name | data_type
+cod_cd | character varying
+cod_nm | character varying
+upr_cod_cd | character varying
+disp_seq | integer
+use_yn | character
+note | character varying
+reg_dt | timestamp without time zone
+upd_dt | timestamp without time zone
+del_yn | character
+del_dt | timestamp without time zone
+
+# run finished: 2026-09-08 02:01:46 KST

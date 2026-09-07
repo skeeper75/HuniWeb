@@ -1,0 +1,374 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>후니프린팅 위젯+웹어드민 종합 브리핑 — 2026-09-09 실무진 발표용</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+:root{
+  --ivory:#F6F6F6; --paper:#FFFFFF; --slate:#424242;
+  --clay:#5538B6; --clay-d:#351D87; --oat:#EEEBF9; --olive:#7AC8C4;
+  --g100:#DED7F4; --g300:#CACACA; --g500:#979797; --g700:#565656;
+  --sans:"Noto Sans KR",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --serif:"Noto Sans KR",ui-serif,Georgia,serif;
+  --mono:"JetBrains Mono",ui-monospace,"SF Mono",Menlo,Consolas,monospace;
+  --max-width:860px; --radius-panel:4px; --radius-row:4px;
+  --border:1.5px solid var(--g300);
+}
+*{box-sizing:border-box}
+body{margin:0;padding:56px 24px 120px;background:var(--ivory);color:var(--slate);font-family:var(--sans);font-size:15px;line-height:1.65;-webkit-font-smoothing:antialiased}
+.page{max-width:var(--max-width);margin:0 auto}
+header{margin-bottom:40px}
+.header-top{display:flex;align-items:baseline;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-bottom:8px}
+.eyebrow{font-family:var(--mono);font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--g500);margin:0 0 10px}
+h1{font-family:var(--serif);font-weight:700;font-size:34px;letter-spacing:-0.02em;margin:0;color:var(--clay-d);line-height:1.25}
+.auto-pill{font-family:var(--mono);font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:var(--g500);background:var(--g100);border:var(--border);border-radius:999px;padding:5px 11px;white-space:nowrap;flex-shrink:0}
+.date-range{color:var(--g500);font-size:14px;margin-top:6px}
+.date-range .repo{font-family:var(--mono);font-size:13px;color:var(--g700)}
+section{margin-bottom:52px}
+h2{font-family:var(--serif);font-weight:700;font-size:22px;letter-spacing:-0.02em;margin:0 0 6px;color:var(--slate)}
+hr.rule{border:none;border-top:1px solid var(--g300);margin:0 0 22px}
+.metrics-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+@media(max-width:720px){.metrics-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:400px){.metrics-grid{grid-template-columns:1fr}}
+.stat-card{background:var(--paper);border:var(--border);border-radius:var(--radius-panel);padding:20px 22px 18px}
+.stat-card.warn{border-left:4px solid var(--clay);padding-left:19px}
+.stat-num{font-family:var(--serif);font-size:42px;font-weight:700;line-height:1;color:var(--slate);margin-bottom:8px}
+.stat-label{font-family:var(--sans);font-size:12px;letter-spacing:.02em;color:var(--g500)}
+.stat-delta{font-family:var(--mono);font-size:10.5px;margin-top:6px}
+.stat-delta.up{color:var(--clay-d)} .stat-delta.down{color:var(--clay-d)} .stat-delta.flat{color:var(--g500)}
+.highlights{list-style:none;margin:0;padding:0}
+.highlights li{position:relative;padding:0 0 14px 26px;font-size:15px;color:var(--g700)}
+.highlights li::before{content:"";position:absolute;left:6px;top:8px;width:7px;height:7px;border-radius:2px;background:var(--clay)}
+.highlights li strong{color:var(--slate);font-weight:700}
+table.shipped{width:100%;border-collapse:separate;border-spacing:0;background:var(--paper);border:var(--border);border-radius:var(--radius-panel);overflow:hidden}
+table.shipped thead th{text-align:left;font-family:var(--sans);font-size:11px;font-weight:700;letter-spacing:.04em;color:var(--g500);background:var(--g100);padding:12px 16px;border-bottom:1px solid var(--g300)}
+table.shipped tbody td{padding:12px 16px;border-bottom:1px solid var(--oat);font-size:13.5px;vertical-align:middle;color:var(--slate)}
+table.shipped tbody tr:last-child td{border-bottom:none}
+table.shipped tbody tr:hover{background:var(--ivory)}
+.item-link{font-family:var(--mono);font-size:13px;color:var(--clay);text-decoration:none}
+.author{color:var(--g700);font-size:13px}
+.risk{display:inline-flex;align-items:center;gap:7px;font-size:12px;color:var(--g500)}
+.risk-dot{width:9px;height:9px;border-radius:50%;flex-shrink:0}
+.risk-dot.low{background:var(--olive)} .risk-dot.med{background:var(--clay)} .risk-dot.high{background:var(--clay-d)}
+.chart-panel{background:var(--paper);border:var(--border);border-radius:var(--radius-panel);padding:24px 28px 18px}
+.chart-panel svg{display:block;width:100%;height:auto}
+.chart-caption{font-size:12px;color:var(--g500);margin-top:12px}
+.carryover{background:var(--oat);border-radius:var(--radius-panel);padding:20px 22px}
+.carry-group{margin-bottom:18px}
+.carry-group:last-child{margin-bottom:0}
+.carry-group-title{font-family:var(--mono);font-size:10px;text-transform:uppercase;letter-spacing:.08em;color:var(--g500);margin:0 0 8px}
+.carry-item{display:flex;align-items:baseline;gap:14px;padding:8px 0}
+.carry-item + .carry-item{border-top:1px solid rgba(66,66,66,.08)}
+.carry-tag{font-family:var(--mono);font-size:11px;letter-spacing:.04em;color:var(--clay-d);background:var(--ivory);border-radius:4px;padding:3px 7px;flex-shrink:0}
+.carry-body{font-size:14px;color:var(--g700)}
+.carry-body .who{color:var(--g500);font-size:12px}
+.example-box{background:var(--paper);border:1.5px dashed var(--clay);border-radius:var(--radius-panel);padding:16px 20px;margin:18px 0}
+.example-box .ex-title{font-family:var(--mono);font-size:11px;letter-spacing:.06em;color:var(--clay-d);margin:0 0 8px}
+.notice{background:var(--oat);border-radius:var(--radius-panel);padding:14px 18px;font-size:13.5px;color:var(--g700);margin:16px 0}
+pre.mermaid{background:var(--paper);border:var(--border);border-radius:var(--radius-panel);padding:16px;font-size:13px;overflow-x:auto}
+footer{margin-top:64px;padding-top:20px;border-top:1px solid var(--g300);font-family:var(--mono);font-size:11.5px;color:var(--g500)}
+h3{font-family:var(--serif);font-weight:700;font-size:16.5px;letter-spacing:-0.01em;margin:26px 0 8px;color:var(--slate)}
+p{margin:0 0 12px}
+ul.plain{margin:0 0 12px;padding-left:22px}
+ul.plain li{margin-bottom:7px}
+@media print{
+  body{background:#fff;color:#000;padding:0;font-size:12pt}
+  .page{max-width:none}
+  h1,h2,h3{page-break-after:avoid}
+  table,.chart-panel,pre.mermaid,.example-box{page-break-inside:avoid}
+  .no-print{display:none !important}
+  *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+}
+</style>
+</head>
+<body>
+<div class="page">
+
+<header>
+  <p class="eyebrow">Status Report &middot; 2026-09-09 실무진 발표용</p>
+  <div class="header-top">
+    <h1>후니프린팅 위젯+웹어드민 종합 브리핑</h1>
+    <span class="auto-pill">Auto-generated</span>
+  </div>
+  <div class="date-range">
+    현재값 기준: <strong>2026-09-08 02:02 라이브 DB 재실측</strong> &nbsp;&middot;&nbsp;
+    <span class="repo">huni-printing · widget + webadmin</span>
+  </div>
+  <div class="notice">이 리포트의 「현재값」 네 가지(운영 활성 상품 · 게시 위젯 · 공식 바인딩 상품 · 주문 수)는 2026-09-08 오전 02:02 라이브 DB 재실측값입니다. 과거 점검 수치(2026-08-22 감사 · 2026-08-27 재진단)는 모두 측정 날짜를 함께 표기했습니다. 인용 매뉴얼은 2026-09-06 재생성본 기준입니다.</div>
+</header>
+
+<section aria-label="핵심 지표">
+  <div class="metrics-grid">
+    <div class="stat-card">
+      <div class="stat-num">269</div>
+      <div class="stat-label">운영 활성 상품</div>
+      <div class="stat-delta flat">2026-09-08 재실측 · 삭제 제외+사용 중</div>
+    </div>
+    <div class="stat-card warn">
+      <div class="stat-num">193</div>
+      <div class="stat-label">게시 위젯</div>
+      <div class="stat-delta down">2026-09-08 재실측 · 게시됨 ≠ 주문 가능</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num">184</div>
+      <div class="stat-label">공식 바인딩 상품</div>
+      <div class="stat-delta flat">2026-09-08 재실측 · 연결 행 198건</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num">0</div>
+      <div class="stat-label">주문 수</div>
+      <div class="stat-delta flat">프리런치 · 정식 오픈 전</div>
+    </div>
+  </div>
+</section>
+
+<section aria-label="핵심 하이라이트">
+  <h2>핵심 하이라이트</h2>
+  <hr class="rule">
+  <ul class="highlights">
+    <li>시스템은 세 덩어리입니다. 고객이 보는 <strong>위젯</strong>(주문 양식), 운영자가 쓰는 <strong>웹어드민</strong>(관리 화면), 이를 받쳐 주는 <strong>라이브 DB</strong>(실제 데이터).</li>
+    <li><strong>게시됨 ≠ 주문 가능.</strong> 2026-08-22 감사에서 게시 위젯 194개 중 98개의 가격계산이 막혀 있었습니다(정상 통과 88개). 감사 재현율은 65%(2026-08-27 재진단 확인)라 "98개"는 그날의 진단이지 불변값이 아닙니다.</li>
+    <li>가격은 <strong>클라이언트가 표시만 하고 계산은 항상 서버</strong>가 합니다. 위젯 SDK 가이드 문구 그대로 "위젯 코드를 조작해도 주문 금액은 바뀌지 않습니다."</li>
+    <li>라이브 위젯은 <strong>웹 표준(Web Component + Shadow DOM) 바닐라 자바스크립트</strong>입니다. React로 다시 만드는 재구현 트랙은 별개 진행 항목이며 라이브 전환 여부는 미확인입니다.</li>
+    <li>가격 데이터는 채워지는 중입니다. 2026-08-27 대비 2026-09-07 실측에서 가격공식 110→128, 가격구성요소 146→295, 배선 232→306, 바인딩 행 178→198(2026-09-08 재확인).</li>
+    <li>매뉴얼 권위본은 <strong>2026-09-06 재생성본</strong>입니다(2026-08-24자 baseline은 동결 참조용).</li>
+  </ul>
+</section>
+
+<section aria-label="시스템 전체 지표">
+  <h2>시스템 전체를 한눈에 (2026-09-07 실측)</h2>
+  <hr class="rule">
+  <p>위젯은 고객 쪽 화면, 웹어드민은 운영자 쪽 화면입니다. 그 아래에서 실제 상품·옵션·가격 데이터가 살아 있는 곳이 라이브 DB입니다. 아래 표는 2026-09-07 심야 기준 전체 규모입니다.</p>
+  <table class="shipped">
+    <thead><tr><th style="width:120px;">영역</th><th>규모 (2026-09-07 실측)</th><th style="width:90px;">상태</th></tr></thead>
+    <tbody>
+      <tr><td>상품</td><td>등록 309종(완제품 228 · 반제품 57 · 기성 24) · 삭제 제외 292 · 사용 중 280 · Edicus 편집기 연동 123 · 품절 0</td><td><span class="risk"><span class="risk-dot low"></span>안정</span></td></tr>
+      <tr><td>카테고리</td><td>등록 327개 중 활성 71개(1차 12 · 2차 56 · 3차 3) · 상품-카테고리 연결 416건. 삭제 256건은 정리 이력이지 결함이 아닙니다</td><td><span class="risk"><span class="risk-dot low"></span>안정</span></td></tr>
+      <tr><td>옵션</td><td>옵션그룹 382 · 옵션 1,193 · 옵션항목 983 · 제약규칙 103 · 추가상품 템플릿 160 · 추가상품 117</td><td><span class="risk"><span class="risk-dot low"></span>안정</span></td></tr>
+      <tr><td>가격</td><td>가격공식 128 · 가격구성요소 295 · 배선 306 · 단가행 34,125 <span class="author">(2026-09-08 재확인)</span></td><td><span class="risk"><span class="risk-dot med"></span>충전 중</span></td></tr>
+      <tr><td>셋트상품</td><td>구성 행 47 · 모체 상품 20 · 구성원 43</td><td><span class="risk"><span class="risk-dot low"></span>안정</span></td></tr>
+      <tr><td>위젯</td><td>사이트 1 · 위젯 443(게시 193 · 작성중 246 · 게시중단 4, 2026-09-08 재실측) · 버전 390 · 화면 구성 항목 2,919</td><td><span class="risk"><span class="risk-dot med"></span>점검 필요</span></td></tr>
+      <tr><td>운영</td><td>webadmin 계정 4 · Edicus 템플릿 234 / 설정 91 · Shopby 동기화 164 · 주문 0(프리런치)</td><td><span class="risk"><span class="risk-dot low"></span>프리런치</span></td></tr>
+    </tbody>
+  </table>
+  <p style="font-size:13px;color:var(--g500);margin-top:10px;">반제품은 셋트상품의 부품이 되는 상품입니다. 책자를 예로 들면 겉표지와 속내지를 각각 반제품으로 만들어, 이 둘을 묶은 책자 완제품을 파는 구조입니다. 최근에는 만년다이어리·트윈링책자처럼 책자 계열 셋트 구조가 활발히 다듬어지고 있습니다(2026-09-07 기준 최근 수정 상품).</p>
+</section>
+
+<section aria-label="고객이 보는 것 위젯">
+  <h2>§2 고객이 보는 것, 위젯</h2>
+  <hr class="rule">
+
+  <h3>위젯이 무엇인가</h3>
+  <p>위젯은 <strong>고객이 상품을 주문할 때 보는 주문서 화면 전체</strong>입니다(위젯 매뉴얼 §1). 상품 페이지에 붙는 작은 보조 창이 아니라, 옵션 선택 · 가격 표시 · 원고 업로드 · 장바구니 담기까지를 한 번에 처리하는 화면 그 자체입니다.</p>
+  <p>관리자가 위젯빌더에서 양식을 조립해 <strong>게시</strong>하면 고객 화면에 반영됩니다. 위젯빌더는 저장 버튼 없이 0.6초마다 자동저장되는데, 이는 작성 중인 초안일 뿐입니다. <strong>[게시]를 누른 순간</strong> 그 시점의 구성이 통째로 버전 스냅샷(그대로 굳어진 사본)으로 저장되고 고객에게 보입니다. 잘못 게시했으면 이전 버전으로 되돌릴 수 있습니다.</p>
+
+  <h3>고객의 주문 여정 5단계</h3>
+  <ul class="plain">
+    <li><strong>1. 상품 페이지에서 주문 양식을 만난다.</strong> 상품마다 관리자가 조립해 게시한 양식이 붙어, 그 상품에 맞는 선택지만 보입니다.</li>
+    <li><strong>2. 옵션을 고른다.</strong> 안 되는 조합은 고르는 순간 회색으로 비활성화되고 취소선과 이유가 표시됩니다. 순서를 바꿔 골라도 결과가 같습니다.</li>
+    <li><strong>3. 가격이 즉시 바뀐다.</strong> 선택할 때마다 약 0.3초 안에 <strong>서버가 계산한</strong> 가격으로 갱신됩니다(합계+부가세).</li>
+    <li><strong>4. 원고를 준비한다.</strong> 완성 파일 업로드(클라우드 직접 업로드, 파일당 최대 500MB) 또는 브라우저에서 바로 디자인(Edicus 편집기 — 아래 설명).</li>
+    <li><strong>5. 장바구니에 담고 주문한다.</strong> 서버가 가격 · 제약 · 원고를 전부 재검증한 뒤 위변조 방지 서명 토큰을 발급합니다(유효 1시간). 쇼핑몰 장바구니에는 식별자만 넘어가고 결제 직전에 견적이 다시 갱신됩니다. 원고 파일은 30일간 보존되며 그보다 오래되면 주문이 성립되지 않습니다.</li>
+  </ul>
+
+  <div class="example-box">
+    <p class="ex-title">WORKED EXAMPLE — 옵션 하나를 골렀을 때 벌어지는 일</p>
+    <p style="margin-bottom:0;">모양엽서 위젯에서 고객이 용지 그룹에서 "스노우지"를 고르고 항목 "150g"을 선택합니다. 화면은 0.3초 안에 후니 서버에 가격을 물어보고, 서버가 계산한 합계+부가세로 표시를 바꿉니다. 이때 스노우지 150g과 함께 쓸 수 없는 후가공이 있다면 그 후가공 항목은 회색으로 잠기고 이유가 붙습니다. 고객이 브라우저의 개발자 도구로 금액 표시를 바꿔도 주문 시점에 서버가 전부 재검증하므로 실제 주문 금액은 바뀌지 않습니다.</p>
+  </div>
+
+  <h3>가격은 어떻게 계산되나</h3>
+  <p>클라이언트는 표시만 하고 계산은 항상 서버가 합니다. 고객 브라우저는 가격을 보여 주기만 하고 계산은 전부 후니 서버의 가격 엔진이 맡습니다. 주문 시점에는 가격 · 제약 · 원고를 전부 재검증합니다. 위젯 SDK 가이드의 문구를 그대로 옮기면 <strong>"위젯 코드를 조작해도 주문 금액은 바뀌지 않습니다"</strong>. 부가 방어로 사이트당 분당 240회, 서버 간 통신은 분당 600회의 요청 한도가 있습니다.</p>
+  <pre class="mermaid">
+flowchart LR
+  A[고객 브라우저 · 위젯 화면] -- 1 구성 조회 · 옵션 선택 --> B[후니 서버 · 가격 엔진]
+  B -- 2 약 0.3초 서버 계산 가격 --> A
+  A -- 3 주문 요청 --> B
+  B -- 4 재검증 후 서명 토큰 1시간 --> C[파트너 쇼핑몰 서버]
+  C -- 5 검증된 금액으로만 주문 생성 --> D[주문 확정]
+  </pre>
+  <noscript>
+    <p><strong>다이어그램 대체 설명(오프라인·인쇄용)</strong>: 고객 브라우저가 (1) 위젯 구성을 조회하고 옵션을 고르면 (2) 후니 서버가 약 0.3초 안에 계산한 가격을 돌려줍니다. (3) 주문 요청 시 서버는 가격·제약·원고를 전부 재검증하고 (4) 유효 1시간의 서명 토큰을 발급해 파트너 쇼핑몰 서버로 넘기며, (5) 파트너 서버는 검증된 금액으로만 주문을 생성합니다. 브라우저가 보낸 금액은 참고용일 뿐입니다.</p>
+  </noscript>
+
+  <h3>게시되어 있다고 전부 살 수 있는 건 아닙니다</h3>
+  <div class="notice">이 브리핑에서 가장 중요한 주의사항입니다. <strong>게시됨 ≠ 주문 가능.</strong></div>
+  <ul class="plain">
+    <li>2026-08-22 전수 감사에서 게시 위젯 194개 중 <strong>98개의 상품 가격계산이 막혀 있었습니다</strong>(정상 통과 88개). 내역은 처음부터 가격이 안 나오는 94 · 일부 값만 문제인 4 · 시작 기본값 미선택 8입니다.</li>
+    <li>원인 유형(2026-08-22 감사): 매칭 단가 없음 54 · 단가 미등록 47 · 셋트 계산 실패 16 · 공식/단가 미구성 15 · 계산 실패 7.</li>
+    <li>2026-08-27 재진단(SPEC-WIDGET-WIRING-001)에서는 같은 게시 위젯 194개를 다른 기준으로 나눠 BROKEN 66 · WARN 2 · OK 119 · NE 6 · INFRA_FAIL 1로 판정했습니다.</li>
+    <li>다만 이 감사 수치의 <strong>재현율은 65%</strong>(2026-08-27 재진단에서 확인)입니다. "98개"는 불변하는 값이 아니라 그날의 진단이며, 조치가 진행된 뒤에는 다시 점검해야 실제 상태를 말할 수 있습니다.</li>
+  </ul>
+  <p>한마디로 정리하면 위젯 화면 자체는 정상적으로 돌아가지만 그 안에 채워야 할 상품 데이터가 아직 전부 채워지지는 않았습니다. 그 갭은 매일 메워지는 중입니다(아래 데이터 품질 섹션 참조).</p>
+
+  <h3>라이브 위젯의 기술 정체</h3>
+  <p>오늘 고객이 만나는 위젯은 <strong>웹 표준 기술(Web Component + Shadow DOM)로 만들어진 바닐라 자바스크립트</strong>입니다. 어떤 프레임워크로 만든 쇼핑몰에 붙여도 동작하고, 위젯이 페이지의 다른 요소와 스타일을 서로 침범하지 않도록 격리됩니다. 임베드는 스크립트 두 줄이면 충분하고 한 페이지에 여러 위젯을 독립적으로 띄울 수 있으며, 겉모양은 <span class="item-link">--hw-*</span> CSS 변수로 쇼핑몰 쪽에서 색을 바꿀 수 있습니다.</p>
+  <p>참고로 위젯을 요즘 방식으로 다시 만드는 <strong>React 재구현 트랙</strong>이 별도로 진행 중입니다(사내 작업 산출물). 라이브 위젯과 구분되는 별개 트랙이며 라이브 전환 여부는 아직 확인되지 않았습니다. 오늘의 라이브 위젯은 위에서 말한 웹 표준 구현입니다.</p>
+
+  <h3>Edicus 원고 편집기 — 실제로 동작합니다</h3>
+  <p>4단계의 브라우저 디자인은 Edicus 편집기가 맡습니다. 옵션 조합에 맞는 규격 템플릿이 자동으로 열리는데, 어떤 템플릿을 열지는 서버가 결정하고(<span class="item-link">/editor/resolve</span>), 편집기 로그인 토큰도 서버가 대신 발급해 줍니다(편집기 비밀키는 서버 밖으로 나가지 않습니다). 편집 결과를 저장하면 프로젝트 번호(prjid)가 주문에 자동으로 실리고, 나중에 다시 클릭하면 이어서 편집할 수 있습니다. 등록되지 않은 조합은 편집기가 열리지 않도록 설계된 안전장치입니다(잘못된 규격의 원고 사고 방지). 완성 파일 업로드 길은 클라우드 직접 업로드로 앱서버를 거치지 않으며 파일당 최대 500MB(100MB 초과 시 자동 분할 전송), 미업로드 시 주문이 차단됩니다.</p>
+</section>
+
+<section aria-label="운영자가 쓰는 것 웹어드민">
+  <h2>§3 운영자가 쓰는 것, 웹어드민</h2>
+  <hr class="rule">
+  <p>웹어드민은 관리자 화면입니다. 관리자 주소 <span class="item-link">/admin/</span>에 들어가면 상품 뷰어가 곧바로 열립니다. 그만큼 상품 뷰어가 일상 작업의 중심입니다. 메뉴는 8개 그룹입니다(2026-09-06 재생성 매뉴얼 기준).</p>
+  <table class="shipped">
+    <thead><tr><th style="width:130px;">그룹</th><th>메뉴</th></tr></thead>
+    <tbody>
+      <tr><td>1 상품</td><td>상품정보 · <strong>상품 뷰어(핵심 작업 화면)</strong> · 셋트상품 관리 · 추가상품 템플릿 · Edicus 템플릿 연결 · 작업가이드 파일 · 메인이미지 · 시작가 · 상품별 디자인</td></tr>
+      <tr><td>2 기준정보</td><td>카테고리 · 자재정보 · 용지 · 사이즈 · 도수 · 인쇄옵션 · 공정 · 기초코드</td></tr>
+      <tr><td>3 가격 관리</td><td>가격공식 · 가격구성요소 · 할인테이블(수량구간) · 가격 뷰어 · 가격 시뮬레이터</td></tr>
+      <tr><td>4 위젯</td><td>위젯빌더 · 상품별 위젯 관리 · 위젯 템플릿 관리</td></tr>
+      <tr><td>5 고객관리 · 6 인증 및 권한</td><td>고객 · 계정 권한</td></tr>
+      <tr><td>7 문서</td><td>퀵스타트 · 메뉴얼 · 위젯빌더 메뉴얼 · 테이블 명세서</td></tr>
+      <tr><td>8 개발자 문서</td><td>SDK 가이드 · 임베드 데모 (외부 공개)</td></tr>
+    </tbody>
+  </table>
+
+  <h3>매뉴얼의 비유로 짚는 개념 8가지</h3>
+  <table class="shipped">
+    <thead><tr><th style="width:170px;">개념</th><th>뜻</th></tr></thead>
+    <tbody>
+      <tr><td>상품 뷰어 = 재료 조립대</td><td>왼쪽 트리에서 상품을 고르면 옵션 · 템플릿 · 제약 같은 모든 구성이 섹션별 팝업으로 편집됩니다</td></tr>
+      <tr><td>기준정보 = 부품 창고</td><td>데이터 입력 권장 순서가 있습니다. 식당에 비유하면 "메뉴(상품) 정하고 → 옵션 달고 → 가격 매기고 → 많이 시키면 할인해 주는, 그 전체를 데이터로 적어 두는 곳"</td></tr>
+      <tr><td>가격엔진 4단</td><td>가격공식 → 가격구성요소 → 단가표 → 계산. 상품마다 어떤 공식으로, 어떤 요소를 더해서 가격을 낼지 정의합니다</td></tr>
+      <tr><td>차원</td><td>단가를 결정하는 기준 축(사이즈 · 수량 · 도수 · 판형 등). 단가표가 어떤 축으로 펼쳐지는지를 정합니다. 운영 기준 축은 12가지(+수량 자동 고정)</td></tr>
+      <tr><td>단가유형 3종</td><td>단가형 · 합가형 · 고정금액. 매뉴얼 강조문 그대로 "잘못 고르면 금액이 수십~수백 배 틀어진다"</td></tr>
+      <tr><td>옵션 3층</td><td>그룹('용지') → 옵션('스노우지') → 항목('150g'). 주의: 위젯의 '옵션그룹' 컴포넌트는 가격과 무관한 선택지를 묶고, 가격축은 '차원' 컴포넌트가 담당합니다. 이름이 비슷해도 역할이 다릅니다</td></tr>
+      <tr><td>위젯빌더 + 게시/버전</td><td>저장≠게시. 3분할 화면(부품 팔레트 / 드래그 캔버스 / 실제 렌더러로 돌아가는 미리보기). 컴포넌트 20여 종 — 매뉴얼 제목의 16종은 이전 집계</td></tr>
+      <tr><td>추가상품 템플릿 · 셋트 · 시작가</td><td>추가상품 템플릿(구 SKU). 시작가는 자사몰 목록에 표시되는 대표 가격이지 최저가가 아닙니다</td></tr>
+    </tbody>
+  </table>
+  <p><strong>제약규칙 폼빌더</strong>도 눈에 둘 만합니다. 금지 조합 · 필수 동반 · 호환 여부를 양식으로 작성하면 즉시 검증이 돌아갑니다. §2의 "고르는 순간 잠기는" 동작이 이 규칙들입니다(2026-09-07 기준 103건 등록).</p>
+
+  <h3>자주 묻는 증상 5가지와 점검법</h3>
+  <ul class="plain">
+    <li><strong>가격이 0원으로 나와요</strong> → 대부분 단가표에 해당 행이 없거나 적용일자가 미래입니다.</li>
+    <li><strong>고객 화면이 안 바뀌어요</strong> → 게시를 안 했을 가능성이 가장 큽니다. 저장만으로는 고객에게 반영되지 않습니다.</li>
+    <li><strong>지웠는데 다시 살아나요</strong> → 논리삭제라서, 같은 코드로 다시 등록하면 부활한 것처럼 보입니다.</li>
+    <li><strong>단가표에서 필터 건 채로 저장했더니 행이 줄었어요</strong> → 필터가 눈에 안 보이는 행을 숨긴 상태로 저장된 것입니다. 행 유실 위험이 있으니 주의하세요.</li>
+    <li><strong>자사몰에 가격이 안 떠요</strong> → 시작가 미계산이 가장 흔한 원인이고, 그중에서도 '사이즈 기본값 미지정'이 최빈 원인입니다.</li>
+  </ul>
+</section>
+
+<section aria-label="데이터 품질 개선 곡선">
+  <h2>§4 데이터 품질 — 채워가는 중</h2>
+  <hr class="rule">
+  <p>가격 데이터는 지금 활발하게 채워지고 있습니다. 그래프의 연한 막대는 2026-08-27, 진한 막대는 2026-09-07 실측값입니다(2026-09-08 재확인).</p>
+  <div class="chart-panel">
+    <svg viewBox="0 0 640 180" role="img" aria-label="가격 데이터 개선 곡선: 2026-08-27 대비 2026-09-07 실측">
+      <line x1="40" y1="12"  x2="620" y2="12"  stroke="#DED7F4" stroke-width="1"/>
+      <line x1="40" y1="55"  x2="620" y2="55"  stroke="#DED7F4" stroke-width="1"/>
+      <line x1="40" y1="97"  x2="620" y2="97"  stroke="#DED7F4" stroke-width="1"/>
+      <line x1="40" y1="140" x2="620" y2="140" stroke="#CACACA" stroke-width="1.5"/>
+      <text x="34" y="144" text-anchor="end" font-family="system-ui" font-size="11" fill="#979797">0</text>
+      <text x="34" y="101" text-anchor="end" font-family="system-ui" font-size="11" fill="#979797">102</text>
+      <text x="34" y="59"  text-anchor="end" font-family="system-ui" font-size="11" fill="#979797">204</text>
+      <text x="34" y="16"  text-anchor="end" font-family="system-ui" font-size="11" fill="#979797">306</text>
+      <rect x="52"  y="94.0" width="50" height="46.0" rx="4" fill="#DED7F4"/>
+      <text x="77"  y="88"  text-anchor="middle" font-family="system-ui" font-size="11" fill="#979797">110</text>
+      <rect x="123" y="86.5" width="50" height="53.5" rx="4" fill="#5538B6"/>
+      <text x="148" y="80.5" text-anchor="middle" font-family="system-ui" font-size="11" fill="#351D87">128</text>
+      <rect x="194" y="78.9" width="50" height="61.1" rx="4" fill="#DED7F4"/>
+      <text x="219" y="72.9" text-anchor="middle" font-family="system-ui" font-size="11" fill="#979797">146</text>
+      <rect x="265" y="16.7" width="50" height="123.3" rx="4" fill="#5538B6"/>
+      <text x="290" y="10.7" text-anchor="middle" font-family="system-ui" font-size="11" fill="#351D87">295</text>
+      <rect x="336" y="42.9" width="50" height="97.1" rx="4" fill="#DED7F4"/>
+      <text x="361" y="36.9" text-anchor="middle" font-family="system-ui" font-size="11" fill="#979797">232</text>
+      <rect x="407" y="12.0" width="50" height="128.0" rx="4" fill="#5538B6"/>
+      <text x="432" y="6"   text-anchor="middle" font-family="system-ui" font-size="11" font-weight="600" fill="#351D87">306</text>
+      <rect x="478" y="65.5" width="50" height="74.5" rx="4" fill="#DED7F4"/>
+      <text x="503" y="59.5" text-anchor="middle" font-family="system-ui" font-size="11" fill="#979797">178</text>
+      <rect x="549" y="57.2" width="50" height="82.8" rx="4" fill="#5538B6"/>
+      <text x="574" y="51.2" text-anchor="middle" font-family="system-ui" font-size="11" fill="#351D87">198</text>
+      <text x="112" y="158" text-anchor="middle" font-family="system-ui" font-size="11" fill="#565656">가격공식</text>
+      <text x="254" y="158" text-anchor="middle" font-family="system-ui" font-size="11" fill="#565656">가격구성요소</text>
+      <text x="397" y="158" text-anchor="middle" font-family="system-ui" font-size="11" fill="#565656">배선</text>
+      <text x="539" y="158" text-anchor="middle" font-family="system-ui" font-size="11" fill="#565656">바인딩 행</text>
+    </svg>
+    <div class="chart-caption">가격 데이터 개선 곡선 — 연한 막대 2026-08-27 · 진한 막대 2026-09-07 실측(2026-09-08 재확인). 같은 수치는 아래 표에도 있습니다.</div>
+  </div>
+  <table class="shipped" style="margin-top:16px;">
+    <thead><tr><th>항목</th><th style="width:110px;">2026-08-27</th><th style="width:150px;">2026-09-07 실측</th><th style="width:80px;">변화</th></tr></thead>
+    <tbody>
+      <tr><td>가격공식</td><td>110</td><td>128 <span class="author">(09-08 재확인)</span></td><td>+18</td></tr>
+      <tr><td>가격구성요소</td><td>146</td><td>295 <span class="author">(09-08 재확인)</span></td><td>+149</td></tr>
+      <tr><td>배선(공식↔구성요소 연결)</td><td>232</td><td>306 <span class="author">(09-08 재확인)</span></td><td>+74</td></tr>
+      <tr><td>공식 바인딩 행</td><td>178</td><td>198 <span class="author">(09-08 재확인)</span></td><td>+20</td></tr>
+    </tbody>
+  </table>
+  <p>구성요소가 2배로 늘었고 배선은 32% 늘었습니다. "엔진 구조는 다 서 있고, 그 안에 상품별 데이터를 채워가는 단계"가 현재 상태를 가장 잘 표현합니다.</p>
+  <p>활성 상품 269개 중 공식이 연결(바인딩)되지 않은 상품은 90개입니다(2026-09-07 실측, 완제품 기준 53개). 다만 <strong>바인딩 안 됨 ≠ 가격 없음</strong>입니다. 자사몰 목록용 시작가가 192행, 템플릿 가격이 102행 따로 관리되어 두 경로가 병존합니다. 합산 커버리지는 아직 실측되지 않았습니다.</p>
+  <p>옵션 데이터(옵션그룹 382 · 옵션 1,193 · 옵션항목 983)와 제약규칙 103건, 셋트 구성 47행은 이미 상당한 규모로 등록되어 있습니다(모두 2026-09-07 실측).</p>
+</section>
+
+<section aria-label="직접 확인해 볼 것">
+  <h2>§5 직접 확인해 볼 것</h2>
+  <hr class="rule">
+  <ul class="plain">
+    <li><strong>상품 뷰어</strong> <span class="item-link">/admin/product-viewer/</span> — 상품 하나를 골라 옵션 · 가격 · 제약이 어떻게 얽혀 있는지 트리에서 확인합니다. <strong>주의: 뷰어에 보이는 상품 데이터는 2026-06-10에 내장된 스냅샷입니다.</strong> 오늘 날짜의 실시간 조회가 아니므로 최근 등록 상품은 안 보일 수 있습니다.</li>
+    <li><strong>가격 시뮬레이터</strong> <span class="item-link">/admin/price-simulator/</span> — 공식이 연결된 상품을 골라 옵션을 바꿔 가보면 가격이 어떻게 굴러가는지 체감할 수 있습니다.</li>
+    <li><strong>퀵스타트 문서</strong> — 모양엽서를 예시로 상품 등록부터 시작가 계산까지 한 바퀴 돌리는 입문 문서입니다(2026-09-06 재생성본).</li>
+  </ul>
+  <p>인쇄하는 경우: 이 리포트의 다이어그램(가격 흐름)은 온라인 브라우저에서만 렌더링됩니다. 다이어그램에만 있는 정보는 없고 핵심 내용은 글과 표에도 실어 두었으니 인쇄본으로도 내용에는 지장이 없습니다.</p>
+</section>
+
+<section aria-label="리스크와 계획">
+  <h2>리스크와 계획 (Carryover)</h2>
+  <hr class="rule">
+  <div class="carryover">
+    <div class="carry-group">
+      <p class="carry-group-title">알아 둘 인지 리스크</p>
+      <div class="carry-item">
+        <span class="carry-tag">리스크 1</span>
+        <div class="carry-body"><strong>옵션코드 재번호 시 위젯 참조 파손 가능.</strong> 게시된 위젯의 구성 항목은 옵션 코드를 참조합니다. 기초코드 쪽에서 옵션 코드 번호를 다시 매기면 게시된 위젯의 참조가 깨질 수 있으므로, 코드 정리 전에 영향 범위를 먼저 봐야 합니다.</div>
+      </div>
+      <div class="carry-item">
+        <span class="carry-tag">리스크 2</span>
+        <div class="carry-body"><strong>회귀 테스트의 데이터 오염 탐지 한계.</strong> 자동 점검은 구조가 깨졌는지(회귀)는 잡아 내지만 데이터 내용 자체가 틀리게 채워진 경우(오염)까지는 잡지 못합니다. "테스트가 통과했다"와 "데이터가 옳다"는 다른 말입니다.</div>
+      </div>
+    </div>
+    <div class="carry-group">
+      <p class="carry-group-title">계획만 존재하는 기능 — 문의 시 "계획"으로 답해 주세요</p>
+      <div class="carry-item"><span class="carry-tag">계획</span><div class="carry-body">파트너 사이트 포털 (별도 Phase 예정)</div></div>
+      <div class="carry-item"><span class="carry-tag">계획</span><div class="carry-body">다국어 지원</div></div>
+      <div class="carry-item"><span class="carry-tag">계획</span><div class="carry-body">StepTab 단계형 위젯 (한 단계씩 넘어가는 주문 양식)</div></div>
+      <div class="carry-item"><span class="carry-tag">계획</span><div class="carry-body">수량별 가격표 모달</div></div>
+      <div class="carry-item"><span class="carry-tag">계획</span><div class="carry-body">출고예정일 · 배송비 · 예상무게 표시 (DB에 데이터도 아직 없음)</div></div>
+    </div>
+    <div class="carry-group">
+      <p class="carry-group-title">발표 환경</p>
+      <div class="carry-item">
+        <span class="carry-tag">폰트</span>
+        <div class="carry-body">폰트는 온라인 로드이므로 발표장 인터넷이 막혀 있으면 기본 폰트로 대체 렌더링됩니다(내용 파손 아님). 오프라인 대비 PDF 백업을 증거 폴더에 두었습니다. 발표 전 온라인 확인 권장.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  Sources: research.md(4렌즈 조사 · 2026-09-08) · remeasure-260908.txt(2026-09-08 02:02 라이브 DB 읽기전용 재실측) · 매뉴얼 2026-09-06 재생성본 · 위젯 SDK 가이드(2026-09-07) · widget-price-audit-260822 · SPEC-WIDGET-WIRING-001(2026-08-27 재진단) &nbsp;—&nbsp; Generated: 2026-09-08 · SPEC-STAFFBRIEF-001 (card t45)
+</footer>
+
+</div>
+<script type="module">
+import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs";
+mermaid.initialize({
+  startOnLoad: true,
+  theme: "base",
+  themeVariables: {
+    primaryColor:      "#EEEBF9",
+    primaryTextColor:  "#424242",
+    primaryBorderColor:"#5538B6",
+    lineColor:         "#979797",
+    secondaryColor:    "#DED7F4",
+    tertiaryColor:     "#F6F6F6"
+  }
+});
+</script>
+</body>
+</html>

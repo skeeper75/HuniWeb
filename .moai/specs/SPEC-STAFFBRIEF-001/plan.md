@@ -3,7 +3,7 @@ id: SPEC-STAFFBRIEF-001
 doc: plan
 version: "0.1.1"
 updated: 2026-09-08
-status: draft
+status: in-progress
 tier: M
 ---
 

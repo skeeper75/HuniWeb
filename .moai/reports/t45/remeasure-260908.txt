@@ -1,0 +1,81 @@
+# dbprobe_260908.py — mode=metrics
+# run started: 2026-09-08 02:02:03 KST
+# connection: host=<redacted> sslmode=require options=-c default_transaction_read_only=on
+# credential source: /Users/innojini/Dev/HuniWeb/.env.local (RAILWAY_DB_* — values never logged)
+
+=== [2026-09-08 02:02:04 KST] QUERY ===
+SELECT now() AS db_now, current_database() AS db_name;
+--- RESULT (1 row) ---
+db_now | db_name
+2026-09-07 17:02:04.326703+00:00 | railway
+
+=== [2026-09-08 02:02:04 KST] QUERY ===
+SELECT del_yn, use_yn, count(*) AS cnt FROM t_prd_products GROUP BY del_yn, use_yn ORDER BY cnt DESC;
+--- RESULT (4 rows) ---
+del_yn | use_yn | cnt
+N | Y | 269
+N | N | 23
+Y | Y | 11
+Y | N | 6
+
+=== [2026-09-08 02:02:04 KST] QUERY ===
+SELECT count(*) AS active_products FROM t_prd_products WHERE del_yn='N' AND use_yn='Y';
+--- RESULT (1 row) ---
+active_products
+269
+
+=== [2026-09-08 02:02:04 KST] QUERY ===
+SELECT sts_typ_cd, del_yn, use_yn, count(*) AS cnt FROM t_wgt_widgets GROUP BY sts_typ_cd, del_yn, use_yn ORDER BY cnt DESC;
+--- RESULT (4 rows) ---
+sts_typ_cd | del_yn | use_yn | cnt
+WGT_STS_TYPE.01 | N | Y | 239
+WGT_STS_TYPE.02 | N | Y | 193
+WGT_STS_TYPE.01 | Y | Y | 7
+WGT_STS_TYPE.03 | N | Y | 4
+
+=== [2026-09-08 02:02:04 KST] QUERY ===
+SELECT count(*) AS total_widgets FROM t_wgt_widgets;
+--- RESULT (1 row) ---
+total_widgets
+443
+
+=== [2026-09-08 02:02:04 KST] QUERY ===
+SELECT cod_cd, cod_nm, upr_cod_cd, use_yn, del_yn FROM t_cod_base_codes WHERE cod_cd LIKE 'WGT_STS_TYPE%' ORDER BY cod_cd;
+--- RESULT (4 rows) ---
+cod_cd | cod_nm | upr_cod_cd | use_yn | del_yn
+WGT_STS_TYPE | 위젯상태유형 | NULL | Y | N
+WGT_STS_TYPE.01 | 작성중 | WGT_STS_TYPE | Y | N
+WGT_STS_TYPE.02 | 게시됨 | WGT_STS_TYPE | Y | N
+WGT_STS_TYPE.03 | 게시중단 | WGT_STS_TYPE | Y | N
+
+=== [2026-09-08 02:02:04 KST] QUERY ===
+SELECT count(*) AS binding_rows, count(DISTINCT prd_cd) AS bound_products FROM t_prd_product_price_formulas;
+--- RESULT (1 row) ---
+binding_rows | bound_products
+198 | 184
+
+=== [2026-09-08 02:02:04 KST] QUERY ===
+SELECT count(DISTINCT f.prd_cd) AS bound_active_products FROM t_prd_product_price_formulas f JOIN t_prd_products p ON p.prd_cd=f.prd_cd WHERE p.del_yn='N' AND p.use_yn='Y';
+--- RESULT (1 row) ---
+bound_active_products
+179
+
+=== [2026-09-08 02:02:05 KST] QUERY ===
+SELECT count(*) AS total_orders FROM t_ord_orders;
+--- RESULT (1 row) ---
+total_orders
+0
+
+=== [2026-09-08 02:02:05 KST] QUERY ===
+SELECT count(*) AS total_cart_items FROM t_wgt_cart_items;
+--- RESULT (1 row) ---
+total_cart_items
+0
+
+=== [2026-09-08 02:02:05 KST] QUERY ===
+SELECT (SELECT count(*) FROM t_prc_price_formulas) AS formulas, (SELECT count(*) FROM t_prc_price_components) AS components, (SELECT count(*) FROM t_prc_formula_components) AS wiring, (SELECT count(*) FROM t_prc_component_prices) AS price_rows;
+--- RESULT (1 row) ---
+formulas | components | wiring | price_rows
+128 | 295 | 306 | 34125
+
+# run finished: 2026-09-08 02:02:05 KST

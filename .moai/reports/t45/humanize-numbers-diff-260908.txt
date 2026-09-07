@@ -1,0 +1,12 @@
+# humanize 패스 전후 수치 diff (SPEC-STAFFBRIEF-001 / plan §C-5)
+- 편집쌍 적용: 9/9건 역치환으로 before 복원
+- before: huni-staffbrief-260909-draft.before-humanize.md (8480 chars)
+- after : huni-staffbrief-260909-draft.md (8486 chars)
+- 숫자 토큰 수: before 265개 / after 265개
+- 결과: **PASS — 숫자 다중집합 완전 일치 (전후 수치 verbatim 불변)**
+
+## humanize 변경 보고 (Korean 모듈 · prose 모드 · Strict)
+- 검출·제거 텔: 헤딩 대시 대구(M-1 인접) 4건 → 쉼표 동격/평어형으로 · 괄호 부제(C-10 인접) 2건 → 제거/평어화 · 접속 어미 뒤 쉼표(C-11) 1건 → 삭제 · 1문장 명료화(모호 서술) 1건 · 인용구 본문 이동 1건
+- 수치·사실·인용문·날짜 라벨: 전항목 verbatim 불변 (위 다중집합 비교로 기계 확인)
+- 변경률 추정: 약 2~3% (경계 내, WARN 미발)
+- 등급: B (잔여 S1 0 · 패스 자체가 경미 — 초안을 카탈로그 인지 상태에서 작성해 검출 텔 수가 적었음을 감안한 보수 등급)

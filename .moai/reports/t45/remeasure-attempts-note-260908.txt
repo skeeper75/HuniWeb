@@ -1,0 +1,21 @@
+# 재실측 시행 시도 전수 기록 보충 — 2026-09-08
+
+dbprobe_260908.py 는 쿼리 결과를 stdout 에 출력하고 로그 파일은 실행 종료 시점에 일괄 저장한다.
+그래서 예외로 중단된 실행의 로그는 자동 저장되지 않았다. 접근 기록의 완전성을 위해 실패한 2개 실행도 여기에 기록한다.
+전 시도 모두 SELECT 문이며(읽기전용 위반 아님 — 대상 테이블/컬럼명 오타로 서버가 거부), 성공 실행의 최종 로그는
+remeasure-260908.txt / remeasure-discovery2-260908.txt / remeasure-discovery3-260908.txt 이다.
+
+## 시도 1 — discovery 모드 (2026-09-08 02:00:32 KST)
+- D0~D4 성공 (결과는 remeasure-discovery2 와 동일 쿼리 재실행으로 확보됨)
+- D5 실패: SELECT grp_cd, bas_cd, bas_nm, use_yn FROM t_bas_base_codes ...
+  → psycopg2.errors.UndefinedTable: relation "t_bas_base_codes" does not exist
+  (기초코드 테이블명은 t_cod_base_codes 로 확인됨 — discovery3 D10)
+- 로그 미저장(예외 중단)
+
+## 시도 2 — metrics 모드 (2026-09-08 02:01:21 KST)
+- M0~M2b 성공 (값은 최종 실행과 동일: 활성 269 · 게시 193 · 위젯 443)
+- M2c 실패(당시 원문): SELECT grp_cd, bas_cd, bas_nm, use_yn FROM t_cod_base_codes WHERE grp_cd LIKE '%WGT%STS%' OR (grp_cd LIKE '%STS%' AND grp_cd LIKE '%WGT%') ORDER BY grp_cd, bas_cd;
+  → psycopg2.errors.UndefinedColumn: column "grp_cd" does not exist (HINT: cod_cd)
+- 로그 미저장(예외 중단)
+
+## 시도 3 — 최종 metrics 실행 (2026-09-08 02:02:03 KST) → remeasure-260908.txt (전 쿼리 성공, 판정 근거)

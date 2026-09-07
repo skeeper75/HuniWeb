@@ -1,0 +1,8 @@
+-- (D6) 기초코드 테이블명 탐색
+SELECT table_name FROM information_schema.tables WHERE table_schema='public' AND (table_name LIKE '%bas%' OR table_name LIKE '%code%') ORDER BY table_name;
+-- (D7) t_prd_product_price_formulas 컬럼(바인딩 테이블)
+SELECT column_name, data_type FROM information_schema.columns WHERE table_schema='public' AND table_name='t_prd_product_price_formulas' ORDER BY ordinal_position;
+-- (D8) t_ord_orders 컬럼(주문 수 카운트 대상 확인)
+SELECT column_name, data_type FROM information_schema.columns WHERE table_schema='public' AND table_name='t_ord_orders' ORDER BY ordinal_position;
+-- (D9) t_prc_price_formulas 컬럼(공식 테이블)
+SELECT column_name, data_type FROM information_schema.columns WHERE table_schema='public' AND table_name='t_prc_price_formulas' ORDER BY ordinal_position;
