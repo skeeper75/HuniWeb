@@ -1,0 +1,17 @@
+$ psql <URL> -c "
+SELECT it.siz_cd, it.siz_nm, it.cut_width AS cw, it.cut_height AS ch,
+       it.work_width AS ww, it.work_height AS wh,
+       fn_calc_pansu('SIZ_000499', it.siz_cd) AS pansu_on_316x467
+FROM t_siz_sizes it
+WHERE it.siz_cd IN ('SIZ_000251','SIZ_000631','SIZ_000181','SIZ_000054')
+ORDER BY it.siz_cd;
+"
+
+   siz_cd   |     siz_nm      |   cw   |   ch   |   ww   |   wh   | pansu_on_316x467 
+------------+-----------------+--------+--------+--------+--------+------------------
+ SIZ_000054 | 420x297mm       | 420.00 | 297.00 | 426.00 | 303.00 |                1
+ SIZ_000181 | 426x303mm       |        |        | 426.00 | 303.00 |                1
+ SIZ_000251 | 300x214mm       |        |        | 300.00 | 214.00 |                2
+ SIZ_000631 | 중철책자 표지A5 | 296.00 | 210.00 | 302.00 | 216.00 |                2
+(4 rows)
+

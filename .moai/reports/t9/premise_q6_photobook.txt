@@ -1,0 +1,27 @@
+$ psql <URL> -c "
+SELECT p.prd_cd, p.prd_nm, p.semi_role_cd, p.use_yn,
+       (SELECT count(*) FROM t_prd_product_sizes z WHERE z.prd_cd=p.prd_cd AND z.del_yn='N') AS siz_n,
+       (SELECT count(*) FROM t_prd_product_plate_sizes z WHERE z.prd_cd=p.prd_cd AND z.del_yn='N') AS plt_n,
+       (SELECT count(*) FROM t_prd_product_materials z WHERE z.prd_cd=p.prd_cd AND z.del_yn='N') AS mat_n,
+       (SELECT count(*) FROM t_prd_product_price_formulas z WHERE z.prd_cd=p.prd_cd) AS frm_n
+FROM t_prd_products p
+WHERE p.prd_cd IN ('PRD_000100','PRD_000101','PRD_000102','PRD_000104','PRD_000105','PRD_000107',
+                   'PRD_000287','PRD_000288','PRD_000073','PRD_000074','PRD_000078')
+ORDER BY p.prd_cd;
+"
+
+   prd_cd   |             prd_nm             | semi_role_cd | use_yn | siz_n | plt_n | mat_n | frm_n 
+------------+--------------------------------+--------------+--------+-------+-------+-------+-------
+ PRD_000073 | 하드커버책자-표지              | SEMI_ROLE.02 | Y      |     2 |     2 |    21 |     1
+ PRD_000074 | 하드커버책자-면지              | SEMI_ROLE.03 | Y      |     0 |     0 |     3 |     0
+ PRD_000078 | 레더하드커버책자-표지          | SEMI_ROLE.02 | Y      |     2 |     2 |     5 |     1
+ PRD_000100 | 포토북 [디자인명]              |              | Y      |     4 |     0 |     1 |     1
+ PRD_000101 | 포토북 [디자인명]-내지         | SEMI_ROLE.01 | Y      |     4 |     1 |     1 |     1
+ PRD_000102 | 포토북 [디자인명]-하드커버     | SEMI_ROLE.02 | Y      |     0 |     0 |     3 |     0
+ PRD_000104 | 포토북 [디자인명]-면지         | SEMI_ROLE.03 | Y      |     0 |     0 |     1 |     0
+ PRD_000105 | 포토북 [디자인명]-레더하드커버 | SEMI_ROLE.02 | Y      |     0 |     0 |     3 |     0
+ PRD_000107 | 포토북 [디자인명]-소프트커버   | SEMI_ROLE.02 | Y      |     0 |     0 |     1 |     0
+ PRD_000287 | 중철책자-내지                  | SEMI_ROLE.01 | Y      |     2 |     1 |    13 |     1
+ PRD_000288 | 중철책자-표지                  | SEMI_ROLE.02 | Y      |     2 |     1 |    13 |     1
+(11 rows)
+

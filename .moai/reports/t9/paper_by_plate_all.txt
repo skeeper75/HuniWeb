@@ -1,0 +1,20 @@
+$ psql <URL> -c "
+SELECT cp.plt_siz_cd, z.siz_nm, (z.work_width*z.work_height)::int AS area,
+       count(*) AS n_rows, min(cp.unit_price) AS min_p, max(cp.unit_price) AS max_p,
+       min(cp.reg_dt)::date AS first_reg
+FROM t_prc_component_prices cp
+LEFT JOIN t_siz_sizes z ON z.siz_cd=cp.plt_siz_cd
+WHERE cp.comp_cd='COMP_PAPER' AND cp.plt_siz_cd IS NOT NULL
+GROUP BY cp.plt_siz_cd, z.siz_nm, z.work_width, z.work_height
+ORDER BY area NULLS LAST;
+"
+
+ plt_siz_cd | siz_nm  |  area  | n_rows | min_p  |  max_p  | first_reg  
+------------+---------+--------+--------+--------+---------+------------
+ SIZ_000499 | 316x467 | 147572 |     76 |  30.57 | 1242.50 | 2026-06-16
+ SIZ_000641 | 480x320 | 153600 |      7 |  62.20 |  142.20 | 2026-09-01
+ SIZ_000535 | 330x540 | 178200 |      1 | 153.00 |  153.00 | 2026-07-01
+ SIZ_000640 | 550x375 | 206250 |      1 |  67.16 |   67.16 | 2026-08-31
+ SIZ_000475 | 330x660 | 217800 |      5 |  89.54 |  272.95 | 2026-07-01
+(5 rows)
+

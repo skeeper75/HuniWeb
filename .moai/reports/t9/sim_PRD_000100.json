@@ -1,0 +1,374 @@
+{
+ "payload": {
+  "copies": 100,
+  "mode": "lenient",
+  "members": [
+   {
+    "sub_prd_cd": "PRD_000101",
+    "role": "SEMI_ROLE.01",
+    "label": "내지",
+    "siz_cd": "SIZ_000250",
+    "mat_cd": "MAT_000105",
+    "print_opt_cd": "POPT_000002",
+    "qty_mode": "derived",
+    "pages": 24
+   },
+   {
+    "sub_prd_cd": "PRD_000102",
+    "role": "SEMI_ROLE.02",
+    "label": "표지",
+    "siz_cd": null,
+    "mat_cd": "MAT_000078",
+    "print_opt_cd": "POPT_000001",
+    "qty_mode": "manual"
+   },
+   {
+    "sub_prd_cd": "PRD_000105",
+    "role": "SEMI_ROLE.02",
+    "label": "표지",
+    "siz_cd": null,
+    "mat_cd": "MAT_000379",
+    "print_opt_cd": null,
+    "qty_mode": "manual"
+   },
+   {
+    "sub_prd_cd": "PRD_000107",
+    "role": "SEMI_ROLE.02",
+    "label": "표지",
+    "siz_cd": null,
+    "mat_cd": "MAT_000081",
+    "print_opt_cd": "POPT_000001",
+    "qty_mode": "manual"
+   },
+   {
+    "sub_prd_cd": "PRD_000104",
+    "role": "SEMI_ROLE.03",
+    "label": "면지",
+    "siz_cd": null,
+    "mat_cd": null,
+    "print_opt_cd": null,
+    "qty_mode": "manual"
+   }
+  ],
+  "set_selections": {},
+  "set_procs": []
+ },
+ "response": {
+  "ok": true,
+  "kind": "set",
+  "set_prd": "PRD_000100",
+  "set_nm": "포토북 [디자인명]",
+  "copies": 100,
+  "as_of": "2026-09-04",
+  "mode": "lenient",
+  "members": [
+   {
+    "sub_prd_cd": "PRD_000101",
+    "role": "SEMI_ROLE.01",
+    "role_nm": null,
+    "label": "내지",
+    "qty": 100,
+    "qty_breakdown": {
+     "mode": "manual",
+     "qty": 100,
+     "plate": "SIZ_000499",
+     "plate_status": "single",
+     "auto_plate": true,
+     "reason": "page-priced(판형 축 없음)"
+    },
+    "eval": {
+     "ok": true,
+     "target": {
+      "kind": "product",
+      "code": "PRD_000101",
+      "name": "포토북 [디자인명]-내지"
+     },
+     "qty": 100,
+     "as_of": "2026-09-04",
+     "mode": "lenient",
+     "base": {
+      "source": "FORMULA",
+      "formula": {
+       "frm_cd": "PRF_PHOTOBOOK_INNER",
+       "frm_nm": "포토북 내지 추가페이지가(2P당·사이즈별)"
+      },
+      "amount": "30000",
+      "components": [
+       {
+        "comp_cd": "COMP_PHOTOBOOK_PAGE",
+        "comp_nm": "포토북 추가2P당(사이즈별)",
+        "disp_seq": 1,
+        "prc_typ": "PRICE_TYPE.01",
+        "use_dims": [
+         "siz_cd",
+         "min_qty"
+        ],
+        "included": true,
+        "matched_row": {
+         "comp_price_id": 103453,
+         "apply_ymd": "2026-06-06",
+         "unit_price": "300.00",
+         "min_qty": 1,
+         "siz_width": null,
+         "siz_height": null,
+         "siz_cd": "SIZ_000250",
+         "plt_siz_cd": null,
+         "print_opt_cd": null,
+         "mat_cd": null,
+         "proc_cd": null,
+         "opt_cd": null,
+         "coat_side_cnt": null,
+         "spot_side_cnt": null,
+         "bdl_qty": null,
+         "page_cnt": null
+        },
+        "tier_min_qty": "1",
+        "per_item": "300.00",
+        "subtotal": "30000",
+        "comp_qty": 100,
+        "error": null,
+        "calc_error": null,
+        "note": "",
+        "data_gap": [],
+        "matched_names": {
+         "siz_cd": "A5세로 (148x210mm)"
+        }
+       }
+      ],
+      "warnings": []
+     },
+     "discounts": [],
+     "final_price": 30000,
+     "warnings": [],
+     "errors": []
+    },
+    "contribution": "30000",
+    "included": true
+   },
+   {
+    "sub_prd_cd": "PRD_000102",
+    "role": "SEMI_ROLE.02",
+    "role_nm": null,
+    "label": "표지",
+    "qty": 100,
+    "qty_breakdown": {
+     "mode": "manual",
+     "qty": 100,
+     "plate": null,
+     "plate_status": "no_plates",
+     "auto_plate": false
+    },
+    "eval": {
+     "ok": true,
+     "target": {
+      "kind": "product",
+      "code": "PRD_000102",
+      "name": "포토북 [디자인명]-하드커버"
+     },
+     "qty": 100,
+     "as_of": "2026-09-04",
+     "mode": "lenient",
+     "base": {
+      "source": "NONE",
+      "formula": null,
+      "amount": "0",
+      "components": [],
+      "warnings": []
+     },
+     "discounts": [],
+     "final_price": 0,
+     "warnings": [
+      "가격 소스 없음(직접단가·공식 미구성)"
+     ],
+     "errors": []
+    },
+    "contribution": "0",
+    "included": true
+   },
+   {
+    "sub_prd_cd": "PRD_000105",
+    "role": "SEMI_ROLE.02",
+    "role_nm": null,
+    "label": "표지",
+    "qty": 100,
+    "qty_breakdown": {
+     "mode": "manual",
+     "qty": 100,
+     "plate": null,
+     "plate_status": "no_plates",
+     "auto_plate": false
+    },
+    "eval": {
+     "ok": true,
+     "target": {
+      "kind": "product",
+      "code": "PRD_000105",
+      "name": "포토북 [디자인명]-레더하드커버"
+     },
+     "qty": 100,
+     "as_of": "2026-09-04",
+     "mode": "lenient",
+     "base": {
+      "source": "NONE",
+      "formula": null,
+      "amount": "0",
+      "components": [],
+      "warnings": []
+     },
+     "discounts": [],
+     "final_price": 0,
+     "warnings": [
+      "가격 소스 없음(직접단가·공식 미구성)"
+     ],
+     "errors": []
+    },
+    "contribution": "0",
+    "included": true
+   },
+   {
+    "sub_prd_cd": "PRD_000107",
+    "role": "SEMI_ROLE.02",
+    "role_nm": null,
+    "label": "표지",
+    "qty": 100,
+    "qty_breakdown": {
+     "mode": "manual",
+     "qty": 100,
+     "plate": null,
+     "plate_status": "no_plates",
+     "auto_plate": false
+    },
+    "eval": {
+     "ok": true,
+     "target": {
+      "kind": "product",
+      "code": "PRD_000107",
+      "name": "포토북 [디자인명]-소프트커버"
+     },
+     "qty": 100,
+     "as_of": "2026-09-04",
+     "mode": "lenient",
+     "base": {
+      "source": "NONE",
+      "formula": null,
+      "amount": "0",
+      "components": [],
+      "warnings": []
+     },
+     "discounts": [],
+     "final_price": 0,
+     "warnings": [
+      "가격 소스 없음(직접단가·공식 미구성)"
+     ],
+     "errors": []
+    },
+    "contribution": "0",
+    "included": true
+   },
+   {
+    "sub_prd_cd": "PRD_000104",
+    "role": "SEMI_ROLE.03",
+    "role_nm": null,
+    "label": "면지",
+    "qty": 100,
+    "qty_breakdown": {
+     "mode": "manual",
+     "qty": 100,
+     "plate": null,
+     "plate_status": "no_plates",
+     "auto_plate": false
+    },
+    "eval": {
+     "ok": true,
+     "target": {
+      "kind": "product",
+      "code": "PRD_000104",
+      "name": "포토북 [디자인명]-면지"
+     },
+     "qty": 100,
+     "as_of": "2026-09-04",
+     "mode": "lenient",
+     "base": {
+      "source": "NONE",
+      "formula": null,
+      "amount": "0",
+      "components": [],
+      "warnings": []
+     },
+     "discounts": [],
+     "final_price": 0,
+     "warnings": [
+      "가격 소스 없음(직접단가·공식 미구성)"
+     ],
+     "errors": []
+    },
+    "contribution": "0",
+    "included": true
+   }
+  ],
+  "set_eval": {
+   "eval": {
+    "ok": true,
+    "target": {
+     "kind": "product",
+     "code": "PRD_000100",
+     "name": "포토북 [디자인명]"
+    },
+    "qty": 100,
+    "as_of": "2026-09-04",
+    "mode": "lenient",
+    "base": {
+     "source": "FORMULA",
+     "formula": {
+      "frm_cd": "PRF_PHOTOBOOK_FIXED",
+      "frm_nm": "포토북 기본가(24P·사이즈/표지타입별)"
+     },
+     "amount": "0",
+     "components": [
+      {
+       "comp_cd": "COMP_PHOTOBOOK_BASE",
+       "comp_nm": "포토북 완제품가 기본24P(사이즈·표지타입별)",
+       "disp_seq": 1,
+       "prc_typ": "PRICE_TYPE.01",
+       "use_dims": [
+        "siz_cd",
+        "opt_cd",
+        "min_qty"
+       ],
+       "included": false,
+       "matched_row": null,
+       "tier_min_qty": null,
+       "per_item": null,
+       "subtotal": "0",
+       "comp_qty": 100,
+       "error": null,
+       "calc_error": null,
+       "note": "",
+       "data_gap": []
+      }
+     ],
+     "warnings": []
+    },
+    "discounts": [],
+    "final_price": 0,
+    "warnings": [
+     "선택값에 매칭되는 구성요소가 없습니다(합계 0원)."
+    ],
+    "errors": []
+   },
+   "contribution": "0"
+  },
+  "base_total": "30000",
+  "discounts": [],
+  "final_price": 30000,
+  "warnings": [
+   "[표지] 가격 소스 없음(직접단가·공식 미구성)",
+   "[면지] 가격 소스 없음(직접단가·공식 미구성)",
+   "[셋트공식] 선택값에 매칭되는 구성요소가 없습니다(합계 0원)."
+  ],
+  "errors": [],
+  "supply": 30000,
+  "vat": 3000,
+  "total_with_vat": 33000
+ }
+}

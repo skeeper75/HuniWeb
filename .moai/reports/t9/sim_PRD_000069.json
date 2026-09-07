@@ -1,0 +1,428 @@
+{
+ "payload": {
+  "copies": 100,
+  "mode": "lenient",
+  "members": [
+   {
+    "sub_prd_cd": "PRD_000290",
+    "role": "SEMI_ROLE.02",
+    "label": "표지",
+    "siz_cd": "SIZ_000632",
+    "mat_cd": "MAT_000074",
+    "print_opt_cd": "POPT_000001",
+    "qty_mode": "manual"
+   },
+   {
+    "sub_prd_cd": "PRD_000289",
+    "role": "SEMI_ROLE.01",
+    "label": "내지",
+    "siz_cd": "SIZ_000250",
+    "mat_cd": "MAT_000073",
+    "print_opt_cd": "POPT_000002",
+    "qty_mode": "derived",
+    "pages": 16
+   }
+  ],
+  "set_selections": {},
+  "set_procs": []
+ },
+ "response": {
+  "ok": true,
+  "kind": "set",
+  "set_prd": "PRD_000069",
+  "set_nm": "무선책자",
+  "copies": 100,
+  "as_of": "2026-09-04",
+  "mode": "lenient",
+  "members": [
+   {
+    "sub_prd_cd": "PRD_000290",
+    "role": "SEMI_ROLE.02",
+    "role_nm": null,
+    "label": "표지",
+    "qty": 100,
+    "qty_breakdown": {
+     "mode": "manual",
+     "qty": 100,
+     "plate": "SIZ_000499",
+     "plate_status": "single",
+     "auto_plate": true
+    },
+    "eval": {
+     "ok": true,
+     "target": {
+      "kind": "product",
+      "code": "PRD_000290",
+      "name": "무선책자-표지"
+     },
+     "qty": 100,
+     "as_of": "2026-09-04",
+     "mode": "lenient",
+     "base": {
+      "source": "FORMULA",
+      "formula": {
+       "frm_cd": "PRF_BOOK_COVER",
+       "frm_nm": "책자 표지 분해형(인쇄+코팅+용지)"
+      },
+      "amount": "7064",
+      "components": [
+       {
+        "comp_cd": "COMP_PRINT_DIGITAL_S1",
+        "comp_nm": "디지털인쇄",
+        "disp_seq": 1,
+        "prc_typ": "PRICE_TYPE.01",
+        "use_dims": [
+         "proc_cd",
+         "plt_siz_cd",
+         "print_opt_cd",
+         "min_qty",
+         "proc_grp:PROC_000001"
+        ],
+        "included": false,
+        "matched_row": null,
+        "tier_min_qty": null,
+        "per_item": null,
+        "subtotal": "0",
+        "comp_qty": 100,
+        "error": null,
+        "calc_error": null,
+        "note": "",
+        "data_gap": [],
+        "pansu": 1,
+        "qty_order": 100
+       },
+       {
+        "comp_cd": "COMP_COAT_MATTE",
+        "comp_nm": "무광코팅비",
+        "disp_seq": 2,
+        "prc_typ": "PRICE_TYPE.01",
+        "use_dims": [
+         "proc_cd",
+         "plt_siz_cd",
+         "coat_side_cnt",
+         "min_qty",
+         "proc_grp:PROC_000013"
+        ],
+        "included": false,
+        "matched_row": null,
+        "tier_min_qty": null,
+        "per_item": null,
+        "subtotal": "0",
+        "comp_qty": 100,
+        "error": null,
+        "calc_error": null,
+        "note": "",
+        "data_gap": [],
+        "pansu": 1,
+        "qty_order": 100
+       },
+       {
+        "comp_cd": "COMP_PAPER",
+        "comp_nm": "용지비(종이별 절가)",
+        "disp_seq": 3,
+        "prc_typ": "PRICE_TYPE.01",
+        "use_dims": [
+         "mat_cd",
+         "plt_siz_cd",
+         "min_qty"
+        ],
+        "included": true,
+        "matched_row": {
+         "comp_price_id": 5404,
+         "apply_ymd": "2026-06-01",
+         "unit_price": "70.64",
+         "min_qty": 1,
+         "siz_width": null,
+         "siz_height": null,
+         "siz_cd": null,
+         "plt_siz_cd": "SIZ_000499",
+         "print_opt_cd": null,
+         "mat_cd": "MAT_000074",
+         "proc_cd": null,
+         "opt_cd": null,
+         "coat_side_cnt": null,
+         "spot_side_cnt": null,
+         "bdl_qty": null,
+         "page_cnt": null
+        },
+        "tier_min_qty": "1",
+        "per_item": "70.64",
+        "subtotal": "7064",
+        "comp_qty": 100,
+        "error": null,
+        "calc_error": null,
+        "note": "",
+        "data_gap": [],
+        "pansu": 1,
+        "qty_order": 100,
+        "matched_names": {
+         "plt_siz_cd": "316x467",
+         "mat_cd": "백색모조지 220g"
+        }
+       },
+       {
+        "comp_cd": "COMP_COVER_LEATHER",
+        "comp_nm": "레더 하드커버 표지 소재비",
+        "disp_seq": 4,
+        "prc_typ": "PRICE_TYPE.01",
+        "use_dims": [
+         "mat_cd",
+         "siz_cd",
+         "min_qty"
+        ],
+        "included": false,
+        "matched_row": null,
+        "tier_min_qty": null,
+        "per_item": null,
+        "subtotal": "0",
+        "comp_qty": 100,
+        "error": null,
+        "calc_error": null,
+        "note": "단가 없음 — mat_cd=MAT_000074, siz_cd=SIZ_000632",
+        "data_gap": [
+         {
+          "dim": "mat_cd",
+          "value": "MAT_000074",
+          "avail": [
+           "MAT_000379"
+          ],
+          "avail_total": 1
+         },
+         {
+          "dim": "siz_cd",
+          "value": "SIZ_000632",
+          "avail": [
+           "SIZ_000634",
+           "SIZ_000635"
+          ],
+          "avail_total": 2
+         }
+        ]
+       }
+      ],
+      "warnings": []
+     },
+     "discounts": [],
+     "final_price": 7064,
+     "warnings": [],
+     "errors": []
+    },
+    "contribution": "7064",
+    "included": true
+   },
+   {
+    "sub_prd_cd": "PRD_000289",
+    "role": "SEMI_ROLE.01",
+    "role_nm": null,
+    "label": "내지",
+    "qty": 200,
+    "qty_breakdown": {
+     "mode": "derived",
+     "copies": 100,
+     "pages": 16,
+     "plate": "SIZ_000499",
+     "auto_plate": true,
+     "pansu": 4,
+     "per_book": 2,
+     "total_sheets": 200,
+     "sides": 2,
+     "plate_status": "single",
+     "plate_diag": "판형 1개(SIZ_000499) — 공통 자동 선택",
+     "plate_calc_mode": "single"
+    },
+    "eval": null,
+    "contribution": "0",
+    "included": false
+   }
+  ],
+  "set_eval": {
+   "eval": {
+    "ok": true,
+    "target": {
+     "kind": "product",
+     "code": "PRD_000069",
+     "name": "무선책자"
+    },
+    "qty": 100,
+    "as_of": "2026-09-04",
+    "mode": "lenient",
+    "base": {
+     "source": "FORMULA",
+     "formula": {
+      "frm_cd": "PRF_BIND_MUSEON_FOIL",
+      "frm_nm": "무선책자(제본)+박(표지)"
+     },
+     "amount": "0",
+     "components": [
+      {
+       "comp_cd": "COMP_BIND_MUSEON",
+       "comp_nm": "제본비 무선",
+       "disp_seq": 1,
+       "prc_typ": "PRICE_TYPE.01",
+       "use_dims": [
+        "proc_cd",
+        "min_qty",
+        "proc_grp:PROC_000017"
+       ],
+       "included": false,
+       "matched_row": null,
+       "tier_min_qty": null,
+       "per_item": null,
+       "subtotal": "0",
+       "comp_qty": 100,
+       "error": null,
+       "calc_error": null,
+       "note": "",
+       "data_gap": []
+      },
+      {
+       "comp_cd": "COMP_FOIL_SETUP_LARGE",
+       "comp_nm": "박·형압 판셋업비(대형·일반박)",
+       "disp_seq": 2,
+       "prc_typ": "PRICE_TYPE.03",
+       "use_dims": [
+        "proc_cd",
+        "min_qty",
+        "proc_grp:PROC_000033"
+       ],
+       "included": false,
+       "matched_row": null,
+       "tier_min_qty": null,
+       "per_item": null,
+       "subtotal": "0",
+       "comp_qty": 100,
+       "error": null,
+       "calc_error": null,
+       "note": "",
+       "data_gap": []
+      },
+      {
+       "comp_cd": "COMP_FOIL_SETUP_LARGE_SPECIAL",
+       "comp_nm": "박·형압 판셋업비(대형·특수박)",
+       "disp_seq": 2,
+       "prc_typ": "PRICE_TYPE.03",
+       "use_dims": [
+        "proc_cd",
+        "min_qty",
+        "proc_grp:PROC_000172"
+       ],
+       "included": false,
+       "matched_row": null,
+       "tier_min_qty": null,
+       "per_item": null,
+       "subtotal": "0",
+       "comp_qty": 100,
+       "error": null,
+       "calc_error": null,
+       "note": "",
+       "data_gap": []
+      },
+      {
+       "comp_cd": "COMP_FOIL_PROC_LARGE_STD",
+       "comp_nm": "박 가공비(대형·일반박)",
+       "disp_seq": 3,
+       "prc_typ": "PRICE_TYPE.03",
+       "use_dims": [
+        "proc_cd",
+        "min_qty",
+        "proc_grp:PROC_000033"
+       ],
+       "included": false,
+       "matched_row": null,
+       "tier_min_qty": null,
+       "per_item": null,
+       "subtotal": "0",
+       "comp_qty": 100,
+       "error": null,
+       "calc_error": null,
+       "note": "",
+       "data_gap": []
+      },
+      {
+       "comp_cd": "COMP_FOIL_PROC_LARGE_SPECIAL",
+       "comp_nm": "박 가공비(대형·특수박)",
+       "disp_seq": 4,
+       "prc_typ": "PRICE_TYPE.03",
+       "use_dims": [
+        "proc_cd",
+        "min_qty",
+        "proc_grp:PROC_000172"
+       ],
+       "included": false,
+       "matched_row": null,
+       "tier_min_qty": null,
+       "per_item": null,
+       "subtotal": "0",
+       "comp_qty": 100,
+       "error": null,
+       "calc_error": null,
+       "note": "",
+       "data_gap": []
+      },
+      {
+       "comp_cd": "COMP_EMBOSS_SETUP_LARGE",
+       "comp_nm": "형압 판셋업비(대형)",
+       "disp_seq": 5,
+       "prc_typ": "PRICE_TYPE.03",
+       "use_dims": [
+        "proc_cd",
+        "min_qty",
+        "proc_grp:PROC_000050"
+       ],
+       "included": false,
+       "matched_row": null,
+       "tier_min_qty": null,
+       "per_item": null,
+       "subtotal": "0",
+       "comp_qty": 100,
+       "error": null,
+       "calc_error": null,
+       "note": "",
+       "data_gap": []
+      },
+      {
+       "comp_cd": "COMP_EMBOSS_PROC_LARGE_STD",
+       "comp_nm": "형압 가공비(대형)",
+       "disp_seq": 6,
+       "prc_typ": "PRICE_TYPE.03",
+       "use_dims": [
+        "proc_cd",
+        "min_qty",
+        "proc_grp:PROC_000050"
+       ],
+       "included": false,
+       "matched_row": null,
+       "tier_min_qty": null,
+       "per_item": null,
+       "subtotal": "0",
+       "comp_qty": 100,
+       "error": null,
+       "calc_error": null,
+       "note": "",
+       "data_gap": []
+      }
+     ],
+     "warnings": []
+    },
+    "discounts": [],
+    "final_price": 0,
+    "warnings": [
+     "선택값에 매칭되는 구성요소가 없습니다(합계 0원)."
+    ],
+    "errors": []
+   },
+   "contribution": "0"
+  },
+  "base_total": "7064",
+  "discounts": [],
+  "final_price": 7064,
+  "warnings": [
+   "[내지] 페이지수는 최소 24 이상이어야 합니다.",
+   "[셋트공식] 선택값에 매칭되는 구성요소가 없습니다(합계 0원)."
+  ],
+  "errors": [],
+  "supply": 7064,
+  "vat": 706,
+  "total_with_vat": 7770
+ }
+}

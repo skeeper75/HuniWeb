@@ -1,0 +1,15 @@
+$ psql <URL> -c "
+SELECT s.prd_cd, s.siz_cd, z.siz_nm, z.cut_width, z.cut_height, z.work_width, z.work_height,
+       z.margin_top, z.margin_lft, s.dflt_yn, s.disp_seq, s.del_yn, s.del_dt,
+       fn_calc_pansu('SIZ_000499', s.siz_cd) AS pansu
+FROM t_prd_product_sizes s JOIN t_siz_sizes z ON z.siz_cd=s.siz_cd
+WHERE s.prd_cd='PRD_000288' ORDER BY s.siz_cd;
+"
+
+   prd_cd   |   siz_cd   |    siz_nm     | cut_width | cut_height | work_width | work_height | margin_top | margin_lft | dflt_yn | disp_seq | del_yn |           del_dt           | pansu 
+------------+------------+---------------+-----------+------------+------------+-------------+------------+------------+---------+----------+--------+----------------------------+-------
+ PRD_000288 | SIZ_000174 | A3(297x420mm) |           |            |     377.00 |      500.00 |            |            | Y       |        1 | Y      | 2026-07-16 17:31:11.073093 |     0
+ PRD_000288 | SIZ_000181 | 426x303mm     |           |            |     426.00 |      303.00 |            |            | N       |        2 | N      |                            |     1
+ PRD_000288 | SIZ_000251 | 300x214mm     |           |            |     300.00 |      214.00 |            |            | Y       |        1 | N      |                            |     2
+(3 rows)
+

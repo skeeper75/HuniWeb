@@ -1,0 +1,392 @@
+{
+ "payload": {
+  "copies": 100,
+  "mode": "lenient",
+  "members": [
+   {
+    "sub_prd_cd": "PRD_000288",
+    "role": "SEMI_ROLE.02",
+    "label": "표지",
+    "siz_cd": "SIZ_000251",
+    "mat_cd": "MAT_000073",
+    "print_opt_cd": "POPT_000001",
+    "qty_mode": "manual"
+   },
+   {
+    "sub_prd_cd": "PRD_000287",
+    "role": "SEMI_ROLE.01",
+    "label": "내지",
+    "siz_cd": "SIZ_000250",
+    "mat_cd": "MAT_000073",
+    "print_opt_cd": "POPT_000002",
+    "qty_mode": "derived",
+    "pages": 24
+   }
+  ],
+  "set_selections": {},
+  "set_procs": []
+ },
+ "response": {
+  "ok": true,
+  "kind": "set",
+  "set_prd": "PRD_000068",
+  "set_nm": "중철책자",
+  "copies": 100,
+  "as_of": "2026-09-04",
+  "mode": "lenient",
+  "members": [
+   {
+    "sub_prd_cd": "PRD_000288",
+    "role": "SEMI_ROLE.02",
+    "role_nm": null,
+    "label": "표지",
+    "qty": 100,
+    "qty_breakdown": {
+     "mode": "manual",
+     "qty": 100,
+     "plate": "SIZ_000499",
+     "plate_status": "single",
+     "auto_plate": true
+    },
+    "eval": {
+     "ok": true,
+     "target": {
+      "kind": "product",
+      "code": "PRD_000288",
+      "name": "중철책자-표지"
+     },
+     "qty": 100,
+     "as_of": "2026-09-04",
+     "mode": "lenient",
+     "base": {
+      "source": "FORMULA",
+      "formula": {
+       "frm_cd": "PRF_BOOK_COVER",
+       "frm_nm": "책자 표지 분해형(인쇄+코팅+용지)"
+      },
+      "amount": "1844",
+      "components": [
+       {
+        "comp_cd": "COMP_PRINT_DIGITAL_S1",
+        "comp_nm": "디지털인쇄",
+        "disp_seq": 1,
+        "prc_typ": "PRICE_TYPE.01",
+        "use_dims": [
+         "proc_cd",
+         "plt_siz_cd",
+         "print_opt_cd",
+         "min_qty",
+         "proc_grp:PROC_000001"
+        ],
+        "included": false,
+        "matched_row": null,
+        "tier_min_qty": null,
+        "per_item": null,
+        "subtotal": "0",
+        "comp_qty": 50,
+        "error": null,
+        "calc_error": null,
+        "note": "",
+        "data_gap": [],
+        "pansu": 2,
+        "qty_order": 100
+       },
+       {
+        "comp_cd": "COMP_COAT_MATTE",
+        "comp_nm": "무광코팅비",
+        "disp_seq": 2,
+        "prc_typ": "PRICE_TYPE.01",
+        "use_dims": [
+         "proc_cd",
+         "plt_siz_cd",
+         "coat_side_cnt",
+         "min_qty",
+         "proc_grp:PROC_000013"
+        ],
+        "included": false,
+        "matched_row": null,
+        "tier_min_qty": null,
+        "per_item": null,
+        "subtotal": "0",
+        "comp_qty": 50,
+        "error": null,
+        "calc_error": null,
+        "note": "",
+        "data_gap": [],
+        "pansu": 2,
+        "qty_order": 100
+       },
+       {
+        "comp_cd": "COMP_PAPER",
+        "comp_nm": "용지비(종이별 절가)",
+        "disp_seq": 3,
+        "prc_typ": "PRICE_TYPE.01",
+        "use_dims": [
+         "mat_cd",
+         "plt_siz_cd",
+         "min_qty"
+        ],
+        "included": true,
+        "matched_row": {
+         "comp_price_id": 5403,
+         "apply_ymd": "2026-06-01",
+         "unit_price": "36.88",
+         "min_qty": 1,
+         "siz_width": null,
+         "siz_height": null,
+         "siz_cd": null,
+         "plt_siz_cd": "SIZ_000499",
+         "print_opt_cd": null,
+         "mat_cd": "MAT_000073",
+         "proc_cd": null,
+         "opt_cd": null,
+         "coat_side_cnt": null,
+         "spot_side_cnt": null,
+         "bdl_qty": null,
+         "page_cnt": null
+        },
+        "tier_min_qty": "1",
+        "per_item": "36.88",
+        "subtotal": "1844",
+        "comp_qty": 50,
+        "error": null,
+        "calc_error": null,
+        "note": "",
+        "data_gap": [],
+        "pansu": 2,
+        "qty_order": 100,
+        "matched_names": {
+         "plt_siz_cd": "316x467",
+         "mat_cd": "백색모조지 120g"
+        }
+       },
+       {
+        "comp_cd": "COMP_COVER_LEATHER",
+        "comp_nm": "레더 하드커버 표지 소재비",
+        "disp_seq": 4,
+        "prc_typ": "PRICE_TYPE.01",
+        "use_dims": [
+         "mat_cd",
+         "siz_cd",
+         "min_qty"
+        ],
+        "included": false,
+        "matched_row": null,
+        "tier_min_qty": null,
+        "per_item": null,
+        "subtotal": "0",
+        "comp_qty": 100,
+        "error": null,
+        "calc_error": null,
+        "note": "단가 없음 — mat_cd=MAT_000073, siz_cd=SIZ_000251",
+        "data_gap": [
+         {
+          "dim": "mat_cd",
+          "value": "MAT_000073",
+          "avail": [
+           "MAT_000379"
+          ],
+          "avail_total": 1
+         },
+         {
+          "dim": "siz_cd",
+          "value": "SIZ_000251",
+          "avail": [
+           "SIZ_000634",
+           "SIZ_000635"
+          ],
+          "avail_total": 2
+         }
+        ]
+       }
+      ],
+      "warnings": []
+     },
+     "discounts": [],
+     "final_price": 1844,
+     "warnings": [],
+     "errors": []
+    },
+    "contribution": "1844",
+    "included": true
+   },
+   {
+    "sub_prd_cd": "PRD_000287",
+    "role": "SEMI_ROLE.01",
+    "role_nm": null,
+    "label": "내지",
+    "qty": 300,
+    "qty_breakdown": {
+     "mode": "derived",
+     "copies": 100,
+     "pages": 24,
+     "plate": "SIZ_000499",
+     "auto_plate": true,
+     "pansu": 4,
+     "per_book": 3,
+     "total_sheets": 300,
+     "sides": 2,
+     "plate_status": "single",
+     "plate_diag": "판형 1개(SIZ_000499) — 공통 자동 선택",
+     "plate_calc_mode": "single"
+    },
+    "eval": {
+     "ok": true,
+     "target": {
+      "kind": "product",
+      "code": "PRD_000287",
+      "name": "중철책자-내지"
+     },
+     "qty": 300,
+     "as_of": "2026-09-04",
+     "mode": "lenient",
+     "base": {
+      "source": "FORMULA",
+      "formula": {
+       "frm_cd": "PRF_DGP_INNER",
+       "frm_nm": "디지털인쇄 책자 내지(인쇄비+용지비·출력매수)"
+      },
+      "amount": "11064",
+      "components": [
+       {
+        "comp_cd": "COMP_PRINT_DIGITAL_S1",
+        "comp_nm": "디지털인쇄",
+        "disp_seq": 1,
+        "prc_typ": "PRICE_TYPE.01",
+        "use_dims": [
+         "proc_cd",
+         "plt_siz_cd",
+         "print_opt_cd",
+         "min_qty",
+         "proc_grp:PROC_000001"
+        ],
+        "included": false,
+        "matched_row": null,
+        "tier_min_qty": null,
+        "per_item": null,
+        "subtotal": "0",
+        "comp_qty": 300,
+        "error": null,
+        "calc_error": null,
+        "note": "",
+        "data_gap": []
+       },
+       {
+        "comp_cd": "COMP_PAPER",
+        "comp_nm": "용지비(종이별 절가)",
+        "disp_seq": 2,
+        "prc_typ": "PRICE_TYPE.01",
+        "use_dims": [
+         "mat_cd",
+         "plt_siz_cd",
+         "min_qty"
+        ],
+        "included": true,
+        "matched_row": {
+         "comp_price_id": 5403,
+         "apply_ymd": "2026-06-01",
+         "unit_price": "36.88",
+         "min_qty": 1,
+         "siz_width": null,
+         "siz_height": null,
+         "siz_cd": null,
+         "plt_siz_cd": "SIZ_000499",
+         "print_opt_cd": null,
+         "mat_cd": "MAT_000073",
+         "proc_cd": null,
+         "opt_cd": null,
+         "coat_side_cnt": null,
+         "spot_side_cnt": null,
+         "bdl_qty": null,
+         "page_cnt": null
+        },
+        "tier_min_qty": "1",
+        "per_item": "36.88",
+        "subtotal": "11064",
+        "comp_qty": 300,
+        "error": null,
+        "calc_error": null,
+        "note": "",
+        "data_gap": [],
+        "matched_names": {
+         "plt_siz_cd": "316x467",
+         "mat_cd": "백색모조지 120g"
+        }
+       }
+      ],
+      "warnings": []
+     },
+     "discounts": [],
+     "final_price": 11064,
+     "warnings": [],
+     "errors": []
+    },
+    "contribution": "11064",
+    "included": true
+   }
+  ],
+  "set_eval": {
+   "eval": {
+    "ok": true,
+    "target": {
+     "kind": "product",
+     "code": "PRD_000068",
+     "name": "중철책자"
+    },
+    "qty": 100,
+    "as_of": "2026-09-04",
+    "mode": "lenient",
+    "base": {
+     "source": "FORMULA",
+     "formula": {
+      "frm_cd": "PRF_BIND_SUM",
+      "frm_nm": "제본 합산형(중철)"
+     },
+     "amount": "0",
+     "components": [
+      {
+       "comp_cd": "COMP_BIND_JUNGCHEOL",
+       "comp_nm": "제본비 중철",
+       "disp_seq": 1,
+       "prc_typ": "PRICE_TYPE.01",
+       "use_dims": [
+        "proc_cd",
+        "min_qty",
+        "proc_grp:PROC_000017"
+       ],
+       "included": false,
+       "matched_row": null,
+       "tier_min_qty": null,
+       "per_item": null,
+       "subtotal": "0",
+       "comp_qty": 100,
+       "error": null,
+       "calc_error": null,
+       "note": "",
+       "data_gap": []
+      }
+     ],
+     "warnings": []
+    },
+    "discounts": [],
+    "final_price": 0,
+    "warnings": [
+     "선택값에 매칭되는 구성요소가 없습니다(합계 0원)."
+    ],
+    "errors": []
+   },
+   "contribution": "0"
+  },
+  "base_total": "12908",
+  "discounts": [],
+  "final_price": 12908,
+  "warnings": [
+   "[셋트공식] 선택값에 매칭되는 구성요소가 없습니다(합계 0원)."
+  ],
+  "errors": [],
+  "supply": 12900,
+  "vat": 1290,
+  "total_with_vat": 14190,
+  "unit_adj": 8
+ }
+}
