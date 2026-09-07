@@ -3,7 +3,7 @@ id: SPEC-STAFFBRIEF-001
 doc: progress
 version: "0.1.1"
 updated: 2026-09-08
-status: in-progress
+status: completed
 tier: M
 ---
 
@@ -16,7 +16,7 @@ tier: M
 | plan (SPEC 작성) | **완료** 2026-09-08 | 카드 t45 · 세션 `spec-author-t45` · research.md(4렌즈) 승계 |
 | plan-audit | **2차 PASS(9/10) 확정** 2026-09-08 | 1차 FAIL(7/10) → F1~F8 수정(v0.1.1) → 차등 재감사 통과(≤3회 중 2회 소진) |
 | run (M1~M3) | **v1 완료 + v2 보강 완료** 2026-09-08 | v1: M1~M3 AC 23/23 · v2: 지니 확정 4방향+findings 8건 반영(리드 dispatch · 이 세션) |
-| sync | **v1 임시 종료 · v2 최종 검증 별도 dispatch 대기** | findings는 §E.4 · v2 산출·자체 검증 완료 · AC 23건 독립 전량 재판정·completed 전이는 다음 sync dispatch |
+| sync | **완료** 2026-09-08 | v2 최종 검증 PASS · AC 23/23 독립 재판정 · 4차원 96.7 · completed 전이 |
 
 ---
 
@@ -115,7 +115,58 @@ ac_re_adjudication: pending-separate-dispatch  # AC 23건 독립 전량 재판�
 
 ## §E.4 Sync-phase Audit-Ready Signal
 
-_<interim — v1 조기 종료 기록>_
+_<final — 2026-09-08 v2 최종 종결 (manager-docs-t45 · sync dispatch)>_
+
+```yaml
+sync_status: completed
+sync_completed_at: 2026-09-08
+sync_commit: "subject-identified: sync(t45): SPEC-STAFFBRIEF-001 완료 — sync 감사 PASS(AC 23/23·4차원 96.7) · §E.4 최종 · completed 전이 (본 기록을 실은 커밋 자체 — sha 미기입·주제 자기식별은 run-phase 승계 규약)"
+frontmatter_transition: "in-progress → completed · updated: 2026-09-08 — SPEC 4종 동시 적용(spec.md · plan.md · acceptance.md · progress.md)"
+audit_verdict: PASS
+audit_ac_result: "AC-SB-001~023 전항목 PASS(23/23) — 콜드 sync-auditor가 자체 명령(stat·grep·pdftotext·git)으로 전 AC 재현 · verdict.md 판정 인용 0건"
+audit_4dim: "Functionality(40%) 98 · Security(25%) 96 · Craft(20%) 96 · Consistency(15%) 97 → 조화평균 composite 96.7/100"
+audit_must_pass_firewall: "미발화(통과)"
+audit_hard_blockers: 0
+audit_report: .moai/reports/sync-audit/SPEC-STAFFBRIEF-001-v2-2026-09-08.md
+docs_sync: "no-op — README/CHANGELOG/docs-site 변경 대상 없음(§E.4-3 게이트 처분) · §E.4+frontmatter 전이가 유일한 동기화분"
+push: "미실행 — 원격은 칸반 리드 소관"
+```
+
+### §E.4-1 Sync 감사 판정 (바인딩 · 콜드 sync-auditor · 2026-09-08 완료)
+
+- **판정 PASS** — AC-SB-001~023 전항목 PASS(23/23). 감사자는 verdict.md 판정을 인용하지 않고 자체 명령(stat·grep·pdftotext·git)으로 전 AC를 독립 재현했다.
+- **4차원 조화평균 96.7/100** — Functionality(40%) 98 · Security(25%) 96 · Craft(20%) 96 · Consistency(15%) 97. must-pass 방화벽 미발화 · HARD 저해 0건.
+- **감사자 findings F1~F4 — 전량 선택사항(저해 0) → 불채택·기록 유지**:
+  - F1: twin:64 「(부품 창고)」 비유 잔편 = AC 위반 아님
+  - F2: verdict v1 표 35,129B = v1 역사 기록으로 정확
+  - F3: `.env.local` 절대경로 주석 = 값 무누출
+  - F4: design/critique 지목 = 아래 S-1 정정 기록 수립으로 해소
+- 판정 보고서(5-섹션 증거 기반 형식): `.moai/reports/sync-audit/SPEC-STAFFBRIEF-001-v2-2026-09-08.md`
+
+### §E.4-2 오케스트레이터 design/critique 렌즈 소견 (v2 PDF 17면 — 1·4·5·17면 비전 분석 + 기계 교차검증 동반)
+
+**긍정 확인**: 페이지번호 n/17 17면 전수(pdftotext) · 고아 h2 해소(.keep 컨테이너 21곳) · v1 9면 고아 Sources → 「발표 환경」+「출처와 기준 시점」 실콘텐츠로 승격(h2) · SPEC ID 하이픈 줄바꿈 없음(nowrap — 17면에서 SPEC-WIDGET-WIRING-001 한 줄 확인) · 실화면 캡처 3종 렌더 정상+수치 교차검증(스크린샷 3,600원 · 이벤트 로그 total:3960 · 캡션 3,960원=공급가 3,600+부가세 360 일치) · 컴포넌트 20종 카탈로그 표 6면 실림(5면 "표 부재" 비전 지적은 페이지 분할 착시) · 브랜드 토큰·타이포·위계 양호.
+
+**S-1 [보통·non-blocking] PDF mermaid 미렌더** — 5면에 빈 둥근 컨테이너로 남음. 근거: 다이어그램 전용 노드 라벨 「주문 확정」 HTML=1건(mermaid 소스)·PDF 텍스트층=0건 + 5면 비전 관찰(빈 박스). v1 PDF도 동일(「주문 확정」 0건) → **v1 verdict 「mermaid 실렌더」 주장과 v1 임시 §E.4 동일 문구는 오판이었음을 정정**(당시 텍스트층 라벨 히트는 산문/noscript 중복분). 정보 소실 없음(AC-SB-005 중복 설계·noscript 산문 PDF 동반 수록). 운영 권고: 발표는 HTML로 진행하거나, PDF 재출력 시 `--virtual-time-budget` 대기 또는 렌더된 SVG 인라인.
+
+**S-2 [보통·non-blocking] file:// 로컬 경로 17면 전수 노출 + 인쇄 헤더(날짜·제목)** — v2 회귀(v1은 0건·v1은 `--no-pdf-header-footer` 사용). 원인: `mkpdf_v2_260908.py`가 `--no-pdf-header-footer` 제거하고 `--footer-template` 지정했으나 Chromium CLI가 이를 무시(스크립트 주석이 무시 가능성을 자인·후처리 없음) → 크롬 기본 헤더/푸터 활성. verdict v2의 「PDF footer-template으로 n/17 실증」은 메커니즘 오기술(페이지번호 자체는 존재하나 기본 푸터 소급). 배포 전 재출력 시 `--no-pdf-header-footer` + 페이지번호 대체안 병행 권고.
+
+**S-3 [사소]** — 인쇄 헤더 세리프 이질·타임스탬프(S-2에 포함) · 카드 캡션 행말 「·」 잔류(keep-all과 별개의 허용 조판).
+
+**오탐 기각 기록**: 비전 지목 오탈자 8종(삼품수·재약·글렀을·웨젯·워켓·프린트쳐·네 기지·게시될≠) 원문 전부 0건·제목 정상(「위젯+웹어드민 종합 브리핑」) — 저해상도 판독 오탐.
+
+### §E.4-3 게이트 처분
+
+- **GATE 1 (사전 품질)** — 워킹트리 clean(추적 변경 0) · 테스트 N/A(문서 산출 카드 — §E.3 cross_platform_build note 승계) · 오케스트레이터 기계 배치 전건 일치(93,895B · 외부참조 예외 2종 · `#553886`=0 · 금지서술 0건 · `.keep` 21 · `@page` 1 · nowrap 7 · keep-all 1 · data:image 3).
+- **GATE 2 (문서 범위)** — 리드 dispatch로 사전 승인(④ 문서 동기화 전체 지정) · divergence 판정: 본 카드는 `.moai/reports` 리포트 산출 카드로 README/CHANGELOG/docs-site 변경 대상 없음(plan-phase 「프로젝트 문서 스캐폴딩 대상 아님」 근거 승계) → 문서 동기화 no-op, progress.md §E.4+frontmatter 전이가 유일한 동기화분.
+
+### §E.4-4 4차원 스크립트 미사용 근거
+
+`.claude/workflows/sync-audit-4dim.js`가 카드 트리에 부재(메인 체크아웃 미트래킹 자산 — AC-SB-020 정합) → FO-SYNC-1 능력게이트 미충족 → 콜드 sync-auditor 정규 폴백 경로가 바인딩 판정 소유.
+
+### v1 interim 원 기록 (2026-09-08 · 보존)
+
+_<이하는 v1 임시 종료 시점의 원 기록 — verbatim 보존하되 "mermaid PDF 실렌더" 줄에만 S-1 정정 각주를 추가했다(v2 감사에서 오판 확인)._
 
 ```yaml
 sync_status: interim-closed-v1
@@ -125,7 +176,7 @@ frontmatter_transition: none  # v2 대기 — in-progress 유지
 early_exit_reason: "리드 지시 — 지니 확정 '리포트 4방향 보강'(실화면 자료·깊이/분량·오픈준비 시나리오·발표 전달력)으로 v1은 v2로 대체 예정. 진행 중 검증 패스까지만 마무리. v2 최종 검증은 별도 dispatch."
 ```
 
-### 기계 재확인 배치 (2026-09-08 · 읽기전용 — run 판정과 전건 일치)
+#### 기계 재확인 배치 (v1 — 2026-09-08 · 읽기전용 · run 판정과 전건 일치)
 
 | 항목 | 결과 | 방법 |
 |---|---|---|
@@ -134,9 +185,9 @@ early_exit_reason: "리드 지시 — 지니 확정 '리포트 4방향 보강'(�
 | 브랜드 토큰 | `#5538B6` ×6 · 오기 `#553886` ×0 · Noto Sans KR 스택 확인 | grep |
 | 스크립트 구조 | `<script>` 1(mermaid) · `<noscript>` 1 | grep |
 | 금지 서술 | "전부 주문 가능" 0건(html·md) · "가격 없는 상품" 0건 · `260824-baseline` 0건 | grep |
-| mermaid PDF 실렌더 | 라벨이 PDF 텍스트층에 존재(구성 조회·옵션 선택·서명 히트) | `pdftotext -f 2 -l 3` |
+| mermaid PDF 실렌더 | ~~라벨이 PDF 텍스트층에 존재(구성 조회·옵션 선택·서명 히트)~~ → **정정 각주(S-1 · v2 감사)**: 당시 텍스트층 라벨 히트는 산문/noscript 중복분이며, 다이어그램 전용 노드 라벨 「주문 확정」 PDF 텍스트층 0건 — mermaid는 v1·v2 PDF 모두 미렌더. | `pdftotext -f 2 -l 3` |
 
-### `--design` / `--critique` 렌즈 findings (PDF 9면 실물 — pdftoppm PNG → zai 비전 분석 1·5·9면 + 원문 교차검증)
+#### v1 `--design` / `--critique` 렌즈 findings (v1 PDF 9면 실물 — pdftoppm PNG → zai 비전 분석 1·5·9면 + 원문 교차검증 · 권고 8건 전량 v2 반영 완료)
 
 입력 자산: `.moai/state/verify/55945c06/pdf-pages/page-{1..9}.png` (130dpi · 9면 전량 변환).
 
@@ -156,6 +207,8 @@ early_exit_reason: "리드 지시 — 지니 확정 '리포트 4방향 보강'(�
 **오탐 확인(원문 대조 — 결함 아님, 비판 기각)**: 비전 판독 지목 표기 3종("재살출"·"임기전용"·"재전단") → 원문 grep 결과 "재실측"×13·"읽기전용"·"재진단" 전부 정상. "(2026-09-06 재생성 기준 메뉴일 기준) '기준' 이중 사용" 지적 → 원문은 "재생성 매뉴얼 기준"(단일). 비전의 "2026년 날짜=목업 추정"도 부적절(본 프로젝트 실제 연도).
 
 **미수행(v2 dispatch에서)**: 4면(최대 밀도 페이지) 비전 분석 — zai 호출 6분20초 무응답으로 중단(타임아웃). AC 23건 독립 전량 재판정 · 4차원 종합 점수 · manager-docs 문서 동기화 전체 · `completed` frontmatter 전이.
+
+**→ v2 sync dispatch 수행 완료(2026-09-08)**: 4면 비전 분석은 v2 PDF 1·4·5·17면 분석에 포함돼 갈음 · AC 23건 독립 전량 재판정 = §E.4-1 sync 감사 PASS(23/23) · 4차원 종합 점수 = 조화평균 96.7 · manager-docs 문서 동기화 = 본 §E.4 최종 기록+frontmatter 전이(문서 동기화 no-op 판정) · `completed` frontmatter 전이 = 본 커밋.
 
 ## §F Phase 4 Mode Selection
 
