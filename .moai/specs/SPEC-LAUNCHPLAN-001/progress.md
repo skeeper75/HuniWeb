@@ -65,7 +65,127 @@ Implementation Kickoff Approval(plan→run 인간 게이트) 대기. 승인 후 
 
 ## §E.2 Run-phase Evidence
 
-_<pending run-phase>_
+### M0 — 28구간 통합 상태판 (2026-09-17 · run 레인)
+
+#### Claim (주장)
+
+1. SPEC 폴더 안 런타임 캐시 2종을 삭제했다.
+2. `S/S5-plan/` 산출 디렉터리를 신설하고 `status-28.csv`(32행)를 생성했다.
+3. plan 단계 「미검증 사항」 4건 중 **3건을 닫았다**(#1 #2 #3). #4 는 산출물 미생성으로 미개봉.
+
+#### Evidence (증거 · 실행 명령 + 관측 출력)
+
+**(1) 캐시 삭제** — 삭제 전 미추적 확인:
+```
+$ git ls-files .moai/specs/SPEC-LAUNCHPLAN-001/.moai .moai/specs/SPEC-LAUNCHPLAN-001/.claude
+(출력 없음 = 전건 미추적)
+$ rm -rf <두 디렉터리>
+$ git status --short --branch
+## WT-open-plan-rewrite
+?? .moai/state/config-cache.json
+?? .moai/state/context-usage.json
+?? .moai/state/github/
+```
+`.moai/` 하위는 런타임 캐시 3파일(`config-cache.json`·`context-usage.json`·`github/counts.json`),
+`.claude/` 하위는 빈 디렉터리 2개(`agent-memory/manager-spec`·`agent-memory/plan-auditor`)뿐이었다
+— 빈 디렉터리는 git 이 표시하지 않으므로 `git status` 에 안 보였던 것이고, 미추적 판정과 모순되지 않는다.
+워크트리 루트 `.moai/state/` 는 지시대로 **보존**(위 status 3행이 그 증거).
+
+**(2) 상태판** — `S/S5-plan/status-28.csv` 생성. 생성기 자기검사 출력:
+```
+rows(데이터) = 32
+분할 분포 : {'①': 10, '②': 11, '③': 11}
+status 분포: {'작동': 2, '부분': 12, '구현-미검증': 5, '없음': 6, '미실측': 2, '미착수': 5}
+작동 표기 행: ['A1', 'B2']
+근거 빈칸 행: []
+```
+열 = `구간 · 구간명 · 분할 · 시스템 · 담당 · status · 10/6_필수여부 · 근거 · 실측일시 · 남은_일`
+(plan §M0-6 의 7열 + `구간명`·`분할`·`실측일시` 3열. `분할` 은 plan §M0 이 요구한 ①②③ 표기,
+`실측일시` 는 `CARDS-S.md` §2 공통 스키마의 `measured_at` 필수 규정을 승계).
+
+**`작동` 표기 2행뿐**(A1 상품등록 · B2 옵션선택·실시간견적) — 둘 다 오늘 화면 관측 근거를 갖는다
+(A1: 상품뷰어 296항목 렌더 @01:30:17 · B2: `<huni-widget>` 2건 Shadow DOM 렌더 + 부가세 포함가
+7,700 / 44,130 @01:40:39~01:40:52). REQ-LP-018(화면 없이 `작동` 없음) 준수.
+
+**(3) 미검증 #1 — D3 세 검사의 jsdom 구현 가능성 = 구현 가능. 대리 지표 불필요.**
+프로토타입 실행 출력(Node v25.2.1 + jsdom 설치본):
+```
+005(a) 본문 글자수 = 25 · 700 이하 = true
+006(d) 동사 = true · 화면지시어 = true · 길이 = 29 → true
+014(c) 수 = 3 · 기준선언 = true · 원천경로 = true → true
+```
+세 검사 모두 DOM 조회 + 정규식으로 성립한다 — AC-LP-006(d) 의 「형태소 검사」는 실제로는
+SPEC 이 토큰 목록(`열|누르|접속|조회|실행` · `화면|메뉴|페이지|콘솔|목록`)을 명시해 둔
+**부분문자열 매칭**이므로 형태소 분석기가 필요 없다.
+
+**(4) 미검증 #2 — `R/R5/build_xlsx_v4.py` 열람 완료. 654행 시트 보존 실현 가능.**
+```
+$ wc -l .../R/R5/build_xlsx_v4.py
+     914
+$ sed -n '3,5p'
+R5 · 엑셀 9시트 생성기 (D-20 재기준선 · 2026-09-16)
+원장 v4 CSV(654행 · 28열) → docs/huni/후니프린팅_통합IA_일정_역할분담_260916.xlsx
+$ wc -l .../R/R2/unified-ledger-v4.csv
+     655   (헤더 1 + 데이터 654)
+```
+D2(`build_xlsx_v4_plan.py`)는 이 스크립트의 포크로 성립한다. 차단 요인 없음.
+
+**(5) 미검증 #3 — 두 정본 대조 완료. §6 도식 계약 흔들림 없음.**
+```
+$ grep -nE 'use_dims|12종' .claude/rules/moai/domains/huni-pricing-engine-map.md
+203:**12종 선언값 전부 사용 중, 미사용 0.** 추가로 선언에 없는 토큰 2계열: opt_grp: 22건 · proc_grp: 31건
+196:- use_dims 의 opt_grp:* 는 매칭 차원이 아니라 **스코프 선언**이며 판별차원 계산에서 제외된다(:778-781)
+205:물리 컬럼 clr_cd(도수)가 unique 제약에는 있으나 _USE_DIM_CHOICES 12종과 NON_QTY_DIMS 9종에는
+$ grep -nE '단계' .claude/rules/moai/domains/huni-product-lifecycle.md | head -1
+24:## 1. 상품 하나가 팔리기까지 — 6단계
+```
+- `use_dims` **12축**은 정본과 일치(REQ-LP-017 · AC-LP-014(d)).
+- 「5단계 vs 6단계」는 **모순이 아니다** — 6단계는 상품 생애주기(정본 §1), 5단계는 옵션↔가격 도식
+  자체의 단계이고, `spec.md:201` 이 정본을 「§1 6단계」로 정확히 인용하고 있다.
+- **D1 도식에 반영할 단서 2건**(정본 `:196`·`:205`): ① `opt_grp:*` 는 판별차원이 아니므로 도식이
+  「12축 전부가 가격을 가른다」로 읽히면 안 된다 ② `clr_cd`(도수)는 12종·9종 어디에도 없다.
+
+#### Baseline-attribution (baseline 귀속)
+
+- 워크트리 `t47` HEAD = `13dffba8 feat(SPEC-LAUNCHPLAN-001): plan-phase artifacts (Tier M)`
+  (5파일 1,194행) · `git rev-list --count --left-right origin/main...HEAD` = `0	1`
+  (origin/main 대비 1 앞섬 · 뒤처짐 0) · 브랜치 `WT-open-plan-rewrite` · 미푸시.
+- 상태판 입력 = S1~S5 카드 산출물 실측 문장. 모든 행의 `근거` 열은 그 원문 위치를 가리킨다
+  (빈칸 0건 — 위 자기검사 출력).
+- 라이브 관측 시각은 전부 S5(2026-09-17 01:29~01:42 KST) 승계 — run 레인이 새로 브라우저를
+  열지 않았다(§Gaps 참조).
+
+#### Gaps (미검증 — 이번에 관측하지 **않은** 것)
+
+1. **ego-browser 재실측을 run 레인이 새로 하지 않았다.** plan §M0-2 가 「① 즉시 가능(p1·p2)은
+   S5 로 사실상 완료 — 아래 4에서 소비만 한다」로 규정하므로 **소비**했다. 리드 dispatch 의
+   「space 20 재실측」을 새 관측으로 읽으면 이 항은 미이행이다 — **리드 판정 필요**.
+2. **p3 셀러어드민 · p4 구 사이트 미관측** → `D1`·`E1` 두 행은 `없음` 이 아니라 **`미실측`**.
+   4관문(`CARDS-S.md` §3-2)을 통과하지 않은 상태에서 `없음` 을 적으면 근거 없는 결함 주장이 된다.
+   plan §M0-4 의 문자 그대로는 ③ 에 `없음`/`미착수` 를 쓰라고 하지만, 두 행은 부재가 확인된 것이
+   아니라 **보지 못한 것**이므로 상태 어휘를 하나 늘렸다 — **리드 판정 필요**(어휘 확장 승인 여부).
+3. **회원 화면 24행 재실측 대기** — 이메일형 테스트 계정 미확보(S1·S5 공통 Missing Input).
+   `B5`·`B6`·`B7`·`C7`·`D2` 가 이 계정 하나에 함께 걸려 있다(분할 ②의 대표 묶음).
+4. **미검증 #4 미개봉** — `option-price-trace.md` mermaid 렌더 가능성 · §A-2 LOC 추정 ·
+   교차모델 2차 의견. 전부 D1 산출물이 있어야 닫히므로 **M2/M4 로 이월**.
+5. **jsdom 이 이 저장소에 없다** — 리포지토리에 `package.json` 이 없고 전역 설치도 없다
+   (`npm ls -g --depth=0` 출력에 jsdom 부재). 프로토타입은 스크래치패드에 임시 설치해 돌렸다.
+   D3 를 실제로 두려면 `S/S5-plan/` 에 `package.json` + `node_modules` 가 생긴다 —
+   **커밋 대상인지 `.gitignore` 대상인지 리드 결정 필요**.
+
+#### Residual-risk (잔여 위험)
+
+- **R-α (신규)**: jsdom 의 HTML 파서는 `<table>` 밖의 `<td>` 를 **조용히 버린다**(프로토타입에서
+  실제로 겪음 — `querySelector('td.check')` 가 `null`). D1 이 표를 온전한 `<table><tr><td>` 로
+  내지 않으면 AC-LP-006 의 6칸 검사가 **0행을 읽고 조용히 통과**할 수 있다.
+  → D3 에 「검사 대상 행 수가 0 이면 FAIL」 가드를 넣어야 한다. M4 착수 시 필수.
+- **R-β**: 상태판의 `status` 판정은 카드 산출물의 문장을 승계한 것이고, run 레인이 코드를 다시
+  읽어 교차검증하지는 않았다. 카드가 틀렸으면 상태판도 같이 틀린다.
+- 기존 이월 R-2·R-3(plan §잔존 기술부채)은 **D1 조립(M2)·D3 작성(M4)** 에서 닫는다 — 미해소.
+
+#### 다음 단계
+
+M1(데이터 조립) 착수 가능. 단 위 Gaps 1·2·5 는 **리드 판정 대기** 항목이라 보고 후 진행한다.
 
 ## §E.3 Run-phase Audit-Ready Signal
 
