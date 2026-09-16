@@ -323,6 +323,63 @@ widget_manual_content  SCREENS 24 · captures 32 · 콜아웃 52
 |---|---|---|---|
 | 1 | 커밋 `7abdcdba` 히스토리에 **평문 연락처 2건**(대표전화·대표이메일)이 남아 있다 | 작업 파일은 마스킹했으나 이력은 그대로다. 지금 재작성하면 두 레인이 공유한 브랜치를 흔들어 금지 | **푸시 결정 시 sync 레인**이 squash / filter 로 제거. 그 전까지 브랜치는 **내부 워크트리 전용 · 푸시 0** |
 
+### M1.5-② webadmin 실클릭 — 중단 지점 (지니 /clear 지시 · 2026-09-17 07:58)
+
+#### 진행 결과
+
+| 축 | 값 |
+|---|---|
+| 매트릭스 전체 | 159 요소 |
+| **동작확인(URL@일시)** | **37** |
+| **쓰기경로-dev환경필요** | **43**(클릭하지 않음 — 규정대로) |
+| **미실측** | **79** (49.7% · AC-LP-014(e)(vi) 상한 30% **미달성 — 재개 필요**) |
+| webadmin 107 중 | 동작확인 37 · 쓰기경로 32 · 미실측 38 |
+| 위젯빌더 52 | 전건 미착수 |
+| run 레인 실제 클릭 | webadmin step 9회 + p3 메뉴 4회 + p1 13회 |
+
+#### [사고 보고] category-master 에서 삭제 확인 다이얼로그를 띄웠다 — 피해 없음
+
+**무슨 일**: 매뉴얼이 규정한 선행 조작 `click .row` 를 `.row >> nth=0` 으로 실행했는데,
+`/admin/category-master/` 에서 **「엽서/카드 카테고리를 삭제할까요? (논리삭제)」 확인 창**이 떴다.
+스크립트가 다이얼로그를 **자동 수락(acceptDialog)** 하도록 짜여 있었다.
+
+**원인**: 그 화면의 `.row` 는 내부에 삭제 컨트롤을 품고 있다 —
+`<div class="row"> … <span class="del" onclick="delRow(event,'CAT_000001')">삭제</span> …`.
+행 중앙 클릭이 그 자식에 닿았다. **매뉴얼의 step 자체가 이 화면에서는 쓰기 경로를 건드린다.**
+
+**피해 확인(즉시 실측 · 2026-09-17 07:58:16~07:58:48)**:
+- webadmin `/admin/category-master/` — **엽서/카드 `CAT_000001` 존재** · 하위 4 · 상품 18 · 전체 16행 유지.
+- 고객 화면 `shopby.huniprinting.co.kr/` — **GNB 12 카테고리 전부 정상**(엽서/카드 포함).
+→ **삭제되지 않았다.** 다만 「수락이 발화하지 않았음」을 증명한 것이 아니라
+  **「두 화면 모두에 그대로 존재함」을 관측**한 것이다(VCI §1 — 관측한 것만 적는다).
+
+**재개 시 의무**: 선행 조작을 `.row` 중앙이 아니라 **`.row .nm` 등 안전한 자식**으로 좁히고,
+클릭 전에 `.del`·`.edit` 자식 유무를 먼저 검사한다. **다이얼로그 자동 수락 코드를 제거**하고,
+다이얼로그가 뜨면 그 요소는 `미실측(사유)` 로 둔다. 매트릭스 해당 행 note 에 경고를 남겼다.
+
+#### [손실] 첫 6화면 16요소의 증거가 저장되지 않았다
+
+`product-viewer` · `…/options/OPT-000010/?_popup=1` · `sku-catalog` · `set-products` ·
+`tmpl-combo-md` · `paper-management` — 콘솔에는 **16/16 확인**으로 찍혔으나, 그 직후
+다이얼로그로 프로세스가 종료돼 결과 JSON 이 **기록되지 않았다**. URL@시각 증거가 없으므로
+**기억으로 채우지 않고 `미실측` 으로 둔다.** 재개 시 이 6화면을 먼저 다시 돈다.
+
+#### M1.5-② 재개 지점
+
+| 항목 | 값 |
+|---|---|
+| 매트릭스 | `_workspace/huni-launch-runway/07_rebaseline/S/S5-plan/manual-element-matrix.csv`(159행 · 10열) |
+| 읽는 법 | 같은 폴더 `matrix-README.md` — 분모 규칙·재현 명령·두 분모 분리·결과 4종·iframe 기법 |
+| **다음 화면(1순위)** | 위 6화면 재실측(16요소) → 이어서 `{code}` 치환이 필요한 product-viewer 하위 3화면(options·constraints·templates) + `price-viewer/comp/{code}/edit` + `price-viewer/{code}/diagram` |
+| 그다음 | `MODEL_ADMIN_SCREENS` 10건(경로 없음 — Django 표준화면) |
+| 마지막 | 위젯빌더 52요소 — 대표 상품 1개(프리미엄명함)로 캔버스 상태를 만든 뒤 속성 패널 순회 |
+| p2 로그인 | `huni-admin.printly.co.kr` **유지 중**(iframe 아님 · 직접 URL 로 바로 열림) |
+| p3 로그인 | `service.shopby.co.kr` **유지 중**(`SHOPBY_ADMIN_*`) · 본문은 `enterprise-remote` iframe · 메가메뉴 클릭 필요 |
+| p1 로그인 | 회원 세션 유지 중(이메일형 계정) |
+| 남은 지시 | 알림톡 **「주문배송 관련」 탭** 15항목을 ② 도는 김에 오늘 시각으로 갱신(리드 판정 3) |
+| **M2 주의** | `8dc0a618` 기준 `acceptance.md` 를 **다시 읽고** `data-owner ∈ {nhn,huni,ext}` · `data-work ∈ {config,dev,wait}` 적용. nhn·ext 는 `dev` 금지 · `wait` 은 `ext` 전용 · `ext×wait` 집합 = §8 선행/외부 대기 항목 |
+| 브랜치 | `WT-open-plan-rewrite` · 워크트리 `.claude/worktrees/t47` · **유일 사본 · 푸시 0** |
+
 ## §E.3 Run-phase Audit-Ready Signal
 
 _<pending run-phase>_
