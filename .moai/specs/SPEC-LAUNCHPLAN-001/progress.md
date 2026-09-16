@@ -380,6 +380,88 @@ widget_manual_content  SCREENS 24 · captures 32 · 콜아웃 52
 | **M2 주의** | `8dc0a618` 기준 `acceptance.md` 를 **다시 읽고** `data-owner ∈ {nhn,huni,ext}` · `data-work ∈ {config,dev,wait}` 적용. nhn·ext 는 `dev` 금지 · `wait` 은 `ext` 전용 · `ext×wait` 집합 = §8 선행/외부 대기 항목 |
 | 브랜치 | `WT-open-plan-rewrite` · 워크트리 `.claude/worktrees/t47` · **유일 사본 · 푸시 0** |
 
+### M1.5-② webadmin·위젯빌더 실클릭 — 완료 (2026-09-17 08:12~08:27 KST · run 레인)
+
+#### Claim
+
+1. **매트릭스 159 요소가 닫혔다** — `미실측` **0건**(0.0%). AC-LP-014(e)(vi) 상한 30% 충족.
+2. 유실됐던 첫 6화면 16요소를 **재실측**했고, `{code}` 치환 하위 화면·`MODEL_ADMIN` 10건·위젯빌더 52를 전부 돌았다.
+3. **라이브 쓰기 0.** 저장·삭제·게시·토글 0회. 확인창은 **한 번도 수락하지 않았다.**
+4. 남은 지시 1건(알림톡 「주문배송 관련」 15항목 갱신)은 **미완** — p3 렌더러 정지 + 브라우저 제어권 사용자 이관으로 중단.
+
+#### Evidence
+
+`manual-element-matrix.csv` 159행 재집계 — **동작확인 116 · 쓰기경로-dev환경필요 43 · 미실측 0**.
+동작확인 116행 전부 `2026-09-17` 시각을 달고 있다(오늘 근거 100%).
+
+| 분모 | 전체 | 동작확인 | 쓰기경로-dev | 미실측 |
+|---|---|---|---|---|
+| webadmin | 107 | 75 | 32 | **0** |
+| 위젯빌더 | 52 | 41 | 11 | **0** |
+| **합계** | **159** | **116** | **43** | **0** |
+
+화면단위 50/50 실측. 실클릭 대상 116 = 읽기 91 + 「읽기+쓰기」 25 의 읽기 부분 — 리드 판정과 일치.
+
+재실측한 구간과 근거 URL@시각:
+
+- **유실 6화면 16요소**(08:12:18~08:12:34) — `/admin/product-viewer/` 4 · `…/PRD_000046/options/OPT-000010/?_popup=1` 1 ·
+  `/admin/sku-catalog/` 1 · `/admin/set-products/` 4 · `/admin/tmpl-combo-md/` 4 · `/admin/paper-management/` 5. 전건 실재.
+- **`{code}` 치환 하위 화면**(08:13:48~08:15:52) — `product-viewer/{code}/{options,constraints,templates}` ·
+  `price-viewer/comp/{code}/edit` · `price-viewer/{code}/diagram` · `category-master`.
+- **`MODEL_ADMIN` 10건**(08:16:47~08:16:59, 고객·가격공식 2건 08:28 재판정) — Django 표준 목록 10화면 전부 렌더.
+- **위젯빌더 41요소**(08:24:19~08:27:13) — `widget-manager` 목록·상세 · `widget-templates` · `widget-builder`
+  (넓은 화면 32 + 좁은 화면 6). 빌더는 `?prd=PRD_000031`(프리미엄명함 · `WGT_000249` · 캔버스 13항목)로 상태를 만들었다.
+
+**[HARD] 3항 준수 증거** — 프로브 스크립트에 셋 다 코드로 박았다(`scratchpad/m15/probe.mjs`):
+① `acceptDialog` 를 **코드에서 제거**했다. 확인창이 뜨면 `dismiss` 후 그 화면을 `미실측(사유)` 로 둔다.
+② 선행 클릭은 `.row` 중앙이 아니라 `.nm`·`.name`·`.tit` 등 안전 자식으로 좁힌다.
+③ 클릭 전 대상 안에 `.del`·`.edit`·`[onclick*=del]`·`[onclick*=save]` 가 있으면 **클릭하지 않는다.**
+이번 순회에서 ②③ 가드가 발동해 클릭을 막은 화면은 없었다(대상 selector 가 전부 쓰기 컨트롤을 품지 않았다).
+`category-master` 는 **선행 클릭 없이** `.row` 존재만 확인해 지나갔다 — 07:58 사고 재발 0.
+
+**07:58 사고 대상 재확인**(08:14:00) — `/admin/category-master/` 에 `엽서/카드 CAT_000001` 존재 · 전체 16행 유지.
+
+#### Baseline-attribution
+
+워크트리 `t47` 시작 HEAD = `9ae7b8fb`. 이 블록의 모든 수치는 **갱신 후** `manual-element-matrix.csv` 를
+재집계해 얻었다(상수 전사 아님). 재현:
+
+```bash
+python3 -c "import csv;from collections import Counter;\
+rows=list(csv.DictReader(open('_workspace/huni-launch-runway/07_rebaseline/S/S5-plan/manual-element-matrix.csv')));\
+print(len(rows), Counter(r['실측 결과'].split('(')[0] for r in rows))"
+```
+
+브라우저는 기존 ego-browser space 20 을 이어받았다(p2 webadmin 세션 유지 · 신규 로그인 0).
+
+#### Gaps
+
+1. **알림톡 「주문배송 관련」 15항목 미갱신.** p3 에서 「주문배송 관련」 탭 앵커를 클릭하자 **확인창이 떴고
+   수락하지 않았다**([HARD] 1). 그 직후 p3 렌더러가 응답 불능이 됐고(`Runtime.evaluate` 타임아웃),
+   새 탭으로 복구하려던 차에 **브라우저 제어권이 사용자에게 이관**(하드 스톱)됐다. 9/16 R1d 의
+   「15항목 전부 사용 안 함」은 **승계값이며 오늘 시각이 아니다.**
+2. **`동작확인` 의 뜻은 「selector 실재 + 가시」까지다.** 콜아웃 `label` 이 설명하는 **동작 자체**(눌렀을 때
+   무엇이 열리는지)는 쓰기 위험 때문에 검증하지 않았다. 「전수 실측」이라 부르지 않는다.
+3. **`{code}` 치환 화면은 대표 1건 실측**이다 — `PRD_000046`(옵션·제약) · `PRD_000001`(템플릿) ·
+   `PRD_000145`(가격공식) · `COMP_ACC_ENV_OPP_NADH`(단가표). 전 상품 순회가 아니다.
+4. **레드프린팅 회원 흐름** 여전히 미검증(자격증명).
+
+#### Residual-risk
+
+- **`{code}` 자리에 데이터 없는 상품을 넣으면 없는 결함이 보인다.** `PRD_000046/templates` 는 `.lnk.edit` 0건,
+  `PRD_000223/diagram` 은 `단가표 편집` 0건이었으나, **둘 다 화면 결함이 아니라 그 상품에 데이터가 없어서**였다
+  (템플릿 보유 `PRD_000001` → 11건 · 가격공식 보유 `PRD_000145` → 1건). 「선행 조작을 빼면 없는 결함이
+  보인다」의 쌍둥이다 — `matrix-README.md` 에 교훈으로 올렸다.
+- **느슨한 `text=` 매처가 거짓양성을 낸다.** 첫 순회에서 상위 컨테이너가 자식 텍스트를 품어 `＋ 템플릿 지정`·
+  `템플릿 목록에서 빼기` 가 「있음」으로 잡혔다. 리프 노드 전용으로 고친 뒤 재실측했고, 그 결과
+  `템플릿 목록에서 빼기`·`이름 저장` 은 **`.tm-row` 선행 클릭 뒤에만** 뜬다는 것이 드러났다.
+  **첫 판정은 폐기하고 두 번째 값을 채택했다.**
+- **`#wb-pal-pin2` 는 고정 상태에서 0×0** 이다. 매뉴얼이 규정한 「겹쳐 열림」을 만들려면 `#wb-pal-pin`(고정 해제)
+  → `panelOpen('pal')` 가 선행돼야 한다. 뷰 상태 변경이라 실행했고 **`#wb-pal-pin2` 로 원상복구**했다
+  (`aria-pressed=true` 재확인). DB 쓰기 아님.
+- p3 정지 원인을 단정하지 않는다. 확인창을 수락하지 않았으므로 **저장·이동은 일어나지 않았다** — 관측한 것은
+  「렌더러가 응답하지 않는다」뿐이다.
+
 ## §E.3 Run-phase Audit-Ready Signal
 
 _<pending run-phase>_

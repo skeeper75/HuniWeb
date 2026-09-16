@@ -88,3 +88,50 @@ n+=len(mc.MODEL_ADMIN_SCREENS); print(n)'
 **nhn·ext 는 `dev` 금지** · `wait` 은 `ext` 전용 · `ext×wait` 집합 = §8 「선행/외부 대기 항목」과 같은 집합.
 이 매트릭스의 행은 webadmin·위젯빌더 매뉴얼이므로 기본값 `huni` / `dev` 이며,
 외부 벤더가 끼는 행이 나오면 그 행만 `ext`/`wait` 로 바꾼다.
+
+## [교훈] `{code}` 자리에 데이터 없는 상품을 넣으면 없는 결함이 보인다 (260917 M1.5-②)
+
+「선행 조작을 빼면 없는 결함이 보인다」의 쌍둥이다. 두 번 겪었다.
+
+| 화면 | 처음 넣은 코드 | 결과 | 데이터 있는 코드 | 결과 |
+|---|---|---|---|---|
+| `product-viewer/{code}/templates/` | `PRD_000046` | `.lnk.edit` **0건** | `PRD_000001` | **11건** |
+| `price-viewer/{code}/diagram/` | `PRD_000223`(직접단가) | `단가표 편집` **0건** | `PRD_000145`(가격공식) | **1건** |
+
+`PRD_000223` 의 진단 화면은 「이 상품은 현재 가격공식이 없습니다」라고 **스스로 말한다.**
+0건을 `불일치` 로 적기 전에 **그 화면이 무슨 상태인지 먼저 읽는다.** 상태가 「비어 있음」이면
+그건 화면 결함이 아니라 **대표 코드 선택 실패**다.
+
+대표 코드는 목록에서 **그 기능을 실제로 쓰는 행**으로 고른다 — 가격 뷰어 목록은 행마다
+`공식`(177) / `단가`(66) / `가격없음`(53) 라벨을 달고 있다.
+
+## [교훈] 느슨한 `text=` 매처는 거짓양성을 만든다 (260917 M1.5-②)
+
+첫 순회의 `text=` 판정은 「자식이 3개 이하인 요소의 textContent 에 포함」이었다. 상위 컨테이너가
+자식 텍스트를 통째로 품는 바람에 **`＋ 템플릿 지정`·`템플릿 목록에서 빼기`·`이름 저장` 이 전부
+「있음」으로 잡혔다**(샘플 텍스트가 `settings 후니 상품·가격 DB 관리자 Railway…` 로 찍혀 드러났다).
+
+**리프 노드 전용**(`e.children.length === 0`)으로 고친 뒤 다시 재자, 같은 화면에서
+`템플릿 목록에서 빼기`·`이름 저장` 은 **0건**이었고 — `.tm-row` 선행 클릭 뒤에야 떴다.
+
+규칙: **`text=` 존재 판정은 리프 노드로만 한다.** 그리고 샘플 텍스트를 같이 찍어
+**잡힌 게 정말 그 요소인지 눈으로 확인**한다. 찍힌 샘플이 페이지 머리글이면 그 판정은 버린다.
+
+## [재현] 프로브 스크립트
+
+`probe.mjs` — [HARD] 3항(다이얼로그 자동수락 금지 · 안전 자식 · 쓰기 컨트롤 선검사)이 코드로 박혀 있다.
+`m15-2-results.jsonl` — 화면 1건 끝날 때마다 즉시 append 한 원시 결과(07:58 증거 유실의 재발 방지책).
+
+```bash
+ego-browser nodejs -e "
+const fs = await import('node:fs/promises');
+const { probeScreen } = await import('<path>/probe.mjs');
+const task = await taskSpace(20); const page = task.page('p2');
+await probeScreen(page, fs, '<out>/results.jsonl',
+  { name:'<capture>', path:'<url>', waitUntil:'domcontentloaded',
+    steps:[{action:'wait',ms:900}], selectors:['<selector>', ...] });
+"
+```
+
+주의 둘: 위젯 계열 화면은 `waitUntil:'domcontentloaded'` 가 아니면 `goto` 가 걸린다.
+그리고 **막힌 ego-browser 프로세스가 남아 있으면 뒤 호출이 전부 멈춘다** — 먼저 죽이고 다시 건다.
