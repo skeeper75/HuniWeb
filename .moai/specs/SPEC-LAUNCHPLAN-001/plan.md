@@ -104,9 +104,13 @@ mermaid CDN 1건 + 웹폰트 CDN 1건은 REQ-LP-001 의 허용 예외다. 그 �
 
 **소유·분류는 칸이 아니라 속성으로 싣는다**(지니 정정 260917) — 여섯 칸 계약을 깨지 않기
 위해서다. `data-owner` ∈ {`nhn`(NHN 제공 — Shopby SaaS·셀러어드민·주문/결제/회원 원장·
-Shop/Server API·NCPPay), `huni`(후니 개발 — 스킨·webadmin·위젯·가격엔진·DB)} ·
-`data-work` ∈ {`config`(설정/확인), `dev`(개발/수정)}. **[HARD] `nhn` × `dev` 조합 금지** —
-NHN 서비스는 우리가 고칠 수 있는 대상이 아니고, 그 오분류가 임계경로를 부풀린다(AC-LP-006(e)).
+Shop/Server API·NCPPay), `huni`(후니 개발 — 스킨·webadmin·위젯·가격엔진·DB),
+`ext`(외부 벤더 — 이니시스 PG·토스페이먼츠·MES 벤더·구 사이트 운영사·인프라팀·NHN 계약 창구)} ·
+`data-work` ∈ {`config`(설정/확인), `dev`(개발/수정), `wait`(회신·계약·심사 대기)}.
+**[HARD] `nhn` × `dev` 금지 · `ext` × `dev` 금지 · `wait` 은 `ext` 전용** — 우리가 고칠 수
+있는 대상이 아닌 것을 「개발/수정」으로 적으면 임계경로가 부풀려진다(AC-LP-006(e)). `nhn` 은
+**이미 제공되는 것**(설정만 하면 됨) · `ext` 는 **아직 오지 않은 것**(기다려야 함)이고,
+`ext` × `wait` 집합은 §8 선행/외부 대기 항목(AC-LP-012(b))과 **같은 집합**이다.
 
 ```html
 <tr data-role="top" data-step="C4" data-std="STD-MFG-030;STD-MFG-136"
@@ -115,6 +119,14 @@ NHN 서비스는 우리가 고칠 수 있는 대상이 아니고, 그 오분류�
   <td class="evidence">raw/webadmin/webadmin/catalog/artwork_promote.py:198</td>
   <td>webadmin 관리자 메뉴에서 「보류 주문」 목록을 열어 행이 보이는지 확인한다</td>
   <td>D-P1</td><td>없음</td>
+</tr>
+
+<tr data-role="top" data-step="D5" data-std="STD-PAY-011"
+    data-owner="ext" data-work="wait">
+  <td>외부(토스페이먼츠)</td><td class="duedate">2026-09-26</td>
+  <td class="evidence">https://huniprinting.co.kr/admin/pay@2026-09-17</td>
+  <td>계약 회신 메일을 열어 심사 상태 화면에서 승인 여부를 확인한다</td>
+  <td>—</td><td>대기</td>
 </tr>
 ```
 
