@@ -1,7 +1,7 @@
 ---
 id: SPEC-LAUNCHPLAN-001
 title: "프로세스 기준 오픈 계획서 전면 재작성 — 28구간 척추 · 7트랙 · 단일 HTML"
-version: "0.4.0"
+version: "0.6.0"
 status: draft
 created: 2026-09-17
 updated: 2026-09-17
@@ -59,6 +59,8 @@ related_specs: [SPEC-LAUNCHGUIDE-001]
 | 2026-09-17 | 0.2.0 | manager-spec | (동일 판본 · 지니 추가 요건 3건 병합) **요건 1** ego-browser 라이브 판정 규율 + `작동` 승계 한계 신설(REQ-LP-018 · AC-LP-018) · **요건 2** 「판매 준비 프로세스」 절 신설 — 전수 메뉴 지도 37 + 옵션↔가격 도식(REQ-LP-017 · AC-LP-017), 섹션 12→**13** · **요건 3** M0(28구간 통합 상태판)을 첫 마일스톤으로 신설(plan.md). 결과로 REQ 16→**18** · AC 16→**19** 이 되어 Tier M 예산 두 축 모두 초과 — §3-0 에 초과를 선언하고 Tier L 재판정을 권고(억지 병합으로 검사 강도를 낮추지 않음) |
 | 2026-09-17 | 0.3.0 | manager-spec | 재감사 review-2(FAIL 79/100 · 1점 미달) 델타 수정 — **N-1** 「갭 6」 상수 철회: 어느 원천 판독(13 실질 텍스트 / 11 비결함 제외 / 5 ★ / 3 매뉴얼 갭)으로도 6 이 나오지 않아, 상수를 박으면 정직한 문서가 FAIL 하고 통과하는 유일한 길이 「갭 표기를 그 수에 맞춰 조정」이 됨 → REQ-LP-017·AC-LP-014 를 「수 + 판정 기준 + 원천 선언」 파생 검사로 교체, 전파 3곳 정정 · **N-2** §5 성공 기준 표의 AC 오참조 3건 정정(SC-1→016 · SC-8→014 · SC-9→007(d)) + 「SC-1 은 사람 판정」 경고 추가 · **N-3** AC 번호를 판정 주체 순서와 일치(§A 001~014 · §B 015 · §C 016) · **강도 중립 병합 3건**으로 AC 19→**16**(AC 축 예산 준수) · **§6-1** AC-LP-016 에 (e) 「옵션을 바꾸면 어느 화면에서 고치나」 신설 — §6 이 반려 원인의 이사 경로이므로 그 절의 존재 이유로 검사 · **S5 반영**(입력 5/5 완결 · 오늘자 실측이 도식·메뉴 지도의 실입력) · **이월 3건 선반영**(N-5 `class="source"` 제외 · N-6 URL 호스트 화이트리스트 · N-7 `NEW` ≤ 30%) · 리드 판정 ③ 반영 — 예외 선언을 **REQ 한 축**으로 축소 |
 | 2026-09-17 | 0.4.0 | manager-spec | 최종감사 review-3(**PASS-WITH-NOTES 88/100** · 추이 64→79→88 · 회귀 0) 마감 수정 — **R-1** `AC-LP-007(d)` 대상 범위 교정(감사관 지정 문언): (a)(b)(c)는 `REQ-LP-010`("Every **top-level** row")을 따라 최상위 행, **(d)는 `REQ-LP-018`("**Every** checklist row")을 따라 최상위 + `detail` 전 행** — `detail` 행이 654행 원장이 접히는 자리라 양이 가장 많고, 거기 `작동` + `파일:줄` 을 적으면 화면 관측 없는 승격이 통과하던 구멍 · **R-6** `plan.md` §C-2 카테고리 「10원~」 원인 단정 → **추정**(S5 는 「화면만으로 판정 불가」로 기록 — `verification-claim-integrity` §1.1 surface 3) · **R-4** §A 제목 stale(「L 재판정 권고」→승인 완료) · D3 검사 수 19→**14** · **R-5** `research.md` §3 제목 stale(「그대로」→「뼈대로 · 이탈 3건 선언」). **R-2**(선언 갭 수 대조) · **R-3**(§6 앵커 순서) · **m-8**(REQ-016 과묶음)은 AC 계약 변경이라 손대지 않고 `progress.md` 에 **잔존 기술부채**로 이월 — 감사 회차 3/3 소진. `plan_status: audit-ready` 서명 + 미검증 4건 기록 |
+| 2026-09-17 | 0.5.0 | manager-spec | 지니 결정 반영 — **§G·§H 가 전제한 webadmin 실측의 깊이를 (c) 「매뉴얼 원고 요소와의 1:1 대조」로 확정**. ① `REQ-LP-017` 확장(신설 아님 · REQ 18 불변): §6 이 **매뉴얼 요소 대조 매트릭스**(`id="map-manual-elements"`)를 세 번째 블록으로 동반하고, 행 = 매뉴얼 SCREENS/MODEL_ADMIN 원고(`raw/webadmin/tools/manual_content.py` 1,468행 · `widget_manual_content.py` 1,117행 — 합 2,585행) 기술 요소 전건, 실측 결과 값 집합 4종(`동작확인(URL@일시)`·`불일치(URL@일시+차이)`·`쓰기경로-dev환경필요`·`미실측(사유)`) 고정, 읽기 경로는 ego-browser p2 실클릭 판정·쓰기 경로는 라이브 미클릭 + T1 진입 조건 연결 명시 · **층 분리 계약**(본문 = 요약 층 · 전건 매트릭스 = 접힘 부록 + CSV) ② `AC-LP-014` 에 **(e)** 추가(AC 16 불변) — 분모 상수화가 구조적으로 불가능한 **3항 사슬 관계 검사**(원고 grep 분모 == 부록/CSV 행 수 == 본문 요약 층 집계 수 · 산출 규칙 선언 동반) + 결과 4종 외 값 0 + 미실측 사유 빈칸 0 + 대상 행 0 이면 FAIL ③ `REQ-LP-018` 해설의 「28구간 전건 재실측」 문언을 **「`작동` 으로 적을 행은 전부 화면 근거를 갖는다」**로 한정(실제 AC 보다 무겁게 읽히던 표현 교정) ④ `plan.md` 에 **M1.5 매뉴얼 요소 대조** 신설(M1 뒤 · 같은 p2 드라이버 순차) |
+| 2026-09-17 | 0.6.0 | manager-spec | 델타감사(**PASS-WITH-NOTES 85/100** · 추이 64→79→88→85 · 회귀 0) MAJOR 4건 마감 + 지니 정정 1건 — **D-1** `AC-LP-014(e)` 자기축소 구멍 봉쇄: (i)~(iv)만으로는 **1행 매트릭스가 (e) 전체를 닫았다**(산출 규칙을 좁게 선언해 분모 1 · CSV 1행 · 집계 1 로 맞추고 그 행을 `미실측` 으로 두면 전부 통과) → **(v) 화면 축 하한**(메뉴 지도 37행 중 읽기 경로 화면 전건 커버 · 누락 0 · 37은 (a)의 기검증 앵커라 새 상수 아님) + **(vi) 실측 축 하한**(`미실측` ≤ 30% · `NEW` ≤ 30% 와 같은 장치) 추가 — 상수 금지 원칙과 하한은 양립 · **D-2** D3 가 피감사 문서의 명령을 실행하던 구조 철회(감사 독립성 붕괴 + 코드 주입면) → **분모 산출 명령을 D3 의 4번째 입력 인자로** 받고 「선언 명령 == 인자」 문자열 비교 후 **D3 가 자기가** 실행(B 안) · **D-3** `쓰기경로-dev환경필요` 가 문장 수준에 머물러 임계경로에서 보이지 않던 구멍 → `AC-LP-012(b)`·`REQ-LP-015` 에 「§8 선행/외부 대기 항목으로 렌더 + T1 진입 조건 상호 참조」 의무화 · **D-4** `plan.md` stale AC 번호 **10건** 교정(감사관 자인 — 특히 K7·M4-3 이 「654 행수 대조」를 살아 있는 `AC-LP-016`(5분 이해 테스트)로 조용히 해소시켜 D3 제작 지시서가 오지시였다): 016→015(c) 2곳 · 017→015(d) · 018→016 5곳(「4문항」→「5문항」 동반) · 019→007(d) · M4-1 범위 `001~015·019`→`001~014` · **지니 정정** 소유 라벨 신설 — 배치도 전 노드·스윔레인 전 레인명이 열거형 2값(`NHN 제공`/`후니 개발`) 라벨 동반(`REQ-LP-007`·`REQ-LP-008` 확장 · `AC-LP-004(a)`·`AC-LP-005(c)`), 체크리스트 행은 6칸을 늘리지 않고 `data-owner`·`data-work` **속성**으로 싣고 **`nhn` × `dev` 조합 0건**(`REQ-LP-009` 확장 · `AC-LP-006(e)`) — 소유 라벨 부재는 NHN 제공 기능을 자체 개발로 섞어 **임계경로를 길게** 만드는 실패이고, 외부 의존이 지워져 짧아지는 실패의 거울상 · **R-2·R-3·m-8 은 기술부채 유지**(감사 회차 소진), `plan.md` §H 에 R-3 하중 증가(2→3블록)만 기록 + M2 에서 도식을 매트릭스 앞에 두는 운영 회피. **REQ 18 · AC 16 불변** |
 
 ## 1. 배경 — 왜 이 SPEC 이 필요한가
 
@@ -113,11 +115,12 @@ REQ 를 16 으로 줄일 **강도 중립 경로는 없다** — 유일 후보인
 > 판정 그레핑을 위해 본 SPEC 은 산출물 내부의 **안정된 마커 관습**을 지정한다(§4·acceptance.md 와
 > 함께 계약을 이룬다): 섹션 `id="sec-01"`…`id="sec-13"`, 트랙 블록 `id="track-T1"`…`id="track-T7"`,
 > 역할 진입점 `id="role-shopdev"`·`role-printdev"`·`role-ops"`·`role-pm"`·`role-exec"`,
-> 체크리스트 최상위 행 `<tr data-role="top" data-step="…" data-std="…">` · 하위 상세 행은
-> `data-role="detail"`, 증거 칸 `<td class="evidence">`, 목표일 칸 `<td class="duedate">`,
+> 체크리스트 최상위 행 `<tr data-role="top" data-step="…" data-std="…" data-owner="…" data-work="…">`
+> · 하위 상세 행은 `data-role="detail"`(나머지 속성은 동일하게 보유), 증거 칸 `<td class="evidence">`, 목표일 칸 `<td class="duedate">`,
 > 스윔레인 `id="diag-swimlane"`, CTO 10구간 매핑 `id="map-cto10"`, 시스템 배치도 `id="diag-topology"`,
-> 판매 준비 프로세스 `id="sec-06"` 안의 전수 메뉴 지도 `id="map-webadmin-menu"` · 옵션↔가격 도식
-> `id="diag-option-price"`,
+> 판매 준비 프로세스 `id="sec-06"` 안의 메뉴 지도 `id="map-webadmin-menu"` · 옵션↔가격 도식
+> `id="diag-option-price"` · 매뉴얼 요소 대조 요약 층 `id="map-manual-elements"` (전건 매트릭스는
+> 접힘 부록 `id="manual-element-matrix"`),
 > 마일스톤 `id="diag-milestone"`, 임계경로 `id="critical-path"`, 결정 안건 `id="decisions"`,
 > Go/No-Go `id="go-no-go"`, 컷오버 `id="cutover"`, 하이퍼케어 `id="hypercare"`,
 > RACI·의사소통 `id="raci"`, 부록 `id="appendix"`.
@@ -152,20 +155,22 @@ REQ 를 16 으로 줄일 **강도 중립 경로는 없다** — 유일 후보인
 
 - **REQ-LP-006** — Ubiquitous: The scope section shall present 오픈 필수 and 오픈 후 as two separate tables, and shall state a three-line scope-freeze rule declaring that requests arriving after the freeze date are classified into the 오픈 후 backlog by default.
 
-- **REQ-LP-007** — Ubiquitous: The swimlane section shall render one order's full journey across between three and seven lanes each naming a role or system, and shall carry a mapping block (`id="map-cto10"`) that binds the CTO's ten segments as the upper layer to the twenty-eight process steps (`A1`~`E4`) as the lower layer, with every one of the ten segments carrying a one-sentence 「이게 없으면 무슨 일이 벌어지나」 consequence line.
+- **REQ-LP-007** — Ubiquitous: The swimlane section shall render one order's full journey across between three and seven lanes each naming a role or system **and carrying an ownership label drawn from exactly two values — `NHN 제공` or `후니 개발`**, and shall carry a mapping block (`id="map-cto10"`) that binds the CTO's ten segments as the upper layer to the twenty-eight process steps (`A1`~`E4`) as the lower layer, with every one of the ten segments carrying a one-sentence 「이게 없으면 무슨 일이 벌어지나」 consequence line.
   - 해설: 재작성의 근거가 「CTO 가 구간으로 사고한다」인데 척추가 2.8배로 잘게 쪼개졌다. 읽는 사람의 언어(10구간)를 상위에 두고 작업 격자(28구간)를 그 아래로 접는다. CTO 문서가 5분 안에 읽히는 이유가 구간마다 붙은 **영향 한 문장**(예: 「결제는 됐는데 무엇을 만들지 모르는 주문이 됩니다」)이므로, 그 문장을 매핑 블록의 필수 칸으로 계약한다.
 
 ### C. 틀을 이루는 세 섹션 — 5분 이해를 실제로 책임지는 곳
 
-- **REQ-LP-008** — Ubiquitous: The one-page summary (`id="sec-01"`) shall carry all six elements — 무엇·왜 · 현재 RAG 상태 · 상위 리스크 3~4건 · 다음 마일스톤과 목표일 · 롤업 타임라인 · 상태 범례 — within 700 Korean characters of body prose; the milestone chart (`id="diag-milestone"`) shall carry between four and six milestones each with an owner (실명) and a state, with T1 first; and the topology diagram (`id="diag-topology"`) shall carry at most twelve nodes, each labelling both the system name and its owner.
+- **REQ-LP-008** — Ubiquitous: The one-page summary (`id="sec-01"`) shall carry all six elements — 무엇·왜 · 현재 RAG 상태 · 상위 리스크 3~4건 · 다음 마일스톤과 목표일 · 롤업 타임라인 · 상태 범례 — within 700 Korean characters of body prose; the milestone chart (`id="diag-milestone"`) shall carry between four and six milestones each with an owner (실명) and a state, with T1 first; and the topology diagram (`id="diag-topology"`) shall carry at most twelve nodes, each labelling the system name, its owner (실명), and an ownership label drawn from exactly two values — `NHN 제공` or `후니 개발`.
+  - **[HARD] 소유 라벨 — 열거형 2값 고정**(지니 정정 260917). `NHN 제공` = Shopby SaaS(셀러어드민 · 주문/결제/회원 원장 · Shop/Server API · NCPPay) · `후니 개발` = 자사몰 스킨 `shopby.huniprinting.co.kr`(김동학) · webadmin · 위젯 · 가격엔진 · DB(서희항). **그 밖의 값 0건**(결과 4종 집합과 같은 방식으로 고정한다). 라벨이 빠지면 NHN 이 제공하는 기능이 「우리가 개발할 것」으로 섞여 들어가 **임계경로가 실제보다 길게** 나온다 — 외부 대기가 지워져 짧게 나오는 것의 정확한 거울상이다. 기계 판정은 AC-LP-005(c)(배치도) · AC-LP-004(a)(스윔레인) · AC-LP-006(e)(분류 제약).
   - 해설: 세 섹션 모두 「양을 제한하는 것」이 계약의 핵심이다. 요약이 길어지면 요약이 아니고, 마일스톤이 7개를 넘으면 임원용이 아니며, 배치도 노드가 12개를 넘으면 한 눈에 안 들어온다. 상태 범례는 RAG 각 색의 의미를 **수치로** 정의한다(예: 마일스톤 2주+ 지연 = Red).
 
 ### D. 체크리스트 — 「내 자리」가 성립하는 곳
 
-- **REQ-LP-009** — Ubiquitous: The plan document shall carry one checklist block per track `id="track-T1"` through `id="track-T7"`; each block shall carry between three and five top-level rows marked `data-role="top"`, with any finer breakdown carried as `data-role="detail"` rows inside a collapsed container or in the appendix; and every top-level row shall carry all six fields — 담당(실명 또는 「외부(<대상>)」) · **목표일** · 완료 증거 · 체크 방법(한 문장) · 선행 · 상태.
+- **REQ-LP-009** — Ubiquitous: The plan document shall carry one checklist block per track `id="track-T1"` through `id="track-T7"`; each block shall carry between three and five top-level rows marked `data-role="top"`, with any finer breakdown carried as `data-role="detail"` rows inside a collapsed container or in the appendix; and every top-level row shall carry all six fields — 담당(실명 또는 「외부(<대상>)」) · **목표일** · 완료 증거 · 체크 방법(한 문장) · 선행 · 상태 — and every checklist row shall additionally carry two attributes, `data-owner` ∈ {`nhn`, `huni`} and `data-work` ∈ {`config`, `dev`}, where no row with `data-owner="nhn"` carries `data-work="dev"`.
   - 해설(**두 가지가 신설됐다**):
     - **행 수 상한** — S0 §6-5 는 「트랙당 3~5항목」이다. 상한이 없으면 트랙 제목을 씌운 300행 표가 모든 기계 검사를 통과하고, 그것은 9/16 에 반려된 물건과 구조적으로 같다. 654행 원장은 `data-std` **다중값**으로 최상위 행에 매단다(행을 늘려서 담지 않는다).
     - **목표일 칸** — S0 §6-5 의 원문 계약은 「담당·완료 증거·**마감**·상태·블로커」다. 초판은 마감→체크 방법, 블로커→선행으로 바꿔치기하고 그 사실을 적지 않았다. 마감(목표일)을 여섯 번째 칸으로 **복원**한다. 성공 정의가 「자기 일을 체크하고 **일정을 잡는다**」인 이상 날짜 칸 없는 표로는 성공 기준을 만족할 수 없다.
+    - **소유·분류 두 속성**(지니 정정 260917) — 여섯 칸을 늘리지 않고 **속성**으로 싣는다(칸을 늘리면 6칸 계약이 깨진다). `data-owner="nhn"` = NHN 제공(Shopby SaaS · 셀러어드민 · 주문/결제/회원 원장 · Shop/Server API · NCPPay) · `"huni"` = 후니 개발(스킨·webadmin·위젯·가격엔진·DB). `data-work="config"` = 설정/확인 · `"dev"` = 개발/수정. **[HARD] `data-owner="nhn"` 인 행은 `data-work="dev"` 를 가질 수 없다** — NHN 서비스는 우리가 고칠 수 있는 대상이 아니므로 「개발/수정」으로 분류하면 그 자체가 오분류이고, 그 오분류가 임계경로를 부풀린다. 셀러어드민에서 관측한 항목은 **「설정/확인」만** 허용한다. 실무진 관점에서도 답이 달라진다 — 셀러어드민이면 답은 「NHN 설정에서 확인」이지 「개발 요청」이 아니다(AC-LP-016(e) 가 묻는 「어느 화면에서 고치나」에 이 라벨이 답한다).
     - **체크 방법**은 실무진이 그대로 따라 할 수 있는 한 문장이어야 한다 — 행위 동사(`열`·`누르`·`접속`·`조회`·`실행`) 1개 이상 + 화면 지시어(`화면`·`메뉴`·`페이지`·`콘솔`·`목록`) 1개 이상, 15자 이상. 「확인」 한 글자는 체크 방법이 아니다.
 
 - **REQ-LP-010** — Ubiquitous: Every top-level checklist row shall carry an evidence citation in `<td class="evidence">` that resolves — a `파일:줄` citation whose path exists and whose line number does not exceed that file's line count, or a `URL@일시` citation — and shall carry the ledger identifiers it covers in `data-std`, every value of which exists in `unified-ledger-v4.csv` (the literal `NEW` is permitted only with a stated reason).
@@ -187,7 +192,8 @@ REQ 를 16 으로 줄일 **강도 중립 경로는 없다** — 유일 후보인
 
 ### F. 일정·판정·운영
 
-- **REQ-LP-015** — Ubiquitous: The critical-path section (`id="critical-path"`) shall build the schedule forward — 필요 항목 전부 → 의존·외부 대기 → 임계경로 → 도출되는 현실적 오픈일 — and the decisions section (`id="decisions"`) shall raise 날짜·인원·범위 as three levers, each with a named decider.
+- **REQ-LP-015** — Ubiquitous: The critical-path section (`id="critical-path"`) shall build the schedule forward — 필요 항목 전부 → 의존·외부 대기 → 임계경로 → 도출되는 현실적 오픈일 — shall render the `쓰기경로-dev환경필요` set from the manual-element matrix as 선행/외부 대기 항목 cross-referenced with the T1 entry conditions; and the decisions section (`id="decisions"`) shall raise 날짜·인원·범위 as three levers, each with a named decider.
+  - **[HARD] `쓰기경로-dev환경필요` 는 문장이 아니라 항목으로 실린다**(AC-LP-012(b)). 이 집합은 「dev 환경이 서기 전에는 판정 불가」라는 뜻이므로 그 자체가 선행 조건이다. 요약 층의 언급만으로 두면 일정 계산에 들어오지 않고, 그러면 **판정 불가 경로가 임계경로에서 사라진다** — 외부 대기(토스 계약)가 지워져 임계경로가 짧게 나오던 것과 같은 계열의 실패다.
   - 해설: REQ-LP-003 이 금지(판정 없음)를 맡고, 이 조항이 의무(날짜 도출)를 맡는다. 문서는 날짜를 **도출**하고, 그 날짜를 어떻게 할지는 사람이 고른다. 외부 대기 항목은 미해결 입력 통합표의 차단 항목을 회신 요청 대상(실명 또는 외부 기관)과 함께 렌더한다.
 
 - **REQ-LP-016** — Ubiquitous: The plan document shall carry four operating sections — a Go/No-Go scorecard (`id="go-no-go"`) declaring Green/Yellow/Red/Unknown with Unknown treated as blocking, exactly one 결정권자 by real name, and a fixed decision-meeting date; a cutover runbook (`id="cutover"`) whose every row holds 순서·담당 실명·선행조건·검증 증거·비상조치 plus a rollback trigger stated as a measurable threshold with a named decider and a time limit; a hypercare section (`id="hypercare"`) whose exit criteria are stated as metrics with numeric thresholds rather than a calendar date; and a RACI·communications section (`id="raci"`) with exactly one Accountable per row plus the communication cadence (대상·메시지 수준·주기·채널·담당자).
@@ -195,8 +201,18 @@ REQ 를 16 으로 줄일 **강도 중립 경로는 없다** — 유일 후보인
 
 ### G. 판매 준비 프로세스 — 실무진의 일상 질문에 답하는 절
 
-- **REQ-LP-017** — Ubiquitous: The 판매 준비 프로세스 section (`id="sec-06"`) shall carry two blocks — a complete webadmin menu map (`id="map-webadmin-menu"`) enumerating all 37 menus (사이드바 33 + 비사이드바 4) with a gap column on every row, and stating the gap count as a number **accompanied by the gap criterion it used and the source path**; and an option-to-price wiring diagram (`id="diag-option-price"`) tracing 상품 구성요소 → 가격공식·가격구성요소·단가표(`use_dims` 12축) → 위젯 cfg·기본값 → 고객 화면 → `/api/w/v1/price`, with every stage labelling the webadmin screen on which it is edited.
+- **REQ-LP-017** — Ubiquitous: The 판매 준비 프로세스 section (`id="sec-06"`) shall carry three blocks — a complete webadmin menu map (`id="map-webadmin-menu"`) enumerating all 37 menus (사이드바 33 + 비사이드바 4) with a gap column on every row, and stating the gap count as a number **accompanied by the gap criterion it used and the source path**; an option-to-price wiring diagram (`id="diag-option-price"`) tracing 상품 구성요소 → 가격공식·가격구성요소·단가표(`use_dims` 12축) → 위젯 cfg·기본값 → 고객 화면 → `/api/w/v1/price`, with every stage labelling the webadmin screen on which it is edited; and a manual-element conformance matrix whose summary layer (`id="map-manual-elements"`) sits in the section body while its full per-element rows sit in a collapsed appendix block (`id="manual-element-matrix"`) that also states the CSV source path.
   - 해설(지니 확정 260917): 실무진이 그림 **한 장**으로 「옵션을 바꾸면 어디서 가격이 정해지고 어느 화면에서 고치나」를 알 수 있어야 한다. 도식의 각 단계는 **고치는 화면 이름**을 반드시 달고 있어야 한다 — 그것이 없으면 그림이 아니라 개념도다.
+  - **[HARD] 실측의 깊이 = 매뉴얼 원고 요소와의 1:1 대조**(지니 결정 260917). 메뉴 지도의 실측 열은 「메뉴가 렌더된다」까지만 말한다 — 그 깊이로는 §G 판매 준비 프로세스도 §H 상태 판정도 뒷받침되지 않는다. 그래서 세 번째 블록으로 **매뉴얼 요소 대조 매트릭스**를 둔다.
+    - **행** = 매뉴얼 원고(`raw/webadmin/tools/manual_content.py` **1,468행** · `widget_manual_content.py` **1,117행** · 합 2,585행)의 `SCREENS` / `MODEL_ADMIN_SCREENS` 에 기술된 **화면별 요소·버튼·패널 전건**.
+    - **열** = 화면 · 매뉴얼 원문 위치(`파일:줄`) · 요소 · 경로 종류(읽기/쓰기) · 실측 결과.
+    - **실측 결과 값 집합은 정확히 4종이고 그 밖의 값을 쓰지 않는다** — `동작확인(URL@일시)` · `불일치(URL@일시+차이)` · `쓰기경로-dev환경필요` · `미실측(사유)`.
+    - **읽기 경로**(탭·필터·검색·상세·미리보기·진단·다운로드 열기)는 ego-browser p2 에서 **실제로 눌러** 판정한다.
+    - **쓰기 경로**(등록·수정·삭제·게시·저장)는 라이브에서 누르지 않고 `쓰기경로-dev환경필요` 로 둔다. 이 값을 가진 행의 집합이 **T1 오픈 테스트 진입 조건과 연결됨을 문서가 한 줄로 명시**한다 — dev 환경이 서기 전에는 이 경로들이 판정 불가라는 사실이 곧 진입 조건이다.
+  - **[HARD] 층 분리 — 읽는 문서와 참조 자료를 나눈다.** 원고 2,585행에서 도출되는 요소 전건은 수백 행 규모일 수 있고, 그것을 §6 본문에 그대로 실으면 §6 이 **행 목록**이 되어 9/16 반려 원인이 §7 에서 §6 으로 이사한다(`AC-LP-016(e)` 사람 판정이 정확히 그것을 잡는다). 매트릭스는 전건 그대로 만들고 문서에도 싣되, **어디에 싣는가**를 계약한다:
+    - **본문 = 요약 층**(`id="map-manual-elements"`) — 화면 단위 집계(화면 수 · 요소 수) · 결과 4종 분포 · **불일치 행 목록** · **`쓰기경로-dev환경필요` 행 목록**. 뒤 두 목록은 접지 않는다 — 전자는 고쳐야 할 것이고 후자는 T1 진입 조건에 걸리는 것이라 실무진이 펼치지 않고 봐야 한다.
+    - **부록 = 전건 층**(`id="manual-element-matrix"`) — `<details>` 접힘 블록 + CSV 원본 경로(`S/S5-plan/manual-element-matrix.csv`) 명시.
+  - **[HARD] 요소 전건의 분모도 상수로 박지 않는다.** 갭 수와 같은 실패형이다(「외부 의존 딱 2건」·「갭 6」 두 번 다 감사에 잡혔다). 문서는 **분모 산출 규칙**(어느 파일의 어느 최상위 구조를 열거하고, 무엇을 요소 1건으로 세는가 — 그리고 그것을 재현하는 명령)을 선언하고, 검사는 **3항 사슬 관계**로만 이뤄진다 — `원고 grep 분모 == 부록/CSV 행 수 == 본문 요약 층 집계 수`. 어느 지점에도 숫자를 박을 자리가 없으므로 상수화가 구조적으로 불가능하고, 동시에 **층 분리가 요약과 전건을 어긋나게 만드는 위험**(본문엔 12건, 부록엔 340행)을 같은 검사가 함께 잡는다. 기계 판정은 `AC-LP-014(e)`.
   - **[HARD] 갭 개수를 상수로 고정하지 않는다.** 갭 판정 기준이 원천마다 다르다 — 원장 CSV 의 갭 열은 판독에 따라 13(실질 텍스트) / 11(비결함 2건 제외) / 5(★ 표기)로 갈리고, 오늘자 실측은 매뉴얼 갭 **3건**으로 읽는다. 어느 판독으로도 단일 상수가 나오지 않으므로, **수를 요구사항에 박지 않고 「수 + 판정 기준 + 원천」을 문서가 선언하게** 한다. 상수를 박으면 정직한 문서가 FAIL 하고 통과하는 유일한 길이 「갭 표기를 그 수에 맞춰 조정하는 것」이 된다 — 기계 검사가 문서 왜곡을 보상하는 형태이며, 이 절의 존재 이유(실무진이 화면을 찾게 하는 것)가 먼저 깨진다.
   - 정본 입력(읽기 전용 · 메인 체크아웃 절대경로): `.claude/rules/moai/domains/huni-product-lifecycle.md` §1 6단계·§2 네 결정 · `.claude/rules/moai/domains/huni-pricing-engine-map.md` · `_workspace/postersign-audit/widget-contract-260829.md` · `_workspace/huni-widget-flow/02_mermaid` · `R/R1b/evidence/menu-map.csv`(37행) · `S/S5-live/menu-map-260917.csv`(37행 · 오늘자 재실측) · `S/S5-live/option-price-trace.md`(**mermaid 연결 도식 실재 — 도식의 실입력**) · `R/R1b/findings.md` §4(3상품 종단표) · webadmin 매뉴얼 2종 `raw/webadmin/tools/manual_content.py`·`widget_manual_content.py`.
   - 도메인 정본이 못 박은 두 문장을 도식에 그대로 싣는다 — 「위젯의 선택지는 전부 상품 설정에서 온다」·「**위젯은 가격을 정하지 않는다** — 금액은 가격공식·단가표·할인테이블이 정하고 위젯은 결과를 보여 줄 뿐이다」. 실무진이 ④에서 이상한 값을 보면 ③을 고쳐야 한다는 것이 이 절의 실용적 목적이다.
@@ -206,7 +222,8 @@ REQ 를 16 으로 줄일 **강도 중립 경로는 없다** — 유일 후보인
 - **REQ-LP-018** — Ubiquitous: Every checklist row whose 상태 is `작동` shall carry a `URL@일시` evidence citation obtained by live screen observation; a row shall not be marked `작동` on code or DB evidence alone.
   - 해설(지니 확정 260917 · [HARD]):
     - **라이브 판정은 ego-browser 로만 한다** — space **20** 재사용(p1 신규몰 · p2 webadmin · p3 셀러어드민 · p4 구 사이트). 자기 탭만 쓰고 새 space 를 만들지 않는다.
-    - **run 단계 M0 에서 28구간 전건을 재실측한다.** 재실측의 절차가 곧 각 행의 **체크 방법 문장**이다 — 체크 방법 칸은 장식이 아니라 M0 에서 실제로 실행되는 절차이고, 따라 갈 수 없는 문장은 그 자체로 결함이다(REQ-LP-009 의 실질 요건과 같은 방향).
+    - **[HARD] 「전건 재실측」의 뜻을 한정한다** — 이 조항이 요구하는 것은 「28구간을 모두 한 번씩 본다」가 **아니라** 「**`작동` 으로 적을 행은 전부 화면 근거를 갖는다**」이다. 기계 판정(AC-LP-007(d))도 딱 그것만 검사한다. 넓게 읽으면 실제 AC 보다 무거운 의무가 생겨 M0 가 완료 불가로 보인다(요소 수준의 1:1 대조는 §G 의 매뉴얼 요소 대조 매트릭스가 맡는다 — REQ-LP-017).
+    - run 단계 M0 의 재실측 절차가 곧 각 행의 **체크 방법 문장**이다 — 체크 방법 칸은 장식이 아니라 M0 에서 실제로 실행되는 절차이고, 따라 갈 수 없는 문장은 그 자체로 결함이다(REQ-LP-009 의 실질 요건과 같은 방향).
     - **[HARD] 승계의 한계**: 오늘 시점의 입력 조사(S1~S4)는 **코드·문서만** 본 것이다. 따라서 `작동` 표기는 **9/16 라이브 실측 승계분에 한정**된다. 입력 카드가 `구현-미검증`으로 적은 행을 화면 확인 없이 `작동`으로 승격시키는 것은 금지한다 — 미관측은 부재의 증거가 아니지만, 마찬가지로 **미관측은 작동의 증거도 아니다**.
     - S5(오늘자 ego-browser 실측 — webadmin 37메뉴 재확인 · 3상품 옵션↔가격 종단 추적 · 신규몰 주문 흐름)가 도착하면 M0 가 이를 소비한다. 도착 전에도 M0 는 자체 재실측으로 진행한다.
 
@@ -230,7 +247,7 @@ REQ 를 16 으로 줄일 **강도 중립 경로는 없다** — 유일 후보인
 
 - 654행 원장(`unified-ledger-v4.csv`)의 재실측·재분류. 이 SPEC 은 기존 산출물을 **다시 엮는** 작업이지 다시 조사하는 작업이 아니다.
 - 스킨·webadmin 코드의 신규 역공학. 기존 조사 산출물과 증거를 재사용한다.
-- **예외(제외 아님)**: 라이브 **화면 관측**은 REQ-LP-018 이 의무화한다. run 단계 M0 의 ego-browser 재실측은 새 조사가 아니라 **상태 판정의 필수 근거**이며, 읽기 전용 탐색만 한다(저장·주문·결제·삭제·발송 버튼 0).
+- **예외(제외 아님)**: 라이브 **화면 관측**은 REQ-LP-018 이 의무화한다. run 단계 M0 의 ego-browser 재실측은 새 조사가 아니라 **상태 판정의 필수 근거**이며, 읽기 전용 탐색만 한다(저장·주문·결제·삭제·발송 버튼 0). M1.5 의 **매뉴얼 요소 대조**도 같은 예외에 속한다 — 원고(`manual_content.py`·`widget_manual_content.py`)는 기존 산출물이고, 화면 쪽은 읽기 경로만 눌러 보는 **읽기 전용 관측**이다. 쓰기 경로는 라이브에서 누르지 않는다.
 
 ### Out of Scope — 오픈 후 기능
 
@@ -254,7 +271,7 @@ REQ 를 16 으로 줄일 **강도 중립 경로는 없다** — 유일 후보인
 | SC-5 | 트랙당 최상위 행 3~5 · 6칸 완비 | 기계 검사(AC-LP-006) |
 | SC-6 | 역할별 진입점 5블록 | 기계 검사(AC-LP-008) |
 | SC-7 | C1~C7 상태가 실측값과 일치 | 기계 검사(AC-LP-010) — 값 대조 |
-| SC-8 | 판매 준비 프로세스 2블록(37메뉴 지도 · 옵션↔가격 도식) | 기계 검사(AC-LP-014) — 갭 수는 상수 아님 |
+| SC-8 | 판매 준비 프로세스 3블록(37메뉴 지도 · 옵션↔가격 도식 · 매뉴얼 요소 대조 매트릭스) | 기계 검사(AC-LP-014) — 갭 수·요소 분모 모두 상수 아님(수 대신 3항 사슬 관계 검사) |
 | SC-9 | `작동` 전 행이 `URL@일시` 근거 보유 | 기계 검사(AC-LP-007(d)) |
 
 > [HARD] 이 표의 AC 번호는 `acceptance.md` 의 실제 배치(§A 001~014 · §B 015 · §C 016)와
