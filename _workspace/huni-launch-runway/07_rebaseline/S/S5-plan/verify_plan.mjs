@@ -151,7 +151,19 @@ const proseText = (nodes) => nodes.map((n) => n.textContent).join("\n");
   console.log(`    [산문 제외 코드 블록 ${codeBlocks.length}] ` + codeBlocks.map((el) => `${el.tagName.toLowerCase()}${el.id ? "#" + el.id : ""}${el.className ? "." + el.className : ""} 「${el.textContent.trim().slice(0, 40).replace(/\s+/g, " ")}」`).join(" | "));
   const badCode = codeBlocks.filter((el) => !codeOk(el)).map((el) => `허용 밖 코드 블록 ${el.tagName} 「${el.textContent.trim().slice(0, 40)}」`);
   const outside = prose.filter((n) => !n.parentElement.closest("#critical-path, #decisions"));
-  const sentences = proseText(outside).split(/(?<=[.!?。])\s+|\n/);
+  // [리드 판정 260917 · M4-보정3] 문장은 블록 요소 단위로 만든다 — 인라인 태그(b·span·a 등)로 쪼개진 텍스트 노드를
+  // 같은 블록 안에서는 그대로 이어 붙여, 날짜가 <b> 안에 있어도 술어와 같은 문장에서 검사되게 한다(제외 목록은 proseNodes 그대로).
+  const BLOCK = "p, li, td, th, h1, h2, h3, h4, h5, h6, dd, dt, figcaption, caption, summary, blockquote, div, section, header, footer, body";
+  const blockText = [];
+  let prevBlock = null;
+  for (const n of outside) {
+    const blk = n.parentElement.closest(BLOCK);
+    if (blk === prevBlock && blockText.length) blockText[blockText.length - 1] += n.textContent;
+    else blockText.push(n.textContent);
+    prevBlock = blk;
+  }
+  // 블록 안의 소스 줄바꿈은 문장 경계가 아니다 — 공백으로 접고, 블록 사이만 줄바꿈으로 가른다
+  const sentences = blockText.map((t) => t.replace(/\s*\n\s*/g, " ")).join("\n").split(/(?<=[.!?。])\s+|\n/);
   const judge = sentences.filter((s) => OPEN_DATE.test(s) && PRED.test(s)).map((s) => s.trim().slice(0, 80));
   const imp = (all.match(/조판|imposition/g) || []).length;
   check("AC-LP-002", "Out of Scope 금지 4종", [

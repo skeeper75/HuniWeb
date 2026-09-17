@@ -396,7 +396,17 @@ def unblock_items():
 
     def put(role, key, kind, label, rid):
         if role:
-            out[role].setdefault(key, [kind, label, []])[2].append(rid)
+            item = out[role].setdefault(key, [kind, label, []])
+            if label not in item[1].split(' / '):  # 같은 대상의 다른 문구는 원문 그대로 나란히 둔다
+                item[1] += ' / ' + label
+            if rid not in item[2]:
+                item[2].append(rid)
+
+    def target_key(tok, named):
+        # 같은 대상 = 적힌 사람 표시(이름·「(지니)」·「대표(구매)」·「·PM」)를 뺀 뒤 첫 낱말 + 적힌 사람 역할 집합
+        t = re.sub(r'\([^)]*\)', ' ', tok)
+        words = [w for w in re.split(r'\s+', t) if w and not any(nm in w for nm, _ in NAME_ROLE)]
+        return f'대상:{words[0] if words else tok}|' + ','.join(sorted(named))
 
     for r in TOP:
         own = owner_role(r)
@@ -413,10 +423,11 @@ def unblock_items():
             else:
                 named = {role for nm, role in NAME_ROLE if re.search(rf'(?<![가-힣A-Za-z]){nm}(?![A-Za-z])', tok)}
                 dec = '결정' in tok
+                key = target_key(tok, named)
                 for role in named:
-                    put(role, tok, '결정 내리기' if dec else '입력 제공', tok, r['row_id'])
+                    put(role, key, '결정 내리기' if dec else '입력 제공', tok, r['row_id'])
                 if own not in named:
-                    put(own, tok, '결정 요청' if dec else '입력 받기', tok, r['row_id'])
+                    put(own, key, '결정 요청' if dec else '입력 받기', tok, r['row_id'])
     return out
 
 
@@ -434,7 +445,7 @@ def unblock_html(rid):
 roles = ('<p class="rule" id="startable-rule">「이번 주 착수 가능」 표시 규칙 — 상태가 완료가 아니고, 선행 칸에 T 행·선행 입력·결정·외부 회신이 하나도 없는 최상위 할 일. '
          '선행이 해소됐다는 기록은 이 문서에 없으므로 선행이 적힌 행은 모두 대기로 본다. 날짜는 새로 정하지 않았다.</p>'
          '<p class="rule" id="unblock-rule">「이번 주 선행 풀기」 추출 규칙 — 최상위 할 일의 선행 칸을 나눠 T 행은 빼고, 외부 회신은 회신 받기 · 결정 번호는 결정 요청 · 선행 입력은 입력 받기로 그 행 담당 역할에 붙인다. '
-         '사람이 적힌 선행은 적힌 사람의 역할에 입력 제공(결정이면 결정 내리기)으로, 그 행 담당 역할에는 입력 받기(결정 요청)로 붙인다. 한 선행이 여러 행을 막으면 1건으로 센다.</p>'
+         '사람이 적힌 선행은 적힌 사람의 역할에 입력 제공(결정이면 결정 내리기)으로, 그 행 담당 역할에는 입력 받기(결정 요청)로 붙인다. 한 선행이 여러 행을 막으면 1건으로 센다 — 사람이 적힌 선행은 사람 표시를 뺀 첫 낱말이 같으면 같은 선행으로 보고 원문을 나란히 적는다.</p>'
          '<div class="roles">' + ''.join(
     f'<div id="{rid}" class="role"><h4>{name}</h4><ul>' +
     ''.join(f'<li><a href="#row-{r["row_id"]}">{r["row_id"]}</a> {e(r["title"])}'
