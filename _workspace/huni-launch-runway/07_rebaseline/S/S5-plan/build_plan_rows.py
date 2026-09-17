@@ -136,6 +136,26 @@ ADMIN_API_RULES = [
 
 NONE_EV = '샵바이 비경유'
 
+# 외부 대기 행의 회신 요청 대상(바깥 기관) — 담당 칸이 우리 쪽 챙기는 사람인 원장 행을 위해 제목으로 뽑는다(순서 = 우선순위)
+WAIT_TARGET_RULES = [
+    (r'토스|가상계좌|충전', '외부(토스페이먼츠)'),
+    (r'이관|구 사이트|ASP|스냅샷', '외부(구 사이트 운영사)'),
+    (r'적립금|외부포인트|복합결제|프린팅머니|프린트머니', '외부(NHN커머스)'),
+    (r'PG|이니시스|카드|정산', '외부(KG이니시스)'),
+    (r'웹훅|셀러어드민|샵바이', '외부(NHN커머스)'),
+]
+
+
+def wait_target(d):
+    if d['data_owner'] != 'ext':
+        return ''
+    if d['owner_name'].startswith('외부('):
+        return d['owner_name']
+    for rx, who in WAIT_TARGET_RULES:
+        if re.search(rx, d['title']):
+            return who
+    return '외부(대상 확인 필요)'
+
 # 사람 판정(run 레인 · 2026-09-17 · api-path 분류 전건 열람 후) — row_id: (owner, work, api_path, 엔드포인트|None, forced, 사유)
 REVIEW = {
     # 셀러어드민 설정인데 규칙이 후니 개발로 본 행
@@ -673,7 +693,7 @@ def main():
             target_date='', evidence=ev, check_method=t['check'], prereq=t['prereq'], status=t['status'],
             data_owner=t['owner'], data_work=t['work'], api_path=api[0], api_evidence=api[1],
             forced_by_impl=api[2], api_basis=api[3], irreversible='',
-            note=('NEW 사유: ' + t['new']) if not stds and t.get('new') else ('구간=' + '·'.join(t['steps'])),
+            note=('NEW 사유: ' + (t.get('new') or '원장에 이 할 일로 묶을 미완 행이 없다 — 새 행이 필요하다')) if not stds else ('구간=' + '·'.join(t['steps'])),
             source='top',
             effort_lb_days=sum(EFFORT.get(d['_effort'], 0) for d in todo if d['_class'] in EFFORT_CLASSES),
             week_plus_cnt=sum(d['_effort'] == '1주+' for d in todo if d['_class'] in EFFORT_CLASSES),
@@ -704,6 +724,8 @@ def main():
     if new_top > 0.3 * len(top):
         errs.append(f'NEW 최상위 {new_top}/{len(top)} > 30%')
     rows = [apply_review(d) for d in top + detail]
+    for d in rows:
+        d['wait_target'] = wait_target(d)
     unused = set(REVIEW) - {d['row_id'] for d in rows}
     if unused:
         raise SystemExit(f'[판정표에 없는 행] {sorted(unused)}')
@@ -721,7 +743,7 @@ def main():
     cols = ['row_id', 'data_role', 'track', 'step', 'title', 'std_ids', 'owner_name', 'target_date',
             'effort_lb_days', 'week_plus_cnt', 'undetermined_cnt', 'nondev_cnt', 'open_rows', 'date_basis',
             'evidence', 'check_method', 'prereq', 'status', 'data_owner', 'data_work',
-            'api_path', 'api_evidence', 'forced_by_impl', 'api_basis', 'irreversible', 'note', 'source']
+            'api_path', 'api_evidence', 'forced_by_impl', 'api_basis', 'wait_target', 'irreversible', 'note', 'source']
     with open(os.path.join(HERE, 'plan-rows.csv'), 'w', encoding='utf-8', newline='') as f:
         w = csv.DictWriter(f, fieldnames=cols, extrasaction='ignore')
         w.writeheader()
@@ -737,7 +759,7 @@ def main():
 
     wait = [d for d in rows if d['data_owner'] == 'ext' and d['data_work'] == 'wait']
     with open(os.path.join(HERE, 'wait-items.csv'), 'w', encoding='utf-8', newline='') as f:
-        w = csv.DictWriter(f, fieldnames=['row_id', 'data_role', 'track', 'step', 'title', 'owner_name', 'evidence', 'source'], extrasaction='ignore')
+        w = csv.DictWriter(f, fieldnames=['row_id', 'data_role', 'track', 'step', 'title', 'wait_target', 'owner_name', 'evidence', 'source'], extrasaction='ignore')
         w.writeheader()
         w.writerows({k: d[k] for k in w.fieldnames} for d in wait)
 
@@ -751,7 +773,7 @@ def main():
     print('api-path:', dict(Counter(d['api_path'] for d in rows)))
     am = [d for d in rows if d['api_path'] == 'admin-manual']
     print('admin-manual forced_by_impl:', dict(Counter(d['forced_by_impl'] for d in am)))
-    print('외부 대기(ext×wait):', len(wait))
+    print('외부 대기(ext×wait):', len(wait), '· 회신 요청 대상:', dict(Counter(d['wait_target'] for d in wait)))
     for t in top:
         print(f"  {t['row_id']:5} {t['owner_name']:12} 하한 {t['effort_lb_days']:>5}일 · 1주+ {t['week_plus_cnt']} · 미판정 {t['undetermined_cnt']} · 미완 {t['open_rows']}(미합산 {t['nondev_cnt']}) → {t['target_date']} ({t['date_basis']})")
     for n, (d, e) in lanes.items():

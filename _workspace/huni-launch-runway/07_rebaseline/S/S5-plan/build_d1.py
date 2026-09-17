@@ -70,7 +70,7 @@ def raw(t):
 
 # ───────────── 공통 ─────────────
 def attrs(r):
-    return (f'data-role="{r["data_role"]}" data-step="{r["step"]}" data-std="{raw(r["std_ids"])}" '
+    return (f'data-row-id="{raw(r["row_id"])}" data-role="{r["data_role"]}" data-step="{r["step"]}" data-std="{raw(r["std_ids"])}" '
             f'data-owner="{r["data_owner"]}" data-work="{r["data_work"]}" '
             f'data-api-path="{r["api_path"]}" data-api-evidence="{raw(r["api_evidence"])}"')
 
@@ -83,6 +83,8 @@ def row_html(r, extra=''):
     badge = f'<span class="tag t-{r["data_owner"]}">{OWN_LABEL[r["data_owner"]]}</span>' \
             f'<span class="tag t-api">{API_LABEL[r["api_path"]]}</span>'
     irr = ' <strong class="warn">오픈 테스트 통과 전 금지</strong>' if r['irreversible'] == 'Y' else ''
+    if r['std_ids'] == 'NEW' and r['data_role'] == 'top':
+        irr += f' <span class="new-reason">{e(r["note"])}</span>'
     due = r['target_date'] or '—'
     return (f'<tr {attrs(r)}{extra}><th scope="row" class="item">{e(r["title"])}{irr}<br>{badge}</th>'
             f'<td class="owner">{e(r["owner_name"])}</td><td class="duedate">{raw(due)}</td>'
@@ -267,7 +269,7 @@ topo_src = '''flowchart LR
 
 # ───────────── §6 판매 준비 프로세스 ─────────────
 menu_rows_html = ''.join(
-    f'<tr data-gap="{"Y" if "★" in m["갭"] else "N"}"><td>{e(m["사이드바그룹"])}</td><td>{e(m[menu_key])}</td>'
+    f'<tr data-gap="{"Y" if "★" in m["갭"] else "N"}" data-manual="{raw(m["매뉴얼 화면 섹션(SCREENS/MODEL_ADMIN) 유무"])}"><td>{e(m["사이드바그룹"])}</td><td>{e(m[menu_key])}</td>'
     f'<td>{raw(m["경로"])}</td><td class="gap">{e(m["갭"])}</td></tr>' for m in MENU_ROWS)
 menu_block = f'''
 <div id="map-webadmin-menu"><h3>① webadmin 메뉴 지도 — 메뉴 렌더 확인 + 요소 대조 결과</h3>
@@ -444,7 +446,7 @@ critical = f'''
 <h3>1. 필요 항목</h3><p>최상위 할 일 {len(TOP)}개(트랙별 3~5) · 세부 {len(DETAIL)}행. 오픈 전 반드시 정해야 하는 결정 {len(open_req_dec)}건은 <a href="#decisions">결정 절</a>.</p>
 <h3>2. 의존·외부 대기</h3>
 <h4>외부 대기 — {len(WAIT)}건 (회신 시점을 모른다)</h4>
-<ol id="wait-items">{''.join(f'<li data-row="{raw(r["row_id"])}" data-owner="ext" data-work="wait">{e(r["title"])} — 회신 요청 대상 <b>{e(r["owner_name"])}</b></li>' for r in WAIT)}</ol>
+<ol id="wait-items">{''.join(f'<li data-row="{raw(r["row_id"])}" data-owner="ext" data-work="wait">{e(r["title"])} — 회신 요청 대상 <b class="wait-target">{e(r["wait_target"])}</b>' + ('' if r["owner_name"] == r["wait_target"] else f' · 챙기는 사람 {e(r["owner_name"])}') + '</li>' for r in WAIT)}</ol>
 <h4>내부 선행 결정 — {len(internal_pre)}건</h4>
 <ol id="internal-prereq">{''.join(f'<li data-row="{raw(r["row_id"])}">{e(r["title"])} — {e(r["owner_name"])}</li>' for r in internal_pre)}</ol>
 <h4>dev 환경이 있어야 판정할 수 있는 화면 — {len(writepath)}요소 · {len(wp_by_screen)}화면</h4>

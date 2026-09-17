@@ -1,0 +1,13 @@
+{
+  "name": "launchplan-d3",
+  "private": true,
+  "type": "module",
+  "description": "SPEC-LAUNCHPLAN-001 D3 — 오픈 계획서 검증 스크립트(AC-LP-001~014)",
+  "scripts": {
+    "verify": "node verify_plan.mjs"
+  },
+  "dependencies": {
+    "jsdom": "^26.1.0",
+    "mermaid": "^11.17.2"
+  }
+}

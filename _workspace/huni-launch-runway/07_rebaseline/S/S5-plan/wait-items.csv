@@ -1,47 +1,47 @@
-row_id,data_role,track,step,title,owner_name,evidence,source
-T6-2,top,T6,D5,Shopby 엔터프라이즈 플랜·외부포인트 정식 적용 회신,외부(NHN커머스),_workspace/huni-launch-runway/07_rebaseline/S/S3-migration/migration-status.md:67,top
-T6-3,top,T6,D5,토스페이먼츠 계약 4건 회신(면제·수수료·업종 심사·샌드박스),외부(토스페이먼츠),_workspace/huni-launch-runway/07_rebaseline/S/S3-migration/migration-status.md:54,top
-STD-PAY-001,detail,T3,B6,신용카드 결제(PG),신우진,huni-skin-shopby/src/components/checkout/checkout-form.tsx:8-9 주석 'PG 연동은 후속 — 현재는 무통장만 동작' (SB-032 absent) · X-PG-CONTRACT-01 이니시스 계약 미체결,ledger-v4
-STD-PAY-004,detail,T3,B6,네이버페이 결제,외부(네이버페이),X-DEC-NAVERPAY-01 NaverPay 별도 mini-OrderSheet 1차 범위 포함 여부 미결,ledger-v4
-STD-PAY-005,detail,T3,B6,카카오페이 결제,외부(카카오페이),print-kb/wiki/policy/order-payment.md#PAY-03,ledger-v4
-STD-PAY-007,detail,T3,B6,적립금(프린팅머니) 결제,서희항,"huni-skin-shopby/src/lib/api/hooks/use-points.ts:22,62 (조회 done) · checkout-form.tsx:52 (적립/충전은 mock)",ledger-v4
-STD-PAY-008,detail,T3,B6,복합결제(적립금+PG 병용),김동학,huni-skin-shopby/src/components/checkout/checkout-form.tsx:52 (mock),ledger-v4
-STD-PAY-009,detail,T3,B6,할부·무이자 옵션,외부(KG이니시스),print-kb/wiki/policy/order-payment.md#PAY-04,ledger-v4
-STD-PAY-011,detail,T3,B6,PG 리다이렉트·결제 확정 콜백,김동학,huni-skin-shopby/src/lib/payments/ncp-pay.ts:47-70 · src/app/api/pay-config/route.ts:8 — X-PAY-FLOW-01 PG 콜백 흐름 미상,ledger-v4
-STD-PAY-019,detail,T3,B6,수동카드결제(키인·가상단말 · PC+모바일),외부(KG이니시스),"L3/legacy-normalized.json#F-074,IA-074,SCOPE-074 · _workspace/huni-launch-scope/02_gap/fit-gap-matrix.csv:75 · docs/huni/후니프린팅_통합IA_일정_역할분담_260616.xlsx#02_IA마스터!A75:K75 || P1판정(260902): huni-skin-shopby 전수 grep '키인|manualCard|가상단말' 0건(260902)",ledger-v4
-STD-PAY-022,detail,T3,B6,토스 계약 조건 확인(건당 수수료·가입비/연관리비 면제 프로모션·포트원 경유),외부(토스페이먼츠),후니정기미팅 정리260915.html §프린팅머니 · 미결 3,ledger-v4
-STD-PAY-023,detail,T3,B6,「자사 상품 전용 선불 충전」 용도 가맹점 심사 가능 여부 사전 확인,외부(토스페이먼츠),후니정기미팅 정리260915.html §프린팅머니 · 미결 6,ledger-v4
-STD-PAY-026,detail,T3,B6,경로별 수수료 차이(이니시스 경유 +0.x% 여부) 확인,외부(이니시스·카카오페이),후니정기미팅 정리260915.html §결제수단 · 미결 4,ledger-v4
-STD-MEM-020,detail,T3,B5,기존 회원 데이터 이관(구 사이트),김동학,print-kb/wiki/policy/membership-auth.md#MEM-01 마이그레이션 이슈 명시 · L4 사유: 돈 걸림. 구 DB 미접근(X-OLDDB-ACCESS-01)이 20개 질문의 공통 선행 블로커. 이관 리허설 미실행.,ledger-v4
-STD-MYP-007,detail,T6,D5,프린팅머니 충전(PG 결제→적립 전환),김동학,SB-051 stub — huni-skin-shopby/src/components/mypage/point-section.tsx:11-14 → src/lib/legacy-data/hooks.ts:423-432 (no-op),ledger-v4
-STD-MYP-009,detail,T6,D5,기존 프린트머니 잔액 이관,김동학,print-kb/wiki/policy/mypage.md#MYP-02 · print-kb/wiki/policy/custom-dev.md#CST-04 · L4 사유: 돈 걸림. 컷오버 대사 불일치 시 즉시 NO-GO 게이트.,ledger-v4
-STD-MYP-026,detail,T6,D5,구 ASP 코드·DB 미제공 전제 — 이관 원천은 잔액 스냅샷만,최숙진,후니정기미팅 정리260915.html §프린팅머니 · 확정 4,ledger-v4
-STD-MYP-027,detail,T6,D5,샵바이 외부포인트 연동 협의 완료,외부(샵바이(NHN커머스)),후니정기미팅 정리260915.html §프린팅머니 · 확정 6,ledger-v4
-STD-MYP-028,detail,T6,D5,충전 입금 확인 = 토스페이먼츠 가상계좌 API 직접 발급,미정,후니정기미팅 정리260915.html §프린팅머니 · 확정 8,ledger-v4
-STD-FIN-008,detail,T5,E1,PG 정산 대사,김동학,print-kb/wiki/policy/order-payment.md#PAY-02 · L4 사유: 샵바이 정산이 라인 salePrice/addPrice 를 권위로 쓰는지 미관측(X-SETTLE-AUTH) — 대사 설계 이전 단계,ledger-v4
-STD-FIN-020,detail,T5,E1,"가상계좌 정산한도 1,000만 원 초과 시 처리 방안",외부(토스페이먼츠),후니정기미팅 정리260915.html §프린팅머니 · 미결 4,ledger-v4
-STD-SYS-004,detail,T5,E1,PG 연동 설정,김동학,SB-033 done — huni-skin-shopby/src/lib/payments/ncp-pay.ts:47-70 · src/app/api/pay-config/route.ts:8 / SB-032 absent — src/components/checkout/checkout-form.tsx:8-9 ('PG 연동은 후속 — 현재는 무통장만 동작'),ledger-v4
-STD-SYS-039,detail,T4,C3,웹훅 등록 화면 위치 확인(셀러어드민 내 미발견) 및 등록 여부,김동학,https://service.shopby.co.kr 전체메뉴 98링크 중 webhook 0 · 앱 상세(Huni Admin) 항목=설치정보·API 권한 8종만 · Server API GET /webhooks 404·/webhooks/failed 400 (R/R1d/evidence/01-fullmenu-links.txt·42-app-huni-admin-detail.txt·api-get-log.txt),ledger-v4
-STD-MFG-035,detail,T4,C7,MES 화면 신규 버튼(취소·재업로드 요청·취소요청 승인거부)+사유 입력,외부(상대측 회신 대기),[상위:STD-ADO-009] order-to-mes-process.md §8.4 「MES 쪽 화면 작업(신규)」 || P1판정(260902): §8.4 「MES 쪽 화면 작업(신규)」 — MES WinForms 신규 개발,ledger-v4
-STD-MFG-059,detail,T4,C4,품목관리 디자인파일여부 Y/N 로 원본 자동 접수 처리,외부(상대측 회신 대기),후니프린팅_주문프로세스_20251001.pdf p.11 §09 case1 || P1판정(260902): PDF p.11 §09 case1 · auto-vs-human §2.2 #24 「지금」 칸이 「—」,ledger-v4
-STD-MFG-060,detail,T4,C4,Edicus Prepress 랜더링 결과 접수파일 등록,외부(상대측 회신 대기),후니프린팅_주문프로세스_20251001.pdf p.11 §09 case1 · p.1 랜더링전/랜더링완료 || P1판정(260902): PDF p.11 §09 case1 · auto-vs-human §5 A-4 「랜더링 트리거 주체 색 판독 불가」,ledger-v4
-STD-MFG-061,detail,T4,C4,접수파일 인쇄공정 파일 기준 썸네일 자동 생성,외부(상대측 회신 대기),[상위:STD-ART-019] 후니프린팅_주문프로세스_20251001.pdf p.11 §09 server · p.10 §10 || P1판정(260902): PDF p.11 §09 server · auto-vs-human §5 A-3 「server 가 어느 서버인가 미확인」,ledger-v4
-STD-MFG-090,detail,T4,C5,앞공정 미완료 시 다음공정 차단(선후관계 interlock),외부(상대측 회신 대기),후니프린팅_공정관리_시행초안_20260210.pdf p.1 「앞공정은 안찍으면 다음공정 못찍히게」 || P1판정(260902): auto-vs-human §5 A-5 「interlock 을 MES 가 이미 구현했는지 미확인 — MES 소스 없음」,ledger-v4
-F1-1,detail,T1,F1,OIDC 신뢰정책 `sub`=`repo:shopbiz-site/HuniProductPrice2:ref:refs/heads/master` + 역할 권한(ECR push·lightsail Push/CreateDeployment/GetContainerServices·secretsmanager,외부(인프라팀),_workspace/huni-launch-runway/07_rebaseline/S/S4-infra/migration-plan.md:40,S4-infra
-F2-1,detail,T1,F2,SSH 터널 접속정보(호스트·키·포트) 수령 + Lightsail PG 17 에 `hunidb`·`webapp` 2 DB 생성,외부(인프라팀),_workspace/huni-launch-runway/07_rebaseline/S/S4-infra/migration-plan.md:50,S4-infra
-F3-6,detail,T1,F3,S3 CORS 허용 오리진에 새 관리자 호스트(원고 tmp 2 + 관리자 직접 업로드),외부(인프라팀),_workspace/huni-launch-runway/07_rebaseline/S/S4-infra/migration-plan.md:64,S4-infra
-F4-1,detail,T1,F4,Lightsail 컨테이너 서비스 + ECR 레포 `huni-skin` + Secrets Manager `huni/dev/skin-runtime-env` 프로비저닝,외부(인프라팀),_workspace/huni-launch-runway/07_rebaseline/S/S4-infra/migration-plan.md:78,S4-infra
-BLK-S2-3,detail,T4,C5,[차단 입력 S2-3] MES WCF 스펙(WSDL·상태 코드·품목 마스터) 보유 여부·위치,외부(MES 공급사),.moai/specs/SPEC-LAUNCHPLAN-001/research.md:316,research§4
-BLK-S2-4,detail,T4,C4,[차단 입력 S2-4] PitStop 구매 진행 상태(견적·라이선스·인스턴스 계획),외부(PitStop 공급사),.moai/specs/SPEC-LAUNCHPLAN-001/research.md:317,research§4
-BLK-S3-1,detail,T3,B5,[차단 입력 S3-1] 구 사이트 DB 접속 권한·경로,외부(구 사이트 운영사),.moai/specs/SPEC-LAUNCHPLAN-001/research.md:325,research§4
-BLK-S3-5,detail,T6,D5,[차단 입력 S3-5] Shopby 엔터프라이즈 플랜·외부포인트 정식 적용(V9) + NHN 1:1 세팅 주체,외부(NHN커머스),.moai/specs/SPEC-LAUNCHPLAN-001/research.md:329,research§4
-BLK-S3-7,detail,T6,D5,[차단 입력 S3-7] 토스 계약 4건 회신(면제·수수료·업종 심사·샌드박스) + 정산한도·환불계좌 절차,외부(토스페이먼츠),.moai/specs/SPEC-LAUNCHPLAN-001/research.md:331,research§4
-BLK-S3-10,detail,T6,D5,[차단 입력 S3-10] 컷오버 동결 창·delta 규칙(구 사이트 충전·사용·가입 중단 가능 여부),외부(구 사이트 운영사),.moai/specs/SPEC-LAUNCHPLAN-001/research.md:334,research§4
-BLK-S4-1,detail,T1,F1,[차단 입력 S4-1] OIDC 신뢰정책 회신(`sub` 조건 + `lightsail:GetContainerServices` 포함 여부),외부(인프라팀),.moai/specs/SPEC-LAUNCHPLAN-001/research.md:340,research§4
-BLK-S4-2,detail,T1,F1,[차단 입력 S4-2] `huni/dev/admin-runtime-env` 필수 키 존재 여부(값 아님),외부(인프라팀),.moai/specs/SPEC-LAUNCHPLAN-001/research.md:341,research§4
-BLK-S4-3,detail,T1,F2,[차단 입력 S4-3] SSH 터널 접속정보(호스트·포트·키 배포 방식),외부(인프라팀),.moai/specs/SPEC-LAUNCHPLAN-001/research.md:342,research§4
-BLK-S4-4,detail,T1,F2,[차단 입력 S4-4] Lightsail PG 17 인스턴스 사양 · `hunidb`/`webapp` 2 DB 생성 · `pgcrypto`·`citext` 가능 여부,외부(인프라팀),.moai/specs/SPEC-LAUNCHPLAN-001/research.md:343,research§4
-BLK-S4-5,detail,T1,F3,[차단 입력 S4-5] 프록시 Basic Auth 등록(`huni/dev/proxy.proxy_url`),외부(인프라팀),.moai/specs/SPEC-LAUNCHPLAN-001/research.md:344,research§4
-BLK-S4-6,detail,T1,F4,[차단 입력 S4-6] Vercel 프로젝트 접근 · 현재 `DATABASE_URL`·`NEXTAUTH_URL` 소재 · 리다이렉트 설정 유무,외부(Vercel 계정 소유자),.moai/specs/SPEC-LAUNCHPLAN-001/research.md:345,research§4
-BLK-S4-7,detail,T1,F3,[차단 입력 S4-7] DNS 관리 권한자(Cloudflare `printly.co.kr` · `huniprinting.co.kr` 두 존),외부(Cloudflare DNS 권한자),.moai/specs/SPEC-LAUNCHPLAN-001/research.md:346,research§4
-BLK-S4-10,detail,T1,F4,[차단 입력 S4-10] 소셜 3사 콘솔 권한자(Redirect URI 편집),외부(소셜 3사 콘솔 권한자),.moai/specs/SPEC-LAUNCHPLAN-001/research.md:349,research§4
+row_id,data_role,track,step,title,wait_target,owner_name,evidence,source
+T6-2,top,T6,D5,Shopby 엔터프라이즈 플랜·외부포인트 정식 적용 회신,외부(NHN커머스),외부(NHN커머스),_workspace/huni-launch-runway/07_rebaseline/S/S3-migration/migration-status.md:67,top
+T6-3,top,T6,D5,토스페이먼츠 계약 4건 회신(면제·수수료·업종 심사·샌드박스),외부(토스페이먼츠),외부(토스페이먼츠),_workspace/huni-launch-runway/07_rebaseline/S/S3-migration/migration-status.md:54,top
+STD-PAY-001,detail,T3,B6,신용카드 결제(PG),외부(KG이니시스),신우진,huni-skin-shopby/src/components/checkout/checkout-form.tsx:8-9 주석 'PG 연동은 후속 — 현재는 무통장만 동작' (SB-032 absent) · X-PG-CONTRACT-01 이니시스 계약 미체결,ledger-v4
+STD-PAY-004,detail,T3,B6,네이버페이 결제,외부(네이버페이),외부(네이버페이),X-DEC-NAVERPAY-01 NaverPay 별도 mini-OrderSheet 1차 범위 포함 여부 미결,ledger-v4
+STD-PAY-005,detail,T3,B6,카카오페이 결제,외부(카카오페이),외부(카카오페이),print-kb/wiki/policy/order-payment.md#PAY-03,ledger-v4
+STD-PAY-007,detail,T3,B6,적립금(프린팅머니) 결제,외부(NHN커머스),서희항,"huni-skin-shopby/src/lib/api/hooks/use-points.ts:22,62 (조회 done) · checkout-form.tsx:52 (적립/충전은 mock)",ledger-v4
+STD-PAY-008,detail,T3,B6,복합결제(적립금+PG 병용),외부(NHN커머스),김동학,huni-skin-shopby/src/components/checkout/checkout-form.tsx:52 (mock),ledger-v4
+STD-PAY-009,detail,T3,B6,할부·무이자 옵션,외부(KG이니시스),외부(KG이니시스),print-kb/wiki/policy/order-payment.md#PAY-04,ledger-v4
+STD-PAY-011,detail,T3,B6,PG 리다이렉트·결제 확정 콜백,외부(KG이니시스),김동학,huni-skin-shopby/src/lib/payments/ncp-pay.ts:47-70 · src/app/api/pay-config/route.ts:8 — X-PAY-FLOW-01 PG 콜백 흐름 미상,ledger-v4
+STD-PAY-019,detail,T3,B6,수동카드결제(키인·가상단말 · PC+모바일),외부(KG이니시스),외부(KG이니시스),"L3/legacy-normalized.json#F-074,IA-074,SCOPE-074 · _workspace/huni-launch-scope/02_gap/fit-gap-matrix.csv:75 · docs/huni/후니프린팅_통합IA_일정_역할분담_260616.xlsx#02_IA마스터!A75:K75 || P1판정(260902): huni-skin-shopby 전수 grep '키인|manualCard|가상단말' 0건(260902)",ledger-v4
+STD-PAY-022,detail,T3,B6,토스 계약 조건 확인(건당 수수료·가입비/연관리비 면제 프로모션·포트원 경유),외부(토스페이먼츠),외부(토스페이먼츠),후니정기미팅 정리260915.html §프린팅머니 · 미결 3,ledger-v4
+STD-PAY-023,detail,T3,B6,「자사 상품 전용 선불 충전」 용도 가맹점 심사 가능 여부 사전 확인,외부(토스페이먼츠),외부(토스페이먼츠),후니정기미팅 정리260915.html §프린팅머니 · 미결 6,ledger-v4
+STD-PAY-026,detail,T3,B6,경로별 수수료 차이(이니시스 경유 +0.x% 여부) 확인,외부(이니시스·카카오페이),외부(이니시스·카카오페이),후니정기미팅 정리260915.html §결제수단 · 미결 4,ledger-v4
+STD-MEM-020,detail,T3,B5,기존 회원 데이터 이관(구 사이트),외부(구 사이트 운영사),김동학,print-kb/wiki/policy/membership-auth.md#MEM-01 마이그레이션 이슈 명시 · L4 사유: 돈 걸림. 구 DB 미접근(X-OLDDB-ACCESS-01)이 20개 질문의 공통 선행 블로커. 이관 리허설 미실행.,ledger-v4
+STD-MYP-007,detail,T6,D5,프린팅머니 충전(PG 결제→적립 전환),외부(토스페이먼츠),김동학,SB-051 stub — huni-skin-shopby/src/components/mypage/point-section.tsx:11-14 → src/lib/legacy-data/hooks.ts:423-432 (no-op),ledger-v4
+STD-MYP-009,detail,T6,D5,기존 프린트머니 잔액 이관,외부(구 사이트 운영사),김동학,print-kb/wiki/policy/mypage.md#MYP-02 · print-kb/wiki/policy/custom-dev.md#CST-04 · L4 사유: 돈 걸림. 컷오버 대사 불일치 시 즉시 NO-GO 게이트.,ledger-v4
+STD-MYP-026,detail,T6,D5,구 ASP 코드·DB 미제공 전제 — 이관 원천은 잔액 스냅샷만,외부(구 사이트 운영사),최숙진,후니정기미팅 정리260915.html §프린팅머니 · 확정 4,ledger-v4
+STD-MYP-027,detail,T6,D5,샵바이 외부포인트 연동 협의 완료,외부(샵바이(NHN커머스)),외부(샵바이(NHN커머스)),후니정기미팅 정리260915.html §프린팅머니 · 확정 6,ledger-v4
+STD-MYP-028,detail,T6,D5,충전 입금 확인 = 토스페이먼츠 가상계좌 API 직접 발급,외부(토스페이먼츠),미정,후니정기미팅 정리260915.html §프린팅머니 · 확정 8,ledger-v4
+STD-FIN-008,detail,T5,E1,PG 정산 대사,외부(KG이니시스),김동학,print-kb/wiki/policy/order-payment.md#PAY-02 · L4 사유: 샵바이 정산이 라인 salePrice/addPrice 를 권위로 쓰는지 미관측(X-SETTLE-AUTH) — 대사 설계 이전 단계,ledger-v4
+STD-FIN-020,detail,T5,E1,"가상계좌 정산한도 1,000만 원 초과 시 처리 방안",외부(토스페이먼츠),외부(토스페이먼츠),후니정기미팅 정리260915.html §프린팅머니 · 미결 4,ledger-v4
+STD-SYS-004,detail,T5,E1,PG 연동 설정,외부(KG이니시스),김동학,SB-033 done — huni-skin-shopby/src/lib/payments/ncp-pay.ts:47-70 · src/app/api/pay-config/route.ts:8 / SB-032 absent — src/components/checkout/checkout-form.tsx:8-9 ('PG 연동은 후속 — 현재는 무통장만 동작'),ledger-v4
+STD-SYS-039,detail,T4,C3,웹훅 등록 화면 위치 확인(셀러어드민 내 미발견) 및 등록 여부,외부(NHN커머스),김동학,https://service.shopby.co.kr 전체메뉴 98링크 중 webhook 0 · 앱 상세(Huni Admin) 항목=설치정보·API 권한 8종만 · Server API GET /webhooks 404·/webhooks/failed 400 (R/R1d/evidence/01-fullmenu-links.txt·42-app-huni-admin-detail.txt·api-get-log.txt),ledger-v4
+STD-MFG-035,detail,T4,C7,MES 화면 신규 버튼(취소·재업로드 요청·취소요청 승인거부)+사유 입력,외부(상대측 회신 대기),외부(상대측 회신 대기),[상위:STD-ADO-009] order-to-mes-process.md §8.4 「MES 쪽 화면 작업(신규)」 || P1판정(260902): §8.4 「MES 쪽 화면 작업(신규)」 — MES WinForms 신규 개발,ledger-v4
+STD-MFG-059,detail,T4,C4,품목관리 디자인파일여부 Y/N 로 원본 자동 접수 처리,외부(상대측 회신 대기),외부(상대측 회신 대기),후니프린팅_주문프로세스_20251001.pdf p.11 §09 case1 || P1판정(260902): PDF p.11 §09 case1 · auto-vs-human §2.2 #24 「지금」 칸이 「—」,ledger-v4
+STD-MFG-060,detail,T4,C4,Edicus Prepress 랜더링 결과 접수파일 등록,외부(상대측 회신 대기),외부(상대측 회신 대기),후니프린팅_주문프로세스_20251001.pdf p.11 §09 case1 · p.1 랜더링전/랜더링완료 || P1판정(260902): PDF p.11 §09 case1 · auto-vs-human §5 A-4 「랜더링 트리거 주체 색 판독 불가」,ledger-v4
+STD-MFG-061,detail,T4,C4,접수파일 인쇄공정 파일 기준 썸네일 자동 생성,외부(상대측 회신 대기),외부(상대측 회신 대기),[상위:STD-ART-019] 후니프린팅_주문프로세스_20251001.pdf p.11 §09 server · p.10 §10 || P1판정(260902): PDF p.11 §09 server · auto-vs-human §5 A-3 「server 가 어느 서버인가 미확인」,ledger-v4
+STD-MFG-090,detail,T4,C5,앞공정 미완료 시 다음공정 차단(선후관계 interlock),외부(상대측 회신 대기),외부(상대측 회신 대기),후니프린팅_공정관리_시행초안_20260210.pdf p.1 「앞공정은 안찍으면 다음공정 못찍히게」 || P1판정(260902): auto-vs-human §5 A-5 「interlock 을 MES 가 이미 구현했는지 미확인 — MES 소스 없음」,ledger-v4
+F1-1,detail,T1,F1,OIDC 신뢰정책 `sub`=`repo:shopbiz-site/HuniProductPrice2:ref:refs/heads/master` + 역할 권한(ECR push·lightsail Push/CreateDeployment/GetContainerServices·secretsmanager,외부(인프라팀),외부(인프라팀),_workspace/huni-launch-runway/07_rebaseline/S/S4-infra/migration-plan.md:40,S4-infra
+F2-1,detail,T1,F2,SSH 터널 접속정보(호스트·키·포트) 수령 + Lightsail PG 17 에 `hunidb`·`webapp` 2 DB 생성,외부(인프라팀),외부(인프라팀),_workspace/huni-launch-runway/07_rebaseline/S/S4-infra/migration-plan.md:50,S4-infra
+F3-6,detail,T1,F3,S3 CORS 허용 오리진에 새 관리자 호스트(원고 tmp 2 + 관리자 직접 업로드),외부(인프라팀),외부(인프라팀),_workspace/huni-launch-runway/07_rebaseline/S/S4-infra/migration-plan.md:64,S4-infra
+F4-1,detail,T1,F4,Lightsail 컨테이너 서비스 + ECR 레포 `huni-skin` + Secrets Manager `huni/dev/skin-runtime-env` 프로비저닝,외부(인프라팀),외부(인프라팀),_workspace/huni-launch-runway/07_rebaseline/S/S4-infra/migration-plan.md:78,S4-infra
+BLK-S2-3,detail,T4,C5,[차단 입력 S2-3] MES WCF 스펙(WSDL·상태 코드·품목 마스터) 보유 여부·위치,외부(MES 공급사),외부(MES 공급사),.moai/specs/SPEC-LAUNCHPLAN-001/research.md:316,research§4
+BLK-S2-4,detail,T4,C4,[차단 입력 S2-4] PitStop 구매 진행 상태(견적·라이선스·인스턴스 계획),외부(PitStop 공급사),외부(PitStop 공급사),.moai/specs/SPEC-LAUNCHPLAN-001/research.md:317,research§4
+BLK-S3-1,detail,T3,B5,[차단 입력 S3-1] 구 사이트 DB 접속 권한·경로,외부(구 사이트 운영사),외부(구 사이트 운영사),.moai/specs/SPEC-LAUNCHPLAN-001/research.md:325,research§4
+BLK-S3-5,detail,T6,D5,[차단 입력 S3-5] Shopby 엔터프라이즈 플랜·외부포인트 정식 적용(V9) + NHN 1:1 세팅 주체,외부(NHN커머스),외부(NHN커머스),.moai/specs/SPEC-LAUNCHPLAN-001/research.md:329,research§4
+BLK-S3-7,detail,T6,D5,[차단 입력 S3-7] 토스 계약 4건 회신(면제·수수료·업종 심사·샌드박스) + 정산한도·환불계좌 절차,외부(토스페이먼츠),외부(토스페이먼츠),.moai/specs/SPEC-LAUNCHPLAN-001/research.md:331,research§4
+BLK-S3-10,detail,T6,D5,[차단 입력 S3-10] 컷오버 동결 창·delta 규칙(구 사이트 충전·사용·가입 중단 가능 여부),외부(구 사이트 운영사),외부(구 사이트 운영사),.moai/specs/SPEC-LAUNCHPLAN-001/research.md:334,research§4
+BLK-S4-1,detail,T1,F1,[차단 입력 S4-1] OIDC 신뢰정책 회신(`sub` 조건 + `lightsail:GetContainerServices` 포함 여부),외부(인프라팀),외부(인프라팀),.moai/specs/SPEC-LAUNCHPLAN-001/research.md:340,research§4
+BLK-S4-2,detail,T1,F1,[차단 입력 S4-2] `huni/dev/admin-runtime-env` 필수 키 존재 여부(값 아님),외부(인프라팀),외부(인프라팀),.moai/specs/SPEC-LAUNCHPLAN-001/research.md:341,research§4
+BLK-S4-3,detail,T1,F2,[차단 입력 S4-3] SSH 터널 접속정보(호스트·포트·키 배포 방식),외부(인프라팀),외부(인프라팀),.moai/specs/SPEC-LAUNCHPLAN-001/research.md:342,research§4
+BLK-S4-4,detail,T1,F2,[차단 입력 S4-4] Lightsail PG 17 인스턴스 사양 · `hunidb`/`webapp` 2 DB 생성 · `pgcrypto`·`citext` 가능 여부,외부(인프라팀),외부(인프라팀),.moai/specs/SPEC-LAUNCHPLAN-001/research.md:343,research§4
+BLK-S4-5,detail,T1,F3,[차단 입력 S4-5] 프록시 Basic Auth 등록(`huni/dev/proxy.proxy_url`),외부(인프라팀),외부(인프라팀),.moai/specs/SPEC-LAUNCHPLAN-001/research.md:344,research§4
+BLK-S4-6,detail,T1,F4,[차단 입력 S4-6] Vercel 프로젝트 접근 · 현재 `DATABASE_URL`·`NEXTAUTH_URL` 소재 · 리다이렉트 설정 유무,외부(Vercel 계정 소유자),외부(Vercel 계정 소유자),.moai/specs/SPEC-LAUNCHPLAN-001/research.md:345,research§4
+BLK-S4-7,detail,T1,F3,[차단 입력 S4-7] DNS 관리 권한자(Cloudflare `printly.co.kr` · `huniprinting.co.kr` 두 존),외부(Cloudflare DNS 권한자),외부(Cloudflare DNS 권한자),.moai/specs/SPEC-LAUNCHPLAN-001/research.md:346,research§4
+BLK-S4-10,detail,T1,F4,[차단 입력 S4-10] 소셜 3사 콘솔 권한자(Redirect URI 편집),외부(소셜 3사 콘솔 권한자),외부(소셜 3사 콘솔 권한자),.moai/specs/SPEC-LAUNCHPLAN-001/research.md:349,research§4
