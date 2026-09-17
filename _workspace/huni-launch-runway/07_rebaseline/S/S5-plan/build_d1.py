@@ -86,13 +86,14 @@ def row_html(r, extra=''):
     if r['std_ids'] == 'NEW' and r['data_role'] == 'top':
         irr += f' <span class="new-reason">{e(r["note"])}</span>'
     due = r['target_date'] or '—'
-    return (f'<tr {attrs(r)}{extra}><th scope="row" class="item">{e(r["title"])}{irr}<br>{badge}</th>'
+    rid = f'<span class="rid">{raw(r["row_id"])}</span> ' if r['data_role'] == 'top' else ''
+    return (f'<tr {attrs(r)}{extra}><th scope="row" class="item">{rid}{e(r["title"])}{irr}<br>{badge}</th>'
             f'<td class="owner">{e(r["owner_name"])}</td><td class="duedate">{raw(due)}</td>'
             f'<td class="evidence">{raw(r["evidence"])}</td><td class="check">{e(r["check_method"])}</td>'
             f'<td class="prereq">{e(r["prereq"]) or "—"}</td><td class="status">{raw(r["status"])}</td></tr>')
 
 
-THEAD = ('<thead><tr><th>할 일</th><th>담당</th><th>목표일</th><th>완료 증거</th>'
+THEAD = ('<thead><tr><th>할 일</th><th>담당</th><th>목표일<br><small>하한 — 마감일 아님</small></th><th>완료 증거</th>'
          '<th>체크 방법</th><th>선행</th><th>상태</th></tr></thead>')
 
 
@@ -118,6 +119,8 @@ derived = max(dated, key=lambda r: r['target_date'])
 unsized = [r for r in TOP if r['target_date'].startswith('미산정')]
 ext_top = [r for r in TOP if r['data_owner'] == 'ext']
 open_req_dec = [d for d in DEC if d['open_required'] == 'Y']
+# 결정 제목을 전제 없는 질문형으로(리드 판정 260917 · 원문 제목은 decisions-by-step.csv·원천 문서에 유지)
+DEC_TITLE_OVERRIDE = {'1': '오픈 범위를 어디까지로 할 것인가'}
 menu_gap_star = [m for m in MENU_ROWS if '★' in m['갭']]
 menu_key = [k for k in MENU_ROWS[0] if k.startswith('실메뉴')][0]
 MANUAL_COL = '매뉴얼 화면 섹션(SCREENS/MODEL_ADMIN) 유무'
@@ -199,6 +202,8 @@ def ms_date(ids):
     ds = [top_by_id[i]['target_date'] for i in ids if is_date(top_by_id[i]['target_date'])]
     us = [i for i in ids if top_by_id[i]['target_date'].startswith('미산정')]
     s = max(ds) if ds else '—'
+    if us and len(us) * 2 > len(ids):
+        return f'<b>미산정 {len(us)}/{len(ids)} — 계산 불가</b> (계산된 행만의 값 {s})'
     return s + (f' (미산정 {len(us)}개 제외)' if us else '')
 
 
@@ -325,8 +330,20 @@ forced = [r for r in admin_manual if r['forced_by_impl'] == 'Y']
 nonforced = [r for r in admin_manual if r['forced_by_impl'] != 'Y']
 
 
+STD_TO_TOP = {}
+for _t in TOP:
+    STD_TO_TOP[_t['row_id']] = _t['row_id']
+    for _s in _t['std_ids'].split(';'):
+        STD_TO_TOP.setdefault(_s, _t['row_id'])
+
+
+def link_of(r):
+    t = STD_TO_TOP.get(r['row_id'])
+    return f'<a href="#row-{t}">연결 {t}</a>' if t else '참고(트랙 행 밖)'
+
+
 def am_li(r):
-    return (f'<li data-row="{raw(r["row_id"])}" data-step="{r["step"]}"><b>{e(r["title"])}</b> — 담당 {e(r["owner_name"])} · '
+    return (f'<li data-row="{raw(r["row_id"])}" data-step="{r["step"]}"><b>{e(r["title"])}</b> — {link_of(r)} · 담당 {e(r["owner_name"])} · '
             f'<span class="source">{raw(r["api_evidence"])}</span></li>')
 
 
@@ -335,8 +352,14 @@ api_block = f'''
 <p class="lead">샵바이는 NHN 이 제공하는 서비스라, 같은 일을 <b>API 로 자동화</b>할 수도 있고 <b>셀러어드민 화면에서 사람이 등록</b>할 수도 있다. 아래는 체크리스트 전 행에 「어느 길로 하나」를 붙인 결과다.</p>
 <p>분류 값 4종 — Server API(우리 서버가 샵바이를 부름) · Shop API(손님 화면이 샵바이를 부름) · 셀러어드민 수동(사람이 화면에서 등록) · 샵바이 비경유(MES·PitStop·webadmin 가격처럼 샵바이를 안 거침).
 분포: {' · '.join(f'{API_LABEL[k]} {api_dist.get(k, 0)}' for k in ['server-api', 'shop-api', 'admin-manual', 'none'])} (전체 {len(ROWS)}행).</p>
-<h4>API 가 있는데 수동으로 두고 있는 항목 — {len(forced)}건</h4><ol id="api-forced">{''.join(am_li(r) for r in forced)}</ol>
-<details><summary>셀러어드민 화면으로만 할 수 있는 항목 — {len(nonforced)}건</summary><ol id="api-admin-only">{''.join(am_li(r) for r in nonforced)}</ol></details>
+<ul id="api-summary">
+<li>API 가 있는데 셀러어드민에서 손으로 하고 있는 항목 {len(forced)}건 — 트랙 행에 연결 {sum(1 for r in forced if STD_TO_TOP.get(r['row_id']))}건 · 참고(트랙 행 밖) {sum(1 for r in forced if not STD_TO_TOP.get(r['row_id']))}건</li>
+<li>셀러어드민 화면으로만 할 수 있는 항목 {len(nonforced)}건 — 트랙 행에 연결 {sum(1 for r in nonforced if STD_TO_TOP.get(r['row_id']))}건 · 참고 {sum(1 for r in nonforced if not STD_TO_TOP.get(r['row_id']))}건</li>
+<li>우선 볼 곳: 「API 가 있는데 수동」 항목은 자동화로 바꿀지 결정할 대상이다</li>
+<li>「화면으로만」 항목은 실무운영이 셀러어드민에서 설정해야 끝나는 일이다</li>
+<li>샵바이 관련 구간인데 규칙에 걸리지 않은 {len(unreviewed_none)}행은 아래 판정 방법 참고</li></ul>
+<details><summary>API 가 있는데 수동으로 두고 있는 항목 전체 — {len(forced)}건</summary><ol id="api-forced">{''.join(am_li(r) for r in forced)}</ol></details>
+<details><summary>셀러어드민 화면으로만 할 수 있는 항목 전체 — {len(nonforced)}건</summary><ol id="api-admin-only">{''.join(am_li(r) for r in nonforced)}</ol></details>
 <p class="note">판정 방법: 기능명 규칙으로 1차 분류 → 샵바이 경유로 잡힌 행 전건 열람 → 행 단위 사람 판정. 다만 샵바이 관련 구간인데 규칙에 걸리지 않아 「비경유」로 남은 {len(unreviewed_none)}행은 한 행씩 열어 보지 않았으므로, 이 안에 수동 등록 항목이 더 있을 수 있다.</p>
 </div>'''
 
@@ -347,11 +370,20 @@ ROLES = [
     ('role-pm', 'PM — 신우진·지니', lambda r: r['owner_name'] in ('신우진', '지니')),
     ('role-exec', '대표 결정 — 채훈희', lambda r: r['owner_name'] == '채훈희'),
 ]
-roles = '<div class="roles">' + ''.join(
+def startable(r):
+    # 이번 주 착수 가능 = 상태가 완료·작동이 아니고, 선행 칸이 「—」(T 행·선행 입력·결정·외부 회신이 하나도 적혀 있지 않음)
+    return r['status'] not in ('완료', '작동') and (r['prereq'] or '—').strip() == '—'
+
+
+roles = ('<p class="rule" id="startable-rule">「이번 주 착수 가능」 표시 규칙 — 상태가 완료가 아니고, 선행 칸에 T 행·선행 입력·결정·외부 회신이 하나도 없는 최상위 할 일. '
+         '선행이 해소됐다는 기록은 이 문서에 없으므로 선행이 적힌 행은 모두 대기로 본다. 날짜는 새로 정하지 않았다.</p>'
+         '<div class="roles">' + ''.join(
     f'<div id="{rid}" class="role"><h4>{name}</h4><ul>' +
-    ''.join(f'<li><a href="#row-{r["row_id"]}">{r["row_id"]}</a> {e(r["title"])} — {raw(r["target_date"])}</li>'
+    ''.join(f'<li><a href="#row-{r["row_id"]}">{r["row_id"]}</a> {e(r["title"])}'
+            + (' <span class="startable">이번 주 착수 가능</span>' if startable(r) else ' <span class="waiting">선행 대기</span>')
+            + f' — 하한 {raw(r["target_date"])}</li>'
             for r in TOP if f(r)) + '</ul></div>'
-    for rid, name, f in ROLES) + '</div>'
+    for rid, name, f in ROLES) + '</div>')
 # 대표 결정 역할에 결정 레버도 연결(최상위 행만으로는 비어 보일 수 있다)
 roles = roles.replace('<div id="role-exec" class="role"><h4>대표 결정 — 채훈희</h4><ul>',
                       '<div id="role-exec" class="role"><h4>대표 결정 — 채훈희</h4><ul><li><a href="#decisions">날짜·인원·범위 3레버 결정</a></li><li><a href="#go-no-go">Go/No-Go 결정</a></li>')
@@ -465,6 +497,7 @@ critical = f'''
 <p>소요를 산정하지 못한 구간 {len(unsized)}개({', '.join(r["row_id"] for r in unsized)})는 원장에 행이 없어 0 으로 계산했다. 이 구간이 채워지면 날짜는 뒤로 밀린다.</p>
 <h3>4. 도출된 오픈일(하한)</h3>
 <p class="derived">선행 관계만으로 계산한 가장 이른 완료일(하한) = <b id="derived-open-date">{derived["target_date"]}</b> — 가장 늦게 끝나는 최상위 할 일 {derived["row_id"]}({e(derived["title"])}).
+<br><b>범위·인원 조정 전 계산값이며 오픈 가능 여부 판정이 아니다. 판정은 <a href="#go-no-go">Go/No-Go 회의</a>에서 한다.</b>
 실제 날짜는 여기에 소요 미산정 구간과 외부 회신 시점이 더해져 늦어진다. 범위·인원을 정하기 전의 수치라는 점도 함께 봐야 한다.</p>
 <h4>담당자별로 줄 세웠을 때 — 오픈 범위 조정 전 · 1인 직렬 가정 · 하한</h4>
 <p>한 사람이 한 번에 한 가지만 한다고 가정하고, 최상위 할 일에 매달린 개발·수정 미완 행을 원장 담당자별로 이어 붙인 값이다.
@@ -482,7 +515,7 @@ decisions = f'''
 </tbody></table>
 <h3>오픈 전에 정해야 하는 결정 — {len(open_req_dec)}건 (전체 {len(DEC)})</h3>
 <div class="scroll"><table id="decision-list"><thead><tr><th>번호</th><th>결정</th><th>구간</th><th>오픈 전 필수</th></tr></thead><tbody>
-{''.join(f'<tr data-step="{d["step"]}"><td>{d["no"]}</td><td>{e(d["title"])}{(" — " + e(d["memo"])) if d["memo"] else ""}</td><td>{d["step"]}</td><td>{"필수" if d["open_required"] == "Y" else "—"}</td></tr>' for d in DEC)}
+{''.join(f'<tr data-step="{d["step"]}"><td>{d["no"]}</td><td>{e(DEC_TITLE_OVERRIDE.get(d["no"], d["title"]))}{(" — " + e(d["memo"])) if d["memo"] else ""}</td><td>{d["step"]}</td><td>{"필수" if d["open_required"] == "Y" else "—"}</td></tr>' for d in DEC)}
 </tbody></table></div>'''
 
 # ───────────── §10~12 운영 ─────────────
@@ -622,6 +655,10 @@ td.evidence,.source,.cmd{font-family:var(--mono);font-size:12px;color:var(--g700
 .track{border-top:2px solid var(--oat);margin-top:26px;padding-top:6px}
 .ext-dep{font-size:12px;background:#FBE9E7;padding:1px 8px;border-radius:999px}
 .derived{font-size:16px}.note{font-size:13px;color:var(--g700)}
+.rid{font-family:var(--mono);font-size:12px;color:var(--clay-d);font-weight:700}
+.startable{display:inline-block;font-size:11px;padding:0 7px;border-radius:999px;background:#E3F1E4;color:#1E5B24;border:1px solid #9CC9A0}
+.waiting{display:inline-block;font-size:11px;padding:0 7px;border-radius:999px;background:var(--g100);color:var(--g700);border:1px solid var(--g300)}
+.rule{font-size:13px;background:var(--g100);padding:8px 12px;border-radius:var(--radius-row)}
 .proposal{display:inline-block;font-size:11px;font-weight:600;color:#8A4B00;background:#FFF1D6;border:1px solid #E8C27A;border-radius:999px;padding:0 7px;white-space:nowrap}
 figure.diagram{margin:10px 0;overflow-x:auto;background:var(--ivory);border-radius:var(--radius-row);padding:10px}
 pre.mermaid{margin:0;white-space:pre}.cmd{background:var(--g100);padding:10px;border-radius:var(--radius-row);white-space:pre-wrap}
