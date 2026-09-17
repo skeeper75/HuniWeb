@@ -414,7 +414,8 @@ def sheet_00(wb, ctx):
     ws.cell(row=row, column=1, value="입력 원본")
     style_title(ws, f"A{row}", 11)
     src_rows = [[k, v, ""] for k, v in ctx["sources"]]
-    put_table(ws, row + 1, ["입력", "경로(저장소 기준)", ""], src_rows)
+    last = put_table(ws, row + 1, ["입력", "경로(저장소 기준)", ""], src_rows)
+    notice_row(ws, last + 2, STALE_NOTICE_00)
     widths(ws, [22, 34, 100])
     return ws
 
@@ -735,6 +736,7 @@ def sheet_07(wb, ctx):
     ws["A2"] = (f"남은 일 {len(rem)}행(상태≠완료 · 우선순위≠오픈 무관) · 주차는 "
                 + ("임시 배치(R3 확정 전)" if provisional else ctx["rel_plan"]) + " · 체크방법은 원장 문장 그대로")
     style_note(ws, "A2")
+    notice_row(ws, 3, STALE_NOTICE_07)
     hdr = ["☐", "std_id", "기능", "담당역할", "담당실명", "주차", "우선순위", "체크방법", "확인처"]
     rows = []
     for r in rem:
@@ -797,6 +799,22 @@ def sheet_08(wb, ctx):
     put_table(ws, row + 1, hdr2, rows2, zebra=True)
     widths(ws, [13, 40, 12, 40, 10, 10, 10, 8, 10, 20, 44, 12])
     return ws
+
+
+# [확장] 리드 판정 260917 — 9/16 산식 시트를 오픈 계획 기준으로 오인하지 않게 안내 행을 넣는다(원본 행은 보존).
+STALE_NOTICE_07 = ("⚠ 이 시트는 2026-09-16 판(구 산식 · 검증·설정 행 포함)이다. "
+                   "오픈 계획 기준 체크리스트는 「10_트랙체크리스트」 시트다.")
+STALE_NOTICE_00 = ("⚠ 07_체크리스트는 2026-09-16 판(구 산식 · 검증·설정 행 포함)이다. "
+                   "오픈 계획 기준 체크리스트는 「10_트랙체크리스트」, 구간 상태는 「09_구간상태판」을 본다.")
+C_NOTICE_BG = "FFF1D6"
+
+
+def notice_row(ws, row, text):
+    c = ws.cell(row=row, column=1, value=text)
+    c.font = Font(name="Noto Sans", size=11, bold=True, color="8A4B00")
+    c.fill = PatternFill("solid", fgColor=C_NOTICE_BG)
+    c.alignment = Alignment(vertical="center")
+    ws.row_dimensions[row].height = 22
 
 
 def sheet_09(wb, ctx):
@@ -895,6 +913,9 @@ def verify(out_path, ctx):
     ws9 = wb["09_구간상태판"]
     n09 = sum(1 for i in range(5, ws9.max_row + 1) if ws9.cell(row=i, column=1).value)
     check(n09 == len(read_csv(STATUS28)), f"09 구간상태판 {n09}행 == status-28.csv")
+    check(ws7["A3"].value == STALE_NOTICE_07, "07 안내 행(A3) 실재 — 9/16 판 표기 · 10 시트 안내")
+    n00 = [ws0 for ws0 in [wb["00_읽는법"]]][0]
+    check(any(n00.cell(row=i, column=1).value == STALE_NOTICE_00 for i in range(1, n00.max_row + 1)), "00 안내 행 실재")
 
     print("\n== 시트 · 데이터 행 수 ==")
     for name in wb.sheetnames:

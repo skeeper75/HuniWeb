@@ -373,10 +373,16 @@ t1_extra = f'''
 <p class="warnbox">되돌릴 수 없는 단계 2개 — <b>F3-11 Railway 종료</b>·<b>F4-8 Vercel 정지</b>는 <strong class="warn">오픈 테스트 통과 전 금지</strong>. 반입 창(F2-4)부터 F3-10 까지는 가격·상품·위젯 편집을 멈춘다 — T2 가 그 기간에 멈춘다.</p>
 <p id="t1-redirect-reverify">로그인 리다이렉트 절대 origin 교정 재검증 — 스킨 이전(T1-4) 뒤 로그인·마이페이지 경로가 shopby.huniprinting.co.kr 을 벗어나지 않는지 다시 확인한다(9/17 회원 흐름에서는 이탈이 재현되지 않았다).</p>'''
 
-DP = [
-    ('D-P1', 'PitStop 도입 형태', '채훈희'), ('D-P2', '검사 큐 방식', '서희항'), ('D-P3', '편집기 파일 검수 생략 여부', '서희항'),
-    ('D-P4', '웹훅 이벤트 → 내부 상태 매핑', '서희항'), ('D-P5', '주문 상태머신', '채훈희'), ('D-P6', 'MES 인터페이스', '서희항'),
-    ('D-P7', '접수 화면', '최숙진'), ('D-P8', '샵바이 되돌리기(상품준비중·송장·취소)', '서희항'), ('D-P9', '고객 알림·재업로드', '최숙진'),
+DP = [  # 결정자 = S2 findings §4 원문 그대로(복수 실명)
+    ('D-P1', 'PitStop 도입 형태', '채훈희(구매) · 서희항(구성) · 최숙진(검사 항목)'),
+    ('D-P2', '검사 큐 방식', '서희항 · 외부(인프라팀)'),
+    ('D-P3', '편집기(Edicus) 파일 검수 생략 여부', '서희항 · 최숙진'),
+    ('D-P4', '웹훅 이벤트 → 내부 상태 매핑', '서희항 · 김동학(자사몰 이벤트 실측)'),
+    ('D-P5', '주문 상태머신', '서희항 · 최숙진 · 채훈희(정책)'),
+    ('D-P6', 'MES 인터페이스', '서희항 · 외부(MES 담당)'),
+    ('D-P7', '접수 화면', '최숙진(사용자) · 서희항'),
+    ('D-P8', '샵바이 되돌리기(상품준비중·송장·취소)', '서희항 · 최숙진 · 채훈희(시스템키 발급)'),
+    ('D-P9', '고객 알림·재업로드', '최숙진 · 신우진'),
 ]
 C_STATUS = [
     ('C1', '주문 등록 수신 엔드포인트', '구현-미검증'), ('C2', '원고 승격', '구현-미검증'), ('C3 수신', '웹훅 수신·원문 저장', '구현-미검증'),
@@ -463,9 +469,9 @@ critical = f'''
 decisions = f'''
 <p class="lead">임계경로의 날짜를 당길 수 있는 손잡이는 셋이다. 하나를 고르면 나머지 둘의 값이 정해진다. 근거는 <a href="#lane-table">임계경로 절의 담당자별 표</a>다.</p>
 <table id="levers"><thead><tr><th>레버</th><th>무엇을 움직이나</th><th>결정자</th></tr></thead><tbody>
-<tr data-lever="date"><td>날짜</td><td>기준일을 도출된 날짜 쪽으로 옮긴다</td><td class="decider">채훈희</td></tr>
-<tr data-lever="people"><td>인원</td><td>쇼핑개발 담당을 늘려 담당자별 줄을 나눈다</td><td class="decider">채훈희</td></tr>
-<tr data-lever="scope"><td>범위</td><td>오픈 필수 표에서 항목을 빼 오픈 후 표로 옮긴다</td><td class="decider">신우진</td></tr>
+<tr data-lever="date"><td>날짜</td><td>기준일을 도출된 날짜 쪽으로 옮긴다</td><td class="decider">채훈희 <span class="proposal">제안(확정 전)</span></td></tr>
+<tr data-lever="people"><td>인원</td><td>쇼핑개발 담당을 늘려 담당자별 줄을 나눈다</td><td class="decider">채훈희 <span class="proposal">제안(확정 전)</span></td></tr>
+<tr data-lever="scope"><td>범위</td><td>오픈 필수 표에서 항목을 빼 오픈 후 표로 옮긴다</td><td class="decider">신우진 <span class="proposal">제안(확정 전)</span></td></tr>
 </tbody></table>
 <h3>오픈 전에 정해야 하는 결정 — {len(open_req_dec)}건 (전체 {len(DEC)})</h3>
 <div class="scroll"><table id="decision-list"><thead><tr><th>번호</th><th>결정</th><th>구간</th><th>오픈 전 필수</th></tr></thead><tbody>
@@ -479,7 +485,7 @@ gonogo = '''
 <li data-state="yellow"><b>Yellow</b> — 미완이 있으나 리스크 오너와 해결 기한이 적혀 있다</li>
 <li data-state="red"><b>Red</b> — 오픈 테스트 진입 조건 9항 중 하나라도 미충족 → 오픈 차단</li>
 <li data-state="unknown"><b>Unknown</b> — 확인할 데이터가 없다 → 차단으로 본다</li></ul>
-<p>결정권자: <b class="decider">채훈희</b> · 판정 회의: <b class="meeting-date">2026-10-02</b>(기준일 직전 근무일 · 제안) — Red 나 Unknown 이 하나라도 있으면 범위 축소 후 진행·연기·보완 통제 진행 중 하나를 고른다.</p>'''
+<p>결정권자: <b class="decider">채훈희</b> <span class="proposal">제안(확정 전)</span> · 판정 회의: <b class="meeting-date">2026-10-02</b> <span class="proposal">제안(확정 전)</span>(기준일 직전 근무일) — Red 나 Unknown 이 하나라도 있으면 범위 축소 후 진행·연기·보완 통제 진행 중 하나를 고른다.</p>'''
 
 CUT = [
     ('1', '서희항', '종단 테스트 통과(T7-2)', 'Railway 관리자 쓰기 정지 공지 기록', '공지 철회 후 기존 운영 유지'),
@@ -492,8 +498,8 @@ CUT = [
 ]
 cutover = f'''
 <table id="cutover-table"><thead><tr><th>순서</th><th>담당</th><th>선행조건</th><th>검증 증거</th><th>비상조치</th></tr></thead><tbody>
-{''.join(f'<tr><td>{a}</td><td>{b}</td><td>{c}</td><td>{d}</td><td>{x}</td></tr>' for a, b, c, d, x in CUT)}</tbody></table>
-<p id="rollback-trigger">롤백 트리거 — 행수 지문 1개 테이블 이상 불일치, 또는 잔액 대사 차이 1원 이상, 또는 위젯 가격 API 응답 중앙값 300ms 초과가 전환 후 30분 이상 지속.
+{''.join(f'<tr><td>{a} <span class=\"proposal\">제안(확정 전)</span></td><td>{b}</td><td>{c}</td><td>{d}</td><td>{x}</td></tr>' for a, b, c, d, x in CUT)}</tbody></table>
+<p id="rollback-trigger"><span class="proposal">제안(확정 전)</span> 롤백 트리거 — 행수 지문 1개 테이블 이상 불일치, 또는 잔액 대사 차이 1원 이상, 또는 위젯 가격 API 응답 중앙값 300ms 초과가 전환 후 30분 이상 지속.
 결정자 <b class="decider">채훈희</b> · 시한 컷오버 시작 후 <b>48시간</b> 안.</p>'''
 
 hypercare = '''
@@ -502,7 +508,7 @@ hypercare = '''
 <li>결제 완료 주문 중 주문 등록 누락 0건이 연속 72시간 유지된다.</li>
 <li>처리되지 않은 웹훅 이벤트가 0건이다.</li>
 <li>잔액 대사 차이가 0원이다.</li>
-<li>장바구니·주문서 화면 오류 신고가 하루 2건 이하로 3일 연속이다.</li>
+<li>장바구니·주문서 화면 오류 신고가 하루 2건 이하로 3일 연속이다. <span class="proposal">제안(확정 전)</span></li>
 <li>Sev1 결함 미해결 0건이다.</li></ul>'''
 
 RACI = [
@@ -518,13 +524,24 @@ RACI = [
 PEOPLE = ['김동학', '서희항', '최숙진', '김용기', '신우진', '지니', '채훈희']
 raci = f'''
 <table id="raci-table"><thead><tr><th>항목</th>{''.join(f'<th>{p}</th>' for p in PEOPLE)}</tr></thead><tbody>
-{''.join('<tr><td>' + r[0] + '</td>' + ''.join(f'<td>{x}</td>' for x in r[1:]) + '</tr>' for r in RACI)}</tbody></table>
+{''.join('<tr><td>' + r[0] + ' <span class=\"proposal\">제안(확정 전)</span></td>' + ''.join(f'<td>{x}</td>' for x in r[1:]) + '</tr>' for r in RACI)}</tbody></table>
 <p class="note">A = 결정·승인 1인, R = 실행, C = 사전 협의, I = 결과 공유. 행마다 A 는 한 명이다.</p>
 <table id="comms"><caption>의사소통 주기</caption><thead><tr><th>대상</th><th>메시지 수준</th><th>주기</th><th>채널</th><th>담당자</th></tr></thead><tbody>
-<tr><td>실무진 전원</td><td>트랙별 최상위 할 일 상태 변화</td><td>근무일 매일</td><td>이 문서 갱신 + 사내 메신저</td><td>신우진</td></tr>
-<tr><td>대표·CTO</td><td>RAG·임계경로 날짜·결정 요청</td><td>주 1회</td><td>주간 회의</td><td>지니</td></tr>
-<tr><td>외부(인프라팀·NHN·토스)</td><td>회신 요청·기한</td><td>대기 항목 발생 시</td><td>메일</td><td>신우진</td></tr>
-</tbody></table>'''
+<tr><td>실무진 전원 <span class="proposal">제안(확정 전)</span></td><td>트랙별 최상위 할 일 상태 변화</td><td>근무일 매일</td><td>이 문서 갱신 + 사내 메신저</td><td>신우진</td></tr>
+<tr><td>대표·CTO <span class="proposal">제안(확정 전)</span></td><td>RAG·임계경로 날짜·결정 요청</td><td>주 1회</td><td>주간 회의</td><td>지니</td></tr>
+<tr><td>외부(인프라팀·NHN·토스) <span class="proposal">제안(확정 전)</span></td><td>회신 요청·기한</td><td>대기 항목 발생 시</td><td>메일</td><td>신우진</td></tr>
+</tbody></table>
+<div id="jini-decisions" class="focus"><h3>지니 결정 필요 — 제안값 목록</h3>
+<p class="lead">아래는 원천 문서에 확정값이 없어 이 계획서가 제안으로 채운 값이다. 표지 「제안(확정 전)」은 결정이 날 때까지 떼지 않는다.</p>
+<table><thead><tr><th>항목</th><th>제안값</th><th>근거</th><th>결정자</th></tr></thead><tbody>
+<tr><td>Go/No-Go 결정권자·회의 일자</td><td>채훈희 · 2026-10-02</td><td>결정권자는 1인이어야 한다(오픈 준비 베스트프랙티스) · 기준일 직전 근무일</td><td>지니</td></tr>
+<tr><td>3레버 결정자</td><td>날짜·인원 채훈희 · 범위 신우진</td><td>대표 결정 역할 · PM 범위 관리 역할(역할 정의)</td><td>지니</td></tr>
+<tr><td>컷오버 순서 7단계와 담당</td><td>표 그대로</td><td>인프라 런북 F2-4·F3-4·F3-5·F4-5 순서 + 이관 컷오버</td><td>지니</td></tr>
+<tr><td>롤백 트리거 지속 시간·시한</td><td>300ms 초과 30분 지속 · 48시간</td><td>수치 임계는 런북·잔액 대사 원천, 지속 시간·시한은 베스트프랙티스(첫 24~48시간)에서 고른 제안</td><td>지니</td></tr>
+<tr><td>하이퍼케어 CS 신고 기준</td><td>하루 2건 이하 · 3일 연속</td><td>원천 없음 — 종료 기준을 지표로 두라는 원칙만 있음</td><td>지니</td></tr>
+<tr><td>RACI 배정 8행</td><td>표 그대로</td><td>트랙 주 담당(원장 담당 열) · 항목당 A 1인 원칙</td><td>지니</td></tr>
+<tr><td>의사소통 대상·주기·채널</td><td>표 그대로</td><td>원천 없음 — 대상·수준·주기·채널·담당 다섯 요소 원칙만 있음</td><td>지니</td></tr>
+</tbody></table></div>'''
 
 # ───────────── §13 부록 ─────────────
 detail_html = ''.join(
@@ -598,6 +615,7 @@ td.evidence,.source,.cmd{font-family:var(--mono);font-size:12px;color:var(--g700
 .track{border-top:2px solid var(--oat);margin-top:26px;padding-top:6px}
 .ext-dep{font-size:12px;background:#FBE9E7;padding:1px 8px;border-radius:999px}
 .derived{font-size:16px}.note{font-size:13px;color:var(--g700)}
+.proposal{display:inline-block;font-size:11px;font-weight:600;color:#8A4B00;background:#FFF1D6;border:1px solid #E8C27A;border-radius:999px;padding:0 7px;white-space:nowrap}
 figure.diagram{margin:10px 0;overflow-x:auto;background:var(--ivory);border-radius:var(--radius-row);padding:10px}
 pre.mermaid{margin:0;white-space:pre}.cmd{background:var(--g100);padding:10px;border-radius:var(--radius-row);white-space:pre-wrap}
 details{margin:6px 0}summary{cursor:pointer;font-weight:600}
