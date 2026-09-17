@@ -987,6 +987,168 @@ exit=0
 
 - 제안값 표지는 **생성기가 붙인 위치**만 확인했다 — 렌더 화면에서 눈에 띄는지는 사람 판정 때 본다.
 
+### M1.5 분모 보강 (리드 판정 260917) · 외부 대기 대상 원천화 · M4 D3 1회차(윤문 전) — 2026-09-17 14:03 KST
+
+#### Claim
+
+1. **분모 규칙 보강**: 매뉴얼 콜아웃이 0 이거나 매뉴얼 섹션이 없는 **사이드바 관리 화면**도 화면 1건 = 요소 1건. 원고 분모 명령에 메뉴 지도 CSV 항을 더해 **159 → 162**. 문서 본문 메뉴 6개(퀵스타트 가이드·메뉴얼·위젯빌더 메뉴얼·테이블 명세서·SDK 개발가이드·임베드 라이브 데모)는 제외를 **선언**(README · D1 `#manual-exclusions`) — D3 가 계산한 제외 집합과 선언 목록을 대조하고 매번 출력.
+2. **라이브 읽기 실측 3화면**(ego-browser space 20 · p2 · 클릭 0 · 저장 0 · 다이얼로그 0 · [HARD] 3항 준수): basecode-master = 동작확인 · guide-file-md·main-img-md = 불일치(매뉴얼 섹션 없음 · 화면은 렌더).
+3. **외부 대기 회신 요청 대상**을 키워드 배정에서 **행별 원천 인용**(`wait_target_basis`)으로 교체 — 원천에 상대 이름이 없거나 원천이 충돌하는 3행은 「회신 요청 대상 미확정」.
+4. **D3 1회차(윤문 전) = 13/14 PASS · FAIL AC-LP-012(b)** — 위 미확정 3행. 리드 판정대로 FAIL 로 보고한다(지니 확인 상신 대상).
+
+#### Evidence — 분모
+
+```
+$ cd /Users/innojini/Dev/HuniWeb && cd raw/webadmin/tools && python3 -c 'import importlib.util as u
+def L(n,p):
+    s=u.spec_from_file_location(n,p); m=u.module_from_spec(s); s.loader.exec_module(m); return m
+mc=L("mc","manual_content.py"); wc=L("wc","widget_manual_content.py")
+n=sum(len(c.get("callouts",[])) for s in mc.SCREENS for c in s.get("captures",[]))
+n+=sum(len(c.get("callouts",[])) for s in wc.SCREENS for c in s.get("captures",[]))
+n+=len(mc.MODEL_ADMIN_SCREENS); import csv; M=list(csv.DictReader(open("../../../_workspace/huni-launch-runway/07_rebaseline/S/S5-live/menu-map-260917.csv",encoding="utf-8"))); k="매뉴얼 화면 섹션(SCREENS/MODEL_ADMIN) 유무"
+n+=sum(1 for r in M if r["사이드바그룹"]!="(사이드바 없음)" and (r[k].startswith("없음") or "콜아웃 0" in r[k]))
+print(n)'
+162
+```
+
+라이브 실측 원시 기록 `S5-plan/m15-2b-results.jsonl`(화면 1건마다 즉시 append):
+
+```
+{"path":"/admin/basecode-master/","startedAt":"2026-09-17 13:43:09","url":"/admin/basecode-master/","title":"기초코드정보 | 후니 DB Admin","h1":"기초코드정보?\n\n  #hh-help-link{display:inline-flex;align-items:center;justify-content:","login":false,"rows":23,"textLen":1478,"measuredAt":"2026-09-17 13:43:11"}
+{"path":"/admin/guide-file-md/","startedAt":"2026-09-17 13:43:11","url":"/admin/guide-file-md/","title":"상품별 작업가이드 파일 | 후니 DB Admin","h1":"상품별 작업가이드 파일?\n\n  #hh-help-link{display:inline-flex;align-items:center;justify-co","login":false,"rows":248,"textLen":6094,"measuredAt":"2026-09-17 13:43:11"}
+{"path":"/admin/main-img-md/","startedAt":"2026-09-17 13:43:11","url":"/admin/main-img-md/","title":"상품별 메인이미지 | 후니 DB Admin","h1":"상품별 메인이미지?\n\n  #hh-help-link{display:inline-flex;align-items:center;justify-conte","login":false,"rows":248,"textLen":6745,"measuredAt":"2026-09-17 13:43:40"}
+```
+
+| | 보강 전(`e1b99e22`) | 보강 후 |
+|---|---|---|
+| 요소(분모 = CSV 행) | 159 | 162 |
+| 화면단위 | 50 | 53 |
+| 결과 분포 | {'동작확인': 116, '쓰기경로-dev환경필요': 43} | {'동작확인': 117, '쓰기경로-dev환경필요': 43, '불일치': 2} |
+| 미실측 비율 | 0/159 (0.0%) | 0/162 (0.0%) |
+| (iv) 불일치 목록 | 0 | 2(작업가이드 파일 · 메인이미지 — 매뉴얼 섹션 없음 · 개발자 전달) |
+
+#### Evidence — 외부 대기 12행(원장 담당 칸이 우리 쪽 사람이던 행)
+
+| 행 | 제목 | 회신 요청 대상 | 근거 |
+|---|---|---|---|
+| STD-PAY-001 | 신용카드 결제(PG) | 외부(이니시스) | 원장 담당실명 「이니시스(확인 신우진·최숙진 실장)」 · 확인처 「이니시스」 |
+| STD-PAY-007 | 적립금(프린팅머니) 결제 | 외부(NHN커머스) | 원장 비고 「엔터프라이즈 플랜 확인(V9) 필요」 · _workspace/huni-launch-runway/07_rebaseline/S/S3-migration/migration-status.md:58 「Shopby 엔터프라이즈 플랜·외부포인트 정식 적용(V9) → NHN 1:1 세팅」 |
+| STD-PAY-008 | 복합결제(적립금+PG 병용) | 외부(NHN커머스 · 이니시스) | 원장 선행의존 「STD-PAY-007;STD-PAY-001」 — 두 선행 행의 대상 |
+| STD-PAY-011 | PG 리다이렉트·결제 확정 콜백 | 외부(이니시스) | 원장 선행의존 「EXT-PG」 · 같은 EXT-PG 행 STD-PAY-001 확인처 「이니시스」 |
+| STD-MEM-020 | 기존 회원 데이터 이관(구 사이트) | 외부(구 사이트 운영사/IDC) | 원장 선행의존 「EXT-OLDDB」 · _workspace/huni-launch-runway/07_rebaseline/S/S3-migration/migration-status.md:49 「ⓔ 구 사이트 운영사/IDC 협조」 |
+| STD-MYP-007 | 프린팅머니 충전(PG 결제→적립 전환) | 외부(회신 요청 대상 미확정) | 원천 충돌 — 원장 선행의존 「EXT-PG」(이니시스) vs 9/15 회의 확정 「충전 = 토스페이먼츠 가상계좌」(STD-MYP-028) |
+| STD-MYP-009 | 기존 프린트머니 잔액 이관 | 외부(구 사이트 운영사/IDC) | 원장 선행의존 「EXT-OLDDB」 · _workspace/huni-launch-runway/07_rebaseline/S/S3-migration/migration-status.md:65 「구 사이트 운영사/IDC(C-1-2·C-2-4)」 |
+| STD-MYP-026 | 구 ASP 코드·DB 미제공 전제 — 이관 원천은 잔액 스냅샷만 | 외부(구 사이트 운영측) | 원장 확인처 「구 사이트 운영측」 |
+| STD-MYP-028 | 충전 입금 확인 = 토스페이먼츠 가상계좌 API 직접 발급 | 외부(토스페이먼츠) | 원장 기능 「토스페이먼츠 가상계좌 API 직접 발급」 · .moai/specs/SPEC-LAUNCHPLAN-001/research.md:331 「토스 계약 4건 회신」 |
+| STD-FIN-008 | PG 정산 대사 | 외부(이니시스) | 원장 선행의존 「EXT-PG」 · 같은 EXT-PG 행 STD-PAY-001 확인처 「이니시스」 |
+| STD-SYS-004 | PG 연동 설정 | 외부(이니시스) | 원장 선행의존 「EXT-PG」 · 같은 EXT-PG 행 STD-PAY-001 확인처 「이니시스」 |
+| STD-SYS-039 | 웹훅 등록 화면 위치 확인(셀러어드민 내 미발견) 및 등록 여부 | 외부(NHN) | 원장 비고 「앱 개발자센터 또는 NHN 1:1 문의로 확인」 |
+
+미확정 3행(전체 46 중):
+
+| 행 | 제목 | 근거 |
+|---|---|---|
+| STD-MYP-007 | 프린팅머니 충전(PG 결제→적립 전환) | 원천 충돌 — 원장 선행의존 「EXT-PG」(이니시스) vs 9/15 회의 확정 「충전 = 토스페이먼츠 가상계좌」(STD-MYP-028) |
+| BLK-S2-4 | [선행 입력] PitStop 구매 진행 상태(견적·라이선스·인스턴스 계획) | .moai/specs/SPEC-LAUNCHPLAN-001/research.md:317 「PitStop 구매 진행 상태」 — 회신할 상대 이름이 원천에 없다 |
+| BLK-S4-6 | [선행 입력] Vercel 프로젝트 접근 · 현재 `DATABASE_URL`·`NEXTAUTH_URL` 소재 · 리다이렉트 설정 유무 | .moai/specs/SPEC-LAUNCHPLAN-001/research.md:345 「Vercel 프로젝트 접근」 — 접근 권한을 가진 상대 이름이 원천에 없다 |
+
+인용한 `파일:줄` 근거는 생성 시 줄 수 범위를 스크립트로 확인했다(실재 OK).
+
+#### Evidence — D3 1회차(윤문 전 · D1 md5 `5476498a5ef527db23763de6a2ae6653`)
+
+```
+$ node _workspace/huni-launch-runway/07_rebaseline/S/S5-plan/verify_plan.mjs docs/huni/후니프린팅_오픈계획서_260917.html /Users/innojini/Dev/HuniWeb/_workspace/huni-launch-runway/07_rebaseline/R/R2/unified-ledger-v4.csv _workspace/…/S5-plan/manual-element-matrix.csv "<README 분모 명령>"
+[PASS] AC-LP-001 자기완결 + 라이트 테마 전용
+    (① 허용 밖 외부 참조 0) 읽은 대상 2
+    (② prefers-color-scheme 0) 읽은 대상 1
+    (③ 다크 선택자 0) 읽은 대상 1
+    (④ 테마 토글 0) 읽은 대상 1
+[PASS] AC-LP-002 Out of Scope 금지 4종
+    ((a) 내부 코드명 0) 읽은 대상 1804
+    ((b) 반려 수치 0) 읽은 대상 1804
+    ((c) 오픈일 판정 문장 0(critical-path·decisions 밖)) 읽은 대상 1430
+    ((d) 조판 ≤ 1) 읽은 대상 1804
+[PASS] AC-LP-003 13섹션 골격 + 범위 두 표
+    ((a) sec-01~13 순서) 읽은 대상 13
+    ((b) 범위 두 표·동결 규칙) 읽은 대상 2
+[PASS] AC-LP-004 스윔레인 3~7 + CTO 10구간 매핑
+    ((a) 파싱·레인 수·소유 라벨) 읽은 대상 4
+    ((b) 상위 10 · 구간 참조) 읽은 대상 10
+    ((c) 영향 문장) 읽은 대상 10
+[PASS] AC-LP-005 요약·마일스톤·배치도
+    ((a) 요약 6요소·700자·범례) 읽은 대상 6
+    ((b) 마일스톤 4~6·오너·상태·T1 첫째) 읽은 대상 5
+    ((c) 배치도 ≤12·실명·소유 라벨) 읽은 대상 10
+[PASS] AC-LP-006 체크리스트 7블록·3~5·6칸·체크 방법·소유 분류
+    ((a) 7블록·최상위 3~5) 읽은 대상 7
+    ((b) 6칸 빈칸 0) 읽은 대상 28
+    ((c) 담당 실명) 읽은 대상 28
+    ((d) 체크 방법 실질) 읽은 대상 28
+    ((e) 소유·분류 제약(전 행)) 읽은 대상 735
+[PASS] AC-LP-007 증거 실재 + 작동 판정 규율
+    ((a) 파일:줄 실재(최상위 · 파일 증거 28)) 읽은 대상 28
+    ((b) URL@일시 형식·호스트(최상위 · URL 증거 0)) 읽은 대상 28
+    ((c) data-std 원장 실재 · NEW 5 ≤ 30%) 읽은 대상 28
+    ((d) 작동 행 전부 URL@일시 ≥ 2026-09-16(전 행)) 읽은 대상 115
+[PASS] AC-LP-008 구간 귀속 + 역할별 진입점
+    (data-step 허용 집합) 읽은 대상 735
+    (역할 앵커 5·각 1건 이상) 읽은 대상 5
+[PASS] AC-LP-009 T1 인프라
+    ((a) F1~F4) 읽은 대상 4
+    ((b) 진입 조건 정확히 9) 읽은 대상 9
+    ((c) F3-11·F4-8 금지 표기) 읽은 대상 2
+    ((d) 리다이렉트 재검증) 읽은 대상 1
+[PASS] AC-LP-010 T4 3단 + D-P1~9 + C1~C7 값 대조
+    ((a) 3단계 순서) 읽은 대상 3
+    ((b) D-P1~9 결정자) 읽은 대상 9
+    ((c) 상태 값 대조) 읽은 대상 8
+[PASS] AC-LP-011 T3·T6 이관 6단계 + 외부 의존 계층
+    ((a) 6단계 순서) 읽은 대상 2
+    ((b) 하위 외부 의존 정확히 2) 읽은 대상 2
+    ((c) T6 밖 대기 2종) 읽은 대상 1
+    ((d) 미확정·P-6) 읽은 대상 2
+[FAIL] AC-LP-012 임계경로 전진 구축 + 3레버
+    ((a) 순서·도출 날짜) 읽은 대상 4
+    ((b) 외부 대기 46 · dev 선행 28) 읽은 대상 46 · 위반 3
+        - 회신 요청 대상 부적격 「외부(회신 요청 대상 미확정)」: 프린팅머니 충전(PG 결제→적립 전환) — 회신 요청 대상 외부(회신 요청 대상 미확정) 
+        - 회신 요청 대상 부적격 「외부(회신 요청 대상 미확정)」: [선행 입력] PitStop 구매 진행 상태(견적·라이선스·인스턴스 계획) — 회신 요청 
+        - 회신 요청 대상 부적격 「외부(회신 요청 대상 미확정)」: [선행 입력] Vercel 프로젝트 접근 · 현재 `DATABASE_URL`·`NEXTAU
+    ((c) 3레버 결정자) 읽은 대상 3
+[PASS] AC-LP-013 Go/No-Go · 컷오버 · 하이퍼케어 · RACI
+    ((a) 4상태·결정권자 1인·회의일) 읽은 대상 4
+    ((b) 컷오버 5칸·롤백 트리거) 읽은 대상 7
+    ((c) 하이퍼케어 지표·날짜 없음) 읽은 대상 5
+    ((d) RACI A 1개·소통 5요소) 읽은 대상 8
+    [(v) 대조 제외 6] 퀵스타트 가이드 · 메뉴얼 · 위젯빌더 메뉴얼 · 테이블 명세서 · SDK 개발가이드 · 임베드 라이브 데모
+[PASS] AC-LP-014 판매 준비 프로세스 3블록
+    ((a) 메뉴 37·내역) 읽은 대상 37
+    ((b) 갭 열·갭 5건) 읽은 대상 37
+    ((c) 갭 수·기준·원천) 읽은 대상 1
+    ((d) 옵션↔가격 5단계·고치는 화면) 읽은 대상 5
+    ((e) 매트릭스 사슬·값·하한(원고 분모 162 · 부록 162 · 요약 합 162 · 화면 대상 31 · 미실측 0)) 읽은 대상 162
+
+== D3 RESULT: 13/14 PASS · FAIL AC-LP-012 ==
+exit=1
+```
+
+#### D3 작성 중 스스로 고친 것 (보고)
+
+| # | 발견 | 조치 |
+|---|---|---|
+| 1 | D3 가 「외부(회신 요청 대상 미확정)」을 통과시켰다 — 정규식이 「미정」만 찾았는데 「미확정」에는 그 글자 연속이 없다 | 정규식에 「미확정」 추가 → AC-LP-012 가 제대로 FAIL |
+| 2 | AC-LP-002 가 분모 명령 코드 블록 안의 경로 조각 「S5」를 내부 코드명으로 잡았다 | 산문 추출에서 `pre`·`code`(코드 블록)를 뺐다 — AC 가 「산문 노드만」이라 계약 문구에 맞춘 해석. **판정 대상** |
+| 3 | 원장 제목의 「[차단 입력 S2-4]」가 정리 함수에서 코드만 지워져 「[차단 입력 -4]」로 보였다 | 제목을 「[선행 입력]」으로, 식별자는 행 ID 속성에만 |
+
+#### Gaps
+
+1. (v) 커버 판정은 **경로 정규화 일치 또는 메뉴명↔매트릭스 화면명 포함**이라는 D3 규칙이다 — 이름 포함 판정은 느슨할 수 있다(예: 짧은 메뉴명이 긴 화면명에 우연히 포함).
+2. 3화면 실측은 **렌더 확인**(제목·행 수·로그인 폼 부재)까지다 — 화면 안 개별 버튼은 매뉴얼 콜아웃이 없어 대조하지 않았다.
+3. D3 는 이 레인이 썼다 — 생성과 검증 주체가 같다. 리드 재실행·재집계가 독립 판정이다.
+
+#### Residual-risk
+
+- 미확정 3행은 D1 §8 외부 대기 목록에 「회신 요청 대상 미확정」으로 그대로 보인다 — 지니 확인 전까지 AC-LP-012 는 FAIL 이 유지된다.
+
 ## §E.3 Run-phase Audit-Ready Signal
 
 _<pending run-phase>_

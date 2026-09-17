@@ -159,3 +159,6 @@
 [webadmin] 가격 관리 › 가격공식 / 가격구성요소 / 할인테이블 (표준 목록),manual_content.py:822,표준 목록 화면. 실제 편집은 위의 각 MD 화면이 편합니다.,(콜아웃 없음 — 화면 1건=요소 1건),,읽기,동작확인(/admin/catalog/tprcpriceformulas/@2026-09-17 08:28:55 KST),huni,dev,
 [webadmin] 고객관리 › 고객,manual_content.py:823,고객 마스터.,(콜아웃 없음 — 화면 1건=요소 1건),,읽기,동작확인(/admin/catalog/tcuscustomers/@2026-09-17 08:28:53 KST),huni,dev,데이터 0건 — 빈 상태 정상 렌더
 [webadmin] 인증 및 권한 › 사용자,manual_content.py:824,관리자 계정·권한 관리.,(콜아웃 없음 — 화면 1건=요소 1건),,읽기,동작확인(/admin/auth/user/@2026-09-17 08:16:59 KST),huni,dev,
+[webadmin] 기준정보 › 기초코드정보,manual_content.py:464,화면 1건 — 매뉴얼 캡처 master_basecode 는 콜아웃이 0개라 화면 렌더(기초코드 목록)를 요소로 센다,table tbody tr,/admin/basecode-master/,읽기,동작확인(/admin/basecode-master/@2026-09-17 13:43:11 KST),huni,dev,분모 보강(리드 판정 260917) · 행 23 렌더 · 클릭 0 · 다이얼로그 0
+[webadmin] 상품 › 상품별 작업가이드 파일,manual_content.py:1435,화면 1건 — 매뉴얼 섹션 없음(HELP_FALLBACK_OK 잠정 예외),table tbody tr,/admin/guide-file-md/,읽기,불일치(/admin/guide-file-md/@2026-09-17 13:43:11 KST · 화면은 248행 렌더 · 매뉴얼 섹션 없음),huni,dev,분모 보강(리드 판정 260917) · 매뉴얼 섹션 없음(메뉴 지도 갭 ★) · 개발자 전달
+[webadmin] 상품 › 상품별 메인이미지,manual_content.py:1434,화면 1건 — 매뉴얼 섹션 없음(HELP_FALLBACK_OK 잠정 예외),table tbody tr,/admin/main-img-md/,읽기,불일치(/admin/main-img-md/@2026-09-17 13:43:40 KST · 화면은 248행 렌더(약 29초) · 매뉴얼 섹션 없음),huni,dev,분모 보강(리드 판정 260917) · 매뉴얼 섹션 없음(메뉴 지도 갭 ★) · 개발자 전달 · 로딩 약 29초

@@ -136,25 +136,58 @@ ADMIN_API_RULES = [
 
 NONE_EV = '샵바이 비경유'
 
-# 외부 대기 행의 회신 요청 대상(바깥 기관) — 담당 칸이 우리 쪽 챙기는 사람인 원장 행을 위해 제목으로 뽑는다(순서 = 우선순위)
-WAIT_TARGET_RULES = [
-    (r'토스|가상계좌|충전', '외부(토스페이먼츠)'),
-    (r'이관|구 사이트|ASP|스냅샷', '외부(구 사이트 운영사)'),
-    (r'적립금|외부포인트|복합결제|프린팅머니|프린트머니', '외부(NHN커머스)'),
-    (r'PG|이니시스|카드|정산', '외부(KG이니시스)'),
-    (r'웹훅|셀러어드민|샵바이', '외부(NHN커머스)'),
-]
+# 외부 대기 행의 회신 요청 대상(바깥 기관) — [HARD] 원천에 적힌 이름만 쓴다(리드 판정 260917).
+# 원천에 대상이 없거나 원천끼리 충돌하면 「회신 요청 대상 미확정」으로 둔다 — 키워드로 기관을 지어내지 않는다.
+S3M_ = f'{RB}/S/S3-migration/migration-status.md'
+S2F_ = f'{RB}/S/S2-pipeline/findings.md'
+RES_ = '.moai/specs/SPEC-LAUNCHPLAN-001/research.md'
+RUNBOOK_ = f'{RB}/S/S4-infra/migration-plan.md'
+UNRESOLVED = '외부(회신 요청 대상 미확정)'
+WAIT_BASIS = {
+    # 원장 담당 칸이 우리 쪽 챙기는 사람인 12행
+    'STD-PAY-001': ('외부(이니시스)', '원장 담당실명 「이니시스(확인 신우진·최숙진 실장)」 · 확인처 「이니시스」'),
+    'STD-PAY-007': ('외부(NHN커머스)', f'원장 비고 「엔터프라이즈 플랜 확인(V9) 필요」 · {S3M_}:58 「Shopby 엔터프라이즈 플랜·외부포인트 정식 적용(V9) → NHN 1:1 세팅」'),
+    'STD-PAY-008': ('외부(NHN커머스 · 이니시스)', '원장 선행의존 「STD-PAY-007;STD-PAY-001」 — 두 선행 행의 대상'),
+    'STD-PAY-011': ('외부(이니시스)', '원장 선행의존 「EXT-PG」 · 같은 EXT-PG 행 STD-PAY-001 확인처 「이니시스」'),
+    'STD-MEM-020': ('외부(구 사이트 운영사/IDC)', f'원장 선행의존 「EXT-OLDDB」 · {S3M_}:49 「ⓔ 구 사이트 운영사/IDC 협조」'),
+    'STD-MYP-007': (UNRESOLVED, '원천 충돌 — 원장 선행의존 「EXT-PG」(이니시스) vs 9/15 회의 확정 「충전 = 토스페이먼츠 가상계좌」(STD-MYP-028)'),
+    'STD-MYP-009': ('외부(구 사이트 운영사/IDC)', f'원장 선행의존 「EXT-OLDDB」 · {S3M_}:65 「구 사이트 운영사/IDC(C-1-2·C-2-4)」'),
+    'STD-MYP-026': ('외부(구 사이트 운영측)', '원장 확인처 「구 사이트 운영측」'),
+    'STD-MYP-028': ('외부(토스페이먼츠)', f'원장 기능 「토스페이먼츠 가상계좌 API 직접 발급」 · {RES_}:331 「토스 계약 4건 회신」'),
+    'STD-FIN-008': ('외부(이니시스)', '원장 선행의존 「EXT-PG」 · 같은 EXT-PG 행 STD-PAY-001 확인처 「이니시스」'),
+    'STD-SYS-004': ('외부(이니시스)', '원장 선행의존 「EXT-PG」 · 같은 EXT-PG 행 STD-PAY-001 확인처 「이니시스」'),
+    'STD-SYS-039': ('외부(NHN)', '원장 비고 「앱 개발자센터 또는 NHN 1:1 문의로 확인」'),
+    # 원장 담당 칸이 「상대측 회신 대기」인 행 — 선행의존 EXT-MES
+    **{k: ('외부(MES 담당)', f'원장 선행의존 「EXT-MES」 · {S2F_}:53 D-P6 결정자 「MES 담당」')
+       for k in ('STD-MFG-035', 'STD-MFG-059', 'STD-MFG-060', 'STD-MFG-061', 'STD-MFG-090')},
+    # 차단 입력(research §4) — 행 문구 또는 짝 원천에 이름이 있는 것만
+    'BLK-S2-3': ('외부(MES 담당)', f'{RES_}:316 「MES WCF 스펙」 · {S2F_}:53 D-P6 결정자 「MES 담당」'),
+    'BLK-S2-4': (UNRESOLVED, f'{RES_}:317 「PitStop 구매 진행 상태」 — 회신할 상대 이름이 원천에 없다'),
+    'BLK-S3-1': ('외부(구 사이트 운영사/IDC)', f'{RES_}:325 · {S3M_}:49 「ⓔ 구 사이트 운영사/IDC 협조」'),
+    'BLK-S3-5': ('외부(NHN커머스)', f'{RES_}:329 「NHN 1:1 세팅 주체」 · 원장 STD-MYP-027 담당실명 「샵바이(NHN커머스)」'),
+    'BLK-S3-7': ('외부(토스페이먼츠)', f'{RES_}:331 「토스 계약 4건 회신」'),
+    'BLK-S3-10': ('외부(구 사이트 운영사/IDC)', f'{RES_}:334 「구 사이트 충전·사용·가입 중단 가능 여부」 · {S3M_}:65'),
+    'BLK-S4-6': (UNRESOLVED, f'{RES_}:345 「Vercel 프로젝트 접근」 — 접근 권한을 가진 상대 이름이 원천에 없다'),
+    'BLK-S4-7': ('외부(Cloudflare DNS 관리 권한자)', f'{RES_}:346 「DNS 관리 권한자(Cloudflare …)」'),
+    'BLK-S4-10': ('외부(소셜 3사 콘솔 권한자)', f'{RES_}:349 「소셜 3사 콘솔 권한자」'),
+    'T6-2': ('외부(NHN커머스)', f'{S3M_}:58 「Shopby 엔터프라이즈 플랜 … NHN 1:1 세팅」 · 원장 STD-MYP-027 담당실명 「샵바이(NHN커머스)」'),
+    'T6-3': ('외부(토스페이먼츠)', f'{RES_}:331 「토스 계약 4건 회신」'),
+}
+for _k in ('BLK-S4-1', 'BLK-S4-2', 'BLK-S4-3', 'BLK-S4-4', 'BLK-S4-5'):
+    WAIT_BASIS[_k] = ('외부(인프라팀)', f'research §4-4 {_k[4:]} 행 → S4 런북 담당 「인프라」 · {RUNBOOK_}:34 「인프라=인프라팀」')
 
 
 def wait_target(d):
+    """→ (대상, 근거). 원장에 벤더 이름이 담당실명으로 적힌 행은 그 이름, 런북 인프라 행은 런북 약어표."""
     if d['data_owner'] != 'ext':
-        return ''
-    if d['owner_name'].startswith('외부('):
-        return d['owner_name']
-    for rx, who in WAIT_TARGET_RULES:
-        if re.search(rx, d['title']):
-            return who
-    return '외부(대상 확인 필요)'
+        return '', ''
+    if d['row_id'] in WAIT_BASIS:
+        return WAIT_BASIS[d['row_id']]
+    if d['source'] == 'S4-infra':
+        return '외부(인프라팀)', f'{d["evidence"]} 담당 「인프라」 · {RUNBOOK_}:34 「인프라=인프라팀」'
+    if d['source'] == 'ledger-v4' and d['owner_name'].startswith('외부('):
+        return d['owner_name'], f'원장 담당실명 「{d["owner_name"][3:-1]}」'
+    return UNRESOLVED, '원천에서 회신 상대 이름을 찾지 못했다'
 
 # 사람 판정(run 레인 · 2026-09-17 · api-path 분류 전건 열람 후) — row_id: (owner, work, api_path, 엔드포인트|None, forced, 사유)
 REVIEW = {
@@ -378,7 +411,7 @@ def blocked_rows():
             api = classify_api(own, st, what + ' ' + why)
             rows.append(dict(
                 row_id=f'BLK-{sid}', data_role='detail', track=tr, step=st,
-                title=f'[차단 입력 {sid}] {what}', std_ids='NEW', owner_name=who, target_date='',
+                title=f'[선행 입력] {what}', std_ids='NEW', owner_name=who, target_date='',
                 evidence=f'{rel}:{i}',
                 check_method=(f'회신 메일·메신저 기록을 열어 「{what}」 값이 적혀 있는지 조회한다'
                               if own == 'ext' else f'결정·확인 기록 화면을 열어 「{what}」 가 적혀 있는지 조회한다'),
@@ -725,7 +758,7 @@ def main():
         errs.append(f'NEW 최상위 {new_top}/{len(top)} > 30%')
     rows = [apply_review(d) for d in top + detail]
     for d in rows:
-        d['wait_target'] = wait_target(d)
+        d['wait_target'], d['wait_target_basis'] = wait_target(d)
     unused = set(REVIEW) - {d['row_id'] for d in rows}
     if unused:
         raise SystemExit(f'[판정표에 없는 행] {sorted(unused)}')
@@ -743,7 +776,7 @@ def main():
     cols = ['row_id', 'data_role', 'track', 'step', 'title', 'std_ids', 'owner_name', 'target_date',
             'effort_lb_days', 'week_plus_cnt', 'undetermined_cnt', 'nondev_cnt', 'open_rows', 'date_basis',
             'evidence', 'check_method', 'prereq', 'status', 'data_owner', 'data_work',
-            'api_path', 'api_evidence', 'forced_by_impl', 'api_basis', 'wait_target', 'irreversible', 'note', 'source']
+            'api_path', 'api_evidence', 'forced_by_impl', 'api_basis', 'wait_target', 'wait_target_basis', 'irreversible', 'note', 'source']
     with open(os.path.join(HERE, 'plan-rows.csv'), 'w', encoding='utf-8', newline='') as f:
         w = csv.DictWriter(f, fieldnames=cols, extrasaction='ignore')
         w.writeheader()
@@ -759,7 +792,7 @@ def main():
 
     wait = [d for d in rows if d['data_owner'] == 'ext' and d['data_work'] == 'wait']
     with open(os.path.join(HERE, 'wait-items.csv'), 'w', encoding='utf-8', newline='') as f:
-        w = csv.DictWriter(f, fieldnames=['row_id', 'data_role', 'track', 'step', 'title', 'wait_target', 'owner_name', 'evidence', 'source'], extrasaction='ignore')
+        w = csv.DictWriter(f, fieldnames=['row_id', 'data_role', 'track', 'step', 'title', 'wait_target', 'wait_target_basis', 'owner_name', 'evidence', 'source'], extrasaction='ignore')
         w.writeheader()
         w.writerows({k: d[k] for k in w.fieldnames} for d in wait)
 

@@ -123,7 +123,8 @@ function proseNodes(root = doc.body) {
   for (let n = walker.nextNode(); n; n = walker.nextNode()) {
     let excluded = false;
     for (let p = n.parentElement; p; p = p.parentElement) {
-      if (p.matches("script, style, td.evidence, .source, #appendix")) { excluded = true; break; }
+      // pre·code = 코드 블록(mermaid 원문·분모 명령) — 산문이 아니다
+      if (p.matches("script, style, pre, code, td.evidence, .source, #appendix")) { excluded = true; break; }
     }
     if (!excluded && n.textContent.trim()) out.push(n);
   }
@@ -394,7 +395,7 @@ const hostOk = (h) => HOSTS.some((x) => h === x || h.endsWith(`.${x}`));
   const waitLis = $$("#wait-items > li", cp || doc);
   for (const li of waitLis) {
     const t = txt(li.querySelector(".wait-target"));
-    if (!(NAMES.includes(t) || (/^외부\(.+\)$/.test(t) && !/확인 필요|미정/.test(t)))) vb.push(`회신 요청 대상 부적격 「${t}」: ${txt(li).slice(0, 50)}`);
+    if (!(NAMES.includes(t) || (/^외부\(.+\)$/.test(t) && !/확인 필요|미정|미확정/.test(t)))) vb.push(`회신 요청 대상 부적격 「${t}」: ${txt(li).slice(0, 50)}`);
   }
   const waitSet = new Set(waitLis.map((li) => li.dataset.row));
   const rowSet = new Set(allRows.filter((tr) => tr.dataset.owner === "ext" && tr.dataset.work === "wait").map((tr) => tr.dataset.rowId));
@@ -489,13 +490,18 @@ const hostOk = (h) => HOSTS.some((x) => h === x || h.endsWith(`.${x}`));
   res.filter((v) => kind(v) === "미실측" && !/\(.+\)/.test(v)).forEach((v) => ve.push(`(iv) 미실측 사유 빈칸 「${v}」`));
   for (const id of ["manual-mismatch", "manual-writepath"]) { const el = $(`#${id}`); if (!el || el.closest("details")) ve.push(`(iv) ${id} 가 접힘 밖에 없음`); }
   if (!$('#manual-t1-link a[href="#t1-entry"]')) ve.push("(iv) 쓰기경로 목록의 T1 진입 조건 연결 문장 없음");
-  // (v) 화면 축 하한 — 메뉴 행 중 매뉴얼 화면 섹션(SCREENS/MODEL_ADMIN)을 가진 행 = 읽기 경로 대조 대상.
-  //     자체 문서·별도 문서·섹션 없음·「—」 행은 대조할 콜아웃이 없어 대상에서 뺀다(판정 해석 — progress.md 기록).
+  // (v) 화면 축 하한 — 메뉴 지도 전 행이 대상. 제외는 「문서 본문 자체」 메뉴(매뉴얼 칸 = 자체 문서·별도 문서·—)만 허용하고,
+  //     D3 가 계산한 제외 집합과 D1 이 선언한 제외 목록(#manual-exclusions)이 같아야 한다(숨은 제외 0 · 리드 판정 260917).
   const norm = (s) => (s || "").replace(/\(.*?\)|（.*?）/g, "").replace(/[\s·/]/g, "");
   const normPath = (p) => (p || "").split("?")[0].replace(/\{[^}]+\}/g, "{}").replace(/[A-Z]+_\d+/g, "{}");
   const mPaths = new Set(matrix.map((r) => normPath(r["경로"])).filter(Boolean));
   const mSegs = matrix.map((r) => norm((r["화면"].split(" › ")[1] || "")));
-  const targets = menuRows.filter((tr) => /^(deep|표준화면|light)/.test(tr.dataset.manual || ""));
+  const isDoc = (tr) => /^(자체 문서|별도 문서|—)/.test(tr.dataset.manual || "");
+  const excluded = menuRows.filter(isDoc).map((tr) => txt(tr.cells[1]));
+  const declaredEx = $$("#manual-exclusions > li").map(txt);
+  if (JSON.stringify([...excluded].sort()) !== JSON.stringify([...declaredEx].sort())) ve.push(`(v) 제외 목록 불일치 · 계산 [${excluded}] · 선언 [${declaredEx}]`);
+  console.log(`    [(v) 대조 제외 ${excluded.length}] ${excluded.join(" · ")}`);
+  const targets = menuRows.filter((tr) => !isDoc(tr));
   for (const tr of targets) {
     const cells = $$("td", tr).map(txt); const name = norm(cells[1]); const p = normPath(cells[2]);
     const byPath = mPaths.has(p);

@@ -4,6 +4,14 @@
 
 **요소 1건 = 매뉴얼 원고가 `selector` 로 화면 위 한 지점을 지목하고 `label` 로 설명한 콜아웃 하나.**
 콜아웃이 없는 화면(`MODEL_ADMIN_SCREENS` — `one_liner` 만 보유)은 **화면 1건을 요소 1건**으로 센다.
+**[보강 · 리드 판정 260917] 매뉴얼 콜아웃이 0 이거나 매뉴얼 섹션이 없는 사이드바 관리 화면도 화면 1건 = 요소 1건**으로 센다
+(메뉴 지도 CSV 의 「매뉴얼 화면 섹션」 칸이 `없음…` 이거나 `콜아웃 0` 을 담은 사이드바 행). 이유: (v) 화면 축 하한은 대조 대상을
+줄이는 해석을 막으려고 둔 장치다 — 「섹션이 없어서 제외」는 바로 그 해석이다. 위젯 매뉴얼의 콜아웃 0 부품 설명(`comp_*`)은
+사이드바 화면이 아니므로 더하지 않는다.
+
+**제외 선언(숨은 제외 0)** — 화면 요소가 아니라 **문서 본문 자체**라 대조할 지점이 없는 메뉴 6개:
+퀵스타트 가이드 · 메뉴얼 · 위젯빌더 메뉴얼 · 테이블 명세서(문서) · SDK 개발가이드 · 임베드 라이브 데모(개발자 문서).
+D3 가 이 목록을 실행 시마다 출력한다.
 `steps` 는 요소가 아니라 그 요소에 도달하는 조작이므로 **분모에서 제외**하고 경로 종류 판정에만 쓴다.
 
 재현 명령(이 값을 어디에도 상수로 적지 않는다):
@@ -15,7 +23,9 @@ def L(n,p):
 mc=L("mc","manual_content.py"); wc=L("wc","widget_manual_content.py")
 n=sum(len(c.get("callouts",[])) for s in mc.SCREENS for c in s.get("captures",[]))
 n+=sum(len(c.get("callouts",[])) for s in wc.SCREENS for c in s.get("captures",[]))
-n+=len(mc.MODEL_ADMIN_SCREENS); print(n)'
+n+=len(mc.MODEL_ADMIN_SCREENS); import csv; M=list(csv.DictReader(open("../../../_workspace/huni-launch-runway/07_rebaseline/S/S5-live/menu-map-260917.csv",encoding="utf-8"))); k="매뉴얼 화면 섹션(SCREENS/MODEL_ADMIN) 유무"
+n+=sum(1 for r in M if r["사이드바그룹"]!="(사이드바 없음)" and (r[k].startswith("없음") or "콜아웃 0" in r[k]))
+print(n)'
 ```
 
 ## 두 분모를 섞지 않는다 (리드 판정 260917)
@@ -23,7 +33,7 @@ n+=len(mc.MODEL_ADMIN_SCREENS); print(n)'
 | 분모 | 값 | 쓰는 곳 |
 |---|---|---|
 | **메뉴 지도** | **37** (사이드바 33 + 비사이드바 4) | AC-LP-014(e)(v) 화면 축 하한. 위젯빌더 24 SCREENS 는 **「위젯빌더」 메뉴 1건에 귀속**한다 |
-| **화면단위 / 요소** | **50 화면단위 · 159 요소** | 매트릭스 행과 요약 층 집계 |
+| **화면단위 / 요소** | **53 화면단위 · 162 요소**(보강 전 50 · 159) | 매트릭스 행과 요약 층 집계 |
 
 요약 층에는 「메뉴 37 중 커버 N」과 「화면단위 50 · 요소 159 · 결과 4종 분포」를 **나란히** 적고,
 서로 다른 분모임을 한 줄로 명시한다.

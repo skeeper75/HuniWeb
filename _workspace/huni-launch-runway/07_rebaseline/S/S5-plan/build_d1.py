@@ -120,6 +120,9 @@ ext_top = [r for r in TOP if r['data_owner'] == 'ext']
 open_req_dec = [d for d in DEC if d['open_required'] == 'Y']
 menu_gap_star = [m for m in MENU_ROWS if '★' in m['갭']]
 menu_key = [k for k in MENU_ROWS[0] if k.startswith('실메뉴')][0]
+MANUAL_COL = '매뉴얼 화면 섹션(SCREENS/MODEL_ADMIN) 유무'
+# 대조 제외 = 매뉴얼 칸이 자체 문서·별도 문서·「—」 인 메뉴(문서 본문 자체) — README 제외 선언과 같은 집합
+EXCLUDED_MENUS = [m[menu_key] for m in MENU_ROWS if re.match(r'자체 문서|별도 문서|—', m[MANUAL_COL])]
 sidebar = sum(1 for m in MENU_ROWS if m['사이드바그룹'] != '(사이드바 없음)')
 nonsidebar = len(MENU_ROWS) - sidebar
 res_kind = lambda v: re.split(r'[(]', v)[0]  # noqa: E731
@@ -302,8 +305,10 @@ for m in writepath:
 manual_summary = f'''
 <div id="map-manual-elements"><h3>③ 매뉴얼 요소 대조 — 요약</h3>
 <p class="lead">매뉴얼이 「이 버튼을 누르면 이렇게 된다」고 적은 지점을 실제 화면에서 하나씩 눌러 본 결과다. 메뉴 지도(메뉴 {len(MENU_ROWS)}개)와 분모가 다르다 — 여기서는 화면단위 {len(screens)} · 요소 {len(MATRIX)}건을 센다.</p>
-<p><b>분모 산출 규칙</b>: 요소 1건 = 매뉴얼 원고(manual_content.py · widget_manual_content.py)의 SCREENS 캡처가 selector 로 화면의 한 지점을 지목하고 label 로 설명한 콜아웃 하나. 콜아웃이 없는 MODEL_ADMIN_SCREENS 는 화면 1건을 요소 1건으로 센다. steps(도달 조작)는 세지 않는다. 재현 명령:</p>
+<p><b>분모 산출 규칙</b>: 요소 1건 = 매뉴얼 원고(manual_content.py · widget_manual_content.py)의 SCREENS 캡처가 selector 로 화면의 한 지점을 지목하고 label 로 설명한 콜아웃 하나. 콜아웃이 없는 MODEL_ADMIN_SCREENS 는 화면 1건을 요소 1건으로 센다. <b>매뉴얼 콜아웃이 0 이거나 매뉴얼 섹션이 아예 없는 사이드바 관리 화면도 화면 1건 = 요소 1건</b>으로 센다(9/17 보강 — 대조 대상을 줄이지 않기 위해). steps(도달 조작)는 세지 않는다. 재현 명령:</p>
 <pre id="denominator-command" class="cmd">{html.escape(DENOM_CMD)}</pre>
+<p>대조에서 뺀 메뉴 — 화면 요소가 아니라 문서 본문 자체라 대조할 지점이 없다({len(EXCLUDED_MENUS)}개):</p>
+<ul id="manual-exclusions">{''.join(f'<li>{e(x)}</li>' for x in EXCLUDED_MENUS)}</ul>
 <table class="dist" id="manual-dist"><caption>결과 분포(요소 {len(MATRIX)}건)</caption><tbody>
 {''.join(f'<tr><th>{k}</th><td class="n">{dist.get(k, 0)}</td></tr>' for k in ['동작확인', '불일치', '쓰기경로-dev환경필요', '미실측'])}
 </tbody></table>
@@ -446,7 +451,7 @@ critical = f'''
 <h3>1. 필요 항목</h3><p>최상위 할 일 {len(TOP)}개(트랙별 3~5) · 세부 {len(DETAIL)}행. 오픈 전 반드시 정해야 하는 결정 {len(open_req_dec)}건은 <a href="#decisions">결정 절</a>.</p>
 <h3>2. 의존·외부 대기</h3>
 <h4>외부 대기 — {len(WAIT)}건 (회신 시점을 모른다)</h4>
-<ol id="wait-items">{''.join(f'<li data-row="{raw(r["row_id"])}" data-owner="ext" data-work="wait">{e(r["title"])} — 회신 요청 대상 <b class="wait-target">{e(r["wait_target"])}</b>' + ('' if r["owner_name"] == r["wait_target"] else f' · 챙기는 사람 {e(r["owner_name"])}') + '</li>' for r in WAIT)}</ol>
+<ol id="wait-items">{''.join(f'<li data-row="{raw(r["row_id"])}" data-owner="ext" data-work="wait">{e(r["title"])} — 회신 요청 대상 <b class="wait-target">{e(r["wait_target"])}</b>' + ('' if r["owner_name"] == r["wait_target"] else f' · 챙기는 사람 {e(r["owner_name"])}') + f' <span class="source">근거: {raw(r["wait_target_basis"])}</span></li>' for r in WAIT)}</ol>
 <h4>내부 선행 결정 — {len(internal_pre)}건</h4>
 <ol id="internal-prereq">{''.join(f'<li data-row="{raw(r["row_id"])}">{e(r["title"])} — {e(r["owner_name"])}</li>' for r in internal_pre)}</ol>
 <h4>dev 환경이 있어야 판정할 수 있는 화면 — {len(writepath)}요소 · {len(wp_by_screen)}화면</h4>
