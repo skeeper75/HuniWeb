@@ -116,5 +116,16 @@ for s in ['D1', 'D4', 'E1', 'E3']: TRACK[s] = 'T5'
 TRACK['D5'] = 'T6'
 TRACK['E4'] = 'T7'
 
-def step_of(대분류, 중분류):
+# std_id 단위 override — 분류 규칙보다 우선한다(progress.md §E.2 M1 Gaps 2).
+# 원장은 기능 원장이라 T1(E2·F1~F4) 인프라 행이 분류상 E1/B5 로 간다. 실제로는 이전·도메인·환경변수 일이다.
+STD_OVERRIDE = {
+    'STD-SYS-024': 'E2',  # 보호 라우트 리다이렉트가 vercel.app 으로 튐 → F4-5·F4-7 도메인 고정
+    'STD-SYS-036': 'E2',  # 쇼핑몰 도메인·SNS 콜백 URL 정합 → F4-6
+    'STD-SYS-052': 'E2',  # 환경변수 정합(코드 vs .env.example vs 스크립트) → F4-3
+    'STD-SYS-040': 'E2',  # 발송전용 메일 도메인 인증 → DNS 권한(S4-7)과 같은 자리
+}
+
+def step_of(대분류, 중분류, std_id=None):
+    if std_id and std_id.strip() in STD_OVERRIDE:
+        return STD_OVERRIDE[std_id.strip()]
     return RULES.get((대분류.strip(), 중분류.strip()), 'UNMAPPED')
