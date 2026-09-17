@@ -1767,10 +1767,51 @@ D3 출력 전후 diff(보정2 최종 vs 보정3 최종): (c) 읽은 대상 1695 
 2. 블록 목록에 없는 요소(`dl` 직속 텍스트 등)는 가장 가까운 상위 블록으로 묶인다 — 현 D1 에서 그런 산문은 확인하지 않았다.
 3. t47 워크트리 잠금(plan-huniweb pid 58222)은 기록만 — 계속 `git -C`·경로 지정.
 
+### M4-보정4 — 대리 재판정 권고 표현 (2026-09-17 · 리드 dispatch · AC-LP-016 대리 재판정 CTO 5/5 · 실무운영 5/5 PASS 후 지니 결정)
+
+#### Claim
+
+권고 표현 3건을 **`build_d1.py` 에서만** 고치고 재생성했다(HTML 직접 수정 0 · CSV 무변경 → D2 재생성 불요 · 검사기 무변경). D3 = **14/14 PASS · exit 0**. D1 md5 `566407914fc06ec501efd67c91f76434` → **`7dc9f2c61cadf87cd380e360a3d49886`**.
+
+#### before / after
+
+| # | 위치 | before | after |
+|---|---|---|---|
+| 1 | §8 `p.derived` | 실제 날짜는 여기에 소요 미산정 구간과 외부 회신 시점이 더해져 늦어진다. | 실제 날짜는 여기에 소요 미산정 구간과 외부 회신 시점이 더해지면 이보다 늦어질 수 있다. |
+| 2 | §7 진입점 머리 `#cto-entry` | (없음) | CTO — 의사소통 표의 「대표·CTO」 행(제안(확정 전))이 받는 것은 RAG·임계경로 날짜·결정 요청(주 1회 · 주간 회의 · 의사소통 주기)이다. 시스템 배치·파이프라인은 시스템 배치도·주문이 흐르는 길에서, 개발 구간은 아래 인쇄개발(서희항)·쇼핑개발(김동학) 블록에서 본다. |
+| 3 | §7 `#role-ops` 머리 `p.zero-top` | (없음) | 김용기: 최상위 할 일 담당 행 없음(세부 1행은 부록 T5) |
+
+- 1 — 판정 술어 확인: §8 은 `#critical-path` 안이라 D3 AC-LP-002(c) 의 **검사 대상 밖**이다. 그래서 같은 정규식(`가능|불가|어렵|무리|힘들|충분|맞출 수`)을 새 문장에 직접 돌려 **0건**을 확인했다(D3 가 확인한 것이 아니다).
+- 2 — 원천 대조: §12 `#comms` 「대표·CTO」 행은 **메시지 수준 「RAG·임계경로 날짜·결정 요청」 · 주 1회 · 주간 회의 · 담당 지니 · 제안(확정 전)** 이다. 「시스템 배치·파이프라인」이라는 말은 그 행에 **없다** — 그래서 행 값은 그대로 인용하고, 시스템 배치·파이프라인은 실재 섹션(§5 시스템 배치도 · §4 주문이 흐르는 길)으로, 개발 구간은 기존 두 역할 블록으로 링크했다. 인용값이 표와 다르면 생성이 멈추도록 `assert` 를 넣었다. 새 역할·담당 0.
+- 3 — 실측: `plan-rows.csv` 최상위 담당에 김용기 **0행** · 세부 담당에 **1행**(`STD-FIN-021` 「적립금·증빙 데이터의 MS·이카운트 연동 방식」 · T5) · D1 부록 `data-row-id="STD-FIN-021"` 1건 실재. 수는 CSV 에서 계산해 적는다.
+
+#### Evidence — D3 (최종 D1 `7dc9f2c6…` · 워크트리 루트 절대경로로 실행)
+
+```
+[real] exit=0
+    ((c) 오픈일 판정 문장 0(critical-path·decisions 밖)) 읽은 대상 1193
+== D3 RESULT: 14/14 PASS ==
+```
+
+(c) 읽은 대상 1190 → 1193 = 새 블록 문장(CTO 안내 2 · 김용기 1).
+
+#### 불변 · 변경량 · 가드
+
+- D1 전후: `tr[data-row-id]` 수 · `STD-*` 집합 · `#derived-open-date` · 실명 7명 집합 **동일**. HTML diff = 위 3곳뿐.
+- `build_d1.py` 줄 기준 변경 21/795 = **2.6%** · `git diff --stat` +23/−5(생성기) · D1 4줄.
+- `S5-plan/.moai/` 재발생 없음(명령을 워크트리 루트 절대경로로 실행) · 라이브 쓰기 0 · 푸시 0.
+
+#### Gaps
+
+1. §8 문장은 D3 검사 범위 밖이라 **정규식 직접 확인만** 했다.
+2. PM 역할의 지니도 최상위 담당 행이 0이다 — 지시 범위(김용기)만 적었고 지니 줄은 넣지 않았다.
+3. 렌더는 다시 열어 보지 않았다(`.rule`·`.proposal` 클래스 재사용 · `.zero-top` 은 스타일 없음).
+
 ## §E.3 Run-phase Audit-Ready Signal
 
-- **상태**: run 단계 산출 완료 · **AC-LP-001~015 관측 PASS** · **AC-LP-016 사람 판정 대기**(리드 주관 CTO·실무운영 시점 리뷰).
-- **최종 커밋**: 이 블록을 담은 커밋(카드 t47) · 브랜치 `WT-open-plan-rewrite` · **미푸시**.
+- **상태**: run 단계 산출 완료 · **AC-LP-001~015 관측 PASS** · **AC-LP-016 대리 재판정 CTO 5/5 · 실무운영 5/5 PASS**(D1 `566407914…` · 대리 리뷰는 사람 판정 대체 아님) → 권고 표현 3건 반영(M4-보정4) 후 리드 검산 → sync.
+- **최종 D1**: md5 `7dc9f2c61cadf87cd380e360a3d49886` · **D3 14/14 PASS · exit 0**(M4-보정4) · 음성 대조 nega·negb FAIL exit 1(M4-보정3 · 검사기 이후 무변경).
+- **최종 커밋**: 이 블록을 담은 M4-보정4 커밋(카드 t47 · 직전 `81987b0a`) · 브랜치 `WT-open-plan-rewrite` · **미푸시**.
 - **산출**: D1 `docs/huni/후니프린팅_오픈계획서_260917.html`(+요약 .md) · D2 `docs/huni/후니프린팅_오픈계획서_260917.xlsx` + `S5-plan/build_xlsx_v4_plan.py` · D3 `S5-plan/verify_plan.mjs`(+package.json·lock · node_modules 제외) · 생성기 `build_plan_rows.py`·`build_d1.py`·`lane_audit.py` · 데이터 `plan-rows.csv`·`decisions-by-step.csv`·`wait-items.csv`·`lanes.csv`·`workdays.csv`·`holidays-kasi-2026/2027.xml`·`manual-element-matrix.csv`(162)·`m15-2b-results.jsonl`.
 - **라이브 쓰기 0** — 이번 run 의 라이브 접촉은 webadmin 읽기 3화면(ego-browser space 20 · p2 · 클릭 0 · 저장 0 · 다이얼로그 0)과 로컬 파일 렌더 확인(p12 · 닫음)뿐.
 - **재현 순서**: `python3 -B build_plan_rows.py && python3 -B build_d1.py && python3 -B build_xlsx_v4_plan.py && node verify_plan.mjs <D1> <원장 CSV> <매트릭스 CSV> "<README 분모 명령>"` (S5-plan 디렉터리 · `npm ci` 선행).

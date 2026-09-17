@@ -442,12 +442,27 @@ def unblock_html(rid):
     return f'<h5>이번 주 선행 풀기 — {len(items)}건</h5><ul class="unblock-list">{lis or "<li>없음</li>"}</ul>'
 
 
-roles = ('<p class="rule" id="startable-rule">「이번 주 착수 가능」 표시 규칙 — 상태가 완료가 아니고, 선행 칸에 T 행·선행 입력·결정·외부 회신이 하나도 없는 최상위 할 일. '
+# CTO 안내 — §12 의사소통 표 「대표·CTO」 행을 그대로 인용(새 역할·담당 신설 없음 · 리드 dispatch M4-보정4)
+CTO_COMM = ('대표·CTO', 'RAG·임계경로 날짜·결정 요청', '주 1회', '주간 회의')  # §12 raci 블록 comms 표와 일치 검사는 아래 assert
+cto_note = (f'<p class="rule" id="cto-entry">CTO — 의사소통 표의 「{CTO_COMM[0]}」 행(<span class="proposal">제안(확정 전)</span>)이 받는 것은 {CTO_COMM[1]}({CTO_COMM[2]} · {CTO_COMM[3]} · '
+            '<a href="#comms">의사소통 주기</a>)이다. 시스템 배치·파이프라인은 <a href="#sec-05">시스템 배치도</a>·<a href="#sec-04">주문이 흐르는 길</a>에서, '
+            '개발 구간은 아래 <a href="#role-printdev">인쇄개발(서희항)</a>·<a href="#role-shopdev">쇼핑개발(김동학)</a> 블록에서 본다.</p>')
+
+
+def zero_top_note(name):
+    # 여러 이름이 묶인 역할에서 최상위 담당 행이 0인 사람 — 세부 행 수는 원장 CSV 에서 센다
+    det = [r for r in DETAIL if name in r['owner_name']]
+    where = (f'세부 {len(det)}행은 부록 ' + ' · '.join(f'<a href="#detail-{t}">{t}</a>' for t in sorted({r["track"] for r in det}))) if det else '세부 행도 없음'
+    return f'<p class="zero-top" data-name="{name}">{name}: 최상위 할 일 담당 행 없음({where})</p>'
+
+
+roles = (cto_note + '<p class="rule" id="startable-rule">「이번 주 착수 가능」 표시 규칙 — 상태가 완료가 아니고, 선행 칸에 T 행·선행 입력·결정·외부 회신이 하나도 없는 최상위 할 일. '
          '선행이 해소됐다는 기록은 이 문서에 없으므로 선행이 적힌 행은 모두 대기로 본다. 날짜는 새로 정하지 않았다.</p>'
          '<p class="rule" id="unblock-rule">「이번 주 선행 풀기」 추출 규칙 — 최상위 할 일의 선행 칸을 나눠 T 행은 빼고, 외부 회신은 회신 받기 · 결정 번호는 결정 요청 · 선행 입력은 입력 받기로 그 행 담당 역할에 붙인다. '
          '사람이 적힌 선행은 적힌 사람의 역할에 입력 제공(결정이면 결정 내리기)으로, 그 행 담당 역할에는 입력 받기(결정 요청)로 붙인다. 한 선행이 여러 행을 막으면 1건으로 센다 — 사람이 적힌 선행은 사람 표시를 뺀 첫 낱말이 같으면 같은 선행으로 보고 원문을 나란히 적는다.</p>'
          '<div class="roles">' + ''.join(
-    f'<div id="{rid}" class="role"><h4>{name}</h4><ul>' +
+    f'<div id="{rid}" class="role"><h4>{name}</h4>'
+    + (zero_top_note('김용기') if rid == 'role-ops' and not any(r['owner_name'] == '김용기' for r in TOP) else '') + '<ul>' +
     ''.join(f'<li><a href="#row-{r["row_id"]}">{r["row_id"]}</a> {e(r["title"])}'
             + (' <span class="startable">이번 주 착수 가능</span>' if startable(r) else ' <span class="waiting">선행 대기</span>')
             + f' — 하한 {raw(r["target_date"])}</li>'
@@ -567,7 +582,7 @@ critical = f'''
 <h3>4. 도출된 오픈일(하한)</h3>
 <p class="derived">선행 관계만으로 계산한 가장 이른 완료일(하한) = <b id="derived-open-date">{derived["target_date"]}</b> — 가장 늦게 끝나는 최상위 할 일 {derived["row_id"]}({e(derived["title"])}).
 <br><b>범위·인원 조정 전 계산값이며 오픈 가능 여부 판정이 아니다. 판정은 <a href="#go-no-go">Go/No-Go 회의</a>에서 한다.</b>
-실제 날짜는 여기에 소요 미산정 구간과 외부 회신 시점이 더해져 늦어진다. 범위·인원을 정하기 전의 수치라는 점도 함께 봐야 한다.</p>
+실제 날짜는 여기에 소요 미산정 구간과 외부 회신 시점이 더해지면 이보다 늦어질 수 있다. 범위·인원을 정하기 전의 수치라는 점도 함께 봐야 한다.</p>
 <h4>담당자별로 줄 세웠을 때 — 오픈 범위 조정 전 · 1인 직렬 가정 · 하한</h4>
 <p>한 사람이 한 번에 한 가지만 한다고 가정하고, 최상위 할 일에 매달린 개발·수정 미완 행을 원장 담당자별로 이어 붙인 값이다.
 담당 칸에 여러 이름이 적힌 행은 <b>처음 나오는 이름에 소요 전부</b>를 붙였다. 개발·수정 행이 없는 담당자는 표에 나오지 않는다.</p>
@@ -651,6 +666,9 @@ raci = f'''
 <tr><td>RACI 배정 8행</td><td>표 그대로</td><td>트랙 주 담당(원장 담당 열) · 항목당 A 1인 원칙</td><td>지니</td></tr>
 <tr><td>의사소통 대상·주기·채널</td><td>표 그대로</td><td>원천 없음 — 대상·수준·주기·채널·담당 다섯 요소 원칙만 있음</td><td>지니</td></tr>
 </tbody></table></div>'''
+# §7 CTO 안내가 인용한 값이 의사소통 표와 같은지 확인
+assert (f'<td>{CTO_COMM[0]} <span class="proposal">제안(확정 전)</span></td><td>{CTO_COMM[1]}</td>'
+        f'<td>{CTO_COMM[2]}</td><td>{CTO_COMM[3]}</td>') in raci, 'CTO 인용이 의사소통 표와 다름'
 
 # ───────────── §13 부록 ─────────────
 detail_html = ''.join(
