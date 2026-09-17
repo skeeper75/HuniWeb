@@ -891,6 +891,67 @@ exit=0
 - mermaid CDN(jsdelivr ESM) 이 막힌 환경에서는 `<noscript>` 가 아니라 **원문 `pre` 텍스트**가 보인다(JS 는 켜져 있고 네트워크만 막힌 경우) — 인쇄·오프라인 판독은 원문 텍스트로 떨어진다.
 - `clean()` 은 원장 원문을 본문에 옮길 때 코드명을 **지운다** — 최상위 행 제목·결정 제목 일부가 원문과 글자 단위로 다르다(부록·CSV 는 원문 유지).
 
+### M3 — D2 엑셀 재생성 (완료 · 2026-09-17 11:59 KST · run 레인)
+
+#### Claim
+
+1. `S5-plan/build_xlsx_v4_plan.py` = R5 `build_xlsx_v4.py` 확장 복제. 기존 9시트는 그대로 두고 `09_구간상태판`(status-28.csv) · `10_트랙체크리스트`(plan-rows.csv 735행 · api-path 열 포함) 두 시트를 추가.
+2. 산출 `docs/huni/후니프린팅_오픈계획서_260917.xlsx` · 빌더 종료 코드 0 · 검산 11건 ALL PASS — 원장 시트 654행 · 트랙 체크리스트 735행 == D1 `data-role` top+detail 735.
+3. 원본 R5 빌더는 수정하지 않았다(복제본만). 입력은 메인 체크아웃 절대경로 읽기 전용, 출력만 워크트리.
+
+#### Evidence
+
+```
+$ python3 -B _workspace/huni-launch-runway/07_rebaseline/S/S5-plan/build_xlsx_v4_plan.py; echo exit=$?
+[OK] /Users/innojini/Dev/HuniWeb/.claude/worktrees/t47/docs/huni/후니프린팅_오픈계획서_260917.xlsx
+  원장 654행 · 게이트 5개(_workspace/huni-launch-runway/07_rebaseline/R/R3/gates-d20.md) · 회의 89 · 시나리오 48 · 주차 배치 R3 확정
+
+== VERIFY ==
+  [PASS] 02 행 수 654 == 원장 654
+  [PASS] 02 「분류」 빈칸 0건 (미판정은 허용)
+  [PASS] 02 「난이도」 빈칸 0건 (미판정은 허용)
+  [PASS] 02 「담당역할」 빈칸 0건 (미판정은 허용)
+  [PASS] 02 std_id 유일
+  [PASS] 07 ①블록 남은 일 348행 == 원장 남은 일 348 · 중복 0 · 누락 0 · 여분 0
+  [PASS] 06 행 수 89 == 회의 추적 89
+  [PASS] 시트명 ['00_읽는법', '01_역할정의', '02_IA마스터', '03_페이즈일정', '04_진행현황', '05_주차별실행판', '06_회의결정추적', '07_체크리스트', '08_변경이력', '09_구간상태판', '10_트랙체크리스트']
+  [PASS] 02 원장 시트 데이터 행 654 == 654
+  [PASS] 10 트랙체크리스트 735행 == D1 data-role top+detail 735
+  [PASS] 09 구간상태판 32행 == status-28.csv
+
+== 시트 · 데이터 행 수 ==
+  00_읽는법: max_row=51 · max_col=3
+  01_역할정의: max_row=15 · max_col=18
+  02_IA마스터: max_row=655 · max_col=20
+  03_페이즈일정: max_row=11 · max_col=7
+  04_진행현황: max_row=109 · max_col=8
+  05_주차별실행판: max_row=372 · max_col=13
+  06_회의결정추적: max_row=93 · max_col=12
+  07_체크리스트: max_row=405 · max_col=9
+  08_변경이력: max_row=659 · max_col=12
+  09_구간상태판: max_row=36 · max_col=10
+  10_트랙체크리스트: max_row=739 · max_col=20
+
+[참조 · 읽기만] 260902 시트: ['00_읽는법', '01_역할정의', '02_IA마스터', '03_페이즈일정', '04_진행현황'] (스키마가 의도적으로 바뀌어 구조 대조는 하지 않는다)
+
+== RESULT: ALL PASS ==
+exit=0
+```
+
+#### Baseline-attribution
+
+HEAD `aedd541c`(M2) · `plan-rows.csv` 는 `8800f98f` 규칙 · D1 HTML 은 `aedd541c` 산출을 검산 시점에 직접 읽음(행 수 문자열 대조).
+
+#### Gaps
+
+1. AC-LP-015(c) 의 두 번째 조건(트랙·체크리스트 시트 행 수 == D1 행 수)은 빌더 **자체 검산**으로 관측했다 — §B 판정 주체는 run 레인이므로 M4 에서 D3 와 별개로 한 번 더 인용한다.
+2. 기존 `07_체크리스트` 시트 안내 문구에 9/16 반려 산식(남은 일 행 수)이 그대로 남아 있다 — 원본 보존 원칙상 손대지 않았다(엑셀은 AC-LP-002 산문 검사 대상 아님). 사람 판정에서 혼동을 부르면 시트 설명 한 줄 보강 여부를 리드가 판단.
+3. 엑셀 서식(열 너비·굵게)은 열어서 눈으로 보지 않았다.
+
+#### Residual-risk
+
+- 윤문 패스로 D1 산문이 바뀌어도 행 수는 불변이라 10 시트 검산은 유지된다. 단 윤문 뒤 D1 을 재생성하면 이 검산을 다시 돌린다.
+
 ## §E.3 Run-phase Audit-Ready Signal
 
 _<pending run-phase>_
