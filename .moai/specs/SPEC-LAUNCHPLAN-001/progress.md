@@ -1820,4 +1820,19 @@ D3 출력 전후 diff(보정2 최종 vs 보정3 최종): (c) 읽은 대상 1695 
 
 ## §E.4 Sync-phase Audit-Ready Signal
 
-_<pending sync-phase>_
+- **상태**: `spec.md` status `draft` → **`implemented`**(sync 레인 · 260917). **`completed` 아님** — 아래 Gap 1.
+- **이력 정리(보안 렌즈)**: 평문 연락처가 들어간 `7abdcdba` 와 바로 뒤 마스킹 커밋 `d2e6ee2a` 를 한 커밋으로 합치고 뒤 17커밋을 재적용했다. 방법 = `git commit-tree` 로 원래 트리·작성자·일시·메시지를 그대로 옮겨 붙이고 `git update-ref` 로 브랜치를 옮김(대화형 rebase·작업 트리 조작 0). 합친 커밋 메시지 본문의 연락처도 마스킹 형식으로 바꿨다.
+  - 재작성 전 HEAD `99fb3566` → 재작성 후 HEAD `3fa5fd2d` · `git diff 99fb3566 3fa5fd2d` **0바이트 · exit 0** · `8dc0a618..HEAD` 19커밋(병합 0).
+  - 연락처형 정규식(휴대폰 `01[016789]…` · 이메일) 검사, 값은 출력하지 않고 줄 수만: 새 이력 전 커밋 **diff 줄 0 · 커밋 메시지 줄 0**.
+  - **원래 SHA 는 백업 브랜치 없이 reflog 로만 보존**된다(`WT-open-plan-rewrite@{1}` = `99fb3566`). reflog 가 만료·정리되면 옛 커밋은 복구할 수 없다.
+- **api-path 렌즈(요약 층 정합)**: `plan-rows.csv` 735행 중 `admin-manual` 45 = 「API 가 있는데 수동」 14 + 「화면으로만」 31. D1 `#api-admin-manual` 의 두 목록 행 ID 집합이 CSV 와 **일치**(중복 0) · 요약 줄 14 = 트랙 연결 10 + 참고 4 · 31 = 25 + 6 · 표 `data-api-path="admin-manual"` 45행 전부 요약에 있음(누락 0).
+- **산출물**: D1 md5 `7dc9f2c61cadf87cd380e360a3d49886` — §E.3 이후 **변경 없음**(이력 정리는 트리를 바꾸지 않음).
+- **라이브 쓰기 0 · 푸시 0 · main 병합 0**.
+
+#### Gaps
+
+1. **AC-LP-016 사람 판정 대기** — AI 대리 리뷰 2건은 PASS 이지만 사람 5분 이해 테스트는 아직 안 했다. 그래서 `completed` 로 올리지 않았다.
+2. 운영 제안값(Go/No-Go 10/2 · RACI · 채널 · 컷오버)은 **지니 결정 대기** — 문서의 「제안(확정 전)」 표지 유지.
+3. 연락처 검사는 이 브랜치가 추가한 커밋(`8dc0a618..HEAD`)만 대상이다. `8dc0a618` 이전부터 있던 파일(`07_rebaseline/L0/N1/payment-approval-flow.md`)에 결제 벤더 도메인 이메일 2줄이 있으나 이번 카드 범위 밖이라 손대지 않았다.
+4. 푸시 전 원격 이력 대조(`git fetch` 후 divergence)는 하지 않았다 — 푸시·병합 단계에서 할 일.
+

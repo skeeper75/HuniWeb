@@ -2,7 +2,7 @@
 id: SPEC-LAUNCHPLAN-001
 title: "프로세스 기준 오픈 계획서 전면 재작성 — 28구간 척추 · 7트랙 · 단일 HTML"
 version: "0.7.0"
-status: draft
+status: implemented
 created: 2026-09-17
 updated: 2026-09-17
 author: 지니
