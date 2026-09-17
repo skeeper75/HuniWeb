@@ -141,6 +141,16 @@ unreviewed_none = [r for r in ROWS if r['api_path'] == 'none' and r['data_owner'
                    and '매칭 규칙 없음' in r['api_basis']
                    and r['step'] in {'A5', 'B1', 'B4', 'B5', 'B6', 'B7', 'D2', 'D3', 'D4', 'E3', 'A4', 'C1', 'C3', 'C6', 'C7', 'D5', 'E1'}]
 
+
+def startable(r):
+    # 이번 주 착수 가능 = 상태가 완료·작동이 아니고, 선행 칸이 「—」(T 행·선행 입력·결정·외부 회신이 하나도 적혀 있지 않음)
+    return r['status'] not in ('완료', '작동') and (r['prereq'] or '—').strip() == '—'
+
+
+def due_with_state(r):
+    # 선행 대기 행은 하한 옆에 「선행 대기」를 같이 보인다(하한 계산식은 그대로 · 리드 판정 260917)
+    return raw(r['target_date']) + ('' if startable(r) else ' <span class="waiting">선행 대기</span>')
+
 # ───────────── §1 요약 ─────────────
 risks = [
     ('회원 장바구니 인증 결함', '로그인한 손님이 장바구니를 쓸 수 없다. 결제·주문·주문조회가 전부 이 뒤에 있다.'),
@@ -154,12 +164,13 @@ summary = f'''
   <div class="card" data-el="what-why"><h3>무엇·왜</h3>
     <p class="prose">후니프린팅 새 쇼핑몰을 여는 데 필요한 일을 28개 업무 구간과 7개 트랙으로 묶어, 누가 무엇을 언제까지 확인하는지 적은 계획서다.
     9/16 목록이 「무슨 문서인지 모르겠다」는 반려를 받아, 기능 목록 대신 주문이 흐르는 순서를 뼈대로 다시 짰다.
-    오픈일은 못 박지 않고, 필요한 일과 선행 관계에서 가장 이른 날을 계산해 보여 준다.</p></div>
+    오픈일은 못 박지 않고, 필요한 일과 선행 관계에서 가장 이른 날을 계산해 보여 준다.</p>
+    <p class="prose" id="base-date">기준일(역산 기준점)은 2026-10-06 이다. <a href="#go-no-go">Go/No-Go 판정 회의</a> 제안일 2026-10-02 는 기준일 직전 근무일이다.</p></div>
   <div class="card" data-el="rag"><h3>RAG 상태</h3>
     <p class="rag rag-red">Red</p><p class="prose">최상위 할 일 {len(TOP)}개 중 소요를 산정할 수 없는 구간 {len(unsized)}개, 외부 회신 대기 {len(WAIT)}건.</p></div>
   <div class="card" data-el="risks"><h3>상위 리스크 {len(risks)}개</h3><ol>{''.join(f'<li><b>{a}</b> — {b}</li>' for a, b in risks)}</ol></div>
   <div class="card" data-el="next-milestone"><h3>다음 마일스톤 + 목표일</h3>
-    <p class="prose">T1 인프라 이전 — 인프라팀 회신 요청일 <b>{WORKDAYS[1]}</b>. 스킨 이전 행({raw(next_ms["row_id"])})의 가장 이른 완료일(하한) <b>{raw(next_ms["target_date"])}</b>.</p></div>
+    <p class="prose">T1 인프라 이전 — 인프라팀 회신 요청일 <b>{WORKDAYS[1]}</b>. 스킨 이전 행({raw(next_ms["row_id"])})의 가장 이른 완료일(하한) <b>{due_with_state(next_ms)}</b>.</p></div>
   <div class="card" data-el="rollup"><h3>롤업 타임라인</h3>
     <p class="prose">T1 인프라 이전 → T2·T3·T5 병행 → T4 주문 연결 → T7 종단 테스트 → Go/No-Go. 선행 관계만으로 계산한 가장 이른 완료일(하한)은 <a href="#critical-path">임계경로 절</a>에 있다.</p></div>
   <div class="card" data-el="legend"><h3>상태 범례</h3><ul class="legend">
@@ -370,19 +381,66 @@ ROLES = [
     ('role-pm', 'PM — 신우진·지니', lambda r: r['owner_name'] in ('신우진', '지니')),
     ('role-exec', '대표 결정 — 채훈희', lambda r: r['owner_name'] == '채훈희'),
 ]
-def startable(r):
-    # 이번 주 착수 가능 = 상태가 완료·작동이 아니고, 선행 칸이 「—」(T 행·선행 입력·결정·외부 회신이 하나도 적혀 있지 않음)
-    return r['status'] not in ('완료', '작동') and (r['prereq'] or '—').strip() == '—'
+# 이번 주 선행 풀기 — 최상위 행의 선행 칸에서만 규칙으로 뽑는다(날짜·사실·담당 신설 0 · 지니 결정 260917)
+NAME_ROLE = [('지니', 'role-pm'), ('신우진', 'role-pm'), ('PM', 'role-pm'), ('김동학', 'role-shopdev'),
+             ('서희항', 'role-printdev'), ('최숙진', 'role-ops'), ('김용기', 'role-ops'), ('채훈희', 'role-exec'), ('대표', 'role-exec')]
+
+
+def owner_role(r):
+    return next((rid for rid, _, f in ROLES if f(r)), None)
+
+
+def unblock_items():
+    """→ {role_id: {key: [kind, 표시 문구, [막는 행]]}}. T 행 선행은 일이지 회신·결정·입력이 아니므로 뺀다."""
+    out = defaultdict(dict)
+
+    def put(role, key, kind, label, rid):
+        if role:
+            out[role].setdefault(key, [kind, label, []])[2].append(rid)
+
+    for r in TOP:
+        own = owner_role(r)
+        for tok in [t.strip() for t in (r['prereq'] or '').split(' · ') if t.strip() not in ('', '—')]:
+            if re.match(r'T\d-\d', tok):
+                continue
+            if tok.startswith('외부('):
+                put(own, tok, '회신 받기', tok, r['row_id'])
+            elif m := re.match(r'결정 ([\d·]+)', tok):
+                for no in m.group(1).split('·'):
+                    put(own, f'결정 {no}', '결정 요청', tok if '·' not in m.group(1) else f'결정 {no}', r['row_id'])
+            elif tok.startswith('선행 입력'):
+                put(own, tok, '입력 받기', tok, r['row_id'])
+            else:
+                named = {role for nm, role in NAME_ROLE if re.search(rf'(?<![가-힣A-Za-z]){nm}(?![A-Za-z])', tok)}
+                dec = '결정' in tok
+                for role in named:
+                    put(role, tok, '결정 내리기' if dec else '입력 제공', tok, r['row_id'])
+                if own not in named:
+                    put(own, tok, '결정 요청' if dec else '입력 받기', tok, r['row_id'])
+    return out
+
+
+UNBLOCK = unblock_items()
+
+
+def unblock_html(rid):
+    items = UNBLOCK.get(rid, {})
+    lis = ''.join(f'<li class="unblock" data-unblock="{raw(k)}"><span class="ub-kind">{kind}</span> {e(label)} — 막는 행 '
+                  + ' · '.join(f'<a href="#row-{x}">{x}</a>' for x in rows) + '</li>'
+                  for k, (kind, label, rows) in items.items())
+    return f'<h5>이번 주 선행 풀기 — {len(items)}건</h5><ul class="unblock-list">{lis or "<li>없음</li>"}</ul>'
 
 
 roles = ('<p class="rule" id="startable-rule">「이번 주 착수 가능」 표시 규칙 — 상태가 완료가 아니고, 선행 칸에 T 행·선행 입력·결정·외부 회신이 하나도 없는 최상위 할 일. '
          '선행이 해소됐다는 기록은 이 문서에 없으므로 선행이 적힌 행은 모두 대기로 본다. 날짜는 새로 정하지 않았다.</p>'
+         '<p class="rule" id="unblock-rule">「이번 주 선행 풀기」 추출 규칙 — 최상위 할 일의 선행 칸을 나눠 T 행은 빼고, 외부 회신은 회신 받기 · 결정 번호는 결정 요청 · 선행 입력은 입력 받기로 그 행 담당 역할에 붙인다. '
+         '사람이 적힌 선행은 적힌 사람의 역할에 입력 제공(결정이면 결정 내리기)으로, 그 행 담당 역할에는 입력 받기(결정 요청)로 붙인다. 한 선행이 여러 행을 막으면 1건으로 센다.</p>'
          '<div class="roles">' + ''.join(
     f'<div id="{rid}" class="role"><h4>{name}</h4><ul>' +
     ''.join(f'<li><a href="#row-{r["row_id"]}">{r["row_id"]}</a> {e(r["title"])}'
             + (' <span class="startable">이번 주 착수 가능</span>' if startable(r) else ' <span class="waiting">선행 대기</span>')
             + f' — 하한 {raw(r["target_date"])}</li>'
-            for r in TOP if f(r)) + '</ul></div>'
+            for r in TOP if f(r)) + '</ul>' + unblock_html(rid) + '</div>'
     for rid, name, f in ROLES) + '</div>')
 # 대표 결정 역할에 결정 레버도 연결(최상위 행만으로는 비어 보일 수 있다)
 roles = roles.replace('<div id="role-exec" class="role"><h4>대표 결정 — 채훈희</h4><ul>',
@@ -465,7 +523,7 @@ t6_waits = '''<ul class="t6-wait" id="t6-outside-waits"><li data-wait="toss">토
 <p>잔액 대사는 1원 차이도 NO-GO 다.</p>'''
 
 EXTRA = {'T1': t1_extra, 'T3': mig('T3'), 'T4': t4_extra, 'T6': mig('T6') + t6_waits}
-tracks_html = api_block + '<h3>역할별 진입점 — 내 일부터 찾기</h3>' + roles + ''.join(
+tracks_html = '<h3>역할별 진입점 — 내 일부터 찾기</h3>' + roles + api_block + ''.join(
     f'<div id="track-{t}" class="track"><h3>{t} {n}</h3>{EXTRA.get(t, "")}{track_table(t)}'
     f'<p class="more">세부 {sum(1 for r in DETAIL if r["track"] == t)}행은 <a href="#detail-{t}">부록</a>에 있다.</p></div>'
     for t, n in TRACKS.items())
@@ -525,7 +583,7 @@ gonogo = '''
 <li data-state="yellow"><b>Yellow</b> — 미완이 있으나 리스크 오너와 해결 기한이 적혀 있다</li>
 <li data-state="red"><b>Red</b> — 오픈 테스트 진입 조건 9항 중 하나라도 미충족 → 오픈 차단</li>
 <li data-state="unknown"><b>Unknown</b> — 확인할 데이터가 없다 → 차단으로 본다</li></ul>
-<p>결정권자: <b class="decider">채훈희</b> <span class="proposal">제안(확정 전)</span> · 판정 회의: <b class="meeting-date">2026-10-02</b> <span class="proposal">제안(확정 전)</span>(기준일 직전 근무일). Red 나 Unknown 이 하나라도 있으면 범위 축소 후 진행·연기·보완 통제 진행 중 하나를 고른다.</p>'''
+<p>결정권자: <b class="decider">채훈희</b> <span class="proposal">제안(확정 전)</span> · 판정 회의: <b class="meeting-date">2026-10-02</b> <span class="proposal">제안(확정 전)</span>(<a href="#base-date">기준일 2026-10-06</a> 직전 근무일). Red 나 Unknown 이 하나라도 있으면 범위 축소 후 진행·연기·보완 통제 진행 중 하나를 고른다.</p>'''
 
 CUT = [
     ('1', '서희항', '종단 테스트 통과(T7-2)', 'Railway 관리자 쓰기 정지 공지 기록', '공지 철회 후 기존 운영 유지'),
