@@ -231,16 +231,16 @@ swim_src = '''flowchart LR
   d3 --> b3
 '''
 CTO10 = [
-    ('01 사양 선택·원고 업로드', 'B2 · B3', '금액과 원고가 묶이지 않으면 장바구니에 담긴 가격을 믿을 수 없습니다.'),
-    ('02 장바구니 담기(우리 쪽 보관)', 'B4', '사양을 우리가 보관하지 못하면 재견적과 주문 대조가 불가능해집니다.'),
-    ('03 샵바이 장바구니 올리기', 'B4 · A4', '1원×수량 방식이 틀어지면 손님이 본 금액과 결제 금액이 달라집니다.'),
-    ('04 결제·주문 생성', 'B5 · B6 · B7', '결제가 막히면 매출이 한 건도 생기지 않습니다.'),
-    ('05 주문 등록', 'C1', '결제는 됐는데 무엇을 만들지 모르는 주문이 됩니다.'),
-    ('06 원고 승격', 'C2', '원고가 임시 보관함 시한을 넘기면 주문한 파일이 사라집니다.'),
-    ('07 주문 상태 변화 알림(웹훅)', 'C3 · D1', '입금·취소·주소 변경을 우리가 모르면 생산이 엉뚱한 주문으로 돌아갑니다.'),
-    ('08 파일 검사', 'C4', '인쇄에 맞지 않는 파일이 생산에 들어가 재작업과 클레임이 늘어납니다.'),
-    ('09 접수 — 검수 후 제작대기', 'C5', '접수 화면이 없으면 주문이 쌓여도 제작대기로 넘길 방법이 없습니다.'),
-    ('10 MES 상태 변경 → 자사몰 전달', 'C6 · C7 · D2', '손님이 내 주문이 어디쯤인지 볼 수 없어 문의가 전부 전화로 옵니다.'),
+    ('01 사양 선택·원고 업로드', 'B2 · B3', '금액과 원고가 묶이지 않으면 장바구니에 담긴 가격을 믿을 수 없다.'),
+    ('02 장바구니 담기(우리 쪽 보관)', 'B4', '사양을 우리가 보관하지 못하면 재견적도 주문 대조도 할 수 없다.'),
+    ('03 샵바이 장바구니 올리기', 'B4 · A4', '1원×수량 방식이 틀어지면 손님이 본 금액과 결제 금액이 달라진다.'),
+    ('04 결제·주문 생성', 'B5 · B6 · B7', '결제가 막히면 매출이 한 건도 생기지 않는다.'),
+    ('05 주문 등록', 'C1', '결제는 됐는데 무엇을 만들지 모르는 주문이 된다.'),
+    ('06 원고 승격', 'C2', '원고가 임시 보관함 시한을 넘기면 주문한 파일이 사라진다.'),
+    ('07 주문 상태 변화 알림(웹훅)', 'C3 · D1', '입금·취소·주소 변경을 우리가 모르면 엉뚱한 주문을 생산하게 된다.'),
+    ('08 파일 검사', 'C4', '인쇄에 맞지 않는 파일이 생산에 들어가 재작업과 클레임이 는다.'),
+    ('09 접수 — 검수 후 제작대기', 'C5', '접수 화면이 없으면 주문이 쌓여도 제작대기로 넘길 방법이 없다.'),
+    ('10 MES 상태 변경 → 자사몰 전달', 'C6 · C7 · D2', '손님이 주문 진행 상황을 볼 수 없어 문의가 전부 전화로 몰린다.'),
 ]
 cto = '<ol id="map-cto10" class="cto">' + ''.join(
     f'<li data-steps="{s}"><b>{a}</b> <span class="steps">구간 {s}</span><p class="impact">{i}</p></li>'
@@ -293,7 +293,7 @@ op_src = 'flowchart LR\n' + '\n'.join(
     '\n'.join(f'  s{i} --> s{i + 1}' for i in range(1, len(STAGES)))
 option_block = f'''
 <div><h3>② 옵션을 바꾸면 어느 화면에서 고치나</h3>
-<p class="lead">옵션은 왼쪽에서 오른쪽으로 흐릅니다. 손님 화면에서 값이 이상하면 <b>한 단계 왼쪽 화면</b>부터 봅니다 — 위젯은 가격을 정하지 않고 결과를 보여 줄 뿐입니다.</p>
+<p class="lead">옵션은 왼쪽에서 오른쪽으로 흐른다. 손님 화면에서 값이 이상하면 <b>한 단계 왼쪽 화면</b>부터 본다. 위젯은 가격을 정하지 않고 계산 결과를 보여 줄 뿐이다.</p>
 {mermaid(op_src, ' → '.join(f'{a}(고치는 화면: {b})' for a, b in STAGES))}
 <ol id="diag-option-price" class="stages">{''.join(f'<li data-stage="{i}"><b>{a}</b> <span class="fix-screen">고치는 화면: {b}</span></li>' for i, (a, b) in enumerate(STAGES, 1))}</ol>
 <p class="example"><b>예</b> — 아크릴키링은 위젯에서 사이즈·고리 기본값이 비어 첫 화면이 0원으로 뜬다. 고칠 곳은 3단계 위젯빌더의 기본값이다(9/17 01:34~01:39 가격 추적).</p></div>'''
@@ -304,7 +304,7 @@ for m in writepath:
     wp_by_screen[m['화면']].append(m)
 manual_summary = f'''
 <div id="map-manual-elements"><h3>③ 매뉴얼 요소 대조 — 요약</h3>
-<p class="lead">매뉴얼이 「이 버튼을 누르면 이렇게 된다」고 적은 지점을 실제 화면에서 하나씩 눌러 본 결과다. 메뉴 지도(메뉴 {len(MENU_ROWS)}개)와 분모가 다르다 — 여기서는 화면단위 {len(screens)} · 요소 {len(MATRIX)}건을 센다.</p>
+<p class="lead">매뉴얼이 「이 버튼을 누르면 이렇게 된다」고 적은 지점을 실제 화면에서 하나씩 눌러 본 결과다. 메뉴 지도(메뉴 {len(MENU_ROWS)}개)와는 분모가 달라서, 여기서는 화면단위 {len(screens)} · 요소 {len(MATRIX)}건을 센다.</p>
 <p><b>분모 산출 규칙</b>: 요소 1건 = 매뉴얼 원고(manual_content.py · widget_manual_content.py)의 SCREENS 캡처가 selector 로 화면의 한 지점을 지목하고 label 로 설명한 콜아웃 하나. 콜아웃이 없는 MODEL_ADMIN_SCREENS 는 화면 1건을 요소 1건으로 센다. <b>매뉴얼 콜아웃이 0 이거나 매뉴얼 섹션이 아예 없는 사이드바 관리 화면도 화면 1건 = 요소 1건</b>으로 센다(9/17 보강 — 대조 대상을 줄이지 않기 위해). steps(도달 조작)는 세지 않는다. 재현 명령:</p>
 <pre id="denominator-command" class="cmd">{html.escape(DENOM_CMD)}</pre>
 <p>대조에서 뺀 메뉴 — 화면 요소가 아니라 문서 본문 자체라 대조할 지점이 없다({len(EXCLUDED_MENUS)}개):</p>
@@ -337,7 +337,7 @@ api_block = f'''
 분포: {' · '.join(f'{API_LABEL[k]} {api_dist.get(k, 0)}' for k in ['server-api', 'shop-api', 'admin-manual', 'none'])} (전체 {len(ROWS)}행).</p>
 <h4>API 가 있는데 수동으로 두고 있는 항목 — {len(forced)}건</h4><ol id="api-forced">{''.join(am_li(r) for r in forced)}</ol>
 <details><summary>셀러어드민 화면으로만 할 수 있는 항목 — {len(nonforced)}건</summary><ol id="api-admin-only">{''.join(am_li(r) for r in nonforced)}</ol></details>
-<p class="note">판정 방법: 기능명 규칙으로 1차 분류 → 샵바이 경유로 잡힌 행 전건 열람 → 행 단위 사람 판정. 다만 샵바이 관련 구간인데 규칙에 걸리지 않아 「비경유」로 남은 {len(unreviewed_none)}행은 한 행씩 열어 보지 않았다 — 이 안에 수동 등록 항목이 더 있을 수 있다.</p>
+<p class="note">판정 방법: 기능명 규칙으로 1차 분류 → 샵바이 경유로 잡힌 행 전건 열람 → 행 단위 사람 판정. 다만 샵바이 관련 구간인데 규칙에 걸리지 않아 「비경유」로 남은 {len(unreviewed_none)}행은 한 행씩 열어 보지 않았으므로, 이 안에 수동 등록 항목이 더 있을 수 있다.</p>
 </div>'''
 
 ROLES = [
@@ -377,7 +377,7 @@ T1_ENTRY = [
 t1_extra = f'''
 <ul class="flabels"><li><b>F1</b> 관리서버 dev 배포·검증</li><li><b>F2</b> DB 반입(PG 18.6→17)·검증 4종·vc_ 분리</li><li><b>F3</b> 운영 전환 12단계</li><li><b>F4</b> 스킨 컨테이너화·도메인·콜백·env 이관</li></ul>
 <h4>오픈 테스트 진입 조건 — {len(T1_ENTRY)}항</h4><ol id="t1-entry">{''.join(f'<li>{x}</li>' for x in T1_ENTRY)}</ol>
-<p class="warnbox">되돌릴 수 없는 단계 2개 — <b>F3-11 Railway 종료</b>·<b>F4-8 Vercel 정지</b>는 <strong class="warn">오픈 테스트 통과 전 금지</strong>. 반입 창(F2-4)부터 F3-10 까지는 가격·상품·위젯 편집을 멈춘다 — T2 가 그 기간에 멈춘다.</p>
+<p class="warnbox">되돌릴 수 없는 단계 2개 — <b>F3-11 Railway 종료</b>·<b>F4-8 Vercel 정지</b>는 <strong class="warn">오픈 테스트 통과 전 금지</strong>. 반입 창(F2-4)부터 F3-10 까지는 가격·상품·위젯 편집을 멈추므로 T2 도 그동안 멈춘다.</p>
 <p id="t1-redirect-reverify">로그인 리다이렉트 절대 origin 교정 재검증 — 스킨 이전(T1-4) 뒤 로그인·마이페이지 경로가 shopby.huniprinting.co.kr 을 벗어나지 않는지 다시 확인한다(9/17 회원 흐름에서는 이탈이 재현되지 않았다).</p>'''
 
 DP = [  # 결정자 = S2 findings §4 원문 그대로(복수 실명)
@@ -456,25 +456,25 @@ critical = f'''
 <ol id="internal-prereq">{''.join(f'<li data-row="{raw(r["row_id"])}">{e(r["title"])} — {e(r["owner_name"])}</li>' for r in internal_pre)}</ol>
 <h4>dev 환경이 있어야 판정할 수 있는 화면 — {len(writepath)}요소 · {len(wp_by_screen)}화면</h4>
 <ul id="devenv-prereq">{''.join(f'<li data-prereq="dev-env">{e(s)} — {len(ms)}건</li>' for s, ms in wp_by_screen.items())}</ul>
-<p class="link-t1">이 목록은 <a href="#t1-entry">T1 오픈 테스트 진입 조건</a>이 충족돼 dev 환경이 선 뒤에야 판정할 수 있다 — 그래서 T1 이 끝나기 전에는 이 화면들의 등록·수정 동작을 확인한 것으로 치지 않는다.</p>
+<p class="link-t1">이 목록은 <a href="#t1-entry">T1 오픈 테스트 진입 조건</a>이 충족돼 dev 환경이 선 뒤에야 판정할 수 있다. 그래서 T1 이 끝나기 전에는 이 화면들의 등록·수정 동작을 확인한 것으로 치지 않는다.</p>
 <h3>3. 임계경로</h3>
-<p>소요 = 원장 작업량구간을 하한 일수로 환산해 합산(반일 0.5 · 1일 1 · 2-3일 2 · 1주+ 5). <b>합산 대상은 원장 분류가 개발·수정인 미완 행뿐</b>이다 — 검증·설정·이슈 행은 체크리스트에는 그대로 남지만 소요는 0 으로 둔다. 1주+ 는 상한이 없어 건수를 같이 적는다. 작업량 「미판정」 행은 합산에서 뺐다.
+<p>소요 = 원장 작업량구간을 하한 일수로 환산해 합산(반일 0.5 · 1일 1 · 2-3일 2 · 1주+ 5). <b>합산 대상은 원장 분류가 개발·수정인 미완 행뿐</b>이다 — 검증·설정·이슈 행은 체크리스트에 그대로 남기되 소요는 0 으로 둔다. 1주+ 는 상한이 없어 건수를 같이 적는다. 작업량 「미판정」 행은 합산에서 뺐다.
 근무일은 한국천문연구원 특일정보의 공휴일을 빼고 셌다(첫 근무일: {' · '.join(WORKDAYS[:11])}).</p>
 <div class="scroll"><table id="cp-table"><thead><tr><th>할 일</th><th>이름</th><th>선행</th><th>소요 하한(일)</th><th>1주+ 건수</th><th>가장 이른 완료일(하한)</th></tr></thead><tbody>{cp_rows}</tbody></table></div>
 <p class="note">날짜는 선행 관계만으로 계산했다 — 한 사람이 여러 할 일을 동시에 할 수 없다는 제약은 넣지 않았다(넣으면 줄 세운 순서에 따라 날짜가 달라져 하한이 아니게 된다). 그 제약은 아래 담당자별 표에서 따로 본다.</p>
-<p>소요를 산정하지 못한 구간 {len(unsized)}개({', '.join(r["row_id"] for r in unsized)})는 원장에 행이 없어 0 으로 계산했다 — 이 구간이 채워지면 날짜는 뒤로 밀린다.</p>
+<p>소요를 산정하지 못한 구간 {len(unsized)}개({', '.join(r["row_id"] for r in unsized)})는 원장에 행이 없어 0 으로 계산했다. 이 구간이 채워지면 날짜는 뒤로 밀린다.</p>
 <h3>4. 도출된 오픈일(하한)</h3>
 <p class="derived">선행 관계만으로 계산한 가장 이른 완료일(하한) = <b id="derived-open-date">{derived["target_date"]}</b> — 가장 늦게 끝나는 최상위 할 일 {derived["row_id"]}({e(derived["title"])}).
-여기에 소요 미산정 구간과 외부 회신 시점이 더해지고, 범위·인원 결정 전 수치라는 점을 함께 읽는다.</p>
+실제 날짜는 여기에 소요 미산정 구간과 외부 회신 시점이 더해져 늦어진다. 범위·인원을 정하기 전의 수치라는 점도 함께 봐야 한다.</p>
 <h4>담당자별로 줄 세웠을 때 — 오픈 범위 조정 전 · 1인 직렬 가정 · 하한</h4>
 <p>한 사람이 한 번에 한 가지만 한다고 가정하고, 최상위 할 일에 매달린 개발·수정 미완 행을 원장 담당자별로 이어 붙인 값이다.
 담당 칸에 여러 이름이 적힌 행은 <b>처음 나오는 이름에 소요 전부</b>를 붙였다. 개발·수정 행이 없는 담당자는 표에 나오지 않는다.</p>
-<p>9/16 에 반려된 합산 수치는 구 IA·검증·설정·오픈 후 행까지 일수로 더했지만, 이 표는 <b>오픈 필수 범위의 개발·수정 행만</b> 더한다 — 그래도 범위·인원을 정하기 전의 값이라 <a href="#decisions">결정 절</a>의 근거로만 쓴다.</p>
+<p>9/16 에 반려된 합산 수치는 구 IA·검증·설정·오픈 후 행까지 일수로 더했지만, 이 표는 <b>오픈 필수 범위의 개발·수정 행만</b> 더한다. 다만 범위·인원을 정하기 전의 값이라 <a href="#decisions">결정 절</a>의 근거로만 쓴다.</p>
 <table id="lane-table"><thead><tr><th>담당</th><th>소요 하한(일)</th><th>전부 끝나는 날(하한)</th></tr></thead><tbody>{lane_rows}</tbody></table>'''
 
 # ───────────── §9 결정 ─────────────
 decisions = f'''
-<p class="lead">임계경로의 날짜를 당길 수 있는 손잡이는 셋이다. 하나를 고르면 나머지 둘의 값이 정해진다. 근거는 <a href="#lane-table">임계경로 절의 담당자별 표</a>다.</p>
+<p class="lead">임계경로의 날짜를 앞당기려면 날짜·인원·범위 중 무엇을 움직일지 정해야 한다. 하나를 정하면 나머지 둘도 따라 정해진다. 근거는 <a href="#lane-table">임계경로 절의 담당자별 표</a>다.</p>
 <table id="levers"><thead><tr><th>레버</th><th>무엇을 움직이나</th><th>결정자</th></tr></thead><tbody>
 <tr data-lever="date"><td>날짜</td><td>기준일을 도출된 날짜 쪽으로 옮긴다</td><td class="decider">채훈희 <span class="proposal">제안(확정 전)</span></td></tr>
 <tr data-lever="people"><td>인원</td><td>쇼핑개발 담당을 늘려 담당자별 줄을 나눈다</td><td class="decider">채훈희 <span class="proposal">제안(확정 전)</span></td></tr>
@@ -492,7 +492,7 @@ gonogo = '''
 <li data-state="yellow"><b>Yellow</b> — 미완이 있으나 리스크 오너와 해결 기한이 적혀 있다</li>
 <li data-state="red"><b>Red</b> — 오픈 테스트 진입 조건 9항 중 하나라도 미충족 → 오픈 차단</li>
 <li data-state="unknown"><b>Unknown</b> — 확인할 데이터가 없다 → 차단으로 본다</li></ul>
-<p>결정권자: <b class="decider">채훈희</b> <span class="proposal">제안(확정 전)</span> · 판정 회의: <b class="meeting-date">2026-10-02</b> <span class="proposal">제안(확정 전)</span>(기준일 직전 근무일) — Red 나 Unknown 이 하나라도 있으면 범위 축소 후 진행·연기·보완 통제 진행 중 하나를 고른다.</p>'''
+<p>결정권자: <b class="decider">채훈희</b> <span class="proposal">제안(확정 전)</span> · 판정 회의: <b class="meeting-date">2026-10-02</b> <span class="proposal">제안(확정 전)</span>(기준일 직전 근무일). Red 나 Unknown 이 하나라도 있으면 범위 축소 후 진행·연기·보완 통제 진행 중 하나를 고른다.</p>'''
 
 CUT = [
     ('1', '서희항', '종단 테스트 통과(T7-2)', 'Railway 관리자 쓰기 정지 공지 기록', '공지 철회 후 기존 운영 유지'),
@@ -632,11 +632,11 @@ NAV = ['요약', '범위', '마일스톤', '흐름', '배치도', '판매 준비
 SECTIONS = [
     section(1, '한 장 요약', summary),
     section(2, '범위 — 오픈 필수와 오픈 후', scope, '오픈 판정에 쓰는 것과 쓰지 않는 것을 두 표로 나눴다. 섞이면 오픈 날짜 논의가 끝나지 않는다.'),
-    section(3, '마일스톤', milestones, '큰 체크포인트 5개다. 날짜는 각 마일스톤에 속한 할 일의 가장 이른 완료일(하한) 중 가장 늦은 날이다.'),
+    section(3, '마일스톤', milestones, '큰 확인 지점 5개다. 날짜는 각 마일스톤에 속한 할 일의 가장 이른 완료일(하한) 중 가장 늦은 날이다.'),
     section(4, '주문이 흐르는 길 — 누가 무엇을 넘기나',
             mermaid(swim_src, '고객 화면·자사몰 스킨(후니 개발) → 샵바이 주문·결제·회원 원장(NHN 제공) → 관리서버 webadmin·위젯·가격(후니 개발) → 생산 연동 PitStop·MES(후니 개발). 결제 뒤 주문 등록과 웹훅이 관리서버로 들어오고, MES 상태와 송장이 샵바이로 되돌아간다.', 'diag-swimlane')
             + '<h3>CTO 10구간 ↔ 업무 28구간</h3>' + cto,
-            '가로줄 하나가 한 시스템, 화살표가 넘겨주는 지점이다. 아래 10구간은 9/8 CTO 문서의 구간을 그대로 쓰고 이 계획서의 28구간을 연결했다.'),
+            '가로 구획 하나가 한 시스템이고, 화살표는 일을 넘기는 지점이다. 아래 10구간은 9/8 CTO 문서의 구간을 그대로 쓰고 이 계획서의 28구간을 연결했다.'),
     section(5, '시스템 배치도 — 무엇이 어디로 옮겨지나',
             mermaid(topo_src, '이전 뒤 Lightsail 에 스킨·관리서버·DB 가 올라가고, 샵바이(NHN 제공)는 그대로다. 관리서버가 웹훅을 받고 원고 저장소·PitStop·MES 로 이어진다. 기존 Railway·Vercel 은 오픈 테스트 통과 뒤 종료한다.', 'diag-topology'),
             '노드마다 소유(NHN 제공 / 후니 개발)와 담당 실명을 붙였다. NHN 제공 노드는 우리가 개발하지 않고 설정만 한다.'),

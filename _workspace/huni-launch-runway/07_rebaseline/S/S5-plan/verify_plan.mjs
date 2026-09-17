@@ -110,9 +110,9 @@ const cellOf = (tr, cls) => txt(tr.querySelector(`td.${cls}`));
   $$("script").forEach((s) => { if (toggleRx.test(s.textContent)) toggles++; });
   check("AC-LP-001", "자기완결 + 라이트 테마 전용", [
     sub("① 허용 밖 외부 참조 0", $$("script, link[rel=stylesheet], img").length, ext),
-    sub("② prefers-color-scheme 0", 1, pcs ? [`출현 ${pcs}`] : []),
-    sub("③ 다크 선택자 0", 1, darkSel ? [`출현 ${darkSel}`] : []),
-    sub("④ 테마 토글 0", 1, toggles ? [`출현 ${toggles}`] : []),
+    sub("② prefers-color-scheme 0", 1, pcs ? [`prefers-color-scheme 출현 ${pcs}`] : []),
+    sub("③ 다크 선택자 0", 1, darkSel ? [`다크 선택자([class~="dark"]·[data-theme) 출현 ${darkSel}`] : []),
+    sub("④ 테마 토글 0", 1, toggles ? [`테마 토글 흔적 출현 ${toggles}`] : []),
   ]);
 }
 
@@ -131,6 +131,9 @@ function proseNodes(root = doc.body) {
   return out;
 }
 const prose = proseNodes();
+// [가드 · 리드 판정 260917] 산문에서 뺀 코드 블록은 mermaid 원문과 분모 명령뿐이어야 한다 — 그 밖의 pre/code 가 생기면 FAIL
+const codeBlocks = $$("pre, code").filter((el) => !el.parentElement.closest("pre, code") && !el.closest("#appendix"));
+const codeOk = (el) => el.matches("pre.mermaid") || el.id === "denominator-command";
 const proseText = (nodes) => nodes.map((n) => n.textContent).join("\n");
 
 // ───────────── AC-LP-002 Out of Scope 통합 ─────────────
@@ -142,13 +145,18 @@ const proseText = (nodes) => nodes.map((n) => n.textContent).join("\n");
   const codeRx = /\bS[1-5]\b|\bR[1-5][a-e]?\b|CARDS-|라운드 [A-Z0-9]+|round-\d+|manager-|-orchestrator|plan-auditor/g;
   const codes = [...all.matchAll(codeRx)].map((m) => `「${m[0]}」 …${all.slice(Math.max(0, m.index - 20), m.index + 20).replace(/\n/g, " ")}…`);
   const rej = [];
-  for (const t of ["565일", "348행"]) { const n = all.split(t).length - 1; if (n) rej.push(`${t} ${n}회`); }
+  // (b) 반려 수치는 코드 블록까지 포함한 전체(부록·증거·출처 제외)에서 센다
+  const withCode = all + "\n" + codeBlocks.map((el) => el.textContent).join("\n");
+  for (const t of ["565일", "348행"]) { const n = withCode.split(t).length - 1; if (n) rej.push(`${t} ${n}회`); }
+  console.log(`    [산문 제외 코드 블록 ${codeBlocks.length}] ` + codeBlocks.map((el) => `${el.tagName.toLowerCase()}${el.id ? "#" + el.id : ""}${el.className ? "." + el.className : ""} 「${el.textContent.trim().slice(0, 40).replace(/\s+/g, " ")}」`).join(" | "));
+  const badCode = codeBlocks.filter((el) => !codeOk(el)).map((el) => `허용 밖 코드 블록 ${el.tagName} 「${el.textContent.trim().slice(0, 40)}」`);
   const outside = prose.filter((n) => !n.parentElement.closest("#critical-path, #decisions"));
   const sentences = proseText(outside).split(/(?<=[.!?。])\s+|\n/);
   const judge = sentences.filter((s) => OPEN_DATE.test(s) && PRED.test(s)).map((s) => s.trim().slice(0, 80));
   const imp = (all.match(/조판|imposition/g) || []).length;
   check("AC-LP-002", "Out of Scope 금지 4종", [
     sub("(a) 내부 코드명 0", prose.length, codes),
+    sub("(가드) 산문 제외 코드 블록 = mermaid 원문·분모 명령뿐", codeBlocks.length, badCode),
     sub("(b) 반려 수치 0", prose.length, rej),
     sub("(c) 오픈일 판정 문장 0(critical-path·decisions 밖)", sentences.length, judge),
     sub("(d) 조판 ≤ 1", prose.length, imp > 1 ? [`출현 ${imp}회`] : []),
