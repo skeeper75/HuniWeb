@@ -821,6 +821,76 @@ D 제외: 분류 ∉ {개발, 수정}(지니 결정 260917 — 체크리스트�
 
 - 규칙 변경으로 도출 날짜(가장 늦은 최상위 행 하한)가 `2027-04-26`(T4-2) → `2027-02-15`(T4-2)로 당겨졌다. 앞당겨진 것은 검증·설정 일을 0 으로 본 효과다 — 「그만큼 빨리 끝난다」로 읽으면 오독이다. D1 §8 에 합산 대상을 굵게 명시했다.
 
+### M2 — D1 오픈 계획서 HTML (완료 · 2026-09-17 11:58 KST · run 레인)
+
+#### Claim
+
+1. `docs/huni/후니프린팅_오픈계획서_260917.html` 생성 — 생성기 `S5-plan/build_d1.py`(표·집계 수 전부 CSV 계산 · 손으로 적은 수 없음). 에이전트용 요약 `.md` 동반.
+2. 13섹션 `sec-01`~`sec-13` · §6 블록 순서 = 메뉴 지도 → 옵션↔가격 도식 → 매뉴얼 요소 대조 요약 층(plan §M2-2 순서) · 전건 매트릭스는 부록 `<details id="manual-element-matrix">`.
+3. 새 축 요약 층 `id="api-admin-manual"` 을 §7 맨 앞에 — 「API 가 있는데 수동으로 두고 있는 항목」 14건(목록·근거·담당) + 「셀러어드민 화면으로만」 31건(접힘) + 4값 정의·분포 + 규칙 미매칭 `none` 232행 미검토 고지.
+4. 체크리스트 행 = 여섯 칸(`owner`·`duedate`·`evidence`·`check`·`prereq`·`status` 클래스) + 속성 `data-role/step/std/owner/work` + **추가 속성** `data-api-path`·`data-api-evidence`(D3 는 추가 속성을 거부하지 않게 만든다 — 리드 판정). 최상위 28행은 §7 트랙 블록, detail 707행은 부록(`id="appendix"`) 트랙별 접힘.
+5. 담당자 직렬 하한은 헤드라인·§1 에 쓰지 않고 §8 표 안에만 「오픈 범위 조정 전 · 1인 직렬 가정 · 하한」 + 반려 합산과 다른 점 한 문장(리드 판정).
+6. 브라우저 렌더 확인: ego-browser space 20 · p12(자기 탭 · 확인 후 닫음) — mermaid 3개 전부 `data-processed=true` + SVG · 문법 오류 0 · 본문 폰트 Pretendard.
+
+#### Evidence
+
+```
+$ python3 -B _workspace/huni-launch-runway/07_rebaseline/S/S5-plan/build_d1.py
+D1 /Users/innojini/Dev/HuniWeb/.claude/worktrees/t47/docs/huni/후니프린팅_오픈계획서_260917.html 731,883 bytes
+top 28 · detail 707 · wait 46 · derived 2027-02-15 (T4-2)
+menu 37 (사이드바 33 + 비사이드바 4) · 갭★ 5 · matrix 159 {'동작확인': 116, '쓰기경로-dev환경필요': 43} · 화면 50
+api {'none': 610, 'server-api': 14, 'shop-api': 66, 'admin-manual': 45} · forced 14 · admin-only 31 · 규칙 미매칭 none 232
+exit=0
+```
+
+생성 측 자체 점검(판정은 M4 D3 몫):
+
+```
+자체점검(생성 측 · D3 아님) — bytes 731883
+코드명 토큰: []
+반려 수치 565일/348행: 0 0
+조판+imposition 출현: 1
+기준일+판정 술어 같은 문장(전 문서): 0
+§1 요약 산문 글자 수: 419
+외부 <script src>: 0 · stylesheet: ['https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css']
+다크 흔적 prefers-color-scheme/data-theme/toggle: 0 0 0
+섹션 앵커 13: True · top 28 · detail 707
+```
+
+렌더 확인(ego-browser · file:// · 2026-09-17 11:4x KST):
+`{"mermaid":[{"processed":"true","svg":true,"err":false}×3],"font":"Pretendard, system-ui, -apple-system, sans-serif"}` · 스크린샷 sec-01·04·06·07 (scratchpad, 커밋 안 함).
+
+#### Baseline-attribution
+
+입력 = 커밋 `8800f98f` 의 `plan-rows.csv`·`lanes.csv`·`decisions-by-step.csv`·`workdays.csv` + `manual-element-matrix.csv`(`e1b99e22`) + 메인 체크아웃 `S/S5-live/menu-map-260917.csv`(읽기 전용) + `matrix-README.md` 분모 명령(정규식 추출 — 문서에 옮겨 적지 않고 README 원문을 그대로 실음).
+
+#### 판단 기록 (계약 해석 — M4 D3 에서 이견 시 조정)
+
+| 계약 | 해석·선택 |
+|---|---|
+| AC-LP-002 제외 목록 | detail 707행(원장 원문 · 카드 코드명·반려 수치가 섞임)을 **부록 안**에 둬서 산문 검사 제외 범위로 보냄. 본문 데이터 문자열은 `clean()` 으로 코드명 제거 · 「조판」→「판 배치」 · 기준일+판정 술어 문장의 날짜를 「기준일」로 |
+| `\bS3\b` 가 AWS S3 제품명에도 걸림 | 본문 표기를 「원고 저장소(AWS)」로(의미 보존). 증거 칸·부록 경로는 원문 유지 |
+| AC-LP-014(c) 갭 판정 기준 | 「갭 열 ★ 표기 행」 = 5건으로 선언 + 원천 경로 `class="source"` |
+| AC-LP-012(b) §8 | 외부 대기 목록 `id="wait-items"` = `ext×wait` 46행 그대로 · 내부 선행 결정 `id="internal-prereq"` 별도 · dev 환경 선행 `id="devenv-prereq"` 28화면 + T1 진입 조건 상호 참조 문장 |
+| AC-LP-012(a) 도출된 오픈일 | `id="derived-open-date"` = 최상위 행 가장 이른 완료일(하한) 최댓값 `2027-02-15`(T4-2) · 미산정 구간·외부 회신·범위 미조정 병기 |
+| AC-LP-013 | Go/No-Go 결정권자 채훈희 1인 · 회의 `2026-10-02`(기준일 직전 근무일 · **제안** 표기) · 롤백 트리거 수치 = 행수 지문 불일치 · 잔액 1원 · 가격 API 중앙값 300ms(런북 F3-10·P-G1 원천) · 시한 48시간(베스트프랙티스 리서치) · 하이퍼케어 종료 지표 날짜 리터럴 0 |
+| AC-LP-011 | 6단계 = spec REQ-LP-014 원문 · 외부 의존 T3(1·3단계) / T6(1·5단계) 각 2 · T6 밖 대기 2 · 담당 「미확정」 · P-6 번복 문장 |
+| AC-LP-010(c) | 표 `id="t4-status"` 에 C1·C2·C3 수신 = 구현-미검증 · C3 해석·C4~C7 = 없음(REQ-LP-013 원문 값) |
+
+#### Gaps (미검증)
+
+1. **D3 미작성** — 위 해석이 AC-LP-001~014 를 통과하는지는 아직 관측하지 않았다(M4).
+2. **파일 크기 731,883 바이트** — detail 707행을 부록에 전부 실은 결과. html-report 스킬 권고(≤120KB)를 넘는다. SPEC 계약(REQ-LP-004·AC-LP-015(c) 행 수 일치)이 우선이라 줄이지 않았다.
+3. **한국어 윤문(humanize) 최종 패스 미실시** — 네이티브 원문으로 썼으나 `moai-domain-humanize` 패스는 돌리지 않았다(규칙상 무거운 한국어 산출물 대상). M4 사람 판정 전에 돌릴지 리드 판단.
+4. 운영 섹션의 **컷오버 순서·RACI 배정·의사소통 채널은 원천에 확정값이 없어 제안값**이다(표 안에 제안임을 적지 않은 칸이 있다 — RACI·채널). 사람 판정에서 확인 필요.
+5. 역할 진입점은 최상위 행 담당 기준 — 김용기 담당 최상위 행이 없어 `role-ops` 는 최숙진 행으로만 채워진다.
+6. 매뉴얼 결함 1건(category-master 선행 조작)은 부록에 서술로만 올렸다(행 ID 없음).
+
+#### Residual-risk
+
+- mermaid CDN(jsdelivr ESM) 이 막힌 환경에서는 `<noscript>` 가 아니라 **원문 `pre` 텍스트**가 보인다(JS 는 켜져 있고 네트워크만 막힌 경우) — 인쇄·오프라인 판독은 원문 텍스트로 떨어진다.
+- `clean()` 은 원장 원문을 본문에 옮길 때 코드명을 **지운다** — 최상위 행 제목·결정 제목 일부가 원문과 글자 단위로 다르다(부록·CSV 는 원문 유지).
+
 ## §E.3 Run-phase Audit-Ready Signal
 
 _<pending run-phase>_
