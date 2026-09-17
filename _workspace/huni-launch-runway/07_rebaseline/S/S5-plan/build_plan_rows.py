@@ -374,6 +374,8 @@ def blocked_rows():
 
 # ───────────────────────── 결정 30건 → 구간 ─────────────────────────
 DECISIONS = f'{RB}/R/R3/decisions-for-pm.md'
+REST = '*나머지*'  # 같은 구간의 다른 최상위 행 filt 에 걸리지 않은 행 전부
+
 # (번호: 구간, 오픈 전 필수?, 메모) — 사람 판단 표. 근거는 결정 문단의 「왜 막나」.
 DECISION_STEP = {
     1: ('E4', 'Y', ''), 2: ('E4', 'Y', ''), 3: ('B6', 'Y', ''),
@@ -518,7 +520,7 @@ TOP = [
          ev=(S28, r'^D4,'), prereq='T5-1(PG 신청)',
          check='결정 기록 문서를 열어 발급 주체 결정 문장이 적혀 있는지 조회하고 셀러어드민 현금영수증 설정 화면 상태를 본다'),
     # T6 — 프린팅머니
-    dict(id='T6-1', track='T6', steps=['D5'], filt=r'이관|잔액|마이그', title='프린팅머니 잔액 이관 — 추출 주체·개발 주체 결정 후 6단계',
+    dict(id='T6-1', track='T6', steps=['D5'], filt=REST, title='프린팅머니 잔액 이관 — 추출 주체·개발 주체 결정 후 6단계',
          owner_name='채훈희', owner='huni', work='config', status='없음',
          ev=(S3M, r'^## B\. '), prereq='외부(구 사이트 운영사) DB 접속 · 결정 6',
          check='결정 기록 문서를 열어 개발 주체 결정 문장을 조회하고 구 사이트 관리자 화면에서 잔액 추출 파일 목록이 보이는지 본다'),
@@ -546,6 +548,8 @@ TOP = [
 ]
 
 EFFORT = {'반일': 0.5, '1일': 1, '2-3일': 2, '1주+': 5}
+# 지니 결정 260917: 소요 합산은 원장 분류 ∈ {개발, 수정} 행만. 검증·설정·이슈 행은 체크리스트에 남기되 소요 0.
+EFFORT_CLASSES = ('개발', '수정')
 
 # ───────────────────────── 근무일 달력 · 가장 이른 완료일(하한) ─────────────────────────
 # 공휴일 원천 = 한국천문연구원 특일정보 getRestDeInfo(data.go.kr 15012690) 응답 원문 저장본.
@@ -613,7 +617,7 @@ def schedule(top):
     lanes, seen = {}, set()
     for t in top:
         for d in t['_todo']:
-            if d['row_id'] in seen or d['data_owner'] == 'ext':
+            if d['row_id'] in seen or d['data_owner'] == 'ext' or d['_class'] not in EFFORT_CLASSES:
                 continue
             seen.add(d['row_id'])
             lanes[d['owner_name']] = lanes.get(d['owner_name'], 0) + int(round(EFFORT.get(d['_effort'], 0) * 2))
@@ -640,8 +644,9 @@ def main():
             target_date='', evidence=ev, check_method=r['체크방법'], prereq=r['선행의존'] or '—',
             status=status, data_owner=own, data_work=wk, api_path=api[0], api_evidence=api[1],
             forced_by_impl=api[2], api_basis=api[3], irreversible='',
-            note=f'분류={r["분류"]} · 오픈차단여부={r["오픈차단여부"]} · 작업량={r["작업량구간"]}',
-            source='ledger-v4', _state=r['상태'], _block=r['오픈차단여부'], _effort=r['작업량구간']))
+            note=f'분류={r["분류"]} · 오픈차단여부={r["오픈차단여부"]} · 작업량={r["작업량구간"]}'
+                 + ('' if r['분류'] in EFFORT_CLASSES else f' · 소요 미합산(분류={r["분류"]})'),
+            source='ledger-v4', _state=r['상태'], _block=r['오픈차단여부'], _effort=r['작업량구간'], _class=r['분류']))
     detail += runbook_rows()
     blk, ys = blocked_rows()
     detail += blk
@@ -650,7 +655,10 @@ def main():
     top = []
     for t in TOP:
         pool = [d for d in detail if d['source'] == 'ledger-v4' and d['step'] in t['steps']]
-        if t.get('filt'):
+        if t.get('filt') == REST:
+            sib = [o['filt'] for o in TOP if o is not t and o.get('filt') and o['filt'] != REST and set(o['steps']) & set(t['steps'])]
+            pool = [d for d in pool if not any(re.search(f, d['title']) for f in sib)]
+        elif t.get('filt'):
             pool = [d for d in pool if re.search(t['filt'], d['title'])]
         live = [d for d in pool if d['_block'] != '오픈 무관']
         stds = [d['std_ids'] for d in live]
@@ -667,9 +675,10 @@ def main():
             forced_by_impl=api[2], api_basis=api[3], irreversible='',
             note=('NEW 사유: ' + t['new']) if not stds and t.get('new') else ('구간=' + '·'.join(t['steps'])),
             source='top',
-            effort_lb_days=sum(EFFORT.get(d['_effort'], 0) for d in todo),
-            week_plus_cnt=sum(d['_effort'] == '1주+' for d in todo),
-            undetermined_cnt=sum(d['_effort'] not in EFFORT for d in todo),
+            effort_lb_days=sum(EFFORT.get(d['_effort'], 0) for d in todo if d['_class'] in EFFORT_CLASSES),
+            week_plus_cnt=sum(d['_effort'] == '1주+' for d in todo if d['_class'] in EFFORT_CLASSES),
+            undetermined_cnt=sum(d['_effort'] not in EFFORT for d in todo if d['_class'] in EFFORT_CLASSES),
+            nondev_cnt=sum(d['_class'] not in EFFORT_CLASSES for d in todo),
             open_rows=len(todo), _todo=todo, _runbook_n=sum(1 for d in detail if d['source'] == 'S4-infra' and d['step'] in t['steps'])))
     lanes = schedule(top)
 
@@ -710,7 +719,7 @@ def main():
         raise SystemExit(1)
 
     cols = ['row_id', 'data_role', 'track', 'step', 'title', 'std_ids', 'owner_name', 'target_date',
-            'effort_lb_days', 'week_plus_cnt', 'undetermined_cnt', 'open_rows', 'date_basis',
+            'effort_lb_days', 'week_plus_cnt', 'undetermined_cnt', 'nondev_cnt', 'open_rows', 'date_basis',
             'evidence', 'check_method', 'prereq', 'status', 'data_owner', 'data_work',
             'api_path', 'api_evidence', 'forced_by_impl', 'api_basis', 'irreversible', 'note', 'source']
     with open(os.path.join(HERE, 'plan-rows.csv'), 'w', encoding='utf-8', newline='') as f:
@@ -744,7 +753,7 @@ def main():
     print('admin-manual forced_by_impl:', dict(Counter(d['forced_by_impl'] for d in am)))
     print('외부 대기(ext×wait):', len(wait))
     for t in top:
-        print(f"  {t['row_id']:5} {t['owner_name']:12} 하한 {t['effort_lb_days']:>5}일 · 1주+ {t['week_plus_cnt']} · 미판정 {t['undetermined_cnt']} · 미완 {t['open_rows']} → {t['target_date']} ({t['date_basis']})")
+        print(f"  {t['row_id']:5} {t['owner_name']:12} 하한 {t['effort_lb_days']:>5}일 · 1주+ {t['week_plus_cnt']} · 미판정 {t['undetermined_cnt']} · 미완 {t['open_rows']}(미합산 {t['nondev_cnt']}) → {t['target_date']} ({t['date_basis']})")
     for n, (d, e) in lanes.items():
         print(f'  담당자 직렬(가정) {n}: 하한 {d}일 → {e}')
     with open(os.path.join(HERE, 'lanes.csv'), 'w', encoding='utf-8', newline='') as f:
