@@ -1,0 +1,506 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>운영정책 검토 요청 — 실무진 결정 21건</title>
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+:root{
+  --ivory:#FAF9F5; --paper:#FFFFFF; --slate:#141413;
+  --clay:#D97757; --clay-d:#B85C3E; --oat:#E3DACC; --olive:#788C5D;
+  --g100:#F0EEE6; --g300:#D1CFC5; --g500:#87867F; --g700:#3D3D3A;
+  --sans:"Pretendard",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --serif:"Pretendard",ui-serif,Georgia,serif;
+  --mono:"JetBrains Mono",ui-monospace,"SF Mono",Menlo,Consolas,monospace;
+  --max-width:900px; --radius-panel:12px; --radius-row:8px;
+  --border:1.5px solid var(--g300);
+}
+*{box-sizing:border-box}
+body{margin:0;padding:56px 24px 120px;background:var(--ivory);color:var(--slate);
+  font-family:var(--sans);font-size:15px;line-height:1.65;-webkit-font-smoothing:antialiased}
+.page{max-width:var(--max-width);margin:0 auto}
+
+header{margin-bottom:40px}
+.eyebrow{font-family:var(--mono);font-size:11px;text-transform:uppercase;
+  letter-spacing:.08em;color:var(--g500);margin:0 0 10px}
+h1{font-family:var(--serif);font-weight:600;font-size:34px;letter-spacing:-.01em;
+  margin:0;line-height:1.25}
+.date-range{color:var(--g500);font-size:14px;margin-top:8px}
+.date-range .repo{font-family:var(--mono);font-size:13px;color:var(--g700)}
+
+section{margin-bottom:52px}
+h2{font-family:var(--serif);font-weight:600;font-size:22px;letter-spacing:-.01em;
+  margin:0 0 6px}
+h3{font-family:var(--serif);font-weight:600;font-size:17px;margin:30px 0 10px}
+hr.rule{border:none;border-top:1px solid var(--g300);margin:0 0 22px}
+p{margin:0 0 14px}
+
+.lead{background:var(--g100);border-left:4px solid var(--oat);
+  border-radius:0 var(--radius-row) var(--radius-row) 0;
+  padding:16px 20px;margin:0 0 24px;color:var(--g700);font-size:14.5px}
+.lead strong{color:var(--slate)}
+
+.metrics-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+@media(max-width:720px){.metrics-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:400px){.metrics-grid{grid-template-columns:1fr}}
+.stat-card{background:var(--paper);border:var(--border);border-radius:var(--radius-panel);
+  padding:20px 22px 18px}
+.stat-card.warn{border-left:4px solid var(--clay);padding-left:19px}
+.stat-num{font-family:var(--serif);font-size:40px;font-weight:600;line-height:1;margin-bottom:8px}
+.stat-label{font-size:12px;text-transform:uppercase;letter-spacing:.05em;color:var(--g500)}
+.stat-delta{font-family:var(--mono);font-size:11px;margin-top:6px}
+.stat-delta.down{color:var(--clay-d)} .stat-delta.flat{color:var(--g500)}
+.stat-delta.up{color:var(--olive)}
+
+.highlights{list-style:none;margin:0;padding:0}
+.highlights li{position:relative;padding:0 0 14px 26px;color:var(--g700)}
+.highlights li::before{content:"";position:absolute;left:6px;top:9px;width:7px;height:7px;
+  border-radius:2px;background:var(--clay)}
+.highlights li strong{color:var(--slate);font-weight:600}
+
+table{width:100%;border-collapse:separate;border-spacing:0;background:var(--paper);
+  border:var(--border);border-radius:var(--radius-panel);overflow:hidden;margin:0 0 18px}
+thead th{text-align:left;font-size:11px;font-weight:600;text-transform:uppercase;
+  letter-spacing:.06em;color:var(--g500);background:var(--g100);padding:12px 14px;
+  border-bottom:1px solid var(--g300)}
+tbody td{padding:12px 14px;border-bottom:1px solid var(--g100);font-size:14px;
+  vertical-align:top}
+tbody tr:last-child td{border-bottom:none}
+tbody tr:hover{background:var(--ivory)}
+td.num{font-family:var(--mono);font-size:13px;color:var(--g500);white-space:nowrap}
+code{font-family:var(--mono);font-size:12.5px;background:var(--g100);
+  border-radius:4px;padding:1px 5px;color:var(--g700)}
+.cite{font-family:var(--mono);font-size:12px;color:var(--g500)}
+
+.chart-panel{background:var(--paper);border:var(--border);
+  border-radius:var(--radius-panel);padding:24px 26px 16px}
+.chart-panel svg{display:block;width:100%;height:auto}
+
+pre.mermaid{background:var(--paper);border:var(--border);border-radius:var(--radius-panel);
+  padding:20px;font-family:var(--mono);font-size:12px;color:var(--g700);
+  overflow-x:auto;margin:0 0 6px}
+noscript p{background:var(--g100);border:var(--border);border-radius:var(--radius-row);
+  padding:14px 16px;font-size:13.5px;color:var(--g700)}
+
+.callout{background:var(--paper);border:var(--border);border-left:4px solid var(--clay);
+  border-radius:0 var(--radius-panel) var(--radius-panel) 0;padding:18px 22px;margin:0 0 20px}
+.callout h4{margin:0 0 8px;font-family:var(--serif);font-size:16px}
+.callout.good{border-left-color:var(--olive)}
+
+.tag{display:inline-block;font-family:var(--mono);font-size:10.5px;
+  text-transform:uppercase;letter-spacing:.05em;padding:2px 7px;border-radius:999px;
+  border:1px solid var(--g300);color:var(--g500);background:var(--g100);white-space:nowrap}
+.tag.hot{border-color:var(--clay);color:var(--clay-d);background:#FCF1EC}
+.tag.ok{border-color:var(--olive);color:var(--olive);background:#F1F4EC}
+
+footer{margin-top:64px;padding-top:22px;border-top:1px solid var(--g300);
+  font-size:13px;color:var(--g500)}
+@media print{
+  body{padding:0;background:#fff}
+  .stat-card,table,.chart-panel,.callout{break-inside:avoid}
+  pre.mermaid{display:none}
+}
+</style>
+</head>
+<body>
+<div class="page">
+
+<header>
+  <p class="eyebrow">후니프린팅 · 운영정책 검토 요청</p>
+  <h1>운영정책을 약관에 반영하려 했더니,<br>먼저 정해야 할 것이 21건 나왔습니다</h1>
+  <p class="date-range">
+    2026-09-18 작성 · 권위 <span class="repo">후니프린팅_운영정책_260918.xlsx</span>
+    ↔ 현행 <span class="repo">이용약관.md · 개인정보처리방침.md · 결제/상품 화면</span>
+  </p>
+</header>
+
+<section>
+  <div class="lead">
+    <strong>이 문서는 무엇인가요?</strong> 실무진이 9월 18일에 확정하신 운영정책 엑셀을,
+    지금 사이트에 올라가 있는 이용약관·개인정보처리방침·화면 문구와 한 줄씩 맞춰 본 결과입니다.
+    맞춰 보니 <strong>엑셀만 봐서는 정할 수 없는 것 21건</strong>이 나와서, 그 결정을 요청드립니다.
+  </div>
+  <div class="lead">
+    <strong>왜 그냥 고치지 않았나요?</strong> 정답이 하나가 아니었습니다.
+    같은 항목을 두고 <strong>엑셀 · 사이트 FAQ · 개발 계획서 · 9월 15일 정기미팅 확정본</strong>이
+    서로 다른 값을 말하는 경우가 반복해서 나왔습니다. 어느 쪽이 맞는지는 만드신 분들만 아십니다.
+  </div>
+
+  <div class="callout good">
+    <h4>먼저 안심하실 것 — 대부분은 개발할 게 없습니다</h4>
+    <p style="margin:0">전체 49개 항목 중 <strong>25건은 개발 공수가 0에 가깝습니다.</strong>
+    약관 문장만 고치면 되는 것이 <strong>16건</strong>, 이미 되어 있는 것이 <strong>9건</strong>
+    (그중 6건은 화면 글자 교정)입니다. <strong>실제 개발이 필요한 것은 24건</strong>입니다.
+    특히 증빙서류 7개 문장은 <strong>화면에 이미 글자 그대로 있고</strong> 약관에만 없던 것이라,
+    「12개 문장 신설 = 개발 12건」으로 읽으시면 공수가 크게 부풀어 보입니다.</p>
+  </div>
+
+  <div class="metrics-grid">
+    <div class="stat-card warn">
+      <div class="stat-num">21</div>
+      <div class="stat-label">결정 대기</div>
+      <div class="stat-delta down">이 문서의 본론</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num">20</div>
+      <div class="stat-label">바로 반영 가능</div>
+      <div class="stat-delta up">충돌 없음 · 승인만</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num">5</div>
+      <div class="stat-label">화면 문구 수정</div>
+      <div class="stat-delta flat">글자만 교정</div>
+    </div>
+    <div class="stat-card warn">
+      <div class="stat-num">21</div>
+      <div class="stat-label">오픈 후 완성</div>
+      <div class="stat-delta down">최대 +111일</div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2>1. 왜 결정이 필요한가 — 값이 여러 개입니다</h2>
+  <hr class="rule">
+  <p><strong>프린팅머니 유효기간</strong> 하나로 설명하면 이렇습니다.
+  같은 질문에 대해 네 군데가 세 가지 답을 내놓고 있습니다.</p>
+
+  <table>
+    <thead><tr><th>출처</th><th>시점</th><th>값</th></tr></thead>
+    <tbody>
+      <tr><td>운영정책 엑셀 (8/27판)</td><td class="num">2026-08-27</td><td>유효기간 없음</td></tr>
+      <tr><td>사이트 FAQ</td><td class="num">8/27 이후 수정 없음</td><td><strong>1년</strong></td></tr>
+      <tr><td>정기미팅 「확정 3」</td><td class="num">2026-09-15</td><td><strong>소멸 없음</strong></td></tr>
+      <tr><td>운영정책 엑셀 (9/18판)</td><td class="num">2026-09-18</td><td><strong>5년</strong> <span class="cite">(근거: 상법 제64조)</span></td></tr>
+      <tr><td>개발 계획 <code>STD-MYP-025</code></td><td class="num">미착수</td><td>소멸 없음</td></tr>
+    </tbody>
+  </table>
+
+<pre class="mermaid">
+flowchart TD
+  Q["프린팅머니는<br/>언제 소멸하나?"]
+  Q --> A["8/27 엑셀<br/>유효기간 없음"]
+  Q --> B["FAQ<br/>1년"]
+  Q --> C["9/15 미팅 확정<br/>소멸 없음"]
+  Q --> D["9/18 엑셀<br/>5년"]
+  Q --> E["개발 계획<br/>소멸 없음"]
+  A --> X{"실무진 결정<br/>필요"}
+  B --> X
+  C --> X
+  D --> X
+  E --> X
+  X --> Y["약관 문구 확정"]
+  X --> Z["개발 완료 기준 확정"]
+</pre>
+<noscript>
+  <p>흐름: "프린팅머니는 언제 소멸하나?"라는 한 질문에 8/27 엑셀(유효기간 없음),
+  FAQ(1년), 9/15 미팅 확정(소멸 없음), 9/18 엑셀(5년), 개발 계획(소멸 없음)이
+  각각 다른 답을 내놓고 있습니다. 다섯 출처가 모두 실무진 결정을 거쳐야
+  약관 문구와 개발 완료 기준이 동시에 확정됩니다.</p>
+</noscript>
+
+  <div class="callout">
+    <h4>문구 하나가 개발 완료 조건과 물려 있습니다</h4>
+    <p style="margin-bottom:8px">개발 계획서의 완료 판정 기준이 이렇게 적혀 있습니다.</p>
+    <p style="margin-bottom:8px"><code>check_method</code> — 이용약관에
+      <strong>「프린트머니 소멸 없음」이 고지되고</strong>, 충전권 상품의 적립률이 0으로
+      설정되어 있으면 완료</p>
+    <p style="margin:0">약관에 「5년」을 쓰면 이 개발 항목은 <strong>완료 판정을 받을 수 없습니다.</strong>
+    반대로 「소멸 없음」을 쓰면 9/18 엑셀과 어긋납니다.</p>
+  </div>
+
+  <div class="callout good">
+    <h4>이 건은 오늘 끝낼 수 있습니다</h4>
+    <p style="margin:0"><code>STD-MYP-025</code>는 상위 「토스페이먼츠 계약 회신 대기」 밑에 묶여
+    목표일이 비어 있습니다. 그런데 실제로는 <strong>선행 조건이 없고(<code>prereq: —</code>),
+    작업량이 반일</strong>입니다. 토스 회신을 기다리는 건이 아니라, <strong>사내에서 값만 정하면
+    되는 건</strong>입니다. 같은 사정인 항목이 8건 중 3건입니다.</p>
+  </div>
+</section>
+
+<section>
+  <h2>2. 오픈일 이후에 완성되는 기능 — 21건</h2>
+  <hr class="rule">
+  <div class="lead">
+    <strong>왜 중요한가요?</strong> 약관은 고객에 대한 <strong>약속</strong>입니다.
+    아직 없는 기능을 약관에 적으면, 고객이 그 기능을 요구했을 때 회사가 거절할 근거가 없습니다.
+    오픈 목표일은 <strong>2026년 10월 6일</strong>입니다.
+  </div>
+
+  <div class="chart-panel">
+    <svg viewBox="0 0 720 300" role="img" aria-label="오픈일 대비 기능 완성 목표일 지연 일수">
+      <line x1="150" y1="14" x2="150" y2="268" stroke="#D97757" stroke-width="2"/>
+      <text x="150" y="286" font-family="JetBrains Mono, monospace" font-size="11"
+            fill="#B85C3E" text-anchor="middle">오픈 10/06</text>
+
+      <g font-family="Pretendard, sans-serif" font-size="12" fill="#3D3D3A">
+        <text x="142" y="34" text-anchor="end">방문수령 보관</text>
+        <rect x="150" y="24" width="24" height="14" fill="#788C5D" rx="3"/>
+        <text x="182" y="35" font-family="JetBrains Mono, monospace" font-size="11" fill="#87867F">+9일 · 10/15</text>
+
+        <text x="142" y="68" text-anchor="end">구 머니 잔액 이관</text>
+        <rect x="150" y="58" width="80" height="14" fill="#788C5D" rx="3"/>
+        <text x="238" y="69" font-family="JetBrains Mono, monospace" font-size="11" fill="#87867F">+30일 · 11/05</text>
+
+        <text x="142" y="102" text-anchor="end">무료배송 제외 대상</text>
+        <rect x="150" y="92" width="155" height="14" fill="#D97757" rx="3"/>
+        <text x="313" y="103" font-family="JetBrains Mono, monospace" font-size="11" fill="#87867F">+58일 · 12/03</text>
+
+        <text x="142" y="136" text-anchor="end">쿠폰 · 리뷰 · 편집보관함</text>
+        <rect x="150" y="126" width="168" height="14" fill="#D97757" rx="3"/>
+        <text x="326" y="137" font-family="JetBrains Mono, monospace" font-size="11" fill="#87867F">+63일 · 12/08</text>
+
+        <text x="142" y="170" text-anchor="end">증빙서류 신청 전체</text>
+        <rect x="150" y="160" width="203" height="14" fill="#D97757" rx="3"/>
+        <text x="361" y="171" font-family="JetBrains Mono, monospace" font-size="11" fill="#87867F">+76일 · 12/21</text>
+
+        <text x="142" y="204" text-anchor="end">고객 직접취소</text>
+        <rect x="150" y="194" width="224" height="14" fill="#B85C3E" rx="3"/>
+        <text x="382" y="205" font-family="JetBrains Mono, monospace" font-size="11" fill="#87867F">+84일 · 12/29</text>
+
+        <text x="142" y="238" text-anchor="end">결제수단 3→6종</text>
+        <rect x="150" y="228" width="296" height="14" fill="#B85C3E" rx="3"/>
+        <text x="454" y="239" font-family="JetBrains Mono, monospace" font-size="11" fill="#B85C3E">+111일 · 2027-01-25</text>
+      </g>
+    </svg>
+  </div>
+
+  <h3>특히 짚을 것 세 가지</h3>
+  <ul class="highlights">
+    <li><strong>고객 직접취소 — 지금 기능이 없습니다.</strong>
+      사이트 FAQ는 「주문취소는 인터넷상에서는 고객님께서 취소할수 없으며, 고객센터로 연락」이라고
+      안내하는데 <strong>이게 현재 사실</strong>입니다. 엑셀은 「접수대기 이전의 주문에 한해 직접 취소가
+      가능」이라고 미래를 적어 두었습니다. 엑셀대로 약관에 쓰면 없는 기능을 약속하게 됩니다.</li>
+    <li><strong>증빙서류 — 화면 문구는 이미 다 있는데 기능이 안 돕니다.</strong>
+      발행 조건·기한·대상이 화면에 전부 쓰여 있지만, 뒤에서 서버를 부르는 코드가 없는
+      껍데기 상태입니다.</li>
+    <li><strong>결제수단 — 약관은 6종, 화면은 3종입니다.</strong>
+      신용카드·무통장·계좌이체만 있고 <strong>프린팅머니 탭이 없습니다.</strong>
+      약관 조항까지 만들어 둔 핵심 결제수단입니다.</li>
+  </ul>
+</section>
+
+<section>
+  <h2>3. 결정 요청 21건</h2>
+  <hr class="rule">
+  <p>각 항목은 <strong>무엇이 충돌하는지</strong>와 <strong>안 정하면 무슨 일이 생기는지</strong>만
+  적었습니다. 배경 설명은 뺐습니다.</p>
+
+  <h3>오픈 전 반드시 (7건)</h3>
+  <table>
+    <thead><tr><th style="width:28px">#</th><th>결정할 것</th><th>충돌하는 값</th><th>안 정하면</th></tr></thead>
+    <tbody>
+      <tr><td class="num">1</td><td><strong>프린팅머니 유효기간</strong></td>
+        <td>엑셀 5년 / FAQ 1년 / 미팅확정·개발계획 소멸없음</td>
+        <td>소멸기한 세 개를 동시에 공표한 상태. 어느 쪽으로 운영해도 다른 문구가 고객 주장의 근거가 됩니다. <strong>소멸은 되돌릴 수 없습니다.</strong></td></tr>
+      <tr><td class="num">2</td><td><strong>탈퇴 시 잔액 처리</strong></td>
+        <td>엑셀 「유효기간내 100% 환불」 / FAQ 「탈퇴와 동시에 프린팅머니 포함 모든 정보 삭제」</td>
+        <td>현금 환불 청구권이 있는 잔액이 탈퇴 즉시 사라지는 구조입니다. <strong>탈퇴 화면에 잔액 환불 단계가 없으면 배포되는 순간부터 매 건이 분쟁</strong>입니다.</td></tr>
+      <tr><td class="num">3</td><td><strong>기존 충전 잔액 소급</strong></td>
+        <td>8/27판 「유효기간 없음」 → 9/18판 「5년 소멸」</td>
+        <td>무기한이라 공지해 두고 소멸시효를 새로 부과하는 셈입니다.
+        <strong>다만 아직 피할 수 있어 보입니다</strong> — 구 잔액 이관(<code>T6-1</code> 11/05 목표)이
+        미착수이고 신규 충전 경로도 아직 닫혀 있어, 지금 정하면 「이미 들어온 잔액에 소급」이 아니라
+        <strong>「이관 시점에 조건을 붙여 신규 부여」</strong>로 설계할 수 있습니다.
+        <span class="tag hot">확인 필요</span>
+        <span class="cite">단, 이는 잔액을 직접 조회한 것이 아니라 원장 기록에서 추론한 것입니다.
+        판단 전에 신규몰 적립금 잔액 합계가 0인지 한 번 조회해 주십시오 — 5분이면 되고,
+        이 논거 전체가 그 숫자 하나에 걸려 있습니다.</span></td></tr>
+      <tr><td class="num">4</td><td><strong>미입금 자동취소 기산일</strong></td>
+        <td>엑셀 안에서 충돌 — <code>삭제기준</code> 「주문완료일로부터」 / <code>결제방법</code>·<code>구매배송정보</code> 「발급 후」</td>
+        <td>기산점이 둘이라 어느 쪽도 집행 근거가 되지 못합니다. 취소당한 고객이 늦은 쪽 해석을 주장하면 반박할 수 없습니다.</td></tr>
+      <tr><td class="num">5</td><td><strong>쿠폰 적용 단위</strong></td>
+        <td>9/18판 「1회 주문 시 1장」 / 현행 약관·8/27판 「상품 1개당 1장」</td>
+        <td>고객에게 불리한 축소입니다. <strong>공표된 약관이 "상품당"인 한 그쪽이 구속력</strong>을 가져, 다건 주문 고객이 상품 수만큼 요구하면 거절 근거가 없습니다.</td></tr>
+      <tr><td class="num">6</td><td><strong>자동 삭제 4종 고지</strong></td>
+        <td>신설 — 미입금 7일 / 장바구니 7일 / 편집보관함 30일 / 주문파일 30일</td>
+        <td>고객 자산을 공지 없이 자동 삭제하는 것이라 그 자체가 분쟁거리입니다. 편집물·원고는 고객이 재확보를 기대하는 구간입니다. FAQ의 「방문수령 15일」도 이 목록에 빠져 있습니다.</td></tr>
+      <tr><td class="num">7</td><td><strong>할인 계산순서 · 초과분 환급</strong></td>
+        <td>8/27판에 있던 두 조항이 9/18판에서 사라짐</td>
+        <td>순서를 안 정하면 개발이 임의로 정합니다. 결과가 고객에게 불리하면 근거 없이 덜 할인한 셈이 되고, 환급불가 조항이 없으면 초과분 환급 요구를 거절할 근거도 없습니다. <strong>양방향으로 샙니다.</strong></td></tr>
+    </tbody>
+  </table>
+
+  <h3>값·범위 확인 (8건)</h3>
+  <table>
+    <thead><tr><th style="width:28px">#</th><th>결정할 것</th><th>충돌하는 값</th></tr></thead>
+    <tbody>
+      <tr><td class="num">8</td><td>SILVER 등급쿠폰 지급 횟수</td>
+        <td>한 칸 안에 「1회증정」과 「매월 1회증정」이 같이 적혀 있습니다 — <strong>연 1장이냐 연 12장이냐(12배 차이)</strong>. GOLD·VIP는 「자동발행, 매월 1회증정」으로만 적혀 있습니다.</td></tr>
+      <tr><td class="num">9</td><td><strong>보너스머니 운영 여부</strong></td>
+        <td>현행 약관이 「충전머니와 보너스머니로 구분하여 운영」이라고 규정 중인데, <strong>엑셀 두 판 어디에도 근거가 없습니다</strong>(전체 검색 0건).</td></tr>
+      <tr><td class="num">10</td><td>머니충전 보너스 쿠폰</td>
+        <td>8/27판에 금액표(10만→1만 … 100만→10만 쿠폰)가 있었으나 9/18판에서 사라졌습니다. 그런데 정보구조 문서는 여전히 「자동쿠폰발행」을 요구합니다.</td></tr>
+      <tr><td class="num">11</td><td>무료배송 제외 대상</td>
+        <td>8/27판의 「실외용배너거치대 수량당 / 봉투 1000장 단위 / 현수막」이 9/18판에서 사라졌습니다. <strong>총칙 문장은 남아 있어 편집 누락으로 보입니다.</strong></td></tr>
+      <tr><td class="num">12</td><td>퀵(고객) 픽업 폐지 확인</td>
+        <td>9/18판에서 옵션이 통째로 빠졌으나 <strong>결제 화면에는 아직 표시 중</strong>입니다. 폐지가 맞으면 화면에서도 빼야 합니다.</td></tr>
+      <tr><td class="num">13</td><td>휴대폰 결제 운영 여부</td>
+        <td>FAQ에 안내가 있고 쇼핑몰 설정 목록에도 있으나, 9/18판 결제수단 6종에는 없습니다.</td></tr>
+      <tr><td class="num">14</td><td>방문수령 물품 보관기간</td>
+        <td>FAQ 「영업일 기준 15일」 — 자동 삭제 기준 시트에 대응 항목이 없습니다.</td></tr>
+      <tr><td class="num">15</td><td>카드 매출취소 소요일</td>
+        <td>엑셀 3~5일 / FAQ 3~7일</td></tr>
+    </tbody>
+  </table>
+
+  <h3>사실 확인 (6건)</h3>
+  <table>
+    <thead><tr><th style="width:28px">#</th><th>확인할 것</th><th>왜 필요한가</th></tr></thead>
+    <tbody>
+      <tr><td class="num">16</td><td>미입금 자동취소 배치가 실제로 도는가</td>
+        <td>약관에 「자동으로 취소됩니다」라고 쓰려면 실제로 돌아야 합니다. 안 돌면 그 문장 자체가 약관 위반이 됩니다.</td></tr>
+      <tr><td class="num">17</td><td>고객 직접취소 기능 개발 시점</td>
+        <td>현재 없습니다. 오픈 시점 문구를 FAQ 기준(고객센터 연락)으로 쓸지 결정이 필요합니다.</td></tr>
+      <tr><td class="num">18</td><td>취소 불가 기산 시점</td>
+        <td>엑셀 「제작이 접수된 이후」 / FAQ 「시안작업 및 제작에 착수한 이후」 — FAQ 쪽이 더 이릅니다.</td></tr>
+      <tr><td class="num">19</td><td>증빙 발행 결제수단 제한</td>
+        <td>엑셀 안에서 충돌합니다. 요약 칸은 「주문시 신청 가능」(무조건), 상세 시트는 「계좌이체·가상계좌·에스크로에만」입니다.</td></tr>
+      <tr><td class="num">20</td><td>저작권 면책 문구</td>
+        <td>FAQ에만 있고 엑셀에 없습니다. 약관 제14조와 수준이 맞는지 확인이 필요합니다.</td></tr>
+      <tr><td class="num">21</td><td>비회원 주문</td>
+        <td>FAQ에 「비회원으로 주문 가능」. 기능은 작동 중이나 엑셀·약관에 조항이 없습니다.</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<section>
+  <h2>4. 결정 없이 바로 반영 가능 (20건)</h2>
+  <hr class="rule">
+  <p>엑셀이 유일한 출처이고 다른 문서와 충돌하지 않는 항목입니다.
+  <strong>승인만 해 주시면 약관에 반영하겠습니다.</strong></p>
+
+  <table>
+    <thead><tr><th style="width:110px">영역</th><th>반영할 내용</th></tr></thead>
+    <tbody>
+      <tr><td><span class="tag">쿠폰</span></td>
+        <td>특가·맞춤제작 제외 명시 / 만료 쿠폰 재발급 불가 / 복원 조건을 「접수대기 이전 + 주문 전체 취소 + 유효기간 내」로 교체</td></tr>
+      <tr><td><span class="tag">회원등급</span></td>
+        <td>구매금액 산정 = <strong>배송완료 상태 기준</strong> 명시</td></tr>
+      <tr><td><span class="tag">리뷰</span></td>
+        <td>작성기한 <strong>배송완료 30일 이내</strong> / 등록 즉시 노출 / 비노출 사유 3종 보강(개인정보 노출·타사 광고·저해상도 사진)</td></tr>
+      <tr><td><span class="tag">증빙서류</span></td>
+        <td>발행 대상 결제수단 한정 / 쿠폰·머니 제외한 실결제금액 / 프린팅머니는 충전시만 / <strong>주문월 말일까지</strong> / 미신청·취소분 재발행 불가 / 카드는 승인일 자동발행 / 이메일·온라인 전용</td></tr>
+      <tr><td><span class="tag">프린팅머니</span></td>
+        <td>가상계좌 전용 충전 / 충전·환불 시 증빙 처리</td></tr>
+    </tbody>
+  </table>
+
+  <div class="callout">
+    <h4>여기에 정정이 하나 있습니다</h4>
+    <p style="margin:0">현행 약관 제12조의2에
+    「증빙 발급 및 정정 기한은 <strong>관련 세법에서 정한 바에 따릅니다</strong>」라는 문장이 있는데,
+    <strong>운영정책 어디에도 없는 문장</strong>입니다. 실제 기준은 「주문일자의 해당월 말일까지」이고,
+    세법 기한이 더 길기 때문에 이 문장이 <strong>회사를 불리하게</strong> 만듭니다.
+    삭제하고 실제 기준으로 바꾸겠습니다.</p>
+  </div>
+</section>
+
+<section>
+  <h2>5. 화면 문구 수정 (5건)</h2>
+  <hr class="rule">
+  <p>새 화면을 만들 필요 없이 <strong>기존 화면의 글자만</strong> 고치면 되는 것들입니다.</p>
+  <table>
+    <thead><tr><th style="width:150px">화면</th><th>현재</th><th>고칠 값</th></tr></thead>
+    <tbody>
+      <tr><td>결제 — 방문수령</td><td>낙원빌딩 <strong>2층</strong></td>
+        <td><strong>3층</strong> <span class="cite">(9/18판에서 변경됨)</span> <span class="tag hot">우선</span></td></tr>
+      <tr><td>결제 — 방문수령</td><td>수령 조건 없음</td><td>「출고준비중인 주문건에 한해」 추가</td></tr>
+      <tr><td>결제 — 퀵배송</td><td>착불 안내만</td><td>오토바이/다마스 추가비용 · 날씨·교통 배송불가</td></tr>
+      <tr><td>상품 상세</td><td>「취소·교환·반품은 <strong>어렵습니다</strong>」</td>
+        <td>「<strong>불가능합니다</strong>」 <span class="cite">(운영정책 표현)</span></td></tr>
+      <tr><td>상품 상세</td><td>분리배송 안내 없음</td><td>「손상방지를 위해 분리배송 될 수 있습니다」</td></tr>
+    </tbody>
+  </table>
+  <p>첫 줄은 고객이 <strong>다른 층으로 찾아가는</strong> 문제라 가장 급합니다.</p>
+</section>
+
+<section>
+  <h2>6. 별건 — FAQ 정리가 필요합니다</h2>
+  <hr class="rule">
+  <p>FAQ는 8월 27일 이후 <strong>한 글자도 수정되지 않았습니다</strong>(두 판을 기계 비교한 결과 완전 동일).
+  그 안에 이런 것들이 남아 있습니다.</p>
+  <ul class="highlights">
+    <li><strong>경쟁사 원문</strong> — 「<strong>레드 프린팅 앤 프레스</strong> 방문출고실로 방문하셔서…」</li>
+    <li>수령시간 <code>09:30~19:00</code> — 운영정책은 <code>10:00~18:00</code></li>
+    <li>프린팅머니 1년 · 카드취소 3~7일 · 휴대폰 결제 — 모두 현행 운영정책과 불일치</li>
+  </ul>
+  <p>정책 결정과 별개로 <strong>FAQ 자체가 한 번 정리</strong>되어야 합니다.
+  지금은 고객이 보는 안내 중 가장 오래된 층입니다.</p>
+</section>
+
+<section>
+  <h2>확인한 방법과 한계</h2>
+  <hr class="rule">
+  <p><strong>어떻게 확인했나</strong> — 엑셀 두 판을 프로그램으로 읽어 <strong>칸 단위로 비교</strong>했습니다.
+  사람이나 AI가 눈으로 옮겨 적으면 숫자가 틀리기 때문에, 값은 전부 엑셀 칸에서 직접 읽었습니다.
+  각 항목에는 어느 시트 어느 칸에서 나왔는지가 붙어 있습니다.</p>
+  <p><strong>확인하지 못한 것</strong> — 실제 결제 연동 설정(주문마다 계좌를 새로 만드는지, 고정 계좌인지)과
+  자동취소가 실제로 도는지는 문서로 확인할 수 없어 <strong>확인 요청 16번</strong>으로 넘겼습니다.
+  구현 현황 판정은 개발 계획서와 코드 두 가지 근거로만 했습니다 —
+  관리자 화면 목록은 고객 화면을 담고 있지 않아 이번 판정에 쓰지 못했습니다.</p>
+
+  <h3>확신이 낮은 판정 — 그대로 믿지 마십시오</h3>
+  <table>
+    <thead><tr><th style="width:190px">항목</th><th>왜 확신이 낮은가</th></tr></thead>
+    <tbody>
+      <tr><td>쿠폰 중복 제한 <span class="cite">(3장 5번)</span></td>
+        <td>코드 근거가 <strong>한 줄뿐</strong>이라, 현재 구현이 <strong>주문 단위인지 상품 단위인지 코드로 갈리지 않습니다.</strong></td></tr>
+      <tr><td>리뷰 작성기한 30일</td>
+        <td>리뷰 작성·노출·블라인드는 작동을 확인했으나, <strong>「배송완료 30일 이내」 제한이 실제로 걸려 있는지는 확인하지 못했습니다.</strong></td></tr>
+      <tr><td>쿠폰 운영 기능 3건</td>
+        <td>계획서에 <strong>「미실측」</strong>으로 되어 있어 <strong>이미 작동 중일 수 있는데 「구현예정」으로 분류</strong>했습니다.</td></tr>
+      <tr><td>미입금 자동취소 배치</td>
+        <td>설정값은 실재하지만 <strong>배치가 실제로 도는 증거는 어느 자료에도 없습니다.</strong> 설정이 있다는 것과 도는 것은 다릅니다.</td></tr>
+      <tr><td>퀵 픽업 폐지 <span class="cite">(3장 12번)</span></td>
+        <td>화면에는 떠 있고 계획서는 미착수라 서로 엇갈립니다. 쇼핑몰 배송수단 설정을 직접 보지 못했습니다.</td></tr>
+      <tr><td>휴대폰 결제 <span class="cite">(3장 13번)</span></td>
+        <td>쇼핑몰 설정 목록엔 있고 운영정책 6종엔 없습니다 — <strong>「뺀 것」인지 「목록 누락」인지 가리지 못했습니다.</strong></td></tr>
+      <tr><td>편집 디자인 보관함</td>
+        <td>계획(<code>STD-MYP-030</code>)은 있고 「부분」으로 되어 있으나, 실제로는
+          <strong>고객이 볼 수 있는 보관함 화면이 아직 없습니다.</strong>
+          장바구니 코드에 <span class="cite">「shopby 장바구니에는 보관함 개념이 없어 단일 목록으로 렌더한다」</span>는
+          주석이 있고, 고객에게 보이는 「보관함」 문구는 0건입니다. 목표일 12/08.</td></tr>
+      <tr><td>기존 잔액 소급 <span class="cite">(3장 3번)</span></td>
+        <td>잔액을 <strong>직접 조회하지 않고 계획서 기록에서 추론</strong>했습니다. 조회 한 번을 권합니다.</td></tr>
+      <tr><td>프린팅머니 3건의 일정</td>
+        <td>계획서상 「토스페이먼츠 회신 대기」 아래 묶여 있는데 선행 조건이 비어 있습니다.
+          <strong>배정 오류로 보이나 근거를 찾지 못해 단정하지 않았습니다.</strong></td></tr>
+    </tbody>
+  </table>
+  <p>구현 현황을 가릴 때 쓸 수 있었던 자료가 <strong>둘뿐</strong>이었습니다(개발 계획서·코드).
+  쇼핑몰 관리자 쪽 자료가 없어 <strong>「설정만 하면 되는 건」과 「개발해야 하는 건」을 구분하지 못했습니다.</strong>
+  위 항목들은 실무진이 아시는 사실 한 마디로 바로 뒤집힐 수 있습니다.</p>
+</section>
+
+<footer>
+  후니프린팅 운영정책 검토 요청 · 2026-09-18 ·
+  권위 <code>후니프린팅_운영정책_260918.xlsx</code> ↔
+  <code>huni-skin-shopby</code> 이용약관·개인정보처리방침·결제/상품 화면
+</footer>
+
+</div>
+
+<script type="module">
+  import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs";
+  mermaid.initialize({
+    startOnLoad: true,
+    theme: "base",
+    themeVariables: {
+      primaryColor:       "#FAF9F5",
+      primaryTextColor:   "#141413",
+      primaryBorderColor: "#D97757",
+      lineColor:          "#87867F",
+      secondaryColor:     "#E3DACC",
+      tertiaryColor:      "#F0EEE6",
+      fontFamily:         "Pretendard, system-ui, sans-serif"
+    }
+  });
+</script>
+</body>
+</html>
