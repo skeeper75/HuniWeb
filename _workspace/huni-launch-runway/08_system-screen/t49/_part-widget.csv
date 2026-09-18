@@ -1,0 +1,134 @@
+system,group,screen_id,screen_name,role,function,work_type,counterpart,direction,owner_side,plan_row_id,status,evidence
+widget,위젯빌더(운영자),ui_layout,화면 구성,운영자(CS·상품),상품 콤보에서 위젯 만들 상품 검색·선택(위젯 개수·최근 작업일 표시),build,,,,NEW,완료,raw/webadmin/tools/widget_manual_content.py:190 · 빌더 운영 도구 자체를 가리키는 런웨이 행 없음
+widget,위젯빌더(운영자),ui_layout,화면 구성,운영자(CS·상품),위젯 콤보에서 그 상품에 만들어 둔 위젯 선택,build,,,,NEW,완료,raw/webadmin/tools/widget_manual_content.py:191 · 빌더 운영 도구 행 없음
+widget,위젯빌더(운영자),ui_layout,화면 구성,운영자(CS·상품),상품 선택 시 기본 위젯 자동 판정(게시본 우선 → 최근수정 → 직전 선택 복원),build,,,,NEW,완료,raw/webadmin/webadmin/catalog/static/catalog/widget_pick.js:41 defaultWidget · 빌더 운영 도구 행 없음
+widget,위젯빌더(운영자),ui_layout,화면 구성,운영자(CS·상품),3분할 본문(팔레트 → 캔버스 → 속성창) + 상·하단 띠 배치,build,,,,NEW,완료,raw/webadmin/tools/widget_manual_content.py:184 · 빌더 운영 도구 행 없음
+widget,위젯빌더(운영자),ui_toolbar,상단바 버튼,운영자(CS·상품),＋ 새 위젯 생성(이름 입력 후 빈 위젯 또는 템플릿에서 시작),build,,,,NEW,완료,raw/webadmin/tools/widget_manual_content.py:205 · raw/webadmin/webadmin/config/urls.py:190 widget_create · 빌더 운영 도구 행 없음
+widget,위젯빌더(운영자),ui_toolbar,상단바 버튼,운영자(CS·상품),[구성] 탭 — 캔버스 단독 보기로 전환,build,,,,NEW,완료,raw/webadmin/tools/widget_manual_content.py:206
+widget,위젯빌더(운영자),ui_toolbar,상단바 버튼,운영자(CS·상품),[나란히] 탭 — 캔버스+미리보기 동시 보기로 전환(위젯 열 때 기본),build,,,,NEW,완료,raw/webadmin/tools/widget_manual_content.py:207
+widget,위젯빌더(운영자),ui_toolbar,상단바 버튼,운영자(CS·상품),[미리보기] 탭 — 고객 화면만 실제 렌더러로 크게 보기,build,,,,NEW,완료,raw/webadmin/tools/widget_manual_content.py:208
+widget,위젯빌더(운영자),ui_toolbar,상단바 버튼,운영자(CS·상품),실행취소 Ctrl+Z (최근 100단계),build,,,,NEW,완료,raw/webadmin/tools/widget_manual_content.py:209
+widget,위젯빌더(운영자),ui_toolbar,상단바 버튼,운영자(CS·상품),다시실행 Ctrl+Shift+Z,build,,,,NEW,완료,raw/webadmin/tools/widget_manual_content.py:210
+widget,위젯빌더(운영자),ui_toolbar,상단바 버튼,운영자(CS·상품),[게시] — 작업본을 버전으로 굳혀 고객 화면에 내보냄,build,,,,T2-2,완료,raw/webadmin/tools/widget_manual_content.py:211 · raw/webadmin/webadmin/config/urls.py:207 widget_publish
+widget,위젯빌더(운영자),ui_toolbar,상단바 버튼,운영자(CS·상품),[버전…] 패널 열기(게시 이력·롤백),build,,,,NEW,완료,raw/webadmin/tools/widget_manual_content.py:212 · raw/webadmin/webadmin/config/urls.py:209 widget_versions
+widget,위젯빌더(운영자),ui_toolbar,상단바 버튼,운영자(CS·상품),[템플릿 지정]/[템플릿 해제] 토글,build,,,,NEW,완료,raw/webadmin/tools/widget_manual_content.py:213 · raw/webadmin/webadmin/config/urls.py:213 widget_template_toggle
+widget,위젯빌더(운영자),ui_toolbar,상단바 버튼,운영자(CS·상품),[삭제] — 사용 현황 표시 후 2단계 확인 논리삭제,build,,,,NEW,완료,raw/webadmin/tools/widget_manual_content.py:214 · raw/webadmin/webadmin/config/urls.py:204 widget_delete
+widget,위젯빌더(운영자),ui_toolbar,상단바 버튼,운영자(CS·상품),자동저장 상태 표시(변경됨 → 저장 중… → 마지막 저장 N초 전),build,,,,NEW,완료,raw/webadmin/tools/widget_manual_content.py:215 · raw/webadmin/webadmin/config/urls.py:194 widget_save
+widget,위젯빌더(운영자),ui_toolbar,상단바 버튼,운영자(CS·상품),「이 상품 다른 화면에서 열기」 드롭다운 — 상품정보·상품뷰어·가격뷰어·Edicus 템플릿 연결·작업가이드·메인이미지·디자인 새 탭 진입,build,,,,NEW,완료,raw/webadmin/tools/widget_manual_content.py:216
+widget,위젯빌더(운영자),ui_palette,팔레트(부품 목록),운영자(CS·상품),컴포넌트 이름·코드 검색으로 목록 좁히기,build,,,,NEW,완료,raw/webadmin/tools/widget_manual_content.py:230
+widget,위젯빌더(운영자),ui_palette,팔레트(부품 목록),운영자(CS·상품),분류 머리글 접기(소스—차원 / 옵션그룹 / 수량·추가상품 / 구조 요소 / 파일·에디터),build,,,,NEW,완료,raw/webadmin/tools/widget_manual_content.py:231
+widget,위젯빌더(운영자),ui_palette,팔레트(부품 목록),운영자(CS·상품),손잡이(⠿) 드래그로 부품을 캔버스에 투입,build,,,,NEW,완료,raw/webadmin/tools/widget_manual_content.py:232
+widget,위젯빌더(운영자),ui_palette,팔레트(부품 목록),운영자(CS·상품),상품 설정 미충족 부품 잠금(파일업로드여부·편집기여부·비규격여부 N이면 회색),build,,,,NEW,완료,raw/webadmin/tools/widget_manual_content.py:983 FAQ · raw/webadmin/tools/widget_manual_content.py:484 wm-flags
+widget,위젯빌더(운영자),ui_palette,팔레트(부품 목록),운영자(CS·상품),위젯당 1개 제한 컴포넌트에 「사용 중」 배지 표시,build,,,,NEW,완료,raw/webadmin/tools/widget_manual_content.py:987 FAQ
+widget,위젯빌더(운영자),ui_canvas,캔버스 편집,운영자(CS·상품),행과 행 사이에 드롭 = 새 줄 배치,build,,,,NEW,완료,raw/webadmin/tools/widget_manual_content.py:861 CANVAS_OPS
+widget,위젯빌더(운영자),ui_canvas,캔버스 편집,운영자(CS·상품),항목 오른쪽에 드롭 = 같은 줄 2열 배치(한 행 최대 2열),build,,,,NEW,완료,raw/webadmin/tools/widget_manual_content.py:864
+widget,위젯빌더(운영자),ui_canvas,캔버스 편집,운영자(CS·상품),패널 안에 드롭 = 접기 그룹 자식으로 편입(패널 중첩 불가),build,,,,NEW,완료,raw/webadmin/tools/widget_manual_content.py:866
+widget,위젯빌더(운영자),ui_canvas,캔버스 편집,운영자(CS·상품),옆칸에 빈 공백을 놓아 왼쪽 입력을 반 폭으로 만들기,build,,,,NEW,완료,raw/webadmin/tools/widget_manual_content.py:865
+widget,위젯빌더(운영자),ui_canvas,캔버스 편집,운영자(CS·상품),카드 ↑ ↓ 버튼으로 순서 한 칸씩 이동,build,,,,NEW,완료,raw/webadmin/tools/widget_manual_content.py:245 · raw/webadmin/tools/widget_manual_content.py:863
+widget,위젯빌더(운영자),ui_canvas,캔버스 편집,운영자(CS·상품),카드 드래그로 순서 이동,build,,,,NEW,완료,raw/webadmin/tools/widget_manual_content.py:863
+widget,위젯빌더(운영자),ui_canvas,캔버스 편집,운영자(CS·상품),카드 × 또는 속성창 [항목 삭제]로 항목 제거(확인 1회),build,,,,NEW,완료,raw/webadmin/tools/widget_manual_content.py:246 · raw/webadmin/tools/widget_manual_content.py:867
+widget,위젯빌더(운영자),ui_canvas,캔버스 편집,운영자(CS·상품),카드 클릭 = 선택(속성창 열림) + 나란히 모드에서 미리보기 해당 항목 강조,build,,,,NEW,완료,raw/webadmin/tools/widget_manual_content.py:243 · raw/webadmin/tools/widget_manual_content.py:869
+widget,위젯빌더(운영자),ui_canvas,캔버스 편집,운영자(CS·상품),배치 순서를 제약 우선순위로 해석(위·왼쪽 항목이 이기고 아래쪽 충돌 선택이 자동 해제),build,,,,STD-OPT-037,완료,raw/webadmin/tools/widget_manual_content.py:873 CANVAS_OPS 「배치 순서 = 제약 우선순위」
+widget,위젯빌더(운영자),ui_canvas,캔버스 편집,운영자(CS·상품),항목 카드 상태 배지 표시(삭제됨·본품스코프페이지수·기본값삭제됨·기본값무효·유형바뀜·공정겹침·적용면어긋남·사용안함N·숨김),build,,,,NEW,완료,raw/webadmin/tools/widget_manual_content.py:831 BADGES
+widget,위젯빌더(운영자),ui_preview,미리보기 · 나란히 보기,운영자(CS·상품),고객 화면을 실제 런타임 렌더러로 그대로 렌더,build,,,,STD-OPT-001,완료,raw/webadmin/tools/widget_manual_content.py:250 · raw/webadmin/webadmin/catalog/static/catalog/widget_renderer.js:6642 render()
+widget,위젯빌더(운영자),ui_preview,미리보기 · 나란히 보기,운영자(CS·상품),미리보기 폭 320~800px 지정 및 남는 자리 자동 축소(지정값이 상한),build,,,,NEW,완료,raw/webadmin/tools/widget_manual_content.py:256
+widget,위젯빌더(운영자),ui_preview,미리보기 · 나란히 보기,운영자(CS·상품),가격 진단 — 가격 소스·구성요소별 매칭/제외 사유·할인 단계·필수공정 누락·구성원 사이즈 유래 표시,build,,,,STD-ADP-033,완료,raw/webadmin/tools/widget_manual_content.py:257
+widget,위젯빌더(운영자),ui_preview,미리보기 · 나란히 보기,운영자(CS·상품),게시 위젯 가격 전수 대조·3단계 승인(1차 최숙진 → 2차 김용기 → 3차 채훈희),manual,,,,STD-ADP-037,진행,"_workspace/huni-launch-runway/08_system-screen/t49/_planrows-A.csv:116 STD-ADP-037 「게시 위젯 가격 전수 대조(1차 최숙진 → 2차 김용기 → 3차 채훈희 승인)」(부분·최숙진) — ⓐ 원장 대응 · 대조가 수행되는 화면 = raw/webadmin/tools/widget_manual_content.py:257 가격 진단(가격 소스·구성요소별 매칭/제외 사유·할인 단계, 작업자 전용) · 승인 절차 자체는 시스템 밖"
+widget,위젯빌더(운영자),ui_preview,미리보기 · 나란히 보기,운영자(CS·상품),주문 미리보기 — 담기 시 넘어가는 본문을 저장 없이 확인,build,,,,NEW,완료,raw/webadmin/webadmin/config/urls.py:202 widget_order_preview · raw/webadmin/tools/widget_manual_content.py:975 EMBED_NOTES
+widget,위젯빌더(운영자),ui_preview,미리보기 · 나란히 보기,운영자(CS·상품),미리보기 원고 업로드 presign 발급,integrate,s3,webadmin→s3,webadmin,STD-ART-001,미확인,raw/webadmin/webadmin/config/urls.py:196 widget_preview_presign · 라우트만 확인(구현 미독)
+widget,위젯빌더(운영자),ui_preview,미리보기 · 나란히 보기,운영자(CS·상품),미리보기 대용량 멀티파트 업로드(create|sign|complete|abort),integrate,s3,webadmin→s3,webadmin,STD-ART-002,미확인,raw/webadmin/webadmin/config/urls.py:198 widget_preview_multipart · 라우트만 확인(구현 미독)
+widget,위젯빌더(운영자),ui_versions,게시 · 버전 · 롤백,운영자(CS·상품),게시 직전 경고 목록 + 버전 메모를 한 창에 모아 확인,build,,,,T2-2,완료,raw/webadmin/tools/widget_manual_content.py:886 PUBLISH_NOTES 「게시 전 확인 절차」
+widget,위젯빌더(운영자),ui_versions,게시 · 버전 · 롤백,운영자(CS·상품),게시 버전 목록 조회 및 활성 버전 표시,build,,,,NEW,완료,raw/webadmin/tools/widget_manual_content.py:276 · raw/webadmin/webadmin/config/urls.py:209 widget_versions
+widget,위젯빌더(운영자),ui_versions,게시 · 버전 · 롤백,운영자(CS·상품),[이 버전으로 롤백] — 활성 버전 교체 + 작업본도 그 내용으로 되돌림,build,,,,NEW,완료,raw/webadmin/webadmin/config/urls.py:211 widget_rollback · raw/webadmin/tools/widget_manual_content.py:899 PUBLISH_NOTES 「버전 · 롤백」
+widget,위젯빌더(운영자),ui_versions,게시 · 버전 · 롤백,운영자(CS·상품),[게시 중단] — 고객 화면에서만 내림(버전 보존),build,,,,T2-2,완료,raw/webadmin/tools/widget_manual_content.py:277 · raw/webadmin/tools/widget_manual_content.py:903
+widget,위젯빌더(운영자),ui_versions,게시 · 버전 · 롤백,운영자(CS·상품),[다시 게시] — 내리기 전 활성 버전 그대로 재노출(최초 게시는 [게시]로만 가능),build,,,,T2-2,완료,raw/webadmin/tools/widget_manual_content.py:903 PUBLISH_NOTES 「게시 취소(내리기)와 다시 올리기」
+widget,위젯빌더(운영자),ui_versions,게시 · 버전 · 롤백,운영자(CS·상품),상태 배지 표시(작성중 / 게시됨 / 게시중단 + 템플릿),build,,,,NEW,완료,raw/webadmin/tools/widget_manual_content.py:273
+widget,위젯빌더(운영자),ui_statusbar,상태바 — 필수공정 자동 청구,운영자(CS·상품),본품·구성원 스코프별 필수공정 상시 표시(항목 없이도 가격·주문에 자동 탑재),build,,,,STD-OPT-035,완료,raw/webadmin/tools/widget_manual_content.py:287 · raw/webadmin/tools/widget_manual_content.py:293
+widget,위젯빌더(운영자),ui_panes,좁은 화면 · 패널 접기,운영자(CS·상품),좌우 패널 핀으로 고정 / 접힘 / 겹쳐열림 3상태 전환,build,,,,NEW,완료,raw/webadmin/tools/widget_manual_content.py:304
+widget,위젯빌더(운영자),ui_panes,좁은 화면 · 패널 접기,운영자(CS·상품),접힌 띠 클릭·호버 0.15초로 겹쳐 열기(캔버스가 밀리지 않음),build,,,,NEW,완료,raw/webadmin/tools/widget_manual_content.py:316
+widget,위젯빌더(운영자),ui_panes,좁은 화면 · 패널 접기,운영자(CS·상품),화면 폭 구간(s/m/l)별 패널 폭·접힘 상태 기억,build,,,,NEW,완료,raw/webadmin/tools/widget_manual_content.py:340 · raw/webadmin/tools/widget_manual_content.py:36 _panes()
+widget,위젯빌더(운영자),ui_panes,좁은 화면 · 패널 접기,운영자(CS·상품),캔버스 자리 600px 미만이면 [나란히] 잠금 + [구성] 자동 전환,build,,,,NEW,완료,raw/webadmin/tools/widget_manual_content.py:406
+widget,위젯빌더(운영자),ui_panes,좁은 화면 · 패널 접기,운영자(CS·상품),좁은 화면에서 상단바 2줄 접기(버튼 잘림 방지),build,,,,NEW,완료,raw/webadmin/tools/widget_manual_content.py:405
+widget,위젯빌더(운영자),comp_dim,속성 — 차원,운영자(CS·상품),사이즈·자재·인쇄옵션 차원의 컨트롤·치수 표시·비규격 직접입력·스와치 모양 지정,build,,,,STD-OPT-014,완료,raw/webadmin/tools/widget_manual_content.py:514 COMPONENTS 차원 · raw/webadmin/tools/widget_manual_content.py:411
+widget,위젯빌더(운영자),comp_optgrp,속성 — 옵션그룹,운영자(CS·상품),상품 옵션그룹을 선택지로 배치(단일/다중은 옵션그룹 마스터가 결정),build,,,,STD-ADP-017,완료,raw/webadmin/tools/widget_manual_content.py:525 · raw/webadmin/tools/widget_manual_content.py:414
+widget,위젯빌더(운영자),comp_qty,속성 — 수량,운영자(CS·상품),주문 수량 입력 방식·수량 구간할인 표시 여부 지정,build,,,,STD-OPT-017,완료,raw/webadmin/tools/widget_manual_content.py:537 · raw/webadmin/tools/widget_manual_content.py:417
+widget,위젯빌더(운영자),comp_procsel,속성 — 후가공(공정선택),운영자(CS·상품),표시 방식·표시 공정·기본 선택·적용면(공통/앞면/뒷면) 지정,build,,,,NEW,완료,raw/webadmin/tools/widget_manual_content.py:639 · raw/webadmin/tools/widget_manual_content.py:420 · 개별 공정 행(STD-OPT-024~033)에 분산돼 빌더 속성 단위 행 없음
+widget,위젯빌더(운영자),comp_price,속성 — 가격 요약,운영자(CS·상품),합계만 표시할지 구성요소별로 펼칠지 지정,build,,,,STD-OPT-046,완료,raw/webadmin/tools/widget_manual_content.py:584 · raw/webadmin/tools/widget_manual_content.py:423
+widget,위젯빌더(운영자),comp_file,속성 — 파일 업로드,운영자(CS·상품),원고 접수 규칙(형식·개수·용량·필수 여부) 지정,build,,,,STD-ART-001,완료,raw/webadmin/tools/widget_manual_content.py:591 · raw/webadmin/tools/widget_manual_content.py:426
+widget,위젯빌더(운영자),comp_casecnt,속성 — 건수,운영자(CS·상품),사양·수량은 같고 원고만 다른 반복 건수 입력 배치,build,,,,STD-OPT-018,완료,raw/webadmin/tools/widget_manual_content.py:705 · raw/webadmin/tools/widget_manual_content.py:429
+widget,위젯빌더(운영자),comp_panel,속성 — 패널,운영자(CS·상품),접기 그룹 생성·제목 지정,build,,,,STD-OPT-006,완료,raw/webadmin/tools/widget_manual_content.py:567 · raw/webadmin/tools/widget_manual_content.py:432
+widget,위젯빌더(운영자),comp_panel,속성 — 라벨,운영자(CS·상품),고정 라벨 텍스트 배치,build,,,,NEW,완료,raw/webadmin/tools/widget_manual_content.py:573 · 구조 요소 단위 런웨이 행 없음
+widget,위젯빌더(운영자),comp_panel,속성 — 안내문,운영자(CS·상품),안내 문구 블록 배치,build,,,,NEW,완료,raw/webadmin/tools/widget_manual_content.py:579 · 구조 요소 단위 런웨이 행 없음
+widget,위젯빌더(운영자),comp_divider,속성 — 가로선,운영자(CS·상품),구분선 배치,build,,,,NEW,완료,raw/webadmin/tools/widget_manual_content.py:662 · 구조 요소 단위 런웨이 행 없음
+widget,위젯빌더(운영자),comp_divider,속성 — 빈 공백,운영자(CS·상품),여백 배치(삭제만 가능),build,,,,NEW,완료,raw/webadmin/tools/widget_manual_content.py:616 · 구조 요소 단위 런웨이 행 없음
+widget,위젯빌더(운영자),comp_title,속성 — 제작물 제목,운영자(CS·상품),주문서에 실릴 제목을 고객이 적는 칸 배치,build,,,,NEW,완료,raw/webadmin/tools/widget_manual_content.py:672 · 대응 런웨이 행 없음
+widget,위젯빌더(운영자),comp_head,속성 — 머리말,운영자(CS·상품),구역 섹션 헤더 라벨·아이콘 지정(셋트는 비우면 역할명 표기),build,,,,NEW,완료,raw/webadmin/tools/widget_manual_content.py:681 · 대응 런웨이 행 없음
+widget,위젯빌더(운영자),comp_nonspec,속성 — 비규격 치수,운영자(CS·상품),가로·세로 직접입력 범위 지정(상품 비규격여부=Y 필요),build,,,,STD-OPT-015,완료,raw/webadmin/tools/widget_manual_content.py:621 · raw/webadmin/tools/widget_manual_content.py:453
+widget,위젯빌더(운영자),comp_nonspec,속성 — 추가상품 피커,운영자(CS·상품),끼워팔기 목록·개당 단가 표시 지정,build,,,,STD-OPT-036,완료,raw/webadmin/tools/widget_manual_content.py:630 · raw/webadmin/tools/widget_manual_content.py:455
+widget,위젯빌더(운영자),comp_editor,속성 — 편집기 버튼,운영자(CS·상품),Edicus 편집기 진입 버튼 속성 지정(상품 편집기여부=Y 필요),build,,,,STD-ART-021,완료,raw/webadmin/tools/widget_manual_content.py:604 · raw/webadmin/tools/widget_manual_content.py:462
+widget,위젯빌더(운영자),comp_member,속성 — 구성원 스코프,운영자(CS·상품),셋트상품 입력의 본품(공통)/구성원(표지·내지) 귀속 지정,build,,,,STD-OPT-020,완료,raw/webadmin/tools/widget_manual_content.py:465 · raw/webadmin/tools/widget_manual_content.py:804 COMMON_PROPS 구성원 스코프
+widget,위젯빌더(운영자),comp_addon,속성 — 추가상품(체크박스),운영자(CS·상품),추가상품 체크박스 배치,build,,,,STD-OPT-034,완료,raw/webadmin/tools/widget_manual_content.py:561
+widget,위젯빌더(운영자),comp_spineclr,속성 — 부속 색상,운영자(CS·상품),링 등 부속 색상 선택 배치,build,,,,STD-OPT-025,완료,raw/webadmin/tools/widget_manual_content.py:718
+widget,위젯빌더(운영자),comp_spinedisp,속성 — 책등/표지 사이즈,운영자(CS·상품),작업 사이즈(여백·책등 포함) 한 줄 표시 배치,build,,,,STD-OPT-016,완료,raw/webadmin/tools/widget_manual_content.py:735
+widget,위젯빌더(운영자),comp_common,공통 속성,운영자(CS·상품),라벨 텍스트·라벨 표시·컨트롤 유형·컨트롤 숨김·제약 위반 시(비활성/숨김)·너비·여백·버튼 열 수·props JSON 지정,build,,,,STD-OPT-003,완료,raw/webadmin/tools/widget_manual_content.py:783 COMMON_PROPS
+widget,위젯빌더(운영자),comp_common,공통 속성,운영자(CS·상품),항목 기본값 지정(비우면 상품설정 기본여부를 따름),build,,,,T2-2,완료,raw/webadmin/tools/widget_manual_content.py:793 COMMON_PROPS 「기본값」
+widget,위젯빌더(운영자),comp_common,공통 속성,운영자(CS·상품),오픈 전 과업 — 게시 위젯 전수 기본값 미지정 점검·지정 후 재게시,config,,,,T2-2,진행,raw/webadmin/tools/widget_manual_content.py:793 COMMON_PROPS 「기본값」 · _workspace/huni-launch-runway/08_system-screen/t49/_planrows-A.csv:3 T2-2 「위젯 기본값 미지정 교정·재게시」(부분) — ⓐ 원장 대응
+widget,위젯빌더(운영자),comp_common,컨트롤 유형,운영자(CS·상품),버튼그룹·셀렉트박스·라디오그룹·토글·텍스트필드·수량스텝퍼·이미지 스와치·체크박스그룹·버튼그룹(다중)·라벨 중 선택,build,,,,STD-OPT-003,완료,raw/webadmin/tools/widget_manual_content.py:814 CTRL_TYPES
+widget,위젯빌더(운영자),builder_io,위젯 작업본 로드·저장,운영자(CS·상품),위젯 항목 전체 로드 및 편집 0.6초 뒤 자동저장,build,,,,NEW,완료,raw/webadmin/webadmin/config/urls.py:192 widget_load · raw/webadmin/webadmin/config/urls.py:194 widget_save · raw/webadmin/tools/widget_manual_content.py:882 PUBLISH_NOTES
+widget,위젯빌더(운영자),builder_io,위젯 작업본 로드·저장,운영자(CS·상품),동시 편집 충돌 감지 시 자동저장 중단·서버 최신본 재로드 / 브라우저 크래시 복구본 이어쓰기,build,,,,NEW,완료,raw/webadmin/tools/widget_manual_content.py:957 PUBLISH_NOTES 「동시 편집 · 크래시 복구」
+widget,위젯빌더(운영자),builder_usage,위젯 사용 현황,운영자(CS·상품),삭제 전 사용 현황 조회(게시 여부·게시 버전 수·허용 사이트·최근 사용),build,,,,NEW,완료,raw/webadmin/webadmin/config/urls.py:200 widget_usage · raw/webadmin/tools/widget_manual_content.py:953 PUBLISH_NOTES 「위젯 삭제」
+widget,위젯빌더(운영자),builder_templates,템플릿에서 시작,운영자(CS·상품),새 위젯 생성 시 템플릿 목록에서 골라 항목 전체(배치·속성·기본값) 복제,build,,,,NEW,완료,raw/webadmin/webadmin/config/urls.py:236 widget_templates · raw/webadmin/tools/widget_manual_content.py:918 PUBLISH_NOTES 「템플릿」
+widget,위젯빌더(운영자),ui_manager,상품별 위젯 관리,운영자(CS·상품),상품명·코드 검색,build,,,,NEW,완료,raw/webadmin/tools/widget_manual_content.py:475 · raw/webadmin/webadmin/config/urls.py:218 widget_manager_tree
+widget,위젯빌더(운영자),ui_manager,상품별 위젯 관리,운영자(CS·상품),상태 필터(게시됨 / 작성중 있음 / 게시중단 / 위젯 없음),build,,,,NEW,완료,raw/webadmin/tools/widget_manual_content.py:476
+widget,위젯빌더(운영자),ui_manager,상품별 위젯 관리,운영자(CS·상품),상품 트리 배지 표시(게시 N · 중단 N · 작성 N · 위젯 없음),build,,,,NEW,완료,raw/webadmin/tools/widget_manual_content.py:477
+widget,위젯빌더(운영자),ui_manager,상품별 위젯 관리,운영자(CS·상품),상품별 위젯 목록(상태·항목수·버전수·최종수정·최근사용),build,,,,NEW,완료,raw/webadmin/webadmin/config/urls.py:220 widget_manager_list · raw/webadmin/tools/widget_manual_content.py:489
+widget,위젯빌더(운영자),ui_manager,상품별 위젯 관리,운영자(CS·상품),상품 설정 요약 표시(파일업로드·편집기·비규격 플래그),build,,,,NEW,완료,raw/webadmin/tools/widget_manual_content.py:484
+widget,위젯빌더(운영자),ui_manager,상품별 위젯 관리,운영자(CS·상품),[빌더에서 열기 ↗] — 해당 위젯 선택된 채 빌더 진입,build,,,,NEW,완료,raw/webadmin/tools/widget_manual_content.py:486
+widget,위젯빌더(운영자),ui_manager,상품별 위젯 관리,운영자(CS·상품),게시 중단·다시 게시 상태 변경,build,,,,T2-2,완료,raw/webadmin/webadmin/config/urls.py:222 widget_set_status · raw/webadmin/tools/widget_manual_content.py:487
+widget,위젯빌더(운영자),ui_manager,상품별 위젯 관리,운영자(CS·상품),위젯 삭제(사용 현황 표시 후 2단계 확인),build,,,,NEW,완료,raw/webadmin/tools/widget_manual_content.py:488
+widget,위젯빌더(운영자),ui_manager,상품별 위젯 관리,운영자(CS·상품),위젯 이름 변경(전용 엔드포인트 — widget_save 로 대체 금지),build,,,,NEW,완료,raw/webadmin/webadmin/config/urls.py:234 widget_rename
+widget,위젯빌더(운영자),ui_templates,위젯 템플릿 관리,운영자(CS·상품),템플릿 목록 조회(상품 구분 없는 전역 단일 목록),build,,,,NEW,완료,raw/webadmin/webadmin/config/urls.py:227 widget_template_rows · raw/webadmin/tools/widget_manual_content.py:501
+widget,위젯빌더(운영자),ui_templates,위젯 템플릿 관리,운영자(CS·상품),[＋ 템플릿 지정] — 후보 위젯 검색 후 템플릿으로 지정,build,,,,NEW,완료,raw/webadmin/webadmin/config/urls.py:229 widget_template_candidates · raw/webadmin/tools/widget_manual_content.py:500
+widget,위젯빌더(운영자),ui_templates,위젯 템플릿 관리,운영자(CS·상품),템플릿 상세 — 구성 항목과 상품 종속 항목(옵션그룹·추가상품·셋트 구성원) 개수 경고,build,,,,NEW,완료,raw/webadmin/webadmin/config/urls.py:231 widget_template_detail · raw/webadmin/tools/widget_manual_content.py:502
+widget,위젯빌더(운영자),ui_templates,위젯 템플릿 관리,운영자(CS·상품),[템플릿 목록에서 빼기] — 위젯은 남기고 템플릿 지정만 해제,build,,,,NEW,완료,raw/webadmin/tools/widget_manual_content.py:503
+widget,위젯빌더(운영자),ui_templates,위젯 템플릿 관리,운영자(CS·상품),템플릿 이름 변경(구성은 유지),build,,,,NEW,완료,raw/webadmin/tools/widget_manual_content.py:504 · raw/webadmin/webadmin/config/urls.py:234 widget_rename
+widget,위젯 런타임(고객),rt_mount,위젯 런타임 마운트,고객,커스텀 엘리먼트 마운트 + 의존 스크립트 지연 로드(json-logic·constraint_engine·spine_calc·cover_rule·renderer),build,,,,STD-OPT-001,완료,raw/webadmin/webadmin/catalog/static/catalog/widget.js:48 ensureDeps
+widget,위젯 런타임(고객),rt_mount,위젯 런타임 마운트,고객,site_key 로 게시 위젯 설정 조회 후 렌더,integrate,webadmin,widget→webadmin,widget,STD-OPT-002,완료,raw/webadmin/webadmin/catalog/static/catalog/widget.js:145 fetch /api/w/v1/widgets/<wgt_cd> · 런타임 코드는 webadmin static 에 배포되나 호출 주체는 위젯이라 owner_side=widget
+widget,위젯 런타임(고객),rt_render,옵션 렌더,고객,20종 소스유형(차원·옵션그룹·수량·추가상품·패널·가격·파일·편집기·비규격·피커·후가공·건수·제목·머리말·부속색상·책등표시 등) 다형 렌더,build,,,,STD-OPT-003,완료,raw/webadmin/webadmin/catalog/static/catalog/widget_renderer.js:28 SRC 맵 · raw/webadmin/webadmin/catalog/static/catalog/widget_renderer.js:6642 render()
+widget,위젯 런타임(고객),rt_render,옵션 렌더,고객,판매 불가 후보 사전 제거 — 화면에는 보이는데 담기에서 422 나는 비대칭 차단,build,,,,STD-OPT-004,완료,raw/webadmin/webadmin/catalog/static/catalog/widget_renderer.js:986 · raw/webadmin/webadmin/catalog/static/catalog/widget_renderer.js:3017
+widget,위젯 런타임(고객),rt_constraint,제약 평가,고객,옵션 제약 규칙 평가로 선택지 비활성/숨김 및 충돌 선택 자동 해제 안내,build,,,,STD-OPT-037,완료,raw/webadmin/webadmin/catalog/static/catalog/widget_renderer.js:2186 · raw/webadmin/tools/widget_manual_content.py:873
+widget,위젯 런타임(고객),rt_price,실시간 견적,고객,선택 변경 시 서버 가격 재계산 요청,integrate,webadmin,widget→webadmin,widget,STD-OPT-043,완료,raw/webadmin/webadmin/catalog/static/catalog/widget.js:682 post /api/w/v1/price
+widget,위젯 런타임(고객),rt_price,가격 표시,고객,구성요소별 금액 박스 렌더(셋트는 구성원별 분해),build,,,,STD-OPT-046,완료,raw/webadmin/webadmin/catalog/static/catalog/widget_renderer.js:6411 renderPriceBoxes
+widget,위젯 런타임(고객),rt_price,가격 표시,고객,수량 구간 할인 박스 렌더,build,,,,STD-OPT-047,완료,raw/webadmin/webadmin/catalog/static/catalog/widget_renderer.js:6513 renderTierBoxes
+widget,위젯 런타임(고객),rt_upload,원고 업로드,고객,단일 파일 presign 발급 후 직접 PUT 업로드 및 진행률 보고,integrate,webadmin,widget→webadmin,widget,STD-ART-001,완료,raw/webadmin/webadmin/catalog/static/catalog/widget.js:799 _uploadSingle → /api/w/v1/upload/presign
+widget,위젯 런타임(고객),rt_upload,원고 업로드,고객,100MB 이상 멀티파트 업로드(create→sign→complete·실패 시 abort),integrate,webadmin,widget→webadmin,widget,STD-ART-002,완료,raw/webadmin/webadmin/catalog/static/catalog/widget.js:819 _uploadMultipart
+widget,위젯 런타임(고객),rt_upload,원고 업로드,고객,건수(디자인 N종)별 파일 순차 업로드·실패 항목 표시,build,,,,STD-ART-004,완료,raw/webadmin/webadmin/catalog/static/catalog/widget.js:773 _upload — descs.reduce 순차 체인
+widget,위젯 런타임(고객),rt_editor,편집기 진입,고객,편집기 버튼 클릭 시 선택 옵션조합 → PSCode·템플릿 URI 해석 요청,integrate,webadmin,widget→webadmin,widget,STD-ART-030,완료,raw/webadmin/webadmin/catalog/static/catalog/widget.js:392 post /api/w/v1/editor/resolve
+widget,위젯 런타임(고객),rt_editor,편집기 오버레이,고객,Edicus 편집기 SDK 로드 후 오버레이 기동 및 save/close/error 수신,integrate,edicus,widget→edicus,widget,STD-ART-021,완료,raw/webadmin/webadmin/catalog/static/catalog/widget.js:414 _ensureEditorSdk(huni_editor_sdk.js) · raw/webadmin/webadmin/catalog/static/catalog/widget.js:593 · raw/webadmin/webadmin/catalog/static/catalog/widget.js:613 sdk.on(save) — 브리지 코드가 widget.js 안에 있어 owner_side=widget
+widget,위젯 런타임(고객),rt_editor,편집기 토큰,고객,편집기 사용자 토큰 대리 발급 요청(비회원은 게스트 토큰),integrate,webadmin,widget→webadmin,widget,STD-ART-021,완료,raw/webadmin/webadmin/catalog/static/catalog/widget.js:584 post /api/w/v1/editor/token · raw/webadmin/webadmin/catalog/static/catalog/widget.js:449 _guestToken
+widget,위젯 런타임(고객),rt_editor,편집기 결과 수용,고객,setEditorResult 로 편집 산출물(docInfo)을 해당 항목에 반영,build,,,,STD-ART-024,완료,raw/webadmin/webadmin/catalog/static/catalog/widget.js:331 setEditorResult · raw/webadmin/webadmin/catalog/static/catalog/widget.js:349 summarizeDocInfo
+widget,위젯 런타임(고객),rt_validate,주문 전 검증,고객,담기 전 서버 validate 호출(옵션·셋트 본문·디자인을 handoff 와 같은 자리로 전송),integrate,webadmin,widget→webadmin,widget,T2-4,완료,raw/webadmin/webadmin/catalog/static/catalog/widget.js:924 validate → /api/w/v1/validate
+widget,위젯 런타임(고객),rt_submit,장바구니 담기,고객,canOrder → validate → handoff 서명 토큰 발급 → huni:submit 이벤트 방출,integrate,huni-mall,widget→huni-mall,widget,STD-PAY-031,완료,raw/webadmin/webadmin/catalog/static/catalog/widget.js:953 submit · raw/webadmin/webadmin/catalog/static/catalog/widget.js:1015 post /api/w/v1/handoff
+widget,위젯 런타임(고객),rt_cta,담기 CTA,고객,장바구니 담기 버튼 렌더 및 미충족 사유 표시,build,,,,STD-OPT-007,완료,raw/webadmin/webadmin/catalog/static/catalog/widget_renderer.js:5936 pv-cta-btn · raw/webadmin/webadmin/catalog/static/catalog/widget_renderer.js:5944 renderCanOrder
+widget,위젯 런타임(고객),rt_design,디자인 상품 진입,고객,디자인 코드로 고정 사양 잠금 + 디자인 배너 표시,build,,,,STD-CAT-033,완료,raw/webadmin/webadmin/catalog/static/catalog/widget.js:171 fetch /api/w/v1/designs · raw/webadmin/webadmin/catalog/static/catalog/widget.js:195 _applyDesignLock · raw/webadmin/webadmin/catalog/static/catalog/widget.js:225 _designBanner
+widget,위젯 런타임(고객),rt_guest,비회원 토큰,고객,게스트 토큰 발급·로컬 보관(레거시 guest id 승계),build,,,,NEW,완료,raw/webadmin/webadmin/catalog/static/catalog/widget.js:446 _guestTokenKey · raw/webadmin/webadmin/catalog/static/catalog/widget.js:465 _legacyGuestId · 대응 런웨이 행 없음
+widget,위젯 런타임(고객),rt_events,이벤트 방출,고객,ready·change·priced·state·submit 커스텀 이벤트로 임베드 페이지에 상태 전달,build,,,,NEW,완료,raw/webadmin/webadmin/catalog/static/catalog/widget.js:125 _emit · raw/webadmin/webadmin/catalog/static/catalog/widget.js:871 _emitState · 대응 런웨이 행 없음
+widget,위젯 런타임(고객),rt_guard,이탈 방지,고객,편집 중 페이지 이탈 경고 가드,build,,,,NEW,완료,raw/webadmin/webadmin/catalog/static/catalog/widget.js:100 _attachUnloadGuard · 대응 런웨이 행 없음
+widget,위젯 런타임(고객),rt_theme,테마 적용,고객,CSS 변수(--hw-*)로 임베드 사이트 색·글꼴·간격 반영,build,,,,NEW,완료,raw/webadmin/tools/widget_manual_content.py:972 EMBED_NOTES · 대응 런웨이 행 없음
+widget,위젯 API,wapi_widget,GET /api/w/v1/widgets/<wgt_cd>,시스템(무인),게시 위젯 설정·메타 조회(site_key 게이트),integrate,widget,widget→webadmin,webadmin,STD-OPT-002,완료,raw/webadmin/webadmin/config/urls.py:247 · raw/webadmin/webadmin/catalog/static/catalog/widget.js:145 클라이언트 호출 확인
+widget,위젯 API,wapi_catalog,GET /api/w/v1/catalog,시스템(무인),게시 위젯 카탈로그 + 상품별 시작가 조회,integrate,huni-mall,huni-mall→webadmin,webadmin,STD-CAT-043,완료,raw/webadmin/webadmin/config/urls.py:248 · raw/webadmin/webadmin/catalog/widget_api.py:5841
+widget,위젯 API,wapi_price,POST /api/w/v1/price,시스템(무인),서버 권위 가격 계산(구성요소·셋트 구성원·할인 단계 반환),integrate,widget,widget→webadmin,webadmin,STD-OPT-044,완료,raw/webadmin/webadmin/config/urls.py:249 · raw/webadmin/webadmin/catalog/static/catalog/widget.js:682
+widget,위젯 API,wapi_validate,POST /api/w/v1/validate,시스템(무인),주문 전 사양 검증,integrate,widget,widget→webadmin,webadmin,T2-4,완료,raw/webadmin/webadmin/config/urls.py:250 · raw/webadmin/webadmin/catalog/static/catalog/widget.js:924
+widget,위젯 API,wapi_presign,POST /api/w/v1/upload/presign,시스템(무인),원고 단일 업로드 presign 발급,integrate,widget,widget→webadmin,webadmin,STD-ART-001,완료,raw/webadmin/webadmin/config/urls.py:251 · raw/webadmin/webadmin/catalog/static/catalog/widget.js:799
+widget,위젯 API,wapi_multipart,POST /api/w/v1/upload/multipart/<action>,시스템(무인),멀티파트 업로드 create|sign|complete|abort,integrate,widget,widget→webadmin,webadmin,STD-ART-002,완료,raw/webadmin/webadmin/config/urls.py:253 · raw/webadmin/webadmin/catalog/static/catalog/widget.js:819
+widget,위젯 API,wapi_handoff,POST /api/w/v1/handoff,시스템(무인),재계산 + HMAC 서명 토큰 발급(주문 인계),integrate,widget,widget→webadmin,webadmin,STD-PAY-031,완료,raw/webadmin/webadmin/config/urls.py:255 · raw/webadmin/webadmin/catalog/widget_api.py:3416
+widget,위젯 API,wapi_handoff_verify,POST /api/w/v1/handoff/verify,시스템(무인),쇼핑몰 서버가 서명 토큰·금액 검증(서버-투-서버),integrate,huni-mall,huni-mall→webadmin,webadmin,STD-PAY-031,완료,raw/webadmin/webadmin/config/urls.py:256 · raw/webadmin/webadmin/catalog/widget_api.py:183
+widget,위젯 API,wapi_handoff_requote,POST /api/w/v1/handoff/requote,시스템(무인),장바구니 재견적(결제 직전 갱신·수량 변경),integrate,huni-mall,huni-mall→webadmin,webadmin,STD-SYS-045,완료,raw/webadmin/webadmin/config/urls.py:257 · raw/webadmin/webadmin/catalog/widget_api.py:5011
+widget,위젯 API,wapi_editor_resolve,POST /api/w/v1/editor/resolve,시스템(무인),옵션조합 → Edicus PSCode·템플릿 URI 해석,integrate,widget,widget→webadmin,webadmin,STD-ART-030,완료,raw/webadmin/webadmin/config/urls.py:275 · raw/webadmin/webadmin/catalog/static/catalog/widget.js:392
+widget,위젯 API,wapi_editor_token,POST /api/w/v1/editor/token,시스템(무인),Edicus 사용자 토큰 대리 발급,integrate,widget,widget→webadmin,webadmin,STD-ART-021,완료,raw/webadmin/webadmin/config/urls.py:276 · raw/webadmin/webadmin/catalog/static/catalog/widget.js:584
+widget,SDK·임베드,sdk_guide,SDK 개발자 가이드(/sdk/guide/),관리자,외부 파트너 개발자용 공개 임베드 가이드 서빙(docs/widget-sdk-guide.html),build,,,,NEW,완료,raw/webadmin/webadmin/config/urls.py:242 sdk_guide · 대응 런웨이 행 없음
+widget,SDK·임베드,sdk_demo,SDK 데모(/sdk/demo/),관리자,게시 위젯 실임베드 데모 서빙(site_key 게이트 포함·우회 없음),build,,,,NEW,완료,raw/webadmin/webadmin/config/urls.py:243 sdk_demo · 대응 런웨이 행 없음
+widget,SDK·임베드,sdk_cart_guide,장바구니 연동 가이드(/sdk/cart-guide/),관리자,쇼핑몰 개발 담당자용 장바구니 연동 공개 가이드 서빙,build,,,,STD-SYS-045,완료,raw/webadmin/webadmin/config/urls.py:246 cart_guide
+widget,SDK·임베드,sdk_api,위젯 SDK API,시스템(무인),mount·destroy·getState·getSummary·setSelection·price·validate·submit·canOrder·getStatus·setNotice·on·off 제공,build,,,,STD-OPT-001,완료,raw/webadmin/webadmin/catalog/static/catalog/widget.js:1036 HuniWidgetSDK.prototype.mount ~ raw/webadmin/webadmin/catalog/static/catalog/widget.js:1112
+widget,SDK·임베드,sdk_embed,임베드 운영 요건,관리자,허용 사이트(도메인 + 사이트 키)로 등록된 도메인에서만 위젯 API 응답,build,,,,NEW,완료,raw/webadmin/tools/widget_manual_content.py:968 EMBED_NOTES 「사이트 키」 · 대응 런웨이 행 없음
+widget,SDK·임베드,sdk_embed,임베드 운영 요건,관리자,오픈 전 과업 — 신규몰 도메인을 허용 사이트(도메인 + 사이트 키)에 등록,config,,,,NEW,미확인,raw/webadmin/tools/widget_manual_content.py:968 EMBED_NOTES 「새 도메인에 붙이려면 허용 사이트에 도메인을 먼저 등록해야 합니다」 — ⓑ 오픈 전 필수 세팅 근거 · 등록 여부 미실측
