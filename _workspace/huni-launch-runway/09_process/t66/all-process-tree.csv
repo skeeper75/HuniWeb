@@ -1,0 +1,775 @@
+card,L1_대분류,L2_중분류,process_uid,process_id,process_name,step_no,row_id,기능,시스템,담당자,상태,근거,cross,귀속
+t62,회원·인증,가입(원장전용),t62-P01,P01,회원가입(이메일 식별자),1,STD-MEM-022,로그인 식별자 정책(이메일 전용 vs 아이디) 확정·테스트회원 계정 정비,결정(PM·지니),김동학,미착수,https://shopby.huniprinting.co.kr/login 테스트회원 ID 입력 → 「올바른 이메일 형식이 아닙니다」 @ 2026-09-16 21:30,,담당
+t62,회원·인증,가입,t62-P01,P01,회원가입(이메일 식별자),2,STD-MEM-002,약관 동의·전체동의,huni-mall,김동학,부분,"[L4b보강] huni-skin-shopby/src/components/auth/signup-form.tsx:24-25,75-76",,담당
+t62,회원·인증,가입,t62-P01,P01,회원가입(이메일 식별자),3,STD-MEM-004,14세 미만 가입 제한,huni-mall,김동학,작동,https://shopby.huniprinting.co.kr/signup@2026-09-16 21:27,,담당
+t62,회원·인증,가입,t62-P01,P01,회원가입(이메일 식별자),4,STD-MEM-003,휴대전화 본인인증(SMS/PASS),huni-mall → 샵바이,김동학,부분,SB-043 absent(인증 SDK·API 호출 지점 0건) · L2 service-dependency D-17 endpoint='(호출 지점 없음)',,담당
+t62,회원·인증,가입,t62-P01,P01,회원가입(이메일 식별자),5,STD-MEM-005,1인 1계정 중복가입 제한,샵바이,김동학,부분,huni-skin-shopby/src/app/api/auth/signup/route.ts:8-33,,담당
+t62,회원·인증,가입,t62-P01,P01,회원가입(이메일 식별자),6,STD-MEM-001,회원가입(이메일 식별자),huni-mall → 샵바이,김동학,작동,https://shopby.huniprinting.co.kr/signup@2026-09-16 21:33,,담당
+t62,회원·인증,가입(원장전용),t62-P01,P01,회원가입(이메일 식별자),7,STD-MEM-021,가입완료 안내 메일 발송,샵바이,최숙진,미착수,https://shopby.huniprinting.co.kr/signup 2단계(정보입력) @ 2026-09-16 21:33,,담당
+t62,회원·인증,가입,t62-P01,P01,회원가입(이메일 식별자),8,STD-MEM-006,가입완료 혜택 자동지급(쿠폰+적립금),샵바이,최숙진,미착수,print-kb/wiki/policy/membership-auth.md#MEM-07 · L4 사유: L2 인벤토리에 가입완료 혜택 지급 행 없음. X-SHOPBY-NATIVE-01 가입완료 메일 native 범위 미확인.,프로모션 P19(쿠폰 발행)와 맞물림 — 같은 카드 t62 안,담당
+t62,회원·인증,로그인(원장전용),t62-P02,P02,소셜 로그인 가입·연결,1,STD-MEM-023,소셜 로그인 전제 설정 — 셀러어드민 간편로그인 앱(네이버·카카오·구글) 등록 + 각 개발자센터 Redirect URI `{origin}/oauth/callback` 등록,운영자(셀러어드민·제공자 개발자센터),최숙진,미착수,commit 13ed106 본문 「⚠ 동작 전제(코드 외)」 · huni-skin-shopby/src/components/auth/sns-buttons.tsx:66-67,,담당
+t62,회원·인증,로그인,t62-P02,P02,소셜 로그인 가입·연결,2,STD-MEM-010,카카오 소셜 로그인,huni-mall,김동학,부분,SB-041 stub — huni-skin-shopby/src/components/auth/sns-buttons.tsx:74-80 (토스트만·signIn 미호출) · D-16 providers 빈 배열,,담당
+t62,회원·인증,로그인,t62-P02,P02,소셜 로그인 가입·연결,3,STD-MEM-011,네이버 소셜 로그인,huni-mall,김동학,부분,SB-041 stub — sns-buttons.tsx:74-80 · D-16,,담당
+t62,회원·인증,로그인,t62-P02,P02,소셜 로그인 가입·연결,4,STD-MEM-012,구글/애플 소셜 로그인,huni-mall,김동학,부분,SB-041 stub — sns-buttons.tsx:74-80 · D-16,,담당
+t62,회원·인증,로그인(원장전용),t62-P02,P02,소셜 로그인 가입·연결,5,STD-MEM-024,소셜 최초 로그인 가입완료(WAITING→ACTIVE) 추가정보 화면 실검증 — 약관 타입·필수항목이 몰 설정과 맞는지,huni-mall → 샵바이,김동학,미착수,commit 4f33a67 · huni-skin-shopby/src/app/api/auth/social-join/route.ts:1-9 · https://shopby.huniprinting.co.kr/social-join 200 「추가정보 입력」 @ 2026-09-16 22:00,,담당
+t62,회원·인증,로그인,t62-P03,P03,로그인·세션 유지·비회원 세션,1,STD-MEM-007,아이디/비밀번호 로그인,huni-mall → 샵바이,김동학,부분,huni-skin-shopby/src/lib/auth/auth.config.ts:12-22 · src/lib/auth/shopby-auth.ts:1,,담당
+t62,회원·인증,세션,t62-P03,P03,로그인·세션 유지·비회원 세션,2,STD-MEM-013,로그인 세션 유지·자동 갱신,huni-mall,김동학,부분,SB-040 done — huni-skin-shopby/src/lib/auth/auth.config.ts:18-22 · src/app/api/shop/[...path]/route.ts:20-27,,담당
+t62,회원·인증,세션,t62-P03,P03,로그인·세션 유지·비회원 세션,3,STD-MEM-014,비회원 게스트 세션 처리,huni-mall,김동학,작동,https://shopby.huniprinting.co.kr/cart@2026-09-16 21:27,t63 장바구니·주문(비회원 주문),담당
+t62,회원·인증,로그인,t62-P04,P04,계정 찾기(아이디·비밀번호),1,STD-MEM-008,아이디 찾기(마스킹),huni-mall → 샵바이,김동학,미착수,SB-042 stub — huni-skin-shopby/src/components/auth/find-id-form.tsx:50-56 (토스트 '준비 중'),,담당
+t62,회원·인증,로그인,t62-P04,P04,계정 찾기(아이디·비밀번호),2,STD-MEM-009,비밀번호 재설정(이메일 링크),huni-mall → 샵바이,김동학,미착수,SB-042 stub — find-id-form.tsx:50-56,,담당
+t62,회원·인증,회원,t62-P05,P05,회원정보 변경·탈퇴,1,STD-MEM-015,회원정보 수정(비밀번호 재확인),huni-mall → 샵바이,김동학,부분,huni-skin-shopby/src/lib/api/hooks/use-profile.ts:42,,담당
+t62,회원·인증,회원,t62-P05,P05,회원정보 변경·탈퇴,2,STD-MEM-016,비밀번호 변경,huni-mall → 샵바이,김동학,부분,huni-skin-shopby/src/lib/api/hooks/use-profile.ts:42,,담당
+t62,회원·인증,회원,t62-P05,P05,회원정보 변경·탈퇴,3,STD-MEM-017,회원탈퇴,huni-mall → 샵바이,김동학,부분,huni-skin-shopby/src/lib/api/hooks/use-profile.ts:112 · src/components/mypage/withdraw-section.tsx:4,P10 프린팅머니(잔액 처리 미정),담당
+t62,회원·인증,회원,t62-P06,P06,회원등급·휴면 생애주기,1,STD-MEM-018,회원등급 산정·자동 승급,샵바이,서희항,미착수,[L4b보강] huni-skin-shopby/src/lib/api/hooks/use-profile.ts:39 (memberGradeName 표시 필드만),P19 쿠폰 발행(등급 쿠폰),담당
+t62,회원·인증,회원,t62-P06,P06,회원등급·휴면 생애주기,2,STD-ADC-002,회원등급 수동 조정,운영자(셀러어드민),김동학,미착수,print-kb/wiki/policy/membership-auth.md#MEM-06 · L4 사유: grade_cd ↔ 샵바이 memberGrade 매핑이 미결(X-DEC-GRADE) — 등급가가 걸려 돈 영향,,담당
+t62,회원·인증,회원,t62-P06,P06,회원등급·휴면 생애주기,3,STD-MEM-019,휴면계정 전환·복구,샵바이,최숙진,미착수,[L4b보강] huni-skin-shopby/src/lib/auth/shopby-auth.ts:28 (휴면 응답 주석만·전환/복구 화면 0건),,담당
+t62,회원·인증,회원(원장전용),t62-P07,P07,구 사이트 회원·프린트머니 잔액 이관,1,STD-MYP-026,구 ASP 코드·DB 미제공 전제 — 이관 원천은 잔액 스냅샷만,결정(최숙진),최숙진,미착수,후니정기미팅 정리260915.html §프린팅머니 · 확정 4,,담당
+t62,회원·인증,회원(원장전용),t62-P07,P07,구 사이트 회원·프린트머니 잔액 이관,2,STD-MYP-024,기존 회원·잔액 이관 / PitStop Server 연동 담당 확정,결정(미정),미정,미착수,후니정기미팅 정리260915.html §개발 역할 분담 · 미결 4,,담당
+t62,회원·인증,회원,t62-P07,P07,구 사이트 회원·프린트머니 잔액 이관,3,STD-MEM-020,기존 회원 데이터 이관(구 사이트),운영자 → 샵바이,서희항,미착수,print-kb/wiki/policy/membership-auth.md#MEM-01 마이그레이션 이슈 명시 · L4 사유: 돈 걸림. 구 DB 미접근(X-OLDDB-ACCESS-01)이 20개 질문의 공통 선행 블로커. 이관 리허설 미실행.,t65 시스템·플랫폼(컷오버 일정),담당
+t62,회원·인증,적립금,t62-P07,P07,구 사이트 회원·프린트머니 잔액 이관,4,STD-MYP-009,기존 프린트머니 잔액 이관,webadmin,서희항,미착수,print-kb/wiki/policy/mypage.md#MYP-02 · print-kb/wiki/policy/custom-dev.md#CST-04 · L4 사유: 돈 걸림. 컷오버 대사 불일치 시 즉시 NO-GO 게이트.,,담당
+t62,회원·인증,회원(원장전용),t62-P07,P07,구 사이트 회원·프린트머니 잔액 이관,5,STD-MYP-047,프린트머니 구현 M5 — 구 잔액 마이그레이션 시드 실행(260630 스펙),webadmin,미정,미착수,_workspace/huni-shopby/17_prepaid-money/prepaid-money-design-260915.md:293,,담당
+t62,마이페이지,주문(원장전용),t62-P08,P08,마이페이지 주문 조회·상세,1,STD-MYP-017,마이페이지 메인 대시보드(주문요약·프린팅머니·쿠폰 한눈에),huni-mall,김동학,부분,"L3/legacy-normalized.json#F-029,IA-029,SCOPE-029 · _workspace/huni-launch-scope/02_gap/fit-gap-matrix.csv:30 · docs/huni/후니프린팅_통합IA_일정_역할분담_260616.xlsx#02_IA마스터!A30:K30 · L2/as-is-inventory.csv#SB-044 huni-skin-shopby/src/components/mypage/dashboard-section.tsx:17-59",,담당
+t62,마이페이지,주문(원장전용),t62-P08,P08,마이페이지 주문 조회·상세,2,STD-MYP-018,마이페이지 서브메인(기능군 랜딩) 화면,huni-mall,김동학,부분,"L3/legacy-normalized.json#F-030,IA-030,SCOPE-030 · _workspace/huni-launch-scope/02_gap/fit-gap-matrix.csv:31 · docs/huni/후니프린팅_통합IA_일정_역할분담_260616.xlsx#02_IA마스터!A31:K31 || P1판정(260902): huni-skin-shopby/src/app/(main)/mypage/page.tsx:10 DashboardSection · layout.tsx (중첩 라우트 전환)",,담당
+t62,마이페이지,주문,t62-P08,P08,마이페이지 주문 조회·상세,3,STD-MYP-001,주문 목록 조회,huni-mall → 샵바이,김동학,부분,huni-skin-shopby/src/lib/api/hooks/use-my-orders.ts:84,,담당
+t62,마이페이지,주문,t62-P08,P08,마이페이지 주문 조회·상세,4,STD-MYP-002,주문 상세 조회(사양·파일·상태),huni-mall → 샵바이,김동학,부분,huni-skin-shopby/src/lib/api/hooks/use-my-orders.ts:84 (목록/상세),,담당
+t62,마이페이지,주문,t62-P08,P08,마이페이지 주문 조회·상세,5,STD-MYP-003,편집상품 미리보기,huni-mall + 위젯/Edicus,서희항+김동학,미착수,SB-020 stub — huni-skin-shopby/src/components/product/configurator-actions.tsx:170-176 (onClick 없음),t63 원고·파일(에디터·시안),담당
+t62,마이페이지,주문(원장전용),t62-P08,P08,마이페이지 주문 조회·상세,6,STD-MYP-019,마이페이지 통합 검색결과 LIST 화면,huni-mall,김동학,미착수,"L3/legacy-normalized.json#F-031,IA-031,SCOPE-031 · _workspace/huni-launch-scope/02_gap/fit-gap-matrix.csv:32 · docs/huni/후니프린팅_통합IA_일정_역할분담_260616.xlsx#02_IA마스터!A32:K32 || P1판정(260902): huni-skin-shopby 전수 grep 'mypage.*search' 0건(260902) — 마이페이지 통합 검색 라우트 없음",,담당
+t62,마이페이지,보관함(원장전용),t62-P09,P09,편집 디자인·옵션 보관함,1,STD-MYP-030,"편집 디자인 보관함 — 편집 종료 후 보관, 장바구니 담기 전까지 수정 가능",huni-mall + 위젯,김동학+서희항,부분,후니정기미팅 정리260915.html §디자인 상품·편집기·보관함 · 확정 7 / 후니-오픈잔여작업-실무진안내_260909.html §항목 11 · ④ 완료 기준,t63 원고·파일(에디터·업로드),담당
+t62,마이페이지,보관함(원장전용),t62-P09,P09,편집 디자인·옵션 보관함,2,STD-MYP-031,보관함 저장 시점 결정(저장 버튼 vs 편집 종료 시 자동),결정(신우진),신우진,미착수,후니정기미팅 정리260915.html §디자인 상품·편집기·보관함 · 미결 2,,담당
+t62,마이페이지,보관함,t62-P09,P09,편집 디자인·옵션 보관함,3,STD-MYP-004,옵션보관함 저장/불러오기,huni-mall,김동학,미착수,[L4b보강] huni-skin-shopby/src/components/cart/cart-page.tsx:6 ('shopby 장바구니에는 보관함(draft) 개념이 없어 단일 목록으로 렌더'),,담당
+t62,마이페이지,보관함,t62-P09,P09,편집 디자인·옵션 보관함,4,STD-MYP-005,보관 기간 정책 적용·만료 처리,huni-mall/webadmin,김동학,미착수,print-kb/wiki/policy/mypage.md#MYP-01 3개월 권장 · L4 사유: new — 보관 만료 정책은 화면이 아니라 배치 규칙이라 legacy 화면 분모에 수록된 적 없음. 근거 print-kb/mypage.md(ia.md 오염 아님).,,담당
+t62,마이페이지,보관함(원장전용),t62-P09,P09,편집 디자인·옵션 보관함,5,STD-MYP-032,편집 후 장바구니를 누르지 않고 이탈한 고객 안내 방법,huni-mall,김동학,미착수,후니정기미팅 정리260915.html §디자인 상품·편집기·보관함 · 미결 3,,담당
+t62,마이페이지,보관함(원장전용),t62-P09,P09,편집 디자인·옵션 보관함,6,STD-MYP-033,보관함을 일반 상품까지 확대할지 여부,결정(신우진),신우진,미착수,후니정기미팅 정리260915.html §디자인 상품·편집기·보관함 · 미결 6,,담당
+t62,마이페이지,적립금(원장전용),t62-P10,P10,프린팅머니 충전(무통장·가상계좌),1,STD-MYP-051,프린트머니 결정 요청 — 원장 소유 결정 A(샵바이 적립금) vs B′(후니 원장+외부포인트 연동),결정(지니),지니,미착수,_workspace/huni-shopby/17_prepaid-money/prepaid-money-design-260915.md:303,,담당
+t62,마이페이지,적립금(원장전용),t62-P10,P10,프린팅머니 충전(무통장·가상계좌),2,STD-MYP-025,프린트머니 정책 — 소멸기한 없음·충전 1:1·추가 적립 없음,결정(신우진),신우진,미착수,후니정기미팅 정리260915.html §프린팅머니 · 확정 3,,담당
+t62,마이페이지,적립금(원장전용),t62-P10,P10,프린팅머니 충전(무통장·가상계좌),3,STD-MYP-049,"프린트머니 결정 요청 — 충전 단위·최소/최대(현 화면 6종 10,000~500,000) 유지 여부",결정(지니),지니,미착수,_workspace/huni-shopby/17_prepaid-money/prepaid-money-design-260915.md:299,,담당
+t62,마이페이지,적립금(원장전용),t62-P10,P10,프린팅머니 충전(무통장·가상계좌),4,STD-MYP-052,프린트머니 결정 요청 — 충전 전용 입금계좌 분리 여부 · 과입금·부분입금 정책,결정(지니),지니,미착수,_workspace/huni-shopby/17_prepaid-money/prepaid-money-design-260915.md:306,,담당
+t62,마이페이지,적립금(원장전용),t62-P10,P10,프린팅머니 충전(무통장·가상계좌),5,STD-MYP-022,프린트머니 원장·외부포인트 API 5종·증빙 발행·충전 운영 화면의 개발 주체·배치 확정,결정(신우진),신우진,미착수,후니정기미팅 정리260915.html §개발 역할 분담 · 미결 2,,담당
+t62,마이페이지,적립금(원장전용),t62-P10,P10,프린팅머니 충전(무통장·가상계좌),6,STD-MYP-023,토스 가상계좌 API 연동·입금 알림 수신 담당 확정,결정(미정),미정,미착수,후니정기미팅 정리260915.html §개발 역할 분담 · 미결 3,,담당
+t62,마이페이지,적립금(원장전용),t62-P10,P10,프린팅머니 충전(무통장·가상계좌),7,STD-MYP-027,샵바이 외부포인트 연동 협의 완료,샵바이,외부(샵바이(NHN커머스)),구현-미검증,후니정기미팅 정리260915.html §프린팅머니 · 확정 6,,담당
+t62,마이페이지,적립금(원장전용),t62-P10,P10,프린팅머니 충전(무통장·가상계좌),8,STD-MYP-042,프린트머니 구현 M0 — 어드민 설정 + 충전권 상품 6종 + 실측 V1~V8,운영자/webadmin,미정,미착수,_workspace/huni-shopby/17_prepaid-money/prepaid-money-design-260915.md:288,,담당
+t62,마이페이지,적립금(원장전용),t62-P10,P10,프린팅머니 충전(무통장·가상계좌),9,STD-MYP-043,프린트머니 구현 M1 — webadmin t_pm_charge_txn + 감지·지급 잡(폴링) + 웹훅 신호 연결,webadmin,미정,미착수,_workspace/huni-shopby/17_prepaid-money/prepaid-money-design-260915.md:289,,담당
+t62,마이페이지,적립금(원장전용),t62-P10,P10,프린팅머니 충전(무통장·가상계좌),10,STD-MYP-028,충전 입금 확인 = 토스페이먼츠 가상계좌 API 직접 발급,webadmin → 토스,미정,미착수,후니정기미팅 정리260915.html §프린팅머니 · 확정 8,,담당
+t62,마이페이지,적립금(원장전용),t62-P10,P10,프린팅머니 충전(무통장·가상계좌),11,STD-MYP-029,입금 확인 자동화 — 가상계좌 DEPOSIT_CALLBACK 웹훅 수신→자동 충전,webadmin,미정,미착수,후니정기미팅 정리260915.html §프린팅머니 · 확정 9(「입금 확인은 가상계좌 입금 알림으로 자동 처리」까지) · DEPOSIT_CALLBACK 명칭 출처: _workspace/huni-shopby/17_prepaid-money/prepaid-money-design-260915.md:316,,담당
+t62,마이페이지,적립금(원장전용),t62-P10,P10,프린팅머니 충전(무통장·가상계좌),12,STD-MYP-044,프린트머니 구현 M2 — 스킨 충전 화면 배선(useChargePoint → 충전권 주문서),huni-mall,미정,미착수,_workspace/huni-shopby/17_prepaid-money/prepaid-money-design-260915.md:290,,담당
+t62,마이페이지,적립금,t62-P10,P10,프린팅머니 충전(무통장·가상계좌),13,STD-MYP-007,프린팅머니 충전(PG 결제→적립 전환),huni-mall,김동학,부분,SB-051 stub — huni-skin-shopby/src/components/mypage/point-section.tsx:11-14 → src/lib/legacy-data/hooks.ts:423-432 (no-op),t63 결제(PG·결제수단),담당
+t62,마이페이지,적립금,t62-P10,P10,프린팅머니 충전(무통장·가상계좌),14,STD-MYP-006,프린팅머니 잔액·내역 조회,huni-mall → 샵바이,김동학,부분,huni-skin-shopby/src/lib/api/hooks/use-points.ts:22,,담당
+t62,마이페이지,적립금(원장전용),t62-P10,P10,프린팅머니 충전(무통장·가상계좌),15,STD-MYP-048,프린트머니 구현 M6 — PG 계약 후 카드 충전 활성(코드 변경 없이 availablePayTypes 로 자동),huni-mall,미정,미착수,_workspace/huni-shopby/17_prepaid-money/prepaid-money-design-260915.md:294,,담당
+t62,마이페이지,적립금(원장전용),t62-P10,P10,프린팅머니 충전(무통장·가상계좌),16,STD-MYP-053,테스트몰 실측 12항(전액결제 payType 조합·expireYmd 생략·externalKey 유일성·웹훅 페이로드 등),webadmin/huni-mall,미정,미착수,_workspace/huni-shopby/HANDOFF.md:16,,담당
+t62,마이페이지,적립금(원장전용),t62-P11,P11,프린팅머니 사용·충전 취소·환불,1,STD-MYP-045,프린트머니 구현 M3 — 체크아웃 전액결제 분기,huni-mall,미정,미착수,_workspace/huni-shopby/17_prepaid-money/prepaid-money-design-260915.md:291,t63 결제 · t65 클레임(환불),담당
+t62,마이페이지,적립금(원장전용),t62-P11,P11,프린팅머니 사용·충전 취소·환불,2,STD-MYP-046,프린트머니 구현 M4 — 충전 취소/환불 처리 + 운영 화면(txn 목록·재시도),webadmin,미정,미착수,_workspace/huni-shopby/17_prepaid-money/prepaid-money-design-260915.md:292,,담당
+t62,마이페이지,적립금(원장전용),t62-P11,P11,프린팅머니 사용·충전 취소·환불,3,STD-MYP-050,프린트머니 결정 요청 — 일부 사용 후 충전 취소 정책(불가 vs 미사용분 부분 환불),결정(지니),지니,미착수,_workspace/huni-shopby/17_prepaid-money/prepaid-money-design-260915.md:300,,담당
+t62,마이페이지,적립금,t62-P12,P12,적립금 적립·운영자 수동 지급,1,STD-MYP-008,구매확정 적립금 자동 지급,샵바이,최숙진,미착수,SB-030 partial — huni-skin-shopby/src/components/checkout/checkout-form.tsx:52 (조회는 실API·적립/충전은 mock),t63 장바구니·주문(구매확정),담당
+t62,마이페이지,회원,t62-P12,P12,적립금 적립·운영자 수동 지급,2,STD-ADC-004,프린팅머니 수동 지급·차감,운영자(셀러어드민/webadmin),서희항,미착수,print-quote/04_design/ia.md §2.3 SM-A-42 · L4 사유: 프린팅머니가 샵바이 적립금 재해석인지 별도 원장인지 미결(X-DEC-PRINTMONEY). 고객측 충전도 no-op(SB-051 stub),,담당
+t62,마이페이지,쿠폰,t62-P13,P13,쿠폰 보유·등록·주문 적용(고객),1,STD-MYP-010,보유 쿠폰 목록,huni-mall → 샵바이,김동학,부분,huni-skin-shopby/src/lib/api/hooks/use-coupons.ts:71,,담당
+t62,마이페이지,쿠폰,t62-P13,P13,쿠폰 보유·등록·주문 적용(고객),2,STD-MYP-011,쿠폰 번호 등록,huni-mall → 샵바이,김동학,부분,huni-skin-shopby/src/lib/api/hooks/use-coupons.ts:71,,담당
+t62,마이페이지,쿠폰,t62-P13,P13,쿠폰 보유·등록·주문 적용(고객),3,STD-PRM-007,장바구니/주문서 쿠폰 적용,huni-mall → 샵바이,김동학,부분,huni-skin-shopby/src/lib/api/hooks/use-order-coupons.ts:34,t63 장바구니·주문 · 결제,담당
+t62,마이페이지,리뷰,t62-P14,P14,리뷰 작성·보상,1,STD-MYP-012,내 리뷰 작성·조회,huni-mall → 샵바이,김동학,부분,huni-skin-shopby/src/lib/api/hooks/use-review-write.ts:38 · use-my-reviews.ts:84,,담당
+t62,마이페이지,리뷰,t62-P14,P14,리뷰 작성·보상,2,STD-PRM-009,사진 리뷰 추가 보상,샵바이,최숙진,작동,https://service.shopby.co.kr/accumulation/setting@2026-09-16 21:33,P28 이용후기 관리·블라인드,담당
+t62,마이페이지,쿠폰,t62-P14,P14,리뷰 작성·보상,3,STD-PRM-002,리뷰 작성 보상 쿠폰 발행,샵바이,최숙진,미착수,print-kb/wiki/policy/coupon.md#CPN-02 · L4 사유: new — 리뷰 보상 쿠폰은 legacy 3원 어디에도 없음. 근거 print-kb/coupon.md#CPN-02(ia.md 오염 아님).,,담당
+t62,마이페이지,리뷰,t62-P14,P14,리뷰 작성·보상,4,STD-PRM-008,리뷰 삭제 시 보상 회수,샵바이,최숙진,미착수,print-kb/wiki/policy/review.md#RVW-03 · L4 사유: new — 리뷰 삭제 시 보상 회수 규칙 미수록. 근거 print-kb/review.md#RVW-03(오염 아님).,,담당
+t62,마이페이지,리뷰(원장전용),t62-P14,P14,리뷰 작성·보상,5,STD-PRM-016,이용후기 메인(전체 리뷰 모아보기),huni-mall,김동학,미착수,https://shopby.huniprinting.co.kr/ @ 2026-09-16 21:26,,담당
+t62,마이페이지,문의,t62-P15,P15,내 문의 조회(상품Q&A·1:1),1,STD-MYP-013,내 상품Q&A/1:1문의 조회,huni-mall → 샵바이,김동학,미착수,SB-056 absent — huni-skin-shopby/src/app/(main) 하위 inquiry/qna 라우트 부재,P28 게시판·문의 응대 운영,담당
+t62,마이페이지,증빙(원장전용),t62-P16,P16,증빙서류 발급(세금계산서·현금영수증),1,STD-MYP-034,증빙 신청 탭 3개(신청 가능 / 신청 완료 / 신용카드 결제),huni-mall,김동학,미착수,후니정기미팅 정리260915.html §증빙서류 · 확정 3,,담당
+t62,마이페이지,증빙(원장전용),t62-P16,P16,증빙서류 발급(세금계산서·현금영수증),2,STD-MYP-035,현금 결제 건만 신청 대상 — 세금계산서·현금영수증 중 택1,huni-mall,김동학,미착수,후니정기미팅 정리260915.html §증빙서류 · 확정 4,,담당
+t62,마이페이지,증빙(원장전용),t62-P16,P16,증빙서류 발급(세금계산서·현금영수증),3,STD-MYP-036,카드 결제 건·발행 완료 건은 목록에 보이되 비활성+사유 표시,huni-mall,김동학,미착수,후니정기미팅 정리260915.html §증빙서류 · 확정 5,,담당
+t62,마이페이지,증빙(원장전용),t62-P16,P16,증빙서류 발급(세금계산서·현금영수증),4,STD-MYP-020,사업자정보 목록,huni-mall,김동학,미착수,https://www.huniprinting.com/mypage/tax01.asp @ 2026-09-16 21:33,,담당
+t62,마이페이지,증빙(원장전용),t62-P16,P16,증빙서류 발급(세금계산서·현금영수증),5,STD-MYP-021,사업자정보 등록(쓰기),huni-mall,김동학,미착수,https://www.huniprinting.com/mypage/tax01.asp @ 2026-09-16 21:33,,담당
+t62,마이페이지,증빙,t62-P16,P16,증빙서류 발급(세금계산서·현금영수증),6,STD-MYP-015,현금영수증 정보 관리,huni-mall → 샵바이,김동학,미착수,SB-053 stub — document-section.tsx:1-6 · D-18 호출 지점 없음,,담당
+t62,마이페이지,증빙,t62-P16,P16,증빙서류 발급(세금계산서·현금영수증),7,STD-MYP-014,증빙서류 발급내역 조회,huni-mall,김동학,미착수,SB-053 stub — huni-skin-shopby/src/components/mypage/document-section.tsx:1-6 (정적 표 UI·API 호출 0) · D-18 endpoint='(호출 지점 없음)',,담당
+t62,마이페이지,증빙(원장전용),t62-P16,P16,증빙서류 발급(세금계산서·현금영수증),8,STD-MYP-037,프린트머니 증빙 발행 규칙 — 충전 시 충전액·주문 시 실결제액·환불 시 마이너스 계산서,결정+구현,김동학,미착수,후니정기미팅 정리260915.html §증빙서류 · 확정 7,,담당
+t62,마이페이지,증빙(원장전용),t62-P16,P16,증빙서류 발급(세금계산서·현금영수증),9,STD-MYP-038,프린트머니 증빙 발행 시점 세무 확인(충전 시 vs 사용 시),결정(미정),미정,미착수,후니정기미팅 정리260915.html §증빙서류 · 미결 1,,담당
+t62,마이페이지,증빙(원장전용),t62-P16,P16,증빙서류 발급(세금계산서·현금영수증),10,STD-MYP-039,세금계산서 API 자동 발행 여부 결정,결정(최숙진·신우진),최숙진+신우진,미착수,후니정기미팅 정리260915.html §증빙서류 · 미결 2,,담당
+t62,마이페이지,세금,t62-P16,P16,증빙서류 발급(세금계산서·현금영수증),11,STD-B2B-012,세금계산서 일괄 발행,운영자 — P26 과 공유,미정,미착수,SB-053 stub — document-section.tsx:1-6 · D-18 endpoint='(호출 지점 없음)',P26 B2B 정산·거래처 원장,담당
+t62,마이페이지,배송지,t62-P17,P17,배송지 주소록 관리,1,STD-MYP-016,배송지 주소록 관리,huni-mall → 샵바이,김동학,부분,SB-048 done — huni-skin-shopby/src/lib/api/hooks/use-shipping-address.ts:65-125 · SB-028 src/components/checkout/address-modal.tsx:1,t63 배송(주문서 배송지 선택),담당
+t62,마이페이지,IA·정책(원장전용),t62-P18,P18,마이페이지 정보구조 정비,1,STD-MYP-040,마이페이지 9개 메뉴 점검·판정표 + 프린트머니 범위 결정,운영자·PM,최숙진+신우진,부분,후니정기미팅 정리260915.html §일정·설계 · 미결 3 / 후니-오픈잔여작업-실무진안내_260909.html §항목 4 · ④ 완료 기준,,담당
+t62,마이페이지,IA·정책(원장전용),t62-P18,P18,마이페이지 정보구조 정비,2,STD-MYP-041,프린트머니 화면 피그마 부재·명칭 미정(「마이 포인트」 등),운영자(최숙진),최숙진,미착수,후니정기미팅 정리260915.html §일정·설계 · 미결 4,,담당
+t62,마이페이지,IA·정책(원장전용),t62-P18,P18,마이페이지 정보구조 정비,3,STD-MYP-054,마이포인트(/mypage/point·shopby 적립금)와 프린팅머니(/mypage/money·UI 전용) 메뉴 중복 정리 — 노출 메뉴·명칭 확정,huni-mall + 정책,김동학,미착수,huni-skin-shopby/src/components/mypage/mypage-shared.tsx:14-15 NAV 두 항목 · commit 2092b12,P10 프린팅머니 충전,담당
+t62,프로모션,쿠폰,t62-P19,P19,쿠폰 기획·발행·소진(운영자),1,STD-ADC-005,쿠폰 생성·발행 관리,운영자(셀러어드민),김동학,미착수,print-quote/04_design/ia.md §2.3 SM-A-43 · L4 사유: 고객측 쿠폰 조회/등록은 done(SB-049)이나 운영자 발행 화면 근거 없음,,담당
+t62,프로모션,쿠폰,t62-P19,P19,쿠폰 기획·발행·소진(운영자),2,STD-PRM-006,쿠폰 유효기간 관리,운영자(셀러어드민),최숙진,미착수,print-kb/wiki/policy/coupon.md#CPN-06 · L4 사유: 쿠폰 발행·유효기간 관리 화면 L2 무근거(F-126 돈·L).,,담당
+t62,프로모션,쿠폰,t62-P19,P19,쿠폰 기획·발행·소진(운영자),3,STD-PRM-005,쿠폰 동시사용 개수 제한,샵바이 설정,최숙진,부분,SB-029 done — huni-skin-shopby/src/lib/api/hooks/use-order-coupons.ts:34 (최대할인 계산),,담당
+t62,프로모션,쿠폰,t62-P19,P19,쿠폰 기획·발행·소진(운영자),4,STD-PRM-001,신규회원 쿠폰 자동발행,샵바이,최숙진,미착수,print-kb/wiki/policy/coupon.md#CPN-01 · L4 사유: 돈 걸림(F-156). 자동발행 트리거 L2 무근거.,,담당
+t62,프로모션,쿠폰,t62-P19,P19,쿠폰 기획·발행·소진(운영자),5,STD-PRM-003,재구매 쿠폰 발행,샵바이,최숙진,미착수,print-kb/wiki/policy/coupon.md#CPN-03 · L4 사유: new — 재구매 쿠폰 미수록. 근거 print-kb/coupon.md#CPN-03(오염 아님).,,담당
+t62,프로모션,쿠폰,t62-P19,P19,쿠폰 기획·발행·소진(운영자),6,STD-PRM-004,회원등급(VIP) 쿠폰 발행,샵바이,최숙진,미착수,print-kb/wiki/policy/coupon.md#CPN-04 · L4 사유: 회원등급(STD-MEM-018) 종속. 돈 걸림.,P06 회원등급 · STD-PRM-001 → P01 가입,담당
+t62,프로모션,쿠폰(원장전용),t62-P19,P19,쿠폰 기획·발행·소진(운영자),7,STD-PRM-018,[구IA#76] 쿠폰관리 (발행/매칭/사용내역),운영자,최숙진,미실측,IA No.76 쿠폰관리 · 샵바이 쿠폰(R1d),,담당
+t62,프로모션,쿠폰(원장전용),t62-P19,P19,쿠폰 기획·발행·소진(운영자),8,STD-PRM-019,[구IA#77] 쿠폰등록내역,운영자,최숙진,미실측,IA No.77 쿠폰등록내역 · 샵바이(R1d),,담당
+t62,프로모션,쿠폰(원장전용),t62-P19,P19,쿠폰 기획·발행·소진(운영자),9,STD-PRM-020,[구IA#78] 쿠폰사용내역,운영자,최숙진,미실측,IA No.78 쿠폰사용내역 · 샵바이(R1d),,담당
+t62,프로모션,쿠폰,t62-P19,P19,쿠폰 기획·발행·소진(운영자),10,STD-ADC-006,쿠폰 등록·사용 내역 조회,운영자(셀러어드민),최숙진,작동,https://service.shopby.co.kr/promotion/coupon/list@2026-09-16,,담당
+t62,프로모션,기획전,t62-P20,P20,기획전·배너 운영,1,STD-PRM-010,기획전/할인 이벤트 페이지,huni-mall → 샵바이,김동학,미착수,SB-001 partial — huni-skin-shopby/src/lib/legacy-data/hooks.ts:352-360 (프로모 데이터원 legacy mock 빈배열),t63 상품·카탈로그(기획전 상품 리스팅),담당
+t62,프로모션,콘텐츠,t62-P20,P20,기획전·배너 운영,2,STD-ADC-013,메인/기획전 배너 관리,운영자(셀러어드민),김동학,미착수,print-quote/04_design/ia.md §2.1 메인 · L4 사유: 메인 배너·BEST 큐레이션의 데이터원이 legacy mock 빈배열/정적 상수(SB-002 stub·SB-003 partial) — 운영자가 바꿀 자리가 없다,,담당
+t62,프로모션,체험단,t62-P21,P21,체험단 모집·운영,1,STD-PRM-011,체험단 모집·신청·당첨·후기,huni-mall,김동학,미착수,print-kb/wiki/policy/custom-dev.md#CST-05 · L4 사유: 체험단 native 지원 범위 미확인. 3차 후보.,P14 리뷰(후기) · P28 게시판 운영,담당
+t62,프로모션,체험단(원장전용),t62-P21,P21,체험단 모집·운영,2,STD-PRM-017,[구IA#71] 체험단관리 (등록/수정/신청내역),운영자,김동학,미실측,IA No.71 체험단관리 · 신규 어디에도 없음 @ 2026-09-16 21:28,,담당
+t62,프로모션,체험단(원장전용),t62-P21,P21,체험단 모집·운영,3,STD-ADC-016,체험단 모집·신청내역 관리(운영자),운영자,김동학,미착수,"L3/legacy-normalized.json#F-121,IA-121,SCOPE-121 · _workspace/huni-launch-scope/02_gap/fit-gap-matrix.csv:122 · docs/huni/후니프린팅_통합IA_일정_역할분담_260616.xlsx#02_IA마스터!A122:K122 || P1판정(260902): huni-skin-shopby 전수 grep '체험단' 0건",,담당
+t62,프로모션,수신동의,t62-P22,P22,마케팅 발송·수신동의 관리,1,STD-PRM-014,마케팅 수신동의 관리,huni-mall → 샵바이,김동학,작동,https://shopby.huniprinting.co.kr/signup@2026-09-16 21:27,P01 회원가입(동의 수집 지점),담당
+t62,프로모션,알림,t62-P22,P22,마케팅 발송·수신동의 관리,2,STD-PRM-012,알림톡/SMS 마케팅 발송,운영자 → 샵바이,최숙진,미착수,print-kb/wiki/policy/membership-auth.md#MEM-02 알림톡 계약 필요 · L4 사유: 알림톡/SMS 계약 미체결 — 1차 영향·조기 필요.,,담당
+t62,프로모션,알림,t62-P22,P22,마케팅 발송·수신동의 관리,3,STD-PRM-013,이메일 뉴스레터 발송,운영자 → 샵바이,최숙진,미착수,print-quote/04_design/ia.md §2.1 고객센터 파생 · L4 사유: new(★ia.md 오염) — 근거출처가 print-quote/04_design/ia.md 파생이라 §4-1 상 「독립 발견」으로 신뢰하면 과대평가. 후니 IA 계보 안에서 파생된 항목.,,담당
+t62,프로모션,알림·수신동의(원장전용),t62-P22,P22,마케팅 발송·수신동의 관리,4,STD-PRM-021,080 수신거부 서비스 미도입 확정,결정(신우진),신우진,구현-미검증,후니정기미팅 정리260915.html §회원·로그인·인증 · 확정 4,,담당
+t62,프로모션,알림·수신동의(원장전용),t62-P22,P22,마케팅 발송·수신동의 관리,5,STD-PRM-015,(IA r59 기능명 공란),미상,신우진,미실측,docs/huni/후니프린팅_IA.xlsx:IA 확인!r59 (기능명 없음),,담당
+t62,B2B,거래처,t62-P23,P23,거래처(기업회원) 등록·관리,1,STD-B2B-001,거래처(기업회원) 등록·관리,미정(webadmin 또는 샵바이 회원그룹),서희항,부분,WA-060 partial — raw/webadmin/webadmin/catalog/models.py:87 (TCusCustomers 모델만·전용 운영화면 urls.py 부재),,담당
+t62,B2B,거래처,t62-P23,P23,거래처(기업회원) 등록·관리,2,STD-B2B-003,거래처 소속 담당자 다계정,미정,최숙진,미착수,WA-060 partial(모델만),,담당
+t62,B2B,거래처(원장전용),t62-P23,P23,거래처(기업회원) 등록·관리,3,STD-B2B-013,[구IA#45] 거래처관리 (등록/수정/처리),운영자,최숙진,미실측,docs/huni/후니프린팅_IA.xlsx 「IA 확인」 No.45 · webadmin 사이드바 33화면에 거래처 없음 @ 2026-09-16 21:28 · 셀러어드민 미확인(R1d),,담당
+t62,B2B,거래처(원장전용),t62-P23,P23,거래처(기업회원) 등록·관리,4,STD-B2B-014,[구IA#46] 매장게시판,운영자(셀러어드민 게시판),최숙진,미실측,IA No.46 매장게시판 · webadmin 해당 없음 @ 2026-09-16 21:28,,담당
+t62,B2B,거래처(원장전용),t62-P23,P23,거래처(기업회원) 등록·관리,5,STD-ADC-015,매장(거래처) 게시판 관리,운영자,김동학,미착수,"L3/legacy-normalized.json#F-096,IA-096,SCOPE-096 · _workspace/huni-launch-scope/02_gap/fit-gap-matrix.csv:97 · docs/huni/후니프린팅_통합IA_일정_역할분담_260616.xlsx#02_IA마스터!A97:K97 || P1판정(260902): huni-skin-shopby 전수 grep '거래처 게시판|매장' 0건 · 운영자 기능은 셀러어드민 소관",P28 게시판 운영,담당
+t62,B2B,거래처,t62-P24,P24,거래처 단가·대량견적,1,STD-B2B-002,거래처별 단가/할인율 설정,webadmin(가격엔진),최숙진,미착수,print-kb/wiki/huni/price-engine.md#PE-SOT-5 가격소스 우선순위 · L4 사유: 돈 걸림. 등급가 매핑 미결이 선행.,t65 운영자·상품가격(가격엔진),담당
+t62,B2B,견적,t62-P24,P24,거래처 단가·대량견적,2,STD-B2B-010,대량 견적 요청 접수·회신,huni-mall + 운영자,최숙진,미착수,SB-056 absent(문의 라우트 부재),,담당
+t62,B2B,견적,t62-P24,P24,거래처 단가·대량견적,3,STD-B2B-011,견적서 발행(사업자 양식),운영자,최숙진,미착수,print-quote/04_design/ia.md §2.1 대량견적 파생 · L4 사유: F-051 견적서 생성·다운로드는 L4a 도메인 std 와도 물린다 — legacy 1:N 공유(§4-2).,,담당
+t62,B2B,후불,t62-P25,P25,후불 주문·여신 관리,1,STD-B2B-004,후불 여신한도 설정,미정(t56 판정 미정),김동학,미착수,print-kb/wiki/policy/custom-dev.md#CST-07 · L4 사유: F-141 후불결제(돈·주문) 미착수.,,담당
+t62,B2B,후불,t62-P25,P25,후불 주문·여신 관리,2,STD-B2B-005,후불 주문 승인·미결제 관리,미정,김동학+신우진,미착수,print-kb/wiki/policy/order-mgmt.md#OMG-04 · L4 사유: 후불 승인·미결제 관리 L2 무근거.,t63 결제 · t64 주문운영(승인→생산),담당
+t62,B2B,후불(원장전용),t62-P25,P25,후불 주문·여신 관리,3,STD-B2B-015,[구IA#91] 주문관리-후불결제,운영자,신우진,미실측,IA No.91 주문관리-후불결제 · 9/15 회의 결제수단 표(가상계좌 미신청·토스 제외) · webadmin 없음,,담당
+t62,B2B,정산,t62-P26,P26,B2B 정산·거래처 원장,1,STD-B2B-006,월 마감 청구서 발행,미정,최숙진,미착수,print-kb/wiki/policy/operations.md#OPS-05 월단위 마감 · L4 사유: 돈 걸림(F-098). 원장 월마감 미구현.,P16 증빙서류 발급(세금계산서) · t65 정산·통계,담당
+t62,B2B,정산,t62-P26,P26,B2B 정산·거래처 원장,2,STD-B2B-007,업체별 미수금 관리,미정,최숙진,미착수,print-quote/04_design/ia.md §2.3 SM-A-06 · L4 사유: 돈 걸림(F-099).,,담당
+t62,B2B,원장,t62-P26,P26,B2B 정산·거래처 원장,3,STD-B2B-008,거래처 원장(온·오프라인 통합),미정(t56 판정 미정),김동학,미착수,print-kb/wiki/policy/custom-dev.md#CST-06 · L4 사유: 온·오프라인 통합 원장 + 계좌관리. 전부 CUSTOM.,,담당
+t62,B2B,원장,t62-P26,P26,B2B 정산·거래처 원장,4,STD-B2B-009,원장 데이터 파일 생성(.txt 연계),미정(t56 판정 미정),김동학,미착수,print-quote/04_design/ia.md §2.3 SM-A-02 .txt 생성 · L4 사유: .txt 연계 생성 미구현.,,담당
+t62,운영자·회원CS,회원,t62-P27,P27,회원 운영(조회·탈퇴회원),1,STD-ADC-001,회원 목록·검색·상세,운영자(셀러어드민),최숙진,작동,https://service.shopby.co.kr/member/list@2026-09-16,P06 등급 · P12 적립금,담당
+t62,운영자·회원CS,회원,t62-P27,P27,회원 운영(조회·탈퇴회원),2,STD-ADC-003,탈퇴회원 관리,운영자(셀러어드민),최숙진,작동,https://service.shopby.co.kr/member/expel@2026-09-16,,담당
+t62,운영자·회원CS,회원(원장전용),t62-P27,P27,회원 운영(조회·탈퇴회원),3,STD-ADC-017,[구IA#73] 회원관리 (주문내역/정보확인),운영자,최숙진,미실측,IA No.73 회원관리 · 샵바이 회원관리(R1d),,담당
+t62,운영자·회원CS,게시판,t62-P28,P28,게시판·문의 응대 운영,1,STD-ADC-007,공지사항 관리,운영자(셀러어드민) → huni-mall `/notice`,최숙진,작동,https://service.shopby.co.kr/board/article@2026-09-16,,담당
+t62,운영자·회원CS,게시판,t62-P28,P28,게시판·문의 응대 운영,2,STD-ADC-008,FAQ 관리,운영자(셀러어드민),최숙진,작동,https://service.shopby.co.kr/board@2026-09-16,,담당
+t62,운영자·회원CS,게시판,t62-P28,P28,게시판·문의 응대 운영,3,STD-ADC-009,상품Q&A 답변 관리,운영자(셀러어드민),최숙진,작동,https://service.shopby.co.kr/product/inquiry@2026-09-16,,담당
+t62,운영자·회원CS,게시판,t62-P28,P28,게시판·문의 응대 운영,4,STD-ADC-010,1:1 문의 답변 관리,운영자(셀러어드민),최숙진,작동,https://service.shopby.co.kr/inquiry@2026-09-16,,담당
+t62,운영자·회원CS,게시판,t62-P28,P28,게시판·문의 응대 운영,5,STD-ADC-011,이용후기(리뷰) 관리·블라인드,운영자(셀러어드민),최숙진,작동,https://service.shopby.co.kr/review@2026-09-16,,담당
+t62,운영자·회원CS,게시판,t62-P28,P28,게시판·문의 응대 운영,6,STD-ADC-012,대량견적/기업상담/디자인상담 접수 관리,운영자,김동학,미착수,print-quote/04_design/ia.md §2.3 SM-A-32 SM-A-33 SM-A-34 · L4 사유: 대량견적·기업상담·디자인상담 접수 관리 화면 근거 없음,P24 대량견적 · STD-ADC-011 → P14 리뷰,담당
+t62,운영자·회원CS,콘텐츠,t62-P29,P29,인쇄 가이드 콘텐츠 운영,1,STD-ADC-014,인쇄 가이드 콘텐츠 관리,webadmin + huni-mall,서희항+최숙진,구현-미검증,raw/webadmin/webadmin/config/urls.py:72-87 가이드파일 업로드/관리 · raw/webadmin/webadmin/catalog/s3_guide.py:266-350,t63 원고·파일(가이드 활용),담당
+t63,상품·카탈로그,카테고리 · 전시,t63-P01,P01,카테고리로 상품 찾기,1,STD-CAT-023,상품 기본정보 세팅·로드(상품코드·주문가능여부·회원전용 노출 게이팅),huni-mall,김동학,작동,huni-skin-shopby/src/lib/api/server/catalog.ts:8,t65 — 상품·가격 등록 운영(STD-ADP)이 이 목록의 원천을 채운다,담당
+t63,상품·카탈로그,카테고리 · 전시,t63-P01,P01,카테고리로 상품 찾기,2,STD-CAT-001,대분류/중분류/소분류 다단 카테고리 트리 노출,huni-mall,김동학,작동,huni-skin-shopby/src/lib/api/server/catalog.ts:6 · huni-skin-shopby/src/lib/api/server/catalog.ts · huni-skin-shopby/src/components/layout/header.tsx:280-288 · huni-skin-shopby/src/components/layout/mobile-nav.tsx:118-160,t65 — 상품·가격 등록 운영(STD-ADP)이 이 목록의 원천을 채운다,담당
+t63,상품·카탈로그,카테고리 · 전시,t63-P01,P01,카테고리로 상품 찾기,3,STD-CAT-002,카테고리별 상품 리스팅(정렬·페이징),huni-mall,김동학,부분,huni-skin-shopby/src/lib/api/server/catalog.ts:337-344 · huni-skin-shopby/src/components/shop/shop-list.tsx:14-24,t65 — 상품·가격 등록 운영(STD-ADP)이 이 목록의 원천을 채운다,담당
+t63,상품·카탈로그,카테고리 · 전시,t63-P01,P01,카테고리로 상품 찾기,4,STD-CAT-030,상품 0개 중분류(스티커 팩 0 등) 노출 정리,huni-mall,최숙진,미착수,huni-skin-shopby/src/lib/api/server/catalog.ts:314,t65 — 상품·가격 등록 운영(STD-ADP)이 이 목록의 원천을 채운다,담당
+t63,상품·카탈로그,카테고리 · 전시,t63-P01,P01,카테고리로 상품 찾기,5,STD-CAT-003,상품군 전용 랜딩(출력/책자/실사/패키지/굿즈),huni-mall,김동학,미착수,「미확인」 — 찾지못했다 huni-skin-shopby app main 하위 상품군 전용 랜딩 라우트 grep 0건,t65 — 상품·가격 등록 운영(STD-ADP)이 이 목록의 원천을 채운다,담당
+t63,상품·카탈로그,카테고리 · 전시,t63-P01,P01,카테고리로 상품 찾기,6,STD-CAT-021,메인 기획전/배너 영역,huni-mall,김동학,부분,huni-skin-shopby/src/app/(main)/page.tsx:1-9,t65 — 상품·가격 등록 운영(STD-ADP)이 이 목록의 원천을 채운다,담당
+t63,상품·카탈로그,카테고리 · 전시,t63-P01,P01,카테고리로 상품 찾기,7,STD-CAT-027,홈 더미 콘텐츠 정리(BEST 8종 /product/1 404 · 프로모션 ZONE·새소식 영문 문구),huni-mall,김동학,미착수,「미확인」 — 찾지못했다 코드 저장소 기준 조사 - 라이브 사이트 실측은 이번 읽기전용 코드조사 범위를 벗어나 재확인하지 않음. home-content.ts:59(BEST 상품(홈) - 레거시. 현재 빈 목록) 및 351(홈 기획전 배너(레거시) - 빈 목록) 주석은 코드상 확인,t65 — 상품·가격 등록 운영(STD-ADP)이 이 목록의 원천을 채운다,담당
+t63,상품·카탈로그,카테고리 · 전시,t63-P01,P01,카테고리로 상품 찾기,8,STD-CAT-022,품절/판매중지 상품 표시 및 대체 안내,webadmin + shopby,김동학,미착수,raw/webadmin/webadmin/catalog/widget_api.py:5904-5993,t65 — 상품·가격 등록 운영(STD-ADP)이 이 목록의 원천을 채운다,담당
+t63,상품·카탈로그,카테고리 · 전시,t63-P01,P01,카테고리로 상품 찾기,9,STD-CAT-039,목록 시작가 자동 계산(위젯 기본값) — 오리지널 명함만 수기 입력,webadmin,서희항,부분,raw/webadmin/webadmin/catalog/widget_api.py:5955-5958,t65 — 상품·가격 등록 운영(STD-ADP)이 이 목록의 원천을 채운다,담당
+t63,상품·카탈로그,카테고리 · 전시,t63-P01,P01,카테고리로 상품 찾기,10,STD-CAT-028,목록·검색 시작가 「10원~」 표시(샵바이 salePrice 더미),huni-mall,김동학,미착수,huni-skin-shopby/src/lib/api/server/catalog.ts:86 · huni-skin-shopby/src/lib/api/widget-order.ts:22-23,t65 — 상품·가격 등록 운영(STD-ADP)이 이 목록의 원천을 채운다,담당
+t63,상품·카탈로그,카테고리 · 전시,t63-P01,P01,카테고리로 상품 찾기,11,STD-CAT-043,목록·검색 시작가를 webadmin `GET /api/w/v1/catalog`(게시 위젯+시작가) 로 이관 — 「10원~」 더미 대체 개발안,webadmin + huni-mall,김동학+서희항,미착수,raw/webadmin/webadmin/config/urls.py:248 · huni-skin-shopby/src/lib/api/server/catalog.ts:86,t65 — 상품·가격 등록 운영(STD-ADP)이 이 목록의 원천을 채운다,담당
+t63,상품·카탈로그,카테고리 · 전시,t63-P01,P01,카테고리로 상품 찾기,12,STD-CAT-040,시작가가 API 로 샵바이에 내려가는데 쇼핑몰에 반영되지 않는 원인 확인,webadmin,서희항·최숙진,미착수,raw/webadmin/webadmin/catalog/shopby_sync.py:1-384 · huni-skin-shopby/src/lib/api/server/catalog.ts:86,t65 — 상품·가격 등록 운영(STD-ADP)이 이 목록의 원천을 채운다,담당
+t63,상품·카탈로그,카테고리 · 전시,t63-P01,P01,카테고리로 상품 찾기,13,STD-CAT-041,판매중 상품 수 3갈래(대시보드 291·상품목록 판매중 297/검색 291·API ONSALE 226) 기준 정리,webadmin,최숙진,미착수,「미확인」 — 찾지못했다 대시보드 291-상품목록 297/291-API ONSALE 226 이라는 3갈래 수치 불일치의 원인이 될 단일 코드 지점을 특정하지 못함 - 여러 화면의 집계 로직 각각을 대조해야 하는 교차검증 성격의 조사이며 이번 범위에서는 원인 코드를 확정할 수 없었다,t65 — 상품·가격 등록 운영(STD-ADP)이 이 목록의 원천을 채운다,담당
+t63,상품·카탈로그,카테고리 · 전시,t63-P01,P01,카테고리로 상품 찾기,14,STD-CAT-024,포장재 상품군 주문 경로(전용 옵션·주문 흐름),huni-mall,김동학,부분,_workspace/huni-launch-scope/02_gap/fit-gap-matrix.csv:92 (선행 카드 증거 · 실재 확인),t65 — 상품·가격 등록 운영(STD-ADP)이 이 목록의 원천을 채운다,담당
+t63,상품·카탈로그,카테고리 · 전시,t63-P01,P01,카테고리로 상품 찾기,15,STD-CAT-025,굿즈 상품군 주문 경로(파우치·백 포함),huni-mall,김동학,부분,huni-skin-shopby/src/components/home/home-content.ts:64,t65 — 상품·가격 등록 운영(STD-ADP)이 이 목록의 원천을 채운다,담당
+t63,상품·카탈로그,카테고리 · 전시,t63-P01,P01,카테고리로 상품 찾기,16,STD-CAT-026,수작 상품 메인·상품페이지 경로,huni-mall,김동학,미착수,_workspace/huni-launch-scope/02_gap/fit-gap-matrix.csv:94 (선행 카드 증거 · 실재 확인),t65 — 상품·가격 등록 운영(STD-ADP)이 이 목록의 원천을 채운다,담당
+t63,상품·카탈로그,카테고리 · 전시,t63-P01,P01,카테고리로 상품 찾기,17,STD-CAT-031,캘린더 4종 1차 오픈 포함 확정,huni-mall,최숙진+신우진,부분,huni-skin-shopby/src/lib/product-menu.ts:22,t65 — 상품·가격 등록 운영(STD-ADP)이 이 목록의 원천을 채운다,담당
+t63,상품·카탈로그,카테고리 · 전시,t63-P01,P01,카테고리로 상품 찾기,18,STD-CAT-032,포토앨범 1차 오픈 제외 — 전달·문의 멘트 통일,huni-mall,최숙진,부분,huni-skin-shopby/src/lib/product-menu.ts:41,t65 — 상품·가격 등록 운영(STD-ADP)이 이 목록의 원천을 채운다,담당
+t63,상품·카탈로그,카테고리 · 전시,t63-P01,P01,카테고리로 상품 찾기,19,,카테고리 트리 ↔ webadmin 상품군의 매핑 규약,huni-mall,김동학+서희항,원장 행 없음,「미확인」,t65 — 상품·가격 등록 운영(STD-ADP)이 이 목록의 원천을 채운다,단계
+t63,상품·카탈로그,검색,t63-P02,P02,검색으로 상품 찾기,1,STD-CAT-006,검색어 자동완성·인기검색어,huni-mall,김동학,부분,huni-skin-shopby/src/app/(main)/search/page.tsx:1-6,,담당
+t63,상품·카탈로그,검색,t63-P02,P02,검색으로 상품 찾기,2,STD-CAT-004,상품명 통합검색,huni-mall,김동학,작동,huni-skin-shopby/src/app/(main)/search/page.tsx:1-14 · huni-skin-shopby/src/lib/api/server/catalog.ts:181-182,,담당
+t63,상품·카탈로그,검색,t63-P02,P02,검색으로 상품 찾기,3,STD-CAT-005,종이/소재명 기준 검색(아트지·스노우지 등),huni-mall,김동학,미착수,「미확인」 — 찾지못했다 소재 필터 관련 코드 없음,,담당
+t63,상품·카탈로그,검색,t63-P02,P02,검색으로 상품 찾기,4,,검색 결과 0건 안내 화면,huni-mall,김동학,원장 행 없음,「미확인」,,단계
+t63,상품·카탈로그,상품상세 · 콘텐츠,t63-P03,P03,상품 상세 읽고 판단하기,1,STD-CAT-007,상품 상세페이지 본문(이미지·설명 블록),huni-mall,김동학+최숙진,부분,huni-skin-shopby/src/components/product/product-sections.tsx:1-15,t65 — 상품 Q&A·리뷰의 운영자 응대(STD-CLM)는 t65,담당
+t63,상품·카탈로그,상품상세 · 콘텐츠,t63-P03,P03,상품 상세 읽고 판단하기,2,STD-CAT-034,상세페이지 탭 6종 자동 등록(디자인가이드·디자인보기 포함),huni-mall,김동학+서희항+최숙진,부분,huni-skin-shopby/src/lib/printly/detail-tabs.ts:18-31,t65 — 상품 Q&A·리뷰의 운영자 응대(STD-CLM)는 t65,담당
+t63,상품·카탈로그,상품상세 · 콘텐츠,t63-P03,P03,상품 상세 읽고 판단하기,3,STD-CAT-029,메뉴 슬러그형 목업 상세(/product/calendar 등) 잔존 — 「(44 Reviews)」·더미 옵션,huni-mall,김동학,미착수,huni-skin-shopby/src/components/product/configurators/print-configurator.tsx:379,t65 — 상품 Q&A·리뷰의 운영자 응대(STD-CLM)는 t65,담당
+t63,상품·카탈로그,상품상세 · 콘텐츠,t63-P03,P03,상품 상세 읽고 판단하기,4,STD-CAT-042,레거시 mock 훅 제거 — legacy-data 참조 17파일(configurator 11종·홈 뉴스/프로모·포인트 모달),huni-mall,김동학,미착수,huni-skin-shopby/src/lib/legacy-data/index.ts:1,t65 — 상품 Q&A·리뷰의 운영자 응대(STD-CLM)는 t65,담당
+t63,상품·카탈로그,상품상세 · 콘텐츠,t63-P03,P03,상품 상세 읽고 판단하기,5,STD-CAT-008,동일 계열 상품 분기 안내(일반명함/고급지명함/부분UV명함 등),huni-mall,김동학,미착수,「미확인」 — 찾지못했다 계열 분기 안내 UI grep 0건 - MENU_PRODUCTS 는 메뉴 슬러그 분기일 뿐,t65 — 상품 Q&A·리뷰의 운영자 응대(STD-CLM)는 t65,담당
+t63,상품·카탈로그,상품상세 · 콘텐츠,t63-P03,P03,상품 상세 읽고 판단하기,6,STD-CAT-010,재단사이즈 vs 작업사이즈 설명 가이드,huni-mall,김동학,작동,huni-skin-shopby/src/lib/guide-data.ts:87,t65 — 상품 Q&A·리뷰의 운영자 응대(STD-CLM)는 t65,담당
+t63,상품·카탈로그,상품상세 · 콘텐츠,t63-P03,P03,상품 상세 읽고 판단하기,7,STD-CAT-009,후가공 용어 설명 툴팁(도무송·오시·형압·귀돌이),huni-mall,김동학+최숙진,미착수,huni-skin-shopby/src/lib/guide-data.ts:178-184,t65 — 상품 Q&A·리뷰의 운영자 응대(STD-CLM)는 t65,담당
+t63,상품·카탈로그,상품상세 · 콘텐츠,t63-P03,P03,상품 상세 읽고 판단하기,8,STD-CAT-011,상품별 제작 소요일/출고 기준 안내,huni-mall,김동학+서희항,미착수,huni-skin-shopby/src/components/product/product-sections.tsx:151,t65 — 상품 Q&A·리뷰의 운영자 응대(STD-CLM)는 t65,담당
+t63,상품·카탈로그,상품상세 · 콘텐츠,t63-P03,P03,상품 상세 읽고 판단하기,9,STD-CAT-012,재작업 불가 사항 고지(폰트 아웃라인 등),huni-mall,김동학+최숙진,부분,huni-skin-shopby/src/lib/guide-data.ts:100,t65 — 상품 Q&A·리뷰의 운영자 응대(STD-CLM)는 t65,담당
+t63,상품·카탈로그,상품상세 · 콘텐츠,t63-P03,P03,상품 상세 읽고 판단하기,10,STD-CAT-019,인쇄 가이드 콘텐츠(11종),huni-mall,최숙진+김동학,부분,huni-skin-shopby/src/lib/guide-data.ts:158-206,t65 — 상품 Q&A·리뷰의 운영자 응대(STD-CLM)는 t65,담당
+t63,상품·카탈로그,상품상세 · 콘텐츠,t63-P03,P03,상품 상세 읽고 판단하기,11,STD-CAT-020,템플릿/샘플 다운로드 제공,huni-mall,미정,미실측,「미확인」 — 찾지못했다 guide-data.ts 전체에서 실제 파일 다운로드 링크-템플릿/샘플 파일 경로 grep 0건 - 템플릿 불러오기와 저장(204행)은 편집기 사용법 가이드 제목일 뿐 다운로드 기능 아님,t65 — 상품 Q&A·리뷰의 운영자 응대(STD-CLM)는 t65,담당
+t63,상품·카탈로그,상품상세 · 콘텐츠,t63-P03,P03,상품 상세 읽고 판단하기,12,STD-CAT-014,상품 리뷰 목록·평점 노출,huni-mall,김동학+최숙진,작동,huni-skin-shopby/src/components/product/product-sections-interactive.tsx:247-248,t65 — 상품 Q&A·리뷰의 운영자 응대(STD-CLM)는 t65,담당
+t63,상품·카탈로그,상품상세 · 콘텐츠,t63-P03,P03,상품 상세 읽고 판단하기,13,STD-CAT-015,사진 리뷰 갤러리,huni-mall,김동학,부분,huni-skin-shopby/src/lib/api/hooks/use-product-reviews.ts:16-34,t65 — 상품 Q&A·리뷰의 운영자 응대(STD-CLM)는 t65,담당
+t63,상품·카탈로그,상품상세 · 콘텐츠,t63-P03,P03,상품 상세 읽고 판단하기,14,STD-CAT-013,상품 Q&A 게시,huni-mall + shopby,김동학,미착수,「미확인」 — 찾지못했다 huni-skin-shopby app main 하위 inquiry-qna 문의 라우트 grep 0건. docs shopby-api product-shop-public.yml products/inquiries 및 display-shop-public.yml ProductInquiry 태그(3180-3360행)에 명세는 존재,t65 — 상품 Q&A·리뷰의 운영자 응대(STD-CLM)는 t65,담당
+t63,상품·카탈로그,상품상세 · 콘텐츠,t63-P03,P03,상품 상세 읽고 판단하기,15,STD-CAT-016,관련상품/함께 주문한 상품 추천,huni-mall + shopby,김동학,미착수,print-quote/04_design/ia.md (선행 카드 증거 · 실재 확인),t65 — 상품 Q&A·리뷰의 운영자 응대(STD-CLM)는 t65,담당
+t63,상품·카탈로그,상품상세 · 콘텐츠,t63-P03,P03,상품 상세 읽고 판단하기,16,STD-CAT-017,최근 본 상품,huni-mall + shopby,김동학,미착수,print-quote/04_design/ia.md (선행 카드 증거 · 실재 확인),t65 — 상품 Q&A·리뷰의 운영자 응대(STD-CLM)는 t65,담당
+t63,상품·카탈로그,상품상세 · 콘텐츠,t63-P03,P03,상품 상세 읽고 판단하기,17,STD-CAT-018,찜/관심상품,huni-mall + shopby,김동학,미착수,print-kb/wiki/policy/mypage.md (선행 카드 증거 · 실재 확인),t65 — 상품 Q&A·리뷰의 운영자 응대(STD-CLM)는 t65,담당
+t63,상품·카탈로그,상품상세 · 콘텐츠,t63-P03,P03,상품 상세 읽고 판단하기,18,,상세 → 주문옵션 위젯으로 넘어가는 진입 지점(CTA),huni-mall,김동학,원장 행 없음,「미확인」,t65 — 상품 Q&A·리뷰의 운영자 응대(STD-CLM)는 t65,단계
+t63,상품·카탈로그,상품상세(디자인 상품),t63-P04,P04,디자인 상품 고르기,1,STD-CAT-033,디자인 상품 화면 구조 — 카테고리 → 디자인 목록 → 상세 페이지,huni-mall,서희항,미착수,「미확인」 — 찾지못했다 huni-skin-shopby 에 카테고리에서 디자인목록으로 상세로 이어지는 3단 전용 라우트 grep 0건 - design-calendar-configurator.tsx 는 기존 상품상세 내 옵션 패널일 뿐 별도 디자인 목록 페이지 아님,t65 — 디자인 등록·그룹핑 운영(STD-ADP)은 t65,담당
+t63,상품·카탈로그,상품상세(디자인 상품),t63-P04,P04,디자인 상품 고르기,2,STD-CAT-035,디자인 식별 규약 — PS코드 1개 + 템플릿 경로(이름) 구분·정사각형 공용 템플릿,webadmin,서희항,미착수,raw/webadmin/webadmin/catalog/designs.py:8-10,t65 — 디자인 등록·그룹핑 운영(STD-ADP)은 t65,담당
+t63,상품·카탈로그,상품상세(디자인 상품),t63-P04,P04,디자인 상품 고르기,3,STD-CAT-036,디자인 목록 API — webadmin 등록분을 신규몰이 불러오는 연동,webadmin,서희항,미착수,raw/webadmin/webadmin/config/urls.py:288,t65 — 디자인 등록·그룹핑 운영(STD-ADP)은 t65,담당
+t63,상품·카탈로그,상품상세(디자인 상품),t63-P04,P04,디자인 상품 고르기,4,STD-CAT-037,디자인 그룹핑 기준(태그·그룹·복수 그룹 등록·노출 순서),webadmin,최숙진,미착수,raw/webadmin/webadmin/catalog/designs.py:235-236,t65 — 디자인 등록·그룹핑 운영(STD-ADP)은 t65,담당
+t63,상품·카탈로그,상품상세(디자인 상품),t63-P04,P04,디자인 상품 고르기,5,STD-CAT-038,디자인 목록용 API·어드민 기능 개발자 협의,webadmin,신우진,미착수,「미확인」 — 찾지못했다 디자인 목록용 API-어드민 기능에 대한 개발자 협의 자체는 코드/명세 대상이 아닌 프로세스 항목 - raw/webadmin 및 docs/shopby 어디에도 협의 회의록-TODO 주석 형태의 근거 없음,t65 — 디자인 등록·그룹핑 운영(STD-ADP)은 t65,담당
+t63,옵션·견적,옵션위젯 · 제약,t63-P05,P05,옵션 위젯 띄우고 고르기,1,STD-OPT-001,상품 상세 내 주문옵션 위젯 마운트(격리 렌더),widget,서희항,작동,raw/webadmin/webadmin/catalog/static/catalog/widget.js:136 · raw/webadmin/webadmin/catalog/static/catalog/widget.js:1032 · huni-skin-shopby/src/components/product/huni-widget.tsx:304-313,t65 — 제약규칙 등록·관리(webadmin 폼빌더)는 운영 쪽,담당
+t63,옵션·견적,옵션위젯 · 제약,t63-P05,P05,옵션 위젯 띄우고 고르기,2,STD-OPT-002,정규화 옵션 데이터 계약 기반 위젯 구동,widget,서희항,작동,raw/webadmin/webadmin/catalog/static/catalog/widget.js:145 · raw/webadmin/webadmin/catalog/widget_api.py:1172,t65 — 제약규칙 등록·관리(webadmin 폼빌더)는 운영 쪽,담당
+t63,옵션·견적,옵션위젯 · 제약,t63-P05,P05,옵션 위젯 띄우고 고르기,3,STD-OPT-003,옵션 컴포넌트 타입 다형 렌더(셀렉트·라디오·체크·수치입력·이미지선택),widget,서희항,작동,raw/webadmin/webadmin/catalog/static/catalog/widget_renderer.js:5019 · raw/webadmin/webadmin/catalog/static/catalog/widget_renderer.js:5159 · raw/webadmin/webadmin/catalog/static/catalog/widget_renderer.js:5182 · raw/webadmin/webadmin/catalog/static/catalog/widget_renderer.js:2454-2493 · raw/webadmin/webadmin/catalog/static/catalog/widget_renderer.js:789-841,t65 — 제약규칙 등록·관리(webadmin 폼빌더)는 운영 쪽,담당
+t63,옵션·견적,옵션위젯 · 제약,t63-P05,P05,옵션 위젯 띄우고 고르기,4,STD-OPT-006,옵션 그룹 접기/펼치기·진행 스텝 표시,widget,서희항,부분,raw/webadmin/webadmin/catalog/static/catalog/widget_renderer.js:5289-5307,t65 — 제약규칙 등록·관리(webadmin 폼빌더)는 운영 쪽,담당
+t63,옵션·견적,옵션위젯 · 제약,t63-P05,P05,옵션 위젯 띄우고 고르기,5,STD-OPT-004,옵션 선택 캐스케이드(상위 선택이 하위 목록 갱신),widget,서희항,부분,raw/webadmin/webadmin/catalog/static/catalog/widget_renderer.js:2918-2934 · raw/webadmin/webadmin/catalog/static/catalog/widget_renderer.js:690-760,t65 — 제약규칙 등록·관리(webadmin 폼빌더)는 운영 쪽,담당
+t63,옵션·견적,옵션위젯 · 제약,t63-P05,P05,옵션 위젯 띄우고 고르기,6,STD-OPT-005,토글형 후가공 섹션(켜야 하위 선택지 노출),widget,서희항,부분,raw/webadmin/webadmin/catalog/static/catalog/widget_renderer.js:5491-5646,t65 — 제약규칙 등록·관리(webadmin 폼빌더)는 운영 쪽,담당
+t63,옵션·견적,옵션위젯 · 제약,t63-P05,P05,옵션 위젯 띄우고 고르기,7,STD-OPT-037,옵션 조합 제약 규칙 평가(불가 조합 차단·사유 표시),webadmin,서희항,부분,raw/webadmin/webadmin/catalog/models.py:814-829 · raw/webadmin/webadmin/catalog/widget_api.py:3370-3409 · raw/webadmin/webadmin/catalog/widget_api.py:4389-4392 · raw/webadmin/webadmin/catalog/static/catalog/widget.js:924-939 · raw/webadmin/webadmin/catalog/static/catalog/constraint_engine.js:1-54,t65 — 제약규칙 등록·관리(webadmin 폼빌더)는 운영 쪽,담당
+t63,옵션·견적,옵션위젯 · 제약,t63-P05,P05,옵션 위젯 띄우고 고르기,8,STD-OPT-038,자재→가능 인쇄방식 게이팅,webadmin,서희항,부분,raw/webadmin/webadmin/catalog/models.py:814-829 · raw/webadmin/webadmin/catalog/static/catalog/widget_renderer.js:4066-4067,t65 — 제약규칙 등록·관리(webadmin 폼빌더)는 운영 쪽,담당
+t63,옵션·견적,옵션위젯 · 제약,t63-P05,P05,옵션 위젯 띄우고 고르기,9,STD-OPT-039,공정 택일 그룹(상호배타) 처리,webadmin,서희항,부분,raw/webadmin/webadmin/catalog/static/catalog/widget_renderer.js:4029-4131,t65 — 제약규칙 등록·관리(webadmin 폼빌더)는 운영 쪽,담당
+t63,옵션·견적,옵션위젯 · 제약,t63-P05,P05,옵션 위젯 띄우고 고르기,10,STD-OPT-040,필수 동반 옵션 강제(예 인쇄없음 시 후가공 필수),webadmin,서희항,부분,raw/webadmin/webadmin/catalog/static/catalog/widget_renderer.js:4100-4101,t65 — 제약규칙 등록·관리(webadmin 폼빌더)는 운영 쪽,담당
+t63,옵션·견적,옵션위젯 · 제약,t63-P05,P05,옵션 위젯 띄우고 고르기,11,STD-OPT-041,수량 최소/최대/증분 검증,widget,서희항,작동,raw/webadmin/webadmin/catalog/static/catalog/widget_renderer.js:2804-2901 · raw/webadmin/webadmin/catalog/models.py:539-541,t65 — 제약규칙 등록·관리(webadmin 폼빌더)는 운영 쪽,담당
+t63,옵션·견적,옵션위젯 · 제약,t63-P05,P05,옵션 위젯 띄우고 고르기,12,STD-OPT-042,사이즈 범위·비율 검증(매트릭스 밖 사이즈 차단),widget,서희항,부분,raw/webadmin/webadmin/catalog/static/catalog/widget_renderer.js:3921-3930 · raw/webadmin/webadmin/catalog/models.py:555-560,t65 — 제약규칙 등록·관리(webadmin 폼빌더)는 운영 쪽,담당
+t63,옵션·견적,옵션위젯 · 제약,t63-P05,P05,옵션 위젯 띄우고 고르기,13,STD-OPT-007,선택 요약 패널(현재 사양 한눈에),widget,서희항,작동,raw/webadmin/webadmin/catalog/static/catalog/widget_renderer.js:7867-7900,t65 — 제약규칙 등록·관리(webadmin 폼빌더)는 운영 쪽,담당
+t63,옵션·견적,옵션축,t63-P06,P06,인쇄 사양 축 입력하기,1,STD-OPT-008,용지(자재) 선택,webadmin,서희항,작동,raw/webadmin/webadmin/catalog/models.py:155-160 · raw/webadmin/webadmin/catalog/static/catalog/widget_renderer.js:714,,담당
+t63,옵션·견적,옵션축,t63-P06,P06,인쇄 사양 축 입력하기,2,STD-OPT-009,평량(g/㎡) 선택,webadmin,서희항,작동,raw/webadmin/webadmin/catalog/models.py:167 · raw/webadmin/webadmin/catalog/paper_views.py:419,,담당
+t63,옵션·견적,옵션축,t63-P06,P06,인쇄 사양 축 입력하기,3,STD-OPT-010,비종이 소재 선택(아크릴·PVC·패브릭 등),webadmin,서희항,작동,raw/webadmin/webadmin/catalog/models.py:160-161 · raw/webadmin/webadmin/catalog/tmpl_combo.py:54,,담당
+t63,옵션·견적,옵션축,t63-P06,P06,인쇄 사양 축 입력하기,4,STD-OPT-058,주문가능 자재(용지) 목록 모달,webadmin,김동학+최숙진,미착수,_workspace/huni-launch-scope/02_gap/fit-gap-matrix.csv:60 (선행 카드 증거 · 실재 확인),,담당
+t63,옵션·견적,옵션축,t63-P06,P06,인쇄 사양 축 입력하기,5,STD-OPT-011,인쇄도수 선택(단면/양면·4도/8도·1도),webadmin,서희항,작동,raw/webadmin/webadmin/catalog/models.py:48-56,,담당
+t63,옵션·견적,옵션축,t63-P06,P06,인쇄 사양 축 입력하기,6,STD-OPT-012,별색(spot color) 선택,webadmin,서희항,작동,raw/webadmin/webadmin/catalog/models.py:213 · raw/webadmin/webadmin/catalog/static/catalog/widget_renderer.js:3995-4005,,담당
+t63,옵션·견적,옵션축,t63-P06,P06,인쇄 사양 축 입력하기,7,STD-OPT-013,화이트/UV white 언더베이스 선택,widget,서희항,작동,raw/webadmin/webadmin/catalog/static/catalog/widget_renderer.js:4001-4067,,담당
+t63,옵션·견적,옵션축,t63-P06,P06,인쇄 사양 축 입력하기,8,STD-OPT-014,규격 사이즈 선택(프리셋),webadmin,서희항,작동,raw/webadmin/webadmin/catalog/models.py:534-550 · raw/webadmin/webadmin/catalog/static/catalog/widget_renderer.js:2795,,담당
+t63,옵션·견적,옵션축,t63-P06,P06,인쇄 사양 축 입력하기,9,STD-OPT-015,비규격 사이즈 직접입력(재단 가로·세로),webadmin,서희항,작동,raw/webadmin/webadmin/catalog/models.py:555-560 · raw/webadmin/webadmin/catalog/static/catalog/widget_renderer.js:3114-3174,,담당
+t63,옵션·견적,옵션축,t63-P06,P06,인쇄 사양 축 입력하기,10,STD-OPT-016,작업 사이즈 입력·자동 도출(도련 포함),webadmin,서희항,부분,raw/webadmin/webadmin/catalog/static/catalog/widget_renderer.js:3921-3930 · raw/webadmin/webadmin/catalog/cover_rule_db.py:212,,담당
+t63,옵션·견적,옵션축,t63-P06,P06,인쇄 사양 축 입력하기,11,STD-OPT-057,규격 가이드 모달(사이즈 안내 팝업),shopby,김동학+최숙진,미착수,「미확인」 — 찾지 못했다(huni-skin-shopby/src 전체 및 raw/webadmin/webadmin/catalog/static/catalog/*.js에서 사이즈 안내 모달 관련 코드 grep 0건),,담당
+t63,옵션·견적,옵션축,t63-P06,P06,인쇄 사양 축 입력하기,12,STD-OPT-017,수량 선택(구간 프리셋 + 직접입력),widget,서희항,작동,raw/webadmin/webadmin/catalog/static/catalog/widget_renderer.js:5010-5024 · raw/webadmin/webadmin/catalog/static/catalog/widget_renderer.js:5033-5041,,담당
+t63,옵션·견적,옵션축,t63-P06,P06,인쇄 사양 축 입력하기,13,STD-OPT-018,건수(디자인 종류 수) 입력 및 총량 = 건수×수량 규칙 표시,widget,서희항,작동,raw/webadmin/webadmin/catalog/static/catalog/widget_renderer.js:5045-5052 · raw/webadmin/webadmin/catalog/static/catalog/widget_renderer.js:2977,,담당
+t63,옵션·견적,옵션축,t63-P06,P06,인쇄 사양 축 입력하기,14,STD-OPT-019,페이지 수 입력(책자류 필수 축),webadmin,서희항,부분,raw/webadmin/webadmin/catalog/models.py:215 · raw/webadmin/webadmin/catalog/static/catalog/widget_renderer.js:894,,담당
+t63,옵션·견적,옵션축,t63-P06,P06,인쇄 사양 축 입력하기,15,STD-OPT-020,표지/내지/간지 용지 개별 선택,widget,서희항,작동,raw/webadmin/webadmin/catalog/models.py:889 · raw/webadmin/webadmin/catalog/static/catalog/widget_renderer.js:690-760,,담당
+t63,옵션·견적,옵션축,t63-P06,P06,인쇄 사양 축 입력하기,16,STD-OPT-021,표지/내지 인쇄도수 개별 선택,widget,서희항,작동,raw/webadmin/webadmin/catalog/static/catalog/widget_renderer.js:1104 · raw/webadmin/webadmin/catalog/static/catalog/widget_renderer.js:1805-1806,,담당
+t63,옵션·견적,옵션축,t63-P06,P06,인쇄 사양 축 입력하기,17,STD-OPT-022,제본 방식 선택(중철·무선·PUR·트윈링·하드커버),webadmin,서희항,작동,raw/webadmin/webadmin/catalog/models.py:589-624 · raw/webadmin/webadmin/catalog/spine_calc.py:1,,담당
+t63,옵션·견적,옵션축,t63-P06,P06,인쇄 사양 축 입력하기,18,STD-OPT-023,제본 방향 선택(좌철/상철 × 세로/가로),webadmin,서희항,작동,raw/webadmin/webadmin/catalog/spine_calc.py:48-58,,담당
+t63,옵션·견적,옵션축,t63-P06,P06,인쇄 사양 축 입력하기,19,STD-OPT-056,캘린더 가공·장수(월수) 선택,shopby,김동학,구현-미검증,huni-skin-shopby/src/components/product/configurators/calendar-configurator.tsx:59 · huni-skin-shopby/src/components/product/configurators/calendar-configurator.tsx:167-169 · huni-skin-shopby/src/components/product/configurators/calendar-configurator.tsx:196-211,,담당
+t63,옵션·견적,후가공 · 부자재,t63-P07,P07,후가공·부자재 고르기,1,STD-OPT-024,코팅 선택(무광/유광 × 단면/양면),widget,서희항,부분,raw/webadmin/webadmin/catalog/static/catalog/widget_renderer.js:696 · raw/webadmin/webadmin/catalog/static/catalog/widget_renderer.js:3995,t64 — 선택된 공정은 MES 공정 전개의 입력이 된다,담당
+t63,옵션·견적,후가공 · 부자재,t63-P07,P07,후가공·부자재 고르기,2,STD-OPT-025,박 선택(색상 다종 × 면 × 크기 × 내용같음/틀림),webadmin,서희항,부분,raw/webadmin/webadmin/catalog/models.py:589-608,t64 — 선택된 공정은 MES 공정 전개의 입력이 된다,담당
+t63,옵션·견적,후가공 · 부자재,t63-P07,P07,후가공·부자재 고르기,3,STD-OPT-026,형압(양각/음각) 선택,webadmin,서희항,부분,raw/webadmin/webadmin/catalog/models.py:596-601,t64 — 선택된 공정은 MES 공정 전개의 입력이 된다,담당
+t63,옵션·견적,후가공 · 부자재,t63-P07,P07,후가공·부자재 고르기,4,STD-OPT-027,오시 선택(줄 수 × 방향),webadmin,서희항,부분,raw/webadmin/webadmin/catalog/models.py:589-624,t64 — 선택된 공정은 MES 공정 전개의 입력이 된다,담당
+t63,옵션·견적,후가공 · 부자재,t63-P07,P07,후가공·부자재 고르기,5,STD-OPT-028,미싱 선택,webadmin,서희항,부분,raw/webadmin/webadmin/catalog/models.py:589-624,t64 — 선택된 공정은 MES 공정 전개의 입력이 된다,담당
+t63,옵션·견적,후가공 · 부자재,t63-P07,P07,후가공·부자재 고르기,6,STD-OPT-029,타공 선택(직경 × 개수 × 위치),webadmin,서희항,부분,raw/webadmin/webadmin/catalog/models.py:589-624,t64 — 선택된 공정은 MES 공정 전개의 입력이 된다,담당
+t63,옵션·견적,후가공 · 부자재,t63-P07,P07,후가공·부자재 고르기,7,STD-OPT-030,귀돌이/라운딩 선택(반경 × 모서리 위치),webadmin,서희항,부분,raw/webadmin/webadmin/catalog/models.py:589-624,t64 — 선택된 공정은 MES 공정 전개의 입력이 된다,담당
+t63,옵션·견적,후가공 · 부자재,t63-P07,P07,후가공·부자재 고르기,8,STD-OPT-031,도무송(전체/부분·모양·개수) 선택,webadmin,서희항,작동,raw/webadmin/webadmin/catalog/models.py:589-624 · raw/webadmin/webadmin/catalog/views.py:2610,t64 — 선택된 공정은 MES 공정 전개의 입력이 된다,담당
+t63,옵션·견적,후가공 · 부자재,t63-P07,P07,후가공·부자재 고르기,9,STD-OPT-032,넘버링(일반/난수 × 자릿수 × 개수) 선택,webadmin,서희항,미착수,「미확인」 — 찾지 못했다(raw/webadmin/webadmin/catalog/*.py 및 static/catalog/*.js 전체에서 넘버링 문자열 grep 0건),t64 — 선택된 공정은 MES 공정 전개의 입력이 된다,담당
+t63,옵션·견적,후가공 · 부자재,t63-P07,P07,후가공·부자재 고르기,10,STD-OPT-033,부분UV/에폭시 선택,webadmin,서희항,부분,raw/webadmin/webadmin/catalog/models.py:589-624,t64 — 선택된 공정은 MES 공정 전개의 입력이 된다,담당
+t63,옵션·견적,후가공 · 부자재,t63-P07,P07,후가공·부자재 고르기,11,STD-OPT-034,부자재 선택(케이스·폴리백·포장),webadmin,서희항,작동,raw/webadmin/webadmin/catalog/models.py:281-294,t64 — 선택된 공정은 MES 공정 전개의 입력이 된다,담당
+t63,옵션·견적,후가공 · 부자재,t63-P07,P07,후가공·부자재 고르기,12,STD-OPT-035,상품별 기본제공 부자재 규칙 표시,webadmin,서희항,미착수,「미확인」 — 찾지 못했다(models.py TPrdProductAddons에 기본제공/자동포함 여부 컬럼 없음 · widget_renderer.js ADDON dflt_val 외 기본제공 규칙 표시 로직 없음),t64 — 선택된 공정은 MES 공정 전개의 입력이 된다,담당
+t63,옵션·견적,후가공 · 부자재,t63-P07,P07,후가공·부자재 고르기,13,STD-OPT-036,추가상품(악세사리) 템플릿 묶음 선택,widget,서희항,작동,raw/webadmin/webadmin/catalog/models.py:281-294 · raw/webadmin/webadmin/catalog/static/catalog/widget_renderer.js:851,t64 — 선택된 공정은 MES 공정 전개의 입력이 된다,담당
+t63,옵션·견적,가격,t63-P08,P08,실시간 견적 받기,1,STD-OPT-043,옵션 변경 시 실시간 재견적,widget,서희항,작동,raw/webadmin/webadmin/catalog/static/catalog/widget.js:682,,담당
+t63,옵션·견적,가격,t63-P08,P08,실시간 견적 받기,2,STD-OPT-044,서버 권위 가격 계산(클라이언트 계산 금지),webadmin,서희항,작동,raw/webadmin/webadmin/catalog/pricing.py:838 · raw/webadmin/webadmin/catalog/widget_api.py:3029,,담당
+t63,옵션·견적,가격,t63-P08,P08,실시간 견적 받기,3,STD-OPT-049,원자합산형 가격 계산(디지털인쇄),webadmin,서희항,작동,raw/webadmin/webadmin/catalog/pricing.py:83 · raw/webadmin/webadmin/catalog/pricing.py:17,,담당
+t63,옵션·견적,가격,t63-P08,P08,실시간 견적 받기,4,STD-OPT-048,면적 기반 가격 계산(실사·현수막·아크릴),webadmin,서희항,부분,raw/webadmin/webadmin/catalog/pricing.py:68-78,,담당
+t63,옵션·견적,가격,t63-P08,P08,실시간 견적 받기,5,STD-OPT-050,고정가형 가격 계산(수량×옵션),webadmin,서희항,부분,raw/webadmin/webadmin/catalog/pricing.py:85,,담당
+t63,옵션·견적,가격,t63-P08,P08,실시간 견적 받기,6,STD-OPT-051,셋트/부품조립 상품 합산 가격 계산,webadmin,서희항,부분,raw/webadmin/webadmin/catalog/pricing.py:1873-1931,,담당
+t63,옵션·견적,가격,t63-P08,P08,실시간 견적 받기,7,STD-OPT-052,판걸이수 기반 판형 원가 반영,webadmin,서희항,작동,raw/webadmin/webadmin/catalog/pricing.py:20-22 · raw/webadmin/webadmin/catalog/pricing.py:392-413,,담당
+t63,옵션·견적,가격,t63-P08,P08,실시간 견적 받기,8,STD-OPT-047,수량구간 할인 적용,webadmin,서희항,작동,raw/webadmin/webadmin/catalog/pricing.py:1476-1509,,담당
+t63,옵션·견적,가격,t63-P08,P08,실시간 견적 받기,9,STD-OPT-046,가격 내역 분해 표시(인쇄비·후가공비·부가세),webadmin,서희항,작동,raw/webadmin/webadmin/catalog/pricing.py:147-179 · raw/webadmin/webadmin/catalog/static/catalog/widget.js:682-745,,담당
+t63,옵션·견적,가격,t63-P08,P08,실시간 견적 받기,10,STD-OPT-045,가격 0원/계산불가 상태 처리 및 사용자 안내,widget,최숙진,부분,raw/webadmin/webadmin/catalog/static/catalog/widget.js:688-691 · raw/webadmin/webadmin/catalog/pricing.py:114-119,,담당
+t63,옵션·견적,견적,t63-P09,P09,견적 저장·대량주문 문의,1,STD-OPT-053,견적 결과 저장(옵션보관함),webadmin,서희항,미착수,「미확인」 — 찾지 못했다(raw/webadmin/webadmin/catalog/*.py·static/catalog/*.js 및 huni-skin-shopby/src 전체에서 보관함 문자열 grep 0건),t62 — 저장된 견적을 다시 보는 자리는 마이페이지(STD-MYP) / t65 — 대량주문 문의 응대는 운영자 CS,담당
+t63,옵션·견적,견적,t63-P09,P09,견적 저장·대량주문 문의,2,STD-OPT-054,견적서 PDF/출력물 발급,webadmin,서희항,미착수,「미확인」 — 찾지 못했다(raw/webadmin/webadmin/catalog/*.py·static/catalog/*.js 및 huni-skin-shopby/src 전체에서 견적서/PDF 발급 로직 grep 0건 — PDF 관련 코드는 전부 원고 업로드 파일형식 검증용),t62 — 저장된 견적을 다시 보는 자리는 마이페이지(STD-MYP) / t65 — 대량주문 문의 응대는 운영자 CS,담당
+t63,옵션·견적,견적,t63-P09,P09,견적 저장·대량주문 문의,3,STD-OPT-055,대량주문 견적 문의 접수,webadmin,김동학,미착수,「미확인」 — 찾지 못했다(raw/webadmin·huni-skin-shopby/src 전체에서 대량주문 코드 grep 0건 — raw/webadmin/.planning 기획문서에만 언급),t62 — 저장된 견적을 다시 보는 자리는 마이페이지(STD-MYP) / t65 — 대량주문 문의 응대는 운영자 CS,담당
+t63,원고·파일,업로드,t63-P10,P10,원고 올리기,1,STD-ART-001,인쇄원고 파일 업로드(PDF/AI/EPS),widget,서희항,작동,raw/webadmin/webadmin/catalog/static/catalog/widget.js:773 · raw/webadmin/webadmin/catalog/static/catalog/widget.js:799 · raw/webadmin/webadmin/catalog/s3_artwork.py:83-88,t64 — 올라간 파일의 검판(STD-ART-008~018)·생산 전달(STD-ART-028)은 t64,담당
+t63,원고·파일,업로드,t63-P10,P10,원고 올리기,2,STD-ART-002,대용량 파일 분할/재개 업로드,widget,서희항,구현-미검증,raw/webadmin/webadmin/catalog/static/catalog/widget.js:819 · raw/webadmin/webadmin/catalog/s3_artwork.py:56-57 · raw/webadmin/webadmin/catalog/static/catalog/widget_renderer.js:628-666,t64 — 올라간 파일의 검판(STD-ART-008~018)·생산 전달(STD-ART-028)은 t64,담당
+t63,원고·파일,업로드,t63-P10,P10,원고 올리기,3,STD-ART-003,업로드 진행률·실패 재시도,widget,서희항,부분,raw/webadmin/webadmin/catalog/static/catalog/widget_renderer.js:3283-3289 · raw/webadmin/webadmin/catalog/static/catalog/widget_renderer.js:5408 · raw/webadmin/webadmin/catalog/static/catalog/widget_renderer.js:8036,t64 — 올라간 파일의 검판(STD-ART-008~018)·생산 전달(STD-ART-028)은 t64,담당
+t63,원고·파일,업로드,t63-P10,P10,원고 올리기,4,STD-ART-004,건수별 개별 파일 업로드(디자인 N종),widget,서희항,부분,raw/webadmin/webadmin/catalog/static/catalog/widget_renderer.js:3245-3258 · raw/webadmin/webadmin/catalog/s3_artwork.py:135-145,t64 — 올라간 파일의 검판(STD-ART-008~018)·생산 전달(STD-ART-028)은 t64,담당
+t63,원고·파일,업로드,t63-P10,P10,원고 올리기,5,STD-ART-005,앞면/뒷면 파일 분리 업로드,widget,서희항,부분,raw/webadmin/webadmin/catalog/static/catalog/widget_renderer.js:3255-3258 · raw/webadmin/webadmin/catalog/s3_artwork.py:122-131,t64 — 올라간 파일의 검판(STD-ART-008~018)·생산 전달(STD-ART-028)은 t64,담당
+t63,원고·파일,업로드,t63-P10,P10,원고 올리기,6,STD-ART-006,주문 이후 파일 업로드 경로(결제 후 입고),webadmin,서희항,부분,raw/webadmin/webadmin/catalog/artwork_promote.py:1-24 · raw/webadmin/webadmin/catalog/edicus_lookup.py:433-462,t64 — 올라간 파일의 검판(STD-ART-008~018)·생산 전달(STD-ART-028)은 t64,담당
+t63,원고·파일,업로드,t63-P10,P10,원고 올리기,7,STD-ART-007,파일 재업로드·버전 이력 보관,webadmin,서희항,부분,raw/webadmin/webadmin/catalog/s3_artwork.py:135-166,t64 — 올라간 파일의 검판(STD-ART-008~018)·생산 전달(STD-ART-028)은 t64,담당
+t63,원고·파일,업로드,t63-P10,P10,원고 올리기,8,STD-ART-029,가변데이터 인쇄(VDP) 데이터 업로드·병합,edicus,김동학,미착수,raw/edicus_dev/demo-vdp/context.js:19-23 · raw/edicus_dev/demo-vdp/context.js:164-170 · raw/webadmin/webadmin/catalog/edicus_lookup.py:391,t64 — 올라간 파일의 검판(STD-ART-008~018)·생산 전달(STD-ART-028)은 t64,담당
+t63,원고·파일,미리보기,t63-P11,P11,올린 원고 확인하기,1,STD-ART-019,업로드 파일 썸네일·PDF 미리보기,widget,서희항,미착수,「미확인」 — 찾지 못했다(webadmin/catalog/widget.js·widget_renderer.js 전수 grep thumbnail/썸네일/preview/미리보기 — 디자인 템플릿 썸네일(widget_api.py:6105,t64 — 기계 검판(블리드·색공간·해상도)은 t64. 여기는 손님 눈으로 보는 단계다,담당
+t63,원고·파일,미리보기,t63-P11,P11,올린 원고 확인하기,2,STD-ART-020,재단선 오버레이 미리보기,widget,서희항,미착수,「미확인」 — 찾지 못했다(widget_renderer.js:1638-1707 은 재단선/작업사이즈 치수 도해(사이즈 안내 SVG)이고 고객이 올린 실제 파일 위에 재단선을 겹쳐 보여주는 오버레이가 아님),t64 — 기계 검판(블리드·색공간·해상도)은 t64. 여기는 손님 눈으로 보는 단계다,담당
+t63,원고·파일,에디터,t63-P12,P12,에디터로 디자인하기,1,STD-ART-021,온라인 디자인 에디터 진입,widget,서희항,부분,raw/webadmin/webadmin/catalog/static/catalog/widget.js:368-395,,담당
+t63,원고·파일,에디터,t63-P12,P12,에디터로 디자인하기,2,STD-ART-030,「옵션 조합에 연결된 편집기 템플릿 없음」 오류 — 에디쿠스 템플릿 연결 점검,webadmin,서희항,미착수,raw/webadmin/webadmin/catalog/edicus_views.py:327-419 · raw/webadmin/tools/audit_edicus_coverage.py:1-20,,담당
+t63,원고·파일,에디터,t63-P12,P12,에디터로 디자인하기,3,STD-ART-022,에디터 템플릿 선택·불러오기,widget,서희항,작동,raw/webadmin/webadmin/catalog/static/catalog/widget.js:634,,담당
+t63,원고·파일,에디터,t63-P12,P12,에디터로 디자인하기,4,STD-ART-031,삭제된 사이즈 코드가 연결된 템플릿 전수조사(800여 개 중 노출 대상 선별),webadmin,서희항,미착수,raw/webadmin/webadmin/catalog/edicus_views.py:327-419 · raw/webadmin/tools/audit_edicus_coverage.py:82-232,,담당
+t63,원고·파일,에디터,t63-P12,P12,에디터로 디자인하기,5,STD-ART-032,에디쿠스 테스트용 단순 상품(메모패드 등) 제공,webadmin,서희항,미착수,「미확인」 — 찾지 못했다(webadmin/catalog·tools·.planning 전수 grep 메모패드/memo pad/테스트용 단순 상품 — 메모패드는 실사고 재현 사례로만 등장하고 에디쿠스 테스트 전용 상품을 의도적으로 제공하는 기능/문서는 없음),,담당
+t63,원고·파일,에디터,t63-P12,P12,에디터로 디자인하기,6,STD-ART-025,선택 옵션(사이즈·페이지)과 에디터 캔버스 동기화,widget,서희항,부분,raw/webadmin/webadmin/catalog/static/catalog/widget.js:378-394,,담당
+t63,원고·파일,에디터,t63-P12,P12,에디터로 디자인하기,7,STD-ART-023,에디터 작업물 저장·재편집,widget,서희항,미착수,raw/webadmin/webadmin/catalog/static/catalog/widget.js:613-615 · raw/webadmin/webadmin/catalog/static/catalog/widget.js:625-634,,담당
+t63,원고·파일,에디터,t63-P12,P12,에디터로 디자인하기,8,STD-ART-024,에디터 산출물 인쇄용 파일 변환·주문 연결,widget,서희항,부분,raw/webadmin/webadmin/catalog/static/catalog/widget.js:1004,,담당
+t63,원고·파일,에디터,t63-P12,P12,에디터로 디자인하기,9,,에디터 산출물 변환 실패 처리,huni-mall,서희항,원장 행 없음,「미확인」,,단계
+t63,원고·파일,보관,t63-P13,P13,원고 보관·재사용,1,STD-ART-026,고객 파일 보관기간 정책 적용·만료 삭제,webadmin,미정,미착수,raw/webadmin/webadmin/catalog/artwork_promote.py:3 · raw/webadmin/webadmin/catalog/widget_api.py:3628-3636,t62 — 과거 주문 목록을 보는 자리는 마이페이지,담당
+t63,원고·파일,보관,t63-P13,P13,원고 보관·재사용,2,STD-ART-027,과거 주문 파일 재사용 재주문,webadmin,서희항+김동학,미착수,raw/webadmin/webadmin/catalog/edicus_lookup.py:401-415 · raw/webadmin/webadmin/catalog/edicus_lookup.py:433-462,t62 — 과거 주문 목록을 보는 자리는 마이페이지,담당
+t63,장바구니·주문,장바구니,t63-P14,P14,장바구니 담고 고치기,1,STD-ORD-028,선택옵션→주문 데이터 변환(확정 사양의 주문항목 생성),widget,김동학,작동,raw/webadmin/webadmin/catalog/static/catalog/widget.js:1004,,담당
+t63,장바구니·주문,장바구니,t63-P14,P14,장바구니 담고 고치기,2,STD-ORD-001,장바구니 담기(인쇄옵션+파일 동반),huni-mall,김동학,작동,「미확인」 — src/components/product/huni-widget.tsx:188-284 · src/lib/guest-cart.ts:53-57,,담당
+t63,장바구니·주문,장바구니,t63-P14,P14,장바구니 담고 고치기,3,STD-ORD-007,비회원 장바구니 계산(비영속),huni-mall,김동학,작동,「미확인」 — src/lib/guest-cart.ts:1-20 · src/lib/guest-cart.ts:35-50,,담당
+t63,장바구니·주문,장바구니,t63-P14,P14,장바구니 담고 고치기,4,STD-ORD-002,장바구니 조회,huni-mall,김동학,작동,「미확인」 — src/components/cart/cart-page.tsx:57-70 · src/components/cart/cart-page.tsx:262-330,,담당
+t63,장바구니·주문,장바구니,t63-P14,P14,장바구니 담고 고치기,5,STD-ORD-008,장바구니 인쇄사양 요약 표시,huni-mall,김동학,작동,「미확인」 — src/components/cart/cart-page.tsx:289-293 · src/components/product/huni-widget.tsx:61-68,,담당
+t63,장바구니·주문,장바구니,t63-P14,P14,장바구니 담고 고치기,6,STD-ORD-003,장바구니 수량/옵션 수정,huni-mall,김동학,작동,「미확인」 — src/components/cart/cart-page.tsx:73-80 · src/components/cart/cart-page.tsx:117-160 · src/components/cart/cart-page.tsx:296-321,,담당
+t63,장바구니·주문,장바구니,t63-P14,P14,장바구니 담고 고치기,7,STD-ORD-004,장바구니 항목 삭제,huni-mall,김동학,작동,「미확인」 — src/components/cart/cart-page.tsx:81-84 · src/components/cart/cart-page.tsx:191-195,,담당
+t63,장바구니·주문,장바구니,t63-P14,P14,장바구니 담고 고치기,8,STD-ORD-005,선택 상품 금액 계산,huni-mall,김동학,작동,「미확인」 — src/components/cart/cart-page.tsx:109-110,,담당
+t63,장바구니·주문,장바구니,t63-P14,P14,장바구니 담고 고치기,9,STD-ORD-006,구매가능 검증(결제 전 sanity),shopby,김동학,부분,docs/shopby/shopby-api/order-shop-public.yml:1129,,담당
+t63,장바구니·주문,주문서,t63-P15,P15,주문서 쓰기,1,STD-ORD-009,주문서 작성,huni-mall,김동학,작동,「미확인」 — src/lib/api/hooks/use-order-sheet.ts:5-6 · src/lib/api/hooks/use-order-sheet.ts:40-49,t62 — 쿠폰·적립금의 발급·보유는 프로모션(STD-PRM),담당
+t63,장바구니·주문,주문서,t63-P15,P15,주문서 쓰기,2,STD-ORD-010,주문서 조회,huni-mall,김동학,작동,「미확인」 — src/lib/api/hooks/use-order-sheet.ts:6 · src/lib/api/hooks/use-order-sheet.ts:177-183,t62 — 쿠폰·적립금의 발급·보유는 프로모션(STD-PRM),담당
+t63,장바구니·주문,주문서,t63-P15,P15,주문서 쓰기,3,STD-ORD-012,주문자/수령자 정보 입력,huni-mall,김동학,작동,「미확인」 — src/components/checkout/checkout-form.tsx:244-334 · src/components/checkout/checkout-form.tsx:400-401,t62 — 쿠폰·적립금의 발급·보유는 프로모션(STD-PRM),담당
+t63,장바구니·주문,주문서,t63-P15,P15,주문서 쓰기,4,STD-ORD-032,비회원 주문서 무통장 계좌·입금자명 표시(회원 주문서와 동일 여부),huni-mall,김동학,부분,「미확인」 — src/components/checkout/checkout-form.tsx:827-852 · src/components/checkout/guest-checkout-form.tsx:55 · src/components/checkout/guest-checkout-form.tsx:323-365,t62 — 쿠폰·적립금의 발급·보유는 프로모션(STD-PRM),담당
+t63,장바구니·주문,주문서,t63-P15,P15,주문서 쓰기,5,STD-ORD-013,배송지 주소 검색(우편번호),huni-mall,김동학,작동,「미확인」 — src/components/common/address-search-modal.tsx:4-5 · src/components/common/address-search-modal.tsx:77 · src/components/checkout/checkout-form.tsx:984-991,t62 — 쿠폰·적립금의 발급·보유는 프로모션(STD-PRM),담당
+t63,장바구니·주문,주문서,t63-P15,P15,주문서 쓰기,6,STD-ORD-015,나중배송(배송지 미입력) 주문,shopby,김동학,미착수,docs/shopby/shopby-api/order-shop-public.yml:2707,t62 — 쿠폰·적립금의 발급·보유는 프로모션(STD-PRM),담당
+t63,장바구니·주문,주문서,t63-P15,P15,주문서 쓰기,7,STD-ORD-014,배송 요청사항 입력,huni-mall,김동학,미착수,「미확인」 — src/components/checkout/checkout-form.tsx:733,t62 — 쿠폰·적립금의 발급·보유는 프로모션(STD-PRM),담당
+t63,장바구니·주문,주문서,t63-P15,P15,주문서 쓰기,8,STD-ORD-017,출고 옵션 선택(오늘출고·토요일출고),huni-mall,김동학,미착수,「미확인」 — 찾지 못했다(checkout-form.tsx·guest-checkout-form.tsx·shopby yml order-shop-public.yml 전수 grep 오늘출고/토요일출고/당일출고/Saturday — 없음),t62 — 쿠폰·적립금의 발급·보유는 프로모션(STD-PRM),담당
+t63,장바구니·주문,주문서,t63-P15,P15,주문서 쓰기,9,STD-ORD-016,주문 제목/작업명 입력,huni-mall,김동학,부분,huni-skin-shopby/src/components/product/huni-widget.tsx:62-68,t62 — 쿠폰·적립금의 발급·보유는 프로모션(STD-PRM),담당
+t63,장바구니·주문,주문서,t63-P15,P15,주문서 쓰기,10,STD-ORD-011,쿠폰·배송지 반영 최종 금액 계산,huni-mall,김동학,부분,huni-skin-shopby/src/lib/api/hooks/use-order-sheet.ts:177 (선행 카드 증거 · 실재 확인),t62 — 쿠폰·적립금의 발급·보유는 프로모션(STD-PRM),담당
+t63,장바구니·주문,주문서,t63-P15,P15,주문서 쓰기,11,STD-ORD-029,결제 직전 재견적(최종 금액을 다시 확정하고 결제로 넘김),huni-mall,김동학,미착수,「미확인」 — src/lib/api/requote.ts:1-9 · src/app/api/printly/requote/route.ts:1-19 · src/components/cart/cart-page.tsx:162-189,t62 — 쿠폰·적립금의 발급·보유는 프로모션(STD-PRM),담당
+t63,장바구니·주문,주문서,t63-P15,P15,주문서 쓰기,12,STD-ORD-018,약관 동의(구매·개인정보 제3자),huni-mall,김동학,부분,「미확인」 — src/components/checkout/order-summary.tsx:12 · src/components/checkout/order-summary.tsx:79-98 · src/components/checkout/checkout-form.tsx:281,t62 — 쿠폰·적립금의 발급·보유는 프로모션(STD-PRM),담당
+t63,장바구니·주문,주문,t63-P16,P16,주문 확정하기,1,STD-ORD-019,주문 예약(reserve) 및 금액 검증,huni-mall,김동학,부분,docs/shopby/shopby-api/order-shop-public.yml:4688,t64 — 주문등록 S2S 이후의 검판·MES·공정·출고는 전부 t64,담당
+t63,장바구니·주문,주문,t63-P16,P16,주문 확정하기,2,STD-ORD-020,주문 완료 화면·주문번호 발급,huni-mall,김동학,작동,「미확인」 — src/components/order/order-complete-view.tsx:1-24,t64 — 주문등록 S2S 이후의 검판·MES·공정·출고는 전부 t64,담당
+t63,장바구니·주문,주문,t63-P16,P16,주문 확정하기,3,STD-ORD-030,주문 생성 직후 후니 주문등록 S2S 호출(order/register),webadmin,김동학,미착수,raw/webadmin/webadmin/catalog/widget_api.py:5286-5303 · raw/webadmin/webadmin/catalog/artwork_promote.py:5-8,t64 — 주문등록 S2S 이후의 검판·MES·공정·출고는 전부 t64,담당
+t63,장바구니·주문,주문,t63-P16,P16,주문 확정하기,4,STD-ORD-031,주문완료 메일/알림 발송,huni-mall,최숙진,미착수,「미확인」 — 찾지 못했다(huni-mall src/lib·src/app/api 전수 grep mail/알림/notification/SMTP — 회원가입·소셜 인증 관련 email 필드만 있고 주문완료 메일·알림 발송 로직 없음. webadmin 도 send_mail/EmailMessage/SMTP/알림톡 전수 grep 0건),t64 — 주문등록 S2S 이후의 검판·MES·공정·출고는 전부 t64,담당
+t63,장바구니·주문,주문,t63-P16,P16,주문 확정하기,5,,주문등록 S2S 실패 재전송·수기 보정,webadmin,김동학+서희항,원장 행 없음,「미확인」,t64 — 주문등록 S2S 이후의 검판·MES·공정·출고는 전부 t64,단계
+t63,장바구니·주문,주문,t63-P17,P17,주문 조회·후속 처리,1,STD-ORD-021,주문 상태 조회(회원),huni-mall,김동학,부분,huni-skin-shopby/src/lib/api/hooks/use-my-orders.ts:84 (선행 카드 증거 · 실재 확인),t62 — 회원 주문 내역 화면은 마이페이지(STD-MYP) / t64 — 공정 단계 값을 만드는 쪽은 MES·운영자 주문운영 / t65 — 취소·반품·교환은 클레임(STD-CLM),담당
+t63,장바구니·주문,주문,t63-P17,P17,주문 조회·후속 처리,2,STD-ORD-022,비회원 주문 조회(주문번호+휴대전화),huni-mall,김동학,작동,「미확인」 — src/components/order/guest-order-lookup.tsx:1-9 · src/components/order/guest-order-lookup.tsx:25-28 · src/components/order/guest-order-lookup.tsx:136-196,t62 — 회원 주문 내역 화면은 마이페이지(STD-MYP) / t64 — 공정 단계 값을 만드는 쪽은 MES·운영자 주문운영 / t65 — 취소·반품·교환은 클레임(STD-CLM),담당
+t63,장바구니·주문,주문,t63-P17,P17,주문 조회·후속 처리,3,STD-ORD-023,주문 상태 머신 전이 표시(결제완료→상품준비→배송준비→배송중→배송완료→구매확정),huni-mall,김동학,부분,huni-skin-shopby/src/lib/api/hooks/use-my-orders.ts:84 (선행 카드 증거 · 실재 확인),t62 — 회원 주문 내역 화면은 마이페이지(STD-MYP) / t64 — 공정 단계 값을 만드는 쪽은 MES·운영자 주문운영 / t65 — 취소·반품·교환은 클레임(STD-CLM),담당
+t63,장바구니·주문,주문,t63-P17,P17,주문 조회·후속 처리,4,STD-ORD-024,인쇄 공정 단계 상태 노출(검판·출력·후가공),webadmin,김동학,미착수,「미확인」 — 찾지 못했다(webadmin/catalog/*.py 전수 grep 검판/후가공 단계/공정 노출 — 후가공은 전부 가격 구성요소 용어이고 MES 는 원고 전달 대상일 뿐 고객에게 인쇄 공정 진행 단계를 노출하는 코드/화면은 huni-mall·webadmin 어디서도 못 찾음),t62 — 회원 주문 내역 화면은 마이페이지(STD-MYP) / t64 — 공정 단계 값을 만드는 쪽은 MES·운영자 주문운영 / t65 — 취소·반품·교환은 클레임(STD-CLM),담당
+t63,장바구니·주문,주문,t63-P17,P17,주문 조회·후속 처리,5,STD-ORD-025,구매확정(고객·자동),shopby,김동학,미착수,docs/shopby/shopby-api/order-shop-public.yml:1950-1958 · docs/shopby/shopby-api/order-shop-public.yml:6612-6620 · docs/shopby/shopby-api/order-shop-public.yml:1996-2008,t62 — 회원 주문 내역 화면은 마이페이지(STD-MYP) / t64 — 공정 단계 값을 만드는 쪽은 MES·운영자 주문운영 / t65 — 취소·반품·교환은 클레임(STD-CLM),담당
+t63,장바구니·주문,주문,t63-P17,P17,주문 조회·후속 처리,6,STD-ORD-026,재주문(동일 사양 반복),huni-mall,김동학,미착수,「미확인」 — 찾지 못했다(src 전수 grep 재주문/reorder — src/lib/guide-data.ts:193 에 재주문·재견적 방법 이라는 가이드 문서 제목만 있고 실제 재주문 버튼/로직 코드는 없음),t62 — 회원 주문 내역 화면은 마이페이지(STD-MYP) / t64 — 공정 단계 값을 만드는 쪽은 MES·운영자 주문운영 / t65 — 취소·반품·교환은 클레임(STD-CLM),담당
+t63,장바구니·주문,주문,t63-P18,P18,오프라인 주문 등록,1,STD-ORD-027,오프라인 주문 별도 등록 경로,webadmin,서희항,부분,raw/webadmin/webadmin/catalog/models.py:87 (선행 카드 증거 · 실재 확인),t64 — 등록된 주문은 같은 생산 흐름을 탄다 / t65 — 운영자 주문 운영 화면 전반은 t64·t65,담당
+t63,결제,결제수단 · 결제처리,t63-P19,P19,결제하기,1,STD-PAY-020,카드 결제 화면 분기(비회원·회원 주문서),huni-mall,김동학,미착수,huni-skin-shopby/src/components/checkout/guest-checkout-form.tsx:1-10,t62 — 적립금(프린팅머니) 잔액·충전은 프로모션·마이페이지,담당
+t63,결제,결제수단 · 결제처리,t63-P19,P19,결제하기,2,STD-PAY-001,신용카드 결제(PG),huni-mall,김동학,미착수,huni-skin-shopby/src/components/checkout/checkout-form.tsx:8 (선행 카드 증거 · 실재 확인),t62 — 적립금(프린팅머니) 잔액·충전은 프로모션·마이페이지,담당
+t63,결제,결제수단 · 결제처리,t63-P19,P19,결제하기,3,STD-PAY-002,실시간 계좌이체,huni-mall,김동학,미착수,huni-skin-shopby/src/components/checkout/checkout-form.tsx:8 (선행 카드 증거 · 실재 확인),t62 — 적립금(프린팅머니) 잔액·충전은 프로모션·마이페이지,담당
+t63,결제,결제수단 · 결제처리,t63-P19,P19,결제하기,4,STD-PAY-003,무통장입금(가상계좌)·입금대기 상태,huni-mall,최숙진,작동,huni-skin-shopby/src/components/checkout/checkout-form.tsx:4-9 · huni-skin-shopby/src/components/checkout/checkout-form.tsx:157-180 · huni-skin-shopby/src/components/checkout/checkout-form.tsx:360-420 · huni-skin-shopby/src/lib/payments/ncp-pay.ts:1-105 · huni-skin-shopby/src/components/order/order-complete-view.tsx:105-139,t62 — 적립금(프린팅머니) 잔액·충전은 프로모션·마이페이지,담당
+t63,결제,결제수단 · 결제처리,t63-P19,P19,결제하기,5,STD-PAY-004,네이버페이 결제,huni-mall,외부(네이버페이),미착수,「미확인」 — huni-skin-shopby/src/components/checkout/checkout-form.tsx:365-371 · docs/shopby/shopby-api/admin-shop-public.yml:1374,t62 — 적립금(프린팅머니) 잔액·충전은 프로모션·마이페이지,담당
+t63,결제,결제수단 · 결제처리,t63-P19,P19,결제하기,6,STD-PAY-005,카카오페이 결제,huni-mall,외부(카카오페이),미착수,「미확인」 — huni-skin-shopby/src/components/checkout/checkout-form.tsx:365-371 · docs/shopby/shopby-api/admin-shop-public.yml:1378,t62 — 적립금(프린팅머니) 잔액·충전은 프로모션·마이페이지,담당
+t63,결제,결제수단 · 결제처리,t63-P19,P19,결제하기,7,STD-PAY-006,토스페이 결제,huni-mall,최숙진,미착수,「미확인」 — huni-skin-shopby/src/components/checkout/checkout-form.tsx:365-371 · docs/shopby/shopby-api/admin-shop-public.yml:1380,t62 — 적립금(프린팅머니) 잔액·충전은 프로모션·마이페이지,담당
+t63,결제,결제수단 · 결제처리,t63-P19,P19,결제하기,8,STD-PAY-009,할부·무이자 옵션,huni-mall,외부(KG이니시스),미착수,「미확인」 — huni-skin-shopby/src/components/checkout/checkout-data.ts:62,t62 — 적립금(프린팅머니) 잔액·충전은 프로모션·마이페이지,담당
+t63,결제,결제수단 · 결제처리,t63-P19,P19,결제하기,9,STD-PAY-019,수동카드결제(키인·가상단말 · PC+모바일),외부PG,외부(KG이니시스),미착수,「미확인」 — 코드 대상 아님(계약·설정) — 이니시스 가상단말/키인결제는 PG 계약·단말 발급 사안,t62 — 적립금(프린팅머니) 잔액·충전은 프로모션·마이페이지,담당
+t63,결제,결제수단 · 결제처리,t63-P19,P19,결제하기,10,STD-PAY-007,적립금(프린팅머니) 결제,huni-mall,김동학,부분,huni-skin-shopby/src/components/checkout/checkout-form.tsx:170-183 · huni-skin-shopby/src/components/checkout/checkout-form.tsx:289-299 · huni-skin-shopby/src/components/checkout/checkout-form.tsx:413,t62 — 적립금(프린팅머니) 잔액·충전은 프로모션·마이페이지,담당
+t63,결제,결제수단 · 결제처리,t63-P19,P19,결제하기,11,STD-PAY-008,복합결제(적립금+PG 병용),huni-mall,김동학,미착수,huni-skin-shopby/src/components/checkout/checkout-form.tsx:52 (선행 카드 증거 · 실재 확인),t62 — 적립금(프린팅머니) 잔액·충전은 프로모션·마이페이지,담당
+t63,결제,결제수단 · 결제처리,t63-P19,P19,결제하기,12,STD-PAY-010,B2B 후불결제,미확인,김동학,미착수,「미확인」 — 찾지 못했다(huni-skin-shopby/src 전수 grep 'B2B'·'후불' 0건 · raw/webadmin/webadmin 전수 grep 0건),t62 — 적립금(프린팅머니) 잔액·충전은 프로모션·마이페이지,담당
+t63,결제,결제수단 · 결제처리,t63-P19,P19,결제하기,13,STD-PAY-013,결제 금액 위변조 검증(서버 재계산 대조),huni-mall,김동학+서희항,부분,huni-skin-shopby/src/app/api/printly/requote/route.ts:1-77 · huni-skin-shopby/src/lib/api/widget-order.ts:20-35,t62 — 적립금(프린팅머니) 잔액·충전은 프로모션·마이페이지,담당
+t63,결제,결제수단 · 결제처리,t63-P19,P19,결제하기,14,STD-PAY-031,위젯 총액↔shopby 청구액 「10원×수량」 모델 정합 검증(표시↔청구 불일치 알려진 이슈),huni-mall,김동학+서희항,미착수,huni-skin-shopby/README.md:70-71 · huni-skin-shopby/src/lib/api/widget-order.ts:20-35,t62 — 적립금(프린팅머니) 잔액·충전은 프로모션·마이페이지,담당
+t63,결제,결제수단 · 결제처리,t63-P19,P19,결제하기,15,STD-PAY-011,PG 리다이렉트·결제 확정 콜백,huni-mall,김동학,부분,huni-skin-shopby/src/lib/payments/ncp-pay.ts:1-105 · huni-skin-shopby/src/app/(main)/order-complete/page.tsx:1-40,t62 — 적립금(프린팅머니) 잔액·충전은 프로모션·마이페이지,담당
+t63,결제,결제수단 · 결제처리,t63-P19,P19,결제하기,16,STD-PAY-012,결제 실패 안내·재시도,huni-mall,김동학,미착수,huni-skin-shopby/src/components/checkout/checkout-form.tsx:428-434 · huni-skin-shopby/src/components/order/order-complete-view.tsx:24-40,t62 — 적립금(프린팅머니) 잔액·충전은 프로모션·마이페이지,담당
+t63,결제,결제수단 · 결제처리,t63-P19,P19,결제하기,17,STD-PAY-014,결제 포기 처리,미확인,김동학,미착수,"「미확인」 — 찾지 못했다(huni-skin-shopby/src/components/checkout, src/lib/payments 전수 grep '포기'·'abandon'·'beforeunload' 0건)",t62 — 적립금(프린팅머니) 잔액·충전은 프로모션·마이페이지,담당
+t63,결제,결제수단 · 결제처리,t63-P19,P19,결제하기,18,,무통장 입금 확인 → 결제완료 전이,shopby,최숙진,원장 행 없음,「미확인」,t62 — 적립금(프린팅머니) 잔액·충전은 프로모션·마이페이지,단계
+t63,결제,결제수단(계약·설정),t63-P20,P20,결제수단 개통하기,1,STD-PAY-022,토스 계약 조건 확인(건당 수수료·가입비/연관리비 면제 프로모션·포트원 경유),외부PG,외부(토스페이먼츠),미착수,「미확인」 — 코드 대상 아님(계약·설정) — 토스페이먼츠 수수료·프로모션·포트원 경유 여부 확인 사안,t65 — 충전 회계 분리(STD-PAY-021)는 정산(STD-FIN)과 맞물린다,담당
+t63,결제,결제수단(계약·설정),t63-P20,P20,결제수단 개통하기,2,STD-PAY-023,「자사 상품 전용 선불 충전」 용도 가맹점 심사 가능 여부 사전 확인,외부PG,외부(토스페이먼츠),미착수,「미확인」 — 코드 대상 아님(계약·설정) — 선불충전 전용 가맹점 심사 여부 확인 사안,t65 — 충전 회계 분리(STD-PAY-021)는 정산(STD-FIN)과 맞물린다,담당
+t63,결제,결제수단(계약·설정),t63-P20,P20,결제수단 개통하기,3,STD-PAY-026,경로별 수수료 차이(이니시스 경유 +0.x% 여부) 확인,외부PG,외부(이니시스·카카오페이),미착수,「미확인」 — 코드 대상 아님(계약·설정) — PG 경유 수수료 차이 확인 사안,t65 — 충전 회계 분리(STD-PAY-021)는 정산(STD-FIN)과 맞물린다,담당
+t63,결제,결제수단(계약·설정),t63-P20,P20,결제수단 개통하기,4,STD-PAY-024,카카오페이 신청 서류·절차 정리 후 전달,외부PG,신우진,미착수,「미확인」 — 코드 대상 아님(계약·설정) — 카카오페이 신청 서류·절차 정리 사안,t65 — 충전 회계 분리(STD-PAY-021)는 정산(STD-FIN)과 맞물린다,담당
+t63,결제,결제수단(계약·설정),t63-P20,P20,결제수단 개통하기,5,STD-PAY-025,샵바이 어드민의 카카오페이 신청 경로 확인,shopby,김동학,미착수,「미확인」 — 찾지 못했다(docs/shopby/shopby-api 전수 grep '카카오페이 신청'·'PG 신청' 0건 — 셀러어드민 신청화면은 API 문서 범위 밖),t65 — 충전 회계 분리(STD-PAY-021)는 정산(STD-FIN)과 맞물린다,담당
+t63,결제,결제수단(계약·설정),t63-P20,P20,결제수단 개통하기,6,STD-PAY-021,충전은 현금만 수납 — 이니시스 PG 결제와 회계 분리,외부PG,신우진,미착수,「미확인」 — 코드 대상 아님(계약·설정) — 프린팅머니 충전 결제수단·회계분리 정책 확정 사안,t65 — 충전 회계 분리(STD-PAY-021)는 정산(STD-FIN)과 맞물린다,담당
+t63,결제,결제수단(계약·설정),t63-P20,P20,결제수단 개통하기,7,STD-PAY-027,결제수단 노출설정 10항목 켜기(PG 승인 후),shopby,최숙진,미착수,「미확인」 — 찾지 못했다(docs/shopby/shopby-api/admin-shop-public.yml·workspace-server-public.yml 전수 grep '노출설정'·'exposureYn' 등 결제수단 10항목 관련 전용 엔드포인트 미발견),t65 — 충전 회계 분리(STD-PAY-021)는 정산(STD-FIN)과 맞물린다,담당
+t63,결제,결제수단(계약·설정),t63-P20,P20,결제수단 개통하기,8,STD-PAY-028,무통장 입금 계좌 등록,shopby,최숙진,작동,huni-skin-shopby/src/lib/api/hooks/use-order-sheet.ts:194 · huni-skin-shopby/src/components/checkout/checkout-form.tsx:150 · huni-skin-shopby/src/components/checkout/checkout-form.tsx:177-180,t65 — 충전 회계 분리(STD-PAY-021)는 정산(STD-FIN)과 맞물린다,담당
+t63,결제,결제수단(계약·설정),t63-P20,P20,결제수단 개통하기,9,STD-PAY-029,미입금 주문 자동취소 기간 정책 확정(현재 무통장 7영업일·가상계좌 7일),외부PG,최숙진,미착수,/Users/innojini/Dev/HuniWeb/.claude/worktrees/t59/_workspace/huni-launch-runway/08_system-screen/t56/rejudge.csv (선행 카드 증거 · 실재 확인),t65 — 충전 회계 분리(STD-PAY-021)는 정산(STD-FIN)과 맞물린다,담당
+t63,결제,증빙,t63-P21,P21,결제 증빙 발급,1,STD-PAY-017,사업자정보 등록·관리,shopby,김동학,부분,docs/shopby/shopby-api/workspace-server-public.yml:203 · docs/shopby/shopby-api/workspace-server-public.yml:976-979 · huni-skin-shopby/src/components/mypage/document-section.tsx:253-282,t62 — 사업자정보는 B2B 회원(STD-B)과 겹친다 / t65 — 증빙과 정산(STD-FIN)의 대사는 t65,담당
+t63,결제,증빙,t63-P21,P21,결제 증빙 발급,2,STD-PAY-015,현금영수증 발급,huni-mall,김동학,미착수,huni-skin-shopby/src/components/mypage/document-section.tsx:1 (선행 카드 증거 · 실재 확인),t62 — 사업자정보는 B2B 회원(STD-B)과 겹친다 / t65 — 증빙과 정산(STD-FIN)의 대사는 t65,담당
+t63,결제,증빙,t63-P21,P21,결제 증빙 발급,3,STD-PAY-016,세금계산서 발급 신청·내역,huni-mall,김동학,미착수,huni-skin-shopby/src/components/mypage/document-section.tsx:1 (선행 카드 증거 · 실재 확인),t62 — 사업자정보는 B2B 회원(STD-B)과 겹친다 / t65 — 증빙과 정산(STD-FIN)의 대사는 t65,담당
+t63,결제,증빙,t63-P21,P21,결제 증빙 발급,4,STD-PAY-018,거래명세서 출력,huni-mall,김동학,부분,「미확인」 — huni-skin-shopby/src/components/mypage/document-section.tsx:40-356 · docs/shopby/shopby-api/order-shop-public.yml:7631,t62 — 사업자정보는 B2B 회원(STD-B)과 겹친다 / t65 — 증빙과 정산(STD-FIN)의 대사는 t65,담당
+t63,결제,증빙,t63-P21,P21,결제 증빙 발급,5,STD-PAY-030,거래명세서 어드민 출력항목·수량 표기 확인(A-4),shopby,최숙진,미착수,「미확인」 — docs/shopby/shopby-api/order-shop-public.yml:3774-3779,t62 — 사업자정보는 B2B 회원(STD-B)과 겹친다 / t65 — 증빙과 정산(STD-FIN)의 대사는 t65,담당
+t63,배송,배송비,t63-P22,P22,배송비 계산,1,STD-SHP-007,배송 권역·템플릿 관리,shopby,최숙진,부분,docs/shopby/shopby-api/delivery-server-public.yml:460-475 · docs/shopby/shopby-api/delivery-server-public.yml:803-820,,담당
+t63,배송,배송비,t63-P22,P22,배송비 계산,2,STD-SHP-001,기본 배송비 부과,huni-mall,최숙진,부분,huni-skin-shopby/src/components/checkout/checkout-data.ts:32-37,,담당
+t63,배송,배송비,t63-P22,P22,배송비 계산,3,STD-SHP-002,무료배송 기준금액 적용,huni-mall,최숙진,부분,huni-skin-shopby/src/components/checkout/checkout-data.ts:35,,담당
+t63,배송,배송비,t63-P22,P22,배송비 계산,4,STD-SHP-003,제주 추가 배송비,shopby,최숙진,미착수,docs/shopby/shopby-api/delivery-server-public.yml:16-30 · huni-skin-shopby/src/components/checkout/checkout-data.ts:35,,담당
+t63,배송,배송비,t63-P22,P22,배송비 계산,5,STD-SHP-004,도서산간 권역별 추가 배송비,shopby,최숙진,미착수,docs/shopby/shopby-api/delivery-server-public.yml:332-345 · docs/shopby/shopby-api/delivery-server-public.yml:16-30,,담당
+t63,배송,배송비,t63-P22,P22,배송비 계산,6,STD-SHP-005,특정 상품군 무료배송 제외(실사·대형),미확인,최숙진,미착수,「미확인」 — 찾지 못했다(huni-skin-shopby/src 전수 grep '무료배송 제외' 0건 · delivery-server-public.yml 'exclude'·'freeCondition' 관련 필드 미발견),,담당
+t63,배송,배송비,t63-P22,P22,배송비 계산,7,STD-SHP-006,혼합주문 배송비 산정(최고값 1건),shopby,최숙진,작동,docs/shopby/shopby-api/product-server-public.yml:1397,,담당
+t63,배송,배송비,t63-P22,P22,배송비 계산,8,STD-SHP-017,금지 설정 4종 확인(A-14/U-1): 수량비례·중량 배송비 / 최대구매수량 / 즉시할인,webadmin,최숙진,부분,_workspace/huni-launch-runway/08_system-screen/t51/merged.csv:404,,담당
+t63,배송,배송방식 · 추적(판매자 쪽),t63-P23,P23,배송 방식·출고 처리,1,STD-SHP-008,택배 배송,huni-mall,최숙진,작동,huni-skin-shopby/src/components/checkout/checkout-data.ts:32-37 · huni-skin-shopby/src/components/order/order-complete-view.tsx:71-72,t64 — 출고·추적의 운영자 쪽(STD-ADO·MFG)은 t64 담당. STD-SHP-012·013 은 두 카드가 만나는 경계 행이다,담당
+t63,배송,배송방식 · 추적(판매자 쪽),t63-P23,P23,배송 방식·출고 처리,2,STD-SHP-009,퀵/화물 배송(대형 인쇄물),huni-mall,최숙진,미착수,huni-skin-shopby/src/components/checkout/checkout-data.ts:38-43,t64 — 출고·추적의 운영자 쪽(STD-ADO·MFG)은 t64 담당. STD-SHP-012·013 은 두 카드가 만나는 경계 행이다,담당
+t63,배송,배송방식 · 추적(판매자 쪽),t63-P23,P23,배송 방식·출고 처리,3,STD-SHP-010,매장 방문수령,huni-mall,최숙진,미착수,huni-skin-shopby/src/components/checkout/checkout-data.ts:44-49,t64 — 출고·추적의 운영자 쪽(STD-ADO·MFG)은 t64 담당. STD-SHP-012·013 은 두 카드가 만나는 경계 행이다,담당
+t63,배송,배송방식 · 추적(판매자 쪽),t63-P23,P23,배송 방식·출고 처리,4,STD-SHP-011,분할배송(건별 부분 출고),shopby,최숙진,미착수,docs/shopby/shopby-api/order-server-public.yml:4319,t64 — 출고·추적의 운영자 쪽(STD-ADO·MFG)은 t64 담당. STD-SHP-012·013 은 두 카드가 만나는 경계 행이다,담당
+t63,배송,배송방식 · 추적(판매자 쪽),t63-P23,P23,배송 방식·출고 처리,5,STD-SHP-012,송장번호 등록(판매자),webadmin,서희항,부분,「미확인」 — raw/webadmin/webadmin/catalog/shopby_client.py:136-149 · docs/shopby/shopby-api/order-server-public.yml:934-945,t64 — 출고·추적의 운영자 쪽(STD-ADO·MFG)은 t64 담당. STD-SHP-012·013 은 두 카드가 만나는 경계 행이다,담당
+t63,배송,배송방식 · 추적(판매자 쪽),t63-P23,P23,배송 방식·출고 처리,6,STD-SHP-013,송장 기반 배송상태 일괄변경,webadmin,서희항,부분,「미확인」 — raw/webadmin/webadmin/catalog/shopby_client.py:136-149 · docs/shopby/shopby-api/order-server-public.yml:1430-1436,t64 — 출고·추적의 운영자 쪽(STD-ADO·MFG)은 t64 담당. STD-SHP-012·013 은 두 카드가 만나는 경계 행이다,담당
+t63,배송,추적 · 알림,t63-P24,P24,배송 추적·변경·알림,1,STD-SHP-014,고객 배송 조회(택배사 추적),huni-mall,김동학,부분,huni-skin-shopby/src/lib/api/hooks/use-my-orders.ts:164-165 · huni-skin-shopby/src/lib/api/hooks/use-my-orders.ts:293-294 · huni-skin-shopby/src/components/mypage/order-detail-section.tsx:66-70,t64 — 출고 이후 추적값의 원천은 t64 가 다루는 출고 처리다,담당
+t63,배송,추적 · 알림,t63-P24,P24,배송 추적·변경·알림,2,STD-SHP-015,배송지 변경/추가,huni-mall,김동학,부분,huni-skin-shopby/src/lib/api/hooks/use-shipping-address.ts:89-130 · huni-skin-shopby/src/components/checkout/address-modal.tsx:1-177,t64 — 출고 이후 추적값의 원천은 t64 가 다루는 출고 처리다,담당
+t63,배송,추적 · 알림,t63-P24,P24,배송 추적·변경·알림,3,STD-SHP-016,배송 상태 변경 알림 발송,shopby,최숙진,미착수,docs/shopby/shopby-api/manage-server-public.yml:1115-1120,t64 — 출고 이후 추적값의 원천은 t64 가 다루는 출고 처리다,담당
+t63,배송,추적 · 알림,t63-P24,P24,배송 추적·변경·알림,4,,배송지 변경 가능 시점 정책(출고 전까지),shopby,최숙진,원장 행 없음,「미확인」,t64 — 출고 이후 추적값의 원천은 t64 가 다루는 출고 처리다,단계
+t64,운영자·주문운영,주문,t64-P09,P09,생산상태 · 역방향동기화,C3,BLK-S2-2,[선행 입력] 샵바이 어드민 웹훅 등록 현황(URL·구독 이벤트),,최숙진+신우진,미착수,ledger전용,t65,담당
+t64,원고·파일,생산연계,t64-P06,P06,MES주문접수전송,C5,BLK-S2-3,[선행 입력] MES WCF 스펙(WSDL·상태 코드·품목 마스터) 보유 여부·위치,,외부(MES 담당),대기,ledger전용,,담당
+t64,원고·파일,검판,t64-P03,P03,파일검판 · 프리플라이트,C4,BLK-S2-4,[선행 입력] PitStop 구매 진행 상태(견적·라이선스·인스턴스 계획),,대표(구매),미착수,ledger전용,,담당
+t64,운영자·주문운영,주문,t64-P14,P14,운영자 · 주문운영,C5,STD-ADO-001,주문 목록·검색·필터,,최숙진,작동,canon+ledger,,담당
+t64,운영자·주문운영,주문,t64-P14,P14,운영자 · 주문운영,C5,STD-ADO-002,주문 상세 조회(사양·파일·금액),,서희항,부분,canon+ledger,,담당
+t64,운영자·주문운영,주문,t64-P14,P14,운영자 · 주문운영,C5,STD-ADO-003,주문 상태 변경(단건),,서희항,부분,canon+ledger,,담당
+t64,운영자·주문운영,주문,t64-P14,P14,운영자 · 주문운영,C5,STD-ADO-004,주문 상태 일괄 변경,,최숙진,작동,canon+ledger,,담당
+t64,운영자·주문운영,주문,t64-P17,P17,생산 · 파일알림발송,C5,STD-ADO-005,상태 변경 시 고객 알림 자동발송,,서희항·최숙진,미착수,canon+ledger,t62,담당
+t64,운영자·주문운영,주문,t64-P14,P14,운영자 · 주문운영,C5,STD-ADO-006,주문서(작업지시서) 출력,,최숙진,미착수,canon+ledger,,담당
+t64,운영자·주문운영,주문,t64-P17,P17,생산 · 파일알림발송,C5,STD-ADO-007,고객 SMS/알림톡 수동 발송,,최숙진,작동,canon+ledger,t62,담당
+t64,운영자·주문운영,검수,t64-P03,P03,파일검판 · 프리플라이트,C4,STD-ADO-008,파일 확인 처리(검판 판정),,서희항,미착수,canon+ledger,,담당
+t64,운영자·주문운영,검수,t64-P04,P04,원고보완 · 재업로드,C4,STD-ADO-009,재업로드 요청 발송,,서희항,미착수,canon+ledger,,담당
+t64,운영자·주문운영,검수,t64-P03,P03,파일검판 · 프리플라이트,C4,STD-ADO-010,검수 게이트 관리(G1 파일·G3 가공·G4 출고),,최숙진,미착수,canon+ledger,,담당
+t64,운영자·주문운영,검수,t64-P07,P07,생산공정진행,C4,STD-ADO-010,검수 게이트 관리(G1 파일·G3 가공·G4 출고),,최숙진,미착수,canon+ledger,,담당
+t64,운영자·주문운영,검수,t64-P10,P10,포장 · 출고 · 송장,C4,STD-ADO-010,검수 게이트 관리(G1 파일·G3 가공·G4 출고),,최숙진,미착수,canon+ledger,t63,담당
+t64,운영자·주문운영,검수,t64-P12,P12,재제작 · 반송 · 재출고,C4,STD-ADO-011,불량 판정·재작업 지시,,최숙진,미착수,canon+ledger,t65,담당
+t64,운영자·주문운영,생산,t64-P07,P07,생산공정진행,C5,STD-ADO-012,인쇄 공정 상태 트래킹,,최숙진,미착수,canon+ledger,,담당
+t64,운영자·주문운영,생산,t64-P07,P07,생산공정진행,C5,STD-ADO-013,작업 큐/일정 배정,,최숙진,미착수,canon+ledger,,담당
+t64,운영자·주문운영,생산,t64-P05,P05,접수파일등록 · 조판,C5,STD-ADO-014,판걸이/임포지션 정보 산출,,서희항,작동,canon+ledger,,담당
+t64,운영자·주문운영,생산,t64-P06,P06,MES주문접수전송,C5,STD-ADO-015,생산 지시 데이터 연계(JDF/XJDF),,서희항,미착수,canon+ledger,,담당
+t64,운영자·주문운영,생산,t64-P07,P07,생산공정진행,C5,STD-ADO-016,바코드/라벨 출력,,최숙진,미착수,canon+ledger,,담당
+t64,운영자·주문운영,생산,t64-P10,P10,포장 · 출고 · 송장,C5,STD-ADO-016,바코드/라벨 출력,,최숙진,미착수,canon+ledger,t63,담당
+t64,운영자·주문운영,외주,t64-P08,P08,외주발주 · 입고,C5,STD-ADO-017,외주 발주 등록·관리,,최숙진,미착수,canon+ledger,,담당
+t64,운영자·주문운영,외주,t64-P08,P08,외주발주 · 입고,C5,STD-ADO-018,외주 입고 전수검수 기록,,최숙진,미착수,canon+ledger,,담당
+t64,운영자·주문운영,외주,t64-P08,P08,외주발주 · 입고,C5,STD-ADO-019,외주 정산(월 마감),,최숙진,미착수,canon+ledger,,담당
+t64,운영자·주문운영,배송,t64-P10,P10,포장 · 출고 · 송장,C6,STD-ADO-020,송장 등록·일괄 업로드,,서희항,작동,canon+ledger,t63,담당
+t64,운영자·주문운영,배송,t64-P10,P10,포장 · 출고 · 송장,C6,STD-ADO-021,출고 처리·배송중 전이,,서희항,작동,canon+ledger,t63,담당
+t64,운영자·주문운영,클레임,t64-P13,P13,생산구간 · 주문취소,D3,STD-ADO-022,클레임 접수 목록·처리,,최숙진,작동,canon+ledger,t65,담당
+t64,운영자·주문운영,클레임,t64-P13,P13,생산구간 · 주문취소,D3,STD-ADO-023,환불 실행·정산 반영,,최숙진,부분,canon+ledger,t65,담당
+t64,운영자·주문운영,증빙,t64-P16,P16,오프라인주문 · 증빙,D4,STD-ADO-024,증빙서류 발급 관리,,최숙진,미착수,canon+ledger,t65,담당
+t64,운영자·주문운영,주문,t64-P14,P14,운영자 · 주문운영,C5,STD-ADO-025,[구IA#86] 주문관리-인쇄/제본/굿즈 (상세),,최숙진,미실측,ledger전용,,담당
+t64,운영자·주문운영,주문,t64-P14,P14,운영자 · 주문운영,C5,STD-ADO-026,[구IA#93] 주문상태변경 (일괄),,최숙진,미실측,ledger전용,,담당
+t64,운영자·주문운영,주문,t64-P17,P17,생산 · 파일알림발송,D1,STD-ADO-027,[구IA#94] 고객 SMS 발송,,최숙진,미실측,ledger전용,t62,담당
+t64,운영자·주문운영,주문,t64-P14,P14,운영자 · 주문운영,C5,STD-ADO-028,스모크 주문 3건·취소 클레임 1건으로 A-1/A-2/A-4 관측 완료하기,,최숙진,미착수,ledger전용,,담당
+t64,원고·파일,검판,t64-P03,P03,파일검판 · 프리플라이트,C4,STD-ART-008,파일 포맷 유효성 검사,,서희항,미착수,canon+ledger,,담당
+t64,원고·파일,검판,t64-P03,P03,파일검판 · 프리플라이트,C4,STD-ART-009,재단선/블리드 3mm 확보 검사,,서희항,미착수,canon+ledger,,담당
+t64,원고·파일,검판,t64-P03,P03,파일검판 · 프리플라이트,C4,STD-ART-010,색공간(CMYK) 검사 및 RGB 경고,,서희항,미착수,canon+ledger,,담당
+t64,원고·파일,검판,t64-P03,P03,파일검판 · 프리플라이트,C4,STD-ART-011,해상도(dpi) 검사,,서희항,미착수,canon+ledger,,담당
+t64,원고·파일,검판,t64-P03,P03,파일검판 · 프리플라이트,C4,STD-ART-012,폰트 아웃라인 여부 검사,,서희항,미착수,canon+ledger,,담당
+t64,원고·파일,검판,t64-P03,P03,파일검판 · 프리플라이트,C4,STD-ART-013,주문 사양과 파일 실측 사이즈 대조,,서희항,미착수,canon+ledger,,담당
+t64,원고·파일,검판,t64-P03,P03,파일검판 · 프리플라이트,C4,STD-ART-014,별색 채널·오버프린트 검사,,서희항,미착수,canon+ledger,,담당
+t64,원고·파일,검판,t64-P03,P03,파일검판 · 프리플라이트,C4,STD-ART-015,검판 결과 리포트 고객 노출,,서희항,미착수,canon+ledger,,담당
+t64,원고·파일,검판,t64-P03,P03,파일검판 · 프리플라이트,C4,STD-ART-016,자동검판 도구 연동(PitStop 등),,서희항,미착수,canon+ledger,,담당
+t64,원고·파일,검판,t64-P03,P03,파일검판 · 프리플라이트,C4,STD-ART-017,검판 게이트 통과/보류 상태 관리,,최숙진,미착수,canon+ledger,,담당
+t64,원고·파일,검판,t64-P04,P04,원고보완 · 재업로드,C4,STD-ART-018,재업로드 요청 발송(문자/알림),,서희항,미착수,canon+ledger,,담당
+t64,원고·파일,생산연계,t64-P06,P06,MES주문접수전송,C5,STD-ART-028,생산용 원고 자동 다운로드/전달,,서희항,부분,canon+ledger,,담당
+t64,원고·파일,검판,t64-P03,P03,파일검판 · 프리플라이트,C4,STD-ART-033,PitStop 연동 소요 시간 다음 미팅 상정·일정 반영,,미정,미착수,ledger전용,,담당
+t64,원고·파일,검판,t64-P03,P03,파일검판 · 프리플라이트,C4,STD-ART-034,PitStop 연동 방식 결정(핫폴더 vs CLI),,미정,미착수,ledger전용,,담당
+t64,원고·파일,검판,t64-P03,P03,파일검판 · 프리플라이트,C4,STD-ART-035,PitStop 작업 범위 산정(상품별 프로파일·S3↔서버 파일 이동·결과 표시·대용량 테스트),,미정,미착수,ledger전용,,담당
+t64,운영자·주문운영,주문,t64-P01,P01,주문접수 · S2S등록,C5,STD-MFG-001,주문 등록 API 수신(자사몰→우리·site_key/order_no/line_no/token),,서희항,부분,ledger전용,t63,담당
+t64,운영자·주문운영,주문,t64-P01,P01,주문접수 · S2S등록,C5,STD-MFG-002,주문 등록 멱등 처리(재시도 already:true·같은 자리 다른 사양 409),,서희항,부분,ledger전용,t63,담당
+t64,운영자·주문운영,주문,t64-P01,P01,주문접수 · S2S등록,C5,STD-MFG-003,결제 사양 전문 보관(t_ord_orders·서명 token 검증 후 전개),,서희항,부분,ledger전용,t63,담당
+t64,원고·파일,생산연계,t64-P02,P02,원고승격 · 보관,C5,STD-MFG-004,원고 승격 tmp→order 버킷 CopyObject,,서희항,부분,ledger전용,t63,담당
+t64,원고·파일,생산연계,t64-P02,P02,원고승격 · 보관,C5,STD-MFG-005,승격 시 원본 실존·크기 실측 대조(head_object) fail-closed,,서희항,부분,ledger전용,t63,담당
+t64,원고·파일,생산연계,t64-P02,P02,원고승격 · 보관,C5,STD-MFG-006,승격 실패 시 주문 보류(HOLD)+사유 기록,,서희항,부분,ledger전용,t63,담당
+t64,원고·파일,생산연계,t64-P02,P02,원고승격 · 보관,C5,STD-MFG-007,담당자용 보류 주문 목록 화면,,서희항,미착수,ledger전용,t63,담당
+t64,운영자·주문운영,주문,t64-P14,P14,운영자 · 주문운영,C5,STD-MFG-007,담당자용 보류 주문 목록 화면,,서희항,미착수,ledger전용,,담당
+t64,원고·파일,생산연계,t64-P02,P02,원고승격 · 보관,C5,STD-MFG-008,원고 키 회차(r{n}) 규약·재업로드 누적 보관,,서희항,부분,ledger전용,t63,담당
+t64,원고·파일,생산연계,t64-P02,P02,원고승격 · 보관,C5,STD-MFG-009,MES 넘길 파일 목록 산출(t_ord_artworks 최신 회차),,서희항,부분,ledger전용,t63,담당
+t64,원고·파일,생산연계,t64-P06,P06,MES주문접수전송,C5,STD-MFG-009,MES 넘길 파일 목록 산출(t_ord_artworks 최신 회차),,서희항,부분,ledger전용,,담당
+t64,원고·파일,생산연계,t64-P06,P06,MES주문접수전송,C5,STD-MFG-010,상품↔MES 품목코드(MES_ITEM_CD) 매핑 일괄 적재,,서희항,부분,ledger전용,,담당
+t64,원고·파일,생산연계,t64-P06,P06,MES주문접수전송,C5,STD-MFG-011,MES 품목코드 중복 검증(부분 유니크·삭제상품 점유 명시),,서희항,부분,ledger전용,,담당
+t64,원고·파일,생산연계,t64-P06,P06,MES주문접수전송,C5,STD-MFG-012,MES 품목코드 매핑 현황 목록 노출,,서희항,미착수,ledger전용,,담당
+t64,원고·파일,생산연계,t64-P06,P06,MES주문접수전송,C5,STD-MFG-013,MES-1 주문 접수 전송(WCF·주문헤더+제작사양 전문+원고 목록+handoff_id),,서희항,미착수,ledger전용,,담당
+t64,원고·파일,생산연계,t64-P06,P06,MES주문접수전송,C5,STD-MFG-014,MES 중복 전송 방지 도장,,서희항,미착수,ledger전용,,담당
+t64,운영자·주문운영,클레임,t64-P13,P13,생산구간 · 주문취소,C5,STD-MFG-015,MES-2 주문 취소 통보(생산중지 요청),,서희항,미착수,ledger전용,t65,담당
+t64,원고·파일,검판,t64-P04,P04,원고보완 · 재업로드,C5,STD-MFG-016,MES-3 원고 교체 통보(회차 증가 시 새 키 전달),,서희항,미착수,ledger전용,,담당
+t64,배송,추적,t64-P11,P11,배송추적 · 배송지변경,C5,STD-MFG-017,MES-4 배송지·수령자 변경 통보(출고 전 한정),,서희항,미착수,ledger전용,t63,담당
+t64,운영자·주문운영,주문,t64-P09,P09,생산상태 · 역방향동기화,C5,STD-MFG-018,MES-5 주문 조회 재동기화,,서희항,미착수,ledger전용,t65,담당
+t64,원고·파일,생산연계,t64-P06,P06,MES주문접수전송,C5,STD-MFG-019,MES→우리 API 인증(VPC 사설 경로+API 키·인터넷 미개방),,서희항,미착수,ledger전용,,담당
+t64,원고·파일,생산연계,t64-P06,P06,MES주문접수전송,C5,STD-MFG-020,주문 큐 비동기 처리(SQS 디커플·MES 다운 중에도 접수 지속),,서희항,미착수,ledger전용,,담당
+t64,원고·파일,생산연계,t64-P06,P06,MES주문접수전송,C5,STD-MFG-021,실패 재시도·DLQ·처리 실패 주문 관리자 화면,,서희항,미착수,ledger전용,,담당
+t64,운영자·주문운영,생산,t64-P15,P15,생산현황 · 산출데이터,C5,STD-MFG-021,실패 재시도·DLQ·처리 실패 주문 관리자 화면,,서희항,미착수,ledger전용,,담당
+t64,운영자·주문운영,주문,t64-P09,P09,생산상태 · 역방향동기화,C7,STD-MFG-022,주문 상태머신(REGISTERED/PROMOTING/PROMOTED/HOLD/PAID/FILE_CHECK/FILE_HOLD/MES_SENT/IN_PRODUCTION/PRODUCED/SHIPPED/DONE/CANCELED),,서희항,부분,ledger전용,t65,담당
+t64,운영자·주문운영,주문,t64-P09,P09,생산상태 · 역방향동기화,C7,STD-MFG-023,상태 단위=주문상품옵션(orderProductOptionNo)·주문 단위는 롤업,,서희항,부분,ledger전용,t65,담당
+t64,원고·파일,생산연계,t64-P06,P06,MES주문접수전송,C7,STD-MFG-024,3시스템 매핑 테이블(handoff_id·orderNo+orderProductOptionNo·MES 작업번호),,서희항,부분,ledger전용,,담당
+t64,운영자·주문운영,주문,t64-P09,P09,생산상태 · 역방향동기화,C7,STD-MFG-024,3시스템 매핑 테이블(handoff_id·orderNo+orderProductOptionNo·MES 작업번호),,서희항,부분,ledger전용,t65,담당
+t64,운영자·주문운영,주문,t64-P09,P09,생산상태 · 역방향동기화,C7,STD-MFG-025,FR-1 MES 주문 상태 변경 통보 수신(접수완료/생산대기/생산중/생산완료),,서희항,미착수,ledger전용,t65,담당
+t64,운영자·주문운영,클레임,t64-P13,P13,생산구간 · 주문취소,C7,STD-MFG-026,접수완료 시 취소 잠금 원자적 전환(cancelable CAS),,서희항,미착수,ledger전용,t65,담당
+t64,운영자·주문운영,주문,t64-P09,P09,생산상태 · 역방향동기화,C7,STD-MFG-027,TO-2 샵바이 상품준비중 전환(취소 창구 닫기),,서희항,미착수,ledger전용,t65,담당
+t64,운영자·주문운영,배송,t64-P10,P10,포장 · 출고 · 송장,C7,STD-MFG-028,FR-2 MES 송장번호 등록 수신,,서희항,미착수,ledger전용,t63,담당
+t64,운영자·주문운영,배송,t64-P10,P10,포장 · 출고 · 송장,C7,STD-MFG-029,TO-3 샵바이 배송처리(송장 등록·정정),,서희항,미착수,ledger전용,t63,담당
+t64,운영자·주문운영,주문,t64-P09,P09,생산상태 · 역방향동기화,C7,STD-MFG-030,우리가 올린 상태변경 웹훅 메아리 필터(무한루프 방지),,서희항,미착수,ledger전용,t65,담당
+t64,운영자·주문운영,클레임,t64-P13,P13,생산구간 · 주문취소,C7,STD-MFG-031,FR-3 MES 발 주문 취소 요청 수신→샵바이 취소·환불(TO-4),,서희항,미착수,ledger전용,t65,담당
+t64,운영자·주문운영,클레임,t64-P13,P13,생산구간 · 주문취소,C7,STD-MFG-032,FR-5 취소요청 승인·거부 수신→샵바이 클레임 처리(TO-5),,서희항,미착수,ledger전용,t65,담당
+t64,운영자·주문운영,클레임,t64-P13,P13,생산구간 · 주문취소,C7,STD-MFG-033,생산 시작 후 도착한 취소는 자동 처리하지 않고 담당자 에스컬레이션,,서희항,미착수,ledger전용,t65,담당
+t64,운영자·주문운영,주문,t64-P09,P09,생산상태 · 역방향동기화,C7,STD-MFG-034,FR-7 주문 메모 기록→샵바이 업무 메시지 동기화(TO-6),,서희항,미착수,ledger전용,t65,담당
+t64,운영자·주문운영,주문,t64-P09,P09,생산상태 · 역방향동기화,C7,STD-MFG-035,MES 화면 신규 버튼(취소·재업로드 요청·취소요청 승인거부)+사유 입력,,외부(상대측 회신 대기),미착수,ledger전용,t65,담당
+t64,운영자·주문운영,클레임,t64-P13,P13,생산구간 · 주문취소,C7,STD-MFG-035,MES 화면 신규 버튼(취소·재업로드 요청·취소요청 승인거부)+사유 입력,,외부(상대측 회신 대기),미착수,ledger전용,t65,담당
+t64,원고·파일,검판,t64-P03,P03,파일검판 · 프리플라이트,C4,STD-MFG-036,원고 바이러스 온디맨드 명시 스캔,,서희항,미착수,ledger전용,,담당
+t64,원고·파일,검판,t64-P03,P03,파일검판 · 프리플라이트,C4,STD-MFG-037,바이러스 검사 3중 교차 판정(스캔결과·탐지기록·파일존재해시),,서희항,미착수,ledger전용,,담당
+t64,원고·파일,검판,t64-P03,P03,파일검판 · 프리플라이트,C4,STD-MFG-038,시그니처 신선도 확인·오래되면 보류,,서희항,미착수,ledger전용,,담당
+t64,원고·파일,검판,t64-P03,P03,파일검판 · 프리플라이트,C4,STD-MFG-039,스캔 실패·타임아웃은 통과가 아니라 보류(재시도 큐),,서희항,미착수,ledger전용,,담당
+t64,원고·파일,검판,t64-P03,P03,파일검판 · 프리플라이트,C4,STD-MFG-040,감염 파일 격리+담당자 알림+고객 재업로드 요청,,서희항,미착수,ledger전용,,담당
+t64,원고·파일,검판,t64-P03,P03,파일검판 · 프리플라이트,C4,STD-MFG-044,폰트 미포함 검사,,서희항,미착수,ledger전용,,담당
+t64,원고·파일,검판,t64-P03,P03,파일검판 · 프리플라이트,C4,STD-MFG-046,페이지 수와 주문 사양 대조,,서희항,미착수,ledger전용,,담당
+t64,원고·파일,검판,t64-P03,P03,파일검판 · 프리플라이트,C4,STD-MFG-048,파일 열림·손상·암호 걸림 검사,,서희항,미착수,ledger전용,,담당
+t64,원고·파일,검판,t64-P03,P03,파일검판 · 프리플라이트,C4,STD-MFG-049,판정 3갈래 분기(자동 재업로드 요청·담당자 검수·담당자 발 요청),,서희항,미착수,ledger전용,,담당
+t64,원고·파일,검판,t64-P03,P03,파일검판 · 프리플라이트,C4,STD-MFG-050,자동 발송 오류 목록 관리(좁게 유지·담당자와 확정),,서희항,미착수,ledger전용,,담당
+t64,원고·파일,검판,t64-P04,P04,원고보완 · 재업로드,C4,STD-MFG-051,FR-6 프리플라이트 재실행 요청 수신,,서희항,미착수,ledger전용,,담당
+t64,원고·파일,검판,t64-P03,P03,파일검판 · 프리플라이트,C4,STD-MFG-052,검사 감사기록 보관(검사시각·엔진시그니처버전·판정·탐지명·파일해시·PitStop 리포트),,서희항,미착수,ledger전용,,담당
+t64,원고·파일,검판,t64-P03,P03,파일검판 · 프리플라이트,C4,STD-MFG-053,검사 없이 PitStop 투입 경로 차단(코드상 부재 보장),,서희항,미착수,ledger전용,,담당
+t64,원고·파일,검판,t64-P04,P04,원고보완 · 재업로드,C4,STD-MFG-054,FR-4 재업로드 요청 수신→서명 1회성 링크 발급(주문·항목·구성원 바인딩·7일),,서희항,미착수,ledger전용,,담당
+t64,원고·파일,검판,t64-P04,P04,원고보완 · 재업로드,C4,STD-MFG-055,재업로드 화면(위젯 업로드 컴포넌트 재사용·대상 파일 지정),,서희항,미착수,ledger전용,,담당
+t64,원고·파일,검판,t64-P04,P04,원고보완 · 재업로드,C4,STD-MFG-056,재업로드 시 회차 증가+검사 자동 재실행,,서희항,미착수,ledger전용,,담당
+t64,원고·파일,검판,t64-P04,P04,원고보완 · 재업로드,C4,STD-MFG-057,원고 보완 대기 중 주문상태 결제완료 유지(고객 취소권 보존),,서희항,미착수,ledger전용,,담당
+t64,운영자·주문운영,생산,t64-P05,P05,접수파일등록 · 조판,C4,STD-MFG-058,접수파일 등록(원본 그대로 사용 vs 가공 후 등록 2경로),,최숙진,미착수,ledger전용,,담당
+t64,운영자·주문운영,생산,t64-P05,P05,접수파일등록 · 조판,C4,STD-MFG-059,품목관리 디자인파일여부 Y/N 로 원본 자동 접수 처리,,외부(상대측 회신 대기),미실측,ledger전용,,담당
+t64,운영자·주문운영,생산,t64-P05,P05,접수파일등록 · 조판,C4,STD-MFG-060,Edicus Prepress 랜더링 결과 접수파일 등록,,외부(상대측 회신 대기),미실측,ledger전용,,담당
+t64,운영자·주문운영,생산,t64-P05,P05,접수파일등록 · 조판,C4,STD-MFG-061,접수파일 인쇄공정 파일 기준 썸네일 자동 생성,,외부(상대측 회신 대기),미실측,ledger전용,,담당
+t64,운영자·주문운영,생산,t64-P05,P05,접수파일등록 · 조판,C4,STD-MFG-062,AI 접수파일에 썸네일용 JPG 동반 업로드(아크릴스티커·박),,최숙진,미착수,ledger전용,,담당
+t64,운영자·주문운영,생산,t64-P05,P05,접수파일등록 · 조판,C4,STD-MFG-064,편집기 상품 수정요청·수정완료 왕복,,서희항,미착수,ledger전용,,담당
+t64,운영자·주문운영,생산,t64-P07,P07,생산공정진행,C4,STD-MFG-065,출고예정일(완료예정일) 등록,,최숙진,미착수,ledger전용,,담당
+t64,운영자·주문운영,생산,t64-P07,P07,생산공정진행,C4,STD-MFG-066,생산메모 입력,,최숙진,미착수,ledger전용,,담당
+t64,운영자·주문운영,생산,t64-P07,P07,생산공정진행,C4,STD-MFG-067,작업의뢰서 출력(대표썸네일·EXCEL 다운),,최숙진,미착수,ledger전용,,담당
+t64,운영자·주문운영,생산,t64-P07,P07,생산공정진행,C4,STD-MFG-068,의뢰서 출력 시 처리표시(빨간점)·주문상태 제작중 전환,,최숙진,미착수,ledger전용,,담당
+t64,운영자·주문운영,증빙,t64-P16,P16,오프라인주문 · 증빙,C4,STD-MFG-069,거래처별 주문 EXCEL 다운(가격 제외),,최숙진,미착수,ledger전용,t65,담당
+t64,운영자·주문운영,증빙,t64-P16,P16,오프라인주문 · 증빙,C4,STD-MFG-070,업체별 주문등록(EXCEL 등록·파일경로 선택),,최숙진,미착수,ledger전용,t65,담당
+t64,운영자·주문운영,증빙,t64-P16,P16,오프라인주문 · 증빙,C4,STD-MFG-071,OEM 주문 IMPORT(비즈하우스·후지필름·컨티뉴),,최숙진,미착수,ledger전용,t65,담당
+t64,운영자·주문운영,생산,t64-P05,P05,접수파일등록 · 조판,C5,STD-MFG-072,원본 AI→PDF 변환 업로드,,최숙진,미착수,ledger전용,,담당
+t64,운영자·주문운영,생산,t64-P05,P05,접수파일등록 · 조판,C5,STD-MFG-073,인쇄파일과 칼선파일 분리하여 공정별 등록,,최숙진,미착수,ledger전용,,담당
+t64,운영자·주문운영,생산,t64-P05,P05,접수파일등록 · 조판,C5,STD-MFG-074,조판(판걸이+아이마크) 파일 생성,,최숙진,미착수,ledger전용,,담당
+t64,운영자·주문운영,생산,t64-P05,P05,접수파일등록 · 조판,C5,STD-MFG-075,아크릴 원판 배치 조판(396x480·도수 구분·돔보),,최숙진,미착수,ledger전용,,담당
+t64,운영자·주문운영,생산,t64-P05,P05,접수파일등록 · 조판,C5,STD-MFG-076,다도안 상품 판걸이·건수·수량 기준 조판,,최숙진,미착수,ledger전용,,담당
+t64,운영자·주문운영,생산,t64-P05,P05,접수파일등록 · 조판,C5,STD-MFG-077,수동조판(여러 주문 취합·틴거울/아크릴/자석북마크),,최숙진,미착수,ledger전용,,담당
+t64,운영자·주문운영,생산,t64-P05,P05,접수파일등록 · 조판,C5,STD-MFG-078,파일명 자동 RENAME 규약 적용(품목_출력사이즈_양단면_소재_거래처_고객_고유번호_수량),,최숙진,미착수,ledger전용,,담당
+t64,운영자·주문운영,생산,t64-P05,P05,접수파일등록 · 조판,C5,STD-MFG-079,상품군별 파일명 조합 규칙 8종(디지털/캘린더/스티커/실사/배너/패브릭/시트커팅/레이저커팅),,최숙진,미착수,ledger전용,,담당
+t64,운영자·주문운영,생산,t64-P05,P05,접수파일등록 · 조판,C5,STD-MFG-080,공정별 파일서버 폴더 구조(년도>발주일자) 자동 배치,,최숙진,미착수,ledger전용,,담당
+t64,운영자·주문운영,생산,t64-P05,P05,접수파일등록 · 조판,C5,STD-MFG-081,팀별 또는 담당자 파일 분리 전달(분배),,최숙진,미착수,ledger전용,,담당
+t64,운영자·주문운영,생산,t64-P07,P07,생산공정진행,C5,STD-MFG-082,공정 마스터 관리(계층·상세옵션·면별선택·작업여백·고객노출설명),,서희항,작동,ledger전용,,담당
+t64,운영자·주문운영,생산,t64-P07,P07,생산공정진행,C5,STD-MFG-083,상품별 공정 연결·필수공정 여부·상세옵션 허용범위,,서희항,작동,ledger전용,,담당
+t64,운영자·주문운영,생산,t64-P07,P07,생산공정진행,C5,STD-MFG-084,공정라우트 마스터(18케이스 라우트 정의·재채번),,최숙진,미착수,ledger전용,,담당
+t64,운영자·주문운영,생산,t64-P07,P07,생산공정진행,C5,STD-MFG-085,라우트 단계 정의(순번·공정·필수선택·담당팀),,최숙진,미착수,ledger전용,,담당
+t64,운영자·주문운영,생산,t64-P07,P07,생산공정진행,C5,STD-MFG-086,상품→공정라우트 매핑,,최숙진,미착수,ledger전용,,담당
+t64,운영자·주문운영,생산,t64-P07,P07,생산공정진행,C5,STD-MFG-087,팀·파트 마스터(디지털인쇄/스티커가공/인쇄후가공/제본/특수인쇄가공/봉재가공/굿즈가공),,최숙진,미착수,ledger전용,,담당
+t64,운영자·주문운영,생산,t64-P07,P07,생산공정진행,C5,STD-MFG-088,공정 완료 신호 입력(출력완료·커팅완료·제본시작·봉재시작·가공시작),,최숙진,미착수,ledger전용,,담당
+t64,운영자·주문운영,생산,t64-P07,P07,생산공정진행,C5,STD-MFG-089,팀 간 출고·입고 처리(봉제미싱입고·아크릴가공입고·제본입고·박작업입고),,최숙진,미착수,ledger전용,,담당
+t64,운영자·주문운영,생산,t64-P07,P07,생산공정진행,C5,STD-MFG-090,앞공정 미완료 시 다음공정 차단(선후관계 interlock),,외부(상대측 회신 대기),미실측,ledger전용,,담당
+t64,운영자·주문운영,생산,t64-P07,P07,생산공정진행,C5,STD-MFG-091,팀별 파일 다운로드 권한(제작중 상태 and 생산다운여부 Y),,최숙진,미착수,ledger전용,,담당
+t64,운영자·주문운영,생산,t64-P05,P05,접수파일등록 · 조판,C5,STD-MFG-092,인쇄타입별 접수파일 포맷 규약(PDF/AI/JPG),,최숙진,미착수,ledger전용,,담당
+t64,운영자·주문운영,생산,t64-P07,P07,생산공정진행,C5,STD-MFG-093,파일 다운로드 시 다운로드완료 상태 자동 전환,,최숙진,미착수,ledger전용,,담당
+t64,운영자·주문운영,생산,t64-P15,P15,생산현황 · 산출데이터,C5,STD-MFG-094,공정별 현황표(당일발주 대기·완료 / 당일생산 주의·불량 / 당일출고),,최숙진,미착수,ledger전용,,담당
+t64,운영자·주문운영,생산,t64-P15,P15,생산현황 · 산출데이터,C5,STD-MFG-095,1차 산출데이터(일별 출력량·출고건량·미출고건량·입고건량),,최숙진,미착수,ledger전용,,담당
+t64,운영자·주문운영,생산,t64-P15,P15,생산현황 · 산출데이터,C5,STD-MFG-096,2차 산출데이터(팀별 입고예정·공정별 평균리드타임·평균 제작기간),,최숙진,미착수,ledger전용,,담당
+t64,운영자·주문운영,생산,t64-P15,P15,생산현황 · 산출데이터,C5,STD-MFG-098,자재 입·출고 관리,,최숙진,미착수,ledger전용,,담당
+t64,원고·파일,생산연계,t64-P06,P06,MES주문접수전송,C5,STD-MFG-099,셋트상품·건수(같은 사양 반복) MES 작업 분해,,서희항,부분,ledger전용,,담당
+t64,운영자·주문운영,외주,t64-P08,P08,외주발주 · 입고,C5,STD-MFG-100,외주처별 발주서 생성(접수파일 취합),,최숙진,미착수,ledger전용,,담당
+t64,운영자·주문운영,외주,t64-P08,P08,외주발주 · 입고,C5,STD-MFG-101,책자 상품 수량·크기 기준 선택적 외주 판단,,최숙진,미착수,ledger전용,,담당
+t64,운영자·주문운영,외주,t64-P08,P08,외주발주 · 입고,C5,STD-MFG-102,외주 파일 다운로드·업체 포맷 변환·웹하드 업로드,,최숙진,미착수,ledger전용,,담당
+t64,운영자·주문운영,외주,t64-P08,P08,외주발주 · 입고,C5,STD-MFG-103,외주공정 주문리스트·외주처별 생산리스트,,최숙진,미착수,ledger전용,,담당
+t64,운영자·주문운영,외주,t64-P08,P08,외주발주 · 입고,C5,STD-MFG-104,외주제작·외주공정 제작물 입·출고 기록,,최숙진,미착수,ledger전용,,담당
+t64,운영자·주문운영,배송,t64-P10,P10,포장 · 출고 · 송장,C6,STD-MFG-106,1차포장 처리,,최숙진,미착수,ledger전용,t63,담당
+t64,운영자·주문운영,배송,t64-P10,P10,포장 · 출고 · 송장,C6,STD-MFG-107,박스포장 처리(실사·대형 상품군),,최숙진,미착수,ledger전용,t63,담당
+t64,운영자·주문운영,배송,t64-P10,P10,포장 · 출고 · 송장,C6,STD-MFG-108,제작번호별 바코드 입력→포장완료 상태변경,,최숙진,미착수,ledger전용,t63,담당
+t64,운영자·주문운영,배송,t64-P10,P10,포장 · 출고 · 송장,C6,STD-MFG-109,전 상품 포장완료 시 제작완료 자동 전환,,최숙진,미착수,ledger전용,t63,담당
+t64,운영자·주문운영,배송,t64-P10,P10,포장 · 출고 · 송장,C6,STD-MFG-110,주문번호별 바코드 입력→출고완료 전환,,최숙진,미착수,ledger전용,t63,담당
+t64,운영자·주문운영,배송,t64-P10,P10,포장 · 출고 · 송장,C6,STD-MFG-111,송장 출력·송장 추가출력(택배),,최숙진,미착수,ledger전용,t63,담당
+t64,운영자·주문운영,배송,t64-P10,P10,포장 · 출고 · 송장,C6,STD-MFG-112,납품명세서 출력(퀵),,최숙진,미착수,ledger전용,t63,담당
+t64,운영자·주문운영,배송,t64-P10,P10,포장 · 출고 · 송장,C6,STD-MFG-113,출고명세서 출력(직접방문),,최숙진,미착수,ledger전용,t63,담당
+t64,운영자·주문운영,배송,t64-P10,P10,포장 · 출고 · 송장,C6,STD-MFG-114,한 주문에 다중 송장 부여,,서희항,미착수,ledger전용,t63,담당
+t64,운영자·주문운영,배송,t64-P10,P10,포장 · 출고 · 송장,C6,STD-MFG-115,합배송 리스트 식별,,최숙진,미착수,ledger전용,t63,담당
+t64,운영자·주문운영,배송,t64-P10,P10,포장 · 출고 · 송장,C6,STD-MFG-116,전 상품 출고지 단일화(오프라인 주문 외),,최숙진,미착수,ledger전용,t63,담당
+t64,운영자·주문운영,배송,t64-P10,P10,포장 · 출고 · 송장,C6,STD-MFG-117,재고상품(상품 액세서리) 관리,,최숙진,미착수,ledger전용,t63,담당
+t64,운영자·주문운영,배송,t64-P10,P10,포장 · 출고 · 송장,C6,STD-MFG-118,제작완료 썸네일 확인 화면,,최숙진,미착수,ledger전용,t63,담당
+t64,운영자·주문운영,클레임,t64-P12,P12,재제작 · 반송 · 재출고,C6,STD-MFG-119,일부 재제작+재배송 지시(MES 주문복사),,최숙진,미착수,ledger전용,t65,담당
+t64,운영자·주문운영,클레임,t64-P12,P12,재제작 · 반송 · 재출고,C6,STD-MFG-120,전체 재제작+재배송 지시,,최숙진,미착수,ledger전용,t65,담당
+t64,운영자·주문운영,클레임,t64-P12,P12,재제작 · 반송 · 재출고,C6,STD-MFG-121,반송 접수·반송여부 체크,,최숙진,미착수,ledger전용,t65,담당
+t64,운영자·주문운영,클레임,t64-P12,P12,재제작 · 반송 · 재출고,C6,STD-MFG-122,주문 내 정산 메모필드(반송비·재제작 비용 부담),,최숙진,미착수,ledger전용,t65,담당
+t64,운영자·주문운영,클레임,t64-P12,P12,재제작 · 반송 · 재출고,C6,STD-MFG-123,재출고 신규송장 부여(상품누락 추가발송·교환 재발송),,서희항,미착수,ledger전용,t65,담당
+t64,운영자·주문운영,클레임,t64-P12,P12,재제작 · 반송 · 재출고,C6,STD-MFG-124,반품·교환 웹훅 기록만 하고 MES 작업 자동생성 안 함,,서희항,미착수,ledger전용,t65,담당
+t64,원고·파일,검판,t64-P04,P04,원고보완 · 재업로드,D1,STD-MFG-125,파일 오류 재업로드 요청 알림톡 발송(자동·담당자 발),,서희항+최숙진,미착수,ledger전용,,담당
+t64,운영자·주문운영,주문,t64-P17,P17,생산 · 파일알림발송,D1,STD-MFG-125,파일 오류 재업로드 요청 알림톡 발송(자동·담당자 발),,서희항+최숙진,미착수,ledger전용,t62,담당
+t64,원고·파일,검판,t64-P04,P04,원고보완 · 재업로드,D1,STD-MFG-126,재업로드 접수 확인 알림,,서희항+최숙진,미착수,ledger전용,,담당
+t64,운영자·주문운영,주문,t64-P17,P17,생산 · 파일알림발송,D1,STD-MFG-126,재업로드 접수 확인 알림,,서희항+최숙진,미착수,ledger전용,t62,담당
+t64,운영자·주문운영,주문,t64-P17,P17,생산 · 파일알림발송,D1,STD-MFG-127,편집상품 수정요청 알림(주문번호·편집번호·안내),,서희항+최숙진,미착수,ledger전용,t62,담당
+t64,운영자·주문운영,주문,t64-P17,P17,생산 · 파일알림발송,D1,STD-MFG-128,알림톡 템플릿 사전 심사·승인 관리,,서희항,미착수,ledger전용,t62,담당
+t64,운영자·주문운영,주문,t64-P17,P17,생산 · 파일알림발송,D1,STD-MFG-129,알림톡 발송 실패 시 SMS/LMS 자동 대체,,서희항+최숙진,미착수,ledger전용,t62,담당
+t64,운영자·주문운영,주문,t64-P17,P17,생산 · 파일알림발송,D1,STD-MFG-130,알림 발송 주체 경계 준수(주문·결제·배송=샵바이 / 파일=우리),,최숙진,미착수,ledger전용,t62,담당
+t64,원고·파일,생산연계,t64-P06,P06,MES주문접수전송,C5,STD-MFG-131,단계별 체류 건수·DLQ 처리 현황 대시보드,,서희항,미착수,ledger전용,,담당
+t64,운영자·주문운영,생산,t64-P15,P15,생산현황 · 산출데이터,C5,STD-MFG-131,단계별 체류 건수·DLQ 처리 현황 대시보드,,서희항,미착수,ledger전용,,담당
+t64,운영자·주문운영,생산,t64-P15,P15,생산현황 · 산출데이터,C5,STD-MFG-132,조직별 권한 관리(마스터/상품마케팅/발주/생산/출고/외주관리/회계경리),,최숙진,미착수,ledger전용,,담당
+t64,운영자·주문운영,증빙,t64-P16,P16,오프라인주문 · 증빙,C5,STD-MFG-133,오프라인 주문 등록(거래처별 EXCEL·금액 직접 입력),,최숙진,미실측,ledger전용,t65,담당
+t64,운영자·주문운영,증빙,t64-P16,P16,오프라인주문 · 증빙,C5,STD-MFG-134,거래처별 청구서 발행(오프라인주문·금액 포함),,최숙진,미착수,ledger전용,t65,담당
+t64,운영자·주문운영,증빙,t64-P16,P16,오프라인주문 · 증빙,C5,STD-MFG-135,세금계산서 발행여부·발행날짜 정보 보관,,최숙진,미착수,ledger전용,t65,담당
+t64,운영자·주문운영,주문,t64-P01,P01,주문접수 · S2S등록,C5,STD-MFG-136,샵바이 웹훅 이벤트 수신 후 소비(결제완료 → 주문 상태 반영 · 생산 전환 착수),,서희항,미착수,ledger전용,t63,담당
+t64,운영자·주문운영,주문,t64-P09,P09,생산상태 · 역방향동기화,C5,STD-MFG-136,샵바이 웹훅 이벤트 수신 후 소비(결제완료 → 주문 상태 반영 · 생산 전환 착수),,서희항,미착수,ledger전용,t65,담당
+t64,원고·파일,생산연계,t64-P02,P02,원고승격 · 보관,C2,T4-2,원고 승격 실파일 1건 종단 + 웹훅 해석 소비자 구현(입금→PAID 전이),,서희항,구현-미검증,ledger전용,t63,담당
+t64,원고·파일,검판,t64-P03,P03,파일검판 · 프리플라이트,C4,T4-3,파일 검수 경로 결정·구축 — PitStop 조달 또는 사람 검수(D-P1·D-P2),,서희항+신우진,없음,ledger전용,,담당
+t64,원고·파일,생산연계,t64-P06,P06,MES주문접수전송,C5,T4-4,접수 화면·주문 상태머신·MES 접수 전송(D-P5·D-P6·D-P7),,미정+최숙진,없음,ledger전용,,담당
+t64,운영자·주문운영,배송,t64-P10,P10,포장 · 출고 · 송장,C6,T4-5,출고·송장 — 셀러어드민 수동 등록 경로 확인 + 생산 상태의 고객 반영 방식 결정,,최숙진+신우진,없음,ledger전용,t63,담당
+t64,T4,주문,t64-P01,P01,주문접수 · S2S등록,C1,BLK-S1-5,[선행 입력] `order/register` 계약(엔드포인트·페이로드·서버키),,서희항+신우진,미착수,ledger전용,t63,cross
+t64,T4,주문,t64-P01,P01,주문접수 · S2S등록,C1,BLK-S2-1,[선행 입력] Railway 운영 변수 4종 설정 여부(값 아님) — `WAPI_SERVER_KEY_REQUIRED`·`SHOPBY_WEBHOOK_SECRET`·`SHOPBY_SYSTEM_KEY`·`SHOPBY_ACCESS_TOKEN`,,서희항+신우진,미착수,ledger전용,t63,cross
+t64,원고·파일,업로드,t64-P02,P02,원고승격 · 보관,B3,STD-ART-006,주문 이후 파일 업로드 경로(결제 후 입고),,서희항,부분,canon+ledger,t63,cross
+t64,원고·파일,업로드,t64-P04,P04,원고보완 · 재업로드,B3,STD-ART-007,파일 재업로드·버전 이력 보관,,서희항,부분,canon+ledger,t63,cross
+t64,원고·파일,에디터,t64-P05,P05,접수파일등록 · 조판,B3,STD-ART-024,에디터 산출물 인쇄용 파일 변환·주문 연결,,서희항,부분,canon+ledger,t63,cross
+t64,클레임·CS,클레임,t64-P13,P13,생산구간 · 주문취소,D3,STD-CLM-013,판매자 클레임 승인·거부 처리,,최숙진,미착수,canon+ledger,t65,cross
+t64,클레임·CS,불량,t64-P12,P12,재제작 · 반송 · 재출고,D3,STD-CLM-014,인쇄 불량 접수(사진 첨부),,김동학,미착수,canon+ledger,t65,cross
+t64,클레임·CS,불량,t64-P12,P12,재제작 · 반송 · 재출고,D3,STD-CLM-015,재제작(재작업) 처리 경로,,신우진+최숙진,미착수,canon+ledger,t65,cross
+t64,T3,주문,t64-P01,P01,주문접수 · S2S등록,B7,STD-ORD-030,주문 생성 직후 후니 주문등록 S2S 호출(order/register),,김동학,미착수,ledger전용,t63,cross
+t64,배송,배송방식,t64-P10,P10,포장 · 출고 · 송장,C6,STD-SHP-008,택배 배송,,최숙진,작동,canon+ledger,t63,cross
+t64,배송,배송방식,t64-P10,P10,포장 · 출고 · 송장,C6,STD-SHP-009,퀵/화물 배송(대형 인쇄물),,최숙진,미착수,canon+ledger,t63,cross
+t64,배송,배송방식,t64-P10,P10,포장 · 출고 · 송장,C6,STD-SHP-010,매장 방문수령,,최숙진,미착수,canon+ledger,t63,cross
+t64,배송,배송방식,t64-P10,P10,포장 · 출고 · 송장,C6,STD-SHP-011,분할배송(건별 부분 출고),,최숙진,미착수,canon+ledger,t63,cross
+t64,배송,추적,t64-P10,P10,포장 · 출고 · 송장,C7,STD-SHP-012,송장번호 등록(판매자),,서희항,부분,canon+ledger,t63,cross
+t64,배송,추적,t64-P11,P11,배송추적 · 배송지변경,C7,STD-SHP-013,송장 기반 배송상태 일괄변경,,서희항,부분,canon+ledger,t63,cross
+t64,배송,추적,t64-P11,P11,배송추적 · 배송지변경,C7,STD-SHP-014,고객 배송 조회(택배사 추적),,김동학,부분,canon+ledger,t63,cross
+t64,배송,추적,t64-P11,P11,배송추적 · 배송지변경,C7,STD-SHP-015,배송지 변경/추가,,김동학,부분,canon+ledger,t63,cross
+t64,배송,알림,t64-P17,P17,생산 · 파일알림발송,D1,STD-SHP-016,배송 상태 변경 알림 발송,,최숙진,미착수,canon+ledger,t63,cross
+t64,시스템·플랫폼,품질,t64-P06,P06,MES주문접수전송,E4,STD-SYS-016,주문/결제 실패 모니터링·알림,,서희항,부분,canon+ledger,t65,cross
+t64,T4,주문,t64-P01,P01,주문접수 · S2S등록,C1,T4-1,주문 등록 다리 — 스킨이 결제 직후 order/register 를 부르게 배선(부르는 쪽 0건),,김동학,부분,ledger전용,t63,cross
+t65,클레임·CS,취소,t65-P01,P01,주문 취소 신청·승인,1,STD-CLM-001,주문 전체 취소 신청,huni-mall,김동학,미착수,huni-shopby/01_research/order-to-delivery-contract.md §4.3 claims-*,주문·결제(STD-ORD/PAY) 카드 — 취소 대상 주문의 생성·결제,담당
+t65,클레임·CS,취소,t65-P01,P01,주문 취소 신청·승인,2,STD-CLM-002,옵션 부분 취소 신청,huni-mall,김동학,미착수,huni-shopby/01_research/order-to-delivery-contract.md §4.3 claims-*,주문·결제(STD-ORD/PAY) 카드 — 취소 대상 주문의 생성·결제,담당
+t65,클레임·CS,취소,t65-P01,P01,주문 취소 신청·승인,3,STD-CLM-003,비회원 취소 신청,huni-mall,김동학,미착수,huni-shopby/01_research/order-to-delivery-contract.md §4.3 claims-*,주문·결제(STD-ORD/PAY) 카드 — 취소 대상 주문의 생성·결제,담당
+t65,클레임·CS,취소,t65-P01,P01,주문 취소 신청·승인,4,STD-CLM-004,제작 착수 후 취소 제한·협의 안내,huni-mall,김동학,미착수,print-kb/wiki/policy/operations.md#OPS-01 케이스별 협의,주문·결제(STD-ORD/PAY) 카드 — 취소 대상 주문의 생성·결제,담당
+t65,클레임·CS,반품,t65-P02,P02,반품·교환 신청·처리,1,STD-CLM-005,반품 신청(단일·복수),huni-mall,김동학,미착수,huni-shopby/01_research/order-to-delivery-contract.md §4.3 claims-*,배송(STD-SHP) 카드 — 수거·재출고 택배 경로,담당
+t65,클레임·CS,교환,t65-P02,P02,반품·교환 신청·처리,2,STD-CLM-006,교환 신청(출고 전/후),huni-mall,김동학,미착수,huni-shopby/01_research/order-to-delivery-contract.md §4.3 claims-*,배송(STD-SHP) 카드 — 수거·재출고 택배 경로,담당
+t65,클레임·CS,환불,t65-P03,P03,환불 예상금액 산정·환불계좌·지급,1,STD-CLM-007,환불 예상금액 계산,huni-mall,김동학,미착수,huni-shopby/01_research/order-to-delivery-contract.md §4.3 claims-*,,담당
+t65,클레임·CS,환불,t65-P03,P03,환불 예상금액 산정·환불계좌·지급,2,STD-CLM-008,환불계좌 등록·수정,huni-mall,김동학,미착수,huni-shopby/01_research/order-to-delivery-contract.md §4.3 claims-*,,담당
+t65,클레임·CS,환불(원장전용),t65-P03,P03,환불 예상금액 산정·환불계좌·지급,3,STD-CLM-026,가상계좌 입금분 환불 시 고객 환불계좌 수령 절차,결정(PM),미정,미착수,후니정기미팅 정리260915.html §프린팅머니 · 미결 7,,담당
+t65,클레임·CS,클레임,t65-P04,P04,클레임 접수·사유분류·귀책판정·승인거부·철회,1,STD-CLM-010,클레임 사유 분류 선택(12종),huni-mall,김동학,미착수,huni-shopby/01_research/order-to-delivery-contract.md §4.2 claimReasonType,,담당
+t65,클레임·CS,클레임,t65-P04,P04,클레임 접수·사유분류·귀책판정·승인거부·철회,2,STD-CLM-011,귀책 구분(구매자/판매자/단순변심),셀러어드민,최숙진,미착수,huni-shopby/01_research/order-to-delivery-contract.md §4.2 responsibleObjectType,,담당
+t65,클레임·CS,클레임,t65-P04,P04,클레임 접수·사유분류·귀책판정·승인거부·철회,3,STD-CLM-012,클레임 목록·상세 조회,huni-mall,김동학,미착수,X-SHOPBY-CLAIM-FSM-01 클레임 상태머신 미폐합 — 수거진행 중간상태 누락·입금대기/교환대기/환불완료 전이 미정의,,담당
+t65,클레임·CS,클레임,t65-P04,P04,클레임 접수·사유분류·귀책판정·승인거부·철회,4,STD-CLM-013,판매자 클레임 승인·거부 처리,셀러어드민,최숙진,미착수,X-SHOPBY-CLAIM-FSM-01 클레임 상태머신 미폐합,,담당
+t65,클레임·CS,환불,t65-P04,P04,클레임 접수·사유분류·귀책판정·승인거부·철회,5,STD-CLM-009,클레임 철회,huni-mall,김동학,미착수,huni-shopby/01_research/order-to-delivery-contract.md §4.3 claims-*,,담당
+t65,클레임·CS,불량,t65-P05,P05,인쇄 불량 접수·재제작,1,STD-CLM-014,인쇄 불량 접수(사진 첨부),huni-mall,김동학,미착수,print-kb/wiki/policy/operations.md#OPS-04 클레임/불량,t64 생산·출고 카드 — 재제작 작업지시·공정 재투입,담당
+t65,클레임·CS,불량,t65-P05,P05,인쇄 불량 접수·재제작,2,STD-CLM-015,재제작(재작업) 처리 경로,결정(PM),신우진+최숙진,미착수,print-kb/wiki/policy/operations.md#OPS-04 재제작 우선,t64 생산·출고 카드 — 재제작 작업지시·공정 재투입,담당
+t65,클레임·CS,문의,t65-P06,P06,1:1 문의·상품 Q&A 응대,1,STD-CLM-016,1:1 문의 등록·답변,huni-mall,김동학,미착수,huni-skin-shopby/src/app/(main) 하위 inquiry/qna 라우트 부재 (SB-056 absent),,담당
+t65,클레임·CS,문의,t65-P06,P06,1:1 문의·상품 Q&A 응대,2,STD-CLM-017,상품 Q&A 등록·답변,huni-mall,김동학,미착수,huni-skin-shopby/src/app/(main) 하위 inquiry/qna 라우트 부재 (SB-056 absent),,담당
+t65,클레임·CS,문의(원장전용),t65-P06,P06,1:1 문의·상품 Q&A 응대,3,STD-CLM-024,[구IA#69] 상품Q&A (확인/답변),셀러어드민,최숙진,미실측,IA No.69 상품Q&A · 샵바이 기본 기능(R1d 미확인),,담당
+t65,클레임·CS,문의(원장전용),t65-P06,P06,1:1 문의·상품 Q&A 응대,4,STD-CLM-025,[구IA#70] 1:1문의 (확인/답변),셀러어드민,최숙진,미실측,IA No.70 1:1문의 · 샵바이 기본 기능(R1d 미확인),,담당
+t65,클레임·CS,문의,t65-P07,P07,기업인쇄·디자인 상담 접수·응대,1,STD-CLM-019,기업인쇄 상담 접수,huni-mall,김동학,미착수,huni-skin-shopby src/app/(main) 하위 inquiry 라우트 부재 (SB-056 absent),,담당
+t65,클레임·CS,문의,t65-P07,P07,기업인쇄·디자인 상담 접수·응대,2,STD-CLM-020,디자인 상담 접수,huni-mall,김동학,미착수,huni-skin-shopby src/app/(main) 하위 inquiry 라우트 부재 (SB-056 absent),,담당
+t65,클레임·CS,문의(원장전용),t65-P07,P07,기업인쇄·디자인 상담 접수·응대,3,STD-CLM-021,디자인 의뢰하기(주문 흐름 내),huni-mall,김동학,미착수,https://shopby.huniprinting.co.kr/checkout/202609160243938684 @ 2026-09-16 21:33,,담당
+t65,클레임·CS,문의(원장전용),t65-P07,P07,기업인쇄·디자인 상담 접수·응대,4,STD-CLM-022,[구IA#67] 기업인쇄상담 (확인/답변),셀러어드민,최숙진,미실측,IA No.67 기업인쇄상담 · webadmin 해당 없음 @ 2026-09-16 21:28,,담당
+t65,클레임·CS,문의(원장전용),t65-P07,P07,기업인쇄·디자인 상담 접수·응대,5,STD-CLM-023,[구IA#68] 디자인상담 (확인/답변),셀러어드민,최숙진,미실측,IA No.68 디자인상담 · webadmin 해당 없음 @ 2026-09-16 21:28,,담당
+t65,정보·콘텐츠,정보(원장전용),t65-P08,P08,회사·정책 정보 페이지 게시,1,STD-INF-001,회사소개 페이지,huni-mall,김동학,부분,"L3/legacy-normalized.json#IA-083,SCOPE-083 · docs/huni/후니프린팅_통합IA_일정_역할분담_260616.xlsx#02_IA마스터!A84:K84 · L2/as-is-inventory.csv#SB-058 huni-skin-shopby/src/app/(main)/company/page.tsx:1",,담당
+t65,정보·콘텐츠,정보(원장전용),t65-P08,P08,회사·정책 정보 페이지 게시,2,STD-INF-002,찾아오시는 길(약도·교통 안내),huni-mall,김동학,작동,https://shopby.huniprinting.co.kr/location@2026-09-16 21:27,,담당
+t65,정보·콘텐츠,정보(원장전용),t65-P08,P08,회사·정책 정보 페이지 게시,3,STD-INF-003,이용약관 페이지 게시,huni-mall,김동학,작동,https://shopby.huniprinting.co.kr/terms@2026-09-16 21:27,,담당
+t65,정보·콘텐츠,정보(원장전용),t65-P08,P08,회사·정책 정보 페이지 게시,4,STD-INF-004,개인정보처리방침 페이지 게시,huni-mall,김동학,작동,https://shopby.huniprinting.co.kr/privacy@2026-09-16 21:27,,담당
+t65,정보·콘텐츠,정보(원장전용),t65-P08,P08,회사·정책 정보 페이지 게시,5,STD-INF-008,푸터 SNS 4종·입점제휴문의·카톡상담 링크가 '#',huni-mall,김동학,미착수,https://shopby.huniprinting.co.kr/ @ 2026-09-16 21:26,,담당
+t65,정보·콘텐츠,공지(원장전용),t65-P09,P09,공지사항 등록·열람,1,STD-INF-005,공지사항 고객 화면(목록·상세),huni-mall,김동학+최숙진,부분,https://shopby.huniprinting.co.kr/notice @ 2026-09-16 21:27,,담당
+t65,정보·콘텐츠,공지(원장전용),t65-P09,P09,공지사항 등록·열람,2,STD-INF-009,[구IA#64] 공지사항 관리 (등록/수정/html생성),셀러어드민,최숙진,미실측,IA No.64 공지사항 · webadmin 해당 없음 @ 2026-09-16 21:28 · 샵바이 게시판(R1d 미확인),,담당
+t65,클레임·CS,문의,t65-P09,P09,공지사항 등록·열람,3,STD-CLM-018,공지사항·FAQ 열람,huni-mall,김동학,부분,huni-skin-shopby/src/app/(main)/notice/page.tsx:1-27 · src/lib/api/server/board.ts:1 (공지 done) — FAQ 라우트 부재(SB-056 absent),,담당
+t65,정보·콘텐츠,안내(원장전용),t65-P10,P10,FAQ·가이드북 등록·열람,1,STD-INF-006,자주묻는질문(FAQ) 고객 화면,huni-mall,김동학,미착수,https://shopby.huniprinting.co.kr/faq 404 @ 2026-09-16 21:27,,담당
+t65,정보·콘텐츠,안내(원장전용),t65-P10,P10,FAQ·가이드북 등록·열람,2,STD-INF-007,가이드북 고객 화면(작업 유의사항 11종),huni-mall,최숙진+김동학,부분,https://shopby.huniprinting.co.kr/guide @ 2026-09-16 21:27,,담당
+t65,정보·콘텐츠,안내(원장전용),t65-P10,P10,FAQ·가이드북 등록·열람,3,STD-INF-010,[구IA#65] 자주묻는질문 관리,셀러어드민,최숙진,미실측,IA No.65 FAQ · webadmin 해당 없음 @ 2026-09-16 21:28,,담당
+t65,정보·콘텐츠,콘텐츠(원장전용),t65-P11,P11,이용후기·뉴스 콘텐츠 운영,1,STD-INF-011,[구IA#72] 이용후기관리 (관리자등록/수정),셀러어드민,최숙진,미실측,IA No.72 이용후기 · 샵바이 상품후기(R1d 미확인),t62 회원·혜택 카드 P14 — 고객이 쓰는 리뷰·보상,담당
+t65,정보·콘텐츠,콘텐츠(원장전용),t65-P11,P11,이용후기·뉴스 콘텐츠 운영,2,STD-INF-012,뉴스·소식 공간 신설(갤러리형/게시판형/커뮤니티형 중 택1 + 메뉴명),결정(PM),김동학,미착수,후니-오픈잔여작업-실무진안내_260909.html §항목 5 · ④ 완료 기준,t62 회원·혜택 카드 P14 — 고객이 쓰는 리뷰·보상,담당
+t65,운영자·상품가격,기초데이터,t65-P12,P12,기초데이터 마스터 등록·관리,1,STD-ADP-001,사이즈 마스터 등록·관리,webadmin,서희항,작동,https://huni-admin.printly.co.kr/admin/catalog/tsizsizes/@2026-09-16 21:28,,담당
+t65,운영자·상품가격,기초데이터,t65-P12,P12,기초데이터 마스터 등록·관리,2,STD-ADP-002,소재(자재) 마스터 등록·관리,webadmin,서희항,작동,https://huni-admin.printly.co.kr/admin/master/mat/@2026-09-16 21:28,,담당
+t65,운영자·상품가격,기초데이터,t65-P12,P12,기초데이터 마스터 등록·관리,3,STD-ADP-003,용지·평량 마스터 관리,webadmin,서희항,작동,https://huni-admin.printly.co.kr/admin/paper-management/@2026-09-16 21:28,,담당
+t65,운영자·상품가격,기초데이터,t65-P12,P12,기초데이터 마스터 등록·관리,4,STD-ADP-004,도수/색상 코드 관리,webadmin,서희항,작동,https://huni-admin.printly.co.kr/admin/catalog/tclrcolorcounts/@2026-09-16 21:28,,담당
+t65,운영자·상품가격,기초데이터,t65-P12,P12,기초데이터 마스터 등록·관리,5,STD-ADP-005,공정(후가공) 마스터 관리,webadmin,서희항,작동,https://huni-admin.printly.co.kr/admin/master/proc/@2026-09-16 21:33,,담당
+t65,운영자·상품가격,기초데이터,t65-P12,P12,기초데이터 마스터 등록·관리,6,STD-ADP-009,기초코드 논리삭제·이름변경 정책 적용,webadmin,서희항,작동,https://huni-admin.printly.co.kr/admin/basecode-master/@2026-09-16 21:28,,담당
+t65,운영자·상품가격,기초데이터,t65-P13,P13,판형·제본·공정 규칙 관리,1,STD-ADP-007,판형(출력판형)·판걸이수 관리,webadmin,서희항,작동,https://huni-admin.printly.co.kr/admin/product-viewer/?prd=PRD_000069@2026-09-16 21:30,,담당
+t65,운영자·상품가격,기초데이터,t65-P13,P13,판형·제본·공정 규칙 관리,2,STD-ADP-008,제본 방식 마스터 관리,webadmin,서희항,구현-미검증,raw/webadmin/webadmin/config/urls.py:320-330 책등(spine) 계산 규칙 · raw/webadmin/webadmin/catalog/spine_calc.py:1,,담당
+t65,운영자·상품가격,기초데이터,t65-P13,P13,판형·제본·공정 규칙 관리,3,STD-ADP-006,공정 택일그룹 관리,webadmin,서희항,구현-미검증,raw/webadmin/webadmin/catalog/admin.py:1595 '(제거됨 — Phase 7/07-08) 공정 택일그룹 모델: 옵션그룹으로 흡수·DROP' · raw/webadmin/webadmin/config/urls.py:356-360 옵션그룹 CRUD,,담당
+t65,운영자·상품가격,상품,t65-P14,P14,상품 등록·진열·셋트 구성,1,STD-ADP-010,인쇄/제본 상품 등록,webadmin,서희항,작동,https://huni-admin.printly.co.kr/admin/product-viewer/@2026-09-16 21:28,상품·카탈로그(STD-CAT) 카드 — 고객이 보는 카탈로그·검색,담당
+t65,운영자·상품가격,상품,t65-P14,P14,상품 등록·진열·셋트 구성,2,STD-ADP-011,굿즈 상품 등록,webadmin,서희항,작동,https://huni-admin.printly.co.kr/admin/product-viewer/?prd=PRD_000146@2026-09-16 21:30,상품·카탈로그(STD-CAT) 카드 — 고객이 보는 카탈로그·검색,담당
+t65,운영자·상품가격,상품,t65-P14,P14,상품 등록·진열·셋트 구성,3,STD-ADP-012,포장재 상품 등록,webadmin,서희항,작동,https://huni-admin.printly.co.kr/admin/sku-catalog/@2026-09-16 21:28,상품·카탈로그(STD-CAT) 카드 — 고객이 보는 카탈로그·검색,담당
+t65,운영자·상품가격,상품(원장전용),t65-P14,P14,상품 등록·진열·셋트 구성,4,STD-ADP-035,디자인 상품 등록,webadmin,서희항,작동,https://huni-admin.printly.co.kr/admin/design-md/@2026-09-16 21:33,상품·카탈로그(STD-CAT) 카드 — 고객이 보는 카탈로그·검색,담당
+t65,운영자·상품가격,상품(원장전용),t65-P14,P14,상품 등록·진열·셋트 구성,5,STD-ADP-034,수작 상품 등록,미확인,서희항·최숙진,미실측,"L3/legacy-normalized.json#F-111,IA-111,SCOPE-111 · _workspace/huni-launch-scope/02_gap/fit-gap-matrix.csv:112 · docs/huni/후니프린팅_통합IA_일정_역할분담_260616.xlsx#02_IA마스터!A112:K112 || P1판정(260902): 수작 상품 등록은 셀러어드민 상품 등록 화면 소관 — 접속 보류로 확인 불가",상품·카탈로그(STD-CAT) 카드 — 고객이 보는 카탈로그·검색,담당
+t65,운영자·상품가격,상품,t65-P14,P14,상품 등록·진열·셋트 구성,6,STD-ADP-016,셋트(부품조립) 상품 구성 관리,webadmin,서희항,작동,https://huni-admin.printly.co.kr/admin/set-products/@2026-09-16 21:28,상품·카탈로그(STD-CAT) 카드 — 고객이 보는 카탈로그·검색,담당
+t65,운영자·상품가격,상품,t65-P14,P14,상품 등록·진열·셋트 구성,7,STD-ADP-013,상품-카테고리 귀속(다중분류),webadmin,서희항,작동,https://huni-admin.printly.co.kr/admin/catalog/tprdproducts/@2026-09-16 21:32,상품·카탈로그(STD-CAT) 카드 — 고객이 보는 카탈로그·검색,담당
+t65,운영자·상품가격,상품(원장전용),t65-P14,P14,상품 등록·진열·셋트 구성,8,STD-ADP-036,[구IA#59] 굿즈 카테고리관리,webadmin,서희항,작동,https://huni-admin.printly.co.kr/admin/category-master/@2026-09-16 21:28,상품·카탈로그(STD-CAT) 카드 — 고객이 보는 카탈로그·검색,담당
+t65,운영자·상품가격,상품,t65-P14,P14,상품 등록·진열·셋트 구성,9,STD-ADP-014,상품 진열/노출 상태 관리,webadmin,서희항,작동,https://huni-admin.printly.co.kr/admin/catalog/tprdproducts/@2026-09-16 21:32,상품·카탈로그(STD-CAT) 카드 — 고객이 보는 카탈로그·검색,담당
+t65,운영자·상품가격,상품,t65-P15,P15,상품 상세페이지 콘텐츠 편집·발행,1,STD-ADP-015,상품 상세페이지 콘텐츠 편집,페이지빌더,김동학,부분,huni-skin-shopby/src/app/(main)/product/[slug]/page.tsx:51-56 Pie Canvas 발행 상세탭 조회,시스템·플랫폼 — 페이지 빌더 트랙(STD-SYS-021),담당
+t65,시스템·플랫폼,품질,t65-P15,P15,상품 상세페이지 콘텐츠 편집·발행,2,STD-SYS-021,페이지 빌더(운영자 화면 편집),페이지빌더,김동학,미착수,print-quote/04_design/ia.md §2.3 빌더 트랙 · L4 사유: 페이지빌더 게이트 NO-GO — 문서 정본 승격 불가. 15건 전부 미해소.,시스템·플랫폼 — 페이지 빌더 트랙(STD-SYS-021),담당
+t65,운영자·상품가격,옵션,t65-P16,P16,옵션그룹 구성·차원 연결·무결성 검증,1,STD-ADP-017,상품별 옵션그룹 구성,webadmin,서희항,구현-미검증,raw/webadmin/webadmin/config/urls.py:356-360 옵션그룹/옵션/항목 CRUD,,담당
+t65,운영자·상품가격,옵션,t65-P16,P16,옵션그룹 구성·차원 연결·무결성 검증,2,STD-ADP-018,옵션 항목 ↔ 차원 참조 연결,webadmin,서희항,작동,https://huni-admin.printly.co.kr/admin/tmpl-combo-md/@2026-09-16 21:28,,담당
+t65,운영자·상품가격,옵션,t65-P16,P16,옵션그룹 구성·차원 연결·무결성 검증,3,STD-ADP-020,추가상품 템플릿 구성,webadmin,서희항,작동,https://huni-admin.printly.co.kr/admin/sku-catalog/@2026-09-16 21:28,,담당
+t65,운영자·상품가격,옵션,t65-P16,P16,옵션그룹 구성·차원 연결·무결성 검증,4,STD-ADP-019,옵션 참조 무결성 검증,webadmin,서희항,구현-미검증,raw/webadmin/webadmin/config/urls.py:373 상품 유효성 검증(validate),,담당
+t65,운영자·상품가격,제약,t65-P17,P17,제약규칙 등록·시뮬레이션,1,STD-ADP-021,제약규칙 등록(UI 폼빌더),webadmin,서희항,구현-미검증,raw/webadmin/webadmin/config/urls.py:371 제약규칙(JSONLogic) 관리 · raw/webadmin/webadmin/catalog/models.py:801 제약 모델,,담당
+t65,운영자·상품가격,제약,t65-P17,P17,제약규칙 등록·시뮬레이션,2,STD-ADP-022,제약규칙 시뮬레이션·미리보기,webadmin,서희항,구현-미검증,raw/webadmin/webadmin/config/urls.py:169 price_sim_constraints — '제약 cascade: 현재 선택 → 각 차원 불가값(비활성)',,담당
+t65,운영자·상품가격,가격,t65-P18,P18,가격공식·구성요소 설계·바인딩,1,STD-ADP-023,가격공식 등록·상품 바인딩,webadmin,서희항,작동,https://huni-admin.printly.co.kr/admin/price-viewer/?prd=PRD_000069@2026-09-16 21:30,,담당
+t65,운영자·상품가격,가격,t65-P18,P18,가격공식·구성요소 설계·바인딩,2,STD-ADP-024,가격구성요소 등록·차원 지정,webadmin,서희항,작동,https://huni-admin.printly.co.kr/admin/price-component-md/@2026-09-16 21:28,,담당
+t65,운영자·상품가격,가격,t65-P18,P18,가격공식·구성요소 설계·바인딩,3,STD-ADP-026,단가유형(단가형/합가형) 설정,webadmin,서희항,구현-미검증,raw/webadmin/webadmin/catalog/admin.py:2816 'Phase 11: 사용차원 순서지정 위젯 + 단가유형 그룹제한(basecodes prc_typ_cd)',,담당
+t65,운영자·상품가격,가격,t65-P19,P19,단가행 적재·할인·이력 관리,1,STD-ADP-025,단가행 일괄 등록(엑셀 업로드),webadmin,서희항,구현-미검증,raw/webadmin/webadmin/catalog/price_views.py:1650 '그리드에 보이는 행이 곧 이 구성요소의 전체 단가표(엑셀처럼)' · raw/webadmin/webadmin/catalog/templates/catalog/comp_price_grid_page.html:142-145 엑셀 복사·붙여넣기,,담당
+t65,운영자·상품가격,가격,t65-P19,P19,단가행 적재·할인·이력 관리,2,STD-ADP-028,면적 매트릭스 단가 관리,webadmin,서희항,구현-미검증,raw/webadmin/webadmin/config/urls.py:144-148 단가 그리드(차원 조합 행) · raw/webadmin/webadmin/catalog/pricing.py:1 evaluate_price,,담당
+t65,운영자·상품가격,가격,t65-P19,P19,단가행 적재·할인·이력 관리,3,STD-ADP-029,템플릿 직접단가 관리,webadmin,서희항,작동,https://huni-admin.printly.co.kr/admin/price-viewer/?prd=PRD_000146@2026-09-16 21:30,,담당
+t65,운영자·상품가격,가격,t65-P19,P19,단가행 적재·할인·이력 관리,4,STD-ADP-027,수량구간 할인테이블 관리,webadmin,서희항,작동,https://huni-admin.printly.co.kr/admin/discount-table-md/@2026-09-16 21:28,,담당
+t65,운영자·상품가격,가격,t65-P19,P19,단가행 적재·할인·이력 관리,5,STD-ADP-030,가격 적용시작일 기반 이력 관리,webadmin,서희항,작동,https://huni-admin.printly.co.kr/admin/price-viewer/?prd=PRD_000069@2026-09-16 21:30,,담당
+t65,운영자·상품가격,가격,t65-P20,P20,가격 검산·기본사양가 진단·게시 위젯 전수 대조,1,STD-ADP-031,가격 시뮬레이터(운영자 검산),webadmin,서희항,작동,https://huni-admin.printly.co.kr/admin/price-simulator/@2026-09-16 21:28,위젯(STD-OPT 견적) — 고객이 실제로 보는 가격,담당
+t65,운영자·상품가격,가격,t65-P20,P20,가격 검산·기본사양가 진단·게시 위젯 전수 대조,2,STD-ADP-032,가격뷰어(계산 결과 조회),webadmin,서희항,작동,https://huni-admin.printly.co.kr/admin/price-viewer/@2026-09-16 21:28,위젯(STD-OPT 견적) — 고객이 실제로 보는 가격,담당
+t65,운영자·상품가격,가격,t65-P20,P20,가격 검산·기본사양가 진단·게시 위젯 전수 대조,3,STD-ADP-033,가격 미산출(0원) 상품 진단 리포트,webadmin,서희항,작동,https://huni-admin.printly.co.kr/admin/start-price/@2026-09-16 21:29,위젯(STD-OPT 견적) — 고객이 실제로 보는 가격,담당
+t65,운영자·상품가격,가격(원장전용),t65-P20,P20,가격 검산·기본사양가 진단·게시 위젯 전수 대조,4,STD-ADP-037,게시 위젯 가격 전수 대조(1차 최숙진 → 2차 김용기 → 3차 채훈희 승인),위젯,서희항,부분,후니정기미팅 정리260915.html §가격·템플릿 데이터 · 미결 1 / 후니-오픈잔여작업-실무진안내_260909.html §항목 1 · ④ 완료 기준,위젯(STD-OPT 견적) — 고객이 실제로 보는 가격,담당
+t65,정산·통계,매출,t65-P21,P21,매출·결제수단·할인 집계,1,STD-FIN-001,월별 매출 통계,셀러어드민,최숙진,작동,https://service.shopby.co.kr/statistic/sales/period@2026-09-16 21:33,,담당
+t65,정산·통계,매출,t65-P21,P21,매출·결제수단·할인 집계,2,STD-FIN-002,일별/기간별 매출 조회,셀러어드민,최숙진,작동,https://service.shopby.co.kr/statistic/sales/period@2026-09-16 21:33,,담당
+t65,정산·통계,매출,t65-P21,P21,매출·결제수단·할인 집계,3,STD-FIN-003,결제수단별 매출 집계,셀러어드민,최숙진,작동,https://service.shopby.co.kr/statistic/sales/period@2026-09-16 21:33,,담당
+t65,정산·통계,정산,t65-P21,P21,매출·결제수단·할인 집계,4,STD-FIN-011,쿠폰/할인 사용액 집계,셀러어드민,최숙진,작동,https://service.shopby.co.kr/statistic/promotion/additionalDiscount@2026-09-16,,담당
+t65,정산·통계,상품,t65-P22,P22,고객군·상품군 판매 통계,1,STD-FIN-004,상품별 판매 통계,셀러어드민,최숙진,작동,https://service.shopby.co.kr/statistic/sales/period@2026-09-16 21:33,,담당
+t65,정산·통계,상품,t65-P22,P22,고객군·상품군 판매 통계,2,STD-FIN-005,상품군별 매출 비중,셀러어드민,최숙진,작동,https://service.shopby.co.kr/statistic/sales/period@2026-09-16 21:33,,담당
+t65,정산·통계,고객,t65-P22,P22,고객군·상품군 판매 통계,3,STD-FIN-006,회원/비회원 주문 비중,셀러어드민,최숙진,작동,https://service.shopby.co.kr/statistic/sales/period@2026-09-16 21:33,,담당
+t65,정산·통계,상품·고객(원장전용),t65-P22,P22,고객군·상품군 판매 통계,4,STD-FIN-015,[구IA#79] 인쇄/제본 상품통계 (상세보기),셀러어드민,최숙진,미실측,IA No.79 인쇄/제본 상품통계 · webadmin 통계 화면 없음 @ 2026-09-16 21:28 · 샵바이 통계(R1d),,담당
+t65,정산·통계,상품·고객(원장전용),t65-P22,P22,고객군·상품군 판매 통계,5,STD-FIN-016,[구IA#80] 굿즈 상품통계 (상세보기),셀러어드민,최숙진,미실측,IA No.80 굿즈 상품통계 · 동 79,,담당
+t65,정산·통계,상품·고객(원장전용),t65-P22,P22,고객군·상품군 판매 통계,6,STD-FIN-017,[구IA#81] 패키지 상품통계 (상세보기),셀러어드민,최숙진,미실측,IA No.81 패키지 상품통계 · 동 79,,담당
+t65,정산·통계,상품·고객(원장전용),t65-P22,P22,고객군·상품군 판매 통계,7,STD-FIN-018,[구IA#82] 수작 상품통계 (상세보기),셀러어드민,최숙진,미실측,IA No.82 수작 상품통계 · 동 79,,담당
+t65,정산·통계,생산,t65-P23,P23,생산·외주 작업량·발주정산,1,STD-FIN-007,공정/팀별 작업량 통계,MES,최숙진,미착수,print-kb/wiki/policy/custom-dev.md#CST-09 · L4 사유: 제작상품 팀별통계(Excel)가 legacy 에 있으나 구현 근거 없음,t64 생산·출고 카드 — MES 공정 실적,담당
+t65,정산·통계,정산,t65-P23,P23,생산·외주 작업량·발주정산,2,STD-FIN-010,외주 발주/정산 엑셀 산출,미확인,최숙진,미착수,print-quote/04_design/ia.md §2.3 SM-A-55 · L4 사유: 굿즈 발주/정산 Excel 이 legacy 에 있으나 구현 근거 없음,t64 생산·출고 카드 — MES 공정 실적,담당
+t65,정산·통계,생산·정산(원장전용),t65-P23,P23,생산·외주 작업량·발주정산,3,STD-FIN-019,[구IA#84] 굿즈 발주/정산 (Excel 다운),미확인,최숙진,미착수,IA No.84 굿즈 발주/정산 Excel · MES 현행(auto-vs-human §2.7) · webadmin 없음 @ 2026-09-16 21:28,t64 생산·출고 카드 — MES 공정 실적,담당
+t65,정산·통계,정산,t65-P24,P24,PG 정산 대사·계좌·미수금,1,STD-FIN-008,PG 정산 대사,미확인,최숙진,미착수,print-kb/wiki/policy/order-payment.md#PAY-02 · L4 사유: 샵바이 정산이 라인 salePrice/addPrice 를 권위로 쓰는지 미관측(X-SETTLE-AUTH) — 대사 설계 이전 단계,,담당
+t65,정산·통계,정산(원장전용),t65-P24,P24,PG 정산 대사·계좌·미수금,2,STD-FIN-013,[구IA#47] 계좌관리 (원장용 계좌 등록),미확인,최숙진,미착수,docs/huni/후니정기미팅 정리260915.html 「프린팅머니 원장 — 후니 웹어드민이 잔액·원장 보유 · 배치 미정」,,담당
+t65,정산·통계,정산(원장전용),t65-P24,P24,PG 정산 대사·계좌·미수금,3,STD-FIN-014,[구IA#49] 업체별 미수금,미확인,최숙진,미착수,IA No.49 업체별 미수금 · 9/15 회의 원장 배치 미정 · webadmin 해당 화면 없음 @ 2026-09-16 21:28,,담당
+t65,정산·통계,정산(원장전용),t65-P24,P24,PG 정산 대사·계좌·미수금,4,STD-FIN-020,"가상계좌 정산한도 1,000만 원 초과 시 처리 방안",결정(PM),외부(토스페이먼츠),미착수,후니정기미팅 정리260915.html §프린팅머니 · 미결 4,,담당
+t65,정산·통계,정산,t65-P25,P25,프린팅머니 부채 집계·내보내기·외부회계 연동,1,STD-FIN-009,적립금(프린팅머니) 부채 집계,미확인,최숙진,미착수,print-kb/wiki/policy/mypage.md#MYP-02 · L4 사유: 고객측 포인트 잔액 조회는 done(SB-050)이나 부채 집계 화면 없음. 적립금 만료 기본값도 미명문화(X-MIG-EXPIRY),t62 회원·혜택 카드 P10~P12 — 프린팅머니 충전·사용,담당
+t65,정산·통계,내보내기,t65-P25,P25,프린팅머니 부채 집계·내보내기·외부회계 연동,2,STD-FIN-012,통계·주문 데이터 엑셀 내보내기,미확인,최숙진,미착수,print-quote/04_design/ia.md §2.3 SM-A-56 팀별통계 Excel · L4 사유: 엑셀 내보내기는 legacy 통계 2건에 부분 포함(1:N) — 전역 내보내기 기능으로는 미구현,t62 회원·혜택 카드 P10~P12 — 프린팅머니 충전·사용,담당
+t65,정산·통계,정산(원장전용),t65-P25,P25,프린팅머니 부채 집계·내보내기·외부회계 연동,3,STD-FIN-021,적립금·증빙 데이터의 MS·이카운트 연동 방식,결정(PM),최숙진,미착수,"후니정기미팅 정리260915.html §증빙서류 · 미결 3 / 후니-오픈잔여작업-실무진안내_260909.html §항목 4 · 결정 필요 — 증빙서류, 이카운트 연동 방안",t62 회원·혜택 카드 P10~P12 — 프린팅머니 충전·사용,담당
+t65,시스템·플랫폼,권한(원장전용),t65-P26,P26,관리자 계정·권한·감사로그,1,STD-SYS-038,실무진 운영자 계정 생성 + 권한그룹(현재 마스터 1·권한그룹 0),셀러어드민,최숙진,미착수,https://service.shopby.co.kr/admin/list·/authorityGroup/list @ 2026-09-16 21:33 (R/R1d/evidence/52-admin-list.txt·53-authority-group.txt),,담당
+t65,시스템·플랫폼,권한,t65-P26,P26,관리자 계정·권한·감사로그,2,STD-SYS-001,관리자 계정 등록·관리,몰·webadmin,김동학,부분,SB-059 stub — huni-skin-shopby/src/app/(admin)/admin/page.tsx:1-8 (자리표시) · WA-058 partial — raw/webadmin/webadmin/catalog/admin.py:2242-2310,,담당
+t65,시스템·플랫폼,권한(원장전용),t65-P26,P26,관리자 계정·권한·감사로그,3,STD-SYS-025,[구IA#44] 관리자 등록/관리,webadmin,서희항,부분,https://huni-admin.printly.co.kr/admin/auth/user/ 4행 @ 2026-09-16 21:28 (webadmin 관리자) · 샵바이 운영자 등록은 셀러어드민(R1d),,담당
+t65,시스템·플랫폼,권한,t65-P26,P26,관리자 계정·권한·감사로그,4,STD-SYS-002,역할 기반 세분 권한 제어,huni-mall,김동학,부분,SB-060 partial — huni-skin-shopby/src/proxy.ts:21-23 (ADMIN 검사 미활성 주석) · src/lib/api/hooks/use-admins.ts:20,,담당
+t65,시스템·플랫폼,권한(원장전용),t65-P26,P26,관리자 계정·권한·감사로그,5,STD-SYS-042,"관리자 대시보드(/admin) 존폐 결정 — 빈 스캐폴드이며 role 이 항상 ""user"" 라 누구도 진입 불가",결정(PM),신우진,미착수,"huni-skin-shopby/src/app/(admin)/admin/page.tsx:2-8 스캐폴드 · src/lib/auth/auth.ts:161 `token.role = ""user""` 무조건 · src/app/(admin)/layout.tsx:19 admin 아니면 / · SPEC-TAKEOVER-001 U-16",,담당
+t65,시스템·플랫폼,권한,t65-P26,P26,관리자 계정·권한·감사로그,6,STD-SYS-003,관리자 작업 감사로그,셀러어드민,최숙진,작동,https://service.shopby.co.kr/PrivacyAccessHistories@2026-09-16,,담당
+t65,시스템·플랫폼,설정(원장전용),t65-P27,P27,몰 기초정보·도메인·발송메일 설정,1,STD-SYS-037,기초정보 사업자 정보 입력(회사명·사업자등록번호·통신판매업신고번호·주소·개인정보책임자),셀러어드민,최숙진,미착수,"https://service.shopby.co.kr/service @ 2026-09-16 21:33 — 회사명·사업자등록번호·통신판매업 신고번호·주소·업종/업태·개인정보보호책임자 빈칸 · 대표자명 「대표 운영자」 · API serviceBasicInfo companyName="""" (R/R1d/evidence/72-service-basic.txt)",,담당
+t65,시스템·플랫폼,설정(원장전용),t65-P27,P27,몰 기초정보·도메인·발송메일 설정,2,STD-SYS-036,쇼핑몰 도메인·SNS 콜백 URL 정합(shopby.huniprinting.com / shoby.huniprinting.com / shoby.huniprinting.co.kr),셀러어드민,김동학,미착수,https://service.shopby.co.kr/mall/modification/81683 @ 2026-09-16 21:31 — PC 웹 도메인 https://shopby.huniprinting.com/ · 모바일 웹 https://shoby.huniprinting.com · SNS 콜백 PC https://shoby.huniprinting.co.kr/callback/auth-callback · 실제 신규몰(p1)=https://shopby.huniprinting.co.kr/ (R/R1d/evidence/20-mall-list.txt·24-mall-modification.txt),,담당
+t65,시스템·플랫폼,설정(원장전용),t65-P27,P27,몰 기초정보·도메인·발송메일 설정,3,STD-SYS-024,보호 라우트 리다이렉트가 vercel.app 도메인으로 튐(마이페이지·/admin),huni-mall,김동학,미착수,https://shopby.huniprinting.co.kr/mypage → https://huni-skin-shopby.vercel.app/login?callbackUrl=%2Fmypage @ 2026-09-16 21:27,,담당
+t65,시스템·플랫폼,설정(원장전용),t65-P27,P27,몰 기초정보·도메인·발송메일 설정,4,STD-SYS-040,발송전용 e-mail 도메인(gmail) 정리·자동 메일 도메인 인증,셀러어드민,최숙진,미착수,https://service.shopby.co.kr/mall/modification/81683 @ 2026-09-16 21:31 — 고객센터/발송전용 e메일 [연락처 마스킹] · 화면 안내 「개인/회사 소유 도메인은 SPF/DKIM/DMARC 인증 필요」 · /mail/dispatch 발송 메일 동일 (R/R1d/evidence/24-mall-modification.txt·32-mail-dispatch.txt),,담당
+t65,시스템·플랫폼,설정(원장전용),t65-P28,P28,알림(SMS·알림톡) 설정·발송,1,STD-SYS-029,SMS 발신번호 인증 완료,셀러어드민,최숙진,구현-미검증,후니정기미팅 정리260915.html §회원·로그인·인증 · 확정 3,주문·결제 카드 — 주문 단계별 알림 시점,담당
+t65,시스템·플랫폼,설정(원장전용),t65-P28,P28,알림(SMS·알림톡) 설정·발송,2,STD-SYS-030,테스트용 SMS 충전 완료 여부 확인,셀러어드민,최숙진,미착수,후니정기미팅 정리260915.html §회원·로그인·인증 · 미결 2,주문·결제 카드 — 주문 단계별 알림 시점,담당
+t65,시스템·플랫폼,설정(원장전용),t65-P28,P28,알림(SMS·알림톡) 설정·발송,3,STD-SYS-034,"SMS 사용설정 「사용」 전환 + 포인트 충전(현재 1,000P·사용 안 함)",셀러어드민,최숙진,미착수,"https://service.shopby.co.kr/pro/premium/sms/main/config @ 2026-09-16 21:31 — SMS 사용설정 「사용 안 함」·잔여 1,000P(SMS 1,000건/알림톡 1,666건)·발신번호 02-3409-8853 등록·부족알림 사용(100P) (R/R1d/evidence/30-sms-config.png)",주문·결제 카드 — 주문 단계별 알림 시점,담당
+t65,시스템·플랫폼,설정(원장전용),t65-P28,P28,알림(SMS·알림톡) 설정·발송,4,STD-SYS-035,알림톡 사용여부 「사용함」 + 주문배송 항목 선택 + 템플릿 검수,셀러어드민,최숙진,미착수,https://service.shopby.co.kr/pro/premium/kakao/notification/config @ 2026-09-16 21:31~21:34 — 채널 @huniprinting·발신프로필키 등록·알림톡 사용여부 「사용 안 함」·주문배송 항목 전부 「사용 안 함」·템플릿 관리 0건 (R/R1d/evidence/31-kakao-alimtalk.png·33-alimtalk-order-delivery.png·35-alimtalk-template-list.txt),주문·결제 카드 — 주문 단계별 알림 시점,담당
+t65,시스템·플랫폼,설정,t65-P28,P28,알림(SMS·알림톡) 설정·발송,5,STD-SYS-006,알림(SMS/알림톡/이메일) 템플릿 설정,셀러어드민,최숙진,미착수,print-kb/wiki/policy/order-mgmt.md#OMG-03 · L4 사유: 알림 템플릿 관리 L2 무근거. 계약 선행.,주문·결제 카드 — 주문 단계별 알림 시점,담당
+t65,시스템·플랫폼,설정,t65-P29,P29,결제(PG)·배송비 정책 설정,1,STD-SYS-004,PG 연동 설정,셀러어드민,최숙진,부분,SB-033 done — huni-skin-shopby/src/lib/payments/ncp-pay.ts:47-70 · src/app/api/pay-config/route.ts:8 / SB-032 absent — src/components/checkout/checkout-form.tsx:8-9 ('PG 연동은 후속 — 현재는 무통장만 동작'),결제(STD-PAY)·배송(STD-SHP) 카드 — 고객이 겪는 결제·배송 화면,담당
+t65,시스템·플랫폼,설정,t65-P29,P29,결제(PG)·배송비 정책 설정,2,STD-SYS-005,배송비 정책 설정,셀러어드민,최숙진,부분,print-kb/wiki/policy/shipping.md#SHIP-02 · L4 사유: 도서산간 권역 정책 미확정(1차 W7-9).,결제(STD-PAY)·배송(STD-SHP) 카드 — 고객이 겪는 결제·배송 화면,담당
+t65,시스템·플랫폼,연동,t65-P30,P30,상품·가격 데이터 동기화(webadmin ↔ 샵바이),1,STD-SYS-007,커머스 플랫폼 API 인증·토큰 관리,huni-mall,김동학,작동,https://shopby.huniprinting.co.kr/product/136578124@2026-09-16 21:29,상품·카탈로그(STD-CAT) 카드 — 고객이 보는 상품 목록·시작가,담당
+t65,시스템·플랫폼,연동,t65-P30,P30,상품·가격 데이터 동기화(webadmin ↔ 샵바이),2,STD-SYS-008,인쇄 도메인 DB ↔ 커머스 상품 동기화,webadmin,서희항,부분,WA-045 done — raw/webadmin/webadmin/catalog/shopby_sync.py:1-30 · WA-046 done — catalog/shopby_client.py:1-50 · SB-015 partial — huni-skin-shopby/src/lib/printly/product-code-map.ts:41-49 (수동 7건만 등록),상품·카탈로그(STD-CAT) 카드 — 고객이 보는 상품 목록·시작가,담당
+t65,시스템·플랫폼,연동(원장전용),t65-P30,P30,상품·가격 데이터 동기화(webadmin ↔ 샵바이),3,STD-SYS-041,상품 텍스트옵션 라벨 huni_token 미등록 확정(U-2) → 스킨 담기 구현 정합,몰·샵바이,김동학+신우진,미착수,"API GET /products/136578130 mallProductInputs=[huni_order, huni_item] (huni_token 없음) @ 2026-09-16 21:31 (R/R1d/evidence/api-server-product-sample.json) · Q0 label-check 226건 참조",상품·카탈로그(STD-CAT) 카드 — 고객이 보는 상품 목록·시작가,담당
+t65,시스템·플랫폼,연동(원장전용),t65-P30,P30,상품·가격 데이터 동기화(webadmin ↔ 샵바이),4,STD-SYS-045,후니 위젯 서버키 헤더(X-Huni-Server-Key) 전송 배선 — 제공자가 WAPI_SERVER_KEY_REQUIRED 를 켜면 재견적이 403,몰·webadmin,김동학+서희항,미착수,huni-skin-shopby/src grep `X-Huni-Server-Key` 0곳 · huni-skin-next/src/lib/printly/server-key.ts(포크 구현·commit 6231dc4) · SPEC-TAKEOVER-001 spec.md:43·D-4,상품·카탈로그(STD-CAT) 카드 — 고객이 보는 상품 목록·시작가,담당
+t65,시스템·플랫폼,연동(원장전용),t65-P30,P30,상품·가격 데이터 동기화(webadmin ↔ 샵바이),5,STD-SYS-049,Railway `vc_v_product_detail_tabs` 직접 SELECT — pg.Pool 타임아웃 없음·DDL 소유자 미정(계약 협상),huni-mall,김동학,미착수,huni-skin-shopby/src/lib/printly/publications.ts:48-56 Pool 옵션 없음·84-85 SELECT · SPEC-TAKEOVER-001 D-2 · 포크 M5(commit 5366dac) 타임아웃 적용,상품·카탈로그(STD-CAT) 카드 — 고객이 보는 상품 목록·시작가,담당
+t65,시스템·플랫폼,연동(원장전용),t65-P30,P30,상품·가격 데이터 동기화(webadmin ↔ 샵바이),6,STD-SYS-039,웹훅 등록 화면 위치 확인(셀러어드민 내 미발견) 및 등록 여부,셀러어드민,최숙진,미착수,https://service.shopby.co.kr 전체메뉴 98링크 중 webhook 0 · 앱 상세(Huni Admin) 항목=설치정보·API 권한 8종만 · Server API GET /webhooks 404·/webhooks/failed 400 (R/R1d/evidence/01-fullmenu-links.txt·42-app-huni-admin-detail.txt·api-get-log.txt),상품·카탈로그(STD-CAT) 카드 — 고객이 보는 상품 목록·시작가,담당
+t65,시스템·플랫폼,연동,t65-P31,P31,가격 계산 결과 카트 주입 브리지,1,STD-SYS-009,가격 계산 결과 카트 주입 브리지,huni-mall,김동학,작동,https://shopby.huniprinting.co.kr/cart@2026-09-16 21:27,장바구니·주문(STD-ORD) 카드 — 담기 이후 흐름,담당
+t65,시스템·플랫폼,연동(원장전용),t65-P31,P31,가격 계산 결과 카트 주입 브리지,2,STD-SYS-023,담기 전달값의 민감정보 비노출·서명 검증(계약 준수),huni-mall,김동학,미착수,L0/N3/ARCHITECTURE-v2.md §10 A-13 (토큰·원고 저장키·프로젝트 식별자 평문 노출) · §3.2 · §8 I-2,장바구니·주문(STD-ORD) 카드 — 담기 이후 흐름,담당
+t65,시스템·플랫폼,연동,t65-P32,P32,원고 저장소·디자인 에디터 연동,1,STD-SYS-010,원고 저장소(스토리지) 연동,webadmin,서희항,구현-미검증,WA-037 raw/webadmin/webadmin/config/urls.py:251 upload/presign · catalog/s3_artwork.py:208-280 · WA-052 catalog/artwork_promote.py:1,t64 생산·출고 카드 — 원고 검판(PitStop)·생산 투입,담당
+t65,시스템·플랫폼,연동,t65-P32,P32,원고 저장소·디자인 에디터 연동,2,STD-SYS-011,디자인 에디터 외부 서비스 연동,미정(외부),미정,부분,WA-041 done — raw/webadmin/webadmin/config/urls.py:274-275 · catalog/edicus_lookup.py:214-260 · WA-047 done — catalog/edicus_views.py:278-674 / SB-020 stub — huni-skin-shopby/src/components/product/configurator-actions.tsx:170-176,t64 생산·출고 카드 — 원고 검판(PitStop)·생산 투입,담당
+t65,시스템·플랫폼,연동,t65-P33,P33,본인인증·주소검색·배송추적 외부 연동,1,STD-SYS-012,본인인증 서비스 연동,huni-mall,김동학,부분,SB-043 absent(grep 무결과) · L2 D-17 endpoint='(호출 지점 없음)',회원·인증(t62) · 배송(STD-SHP) 카드,담당
+t65,시스템·플랫폼,연동,t65-P33,P33,본인인증·주소검색·배송추적 외부 연동,2,STD-SYS-013,우편번호/주소 검색 서비스 연동,huni-mall,김동학,작동,https://shopby.huniprinting.co.kr/checkout/202609160243938684@2026-09-16 21:33,회원·인증(t62) · 배송(STD-SHP) 카드,담당
+t65,시스템·플랫폼,연동,t65-P33,P33,본인인증·주소검색·배송추적 외부 연동,3,STD-SYS-014,택배사 배송추적 연동,huni-mall,김동학,부분,huni-shopby/01_research/order-to-delivery-contract.md §2.1 deliveryCompanyType · L4 사유: 택배사 연동·송장·배송추적 경로 미확인. L2 연계서비스 18건에도 택배사 없음.,회원·인증(t62) · 배송(STD-SHP) 카드,담당
+t65,시스템·플랫폼,연동,t65-P34,P34,고객 유입·전환 품질(분석·SEO·반응형·리다이렉트),1,STD-SYS-015,웹 로그/전환 분석 도구 연동,huni-mall,김동학,미착수,[L4b보강] huni-skin-shopby/src 전역 gtag|GA4|googletagmanager|analytics grep 무결과,,담당
+t65,시스템·플랫폼,품질,t65-P34,P34,고객 유입·전환 품질(분석·SEO·반응형·리다이렉트),2,STD-SYS-020,SEO 메타·사이트맵,huni-mall,김동학,미착수,[L4b보강] huni-skin-shopby/src 전역 sitemap|robots grep 무결과,,담당
+t65,시스템·플랫폼,품질,t65-P34,P34,고객 유입·전환 품질(분석·SEO·반응형·리다이렉트),3,STD-SYS-019,반응형/모바일 대응,huni-mall,김동학,미착수,print-story/02_capture/order-flow-steps.md §A 위젯 높이 2130px 실측 · L4 사유: new — 반응형은 전 화면 횡단 품질축이라 화면 단위 legacy 분모에 행이 없다. 근거 print-story 실측(오염 아님). L2 가 판정하지 않아 상태 미상.,,담당
+t65,시스템·플랫폼,품질,t65-P34,P34,고객 유입·전환 품질(분석·SEO·반응형·리다이렉트),4,STD-SYS-022,구 사이트 → 신규 사이트 URL 리다이렉트,huni-mall,김동학,미착수,print-kb/wiki/policy/membership-auth.md#MEM-01 마이그레이션 파생 · L4 사유: 구 URL 리다이렉트 맵·이전 사이트 종료 계획 미확인.,,담당
+t65,시스템·플랫폼,품질,t65-P35,P35,장애 모니터링·백업복구·서버 환경,1,STD-SYS-016,주문/결제 실패 모니터링·알림,webadmin,서희항,부분,WA-055 done — raw/webadmin/webadmin/catalog/abuse_log.py:1 · rate_alerts.py:61-75 (텔레그램 알림),,담당
+t65,시스템·플랫폼,품질(원장전용),t65-P35,P35,장애 모니터링·백업복구·서버 환경,2,STD-SYS-044,전역 오류 화면(error.tsx·not-found.tsx·global-error.tsx) 부재 — Next 기본 404/500 노출,huni-mall,김동학,미착수,`find huni-skin-shopby/src/app -maxdepth 2 -name error.tsx|not-found.tsx|global-error.tsx` 0개 · 포크 huni-skin-next/src/app/{error·global-error·not-found}.tsx 존재,,담당
+t65,시스템·플랫폼,품질(원장전용),t65-P35,P35,장애 모니터링·백업복구·서버 환경,3,STD-SYS-054,운영 console.error 24건·요청 ID 없는 진단 로그 → 구조화 로그·요청 ID 이식,huni-mall,김동학,미착수,`grep -rnE 'console\.(log|error|warn)' huni-skin-shopby/src` 24 · audit report.md:71 M2 · 포크 huni-skin-next/src/lib/observability/{logger·request-id}.ts(commit f692a43),,담당
+t65,시스템·플랫폼,품질,t65-P35,P35,장애 모니터링·백업복구·서버 환경,4,STD-SYS-017,데이터 백업·복구 절차,인프라,서희항,미착수,print-kb/wiki/huni/load-path.md 적재 경로 안전장치 · L4 사유: DB 스냅샷·복구 리허설 미확인.,,담당
+t65,시스템·플랫폼,품질(원장전용),t65-P35,P35,장애 모니터링·백업복구·서버 환경,5,STD-SYS-031,PitStop 서버 환경 확보(Windows·RAM 16GB·AWS 별도 인스턴스),미정(외부),미정,미착수,후니정기미팅 정리260915.html §PDF 프리플라이트 · 미결 2,,담당
+t65,시스템·플랫폼,품질(원장전용),t65-P36,P36,보안 강화(프록시 가드·XSS·CSP·개인정보),1,STD-SYS-043,[보안 Critical] /api/shopby 서버(파트너) API 범용 프록시가 인증·경로 화이트리스트 없이 파트너 비밀 토큰 중계,huni-mall,김동학,미착수,huni-skin-shopby/src/app/api/shopby/[...path]/route.ts:20-30 가드 없음 · artifacts/audit/iteration-1/report.md:27-33 C1·35 H1 · 포크 huni-skin-next/src/lib/api/server/shopby-proxy-guard.ts(default-deny),,담당
+t65,시스템·플랫폼,품질(원장전용),t65-P36,P36,보안 강화(프록시 가드·XSS·CSP·개인정보),2,STD-SYS-046,공지 본문·상품설명 HTML 무필터 렌더(저장형 XSS 여지) — sanitize 적용,huni-mall,김동학,미착수,huni-skin-shopby/src/app/(main)/notice/[articleNo]/page.tsx:69 · src/components/product/configurator.tsx:77 dangerouslySetInnerHTML · audit report.md:77 M3 · 포크 huni-skin-next/src/lib/security/sanitize.ts,,담당
+t65,시스템·플랫폼,품질(원장전용),t65-P36,P36,보안 강화(프록시 가드·XSS·CSP·개인정보),3,STD-SYS-047,보안 응답 헤더/CSP 부재(next.config.ts 에 headers() 없음),huni-mall,김동학,미착수,huni-skin-shopby/next.config.ts:1-17 headers 없음 · SPEC-TAKEOVER-001 spec.md:46 · 포크 M3(commit 348a8f4) CSP Report-Only,,담당
+t65,시스템·플랫폼,품질,t65-P36,P36,보안 강화(프록시 가드·XSS·CSP·개인정보),4,STD-SYS-018,개인정보 보관·파기 정책 적용,huni-mall,김동학,작동,https://shopby.huniprinting.co.kr/privacy@2026-09-16 21:27,,담당
+t65,시스템·플랫폼,품질(원장전용),t65-P37,P37,코드베이스 정비·포크 처리·CI·문서,1,STD-SYS-050,huni-skin-next 포크(SPEC-TAKEOVER-001 M0~M7·20커밋·remote 없음) 처리 결정 — 원본 main 에 선별 이식 vs 폐기,결정(PM),신우진+김동학,미착수,huni-skin-shopby/.git/info/exclude:7 `huni-skin-next/` · huni-skin-next `git remote` 0 · `git log 0f65b32..HEAD` 20 · 원본 9/10~9/15 4커밋 미반영,,담당
+t65,시스템·플랫폼,품질(원장전용),t65-P37,P37,코드베이스 정비·포크 처리·CI·문서,2,STD-SYS-048,회귀 테스트 0개·CI 없음 — 포크의 특성화 테스트(14파일·108케이스)·ci.yml 이식,huni-mall,김동학,미착수,`find huni-skin-shopby/src -name '*.test.*'` 0 · .github/workflows/ 에 label-sync.yml 만 · 포크 huni-skin-next: 14 test files·.github/workflows/ci.yml(commit ed448b7·77b43cd),,담당
+t65,시스템·플랫폼,품질(원장전용),t65-P37,P37,코드베이스 정비·포크 처리·CI·문서,3,STD-SYS-052,환경변수 정합 — 코드 참조 vs .env.example vs vercel-env-push.sh 불일치(HUNI_WIDGET_SITE_KEY·SHOPBY_NOTICE_BOARD_NO 예시 누락 · DEMO_AUTH_* 미사용 · GRAPHQL 2종 잔존),huni-mall,김동학,미착수,huni-skin-shopby/.env.example(21키) · scripts/vercel-env-push.sh(GRAPHQL_BRIDGE_SECRET·NEXT_PUBLIC_GRAPHQL_ENDPOINT) · src/lib/api/server/board.ts:14 · 포크 t10 commit 8ff573a,,담당
+t65,시스템·플랫폼,품질(원장전용),t65-P37,P37,코드베이스 정비·포크 처리·CI·문서,4,STD-SYS-053,Prisma 로컬 DB(23테이블·DATABASE_URL) 존폐 — 코드 소비자 0(src/lib/prisma.ts 만),huni-mall,김동학,미착수,`grep -rn '@/lib/prisma' huni-skin-shopby/src` 0(정의 파일 제외) · prisma/README.md:3 · package.json postinstall `prisma generate` · SPEC-TAKEOVER-001 U-6,,담당
+t65,시스템·플랫폼,품질(원장전용),t65-P37,P37,코드베이스 정비·포크 처리·CI·문서,5,STD-SYS-051,미병합 로컬 브랜치·워크트리 7개 정리(WT-* 6 + release/0.2.0) — 유효 변경 유무 확인 후 삭제,huni-mall,김동학,미착수,`git -C huni-skin-shopby branch --no-merged main` 7개 · `git worktree list` .claude/worktrees/{t1·t2·t3·t9·t10·t11·release-0.2.0},,담당
+t65,정보·콘텐츠,품질(원장전용),t65-P37,P37,코드베이스 정비·포크 처리·CI·문서,6,STD-INF-013,저장소 문서 stale 정비 — docs/api/README 「코드는 아직 backend API 기준」·frontend README 「서버 확정 시 기입」·연동 현황 보고서(9/2) 갱신,huni-mall,김동학,미착수,huni-skin-shopby/docs/api/README.md:16-17 · docs/api/frontend/README.md:5-7 · artifacts/shopby-integration-status-report.md:6(2026-09-02 기준),,담당
+t65,시스템·플랫폼,품질(원장전용),t65-P37,P37,코드베이스 정비·포크 처리·CI·문서,7,STD-SYS-026,오픈·안정화 후 유지보수 내부 인력 이관,결정(PM),서희항,미착수,후니정기미팅 정리260915.html §개발 역할 분담 · 확정 2,,담당
+t65,시스템·플랫폼,결정(원장전용),t65-P38,P38,런칭 범위·조직·일정 결정,1,STD-SYS-033,사이트 전체 화면·절차 설계(버튼 동작·결제 단계 기능 가능 여부·비용 정리 후 컨펌),결정(PM),신우진,미착수,후니정기미팅 정리260915.html §일정·설계 · 미결 2,,담당
+t65,시스템·플랫폼,결정(원장전용),t65-P38,P38,런칭 범위·조직·일정 결정,2,STD-SYS-032,오픈 목표일 확정 + 2주 테스트 시나리오,결정(PM),채훈희,부분,후니정기미팅 정리260915.html §일정·설계 · 미결 1 / 후니-오픈잔여작업-실무진안내_260909.html §항목 6 · ④ 완료 기준,,담당
+t65,시스템·플랫폼,결정(원장전용),t65-P38,P38,런칭 범위·조직·일정 결정,3,STD-SYS-028,webadmin 영역 분리(쇼핑몰 관리자 영역 / DB·생산 영역),결정(PM),신우진,미착수,후니정기미팅 정리260915.html §개발 역할 분담 · 미결 1,,담당
+t65,시스템·플랫폼,결정(원장전용),t65-P38,P38,런칭 범위·조직·일정 결정,4,STD-SYS-027,기술 책임 총괄 = CTO 서희항 대표,기록,—,미착수,후니정기미팅 정리260915.html §개발 역할 분담 · 확정 3,,담당
+전제,전제 — 일정·인프라(어느 카드에도 담당으로 안 들어간 74행),T1 인프라 이전·배포(Lightsail·DB 반입·도메인),전제-T1,T1,인프라 이전·배포(Lightsail·DB 반입·도메인),F1,BLK-S4-1,[선행 입력] OIDC 신뢰정책 회신(`sub` 조건 + `lightsail:GetContainerServices` 포함 여부),,외부(인프라팀),대기,.moai/specs/SPEC-LAUNCHPLAN-001/research.md:340,,전제
+전제,전제 — 일정·인프라(어느 카드에도 담당으로 안 들어간 74행),T1 인프라 이전·배포(Lightsail·DB 반입·도메인),전제-T1,T1,인프라 이전·배포(Lightsail·DB 반입·도메인),F1,BLK-S4-2,[선행 입력] `huni/dev/admin-runtime-env` 필수 키 존재 여부(값 아님),,외부(인프라팀),대기,.moai/specs/SPEC-LAUNCHPLAN-001/research.md:341,,전제
+전제,전제 — 일정·인프라(어느 카드에도 담당으로 안 들어간 74행),T1 인프라 이전·배포(Lightsail·DB 반입·도메인),전제-T1,T1,인프라 이전·배포(Lightsail·DB 반입·도메인),F1,F1-1,OIDC 신뢰정책 `sub`=`repo:shopbiz-site/HuniProductPrice2:ref:refs/heads/master` + 역할 권한(ECR push·lightsail Push/CreateDeployment/GetContainerServices·secretsmanager,,외부(인프라팀),미착수,_workspace/huni-launch-runway/07_rebaseline/S/S4-infra/migration-plan.md:40,,전제
+전제,전제 — 일정·인프라(어느 카드에도 담당으로 안 들어간 74행),T1 인프라 이전·배포(Lightsail·DB 반입·도메인),전제-T1,T1,인프라 이전·배포(Lightsail·DB 반입·도메인),F1,F1-2,`huni/dev/admin-runtime-env` 시크릿 채움(필수: `DJANGO_SECRET_KEY` 고정 난수≥32자·`AWS_ACCESS_KEY_ID/SECRET`·`WAPI_SERVER_KEY_REQUIRED=Y` · 샵바이 3키 · Edicus 4키 · S3 5키+베이스 2,,서희항,미착수,_workspace/huni-launch-runway/07_rebaseline/S/S4-infra/migration-plan.md:41,,전제
+전제,전제 — 일정·인프라(어느 카드에도 담당으로 안 들어간 74행),T1 인프라 이전·배포(Lightsail·DB 반입·도메인),전제-T1,T1,인프라 이전·배포(Lightsail·DB 반입·도메인),F1,F1-3,Actions → 「Deploy to dev (huni-admin)」 수동 실행(master),,서희항,미착수,_workspace/huni-launch-runway/07_rebaseline/S/S4-infra/migration-plan.md:42,,전제
+전제,전제 — 일정·인프라(어느 카드에도 담당으로 안 들어간 74행),T1 인프라 이전·배포(Lightsail·DB 반입·도메인),전제-T1,T1,인프라 이전·배포(Lightsail·DB 반입·도메인),F1,F1-4,사이드카·LB 실측: cron 로그 `cron_hourly 시작 — 매시 :15` → 정시 `recalc 종료` · 60초 초과 의심 3요청(시작가 재계산·주문등록 승격·그리드 full-sync) 504 여부 · `X-Forwarded-For` 원문 1건,,서희항,미착수,_workspace/huni-launch-runway/07_rebaseline/S/S4-infra/migration-plan.md:43,,전제
+전제,전제 — 일정·인프라(어느 카드에도 담당으로 안 들어간 74행),T1 인프라 이전·배포(Lightsail·DB 반입·도메인),전제-T1,T1,인프라 이전·배포(Lightsail·DB 반입·도메인),F1,F1-5,첫 성공 후 `deploy.yml` push 트리거 주석 해제 + `test_deploy_workflow_manual_first` 반전,,서희항,미착수,_workspace/huni-launch-runway/07_rebaseline/S/S4-infra/migration-plan.md:44,,전제
+전제,전제 — 일정·인프라(어느 카드에도 담당으로 안 들어간 74행),T1 인프라 이전·배포(Lightsail·DB 반입·도메인),전제-T1,T1,인프라 이전·배포(Lightsail·DB 반입·도메인),F1,T1-1,관리서버(webadmin) Lightsail dev 배포·검증 — F1-1~F1-5,,서희항,미착수,_workspace/huni-launch-runway/07_rebaseline/S/S4-infra/migration-plan.md:36,,전제
+전제,전제 — 일정·인프라(어느 카드에도 담당으로 안 들어간 74행),T1 인프라 이전·배포(Lightsail·DB 반입·도메인),전제-T1,T1,인프라 이전·배포(Lightsail·DB 반입·도메인),F2,BLK-S4-3,[선행 입력] SSH 터널 접속정보(호스트·포트·키 배포 방식),,외부(인프라팀),대기,.moai/specs/SPEC-LAUNCHPLAN-001/research.md:342,,전제
+전제,전제 — 일정·인프라(어느 카드에도 담당으로 안 들어간 74행),T1 인프라 이전·배포(Lightsail·DB 반입·도메인),전제-T1,T1,인프라 이전·배포(Lightsail·DB 반입·도메인),F2,BLK-S4-4,[선행 입력] Lightsail PG 17 인스턴스 사양 · `hunidb`/`webapp` 2 DB 생성 · `pgcrypto`·`citext` 가능 여부,,외부(인프라팀),대기,.moai/specs/SPEC-LAUNCHPLAN-001/research.md:343,,전제
+전제,전제 — 일정·인프라(어느 카드에도 담당으로 안 들어간 74행),T1 인프라 이전·배포(Lightsail·DB 반입·도메인),전제-T1,T1,인프라 이전·배포(Lightsail·DB 반입·도메인),F2,F2-1,SSH 터널 접속정보(호스트·키·포트) 수령 + Lightsail PG 17 에 `hunidb`·`webapp` 2 DB 생성,,외부(인프라팀),미착수,_workspace/huni-launch-runway/07_rebaseline/S/S4-infra/migration-plan.md:50,,전제
+전제,전제 — 일정·인프라(어느 카드에도 담당으로 안 들어간 74행),T1 인프라 이전·배포(Lightsail·DB 반입·도메인),전제-T1,T1,인프라 이전·배포(Lightsail·DB 반입·도메인),F2,F2-2,리허설: Railway `pg_dump --no-owner --no-acl` 평문 SQL → 임시 스키마에 복원 → 검증 4종(`audit_data_integrity --exposure --strict`·`audit_published_prices`·`audit_set_qty_mode`·,,서희항,미착수,_workspace/huni-launch-runway/07_rebaseline/S/S4-infra/migration-plan.md:51,,전제
+전제,전제 — 일정·인프라(어느 카드에도 담당으로 안 들어간 74행),T1 인프라 이전·배포(Lightsail·DB 반입·도메인),전제-T1,T1,인프라 이전·배포(Lightsail·DB 반입·도메인),F2,F2-3,vc_ 2객체 재덤프(파이썬 DDL+INSERT 조립) → `webapp` 적재 → 웹팀 도구 접속 문자열 `webapp` 확인 → 상세 탭 표시 확인,,서희항,미착수,_workspace/huni-launch-runway/07_rebaseline/S/S4-infra/migration-plan.md:52,,전제
+전제,전제 — 일정·인프라(어느 카드에도 담당으로 안 들어간 74행),T1 인프라 이전·배포(Lightsail·DB 반입·도메인),전제-T1,T1,인프라 이전·배포(Lightsail·DB 반입·도메인),F2,F2-4,본반입 창: Railway 관리자 쓰기 정지 공지 → 재덤프 → `hunidb` 반입 → 검증 4종 → 행수 지문 대조,,서희항,미착수,_workspace/huni-launch-runway/07_rebaseline/S/S4-infra/migration-plan.md:53,,전제
+전제,전제 — 일정·인프라(어느 카드에도 담당으로 안 들어간 74행),T1 인프라 이전·배포(Lightsail·DB 반입·도메인),전제-T1,T1,인프라 이전·배포(Lightsail·DB 반입·도메인),F2,T1-2,DB 반입(PG 18.6→17) 리허설·본반입·검증 4종·vc_ 분리 — F2-1~F2-4,,서희항,미착수,_workspace/huni-launch-runway/07_rebaseline/S/S4-infra/migration-plan.md:46,,전제
+전제,전제 — 일정·인프라(어느 카드에도 담당으로 안 들어간 74행),T1 인프라 이전·배포(Lightsail·DB 반입·도메인),전제-T1,T1,인프라 이전·배포(Lightsail·DB 반입·도메인),F3,BLK-S4-5,[선행 입력] 프록시 Basic Auth 등록(`huni/dev/proxy.proxy_url`),,외부(인프라팀),대기,.moai/specs/SPEC-LAUNCHPLAN-001/research.md:344,,전제
+전제,전제 — 일정·인프라(어느 카드에도 담당으로 안 들어간 74행),T1 인프라 이전·배포(Lightsail·DB 반입·도메인),전제-T1,T1,인프라 이전·배포(Lightsail·DB 반입·도메인),F3,BLK-S4-7,[선행 입력] DNS 관리 권한자(Cloudflare `printly.co.kr` · `huniprinting.co.kr` 두 존),,외부(Cloudflare DNS 권한자),대기,.moai/specs/SPEC-LAUNCHPLAN-001/research.md:346,,전제
+전제,전제 — 일정·인프라(어느 카드에도 담당으로 안 들어간 74행),T1 인프라 이전·배포(Lightsail·DB 반입·도메인),전제-T1,T1,인프라 이전·배포(Lightsail·DB 반입·도메인),F3,BLK-S4-9,[선행 입력] 샵바이 콘솔 권한자(IP 화이트리스트·웹훅 URL 편집),,최숙진+신우진,미착수,.moai/specs/SPEC-LAUNCHPLAN-001/research.md:348,,전제
+전제,전제 — 일정·인프라(어느 카드에도 담당으로 안 들어간 74행),T1 인프라 이전·배포(Lightsail·DB 반입·도메인),전제-T1,T1,인프라 이전·배포(Lightsail·DB 반입·도메인),F3,F3-1,Railway `start-price-cron` 정지,,서희항,미착수,_workspace/huni-launch-runway/07_rebaseline/S/S4-infra/migration-plan.md:59,,전제
+전제,전제 — 일정·인프라(어느 카드에도 담당으로 안 들어간 74행),T1 인프라 이전·배포(Lightsail·DB 반입·도메인),전제-T1,T1,인프라 이전·배포(Lightsail·DB 반입·도메인),F3,F3-10,전환 후 실측: `/healthz`·로그인·위젯 설정 API 지연·장바구니→재견적·크론 로그,,서희항,미착수,_workspace/huni-launch-runway/07_rebaseline/S/S4-infra/migration-plan.md:68,,전제
+전제,전제 — 일정·인프라(어느 카드에도 담당으로 안 들어간 74행),T1 인프라 이전·배포(Lightsail·DB 반입·도메인),전제-T1,T1,인프라 이전·배포(Lightsail·DB 반입·도메인),F3,F3-11,Railway 3서비스 종료(최종 덤프 보관 후),,서희항,미착수,_workspace/huni-launch-runway/07_rebaseline/S/S4-infra/migration-plan.md:69,,전제
+전제,전제 — 일정·인프라(어느 카드에도 담당으로 안 들어간 74행),T1 인프라 이전·배포(Lightsail·DB 반입·도메인),전제-T1,T1,인프라 이전·배포(Lightsail·DB 반입·도메인),F3,F3-12,"웹팀 통보: vc_ 는 `webapp`, 우리 DB 에 직접 테이블 생성 금지",,신우진,미착수,_workspace/huni-launch-runway/07_rebaseline/S/S4-infra/migration-plan.md:70,,전제
+전제,전제 — 일정·인프라(어느 카드에도 담당으로 안 들어간 74행),T1 인프라 이전·배포(Lightsail·DB 반입·도메인),전제-T1,T1,인프라 이전·배포(Lightsail·DB 반입·도메인),F3,F3-4,샵바이 콘솔 IP 화이트리스트 52.78.126.17 등록 → 메인이미지 동기화 1건 실측,,서희항,미착수,_workspace/huni-launch-runway/07_rebaseline/S/S4-infra/migration-plan.md:62,,전제
+전제,전제 — 일정·인프라(어느 카드에도 담당으로 안 들어간 74행),T1 인프라 이전·배포(Lightsail·DB 반입·도메인),전제-T1,T1,인프라 이전·배포(Lightsail·DB 반입·도메인),F3,F3-5,샵바이 웹훅 수신 URL → 새 호스트 `/api/w/v1/shopby/webhook/<secret>`,,서희항,미착수,_workspace/huni-launch-runway/07_rebaseline/S/S4-infra/migration-plan.md:63,,전제
+전제,전제 — 일정·인프라(어느 카드에도 담당으로 안 들어간 74행),T1 인프라 이전·배포(Lightsail·DB 반입·도메인),전제-T1,T1,인프라 이전·배포(Lightsail·DB 반입·도메인),F3,F3-6,S3 CORS 허용 오리진에 새 관리자 호스트(원고 tmp 2 + 관리자 직접 업로드),,외부(인프라팀),미착수,_workspace/huni-launch-runway/07_rebaseline/S/S4-infra/migration-plan.md:64,,전제
+전제,전제 — 일정·인프라(어느 카드에도 담당으로 안 들어간 74행),T1 인프라 이전·배포(Lightsail·DB 반입·도메인),전제-T1,T1,인프라 이전·배포(Lightsail·DB 반입·도메인),F3,F3-7,DNS `huni-admin.printly.co.kr` CNAME → Lightsail + `CUSTOM_DOMAIN` 에 콤마 추가 + Lightsail 커스텀 도메인 인증서,,서희항,미착수,_workspace/huni-launch-runway/07_rebaseline/S/S4-infra/migration-plan.md:65,,전제
+전제,전제 — 일정·인프라(어느 카드에도 담당으로 안 들어간 74행),T1 인프라 이전·배포(Lightsail·DB 반입·도메인),전제-T1,T1,인프라 이전·배포(Lightsail·DB 반입·도메인),F3,F3-8,"Railway 변수 이관 대조(`railway variables --service huni-admin` 키 목록, 값 노출 금지) + `DJANGO_SECRET_KEY` Railway 값을 시크릿에 그대로",,서희항,미착수,_workspace/huni-launch-runway/07_rebaseline/S/S4-infra/migration-plan.md:66,,전제
+전제,전제 — 일정·인프라(어느 카드에도 담당으로 안 들어간 74행),T1 인프라 이전·배포(Lightsail·DB 반입·도메인),전제-T1,T1,인프라 이전·배포(Lightsail·DB 반입·도메인),F3,F3-9,Edicus 허용 도메인/콜백에 새 호스트 필요 여부 확인,,서희항,미착수,_workspace/huni-launch-runway/07_rebaseline/S/S4-infra/migration-plan.md:67,,전제
+전제,전제 — 일정·인프라(어느 카드에도 담당으로 안 들어간 74행),T1 인프라 이전·배포(Lightsail·DB 반입·도메인),전제-T1,T1,인프라 이전·배포(Lightsail·DB 반입·도메인),F3,T1-3,운영 전환 12단계(F3-11 Railway 종료는 오픈 테스트 통과 전 금지),,서희항,미착수,_workspace/huni-launch-runway/07_rebaseline/S/S4-infra/migration-plan.md:55,,전제
+전제,전제 — 일정·인프라(어느 카드에도 담당으로 안 들어간 74행),T1 인프라 이전·배포(Lightsail·DB 반입·도메인),전제-T1,T1,인프라 이전·배포(Lightsail·DB 반입·도메인),F4,BLK-S4-10,[선행 입력] 소셜 3사 콘솔 권한자(Redirect URI 편집),,외부(소셜 3사 콘솔 권한자),대기,.moai/specs/SPEC-LAUNCHPLAN-001/research.md:349,,전제
+전제,전제 — 일정·인프라(어느 카드에도 담당으로 안 들어간 74행),T1 인프라 이전·배포(Lightsail·DB 반입·도메인),전제-T1,T1,인프라 이전·배포(Lightsail·DB 반입·도메인),F4,BLK-S4-6,[선행 입력] Vercel 프로젝트 접근 · 현재 `DATABASE_URL`·`NEXTAUTH_URL` 소재 · 리다이렉트 설정 유무,,김동학·PM+신우진,미착수,.moai/specs/SPEC-LAUNCHPLAN-001/research.md:345,,전제
+전제,전제 — 일정·인프라(어느 카드에도 담당으로 안 들어간 74행),T1 인프라 이전·배포(Lightsail·DB 반입·도메인),전제-T1,T1,인프라 이전·배포(Lightsail·DB 반입·도메인),F4,F4-1,Lightsail 컨테이너 서비스 + ECR 레포 `huni-skin` + Secrets Manager `huni/dev/skin-runtime-env` 프로비저닝,,외부(인프라팀),미착수,_workspace/huni-launch-runway/07_rebaseline/S/S4-infra/migration-plan.md:78,,전제
+전제,전제 — 일정·인프라(어느 카드에도 담당으로 안 들어간 74행),T1 인프라 이전·배포(Lightsail·DB 반입·도메인),전제-T1,T1,인프라 이전·배포(Lightsail·DB 반입·도메인),F4,F4-2,`deploy.yml` 스킨판 작성(webadmin 것을 본떠 OIDC→ECR→push-container-image→env 조립→deployment) + 헬스체크 경로 결정(`/` 또는 신설 `/api/health`),,김동학,미착수,_workspace/huni-launch-runway/07_rebaseline/S/S4-infra/migration-plan.md:79,,전제
+전제,전제 — 일정·인프라(어느 카드에도 담당으로 안 들어간 74행),T1 인프라 이전·배포(Lightsail·DB 반입·도메인),전제-T1,T1,인프라 이전·배포(Lightsail·DB 반입·도메인),F4,F4-3,env 이관 — `.env.example` 기준 필수: `AUTH_SECRET`·`NEXTAUTH_URL`·`AUTH_GOOGLE/NAVER/KAKAO_ID+SECRET`(6)·`DATABASE_URL`·`PRINTLY_DB_URL`(→webapp)·`PRINTLY_WORKSPACE_I,,김동학,미착수,_workspace/huni-launch-runway/07_rebaseline/S/S4-infra/migration-plan.md:80,,전제
+전제,전제 — 일정·인프라(어느 카드에도 담당으로 안 들어간 74행),T1 인프라 이전·배포(Lightsail·DB 반입·도메인),전제-T1,T1,인프라 이전·배포(Lightsail·DB 반입·도메인),F4,F4-4,`DATABASE_URL`(Prisma) 목적지 결정: Lightsail PG `webapp` 로 합칠지 별도 DB 로 갈지 → `migrator` 스테이지 1회 실행(`pgcrypto`·`citext` 확장 필요),,김동학,미착수,_workspace/huni-launch-runway/07_rebaseline/S/S4-infra/migration-plan.md:81,,전제
+전제,전제 — 일정·인프라(어느 카드에도 담당으로 안 들어간 74행),T1 인프라 이전·배포(Lightsail·DB 반입·도메인),전제-T1,T1,인프라 이전·배포(Lightsail·DB 반입·도메인),F4,F4-5,DNS `shopby.huniprinting.co.kr` → Lightsail 스킨 + 인증서 · `NEXTAUTH_URL=https://shopby.huniprinting.co.kr` 고정,,김동학,미착수,_workspace/huni-launch-runway/07_rebaseline/S/S4-infra/migration-plan.md:82,,전제
+전제,전제 — 일정·인프라(어느 카드에도 담당으로 안 들어간 74행),T1 인프라 이전·배포(Lightsail·DB 반입·도메인),전제-T1,T1,인프라 이전·배포(Lightsail·DB 반입·도메인),F4,F4-6,소셜 콜백 검증: 구글·네이버·카카오 콘솔 Redirect URI = `${NEXTAUTH_URL}/oauth/callback` 인지 + 각 1회 로그인,,김동학,미착수,_workspace/huni-launch-runway/07_rebaseline/S/S4-infra/migration-plan.md:83,,전제
+전제,전제 — 일정·인프라(어느 카드에도 담당으로 안 들어간 74행),T1 인프라 이전·배포(Lightsail·DB 반입·도메인),전제-T1,T1,인프라 이전·배포(Lightsail·DB 반입·도메인),F4,F4-7,vercel.app 리다이렉트: 코드에 없음(§1 마지막 행). Vercel 대시보드 리다이렉트·도메인 설정을 PM 이 확인해 이관 여부 결정,,김동학,미착수,_workspace/huni-launch-runway/07_rebaseline/S/S4-infra/migration-plan.md:84,,전제
+전제,전제 — 일정·인프라(어느 카드에도 담당으로 안 들어간 74행),T1 인프라 이전·배포(Lightsail·DB 반입·도메인),전제-T1,T1,인프라 이전·배포(Lightsail·DB 반입·도메인),F4,F4-8,Vercel 프로젝트 정지(오픈 테스트 통과 후),,김동학,미착수,_workspace/huni-launch-runway/07_rebaseline/S/S4-infra/migration-plan.md:85,,전제
+전제,전제 — 일정·인프라(어느 카드에도 담당으로 안 들어간 74행),T1 인프라 이전·배포(Lightsail·DB 반입·도메인),전제-T1,T1,인프라 이전·배포(Lightsail·DB 반입·도메인),F4,T1-4,스킨 컨테이너화·도메인·소셜 콜백·env 이관(F4-8 Vercel 정지는 오픈 테스트 통과 전 금지) + 로그인 리다이렉트 재검증,,김동학,미착수,_workspace/huni-launch-runway/07_rebaseline/S/S4-infra/migration-plan.md:72,,전제
+전제,전제 — 일정·인프라(어느 카드에도 담당으로 안 들어간 74행),T2 상품·가격·위젯 데이터 충전,전제-T2,T2,상품·가격·위젯 데이터 충전,A1,T2-1,상품·가격 데이터 충전 — 기본사양가 없음 2건·0원 조합 교정,,최숙진,부분,_workspace/huni-launch-runway/07_rebaseline/S/S5-plan/status-28.csv:3,,전제
+전제,전제 — 일정·인프라(어느 카드에도 담당으로 안 들어간 74행),T2 상품·가격·위젯 데이터 충전,전제-T2,T2,상품·가격·위젯 데이터 충전,A3,T2-2,위젯 기본값 미지정 교정·재게시,,서희항,부분,_workspace/huni-launch-runway/07_rebaseline/S/S5-plan/status-28.csv:4,,전제
+전제,전제 — 일정·인프라(어느 카드에도 담당으로 안 들어간 74행),T2 상품·가격·위젯 데이터 충전,전제-T2,T2,상품·가격·위젯 데이터 충전,A4,T2-3,샵바이 상품 연동 — 시작가 「10원~」 교정·상품 수 296/291/297 불일치 규명,,서희항,부분,_workspace/huni-launch-runway/07_rebaseline/S/S5-plan/status-28.csv:5,,전제
+전제,전제 — 일정·인프라(어느 카드에도 담당으로 안 들어간 74행),T2 상품·가격·위젯 데이터 충전,전제-T2,T2,상품·가격·위젯 데이터 충전,B2,T2-4,위젯 견적·원고 업로드·편집기(Edicus) 경로 검증,,서희항,부분,_workspace/huni-launch-runway/07_rebaseline/S/S5-plan/status-28.csv:9,,전제
+전제,전제 — 일정·인프라(어느 카드에도 담당으로 안 들어간 74행),T3 몰 결함 수정·회원 이관,전제-T3,T3,몰 결함 수정·회원 이관,B4,T3-1,회원 장바구니 인증 결함 수정(서버 프록시 토큰 · D-1) — 결함 1·2·3·5 공통 뿌리,,김동학,부분,_workspace/huni-launch-runway/07_rebaseline/S/S6-defects/defect-code-analysis.md:5,,전제
+전제,전제 — 일정·인프라(어느 카드에도 담당으로 안 들어간 74행),T3 몰 결함 수정·회원 이관,전제-T3,T3,몰 결함 수정·회원 이관,B5,BLK-S1-1,[선행 입력] 이메일형 테스트 회원 계정(ID+PW),,지니,미착수,.moai/specs/SPEC-LAUNCHPLAN-001/research.md:301,,전제
+전제,전제 — 일정·인프라(어느 카드에도 담당으로 안 들어간 74행),T3 몰 결함 수정·회원 이관,전제-T3,T3,몰 결함 수정·회원 이관,B5,BLK-S3-1,[선행 입력] 구 사이트 DB 접속 권한·경로,,외부(구 사이트 운영사),대기,.moai/specs/SPEC-LAUNCHPLAN-001/research.md:325,,전제
+전제,전제 — 일정·인프라(어느 카드에도 담당으로 안 들어간 74행),T3 몰 결함 수정·회원 이관,전제-T3,T3,몰 결함 수정·회원 이관,B5,BLK-S3-2,[선행 입력] Shopby 회원 일괄등록 수단(어드민 엑셀 / Server API 부재 확인 / 외부회원연동),,신우진,미착수,.moai/specs/SPEC-LAUNCHPLAN-001/research.md:326,,전제
+전제,전제 — 일정·인프라(어느 카드에도 담당으로 안 들어간 74행),T3 몰 결함 수정·회원 이관,전제-T3,T3,몰 결함 수정·회원 이관,B5,BLK-S3-3,[선행 입력] 이메일 NULL·중복 회원 규모와 처리 원칙,,신우진,미착수,.moai/specs/SPEC-LAUNCHPLAN-001/research.md:327,,전제
+전제,전제 — 일정·인프라(어느 카드에도 담당으로 안 들어간 74행),T3 몰 결함 수정·회원 이관,전제-T3,T3,몰 결함 수정·회원 이관,B5,T3-2,로그인 성공인데 오류 문구·리다이렉트 없음 수정(D-2) + 회원 이관 경로 확정,,김동학+신우진,부분,_workspace/huni-launch-runway/07_rebaseline/S/S6-defects/defect-code-analysis.md:24,,전제
+전제,전제 — 일정·인프라(어느 카드에도 담당으로 안 들어간 74행),T3 몰 결함 수정·회원 이관,전제-T3,T3,몰 결함 수정·회원 이관,B6,BLK-S1-3,[선행 입력] 결제수단 범위(무통장만 / +카드 / +계좌이체),,신우진,미착수,.moai/specs/SPEC-LAUNCHPLAN-001/research.md:303,,전제
+전제,전제 — 일정·인프라(어느 카드에도 담당으로 안 들어간 74행),T3 몰 결함 수정·회원 이관,전제-T3,T3,몰 결함 수정·회원 이관,B6,T3-3,주문서·결제 — 결제수단 범위 결정 후 스킨 결제 분기·주문 성립 1건 종단,,김동학+신우진,부분,_workspace/huni-launch-runway/07_rebaseline/S/S5-plan/status-28.csv:12,,전제
+전제,전제 — 일정·인프라(어느 카드에도 담당으로 안 들어간 74행),T3 몰 결함 수정·회원 이관,전제-T3,T3,몰 결함 수정·회원 이관,D2,T3-4,마이페이지 배송지 결함·비로그인 노출·홈/목록 더미 정리,,김동학,부분,_workspace/huni-launch-runway/07_rebaseline/S/S6-defects/defect-code-analysis.md:58,,전제
+전제,전제 — 일정·인프라(어느 카드에도 담당으로 안 들어간 74행),T3 몰 결함 수정·회원 이관,전제-T3,T3,몰 결함 수정·회원 이관,D3,BLK-S1-6,[선행 입력] 클레임·문의 범위(Shopby API / 외부 채널 / 미제공),,신우진,미착수,.moai/specs/SPEC-LAUNCHPLAN-001/research.md:306,,전제
+전제,전제 — 일정·인프라(어느 카드에도 담당으로 안 들어간 74행),T3 몰 결함 수정·회원 이관,전제-T3,T3,몰 결함 수정·회원 이관,D3,T3-5,취소·반품·문의 — 범위 결정 후 스킨 버튼·문의 라우트 구현,,신우진+김동학,없음,_workspace/huni-launch-runway/07_rebaseline/S/S5-plan/status-28.csv:23,,전제
+전제,전제 — 일정·인프라(어느 카드에도 담당으로 안 들어간 74행),T4 주문 등록 다리·운영 변수,전제-T4,T4,주문 등록 다리·운영 변수,C1,BLK-S1-5,[선행 입력] `order/register` 계약(엔드포인트·페이로드·서버키),,서희항+신우진,미착수,.moai/specs/SPEC-LAUNCHPLAN-001/research.md:305,,전제
+전제,전제 — 일정·인프라(어느 카드에도 담당으로 안 들어간 74행),T4 주문 등록 다리·운영 변수,전제-T4,T4,주문 등록 다리·운영 변수,C1,BLK-S2-1,[선행 입력] Railway 운영 변수 4종 설정 여부(값 아님) — `WAPI_SERVER_KEY_REQUIRED`·`SHOPBY_WEBHOOK_SECRET`·`SHOPBY_SYSTEM_KEY`·`SHOPBY_ACCESS_TOKEN`,,서희항+신우진,미착수,.moai/specs/SPEC-LAUNCHPLAN-001/research.md:314,,전제
+전제,전제 — 일정·인프라(어느 카드에도 담당으로 안 들어간 74행),T4 주문 등록 다리·운영 변수,전제-T4,T4,주문 등록 다리·운영 변수,C1,T4-1,주문 등록 다리 — 스킨이 결제 직후 order/register 를 부르게 배선(부르는 쪽 0건),,김동학,부분,_workspace/huni-launch-runway/07_rebaseline/S/S2-pipeline/pipeline-status.csv:2,,전제
+전제,전제 — 일정·인프라(어느 카드에도 담당으로 안 들어간 74행),T4 주문 등록 다리·운영 변수,전제-T4,T4,주문 등록 다리·운영 변수,C2,BLK-S2-5,[선행 입력] Lightsail 이전 후 크론·워커 실행 형태,,서희항+신우진,미착수,.moai/specs/SPEC-LAUNCHPLAN-001/research.md:318,,전제
+전제,전제 — 일정·인프라(어느 카드에도 담당으로 안 들어간 74행),T5 셀러어드민 설정·알림·법정표기·증빙,전제-T5,T5,셀러어드민 설정·알림·법정표기·증빙,D1,T5-2,알림 — SMS 사용설정·알림톡 33건 개별 판단 후 켜기·템플릿 카카오 검수,,최숙진+신우진,부분,_workspace/huni-launch-runway/07_rebaseline/S/S5-plan/status-28.csv:21,,전제
+전제,전제 — 일정·인프라(어느 카드에도 담당으로 안 들어간 74행),T5 셀러어드민 설정·알림·법정표기·증빙,전제-T5,T5,셀러어드민 설정·알림·법정표기·증빙,D4,BLK-S1-4,[선행 입력] 현금영수증·세금계산서 발급 주체(Shopby/자체/외부),,신우진,미착수,.moai/specs/SPEC-LAUNCHPLAN-001/research.md:304,,전제
+전제,전제 — 일정·인프라(어느 카드에도 담당으로 안 들어간 74행),T5 셀러어드민 설정·알림·법정표기·증빙,전제-T5,T5,셀러어드민 설정·알림·법정표기·증빙,D4,T5-4,현금영수증·세금계산서 발급 주체 결정(Shopby / 자체 / 외부),,신우진,없음,_workspace/huni-launch-runway/07_rebaseline/S/S5-plan/status-28.csv:24,,전제
+전제,전제 — 일정·인프라(어느 카드에도 담당으로 안 들어간 74행),T5 셀러어드민 설정·알림·법정표기·증빙,전제-T5,T5,셀러어드민 설정·알림·법정표기·증빙,E1,T5-1,셀러어드민 기초정보 7항목·대표전화/메일 교체·PG 신청·결제수단 노출·운영자 계정,,최숙진,부분,_workspace/huni-launch-runway/07_rebaseline/S/S5-plan/status-28.csv:26,,전제
+전제,전제 — 일정·인프라(어느 카드에도 담당으로 안 들어간 74행),T5 셀러어드민 설정·알림·법정표기·증빙,전제-T5,T5,셀러어드민 설정·알림·법정표기·증빙,E3,T5-3,법정 표기 단일화(사업자번호 206-29-88022 우세)·증빙 화면 목업 제거(D-5),,김동학+최숙진,부분,_workspace/huni-launch-runway/07_rebaseline/S/S6-defects/defect-code-analysis.md:68,,전제
+전제,전제 — 일정·인프라(어느 카드에도 담당으로 안 들어간 74행),T6 프린팅머니 이관·외부 계약 회신,전제-T6,T6,프린팅머니 이관·외부 계약 회신,D5,BLK-S3-10,[선행 입력] 컷오버 동결 창·delta 규칙(구 사이트 충전·사용·가입 중단 가능 여부),,외부(구 사이트 운영사),대기,.moai/specs/SPEC-LAUNCHPLAN-001/research.md:334,,전제
+전제,전제 — 일정·인프라(어느 카드에도 담당으로 안 들어간 74행),T6 프린팅머니 이관·외부 계약 회신,전제-T6,T6,프린팅머니 이관·외부 계약 회신,D5,BLK-S3-5,[선행 입력] Shopby 엔터프라이즈 플랜·외부포인트 정식 적용(V9) + NHN 1:1 세팅 주체,,외부(NHN커머스),대기,.moai/specs/SPEC-LAUNCHPLAN-001/research.md:329,,전제
+전제,전제 — 일정·인프라(어느 카드에도 담당으로 안 들어간 74행),T6 프린팅머니 이관·외부 계약 회신,전제-T6,T6,프린팅머니 이관·외부 계약 회신,D5,BLK-S3-6,[선행 입력] 프린팅머니 개발 주체·배치·SLA 책임자(세 기록 불일치 해소),,채훈희,미착수,.moai/specs/SPEC-LAUNCHPLAN-001/research.md:330,,전제
+전제,전제 — 일정·인프라(어느 카드에도 담당으로 안 들어간 74행),T6 프린팅머니 이관·외부 계약 회신,전제-T6,T6,프린팅머니 이관·외부 계약 회신,D5,BLK-S3-7,[선행 입력] 토스 계약 4건 회신(면제·수수료·업종 심사·샌드박스) + 정산한도·환불계좌 절차,,외부(토스페이먼츠),대기,.moai/specs/SPEC-LAUNCHPLAN-001/research.md:331,,전제
+전제,전제 — 일정·인프라(어느 카드에도 담당으로 안 들어간 74행),T6 프린팅머니 이관·외부 계약 회신,전제-T6,T6,프린팅머니 이관·외부 계약 회신,D5,T6-1,프린팅머니 잔액 이관 — 추출 주체·개발 주체 결정 후 6단계,,채훈희,없음,_workspace/huni-launch-runway/07_rebaseline/S/S3-migration/migration-status.md:24,,전제
+전제,전제 — 일정·인프라(어느 카드에도 담당으로 안 들어간 74행),T6 프린팅머니 이관·외부 계약 회신,전제-T6,T6,프린팅머니 이관·외부 계약 회신,D5,T6-2,Shopby 엔터프라이즈 플랜·외부포인트 정식 적용 회신,,외부(NHN커머스),대기,_workspace/huni-launch-runway/07_rebaseline/S/S3-migration/migration-status.md:67,,전제
+전제,전제 — 일정·인프라(어느 카드에도 담당으로 안 들어간 74행),T6 프린팅머니 이관·외부 계약 회신,전제-T6,T6,프린팅머니 이관·외부 계약 회신,D5,T6-3,토스페이먼츠 계약 4건 회신(면제·수수료·업종 심사·샌드박스),,외부(토스페이먼츠),대기,_workspace/huni-launch-runway/07_rebaseline/S/S3-migration/migration-status.md:54,,전제
+전제,전제 — 일정·인프라(어느 카드에도 담당으로 안 들어간 74행),T7 오픈 테스트·Go/No-Go,전제-T7,T7,오픈 테스트·Go/No-Go,E4,T7-1,오픈 테스트 진입 조건 9항을 리허설 체크리스트로 승격,,신우진,미착수,_workspace/huni-launch-runway/07_rebaseline/S/S4-infra/migration-plan.md:89,,전제
+전제,전제 — 일정·인프라(어느 카드에도 담당으로 안 들어간 74행),T7 오픈 테스트·Go/No-Go,전제-T7,T7,오픈 테스트·Go/No-Go,E4,T7-2,종단 주문 테스트 — 실주문 1건이 결제→접수→MES→송장→고객 조회까지,,신우진,미착수,_workspace/huni-launch-runway/07_rebaseline/S/S5-plan/status-28.csv:29,,전제
+전제,전제 — 일정·인프라(어느 카드에도 담당으로 안 들어간 74행),T7 오픈 테스트·Go/No-Go,전제-T7,T7,오픈 테스트·Go/No-Go,E4,T7-3,Go/No-Go 판정 회의·컷오버·롤백 트리거 확정,,채훈희,미착수,_workspace/huni-launch-runway/07_rebaseline/S/S5-plan/status-28.csv:29,,전제
