@@ -14,6 +14,7 @@ import csv, html, json, os, re
 from collections import Counter, OrderedDict
 
 import processes_def as D
+import evidence_norm as EN
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 OUT_MD = os.path.join(HERE, 'processes')
@@ -49,15 +50,18 @@ def main():
                 fallback[rid] = ' · '.join(OrderedDict.fromkeys(good))
 
     # ── 행별 확정: 시스템 · 근거 · 갭 종류 ────────────────────────────────
-    info = {}
+    info, dropped_frag = {}, {}
     for rid, s in scope.items():
         e = ev_rows.get(rid, {})
         found = (e.get('found') or '').strip().upper() == 'Y'
         evid = (e.get('evidence') or '').strip()
         system = (e.get('system') or '').strip()
         note = (e.get('note') or '').strip()
-        if found and evid:
-            basis, has_code = evid, True
+        norm, nkeep, ndrop = EN.normalize(evid) if found else ('', 0, 0)
+        if found and nkeep:
+            basis, has_code = norm, True
+            if ndrop:
+                dropped_frag[rid] = ndrop
         elif rid in fallback:
             basis, has_code = fallback[rid] + ' (선행 카드 증거 · 실재 확인)', True
         else:
@@ -140,6 +144,9 @@ def main():
     print('갭', dict(gk), '합', len(gaps))
     print('근거 확보', sum(1 for i in info.values() if i['has_code']),
           '/ 미확인', sum(1 for i in info.values() if not i['has_code']))
+    if dropped_frag:
+        print(f'해소 실패로 버린 근거 조각 {sum(dropped_frag.values())}개 '
+              f'({len(dropped_frag)}행) — 실재 확인된 것만 싣는다')
 
 
 def render_md(p, scope, info, gaps):

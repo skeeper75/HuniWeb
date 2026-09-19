@@ -24,7 +24,7 @@ ROOTS = [WT, BASE, '/Users/innojini/Dev',
          os.path.join(WT, '_workspace/huni-launch-runway'),
          os.path.join(WT, '_workspace')]
 PATH_PAT = re.compile(
-    r'([A-Za-z0-9_./~-]+\.(?:tsx|ts|jsx|js|py|html|yml|yaml|md|json|sql|csv|txt))'
+    r'([A-Za-z0-9_()./~-]+\.(?:tsx|ts|jsx|js|py|html|yml|yaml|md|json|sql|csv|txt))'
     r'(?::(\d+))?')
 SECTIONS = ['## 1. 한줄정의', '## 2. 흐름', '## 3. 갈림길', '## 4. 단계표',
             '## 5. 빠진 곳', '## 6. 채우는 방법', '## 7. 확인 못 한 것']
