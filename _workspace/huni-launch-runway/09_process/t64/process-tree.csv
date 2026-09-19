@@ -197,6 +197,7 @@ L0,L1_대분류,L2_중분류,L3_프로세스,L4_단계_row_id,기능,status,owne
 후니 몰 전체(huni-mall 독립몰 + 샵바이 + webadmin/위젯 + MES + Edicus + PitStop),클레임·CS,클레임,P13-생산구간-주문취소,STD-CLM-013,판매자 클레임 승인·거부 처리,미착수,최숙진,D3,T3,canon+ledger,t65,cross
 후니 몰 전체(huni-mall 독립몰 + 샵바이 + webadmin/위젯 + MES + Edicus + PitStop),클레임·CS,불량,P12-재제작-반송-재출고,STD-CLM-014,인쇄 불량 접수(사진 첨부),미착수,김동학,D3,T3,canon+ledger,t65,cross
 후니 몰 전체(huni-mall 독립몰 + 샵바이 + webadmin/위젯 + MES + Edicus + PitStop),클레임·CS,불량,P12-재제작-반송-재출고,STD-CLM-015,재제작(재작업) 처리 경로,미착수,신우진+최숙진,D3,T3,canon+ledger,t65,cross
+후니 몰 전체(huni-mall 독립몰 + 샵바이 + webadmin/위젯 + MES + Edicus + PitStop),T3,주문,P01-주문접수-S2S등록,STD-ORD-030,주문 생성 직후 후니 주문등록 S2S 호출(order/register),미착수,김동학,B7,T3,ledger전용,t63,cross
 후니 몰 전체(huni-mall 독립몰 + 샵바이 + webadmin/위젯 + MES + Edicus + PitStop),배송,배송방식,P10-포장-출고-송장,STD-SHP-008,택배 배송,작동,최숙진,C6,T4,canon+ledger,t63,cross
 후니 몰 전체(huni-mall 독립몰 + 샵바이 + webadmin/위젯 + MES + Edicus + PitStop),배송,배송방식,P10-포장-출고-송장,STD-SHP-009,퀵/화물 배송(대형 인쇄물),미착수,최숙진,C6,T4,canon+ledger,t63,cross
 후니 몰 전체(huni-mall 독립몰 + 샵바이 + webadmin/위젯 + MES + Edicus + PitStop),배송,배송방식,P10-포장-출고-송장,STD-SHP-010,매장 방문수령,미착수,최숙진,C6,T4,canon+ledger,t63,cross
@@ -208,4 +209,3 @@ L0,L1_대분류,L2_중분류,L3_프로세스,L4_단계_row_id,기능,status,owne
 후니 몰 전체(huni-mall 독립몰 + 샵바이 + webadmin/위젯 + MES + Edicus + PitStop),배송,알림,P17-생산-파일알림발송,STD-SHP-016,배송 상태 변경 알림 발송,미착수,최숙진,D1,T5,canon+ledger,t63,cross
 후니 몰 전체(huni-mall 독립몰 + 샵바이 + webadmin/위젯 + MES + Edicus + PitStop),시스템·플랫폼,품질,P06-MES주문접수전송,STD-SYS-016,주문/결제 실패 모니터링·알림,부분,서희항,E4,T7,canon+ledger,t65,cross
 후니 몰 전체(huni-mall 독립몰 + 샵바이 + webadmin/위젯 + MES + Edicus + PitStop),T4,주문,P01-주문접수-S2S등록,T4-1,주문 등록 다리 — 스킨이 결제 직후 order/register 를 부르게 배선(부르는 쪽 0건),부분,김동학,C1,T4,ledger전용,t63,cross
-후니 몰 전체(huni-mall 독립몰 + 샵바이 + webadmin/위젯 + MES + Edicus + PitStop),운영자·주문운영,주문,P01-주문접수-S2S등록,T4-2-mall,(원장 밖 · 상대 카드 행),,,,,원장밖,t63,cross
