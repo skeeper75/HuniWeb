@@ -6,7 +6,7 @@
 | STD-ART-020 | 위젯/webadmin/페이지빌더 의심 | 재배정 | 서희항 | rule-step | 일치 |
 | STD-SYS-008 | 위젯/webadmin/페이지빌더 의심 | 재배정 | 서희항 | manual-read | 일치 |
 | STD-SYS-010 | 위젯/webadmin/페이지빌더 의심 | 재배정 | 서희항 | evidence-path | 일치 |
-| STD-ADP-015 | 위젯/webadmin/페이지빌더 의심 | 분할 | 서희항+김동학 | manual-read | 일치 |
+| STD-ADP-015 | 위젯/webadmin/페이지빌더 의심 | 담당맞음 | 김동학 | manual-read | 어긋남 |
 | STD-ADO-001 | 운영자·생산 기능 의심 | provided | 최숙진 | evidence-path | 일치 |
 | STD-ADO-002 | 운영자·생산 기능 의심 | 재배정 | 서희항 | manual-read | 일치 |
 | STD-ADO-003 | 운영자·생산 기능 의심 | 재배정 | 서희항 | manual-read | 일치 |
@@ -21,10 +21,10 @@
 | STD-MFG-114 | 운영자·생산 기능 의심 | 재배정 | 서희항 | merged-owner_side | 일치 |
 | STD-SYS-009 | 경계 걸침 | 담당맞음 | 김동학 | merged-owner_side | 어긋남 |
 
-리드 후보 17행 대조: {'일치': 17, '어긋남': 1}
+리드 후보 17행 대조: {'일치': 16, '어긋남': 2}
 
 ## 김동학 T2·T4 41행 전수
-41 {'담당맞음': 17, '재배정': 16, '분할': 4, 'provided': 4}
+41 {'담당맞음': 18, '재배정': 16, '분할': 3, 'provided': 4}
   T4-1|C1|부분|담당맞음→김동학|rule-step|주문 등록 다리 — 스킨이 결제 직후 order/register 를 부르게 배선(부르는 쪽
   STD-CAT-001|A4|작동|담당맞음→김동학|merged-owner_side|대분류/중분류/소분류 다단 카테고리 트리 노출
   STD-CAT-002|A4|부분|담당맞음→김동학|merged-owner_side|카테고리별 상품 리스팅(정렬·페이징)
@@ -43,7 +43,7 @@
   STD-SHP-013|C7|부분|재배정→서희항|merged-owner_side|송장 기반 배송상태 일괄변경
   STD-SHP-014|C7|부분|담당맞음→김동학|merged-owner_side|고객 배송 조회(택배사 추적)
   STD-SHP-015|C7|부분|담당맞음→김동학|merged-owner_side|배송지 변경/추가
-  STD-ADP-015|A1|부분|분할→서희항+김동학|manual-read|상품 상세페이지 콘텐츠 편집
+  STD-ADP-015|A1|부분|담당맞음→김동학|manual-read|상품 상세페이지 콘텐츠 편집
   STD-ADO-001|C5|작동|provided→최숙진|evidence-path|주문 목록·검색·필터
   STD-ADO-002|C5|부분|재배정→서희항|manual-read|주문 상세 조회(사양·파일·금액)
   STD-ADO-003|C5|부분|재배정→서희항|manual-read|주문 상태 변경(단건)

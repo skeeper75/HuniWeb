@@ -36,7 +36,10 @@ SITE_OWNER = {
     'edicus': '서희항',
     'pitstop': '서희항',
     'shopby': '최숙진',      # 셀러어드민 = 설정·운영(코드 0)
-    'pagebuilder': '서희항',  # 상세페이지 빌더 = 자사 관리도구(webadmin 계열)
+    # 페이지빌더 = **김동학(쇼핑개발)** — 지니 결정 260919. CARDS-S §1 A5 「상세페이지·가이드·홈
+    # 콘텐츠 = 스킨·페이지빌더 = 실무운영·쇼핑개발」 그대로. (t56 초판은 자사 관리도구로 보아
+    # 서희항으로 돌렸으나 그 판단은 철회한다.)
+    'pagebuilder': '김동학',
     'mes': '최숙진',          # 생산 현장 · MES 화면은 외부(MES 담당) 개발
 }
 
@@ -44,17 +47,22 @@ SITE_OWNER = {
 # 값 = (판정, 제안담당, 확인한 파일:줄, 메모)
 MANUAL = {
     'STD-SYS-008': ('재배정', '서희항',
-                    'raw/webadmin/webadmin/catalog/shopby_sync.py:1-27',
-                    '동기화 코드가 webadmin 안에 산다(모듈 docstring 「우리 DB 가 원본이고 샵바이는 밀어넣는 대상」). 스킨 코드 0. merged t48:35 owner_side=webadmin 와 일치'),
+                    'raw/webadmin/webadmin/catalog/shopby_sync.py:118 sync_main_images · :315 sync_front_display · catalog/shopby_client.py:1-16',
+                    '[범위 한정] shopby_sync.py 가 실제로 미는 축은 **메인이미지(:118)와 전시 frontDisplayYn(:315) 둘뿐**이고, '
+                    '공통 API 클라이언트는 shopby_client.py 다. 시작가·옵션 등 나머지 상품 축의 push 코드는 이 파일에 없다'
+                    '(시작가는 스킨이 webadmin GET /api/w/v1/catalog 를 당겨가는 pull — STD-CAT-043 참조). '
+                    '그래도 결론은 유지: 존재하는 동기화 코드는 전부 webadmin 안에 살고 스킨 코드 0 · merged t48:35 owner_side=webadmin 와 일치. '
+                    '행이 말하는 「상품 동기화」 전체 범위는 아직 구현 미완이라 status=부분이다'),
     'STD-ADO-002': ('재배정', '서희항',
                     'raw/webadmin/webadmin/catalog/models.py:1078-1093',
                     'TOrdOrders(t_ord_orders)·TOrdArtworks 가 webadmin 모델. 주문 상세의 사양·파일·금액 그릇이 webadmin 에 있다'),
     'STD-ADO-003': ('재배정', '서희항',
                     'raw/webadmin/webadmin/catalog/models.py:1085',
                     'ord_sts(주문상태) 컬럼이 webadmin t_ord_orders. 단건 상태변경 화면은 webadmin 제네릭 admin'),
-    'STD-ADP-015': ('분할', '서희항+김동학',
+    'STD-ADP-015': ('담당맞음', '김동학',
                     'huni-skin-shopby/src/app/(main)/product/[slug]/page.tsx:49-56',
-                    '스킨은 fetchPublishedDetailTabs 로 **발행된 탭을 읽기만** 한다. 「편집」 화면은 pagebuilder(vibe-canvas) 쪽 — 조회=김동학 / 편집=서희항(pagebuilder)'),
+                    '스킨은 fetchPublishedDetailTabs 로 발행된 탭을 읽고, 편집 화면은 pagebuilder(vibe-canvas) 쪽이다. '
+                    '**페이지빌더 담당 = 김동학(지니 결정 260919)** 이므로 조회·편집이 같은 사람에게 있다 — 분할 불요'),
     'STD-MYP-003': ('분할', '서희항+김동학',
                     'huni-skin-shopby/src/components/product/configurator-actions.tsx:170-176',
                     '스킨 버튼은 onClick 없는 데드 버튼(=김동학 몫). 미리보기 산출물 자체는 Edicus/위젯(=서희항)'),
@@ -106,6 +114,12 @@ OVERRIDE = {
     'STD-MFG-129': ('분할', '서희항+최숙진', '알림톡 실패 시 SMS/LMS 대체 — 대체 로직=서희항 / 채널 계약=최숙진'),
     'STD-MFG-130': ('담당맞음', '최숙진', '발송 주체 경계 준수 = 운영 규약 확인 행(문서로 이미 확정)'),
     'STD-SYS-026': ('담당맞음', '서희항', '유지보수 내부 인력 이관 = 기술 총괄(CTO) 안건'),
+    # 콘텐츠 ≠ 화면. 시스템 경계(huni-mall·pagebuilder)가 한 사람으로 모여도
+    # 「11종 원고를 쓰는 일」과 「스텁 화면을 채우는 일」은 다른 사람 몫이다.
+    'STD-CAT-019': ('분할', '최숙진+김동학',
+                    '인쇄 가이드 11종 — 원고·콘텐츠=최숙진 / guide-data.ts 스텁 채우기·화면=김동학'),
+    'STD-INF-007': ('분할', '최숙진+김동학',
+                    '가이드북 고객 화면 — 작업 유의사항 11종 내용=최숙진 / 화면 구현=김동학'),
 }
 
 
