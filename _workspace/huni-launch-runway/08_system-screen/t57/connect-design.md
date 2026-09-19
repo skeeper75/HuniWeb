@@ -20,8 +20,8 @@ HTML 짝: `t57/connect-design.html`(드릴다운) · 검산: `t57/verify.py`
 | **L3** | 근거 부록 — 어느 카드의 어느 줄에서 나왔는가 | 사실을 의심하는 사람 |
 
 **이 문서가 하지 않는 것 3가지.** ① 판정하지 않는다 — 「된다/안 된다」를 쓰지 않고 **결정 안건**으로 올린다.
-② 날짜를 추정하지 않는다 — 선행·순서만 적는다. ③ **담당을 배정하지 않는다** — 담당 열은 S7-A(t56) 결과를
-받아 채우며, 그 전까지 비운다. 여기 적힌 「결정 주체」는 9/17 원장이 이미 명시한 값이고 담당 배정이 아니다.
+② 날짜를 추정하지 않는다 — 선행·순서만 적는다. ③ **담당을 스스로 배정하지 않는다** — L1 의 담당 열은
+S7-A(t56 · 커밋 `5bb97cfd`)의 판정을 옮긴 것이고, 근거가 얇은 칸에는 ⚠ 를, 판본이 갈리는 칸에는 **병기**를 남겼다.
 
 **[HARD] 열림PnP 코드는 후니 status 의 근거가 아니다.** `/Users/innojini/Dev/CRT.DigitalEdit.V2` 는
 타 고객 납품본이다. 원장 pitstop 23행은 `미착수`/`미확인` 그대로다. 가져가는 것은 **호출 방법과 구간 나눔**뿐이다.
@@ -96,20 +96,44 @@ CTO 문서는 「1원짜리 상품을 금액만큼의 수량으로」라고 적�
 **상태 3값**: `있음` 코드가 실재하고 읽어 확인했다 · `부분` 한쪽만 있거나 저장만 한다 · `신규` 코드 0건.
 `미확인` 은 「없다」가 아니라 **「이번 조사로 확인하지 못했다」**다.
 
-| # | 이음매 | CTO 구간 | 상태 | 원장 행 | 미결 결정 | 결정 주체 |
+| # | 이음매 | CTO 구간 | 상태 | 원장 행 | **담당** | 미결 결정 |
 |---|---|---|---|---|---|---|
-| ① | 위젯 → 쇼핑몰 (handoff) | 02 | **있음** | widget↔huni-mall 4 · widget API 3 (전건 완료) | 금액 표현 단위 정본 확정 | 미정 |
-| ② | 쇼핑몰 → 샵바이 (카트·주문·결제) | 03·04 | **부분** | huni-mall↔shopby 104 (완료 20 · 진행 42 · 미착수 42) | 표시↔청구 불일치 해소 방식 | 쇼핑개발 |
-| ③ | 샵바이 → webadmin 주문 등록 | 05 | **부분** | shopby↔webadmin 6 (완료 4 · 미착수 2) | 자사몰이 결제 직후 실제로 부르는가 | 쇼핑개발 |
-| ④ | 샵바이 웹훅 → webadmin | 07 | **부분(저장만)** | `SB-WEBHOOK` 2행 미착수 | 어떤 메시지를 골라 어떤 상태로 바꾸나 · **메아리 필터** | 미정 |
-| ⑤ | 원고 승격 (S3 tmp → order) | 06 | **있음** | s3↔webadmin 6 (전건 완료) | — | — |
-| ⑥ | 원고 → PitStop 작업 지시 | 08 | **신규** | pitstop 23 전건 미착수 | **A(큐+DB) vs B(파일+JSON)** — `STD-ART-034` | 미정 |
-| ⑦ | 샵바이 → MES 주문 수신 | 09 | **부분**(변환 재사용·수신 신규) | mes↔shopby 11 전건 미착수·`owner_side=미정` | **직접 HTTP vs 앞단 큐** | 미정 |
-| ⑧ | PitStop → MES 결과 인계 | 09 | **신규 · 선례 0** | mes↔pitstop 1 미착수 | 자리 후보 5 중 어디 · 재렌더 유실 확인 | 미정 |
-| ⑨ | Edicus 렌더 → MES | — | **있음** | edicus↔mes 1 완료 | — (단 S3 경로가 조인 키) | — |
-| ⑩ | MES → 샵바이 상태·송장 회신 | 10 | **미확인 이음매** | webadmin→shopby 송장·상태 6행 (미착수 4 · 미확인 2) | MES→webadmin 방향 실측 자체가 없다 | 미정 |
+| ① | 위젯 → 쇼핑몰 (handoff) | 02 | **있음**(우리 쪽) · **부르는 쪽 미착수** | widget↔huni-mall 4 · widget API 3 (전건 완료) · 스킨 호출부 3행 미착수 | **서희항**(위젯·API) + **김동학**(스킨 호출부) | 금액 표현 단위 정본 확정 |
+| ② | 쇼핑몰 → 샵바이 (카트·주문·결제) | 03·04 | **부분** | huni-mall↔shopby 104 (완료 20 · 진행 42 · 미착수 42) | **김동학** (98/102) | 표시↔청구 불일치 해소 방식 |
+| ③ | 샵바이 → webadmin 주문 등록 | 05 | **부분** | shopby↔webadmin 6 (완료 4 · 미착수 2) | **서희항** (5/6) | 자사몰이 결제 직후 실제로 부르는가 |
+| ④ | 샵바이 웹훅 → webadmin | 07 | **부분(저장만)** | `SB-WEBHOOK` 2행 미착수 | **서희항** (2/2) | 어떤 메시지를 골라 어떤 상태로 바꾸나 · **메아리 필터** |
+| ⑤ | 원고 승격 (S3 tmp → order) | 06 | **있음** | s3↔webadmin 6 (전건 완료) | **서희항** (5/6 · 1 미정) | — |
+| ⑥ | 원고 → PitStop 작업 지시 | 08 | **신규** | pitstop 23 전건 미착수 | **서희항** (5/6 · 1 미정) — 단 **결정 주체는 미정** | **A(큐+DB) vs B(파일+JSON)** — `STD-ART-034` |
+| ⑦ | 샵바이 → MES 주문 수신 | 09 | **부분**(변환 재사용·수신 신규) | mes↔shopby 11 전건 미착수·`owner_side=미정` | **미정 + 최숙진** ⚠ **약한 근거**(11행 중 1행만 t56 판정) | **직접 HTTP vs 앞단 큐** |
+| ⑧ | PitStop → MES 결과 인계 | 09 | **신규 · 선례 0** | mes↔pitstop 1 미착수 | **서희항** ⚠ **근거 1행뿐** | 자리 후보 5 중 어디 · 재렌더 유실 확인 |
+| ⑨ | Edicus 렌더 → MES | — | **있음** | edicus↔mes 1 완료 | **외부(상대측 회신 대기)** ⚠ 담당이 아니라 **상태**다 | — (단 S3 경로가 조인 키) |
+| ⑩ | MES → 샵바이 상태·송장 회신 | 10 | **미확인 이음매** | webadmin→shopby 송장·상태 6행 (미착수 4 · 미확인 2) | **서희항** (6/6 · 그중 **4행이 김동학→서희항 재배정**) | MES→webadmin 방향 실측 자체가 없다 |
 
 부수: **MES → NAS → 생산**은 `있음`이다(`mes ↔ 외부(사내 NAS)` 1행 완료 · 오픈 분모 밖).
+
+## 담당 열을 읽는 법 [중요]
+
+**출처**: t56 `rejudge.csv` 735행(브랜치 `WT-role-todo-rejudge` · 커밋 `5bb97cfd`)을 직접 열어,
+각 이음매의 원장 행이 가리키는 `plan_row_id` 를 조회해 모았다(`t57/owners.py` · 산출 `t57/owners.json`).
+t56 전체 판정 분포 = 담당맞음 457 · 재배정 141 · 미정 63 · provided 37 · 분할 36 · 불필요 1.
+
+**지니 확정 4경계**(260919): webadmin·위젯·SDK·API = **서희항** / 쇼핑몰 스킨·페이지빌더 = **김동학** /
+실무운영 = **최숙진** / PM = **신우진**.
+
+**⚠ 표시의 뜻 — 근거 강도가 행마다 다르다.** t56 의 `judged_by` 는 5종이고 강도가 같지 않다:
+`merged-owner_side` 366 · `evidence-path` 177 · **`rule-track` 95 · `rule-step` 89**(= 약한 근거 184 · 전체의 25%) ·
+`manual-read` 8. 위 표의 이음매 담당은 **대부분 `merged-owner_side`·`evidence-path`·`manual-read`(강한 근거)**에서 나왔고,
+⚠ 를 붙인 세 칸(⑦·⑧·⑨)만 근거가 얇다 — **배정이 아니라 제안으로 읽어야 한다.**
+
+- **⑦** 은 11행 중 **10행이 `plan_row_id=NEW`**(샵바이 스펙 yaml 에서 새로 만든 행)라 t56 이 판정할 원장 행이 없다.
+  남은 1행(`T4-4`)이 「미정+최숙진」이다. **11행 중 1행으로 이음매 담당을 정하면 안 된다.**
+- **⑧** 은 이음매 전체가 원장 1행(`STD-MFG-051`)뿐이다. 그 행은 `merged-owner_side`(강함)로 서희항이지만,
+  **이음매의 부피에 비해 표본이 1이다.**
+- **⑨** 의 「외부(상대측 회신 대기)」는 4경계 안의 사람이 아니다. **담당이 아니라 대기 상태**이므로
+  회신이 오면 다시 판정해야 한다.
+
+**⑩ 의 재배정 4행**(`STD-SHP-012`·`STD-SHP-013`·`STD-MFG-114`·`STD-MFG-123`)은 현재 김동학으로 적혀 있고
+t56 이 **서희항으로 재배정을 제안**한 것이다(근거 `merged-owner_side` — 코드가 webadmin 에 산다). 확정 전이다.
 
 ## 「있는 줄 알았는데 없는 것」 — MES WebApi 주문 API
 
@@ -134,21 +158,30 @@ CTO 문서는 「1원짜리 상품을 금액만큼의 수량으로」라고 적�
 
 ```
 STD-ART-034  연동방식(큐+DB vs 파일+JSON)      ← 여기가 막히면 아래 전부 막힌다
-      │
-      ├─▶ STD-ART-035  작업범위 산정 4갈래(프로파일·파일이동·결과표시·대용량)
+      │                                        t56: 미정 ⚠rule-track
+      ├─▶ STD-ART-035  작업범위 산정 4갈래       t56: 미정
       │         │
-      │         └─▶ STD-ART-033  소요시간 미팅 상정·일정 반영
+      │         └─▶ STD-ART-033  일정 상정      t56: 미정 ⚠rule-track
       │
-      ├─▶ BLK-S2-4    PitStop 구매·라이선스·인스턴스        결정 주체 = 대표(채훈희)
-      ├─▶ T4-3        파일 검수 경로(PitStop 조달 vs 사람)   결정 주체 = 대표(채훈희)
-      └─▶ STD-MYP-024 PitStop 연동 담당 확정                (선행 STD-ART-016)
+      ├─▶ BLK-S2-4    PitStop 구매·라이선스      t50: 대표(채훈희)  t56: 대표(구매) ⚠rule-track   → 일치
+      ├─▶ T4-3        파일 검수 경로             t50: 대표(채훈희)  t56: 서희항+신우진 ⚠rule-track → 상충
+      └─▶ STD-MYP-024 PitStop 연동 담당 확정     t56: 미정 ⚠rule-track   (선행 STD-ART-016 → t56: 서희항 재배정)
 
-STD-ADO-010  검수 게이트를 현행 MES 상태값으로 대신할지     결정 주체 = 미정
-STD-MYP-031  보관함 저장 시점  ──▶  STD-OPT-053  개발 주체   결정 주체 = 신우진(PM)
+STD-ADO-010  검수 게이트를 MES 상태값으로 대신할지  t50: 미정(최숙진 추정)  t56: 최숙진 ⚠rule-step → 추정 확인
+STD-MYP-031  보관함 저장 시점                    t50: 신우진(PM)      t56: 신우진 ⚠rule-track → 일치
+      └─▶ STD-OPT-053  개발 주체                t50: 신우진(PM)      t56: 서희항 재배정 ⚠rule-track → 상충
 ```
 
-**읽는 법**: 7건 중 **결정 주체가 정해진 것은 4건**(대표 2 · PM 2)이고 **3건이 「미정」**이다.
-`STD-ART-034` 가 사슬의 뿌리인데 결정 주체가 미정이다 — 이것이 ⑥·⑧ 이음매의 작업량을 낼 수 없는 직접 원인이다.
+**읽는 법 3가지.**
+
+1. **사슬의 뿌리가 여전히 미정이다.** `STD-ART-034` 는 t50·t56 양쪽에서 미정이고, t56 판정 근거도
+   `rule-track`(약함)이다. 이것이 ⑥·⑧ 이음매의 작업량을 낼 수 없는 직접 원인이며, **t56 이 해소하지 못했다.**
+2. **이 사슬은 t56 근거가 유독 약하다.** 9건 중 **7건이 `rule-track`/`rule-step`** 이다.
+   이유가 있다 — 결정 안건은 화면도 기능도 없어 `merged-owner_side`(코드가 사는 쪽)로 판정할 수가 없다.
+   **결정 안건의 담당은 규칙으로 유도된 제안이지 실측이 아니다.**
+3. **상충 2건은 이 문서가 고르지 않는다.** `T4-3`(대표 ↔ 서희항+신우진)과
+   `STD-OPT-053`(신우진 ↔ 서희항)은 두 판본을 **병기**했다. 둘 다 t56 근거가 `rule-track` 이므로
+   9/17 원장 `owner_name`(t50 이 읽은 값)을 덮을 만큼 강하지 않다 — **지니 확정이 필요한 자리**다.
 
 ---
 
@@ -172,8 +205,31 @@ STD-MYP-031  보관함 저장 시점  ──▶  STD-OPT-053  개발 주체   �
 | 위젯 `submit` — `canOrder → validate → 서명 토큰 → huni:submit` 이벤트 방출 | `catalog/static/catalog/widget.js:953` · `:1015` |
 | 스킨 수신 — `optionInputs` 에 `huni_order`(JSON) · `huni_token` 저장 | `huni-skin-shopby/README.md:64-67` |
 
-**새로 만들 것**: 없다. 단 원장에 `handoff/verify 재검증 호출` 1행이 **미착수**로 남아 있다
-(`S1-skin/api-wiring.csv C1 — 호출 0건`). 서명을 발급하는 쪽은 완성이고 **검증을 부르는 쪽이 비어 있다.**
+**새로 만들 것 — 우리 쪽은 완료, 부르는 쪽이 통째로 비어 있다 [t58 입력 · 직접 재확인]**
+
+원장의 완료 4행은 **발급하는 쪽**이다. 그것을 **부르는 스킨 쪽 3행이 전부 미착수**다:
+
+| 원장 행 | 기능 | plan_row_id | 담당 |
+|---|---|---|---|
+| `t48:192` | `handoff/verify` 재검증 호출 | `NEW` (`S1-skin/api-wiring.csv C1` 호출 0건) | 김동학 |
+| `t48:193` | 주문 생성 직후 `order/register` S2S 호출 | `STD-ORD-030` | 김동학 |
+| `t48:239` | 결제 직전 재견적(최종 금액 확정) | `STD-ORD-029` | 김동학 |
+
+→ **「완료 4행」을 오픈 준비 완료로 읽으면 안 된다.** 이 이음매의 남은 일은 전부 **스킨 쪽(김동학)**에 있다.
+
+**계약에 한 칸 비어 있다**: `verify` 응답에 `handoff_id` 가 없다 — 반환은
+`{"ok": True, "valid": valid, **({"payload":…} if valid else {"reason":…})}` 뿐이다
+(`widget_api.py:5006-5007` 직접 확인). `submit()` 쪽은 이미 노출된다(`widget.js:1011`).
+주문을 추적·조인할 키가 **검증 응답에는 없다**.
+
+**조용히 깨지는 계약 — 허용 도메인 검사가 꺼진 채 열릴 수 있다 [t58 입력 · 직접 재확인]**
+
+`_origin_allowed` 는 `allow_domains` 가 비어 있으면 **무조건 통과**한다 —
+docstring 이 「미설정=통과」라고 적고 `if not doms: return True`
+(`/Users/innojini/Dev/HuniWeb/raw/webadmin/webadmin/catalog/widget_api.py:709-711` 직접 확인).
+그런데 **`allow_domains` 를 채울 수단이 없다**: `tools/issue_site_key.py:35-37` 의 UPDATE 는
+`site_key` 와 `upd_dt` 만 쓴다(직접 확인). 신규몰 도메인 추가 = 직접 DB UPDATE 다.
+→ 예외가 나지 않고 **Origin 검사만 조용히 꺼진다.**
 
 **조용히 깨지는 계약 — 금액 표현이 세 문서에서 다르다 [결정 안건]**
 
@@ -383,6 +439,12 @@ CTO 문서는 이 자리에 「설치할 서버(EC2 윈도우 인스턴스) 확�
 (`HotFolder/Program.cs:24`), `CRT.Yeolim.IF` 는 WCF 서비스 계약일 뿐이다.
 후니 MES 에 PitStop 은 **코드 0 · 문서 0 · 유사 개념어 0**(`grep -ril pitstop` 0건 · `preflight|검판|전산검수` 0건).
 
+**세 저장소 전부 0이다 [t58 입력 · 직접 재확인].** webadmin 도 같다 —
+`/Users/innojini/Dev/HuniWeb/raw/webadmin` 에서 `*.py`·`*.js`·`*.html` 전수 grep(`pitstop|pit_stop|pit-stop`)
+**0건**. 등장하는 곳은 `docs/**` 7개 · `.planning/**` 5개 · `sql/88_ord_artworks.sql` 뿐이고
+전부 「향후·예정」 표기다. 즉 **MES·열림·webadmin 어디에도 실행 코드가 없다** —
+⑥·⑧ 이음매는 설계 문서만 있고 시작점이 0이다.
+
 **자리 후보 5개 — 「빈 자리」 목록이지 구현이 아니다**
 
 | 후보 | 기존 그릇 | 새로 필요한 것 |
@@ -486,6 +548,8 @@ CTO 문서는 이 자리를 「고객이 "내 주문 어디쯤?"을 보는 자�
 | **t53** `t53/verdict.md` | 열림PnP `CRT.DigitalEdit.V2` | **타 고객 코드** — status 근거 아님 | L2-⑥ 두 갈래·단계별 파라미터·베끼면 안 되는 것 |
 | **t54** `t54/verdict.md` | 후니 MES `TS.BackOffice.Huni` | 읽기전용 실독 | L1 WebApi·L2-⑦⑧⑨ |
 | **t55** `t55/verdict.md` | 두 저장소 뼈대 대조 | 읽기전용 실독 | L2-⑥ 이식 조건·`CommandLine` 차이 |
+| **t56** `t56/rejudge.csv` | 735행 담당 재판정 (커밋 `5bb97cfd`) | 규칙+실측 혼합 — **25%가 약한 근거** | **L1 담당 열 전부** · 결정 사슬 담당 |
+| **t58** `t58/verdict.md` | 위젯 몫 실독 `raw/webadmin` (커밋 `e023dd87`) | 읽기전용 실독 | L2-① 스킨 호출부 3행·`handoff_id` 미노출·`allow_domains` · L2-⑧ webadmin PitStop 0 |
 | CTO 9/8 | `docs/huni/후니-주문흐름-…_서희항_260908.html` | 10구간 사고 틀 | L0 구간 대조표 |
 | 프린팅머니 | `../PRINTMONEY-BRIEF.md` (미트래킹 유일본 · 읽기만) | 리드 브리프 | 아래 §재기준 |
 
@@ -578,6 +642,7 @@ t54 가 짚은 함정이다: **이 저장소들에서 `path:line` 축약 인용�
 | `shopby_client.py` | `/Users/innojini/Dev/HuniWeb/raw/webadmin/webadmin/catalog/shopby_client.py` |
 | `admin.py` | `/Users/innojini/Dev/HuniWeb/raw/webadmin/webadmin/catalog/admin.py` |
 | `widget.js` | `/Users/innojini/Dev/HuniWeb/raw/webadmin/webadmin/catalog/static/catalog/widget.js` |
+| `tools/issue_site_key.py` | `/Users/innojini/Dev/HuniWeb/raw/webadmin/tools/issue_site_key.py` |
 | `widget-order.ts` | `/Users/innojini/Dev/huni-skin-shopby/src/lib/api/widget-order.ts` |
 | 스킨 `README.md` | `/Users/innojini/Dev/huni-skin-shopby/README.md` |
 | `CARDS-S.md` | `/Users/innojini/Dev/HuniWeb/_workspace/huni-launch-runway/07_rebaseline/S/CARDS-S.md` |
@@ -598,14 +663,34 @@ t54 가 짚은 함정이다: **이 저장소들에서 `path:line` 축약 인용�
 | 6 | 후니 워커 서버에 PitStop 이 같이 얹히는가 | 서버 실사 필요 |
 | 7 | MES → webadmin 상태 push 경로 | 세 카드 모두 미실측 |
 | 8 | `CommandHandler.UpdateTracking` 빈 본문이 의도인지 미구현인지 | 코드로 알 수 없다 |
+| 9 | ⑦ 샵바이→MES 의 이음매 담당 | 11행 중 10행이 `NEW` — t56 이 판정할 원장 행이 없다 |
+| 10 | `T4-3`·`STD-OPT-053` 의 담당 | t50 판본 ↔ t56 판본 상충 · t56 근거가 `rule-track`(약함) |
+| 11 | ⑨ 의 「외부(상대측 회신 대기)」가 누구인가 | 상대측 회신 전 |
+| 12 | `allow_domains` 가 신규몰에 실제로 채워지는가 | 채울 수단(화면·도구)이 없어 직접 DB UPDATE 외 경로 미확인 |
 
 **「없다」는 전부 「찾지 못했다」다.** 돌린 grep 패턴은 각 카드 verdict 에 적혀 있고, 패턴 밖 구현이 있다면 이 판정은 틀린다.
 
-## 담당 열 — 비워 둔다
+## 담당 열 — 채워졌다 (t56 `5bb97cfd` 반영)
 
-이 문서에는 **담당 배정이 없다.** S7-A(t56)가 담당 판정을 내면 L1 표에 열을 추가한다.
-여기 적힌 「결정 주체」는 9/17 원장 `owner_name` 이 이미 명시한 값이며(대표 채훈희 2건 · PM 신우진 2건 · 미정 3건),
-**작업 담당과 다른 축**이다.
+초판은 담당 열을 비워 두었다(S7-A 대기). t56 재작업이 끝나 **L1 표에 담당 열을 넣었다.**
+
+| 항목 | 값 |
+|---|---|
+| 입력 | `.claude/worktrees/t56` · 브랜치 `WT-role-todo-rejudge` · 커밋 `5bb97cfd` · `t56/rejudge.csv` 735행 |
+| 조회 방법 | 이음매별 원장 행 → `plan_row_id` → t56 판정 (`t57/owners.py` · 산출 `t57/owners.json`) |
+| t56 판정 분포 | 담당맞음 457 · 재배정 141 · 미정 63 · provided 37 · 분할 36 · 불필요 1 |
+| 근거 강도 분포 | `merged-owner_side` 366 · `evidence-path` 177 · **`rule-track` 95 + `rule-step` 89 = 약한 근거 184(25%)** · `manual-read` 8 |
+
+**이 문서가 담당에 대해 하지 않는 것 3가지.**
+
+1. **스스로 배정하지 않는다.** 담당 값은 전부 t56 이 판정한 것을 옮긴 것이고, 이 문서가 고른 것은 없다.
+2. **약한 근거를 강한 것처럼 적지 않는다.** ⑦·⑧·⑨ 세 칸과 결정 사슬 9건 중 7건에 ⚠ 를 붙였다.
+3. **상충을 임의로 닫지 않는다.** `T4-3`·`STD-OPT-053` 두 건은 t50 판본과 t56 판본을 **병기**했다 — 지니 확정이 필요하다.
+
+**4경계 이탈 2건** — 지니 확정 경계(서희항 / 김동학 / 최숙진 / 신우진) 밖의 값이 둘 있다.
+`미정`(⑦ 일부 · 결정 사슬 4건)과 `외부(상대측 회신 대기)`(⑨)다. **둘 다 사람이 아니라 상태**이며
+그대로 두는 것이 맞다 — 사람 이름을 채우면 없는 배정을 만드는 것이 된다.
+검산기 게이트 **C5** 가 이 규칙을 강제한다(§ 검산 참조).
 
 ---
 

@@ -152,17 +152,64 @@ for k, v in (("in", 683), ("out", 64)):
 gate(not mism, "C4 원장 수치",
      f"행 {len(rows)} · 시스템 {len(DOC)}개 대조" + (" :: " + "; ".join(mism) if mism else " 전건 일치"))
 
-# ── C5 담당 배정 0 (t56 전까지 비움) ────────────────────────────
-ASSIGN = re.compile(r"담당\s*[:=]|담당자\s*[:=]|담당\s*열\s*=\s*[^비]|배정\s*완료")
-hit5 = ASSIGN.findall(md) + ASSIGN.findall(html)
-gate(not hit5, "C5 담당 배정 0", f"배정 문구 {len(hit5)}건 (담당 열은 t56 결과 전까지 비운다)")
+# ── C5 담당 열 정합 ────────────────────────────────────────────
+# [게이트 교체 260919] 초판 C5 = 「담당 배정 문구 0」(t56 대기 중이라 배정 자체를 금지).
+# t56(5bb97cfd) 이 닫혀 담당 열이 들어왔으므로 그대로 두면 이 게이트가 FAIL 한다.
+# 새 C5 = ① 이음매 10행 전건에 담당 값이 있는가 ② 값이 지니 확정 4경계 + 허용 상태어 안인가
+#         ③ t56 이 실제로 그 값을 판정했는가(문서가 지어내지 않았는가).
+BOUNDARY = {"서희항", "김동학", "최숙진", "신우진"}          # 지니 확정 260919
+STATE_OK = {"미정", "외부(상대측 회신 대기)", "대표(구매)"}   # 사람이 아니라 상태 — 그대로 둔다
+c5 = []
+
+# ① L1 담당 열 — md 표에서 이음매 10행의 담당 칸을 읽는다
+L1ROW = re.compile(r"^\|\s*([①-⑩])\s*\|(?:[^|\n]*\|){4}\s*([^|\n]+?)\s*\|", re.M)
+l1 = dict(L1ROW.findall(md))
+if len(l1) != 10:
+    c5.append(f"L1 담당 칸을 읽은 이음매 {len(l1)}/10")
+
+# ② 이름 토큰이 경계 안인가
+names = set()
+KNOWN = BOUNDARY | STATE_OK
+for mark, cell in l1.items():
+    plain = re.sub(r"[*`⚠]", "", cell)
+    found = {n for n in KNOWN if n in plain}
+    if not found:
+        c5.append(f"{mark} 담당 칸에서 경계 안 값을 못 찾음: {cell[:40]!r}")
+    names |= found
+    # 경계 밖 사람 이름이 섞였는가 — 한글 2~4자 토큰 중 아는 값이 아닌 것
+    for tok in re.findall(r"[가-힣]{2,4}", plain):
+        if tok in KNOWN or any(tok in n for n in found):
+            continue
+        if tok.endswith(("항", "학", "진")) and len(tok) == 3:   # 사람 이름 꼴
+            c5.append(f"{mark} 경계 밖 사람 이름 의심 {tok!r}")
+
+# ③ t56 이 실제로 판정한 값인가 — rejudge.csv 의 owner 집합에 들어 있어야 한다
+T56 = ("/Users/innojini/Dev/HuniWeb/.claude/worktrees/t56/_workspace/"
+       "huni-launch-runway/08_system-screen/t56/rejudge.csv")
+if os.path.isfile(T56):
+    t56owners = set()
+    for r in csv.DictReader(open(T56, encoding="utf-8")):
+        for k in ("owner_proposed", "owner_now"):
+            for part in (r.get(k) or "").split("+"):
+                if part.strip():
+                    t56owners.add(part.strip())
+    unbacked = {n for n in names if n not in t56owners}
+    if unbacked:
+        c5.append(f"t56 이 판정하지 않은 담당 값 {unbacked}")
+else:
+    c5.append("t56 rejudge.csv 를 찾지 못했다(담당 근거 대조 불가)")
+
+gate(not c5, "C5 담당 열 정합",
+     f"이음매 {len(l1)}/10 · 등장 담당 {sorted(names)}"
+     + (" :: " + "; ".join(c5) if c5 else " · 4경계+상태어 이탈 0 · t56 미근거 0"))
 
 # ── C6 날짜·작업량 추정 0 ───────────────────────────────────────
 # 실재 근거일(9/8·260919 등)은 허용. 금지 = 소요기간·D-day·인월 추정.
 ESTIM = re.compile(r"\d+\s*(?:영업일|인일|인월|man-?day)"
                    r"|\d+\s*[~-]\s*\d+\s*일\s*(?:소요|예상|걸)"
                    r"|약\s*\d+\s*(?:일|주|개월)\s*(?:소요|예상)"
-                   r"|D[-+]\d+")
+                   # D-day 표기. plan_row_id(STD-ORD-030 등)의 꼬리에 걸리지 않게 앞을 막는다
+                   r"|(?<![A-Za-z0-9])D[-+]\d+")
 hit6 = ESTIM.findall(md) + ESTIM.findall(html)
 gate(not hit6, "C6 날짜·작업량 추정 0", f"추정 표현 {len(hit6)}건 {hit6[:5]}")
 

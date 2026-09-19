@@ -144,8 +144,8 @@ footer{border-top:1px solid var(--line); margin-top:50px; padding-top:22px; colo
     <b>이 문서가 하지 않는 것 3가지.</b>
     ① <b>판정하지 않는다</b> — 「된다/안 된다」를 쓰지 않고 결정 안건으로 올린다.
     ② <b>날짜를 추정하지 않는다</b> — 선행·순서만 적는다.
-    ③ <b>담당을 배정하지 않는다</b> — 담당 열은 S7-A(t56) 결과를 받아 채우며 그 전까지 비운다.
-    여기 적힌 「결정 주체」는 9/17 원장이 이미 명시한 값이고 담당 배정이 아니다.
+    ③ <b>담당을 스스로 배정하지 않는다</b> — L1 의 담당 열은 S7-A(t56 · 커밋 <code>5bb97cfd</code>)의 판정을
+    옮긴 것이고, 근거가 얇은 칸에는 ⚠ 를, 판본이 갈리는 칸에는 <b>병기</b>를 남겼다.
   </div>
   <div class="card hard">
     <b>[HARD] 열림PnP 코드는 후니 status 의 근거가 아니다.</b>
@@ -227,21 +227,48 @@ Edicus 렌더 ──⑨──▶             MES(생산) ───────�
     <span class="pill p-unk">미확인</span> 「없다」가 아니라 <b>이번 조사로 확인하지 못했다</b>.
   </p>
   <div class="tw"><table>
-    <thead><tr><th>#</th><th>이음매</th><th>CTO</th><th>상태</th><th>원장 행</th><th>미결 결정</th><th>결정 주체</th></tr></thead>
+    <thead><tr><th>#</th><th>이음매</th><th>CTO</th><th>상태</th><th>원장 행</th><th>담당</th><th>미결 결정</th></tr></thead>
     <tbody>
-      <tr><td>①</td><td>위젯 → 쇼핑몰 (handoff)</td><td>02</td><td><span class="pill p-ok">있음</span></td><td>widget↔mall 4 · widget API 3 (전건 완료)</td><td>금액 표현 단위 정본 확정</td><td>미정</td></tr>
-      <tr><td>②</td><td>쇼핑몰 → 샵바이 (카트·주문·결제)</td><td>03·04</td><td><span class="pill p-part">부분</span></td><td>104 (완료 20 · 진행 42 · 미착수 42)</td><td>표시↔청구 불일치 해소 방식</td><td>쇼핑개발</td></tr>
-      <tr><td>③</td><td>샵바이 → webadmin 주문 등록</td><td>05</td><td><span class="pill p-part">부분</span></td><td>6 (완료 4 · 미착수 2)</td><td>결제 직후 실제로 부르는가</td><td>쇼핑개발</td></tr>
-      <tr><td>④</td><td>샵바이 웹훅 → webadmin</td><td>07</td><td><span class="pill p-part">저장만</span></td><td><code>SB-WEBHOOK</code> 2행 미착수</td><td>무엇을 골라 어떤 상태로 · <b>메아리 필터</b></td><td>미정</td></tr>
-      <tr><td>⑤</td><td>원고 승격 (S3 tmp → order)</td><td>06</td><td><span class="pill p-ok">있음</span></td><td>6 (전건 완료)</td><td>—</td><td>—</td></tr>
-      <tr><td>⑥</td><td>원고 → PitStop 작업 지시</td><td>08</td><td><span class="pill p-new">신규</span></td><td>pitstop 23 전건 미착수</td><td><b>A(큐+DB) vs B(파일+JSON)</b> — STD-ART-034</td><td>미정</td></tr>
-      <tr><td>⑦</td><td>샵바이 → MES 주문 수신</td><td>09</td><td><span class="pill p-part">변환 재사용·수신 신규</span></td><td>11 전건 미착수 · owner_side=미정</td><td><b>직접 HTTP vs 앞단 큐</b></td><td>미정</td></tr>
-      <tr><td>⑧</td><td>PitStop → MES 결과 인계</td><td>09</td><td><span class="pill p-new">신규 · 선례 0</span></td><td>1 미착수</td><td>자리 후보 5 중 어디 · 재렌더 유실</td><td>미정</td></tr>
-      <tr><td>⑨</td><td>Edicus 렌더 → MES</td><td>—</td><td><span class="pill p-ok">있음</span></td><td>1 완료</td><td>— (S3 경로가 조인 키)</td><td>—</td></tr>
-      <tr><td>⑩</td><td>MES → 샵바이 상태·송장 회신</td><td>10</td><td><span class="pill p-unk">미확인 이음매</span></td><td>6 (미착수 4 · 미확인 2)</td><td>MES→webadmin 방향 실측 자체가 없다</td><td>미정</td></tr>
+      <tr><td>①</td><td>위젯 → 쇼핑몰 (handoff)</td><td>02</td><td><span class="pill p-ok">있음</span> <span class="pill p-new">부르는 쪽 미착수</span></td><td>widget↔mall 4 · API 3 완료 · <b>스킨 호출부 3행 미착수</b></td><td><b>서희항</b>(위젯·API) + <b>김동학</b>(스킨 호출부)</td><td>금액 표현 단위 정본 확정</td></tr>
+      <tr><td>②</td><td>쇼핑몰 → 샵바이 (카트·주문·결제)</td><td>03·04</td><td><span class="pill p-part">부분</span></td><td>104 (완료 20 · 진행 42 · 미착수 42)</td><td><b>김동학</b> (98/102)</td><td>표시↔청구 불일치 해소 방식</td></tr>
+      <tr><td>③</td><td>샵바이 → webadmin 주문 등록</td><td>05</td><td><span class="pill p-part">부분</span></td><td>6 (완료 4 · 미착수 2)</td><td><b>서희항</b> (5/6)</td><td>결제 직후 실제로 부르는가</td></tr>
+      <tr><td>④</td><td>샵바이 웹훅 → webadmin</td><td>07</td><td><span class="pill p-part">저장만</span></td><td><code>SB-WEBHOOK</code> 2행 미착수</td><td><b>서희항</b> (2/2)</td><td>무엇을 골라 어떤 상태로 · <b>메아리 필터</b></td></tr>
+      <tr><td>⑤</td><td>원고 승격 (S3 tmp → order)</td><td>06</td><td><span class="pill p-ok">있음</span></td><td>6 (전건 완료)</td><td><b>서희항</b> (5/6 · 1 미정)</td><td>—</td></tr>
+      <tr><td>⑥</td><td>원고 → PitStop 작업 지시</td><td>08</td><td><span class="pill p-new">신규</span></td><td>pitstop 23 전건 미착수</td><td><b>서희항</b> (5/6) — 단 <b>결정 주체는 미정</b></td><td><b>A(큐+DB) vs B(파일+JSON)</b> — STD-ART-034</td></tr>
+      <tr><td>⑦</td><td>샵바이 → MES 주문 수신</td><td>09</td><td><span class="pill p-part">변환 재사용·수신 신규</span></td><td>11 전건 미착수 · owner_side=미정</td><td><b>미정 + 최숙진</b> <span class="pill p-unk">⚠ 약한 근거 1/11</span></td><td><b>직접 HTTP vs 앞단 큐</b></td></tr>
+      <tr><td>⑧</td><td>PitStop → MES 결과 인계</td><td>09</td><td><span class="pill p-new">신규 · 선례 0</span></td><td>1 미착수</td><td><b>서희항</b> <span class="pill p-unk">⚠ 근거 1행뿐</span></td><td>자리 후보 5 중 어디 · 재렌더 유실</td></tr>
+      <tr><td>⑨</td><td>Edicus 렌더 → MES</td><td>—</td><td><span class="pill p-ok">있음</span></td><td>1 완료</td><td><b>외부(상대측 회신 대기)</b> <span class="pill p-unk">⚠ 담당 아닌 상태</span></td><td>— (S3 경로가 조인 키)</td></tr>
+      <tr><td>⑩</td><td>MES → 샵바이 상태·송장 회신</td><td>10</td><td><span class="pill p-unk">미확인 이음매</span></td><td>6 (미착수 4 · 미확인 2)</td><td><b>서희항</b> (6/6 · <b>4행이 김동학→서희항 재배정</b>)</td><td>MES→webadmin 방향 실측 자체가 없다</td></tr>
     </tbody>
   </table></div>
   <p>부수: <b>MES → NAS → 생산</b>은 <span class="pill p-ok">있음</span>이다(1행 완료 · 오픈 분모 밖).</p>
+
+  <h3>담당 열을 읽는 법 <span style="font-size:13px;color:var(--ink3);font-weight:400">[중요]</span></h3>
+  <p><b>출처</b>: t56 <code>rejudge.csv</code> 735행(브랜치 <code>WT-role-todo-rejudge</code> · 커밋 <code>5bb97cfd</code>)을
+  직접 열어, 각 이음매의 원장 행이 가리키는 <code>plan_row_id</code> 를 조회해 모았다
+  (<code>t57/owners.py</code> · 산출 <code>t57/owners.json</code>).
+  t56 전체 판정 분포 = 담당맞음 457 · 재배정 141 · 미정 63 · provided 37 · 분할 36 · 불필요 1.</p>
+  <div class="card note">
+    <b>지니 확정 4경계</b>(260919): webadmin·위젯·SDK·API = <b>서희항</b> / 쇼핑몰 스킨·페이지빌더 = <b>김동학</b> /
+    실무운영 = <b>최숙진</b> / PM = <b>신우진</b>.
+  </div>
+  <p><b>⚠ 표시의 뜻 — 근거 강도가 행마다 다르다.</b> t56 의 <code>judged_by</code> 는 5종이고 강도가 같지 않다:
+  <code>merged-owner_side</code> 366 · <code>evidence-path</code> 177 ·
+  <b><code>rule-track</code> 95 · <code>rule-step</code> 89</b>(= 약한 근거 184 · 전체의 25%) ·
+  <code>manual-read</code> 8. 위 표의 이음매 담당은 <b>대부분 강한 근거</b>에서 나왔고,
+  ⚠ 를 붙인 세 칸(⑦·⑧·⑨)만 근거가 얇다 — <b>배정이 아니라 제안으로 읽어야 한다.</b></p>
+  <ul>
+    <li><b>⑦</b> 은 11행 중 <b>10행이 <code>plan_row_id=NEW</code></b>(샵바이 스펙 yaml 에서 새로 만든 행)라
+    t56 이 판정할 원장 행이 없다. 남은 1행(<code>T4-4</code>)이 「미정+최숙진」이다.
+    <b>11행 중 1행으로 이음매 담당을 정하면 안 된다.</b></li>
+    <li><b>⑧</b> 은 이음매 전체가 원장 1행(<code>STD-MFG-051</code>)뿐이다. 그 행은
+    <code>merged-owner_side</code>(강함)로 서희항이지만 <b>이음매의 부피에 비해 표본이 1이다.</b></li>
+    <li><b>⑨</b> 의 「외부(상대측 회신 대기)」는 4경계 안의 사람이 아니다.
+    <b>담당이 아니라 대기 상태</b>이므로 회신이 오면 다시 판정해야 한다.</li>
+  </ul>
+  <p><b>⑩ 의 재배정 4행</b>(<code>STD-SHP-012</code>·<code>STD-SHP-013</code>·<code>STD-MFG-114</code>·<code>STD-MFG-123</code>)은
+  현재 김동학으로 적혀 있고 t56 이 <b>서희항으로 재배정을 제안</b>한 것이다
+  (근거 <code>merged-owner_side</code> — 코드가 webadmin 에 산다). <b>확정 전이다.</b></p>
 
   <div class="card hard">
     <h3 style="margin-top:0">「있는 줄 알았는데 없는 것」 — MES WebApi 주문 API</h3>
@@ -260,19 +287,31 @@ Edicus 렌더 ──⑨──▶             MES(생산) ───────�
 
   <h3>결정 사슬 — 무엇을 먼저 정해야 순서가 안 꼬이나</h3>
 <pre>STD-ART-034  연동방식(큐+DB vs 파일+JSON)      ← 여기가 막히면 아래 전부 막힌다
-      │
-      ├─▶ STD-ART-035  작업범위 산정 4갈래(프로파일·파일이동·결과표시·대용량)
+      │                                        t56: 미정 ⚠rule-track
+      ├─▶ STD-ART-035  작업범위 산정 4갈래       t56: 미정
       │         │
-      │         └─▶ STD-ART-033  소요시간 미팅 상정·일정 반영
+      │         └─▶ STD-ART-033  일정 상정      t56: 미정 ⚠rule-track
       │
-      ├─▶ BLK-S2-4    PitStop 구매·라이선스·인스턴스        결정 주체 = 대표(채훈희)
-      ├─▶ T4-3        파일 검수 경로(PitStop 조달 vs 사람)   결정 주체 = 대표(채훈희)
-      └─▶ STD-MYP-024 PitStop 연동 담당 확정                (선행 STD-ART-016)
+      ├─▶ BLK-S2-4    PitStop 구매·라이선스      t50: 대표(채훈희)  t56: 대표(구매) ⚠rule-track   → 일치
+      ├─▶ T4-3        파일 검수 경로             t50: 대표(채훈희)  t56: 서희항+신우진 ⚠rule-track → 상충
+      └─▶ STD-MYP-024 PitStop 연동 담당 확정     t56: 미정 ⚠rule-track   (선행 STD-ART-016 → t56: 서희항 재배정)
 
-STD-ADO-010  검수 게이트를 현행 MES 상태값으로 대신할지     결정 주체 = 미정
-STD-MYP-031  보관함 저장 시점  ──▶  STD-OPT-053  개발 주체   결정 주체 = 신우진(PM)</pre>
-  <p><b>읽는 법</b>: 7건 중 <b>결정 주체가 정해진 것은 4건</b>(대표 2 · PM 2)이고 <b>3건이 「미정」</b>이다.
-  <code>STD-ART-034</code> 가 사슬의 뿌리인데 결정 주체가 미정이다 — 이것이 ⑥·⑧ 이음매의 작업량을 낼 수 없는 직접 원인이다.</p>
+STD-ADO-010  검수 게이트를 MES 상태값으로 대신할지  t50: 미정(최숙진 추정)  t56: 최숙진 ⚠rule-step → 추정 확인
+STD-MYP-031  보관함 저장 시점                    t50: 신우진(PM)      t56: 신우진 ⚠rule-track → 일치
+      └─▶ STD-OPT-053  개발 주체                t50: 신우진(PM)      t56: 서희항 재배정 ⚠rule-track → 상충</pre>
+  <h4>읽는 법 3가지</h4>
+  <ol>
+    <li><b>사슬의 뿌리가 여전히 미정이다.</b> <code>STD-ART-034</code> 는 t50·t56 양쪽에서 미정이고
+    t56 판정 근거도 <code>rule-track</code>(약함)이다. 이것이 ⑥·⑧ 이음매의 작업량을 낼 수 없는 직접 원인이며,
+    <b>t56 이 해소하지 못했다.</b></li>
+    <li><b>이 사슬은 t56 근거가 유독 약하다.</b> 9건 중 <b>7건이 <code>rule-track</code>/<code>rule-step</code></b> 이다.
+    이유가 있다 — 결정 안건은 화면도 기능도 없어 <code>merged-owner_side</code>(코드가 사는 쪽)로 판정할 수가 없다.
+    <b>결정 안건의 담당은 규칙으로 유도된 제안이지 실측이 아니다.</b></li>
+    <li><b>상충 2건은 이 문서가 고르지 않는다.</b> <code>T4-3</code>(대표 ↔ 서희항+신우진)과
+    <code>STD-OPT-053</code>(신우진 ↔ 서희항)은 두 판본을 <b>병기</b>했다. 둘 다 t56 근거가
+    <code>rule-track</code> 이므로 9/17 원장 <code>owner_name</code> 을 덮을 만큼 강하지 않다 —
+    <b>지니 확정이 필요한 자리</b>다.</li>
+  </ol>
 </section>
 
 <hr>
@@ -295,11 +334,31 @@ STD-MYP-031  보관함 저장 시점  ──▶  STD-OPT-053  개발 주체   �
         <li>위젯 <code>submit</code> — canOrder → validate → 토큰 → <code>huni:submit</code> <span class="ev">widget.js:953 · :1015</span></li>
         <li>스킨 수신 — <code>optionInputs</code> 에 <code>huni_order</code>(JSON)·<code>huni_token</code> <span class="ev">huni-skin-shopby/README.md:64-67</span></li>
       </ul></div>
-      <div class="q build"><h5>새로 만들 것</h5>
-        <p>없다. 단 원장에 <code>handoff/verify 재검증 호출</code> 1행이 <b>미착수</b>로 남아 있다
-        (<span class="ev">S1-skin/api-wiring.csv C1 — 호출 0건</span>).</p>
-        <p style="margin-bottom:0"><b>서명을 발급하는 쪽은 완성이고 검증을 부르는 쪽이 비어 있다.</b></p>
+      <div class="q build"><h5>새로 만들 것 — 우리 쪽 완료, 부르는 쪽이 통째로 비어 있다 [t58 · 직접 재확인]</h5>
+        <p>원장의 완료 4행은 <b>발급하는 쪽</b>이다. 그것을 <b>부르는 스킨 쪽 3행이 전부 미착수</b>다:</p>
+        <ul>
+          <li><code>t48:192</code> <code>handoff/verify</code> 재검증 호출 · <code>NEW</code> · 담당 김동학</li>
+          <li><code>t48:193</code> 주문 생성 직후 <code>order/register</code> S2S 호출 · <code>STD-ORD-030</code> · 담당 김동학</li>
+          <li><code>t48:239</code> 결제 직전 재견적 · <code>STD-ORD-029</code> · 담당 김동학</li>
+        </ul>
+        <p style="margin-bottom:0">→ <b>「완료 4행」을 오픈 준비 완료로 읽으면 안 된다.</b>
+        이 이음매의 남은 일은 전부 <b>스킨 쪽(김동학)</b>에 있다.</p>
       </div>
+      <div class="q silent"><h5>계약에 한 칸 비어 있다</h5>
+        <p><code>verify</code> 응답에 <code>handoff_id</code> 가 없다 — 반환은
+        <code>{"ok": True, "valid": valid, **({"payload":…} if valid else {"reason":…})}</code> 뿐이다
+        <span class="ev">widget_api.py:5006-5007 직접 확인</span>.</p>
+        <p style="margin-bottom:0"><code>submit()</code> 쪽은 이미 노출된다(<code>widget.js:1011</code>).
+        주문을 추적·조인할 키가 <b>검증 응답에는 없다</b>.</p>
+      </div>
+    </div>
+    <div class="q silent"><h5>조용히 깨지는 계약 — 허용 도메인 검사가 꺼진 채 열릴 수 있다 [t58 · 직접 재확인]</h5>
+      <p><code>_origin_allowed</code> 는 <code>allow_domains</code> 가 비어 있으면 <b>무조건 통과</b>한다 —
+      docstring 이 「미설정=통과」라고 적고 <code>if not doms: return True</code>
+      <span class="ev">/Users/innojini/Dev/HuniWeb/raw/webadmin/webadmin/catalog/widget_api.py:709-711</span>.</p>
+      <p style="margin-bottom:0">그런데 <b><code>allow_domains</code> 를 채울 수단이 없다</b>:
+      <code>tools/issue_site_key.py:35-37</code> 의 UPDATE 는 <code>site_key</code> 와 <code>upd_dt</code> 만 쓴다(직접 확인).
+      신규몰 도메인 추가 = 직접 DB UPDATE 다. → 예외가 나지 않고 <b>Origin 검사만 조용히 꺼진다.</b></p>
     </div>
     <div class="q silent"><h5>조용히 깨지는 계약 — 금액 표현이 세 문서에서 다르다 [결정 안건]</h5>
       <div class="tw"><table>
@@ -528,6 +587,14 @@ STD-MYP-031  보관함 저장 시점  ──▶  STD-OPT-053  개발 주체   �
     <span class="ev">HotFolder/Program.cs:24</span>, <code>CRT.Yeolim.IF</code> 는 WCF 서비스 계약일 뿐이다.
     후니 MES 에 PitStop 은 <b>코드 0 · 문서 0 · 유사 개념어 0</b>
     <span class="ev">grep -ril pitstop 0건 · preflight|검판|전산검수 0건</span>.</p>
+    <div class="card hard">
+      <b>세 저장소 전부 0이다 [t58 · 직접 재확인].</b> webadmin 도 같다 —
+      <code>/Users/innojini/Dev/HuniWeb/raw/webadmin</code> 에서 <code>*.py</code>·<code>*.js</code>·<code>*.html</code>
+      전수 grep(<code>pitstop|pit_stop|pit-stop</code>) <b>0건</b>.
+      등장하는 곳은 <code>docs/**</code> 7개 · <code>.planning/**</code> 5개 ·
+      <code>sql/88_ord_artworks.sql</code> 뿐이고 전부 「향후·예정」 표기다.
+      즉 <b>MES·열림·webadmin 어디에도 실행 코드가 없다</b> — ⑥·⑧ 이음매는 설계 문서만 있고 시작점이 0이다.
+    </div>
     <h4>자리 후보 5개 — 「빈 자리」 목록이지 구현이 아니다</h4>
     <div class="tw"><table>
       <thead><tr><th>후보</th><th>기존 그릇</th><th>새로 필요한 것</th></tr></thead>
@@ -649,6 +716,8 @@ STD-MYP-031  보관함 저장 시점  ──▶  STD-OPT-053  개발 주체   �
       <tr><td><b>t53</b> <code>t53/verdict.md</code></td><td>열림PnP <code>CRT.DigitalEdit.V2</code></td><td><b>타 고객 코드</b> — status 근거 아님</td><td>L2-⑥ 두 갈래·단계별 파라미터·베끼면 안 되는 것</td></tr>
       <tr><td><b>t54</b> <code>t54/verdict.md</code></td><td>후니 MES <code>TS.BackOffice.Huni</code></td><td>읽기전용 실독</td><td>L1 WebApi · L2-⑦⑧⑨</td></tr>
       <tr><td><b>t55</b> <code>t55/verdict.md</code></td><td>두 저장소 뼈대 대조</td><td>읽기전용 실독</td><td>L2-⑥ 이식 조건·<code>CommandLine</code> 차이</td></tr>
+      <tr><td><b>t56</b> <code>t56/rejudge.csv</code></td><td>735행 담당 재판정 (커밋 <code>5bb97cfd</code>)</td><td>규칙+실측 혼합 — <b>25%가 약한 근거</b></td><td><b>L1 담당 열 전부</b> · 결정 사슬 담당</td></tr>
+      <tr><td><b>t58</b> <code>t58/verdict.md</code></td><td>위젯 몫 실독 <code>raw/webadmin</code> (커밋 <code>e023dd87</code>)</td><td>읽기전용 실독</td><td>L2-① 스킨 호출부 3행·<code>handoff_id</code> 미노출·<code>allow_domains</code> · L2-⑧ webadmin PitStop 0</td></tr>
       <tr><td>CTO 9/8</td><td><code>docs/huni/후니-주문흐름-…_서희항_260908.html</code></td><td>10구간 사고 틀</td><td>L0 구간 대조표</td></tr>
       <tr><td>프린팅머니</td><td><code>../PRINTMONEY-BRIEF.md</code> (미트래킹 유일본 · 읽기만)</td><td>리드 브리프</td><td>아래 재기준 절</td></tr>
     </tbody>
@@ -754,6 +823,7 @@ STD-MYP-031  보관함 저장 시점  ──▶  STD-OPT-053  개발 주체   �
       <tr><td><code>shopby_client.py</code></td><td class="ev">/Users/innojini/Dev/HuniWeb/raw/webadmin/webadmin/catalog/shopby_client.py</td></tr>
       <tr><td><code>admin.py</code></td><td class="ev">/Users/innojini/Dev/HuniWeb/raw/webadmin/webadmin/catalog/admin.py</td></tr>
       <tr><td><code>widget.js</code></td><td class="ev">/Users/innojini/Dev/HuniWeb/raw/webadmin/webadmin/catalog/static/catalog/widget.js</td></tr>
+      <tr><td><code>tools/issue_site_key.py</code></td><td class="ev">/Users/innojini/Dev/HuniWeb/raw/webadmin/tools/issue_site_key.py</td></tr>
       <tr><td><code>widget-order.ts</code></td><td class="ev">/Users/innojini/Dev/huni-skin-shopby/src/lib/api/widget-order.ts</td></tr>
       <tr><td>스킨 <code>README.md</code></td><td class="ev">/Users/innojini/Dev/huni-skin-shopby/README.md</td></tr>
       <tr><td><code>CARDS-S.md</code></td><td class="ev">/Users/innojini/Dev/HuniWeb/_workspace/huni-launch-runway/07_rebaseline/S/CARDS-S.md</td></tr>
@@ -779,17 +849,39 @@ STD-MYP-031  보관함 저장 시점  ──▶  STD-OPT-053  개발 주체   �
       <tr><td>6</td><td>후니 워커 서버에 PitStop 이 같이 얹히는가</td><td>서버 실사 필요</td></tr>
       <tr><td>7</td><td>MES → webadmin 상태 push 경로</td><td>세 카드 모두 미실측</td></tr>
       <tr><td>8</td><td><code>CommandHandler.UpdateTracking</code> 빈 본문이 의도인지 미구현인지</td><td>코드로 알 수 없다</td></tr>
+      <tr><td>9</td><td>⑦ 샵바이→MES 의 이음매 담당</td><td>11행 중 10행이 <code>NEW</code> — t56 이 판정할 원장 행이 없다</td></tr>
+      <tr><td>10</td><td><code>T4-3</code>·<code>STD-OPT-053</code> 의 담당</td><td>t50 판본 ↔ t56 판본 상충 · t56 근거가 <code>rule-track</code>(약함)</td></tr>
+      <tr><td>11</td><td>⑨ 의 「외부(상대측 회신 대기)」가 누구인가</td><td>상대측 회신 전</td></tr>
+      <tr><td>12</td><td><code>allow_domains</code> 가 신규몰에 실제로 채워지는가</td><td>채울 수단(화면·도구)이 없어 직접 DB UPDATE 외 경로 미확인</td></tr>
     </tbody>
   </table></div>
   <p><b>「없다」는 전부 「찾지 못했다」다.</b> 돌린 grep 패턴은 각 카드 verdict 에 적혀 있고,
   패턴 밖 구현이 있다면 이 판정은 틀린다.</p>
 
+  <h3>담당 열 — 채워졌다 <span style="font-size:13px;color:var(--ink3);font-weight:400">(t56 <code>5bb97cfd</code> 반영)</span></h3>
+  <p>초판은 담당 열을 비워 두었다(S7-A 대기). t56 재작업이 끝나 <b>L1 표에 담당 열을 넣었다.</b></p>
+  <div class="tw"><table>
+    <thead><tr><th>항목</th><th>값</th></tr></thead>
+    <tbody>
+      <tr><td>입력</td><td><code>.claude/worktrees/t56</code> · 브랜치 <code>WT-role-todo-rejudge</code> · 커밋 <code>5bb97cfd</code> · <code>t56/rejudge.csv</code> 735행</td></tr>
+      <tr><td>조회 방법</td><td>이음매별 원장 행 → <code>plan_row_id</code> → t56 판정 (<code>t57/owners.py</code> · 산출 <code>t57/owners.json</code>)</td></tr>
+      <tr><td>t56 판정 분포</td><td>담당맞음 457 · 재배정 141 · 미정 63 · provided 37 · 분할 36 · 불필요 1</td></tr>
+      <tr><td>근거 강도 분포</td><td><code>merged-owner_side</code> 366 · <code>evidence-path</code> 177 · <b><code>rule-track</code> 95 + <code>rule-step</code> 89 = 약한 근거 184(25%)</b> · <code>manual-read</code> 8</td></tr>
+    </tbody>
+  </table></div>
   <div class="card hard">
-    <b>담당 열 — 비워 둔다</b><br>
-    이 문서에는 <b>담당 배정이 없다.</b> S7-A(t56)가 담당 판정을 내면 L1 표에 열을 추가한다.
-    여기 적힌 「결정 주체」는 9/17 원장 <code>owner_name</code> 이 이미 명시한 값이며
-    (대표 채훈희 2건 · PM 신우진 2건 · 미정 3건), <b>작업 담당과 다른 축</b>이다.
+    <b>이 문서가 담당에 대해 하지 않는 것 3가지.</b>
+    <ol style="margin-bottom:0">
+      <li><b>스스로 배정하지 않는다.</b> 담당 값은 전부 t56 이 판정한 것을 옮긴 것이고 이 문서가 고른 것은 없다.</li>
+      <li><b>약한 근거를 강한 것처럼 적지 않는다.</b> ⑦·⑧·⑨ 세 칸과 결정 사슬 9건 중 7건에 ⚠ 를 붙였다.</li>
+      <li><b>상충을 임의로 닫지 않는다.</b> <code>T4-3</code>·<code>STD-OPT-053</code> 두 건은
+      t50 판본과 t56 판본을 <b>병기</b>했다 — 지니 확정이 필요하다.</li>
+    </ol>
   </div>
+  <p><b>4경계 이탈 2건</b> — 지니 확정 경계(서희항 / 김동학 / 최숙진 / 신우진) 밖의 값이 둘 있다.
+  <code>미정</code>(⑦ 일부 · 결정 사슬 4건)과 <code>외부(상대측 회신 대기)</code>(⑨)다.
+  <b>둘 다 사람이 아니라 상태</b>이며 그대로 두는 것이 맞다 — 사람 이름을 채우면 없는 배정을 만드는 것이 된다.
+  검산기 게이트 <b>C5</b> 가 이 규칙을 강제한다.</p>
 </section>
 
 <footer>
