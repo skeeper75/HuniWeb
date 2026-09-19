@@ -1,0 +1,53 @@
+PASS G1 입력 plan-rows 735행 — 735
+PASS G2 입력 t56 rejudge 735행 — 735
+PASS G3 서희항 몫 246 · 남은 일 186 — (246, 186)
+PASS G4 axis-rows 186행 — 186
+PASS G5 미배치 0건 — 0
+PASS G6 축별 행수 39/30/18/50/19/30 — {'1': 39, '2': 30, '3': 18, '4': 50, '5': 19, '6': 30}
+PASS G7 row_id 중복 0 — 186
+PASS G8 축 행 전건 t56 원장 실재
+PASS G9 judged_by 66/59/7/42/12 — {'evidence-path': 59, 'merged-owner_side': 66, 'rule-step': 42, 'rule-track': 12, 'manual-read': 7}
+PASS G10 약한 근거 54행 = 29% — (54, 29)
+PASS G11 축별 선행없음 34/12/8/3/1/18 — {'1': 34, '2': 12, '3': 8, '4': 3, '5': 1, '6': 18}
+PASS G12 축별 외부 선행 3/11/12/55/9/6 — {'1': 3, '2': 11, '3': 12, '4': 55, '5': 9, '6': 6}
+PASS G13 ④ 외의 다섯 축 외부 선행 합 41 — 41
+PASS G14 ④ EXT-PITSTOP 24 · EXT-MES 20 · EXT-NHN 9 — {'EXT-PITSTOP': 24, 'EXT-MES': 20, 'EXT-NHN': 9, 'EXT-PG': 1}
+PASS G15 ④ 외 다섯 축 선행없음 합 73 — 73
+PASS G16 provided 8행 전건 ④ — 8
+PASS G17 STD-ART 남은 27 · provided 7 → 20 (리드 표기와 일치) — (27, 7)
+PASS G18 STD-MFG 남은 63 · provided 1 → 62 (리드 표기와 일치) — (63, 1)
+PASS G19 제공자 라우트 5종 실재(urls.py)
+PASS G20 api/w/v1 라우트 22개 — 22
+PASS G21 huni-mall order/register 호출 0건 — 0
+PASS G22 huni-mall 서버키 헤더 0건 — 0
+PASS G23 huni-mall handoff/verify = 주석 2줄뿐(실호출 0) — 2
+PASS G24 requote 헬퍼 호출처 = cart-page.tsx 뿐 — ['/Users/innojini/Dev/huni-skin-shopby/src/components/cart/cart-page.tsx']
+PASS G25 webadmin PitStop 0건
+PASS G26 webadmin MES 전송 코드 0건
+PASS G27 webadmin(앱) mes_item_cd 8곳 — 전부 그릇(필드·안내·중복검증) — 8
+PASS G28 MES 저장소 PitStop 0건
+PASS G29 MES 저장소 shopby 0건
+PASS G30 huni-mall PitStop/MES 0건
+PASS G31 Edicus miss 합계 21 · blocked 1상품 — (21, ['/products/PRD_000226'])
+PASS G32 TWgtSites Django admin 미등록(0건)
+PASS G33 allow_domains 쓰기 = 테스트 픽스처 2곳뿐 · 운영 도구·화면 0곳 — ['tests/test_catalog_include_unpublished.py', 'tests/test_prd_sellable_gate.py']
+PASS G33b allow_domains 등장 21곳(저장소 전체) — 21
+PASS G34 widget_api.py:710 「미설정=통과」 원문 실재
+PASS G35 인용 경로 22개 전건 실재 — 없음 0
+PASS G36 t57 「핫폴더 vs CLI 가 아니다」 원문 실재
+PASS G37 t56 원장 STD-ART-034 제목에 「핫폴더 vs CLI」 실재(정정 대상)
+PASS G38 CARDS-S §0-A 「오픈 테스트는 Lightsail 위에서」 실재
+PASS G39 런북 F3-11 「되돌릴 수 없는 단계 — 오픈 테스트 통과 후에만」 실재
+PASS G40 신규 제안 4건 row_id 원장 충돌 0 — 충돌 0
+PASS G41 ⑤ 인프라 행을 prereq 로 단 행 17 — 17
+PASS G42 ⑤ → 김동학 나가는 원장 간선은 F4-4 하나뿐 — ['F4-4']
+PASS G43 F4-4.prereq 에 F2-1 실재 — F2-1
+PASS G44 F4-2.prereq 에 F1 계열 없음(간선 제안이 맞다) — F4-1
+PASS G45 prereq 에 「오픈 테스트」가 적힌 행은 F4-8 하나뿐 — ['F4-8']
+PASS G46 F3-11 은 prereq 에 오픈테스트 없음 · 같은 조건이 T1-3 제목에만 있다 — F3-10 안정 + vc_ 웹팀 확인
+PASS G47 페이지빌더 Lightsail 이전 행 0 (찾지 못했다) — 0
+PASS G48 EXT-PIECANVAS 를 prereq 로 단 행 0 — 정정이 원장 선후를 바꾸지 않는다
+PASS G49 페이지빌더 언급 행 2 · 전건 김동학(정정과 이미 일치) — [('STD-ADP-015', '김동학'), ('STD-SYS-021', '김동학')]
+PASS G50 pie-canvas-model.md 가 「벤더」로 적고 있다(정정 대상 표기 실재)
+
+실패 0
