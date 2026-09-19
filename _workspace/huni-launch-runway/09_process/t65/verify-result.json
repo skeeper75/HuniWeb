@@ -1,0 +1,80 @@
+[
+ {
+  "gate": "V1",
+  "title": "분모 확정 — canon 87행이 원장 151행에 모두 포함",
+  "verdict": "PASS",
+  "detail": "원장 범위 151 · canon 범위 87 · canon-only 0 []"
+ },
+ {
+  "gate": "V2",
+  "title": "미귀속 0 — 담당 범위의 모든 기능 행이 1개 이상 프로세스에 귀속",
+  "verdict": "PASS",
+  "detail": "귀속 151/151 · 미귀속 0 []"
+ },
+ {
+  "gate": "V3",
+  "title": "범위 밖·신설 행 0 — 735행 원장에 새 행을 섞지 않았다 · T/F 행 단계 편입 0",
+  "verdict": "PASS",
+  "detail": "범위 밖 0 [] · 비STD 접두 0 []"
+ },
+ {
+  "gate": "V4",
+  "title": "프로세스 문서 고정 7절 전수(38개 파일)",
+  "verdict": "PASS",
+  "detail": "결손 0 []"
+ },
+ {
+  "gate": "V5",
+  "title": "mermaid sequence + flowchart 각 1개",
+  "verdict": "PASS",
+  "detail": "결손 0 []"
+ },
+ {
+  "gate": "V6",
+  "title": "단계표 근거 전수 — 빈칸 0(「미확인」은 허용)",
+  "verdict": "PASS",
+  "detail": "빈칸 0 []"
+ },
+ {
+  "gate": "V7",
+  "title": "근거 원문 일치 — 원장 evidence 를 그대로 옮겼다",
+  "verdict": "PASS",
+  "detail": "불일치 0 []"
+ },
+ {
+  "gate": "V8",
+  "title": "담당자 = 원장 owner_proposed (임의 재배정 0)",
+  "verdict": "PASS",
+  "detail": "불일치 0 []"
+ },
+ {
+  "gate": "V9",
+  "title": "L1 대분류 5종 고정",
+  "verdict": "PASS",
+  "detail": "관측 ['시스템·플랫폼', '운영자·상품가격', '정보·콘텐츠', '정산·통계', '클레임·CS']"
+ },
+ {
+  "gate": "V10",
+  "title": "gaps 4종 분류 · 프로세스 실재",
+  "verdict": "PASS",
+  "detail": "종류 위반 0 · 미지 프로세스 0 · 총 117건"
+ },
+ {
+  "gate": "V11",
+  "title": "index.html 프로세스 전수 수록(38)",
+  "verdict": "PASS",
+  "detail": "누락 []"
+ },
+ {
+  "gate": "V12",
+  "title": "프로세스별 단계 ≥1 · 빠진 곳 ≥1",
+  "verdict": "PASS",
+  "detail": "단계 0 [] · 빠진 곳 0 []"
+ },
+ {
+  "gate": "V13",
+  "title": "「없다」 단정 금지 · 7절 확인 범위 명시",
+  "verdict": "PASS",
+  "detail": "적발 0 []"
+ }
+]

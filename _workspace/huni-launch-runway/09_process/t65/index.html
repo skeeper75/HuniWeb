@@ -1,0 +1,1901 @@
+<!doctype html><html lang="ko"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>t65 프로세스 지도 — 클레임·운영·정산</title>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10.9.1/dist/mermaid.min.js"></script>
+<style>
+:root{--bg:#fff;--fg:#1a1a1a;--mut:#6b6b6b;--line:#e3e3e3;--card:#fafafa;
+--a:#2f6fdb;--g1:#c62828;--g2:#e07b00;--g3:#2f6fdb;--g4:#7b3fb8;}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#14161a;--fg:#e8e8e8;
+--mut:#9aa0a6;--line:#2c3038;--card:#1b1e24;--a:#78a9ff;}}
+:root[data-theme="dark"]{--bg:#14161a;--fg:#e8e8e8;--mut:#9aa0a6;--line:#2c3038;--card:#1b1e24;--a:#78a9ff;}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--fg);
+font:15px/1.65 -apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Noto Sans KR",sans-serif}
+.wrap{max-width:1180px;margin:0 auto;padding:32px 16px 96px}
+h1{font-size:26px;margin:0 0 6px}h2{font-size:20px;margin:40px 0 10px;padding-bottom:6px;
+border-bottom:2px solid var(--line)}h3{font-size:16px;margin:0}
+.sub{color:var(--mut);margin:0 0 24px}
+.kpi{display:flex;flex-wrap:wrap;gap:10px;margin:18px 0 6px}
+.kpi div{background:var(--card);border:1px solid var(--line);border-radius:10px;
+padding:10px 14px;min-width:104px}
+.kpi b{display:block;font-size:22px}.kpi span{color:var(--mut);font-size:12px}
+.tree{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:14px 18px;margin:10px 0 0}
+.tree ul{margin:4px 0 4px 18px;padding:0}.tree li{list-style:none;margin:3px 0}
+.tree a{color:var(--a);text-decoration:none}.tree a:hover{text-decoration:underline}
+.proc{background:var(--card);border:1px solid var(--line);border-radius:12px;
+padding:16px 18px;margin:14px 0}
+.phead{display:flex;flex-wrap:wrap;gap:8px;align-items:baseline;justify-content:space-between}
+.badges{display:flex;gap:6px;flex-wrap:wrap}
+.b{font-size:11px;border-radius:999px;padding:2px 9px;color:#fff;white-space:nowrap}
+.b.k가{background:var(--g1)}.b.k나{background:var(--g2)}.b.k다{background:var(--g3)}
+.b.k라{background:var(--g4)}.b.steps{background:var(--mut)}
+.def{color:var(--mut);margin:8px 0 0;font-size:14px}
+details{margin-top:10px}summary{cursor:pointer;color:var(--a);font-size:14px}
+table{border-collapse:collapse;width:100%;font-size:13px;margin-top:8px;display:block;overflow-x:auto}
+th,td{border:1px solid var(--line);padding:5px 8px;text-align:left;vertical-align:top}
+th{background:var(--bg)}
+.ev{color:var(--mut);font-size:11px;word-break:break-all}
+.mer{margin-top:10px;overflow-x:auto}
+.legend{color:var(--mut);font-size:12px;margin-top:8px}
+</style></head><body><div class="wrap">
+<h1>t65 프로세스 지도 — 클레임·운영·정산</h1>
+<p class="sub">기능목록을 <b>고객·운영자가 겪는 한 흐름</b>으로 다시 묶었다. L0 몰 전체 → L1 대분류 → L2 중분류 → L3 프로세스 → L4 단계(기능 행).</p>
+<div class="kpi">
+<div><b>38</b><span>프로세스</span></div>
+<div><b>151</b><span>기능 행(단계)</span></div>
+<div><b>117</b><span>빠진 곳</span></div>
+<div><b>1</b><span>가 — 원장에 행 없음</span></div>
+<div><b>37</b><span>나 — 행은 있는데 코드 0</span></div>
+<div><b>28</b><span>다 — 코드는 있는데 연결 안 됨</span></div>
+<div><b>51</b><span>라 — 결정 미정</span></div>
+</div>
+<h2>L0 → L3 나무</h2>
+<div class="tree"><b>후니프린팅 몰 전체(huni-mall 독립몰 + 샵바이 + webadmin/위젯 + MES/PitStop)</b><ul>
+<li>▸ <b>클레임·CS</b> <span class="ev">프로세스 7 · 단계 25</span><ul>
+<li>· <a href="#P01">P01 주문 취소 신청·승인</a> <span class="ev">(4단계 · 빠진 곳 3)</span></li>
+<li>· <a href="#P02">P02 반품·교환 신청·처리</a> <span class="ev">(2단계 · 빠진 곳 3)</span></li>
+<li>· <a href="#P03">P03 환불 예상금액 산정·환불계좌·지급</a> <span class="ev">(3단계 · 빠진 곳 3)</span></li>
+<li>· <a href="#P04">P04 클레임 접수·사유분류·귀책판정·승인거부·철회</a> <span class="ev">(5단계 · 빠진 곳 3)</span></li>
+<li>· <a href="#P05">P05 인쇄 불량 접수·재제작</a> <span class="ev">(2단계 · 빠진 곳 3)</span></li>
+<li>· <a href="#P06">P06 1:1 문의·상품 Q&amp;A 응대</a> <span class="ev">(4단계 · 빠진 곳 3)</span></li>
+<li>· <a href="#P07">P07 기업인쇄·디자인 상담 접수·응대</a> <span class="ev">(5단계 · 빠진 곳 3)</span></li>
+</ul></li>
+<li>▸ <b>정보·콘텐츠</b> <span class="ev">프로세스 4 · 단계 13</span><ul>
+<li>· <a href="#P08">P08 회사·정책 정보 페이지 게시</a> <span class="ev">(5단계 · 빠진 곳 3)</span></li>
+<li>· <a href="#P09">P09 공지사항 등록·열람</a> <span class="ev">(3단계 · 빠진 곳 3)</span></li>
+<li>· <a href="#P10">P10 FAQ·가이드북 등록·열람</a> <span class="ev">(3단계 · 빠진 곳 3)</span></li>
+<li>· <a href="#P11">P11 이용후기·뉴스 콘텐츠 운영</a> <span class="ev">(2단계 · 빠진 곳 3)</span></li>
+</ul></li>
+<li>▸ <b>운영자·상품가격</b> <span class="ev">프로세스 9 · 단계 38</span><ul>
+<li>· <a href="#P12">P12 기초데이터 마스터 등록·관리</a> <span class="ev">(6단계 · 빠진 곳 2)</span></li>
+<li>· <a href="#P13">P13 판형·제본·공정 규칙 관리</a> <span class="ev">(3단계 · 빠진 곳 3)</span></li>
+<li>· <a href="#P14">P14 상품 등록·진열·셋트 구성</a> <span class="ev">(9단계 · 빠진 곳 3)</span></li>
+<li>· <a href="#P15">P15 상품 상세페이지 콘텐츠 편집·발행</a> <span class="ev">(2단계 · 빠진 곳 3)</span></li>
+<li>· <a href="#P16">P16 옵션그룹 구성·차원 연결·무결성 검증</a> <span class="ev">(4단계 · 빠진 곳 3)</span></li>
+<li>· <a href="#P17">P17 제약규칙 등록·시뮬레이션</a> <span class="ev">(2단계 · 빠진 곳 3)</span></li>
+<li>· <a href="#P18">P18 가격공식·구성요소 설계·바인딩</a> <span class="ev">(3단계 · 빠진 곳 3)</span></li>
+<li>· <a href="#P19">P19 단가행 적재·할인·이력 관리</a> <span class="ev">(5단계 · 빠진 곳 3)</span></li>
+<li>· <a href="#P20">P20 가격 검산·기본사양가 진단·게시 위젯 전수 대조</a> <span class="ev">(4단계 · 빠진 곳 3)</span></li>
+</ul></li>
+<li>▸ <b>정산·통계</b> <span class="ev">프로세스 5 · 단계 21</span><ul>
+<li>· <a href="#P21">P21 매출·결제수단·할인 집계</a> <span class="ev">(4단계 · 빠진 곳 2)</span></li>
+<li>· <a href="#P22">P22 고객군·상품군 판매 통계</a> <span class="ev">(7단계 · 빠진 곳 3)</span></li>
+<li>· <a href="#P23">P23 생산·외주 작업량·발주정산</a> <span class="ev">(3단계 · 빠진 곳 3)</span></li>
+<li>· <a href="#P24">P24 PG 정산 대사·계좌·미수금</a> <span class="ev">(4단계 · 빠진 곳 3)</span></li>
+<li>· <a href="#P25">P25 프린팅머니 부채 집계·내보내기·외부회계 연동</a> <span class="ev">(3단계 · 빠진 곳 3)</span></li>
+</ul></li>
+<li>▸ <b>시스템·플랫폼</b> <span class="ev">프로세스 13 · 단계 54</span><ul>
+<li>· <a href="#P26">P26 관리자 계정·권한·감사로그</a> <span class="ev">(6단계 · 빠진 곳 3)</span></li>
+<li>· <a href="#P27">P27 몰 기초정보·도메인·발송메일 설정</a> <span class="ev">(4단계 · 빠진 곳 3)</span></li>
+<li>· <a href="#P28">P28 알림(SMS·알림톡) 설정·발송</a> <span class="ev">(5단계 · 빠진 곳 3)</span></li>
+<li>· <a href="#P29">P29 결제(PG)·배송비 정책 설정</a> <span class="ev">(2단계 · 빠진 곳 3)</span></li>
+<li>· <a href="#P30">P30 상품·가격 데이터 동기화(webadmin ↔ 샵바이)</a> <span class="ev">(6단계 · 빠진 곳 4)</span></li>
+<li>· <a href="#P31">P31 가격 계산 결과 카트 주입 브리지</a> <span class="ev">(2단계 · 빠진 곳 3)</span></li>
+<li>· <a href="#P32">P32 원고 저장소·디자인 에디터 연동</a> <span class="ev">(2단계 · 빠진 곳 3)</span></li>
+<li>· <a href="#P33">P33 본인인증·주소검색·배송추적 외부 연동</a> <span class="ev">(3단계 · 빠진 곳 3)</span></li>
+<li>· <a href="#P34">P34 고객 유입·전환 품질(분석·SEO·반응형·리다이렉트)</a> <span class="ev">(4단계 · 빠진 곳 4)</span></li>
+<li>· <a href="#P35">P35 장애 모니터링·백업복구·서버 환경</a> <span class="ev">(5단계 · 빠진 곳 4)</span></li>
+<li>· <a href="#P36">P36 보안 강화(프록시 가드·XSS·CSP·개인정보)</a> <span class="ev">(4단계 · 빠진 곳 3)</span></li>
+<li>· <a href="#P37">P37 코드베이스 정비·포크 처리·CI·문서</a> <span class="ev">(7단계 · 빠진 곳 4)</span></li>
+<li>· <a href="#P38">P38 런칭 범위·조직·일정 결정</a> <span class="ev">(4단계 · 빠진 곳 4)</span></li>
+</ul></li>
+</ul></div>
+<h2>클레임·CS</h2>
+<div class="proc" id="P01">
+<div class="phead"><h3>P01 주문 취소 신청·승인</h3><div class="badges">
+<span class="b steps">4단계</span>
+<span class="b k나">나 1</span>
+<span class="b k다">다 1</span>
+<span class="b k라">라 1</span>
+</div></div>
+<p class="def">고객이 이미 넣은 주문을 되돌린다. 제작 착수 전이면 스스로, 착수 뒤면 협의로 — 결제 수단과 제작 단계에 따라 되돌릴 수 있는 범위가 달라진다.</p>
+<div class="mer"><pre class="mermaid">sequenceDiagram
+    autonumber
+    actor C as 고객
+    participant M as huni-mall
+    participant S as 샵바이 Shop API
+    participant O as 운영자(셀러어드민)
+    C-&gt;&gt;M: 마이페이지 → 주문 상세 열기
+    M-&gt;&gt;S: GET /profile/orders/{orderNo}
+    S--&gt;&gt;M: 주문·옵션·제작단계
+    C-&gt;&gt;M: 「주문취소」 선택(전체 또는 옵션 일부)
+    M-&gt;&gt;S: GET /profile/order-options/{no}/claims
+    S--&gt;&gt;M: 취소 가능 여부·사유 목록
+    C-&gt;&gt;M: 사유 선택 후 신청
+    M-&gt;&gt;S: POST /profile/orders/{orderNo}/claims/cancel
+    Note over M,S: 비회원은 /guest/... 대칭 경로
+    S--&gt;&gt;M: claimNo
+    S-&gt;&gt;O: 클레임 접수 알림(제작 착수 뒤면 승인 대기)
+    O--&gt;&gt;S: 승인 / 거부(P04)
+    S--&gt;&gt;C: 취소완료 · 환불 진행(P03)</pre></div>
+<div class="mer"><pre class="mermaid">flowchart TD
+    A[주문 상세] --&gt; B{로그인?}
+    B -- 회원 --&gt; C[/profile/... 경로/]
+    B -- 비회원 --&gt; D[/guest/... 경로 · 주문번호+연락처 인증/]
+    C --&gt; E{제작 착수 전?}
+    D --&gt; E
+    E -- 예 --&gt; F[즉시 취소 신청 접수]
+    E -- 아니오 --&gt; G[취소 제한 안내 · 운영자 협의]
+    G --&gt; H{운영자 승인?}
+    H -- 승인 --&gt; F
+    H -- 거부 --&gt; I[거부 사유 안내 · 주문 유지]
+    F --&gt; J{전체 취소 / 옵션 부분 취소}
+    J --&gt; K[환불 예상금액 산정 P03]
+    K --&gt; L[취소완료]</pre></div>
+<details><summary>단계표 4행</summary><table>
+<tr><th>#</th><th>단계</th><th>시스템</th><th>담당자</th><th>row_id</th><th>상태</th><th>근거</th></tr>
+<tr><td>1</td><td>1. 주문 전체 취소 신청</td><td>huni-mall</td><td>김동학</td><td><code>STD-CLM-001</code></td><td>미착수</td><td class="ev">huni-shopby/01_research/order-to-delivery-contract.md §4.3 claims-*</td></tr>
+<tr><td>2</td><td>2. 옵션 단위 부분 취소 신청</td><td>huni-mall</td><td>김동학</td><td><code>STD-CLM-002</code></td><td>미착수</td><td class="ev">huni-shopby/01_research/order-to-delivery-contract.md §4.3 claims-*</td></tr>
+<tr><td>3</td><td>3. 비회원 취소 신청(주문번호 인증)</td><td>huni-mall</td><td>김동학</td><td><code>STD-CLM-003</code></td><td>미착수</td><td class="ev">huni-shopby/01_research/order-to-delivery-contract.md §4.3 claims-*</td></tr>
+<tr><td>4</td><td>4. 제작 착수 후 취소 제한·협의 안내</td><td>huni-mall</td><td>김동학</td><td><code>STD-CLM-004</code></td><td>미착수</td><td class="ev">print-kb/wiki/policy/operations.md#OPS-01 케이스별 협의</td></tr>
+</table></details>
+<details><summary>빠진 곳 3건</summary><table>
+<tr><th>id</th><th>종류</th><th>내용</th><th>제안 담당</th><th>선행</th></tr>
+<tr><td><code>G-t65-001</code></td><td>나 — 행은 있는데 코드 0</td><td>huni-mall 에 취소 신청 화면·호출이 없다 — `src/app/(main)` 하위 라우트는 cart·checkout·company·guest-order·guide·location·mypage·notice·order-complete·privacy·search·shop·terms 13개뿐이고 claim/cancel 라우트가 없다. 마이페이지 컴포넌트 18개에도 클레임 섹션이 없다. 샵바이 Shop API 쪽은 `POST /profile|guest/orders/{orderNo}/claims/cancel` 과 `POST /profile|guest/order-options/{orderOptionNo}/claims/cancel` 이 회원·비회원 대칭으로 다 있다.</td><td>김동학</td><td>없음 — 바로 착수 가능</td></tr>
+<tr><td><code>G-t65-002</code></td><td>다 — 코드는 있는데 연결 안 됨</td><td>`mypage-shared.tsx:165-166` 의 `cancel_req`/`cancel_done` 은 「주문취소」 글자가 붙은 **상태 칩**이고, 그 카드 전체가 주문 상세를 여는 버튼이라 취소 신청 동작이 걸려 있지 않다. `use-my-orders.ts:117-123` 의 취소처리중·반품처리중·교환대기중·교환처리중·취소완료·반품완료·교환완료 매핑도 표시 전용이다 — 읽기는 되는데 쓰기가 없다.</td><td>김동학</td><td>없음 — 바로 착수 가능</td></tr>
+<tr><td><code>G-t65-003</code></td><td>라 — 결정 미정</td><td>제작 착수 시점의 정의가 문서에만 있고 시스템 신호가 정해지지 않았다. 「착수」를 MES 작업지시 생성으로 볼지 PitStop 검판 통과로 볼지에 따라 고객이 스스로 취소할 수 있는 구간이 달라진다.</td><td>신우진</td><td>MES 연동 범위 확정(t64 생산·출고 카드)</td></tr>
+</table></details>
+</div>
+<div class="proc" id="P02">
+<div class="phead"><h3>P02 반품·교환 신청·처리</h3><div class="badges">
+<span class="b steps">2단계</span>
+<span class="b k나">나 1</span>
+<span class="b k다">다 1</span>
+<span class="b k라">라 1</span>
+</div></div>
+<p class="def">출고된 물건을 되돌리거나(반품) 다시 만들어 보낸다(교환). 인쇄물은 재판매가 안 되므로 반품은 사실상 불량 확인 뒤에만 열린다.</p>
+<div class="mer"><pre class="mermaid">sequenceDiagram
+    autonumber
+    actor C as 고객
+    participant M as huni-mall
+    participant S as 샵바이 Shop API
+    participant O as 운영자
+    participant D as 택배사
+    C-&gt;&gt;M: 주문 상세 → 반품 / 교환 선택
+    M-&gt;&gt;S: GET /profile/order-options/{no}/claims
+    S--&gt;&gt;M: 신청 가능 옵션·사유·귀책 후보
+    C-&gt;&gt;M: 사유·사진 첨부 후 신청
+    alt 반품
+        M-&gt;&gt;S: POST /profile/order-options/{no}/claims/return
+    else 교환
+        M-&gt;&gt;S: POST /profile/order-options/{no}/claims/exchange
+    end
+    S-&gt;&gt;O: 클레임 접수
+    O-&gt;&gt;D: 수거 접수
+    D--&gt;&gt;O: 수거 완료
+    O--&gt;&gt;S: 승인 처리
+    alt 반품
+        S--&gt;&gt;C: 환불 진행(P03)
+    else 교환
+        S--&gt;&gt;C: 재제작·재출고(P05)
+    end</pre></div>
+<div class="mer"><pre class="mermaid">flowchart TD
+    A[수령 후 주문 상세] --&gt; B{출고 전 / 출고 후}
+    B -- 출고 전 --&gt; C[취소로 전환 P01]
+    B -- 출고 후 --&gt; D{사유}
+    D -- 단순변심 --&gt; E[개별 제작 상품 — 원칙 불가 안내]
+    D -- 불량·오류·파손·오염 --&gt; F[7일 이내 접수]
+    F --&gt; G[사진 첨부 · 귀책 판정 P04]
+    G --&gt; H{반품 / 교환}
+    H -- 반품 --&gt; I[수거 → 환불 P03]
+    H -- 교환 --&gt; J[수거 → 재제작 P05 → 재출고]</pre></div>
+<details><summary>단계표 2행</summary><table>
+<tr><th>#</th><th>단계</th><th>시스템</th><th>담당자</th><th>row_id</th><th>상태</th><th>근거</th></tr>
+<tr><td>1</td><td>1. 반품 신청(단일·복수 옵션)</td><td>huni-mall</td><td>김동학</td><td><code>STD-CLM-005</code></td><td>미착수</td><td class="ev">huni-shopby/01_research/order-to-delivery-contract.md §4.3 claims-*</td></tr>
+<tr><td>2</td><td>2. 교환 신청(출고 전/후)</td><td>huni-mall</td><td>김동학</td><td><code>STD-CLM-006</code></td><td>미착수</td><td class="ev">huni-shopby/01_research/order-to-delivery-contract.md §4.3 claims-*</td></tr>
+</table></details>
+<details><summary>빠진 곳 3건</summary><table>
+<tr><th>id</th><th>종류</th><th>내용</th><th>제안 담당</th><th>선행</th></tr>
+<tr><td><code>G-t65-004</code></td><td>나 — 행은 있는데 코드 0</td><td>huni-mall 에 반품·교환 신청 화면이 없다. 샵바이 Shop API 는 `POST /profile|guest/order-options/{orderOptionNo}/claims/return` (단일)·`POST /profile|guest/claims/return`(복수)·`POST /profile|guest/order-options/{orderOptionNo}/claims/exchange` 가 모두 열려 있다.</td><td>김동학</td><td>없음 — 바로 착수 가능</td></tr>
+<tr><td><code>G-t65-005</code></td><td>다 — 코드는 있는데 연결 안 됨</td><td>반품·교환 **정책 문구**는 이미 고객에게 보이는데(`product-sections.tsx:227-228` 의 「교환/반품」 탭 — &quot;개별 제작 상품 특성상 제작 접수 이후 단순 변심에 의한 취소·교환·반품은 어렵습니다. 제품 불량·인쇄 오류·파손·오염 시 수령 후 7일 이내 접수해 주세요.&quot;) 그 문구가 가리키는 접수 창구가 없다. 문구는 상품 상세 컴포넌트에 하드코딩돼 있어 운영자가 고칠 수도 없다.</td><td>김동학</td><td>없음 — 바로 착수 가능</td></tr>
+<tr><td><code>G-t65-006</code></td><td>라 — 결정 미정</td><td>교환 시 수거한 인쇄물의 처리(폐기·보관·검증 보관기간)와 재제작 비용 부담 주체가 정해지지 않았다.</td><td>신우진</td><td>P05 재제작 처리 경로 결정</td></tr>
+</table></details>
+</div>
+<div class="proc" id="P03">
+<div class="phead"><h3>P03 환불 예상금액 산정·환불계좌·지급</h3><div class="badges">
+<span class="b steps">3단계</span>
+<span class="b k나">나 1</span>
+<span class="b k라">라 2</span>
+</div></div>
+<p class="def">클레임이 돈으로 정산되는 구간. 얼마를 돌려줄지 계산하고, 어디로 보낼지 받아, 실제로 보낸다.</p>
+<div class="mer"><pre class="mermaid">sequenceDiagram
+    autonumber
+    actor C as 고객
+    participant M as huni-mall
+    participant S as 샵바이 Shop API
+    participant P as PG
+    C-&gt;&gt;M: 클레임 신청 화면에서 금액 확인
+    M-&gt;&gt;S: GET /profile/order-options/{no}/claims/estimate
+    S--&gt;&gt;M: 환불 예상금액(배송비·쿠폰·적립금 회수 반영)
+    M--&gt;&gt;C: 예상금액 표시
+    alt 가상계좌·무통장 결제분
+        C-&gt;&gt;M: 환불계좌 입력
+        M-&gt;&gt;S: PUT /profile/claims/{claimNo}/account
+    else 카드·간편결제
+        Note over S,P: 원결제수단 취소로 환불
+    end
+    S-&gt;&gt;P: 환불 요청
+    P--&gt;&gt;S: 환불 완료
+    S--&gt;&gt;C: 환불완료 안내</pre></div>
+<div class="mer"><pre class="mermaid">flowchart TD
+    A[클레임 접수] --&gt; B[환불 예상금액 계산]
+    B --&gt; C{원결제 수단}
+    C -- 카드·간편결제 --&gt; D[원결제 취소 · 계좌 불필요]
+    C -- 가상계좌·무통장 --&gt; E[환불계좌 수령 필요]
+    E --&gt; F{계좌 정보 확보 경로 미정}
+    F -- 미정 --&gt; G[라 — 결정 대기]
+    D --&gt; H[환불 실행]
+    E --&gt; H
+    H --&gt; I[환불완료 · 정산 반영 P24]</pre></div>
+<details><summary>단계표 3행</summary><table>
+<tr><th>#</th><th>단계</th><th>시스템</th><th>담당자</th><th>row_id</th><th>상태</th><th>근거</th></tr>
+<tr><td>1</td><td>1. 환불 예상금액 계산</td><td>huni-mall</td><td>김동학</td><td><code>STD-CLM-007</code></td><td>미착수</td><td class="ev">huni-shopby/01_research/order-to-delivery-contract.md §4.3 claims-*</td></tr>
+<tr><td>2</td><td>2. 환불계좌 등록·수정</td><td>huni-mall</td><td>김동학</td><td><code>STD-CLM-008</code></td><td>미착수</td><td class="ev">huni-shopby/01_research/order-to-delivery-contract.md §4.3 claims-*</td></tr>
+<tr><td>3</td><td>3. 가상계좌 입금분 환불 시 계좌 수령 절차 결정</td><td>결정(PM)</td><td>미정</td><td><code>STD-CLM-026</code></td><td>미착수</td><td class="ev">후니정기미팅 정리260915.html §프린팅머니 · 미결 7</td></tr>
+</table></details>
+<details><summary>빠진 곳 3건</summary><table>
+<tr><th>id</th><th>종류</th><th>내용</th><th>제안 담당</th><th>선행</th></tr>
+<tr><td><code>G-t65-007</code></td><td>나 — 행은 있는데 코드 0</td><td>환불 예상금액 화면과 환불계좌 입력 화면이 huni-mall 에 없다. 샵바이 Shop API 는 `GET /profile|guest/order-options/{no}/claims/estimate`(단일)·`POST /profile|guest/claims/estimate`(복수)·`PUT /profile|guest/claims/{claimNo}/account` 가 다 있다.</td><td>김동학</td><td>없음 — 바로 착수 가능</td></tr>
+<tr><td><code>G-t65-008</code></td><td>라 — 결정 미정</td><td>가상계좌 입금분을 환불할 때 고객 환불계좌를 **어느 화면에서 어떻게 받을지**가 미정이다. 원장 판정도 담당 「미정」이다. 무통장·가상계좌가 현재 유일하게 동작하는 결제 수단이라(`checkout-form.tsx:8-9` 「PG 연동은 후속 — 현재는 무통장만 동작」) 1차 런칭에서 가장 먼저 부딪히는 환불 경로다.</td><td>신우진</td><td>PG 연동 설정(P29) 범위 확정</td></tr>
+<tr><td><code>G-t65-009</code></td><td>라 — 결정 미정</td><td>환불 시 적립금·프린팅머니·쿠폰의 회수 규칙(부분 취소 시 안분)이 정해지지 않았다. 프린팅머니 원장 소유 결정(t62 P10·`STD-MYP-051`)이 선행이다.</td><td>신우진</td><td>t62 프린팅머니 원장 소유 결정</td></tr>
+</table></details>
+</div>
+<div class="proc" id="P04">
+<div class="phead"><h3>P04 클레임 접수·사유분류·귀책판정·승인거부·철회</h3><div class="badges">
+<span class="b steps">5단계</span>
+<span class="b k나">나 1</span>
+<span class="b k다">다 1</span>
+<span class="b k라">라 1</span>
+</div></div>
+<p class="def">P01~P03 이 모두 지나가는 공통 관문. 클레임이 어떤 상태를 거쳐 닫히는지, 누구 잘못으로 보는지, 누가 승인하는지를 정하는 흐름이다.</p>
+<div class="mer"><pre class="mermaid">sequenceDiagram
+    autonumber
+    actor C as 고객
+    participant M as huni-mall
+    participant S as 샵바이 Shop API
+    participant O as 운영자(셀러어드민)
+    C-&gt;&gt;M: 클레임 사유 선택(12종)
+    M-&gt;&gt;S: 클레임 신청 + claimReasonType
+    S--&gt;&gt;M: claimNo
+    C-&gt;&gt;M: 내 클레임 목록·상세 조회
+    M-&gt;&gt;S: GET /profile/claims · GET /profile/claims/{claimNo}/result
+    O-&gt;&gt;S: 귀책 구분 판정(responsibleObjectType)
+    O-&gt;&gt;S: 승인 또는 거부
+    opt 고객 마음이 바뀌면
+        C-&gt;&gt;M: 클레임 철회
+        M-&gt;&gt;S: GET /profile/claims/{claimNo}/check-withdraw
+        M-&gt;&gt;S: PUT /profile/claims/{claimNo}/withdraw
+    end
+    S--&gt;&gt;C: 최종 상태 안내</pre></div>
+<div class="mer"><pre class="mermaid">flowchart TD
+    A[클레임 접수] --&gt; B[사유 12종 중 선택]
+    B --&gt; C[귀책 구분: 구매자 / 판매자 / 단순변심]
+    C --&gt; D{운영자 판단}
+    D -- 승인 --&gt; E[수거·환불·재제작 진행]
+    D -- 거부 --&gt; F[거부 사유 안내 · 주문 유지]
+    A --&gt; G{고객 철회?}
+    G -- 예 --&gt; H[철회 유효성 검증]
+    H -- 통과 --&gt; I[클레임 종료]
+    H -- 불가 --&gt; D
+    E --&gt; J[클레임 종료]
+    F --&gt; J
+    J -.상태 전이 미정의.-&gt; K[다 — 수거진행·입금대기·교환대기·환불완료 전이 공백]</pre></div>
+<details><summary>단계표 5행</summary><table>
+<tr><th>#</th><th>단계</th><th>시스템</th><th>담당자</th><th>row_id</th><th>상태</th><th>근거</th></tr>
+<tr><td>1</td><td>1. 클레임 사유 분류 선택(12종)</td><td>huni-mall</td><td>김동학</td><td><code>STD-CLM-010</code></td><td>미착수</td><td class="ev">huni-shopby/01_research/order-to-delivery-contract.md §4.2 claimReasonType</td></tr>
+<tr><td>2</td><td>2. 귀책 구분 판정(구매자/판매자/단순변심)</td><td>셀러어드민</td><td>최숙진</td><td><code>STD-CLM-011</code></td><td>미착수</td><td class="ev">huni-shopby/01_research/order-to-delivery-contract.md §4.2 responsibleObjectType</td></tr>
+<tr><td>3</td><td>3. 클레임 목록·상세 조회</td><td>huni-mall</td><td>김동학</td><td><code>STD-CLM-012</code></td><td>미착수</td><td class="ev">X-SHOPBY-CLAIM-FSM-01 클레임 상태머신 미폐합 — 수거진행 중간상태 누락·입금대기/교환대기/환불완료 전이 미정의</td></tr>
+<tr><td>4</td><td>4. 판매자 클레임 승인·거부 처리</td><td>셀러어드민</td><td>최숙진</td><td><code>STD-CLM-013</code></td><td>미착수</td><td class="ev">X-SHOPBY-CLAIM-FSM-01 클레임 상태머신 미폐합</td></tr>
+<tr><td>5</td><td>5. 클레임 철회</td><td>huni-mall</td><td>김동학</td><td><code>STD-CLM-009</code></td><td>미착수</td><td class="ev">huni-shopby/01_research/order-to-delivery-contract.md §4.3 claims-*</td></tr>
+</table></details>
+<details><summary>빠진 곳 3건</summary><table>
+<tr><th>id</th><th>종류</th><th>내용</th><th>제안 담당</th><th>선행</th></tr>
+<tr><td><code>G-t65-010</code></td><td>다 — 코드는 있는데 연결 안 됨</td><td>원장이 적어둔 `X-SHOPBY-CLAIM-FSM-01` — 클레임 상태머신이 닫혀 있지 않다. 수거진행 중간상태가 빠져 있고 입금대기·교환대기·환불완료로 가는 전이가 정의돼 있지 않다. 고객 화면의 상태 라벨(`use-my-orders.ts:117-123`)은 7종만 매핑돼 있어 정의되지 않은 상태가 오면 그대로 노출된다.</td><td>김동학</td><td>샵바이 클레임 상태 전이 전수 확인</td></tr>
+<tr><td><code>G-t65-011</code></td><td>나 — 행은 있는데 코드 0</td><td>클레임 목록·상세 화면이 huni-mall 에 없다 — `GET /profile/claims`·`GET /profile/claims/{claimNo}/result`·`GET /guest/claims/{claimNo}/result` 는 열려 있다.</td><td>김동학</td><td>없음 — 바로 착수 가능</td></tr>
+<tr><td><code>G-t65-012</code></td><td>라 — 결정 미정</td><td>귀책 구분을 누가 어떤 기준으로 정하는지가 운영 규칙으로 없다. 귀책이 배송비 부담·환불액을 바꾸므로 P03 금액 계산의 선행이다.</td><td>최숙진</td><td>없음 — 운영 규칙 작성</td></tr>
+</table></details>
+</div>
+<div class="proc" id="P05">
+<div class="phead"><h3>P05 인쇄 불량 접수·재제작</h3><div class="badges">
+<span class="b steps">2단계</span>
+<span class="b k나">나 1</span>
+<span class="b k라">라 2</span>
+</div></div>
+<p class="def">인쇄물 고유의 클레임. 색·재단·제본이 잘못 나왔을 때 돈을 돌려주기보다 **다시 만들어 주는** 길이다.</p>
+<div class="mer"><pre class="mermaid">sequenceDiagram
+    autonumber
+    actor C as 고객
+    participant M as huni-mall
+    participant O as 운영자
+    participant G as 생산(MES)
+    C-&gt;&gt;M: 불량 접수(사진 첨부)
+    M-&gt;&gt;O: 접수 알림
+    O-&gt;&gt;O: 불량 판정(원고 문제 / 인쇄 문제)
+    alt 인쇄 문제(판매자 귀책)
+        O-&gt;&gt;G: 재제작 작업지시
+        G--&gt;&gt;O: 재제작 완료
+        O--&gt;&gt;C: 재출고
+    else 원고 문제(구매자 귀책)
+        O--&gt;&gt;C: 재제작 유상 안내 또는 반려
+    end</pre></div>
+<div class="mer"><pre class="mermaid">flowchart TD
+    A[불량 접수 · 사진 첨부] --&gt; B{판정}
+    B -- 인쇄·가공 불량 --&gt; C[재제작 우선]
+    B -- 원고 결함 --&gt; D[유상 재제작 또는 반려]
+    B -- 판정 불가 --&gt; E[실물 회수 후 재판정]
+    C --&gt; F{재제작 경로 미결}
+    F -- 신규 주문 --&gt; G[라 — 결정 대기]
+    F -- 원주문 재투입 --&gt; G
+    C --&gt; H[재출고]
+    D --&gt; I[고객 동의 시 유상 재제작]
+    E --&gt; B</pre></div>
+<details><summary>단계표 2행</summary><table>
+<tr><th>#</th><th>단계</th><th>시스템</th><th>담당자</th><th>row_id</th><th>상태</th><th>근거</th></tr>
+<tr><td>1</td><td>1. 인쇄 불량 접수(사진 첨부)</td><td>huni-mall</td><td>김동학</td><td><code>STD-CLM-014</code></td><td>미착수</td><td class="ev">print-kb/wiki/policy/operations.md#OPS-04 클레임/불량</td></tr>
+<tr><td>2</td><td>2. 재제작(재작업) 처리 경로 결정·운영</td><td>결정(PM)</td><td>신우진+최숙진</td><td><code>STD-CLM-015</code></td><td>미착수</td><td class="ev">print-kb/wiki/policy/operations.md#OPS-04 재제작 우선</td></tr>
+</table></details>
+<details><summary>빠진 곳 3건</summary><table>
+<tr><th>id</th><th>종류</th><th>내용</th><th>제안 담당</th><th>선행</th></tr>
+<tr><td><code>G-t65-013</code></td><td>나 — 행은 있는데 코드 0</td><td>불량 접수 화면이 huni-mall 에 없다. 클레임 사유에 실어 보낼 수는 있으나 사진 첨부 경로(원고 저장소 재사용 여부)가 정해져 있지 않다.</td><td>김동학</td><td>재제작 경로 결정</td></tr>
+<tr><td><code>G-t65-014</code></td><td>라 — 결정 미정</td><td>재제작을 **새 주문으로 만들지, 원주문에 재투입할지**가 미정이다(원장 판정 「분할」 — 경로 결정은 PM, 운영 절차는 실무운영). 이 갈래에 따라 매출 통계(P21·P22)에 재제작분이 두 번 잡히는지가 갈린다.</td><td>신우진</td><td>없음 — 결정 자체가 선행</td></tr>
+<tr><td><code>G-t65-015</code></td><td>라 — 결정 미정</td><td>재제작 무상 기준(색 편차 허용 범위·재단 오차 허용 범위)이 수치로 없다. `print-kb/wiki/policy/operations.md#OPS-04` 는 「재제작 우선」만 말한다.</td><td>최숙진</td><td>없음 — 운영 규칙 작성</td></tr>
+</table></details>
+</div>
+<div class="proc" id="P06">
+<div class="phead"><h3>P06 1:1 문의·상품 Q&amp;A 응대</h3><div class="badges">
+<span class="b steps">4단계</span>
+<span class="b k나">나 1</span>
+<span class="b k다">다 1</span>
+<span class="b k라">라 1</span>
+</div></div>
+<p class="def">고객이 묻고 운영자가 답하는 두 창구. 상품에 붙는 공개 Q&amp;A 와 주문·계정에 붙는 비공개 1:1 문의다.</p>
+<div class="mer"><pre class="mermaid">sequenceDiagram
+    autonumber
+    actor C as 고객
+    participant M as huni-mall
+    participant S as 샵바이 API
+    participant O as 운영자(셀러어드민)
+    alt 상품 Q&amp;A(공개)
+        C-&gt;&gt;M: 상품 상세에서 문의 등록
+        M-&gt;&gt;S: POST /products/{productNo}/inquiries
+        O-&gt;&gt;S: POST /inquiry/{inquiryNo}/reply
+    else 1:1 문의(비공개)
+        C-&gt;&gt;M: 마이페이지에서 문의 등록
+        M-&gt;&gt;S: POST /inquiries
+        O-&gt;&gt;S: POST /inquiries/{inquiryNo}/answer
+    end
+    C-&gt;&gt;M: 내 문의 내역 확인
+    M-&gt;&gt;S: GET /profile/product-inquiries · GET /inquiries
+    S--&gt;&gt;C: 답변 표시</pre></div>
+<div class="mer"><pre class="mermaid">flowchart TD
+    A[고객 질문] --&gt; B{어디서 물었나}
+    B -- 상품 상세 --&gt; C[상품 Q&amp;A · 공개]
+    B -- 마이페이지 --&gt; D[1:1 문의 · 비공개]
+    C --&gt; E[운영자 답변 등록]
+    D --&gt; E
+    E --&gt; F{알림 발송}
+    F -- SMS/알림톡 --&gt; G[P28 알림 설정 필요]
+    F -- 미설정 --&gt; H[라 — 알림 없이 고객이 다시 들어와야 확인]
+    E --&gt; I[문의 종료]</pre></div>
+<details><summary>단계표 4행</summary><table>
+<tr><th>#</th><th>단계</th><th>시스템</th><th>담당자</th><th>row_id</th><th>상태</th><th>근거</th></tr>
+<tr><td>1</td><td>1. 1:1 문의 등록·답변(고객 화면)</td><td>huni-mall</td><td>김동학</td><td><code>STD-CLM-016</code></td><td>미착수</td><td class="ev">huni-skin-shopby/src/app/(main) 하위 inquiry/qna 라우트 부재 (SB-056 absent)</td></tr>
+<tr><td>2</td><td>2. 상품 Q&amp;A 등록·답변(고객 화면)</td><td>huni-mall</td><td>김동학</td><td><code>STD-CLM-017</code></td><td>미착수</td><td class="ev">huni-skin-shopby/src/app/(main) 하위 inquiry/qna 라우트 부재 (SB-056 absent)</td></tr>
+<tr><td>3</td><td>3. [구IA#69] 상품Q&amp;A 확인·답변(운영자)</td><td>셀러어드민</td><td>최숙진</td><td><code>STD-CLM-024</code></td><td>미실측</td><td class="ev">IA No.69 상품Q&amp;A · 샵바이 기본 기능(R1d 미확인)</td></tr>
+<tr><td>4</td><td>4. [구IA#70] 1:1문의 확인·답변(운영자)</td><td>셀러어드민</td><td>최숙진</td><td><code>STD-CLM-025</code></td><td>미실측</td><td class="ev">IA No.70 1:1문의 · 샵바이 기본 기능(R1d 미확인)</td></tr>
+</table></details>
+<details><summary>빠진 곳 3건</summary><table>
+<tr><th>id</th><th>종류</th><th>내용</th><th>제안 담당</th><th>선행</th></tr>
+<tr><td><code>G-t65-016</code></td><td>나 — 행은 있는데 코드 0</td><td>huni-mall 에 문의 라우트가 없다 — `src/app/(main)` 하위 13개 라우트에 inquiry·qna 가 없고 마이페이지 컴포넌트 18개에도 문의 섹션이 없다. 샵바이는 양쪽이 다 열려 있다: 상품문의 `GET/POST /products/{productNo}/inquiries`·`GET /profile/product-inquiries`, 1:1문의 `GET/POST /inquiries`·`GET /inquiries/{inquiryNo}`·`GET /inquiries/{inquiryNo}/file`, 운영자 답변 `POST /inquiry/{inquiryNo}/reply`·`POST /inquiries/{inquiryNo}/answer`.</td><td>김동학</td><td>없음 — 바로 착수 가능</td></tr>
+<tr><td><code>G-t65-017</code></td><td>라 — 결정 미정</td><td>1:1 문의 유형(`GET /inquiries/types`)을 무엇으로 열지 정해지지 않았다. 유형이 곧 운영자 분류·담당 배정의 기준이 된다.</td><td>최숙진</td><td>없음 — 셀러어드민에서 유형 등록</td></tr>
+<tr><td><code>G-t65-018</code></td><td>다 — 코드는 있는데 연결 안 됨</td><td>화면 오른쪽 아래 떠 있는 「카톡상담」 버튼(`floating-cs.tsx:44`)이 `href=&quot;#&quot;` 라 아무 데도 가지 않는다 — 고객이 제일 먼저 누르는 상담 창구가 비어 있다.</td><td>김동학</td><td>상담 채널 URL 확정</td></tr>
+</table></details>
+</div>
+<div class="proc" id="P07">
+<div class="phead"><h3>P07 기업인쇄·디자인 상담 접수·응대</h3><div class="badges">
+<span class="b steps">5단계</span>
+<span class="b k나">나 1</span>
+<span class="b k라">라 2</span>
+</div></div>
+<p class="def">표준 견적으로 안 떨어지는 주문을 사람이 받는 길. 기업 대량인쇄와 디자인 대행 두 갈래다.</p>
+<div class="mer"><pre class="mermaid">sequenceDiagram
+    autonumber
+    actor C as 고객
+    participant M as huni-mall
+    participant O as 운영자
+    alt 기업인쇄 상담
+        C-&gt;&gt;M: 기업인쇄 상담 폼 제출
+    else 디자인 상담
+        C-&gt;&gt;M: 디자인 상담 폼 제출
+    else 주문 흐름 안에서
+        C-&gt;&gt;M: 주문서에서 「디자인 의뢰하기」 선택
+    end
+    M-&gt;&gt;O: 상담 접수
+    O-&gt;&gt;O: 내용 검토 · 견적 산정
+    O--&gt;&gt;C: 회신(메일·전화·문의 답변)</pre></div>
+<div class="mer"><pre class="mermaid">flowchart TD
+    A[상담 진입] --&gt; B{경로}
+    B -- 기업인쇄 --&gt; C[기업 정보·수량·납기 수집]
+    B -- 디자인 --&gt; D[시안 요구사항·참고자료 수집]
+    B -- 주문 흐름 내 디자인 의뢰 --&gt; E[해당 주문에 연결]
+    C --&gt; F[운영자 확인·답변]
+    D --&gt; F
+    E --&gt; F
+    F --&gt; G{표준 상품으로 전환 가능?}
+    G -- 예 --&gt; H[일반 주문으로 유도]
+    G -- 아니오 --&gt; I[별도 견적 · 수기 주문]</pre></div>
+<details><summary>단계표 5행</summary><table>
+<tr><th>#</th><th>단계</th><th>시스템</th><th>담당자</th><th>row_id</th><th>상태</th><th>근거</th></tr>
+<tr><td>1</td><td>1. 기업인쇄 상담 접수(고객 화면)</td><td>huni-mall</td><td>김동학</td><td><code>STD-CLM-019</code></td><td>미착수</td><td class="ev">huni-skin-shopby src/app/(main) 하위 inquiry 라우트 부재 (SB-056 absent)</td></tr>
+<tr><td>2</td><td>2. 디자인 상담 접수(고객 화면)</td><td>huni-mall</td><td>김동학</td><td><code>STD-CLM-020</code></td><td>미착수</td><td class="ev">huni-skin-shopby src/app/(main) 하위 inquiry 라우트 부재 (SB-056 absent)</td></tr>
+<tr><td>3</td><td>3. 디자인 의뢰하기(주문 흐름 내)</td><td>huni-mall</td><td>김동학</td><td><code>STD-CLM-021</code></td><td>미착수</td><td class="ev">https://shopby.huniprinting.co.kr/checkout/202609160243938684 @ 2026-09-16 21:33</td></tr>
+<tr><td>4</td><td>4. [구IA#67] 기업인쇄상담 확인·답변(운영자)</td><td>셀러어드민</td><td>최숙진</td><td><code>STD-CLM-022</code></td><td>미실측</td><td class="ev">IA No.67 기업인쇄상담 · webadmin 해당 없음 @ 2026-09-16 21:28</td></tr>
+<tr><td>5</td><td>5. [구IA#68] 디자인상담 확인·답변(운영자)</td><td>셀러어드민</td><td>최숙진</td><td><code>STD-CLM-023</code></td><td>미실측</td><td class="ev">IA No.68 디자인상담 · webadmin 해당 없음 @ 2026-09-16 21:28</td></tr>
+</table></details>
+<details><summary>빠진 곳 3건</summary><table>
+<tr><th>id</th><th>종류</th><th>내용</th><th>제안 담당</th><th>선행</th></tr>
+<tr><td><code>G-t65-019</code></td><td>나 — 행은 있는데 코드 0</td><td>상담 접수 화면이 huni-mall 에 없다 — inquiry 라우트 자체가 없다. 샵바이 1:1 문의 유형으로 태울지, 별도 폼을 만들지가 정해져 있지 않다.</td><td>김동학</td><td>상담을 1:1 문의 유형으로 태울지 결정</td></tr>
+<tr><td><code>G-t65-020</code></td><td>라 — 결정 미정</td><td>기업인쇄 상담이 B2B 거래처 등록(t62 P23~P26)과 어떻게 이어지는지 미정이다. 상담으로 들어온 기업을 거래처로 승격시키는 길이 없으면 상담이 매번 처음부터 시작된다.</td><td>신우진</td><td>t62 B2B 시스템 경계 결정</td></tr>
+<tr><td><code>G-t65-021</code></td><td>라 — 결정 미정</td><td>디자인 대행의 과금 방식(별도 상품 / 옵션 / 수기 견적)이 정해지지 않았다. `STD-ADP-035 디자인 상품 등록`(webadmin `admin/design-md/`)은 이미 작동하는데 상담에서 그 상품으로 넘어가는 길을 찾지 못했다.</td><td>신우진</td><td>없음 — 결정 자체가 선행</td></tr>
+</table></details>
+</div>
+<h2>정보·콘텐츠</h2>
+<div class="proc" id="P08">
+<div class="phead"><h3>P08 회사·정책 정보 페이지 게시</h3><div class="badges">
+<span class="b steps">5단계</span>
+<span class="b k다">다 2</span>
+<span class="b k라">라 1</span>
+</div></div>
+<p class="def">고객이 &quot;이 회사 믿어도 되나&quot;를 확인하는 페이지들. 회사소개·오시는 길·약관·개인정보처리방침과 푸터의 연결 고리다.</p>
+<div class="mer"><pre class="mermaid">sequenceDiagram
+    autonumber
+    actor C as 고객
+    participant M as huni-mall
+    participant R as 저장소(docs·public)
+    C-&gt;&gt;M: 푸터에서 회사소개 / 오시는 길 / 이용약관 / 개인정보처리방침 클릭
+    M-&gt;&gt;R: 빌드 시점에 읽은 정적 콘텐츠
+    R--&gt;&gt;M: 이미지(public/images/company) · 마크다운(docs/*.md)
+    M--&gt;&gt;C: 정적 페이지 렌더
+    Note over M,R: 운영자가 바꾸려면 저장소 수정 + 재배포가 필요하다</pre></div>
+<div class="mer"><pre class="mermaid">flowchart TD
+    A[푸터·하단 메뉴] --&gt; B{어느 페이지}
+    B -- 회사소개 --&gt; C[이미지 6장 정적 · public/images/company]
+    B -- 오시는 길 --&gt; D[약도 이미지 + 주소·연락처 상수]
+    B -- 이용약관 --&gt; E[docs/이용약관.md 빌드시 1회 로드]
+    B -- 개인정보처리방침 --&gt; F[docs/개인정보처리방침.md 빌드시 1회 로드]
+    B -- SNS·입점제휴문의·카톡상담 --&gt; G[href=# · 연결 안 됨]
+    C --&gt; H{운영자 수정 경로}
+    D --&gt; H
+    E --&gt; H
+    F --&gt; H
+    H -- 없음 --&gt; I[다 — 재배포 없이는 못 고친다]</pre></div>
+<details><summary>단계표 5행</summary><table>
+<tr><th>#</th><th>단계</th><th>시스템</th><th>담당자</th><th>row_id</th><th>상태</th><th>근거</th></tr>
+<tr><td>1</td><td>1. 회사소개 페이지</td><td>huni-mall</td><td>김동학</td><td><code>STD-INF-001</code></td><td>부분</td><td class="ev">L3/legacy-normalized.json#IA-083,SCOPE-083 · docs/huni/후니프린팅_통합IA_일정_역할분담_260616.xlsx#02_IA마스터!A84:K84 · L2/as-is-inventory.csv#SB-058 huni-skin-shopby/src/app/(main)/company/page.tsx:1</td></tr>
+<tr><td>2</td><td>2. 오시는 길(약도·교통 안내)</td><td>huni-mall</td><td>김동학</td><td><code>STD-INF-002</code></td><td>작동</td><td class="ev">https://shopby.huniprinting.co.kr/location@2026-09-16 21:27</td></tr>
+<tr><td>3</td><td>3. 이용약관 페이지 게시</td><td>huni-mall</td><td>김동학</td><td><code>STD-INF-003</code></td><td>작동</td><td class="ev">https://shopby.huniprinting.co.kr/terms@2026-09-16 21:27</td></tr>
+<tr><td>4</td><td>4. 개인정보처리방침 페이지 게시</td><td>huni-mall</td><td>김동학</td><td><code>STD-INF-004</code></td><td>작동</td><td class="ev">https://shopby.huniprinting.co.kr/privacy@2026-09-16 21:27</td></tr>
+<tr><td>5</td><td>5. 푸터 SNS 4종·입점제휴문의·카톡상담 링크 연결</td><td>huni-mall</td><td>김동학</td><td><code>STD-INF-008</code></td><td>미착수</td><td class="ev">https://shopby.huniprinting.co.kr/ @ 2026-09-16 21:26</td></tr>
+</table></details>
+<details><summary>빠진 곳 3건</summary><table>
+<tr><th>id</th><th>종류</th><th>내용</th><th>제안 담당</th><th>선행</th></tr>
+<tr><td><code>G-t65-022</code></td><td>다 — 코드는 있는데 연결 안 됨</td><td>네 페이지 모두 저장소에 하드코딩돼 있어 **운영자가 고칠 수 없다**. 회사소개는 `src/app/(main)/company/page.tsx` 의 `SLIDES` 이미지 6장, 오시는 길은 `src/app/(main)/location/page.tsx` 의 `INFO` 상수(주소 「서울 중구 필동로 80 낙원빌딩 2층」·고객센터 02-3409-8853), 약관·방침은 `docs/이용약관.md`·`docs/개인정보처리방침.md` 를 `export const dynamic = &quot;force-static&quot;` 으로 빌드 시점에 1회 읽는다. 바꾸려면 코드 수정 + 재배포다.</td><td>김동학</td><td>운영 그릇 결정(샵바이 게시판 vs 저장소 유지)</td></tr>
+<tr><td><code>G-t65-023</code></td><td>다 — 코드는 있는데 연결 안 됨</td><td>푸터 SNS 링크가 `footer.tsx:39` 에서 `href=&quot;#&quot;` 로 나가고, 떠 있는 상담 버튼도 `floating-cs.tsx:13` 에서 `href=&quot;#&quot;` 다. 「입점제휴문의」는 `nav-data.ts:574` 에 글자로만 있다.</td><td>김동학</td><td>SNS 계정·상담 채널 URL 수집</td></tr>
+<tr><td><code>G-t65-024</code></td><td>라 — 결정 미정</td><td>법적 고지의 SSOT 를 저장소 마크다운으로 계속 둘지, 셀러어드민 약관 관리로 옮길지 미정이다. 샵바이가 가입 시점의 약관 동의를 자기 약관 ID 로 기록하므로(t62 P01) 두 벌이 어긋날 수 있다.</td><td>신우진</td><td>없음 — 결정 자체가 선행</td></tr>
+</table></details>
+</div>
+<div class="proc" id="P09">
+<div class="phead"><h3>P09 공지사항 등록·열람</h3><div class="badges">
+<span class="b steps">3단계</span>
+<span class="b k다">다 2</span>
+<span class="b k라">라 1</span>
+</div></div>
+<p class="def">운영자가 알리고 고객이 읽는 가장 기본 창구. 휴무·단가 변경·장애 공지가 여기로 나간다.</p>
+<div class="mer"><pre class="mermaid">sequenceDiagram
+    autonumber
+    participant O as 운영자(셀러어드민)
+    participant S as 샵바이 게시판
+    participant M as huni-mall
+    actor C as 고객
+    O-&gt;&gt;S: 공지 글 등록(boardNo=287556)
+    C-&gt;&gt;M: /notice 목록 열기
+    M-&gt;&gt;S: GET /boards/{boardNo}/articles
+    S--&gt;&gt;M: 목록(제목·작성자·등록일·조회수)
+    C-&gt;&gt;M: 글 클릭
+    M-&gt;&gt;S: GET /boards/{boardNo}/articles/{articleNo}
+    S--&gt;&gt;M: 본문 HTML + 첨부
+    M--&gt;&gt;C: 상세 렌더</pre></div>
+<div class="mer"><pre class="mermaid">flowchart TD
+    A[운영자 글 등록] --&gt; B[샵바이 게시판 boardNo]
+    B --&gt; C[몰 /notice 목록]
+    C --&gt; D[상세 /notice/articleNo]
+    D --&gt; E{본문 HTML}
+    E -- 무필터 렌더 --&gt; F[다 — 저장형 XSS 여지 · P36]
+    C --&gt; G{FAQ 게시판}
+    G -- 라우트 없음 --&gt; H[나 — P10]
+    B --&gt; I{게시판 번호}
+    I -- 코드 기본값 287556 --&gt; J[env 로만 바뀐다]</pre></div>
+<details><summary>단계표 3행</summary><table>
+<tr><th>#</th><th>단계</th><th>시스템</th><th>담당자</th><th>row_id</th><th>상태</th><th>근거</th></tr>
+<tr><td>1</td><td>1. 공지사항 고객 화면(목록·상세)</td><td>huni-mall</td><td>김동학+최숙진</td><td><code>STD-INF-005</code></td><td>부분</td><td class="ev">https://shopby.huniprinting.co.kr/notice @ 2026-09-16 21:27</td></tr>
+<tr><td>2</td><td>2. [구IA#64] 공지사항 관리(등록/수정/html생성)</td><td>셀러어드민</td><td>최숙진</td><td><code>STD-INF-009</code></td><td>미실측</td><td class="ev">IA No.64 공지사항 · webadmin 해당 없음 @ 2026-09-16 21:28 · 샵바이 게시판(R1d 미확인)</td></tr>
+<tr><td>3</td><td>3. 공지사항·FAQ 열람(고객 진입 경로)</td><td>huni-mall</td><td>김동학</td><td><code>STD-CLM-018</code></td><td>부분</td><td class="ev">huni-skin-shopby/src/app/(main)/notice/page.tsx:1-27 · src/lib/api/server/board.ts:1 (공지 done) — FAQ 라우트 부재(SB-056 absent)</td></tr>
+</table></details>
+<details><summary>빠진 곳 3건</summary><table>
+<tr><th>id</th><th>종류</th><th>내용</th><th>제안 담당</th><th>선행</th></tr>
+<tr><td><code>G-t65-025</code></td><td>다 — 코드는 있는데 연결 안 됨</td><td>공지 본문이 `notice/[articleNo]/page.tsx:69` 에서 필터 없이 렌더된다 — 운영자가 넣은 HTML 이 그대로 실행된다. 같은 문제가 상품설명(`configurator.tsx:77`)에도 있고 P36 에서 함께 다룬다.</td><td>김동학</td><td>없음 — sanitize 이식으로 해결</td></tr>
+<tr><td><code>G-t65-026</code></td><td>다 — 코드는 있는데 연결 안 됨</td><td>`STD-CLM-018`(공지사항·FAQ 열람) 중 공지 쪽만 동작하고 FAQ 쪽은 라우트가 없다. 원장 근거가 이미 「FAQ 라우트 부재」로 적혀 있다 — 한 행이 반만 충족된 상태다.</td><td>김동학</td><td>P10 FAQ 게시판 신설</td></tr>
+<tr><td><code>G-t65-027</code></td><td>라 — 결정 미정</td><td>공지 게시판 번호가 코드 기본값 `287556`(`board.ts:14`)으로 박혀 있고 env 로만 덮인다. 게시판을 새로 파거나 몰을 바꾸면 조용히 빈 목록이 된다 — 환경변수 정합(P37)과 같은 뿌리다.</td><td>김동학</td><td>없음 — env 정리와 함께</td></tr>
+</table></details>
+</div>
+<div class="proc" id="P10">
+<div class="phead"><h3>P10 FAQ·가이드북 등록·열람</h3><div class="badges">
+<span class="b steps">3단계</span>
+<span class="b k나">나 1</span>
+<span class="b k다">다 1</span>
+<span class="b k라">라 1</span>
+</div></div>
+<p class="def">문의를 줄이는 두 축. 자주 묻는 질문과, 인쇄 주문에 필요한 작업 유의사항 가이드다.</p>
+<div class="mer"><pre class="mermaid">sequenceDiagram
+    autonumber
+    actor C as 고객
+    participant M as huni-mall
+    participant D as guide-data.ts(코드 상수)
+    participant S as 샵바이 게시판
+    C-&gt;&gt;M: /guide 열기
+    M-&gt;&gt;D: 카테고리 탭·아코디언 콘텐츠 로드
+    D--&gt;&gt;M: 하드코딩 가이드 항목
+    M--&gt;&gt;C: 가이드북 렌더(검색·탭·페이지네이션)
+    C-&gt;&gt;M: FAQ 열기
+    M--xS: FAQ 라우트·게시판 연결 없음
+    Note over M,S: 샵바이 /boards/{boardNo}/articles 는 열려 있다</pre></div>
+<div class="mer"><pre class="mermaid">flowchart TD
+    A[고객 안내 필요] --&gt; B{어느 창구}
+    B -- 가이드북 --&gt; C[/guide · GuideBook 컴포넌트/]
+    C --&gt; D[콘텐츠 = src/lib/guide-data.ts 상수]
+    D --&gt; E{운영자 수정 경로}
+    E -- 없음 --&gt; F[다 — 재배포해야 바뀐다]
+    D --&gt; G{준비 중 항목}
+    G -- 존재 --&gt; H[「이 가이드는 준비 중입니다」 자리표시]
+    B -- FAQ --&gt; I{라우트}
+    I -- 없음 --&gt; J[나 — 화면 자체가 없다]</pre></div>
+<details><summary>단계표 3행</summary><table>
+<tr><th>#</th><th>단계</th><th>시스템</th><th>담당자</th><th>row_id</th><th>상태</th><th>근거</th></tr>
+<tr><td>1</td><td>1. 자주묻는질문(FAQ) 고객 화면</td><td>huni-mall</td><td>김동학</td><td><code>STD-INF-006</code></td><td>미착수</td><td class="ev">https://shopby.huniprinting.co.kr/faq 404 @ 2026-09-16 21:27</td></tr>
+<tr><td>2</td><td>2. 가이드북 고객 화면(작업 유의사항 11종)</td><td>huni-mall</td><td>최숙진+김동학</td><td><code>STD-INF-007</code></td><td>부분</td><td class="ev">https://shopby.huniprinting.co.kr/guide @ 2026-09-16 21:27</td></tr>
+<tr><td>3</td><td>3. [구IA#65] 자주묻는질문 관리(운영자)</td><td>셀러어드민</td><td>최숙진</td><td><code>STD-INF-010</code></td><td>미실측</td><td class="ev">IA No.65 FAQ · webadmin 해당 없음 @ 2026-09-16 21:28</td></tr>
+</table></details>
+<details><summary>빠진 곳 3건</summary><table>
+<tr><th>id</th><th>종류</th><th>내용</th><th>제안 담당</th><th>선행</th></tr>
+<tr><td><code>G-t65-028</code></td><td>나 — 행은 있는데 코드 0</td><td>FAQ 고객 화면이 없다 — `src/app/(main)` 하위에 faq 라우트가 없다. 샵바이 게시판 API(`GET /boards/{boardNo}/articles`·`GET /boards/{boardNo}/categories`)는 공지와 같은 방식으로 열려 있어, 게시판 하나를 더 파고 공지 화면을 복제하면 된다.</td><td>김동학</td><td>셀러어드민에서 FAQ 게시판 생성</td></tr>
+<tr><td><code>G-t65-029</code></td><td>다 — 코드는 있는데 연결 안 됨</td><td>가이드북은 화면이 다 만들어져 있는데 콘텐츠가 `src/lib/guide-data.ts` 상수다 — 운영자가 못 고친다. 게다가 일부 항목은 본문이 「이 가이드는 준비 중입니다. 곧 상세 내용이 업데이트됩니다.」 자리표시로 남아 있고, 「폰트 아웃라인 (Create Outlines) 미적용시 해결법」이 네 항목(outline-1~4)에 같은 제목으로 들어 있다.</td><td>최숙진</td><td>가이드 콘텐츠 원고 확정</td></tr>
+<tr><td><code>G-t65-030</code></td><td>라 — 결정 미정</td><td>FAQ 와 가이드북의 경계가 정해지지 않았다. 둘 다 「자주 묻는 것」을 담는데 하나는 게시판, 하나는 코드 상수라 같은 질문이 두 곳에 갈릴 수 있다.</td><td>신우진</td><td>없음 — 결정 자체가 선행</td></tr>
+</table></details>
+</div>
+<div class="proc" id="P11">
+<div class="phead"><h3>P11 이용후기·뉴스 콘텐츠 운영</h3><div class="badges">
+<span class="b steps">2단계</span>
+<span class="b k나">나 1</span>
+<span class="b k라">라 2</span>
+</div></div>
+<p class="def">고객이 남긴 후기를 운영자가 관리하고, 회사 소식을 싣는 공간을 만드는 흐름. 후기는 t62 가 다루는 「고객이 쓰는 쪽」의 반대편, 운영자가 손대는 쪽이다.</p>
+<div class="mer"><pre class="mermaid">sequenceDiagram
+    autonumber
+    participant O as 운영자
+    participant S as 샵바이
+    participant M as huni-mall
+    actor C as 고객
+    O-&gt;&gt;S: 이용후기 목록 확인
+    O-&gt;&gt;S: 관리자 등록·수정·노출 조정
+    C-&gt;&gt;M: 상품 상세에서 후기 열람
+    M-&gt;&gt;S: GET /reviews/boards
+    Note over O,M: 뉴스·소식 공간은 형태(갤러리형/게시판형/커뮤니티형)부터 미정</pre></div>
+<div class="mer"><pre class="mermaid">flowchart TD
+    A[운영자] --&gt; B{무엇을}
+    B -- 이용후기 --&gt; C[목록 확인 · 관리자 등록/수정]
+    C --&gt; D{노출 정책}
+    D -- 미정 --&gt; E[라 — 관리자 등록 후기 허용 여부]
+    B -- 뉴스·소식 --&gt; F{공간 형태 미정}
+    F -- 갤러리형 --&gt; G[라 — 결정 대기]
+    F -- 게시판형 --&gt; G
+    F -- 커뮤니티형 --&gt; G
+    G --&gt; H[메뉴명 확정 후 신설]</pre></div>
+<details><summary>단계표 2행</summary><table>
+<tr><th>#</th><th>단계</th><th>시스템</th><th>담당자</th><th>row_id</th><th>상태</th><th>근거</th></tr>
+<tr><td>1</td><td>1. [구IA#72] 이용후기 관리(관리자 등록/수정)</td><td>셀러어드민</td><td>최숙진</td><td><code>STD-INF-011</code></td><td>미실측</td><td class="ev">IA No.72 이용후기 · 샵바이 상품후기(R1d 미확인)</td></tr>
+<tr><td>2</td><td>2. 뉴스·소식 공간 신설(형태·메뉴명 결정)</td><td>결정(PM)</td><td>김동학</td><td><code>STD-INF-012</code></td><td>미착수</td><td class="ev">후니-오픈잔여작업-실무진안내_260909.html §항목 5 · ④ 완료 기준</td></tr>
+</table></details>
+<details><summary>빠진 곳 3건</summary><table>
+<tr><th>id</th><th>종류</th><th>내용</th><th>제안 담당</th><th>선행</th></tr>
+<tr><td><code>G-t65-031</code></td><td>라 — 결정 미정</td><td>뉴스·소식 공간의 **형태와 메뉴 이름**이 정해지지 않았다(갤러리형/게시판형/커뮤니티형 중 택1). 형태에 따라 게시판 하나로 끝날 수도, 새 화면을 만들어야 할 수도 있다.</td><td>신우진</td><td>없음 — 결정 자체가 선행</td></tr>
+<tr><td><code>G-t65-032</code></td><td>라 — 결정 미정</td><td>관리자가 직접 등록한 후기를 허용할지 정해지지 않았다. 허용하면 표시 규칙(작성자 표기·구매 인증 배지)이 함께 필요하다.</td><td>최숙진</td><td>없음 — 운영 규칙 작성</td></tr>
+<tr><td><code>G-t65-033</code></td><td>나 — 행은 있는데 코드 0</td><td>뉴스·소식 화면이 몰에 없다 — 형태가 정해지면 공지(P09)와 같은 게시판 배선으로 만들 수 있다.</td><td>김동학</td><td>형태·메뉴명 결정</td></tr>
+</table></details>
+</div>
+<h2>운영자·상품가격</h2>
+<div class="proc" id="P12">
+<div class="phead"><h3>P12 기초데이터 마스터 등록·관리</h3><div class="badges">
+<span class="b steps">6단계</span>
+<span class="b k다">다 1</span>
+<span class="b k라">라 1</span>
+</div></div>
+<p class="def">모든 상품·가격이 딛고 서는 바닥. 사이즈·자재·용지·도수·공정 코드를 먼저 세워야 그 위에 상품과 단가를 올릴 수 있다.</p>
+<div class="mer"><pre class="mermaid">sequenceDiagram
+    autonumber
+    participant A as 운영자
+    participant W as webadmin
+    participant D as Railway DB
+    A-&gt;&gt;W: admin/basecode-master/ 열기
+    A-&gt;&gt;W: 코드 신규 등록(사이즈·자재·용지·도수·공정)
+    W-&gt;&gt;D: INSERT 기초코드
+    Note over A,W: 삭제는 하지 않는다 — use_yn=N 논리삭제·이름변경만
+    A-&gt;&gt;W: 상품·옵션·단가 화면에서 코드 선택
+    W-&gt;&gt;D: 참조 연결
+    D--&gt;&gt;W: 참조 무결성 검사(P16)</pre></div>
+<div class="mer"><pre class="mermaid">flowchart TD
+    A[기초코드 필요] --&gt; B{이미 있나}
+    B -- 있다 --&gt; C[재사용 · 중복 mint 금지]
+    B -- 없다 --&gt; D[신규 등록]
+    D --&gt; E{용도}
+    E -- 사이즈 --&gt; F[admin/catalog/tsizsizes/]
+    E -- 자재 --&gt; G[admin/master/mat/]
+    E -- 용지·평량 --&gt; H[admin/paper-management/]
+    E -- 도수·색상 --&gt; I[admin/catalog/tclrcolorcounts/]
+    E -- 공정 --&gt; J[admin/master/proc/]
+    C --&gt; K[상품·옵션·단가에서 참조]
+    F --&gt; K
+    G --&gt; K
+    H --&gt; K
+    I --&gt; K
+    J --&gt; K
+    K --&gt; L{통합해야 하면}
+    L --&gt; M[신규 코드 + 기존 use_yn=N · 삭제 금지]</pre></div>
+<details><summary>단계표 6행</summary><table>
+<tr><th>#</th><th>단계</th><th>시스템</th><th>담당자</th><th>row_id</th><th>상태</th><th>근거</th></tr>
+<tr><td>1</td><td>1. 사이즈 마스터 등록·관리</td><td>webadmin</td><td>서희항</td><td><code>STD-ADP-001</code></td><td>작동</td><td class="ev">https://huni-admin.printly.co.kr/admin/catalog/tsizsizes/@2026-09-16 21:28</td></tr>
+<tr><td>2</td><td>2. 소재(자재) 마스터 등록·관리</td><td>webadmin</td><td>서희항</td><td><code>STD-ADP-002</code></td><td>작동</td><td class="ev">https://huni-admin.printly.co.kr/admin/master/mat/@2026-09-16 21:28</td></tr>
+<tr><td>3</td><td>3. 용지·평량 마스터 관리</td><td>webadmin</td><td>서희항</td><td><code>STD-ADP-003</code></td><td>작동</td><td class="ev">https://huni-admin.printly.co.kr/admin/paper-management/@2026-09-16 21:28</td></tr>
+<tr><td>4</td><td>4. 도수/색상 코드 관리</td><td>webadmin</td><td>서희항</td><td><code>STD-ADP-004</code></td><td>작동</td><td class="ev">https://huni-admin.printly.co.kr/admin/catalog/tclrcolorcounts/@2026-09-16 21:28</td></tr>
+<tr><td>5</td><td>5. 공정(후가공) 마스터 관리</td><td>webadmin</td><td>서희항</td><td><code>STD-ADP-005</code></td><td>작동</td><td class="ev">https://huni-admin.printly.co.kr/admin/master/proc/@2026-09-16 21:33</td></tr>
+<tr><td>6</td><td>6. 기초코드 논리삭제·이름변경 정책 적용</td><td>webadmin</td><td>서희항</td><td><code>STD-ADP-009</code></td><td>작동</td><td class="ev">https://huni-admin.printly.co.kr/admin/basecode-master/@2026-09-16 21:28</td></tr>
+</table></details>
+<details><summary>빠진 곳 2건</summary><table>
+<tr><th>id</th><th>종류</th><th>내용</th><th>제안 담당</th><th>선행</th></tr>
+<tr><td><code>G-t65-034</code></td><td>라 — 결정 미정</td><td>기초코드를 새로 만들 권한과 절차가 사람 규칙으로만 있다. 화면은 누구나 등록할 수 있어 중복 코드가 생기면 단가행이 갈라진다 — 이미 표시중복 정리 하네스가 따로 돌 만큼 쌓인 문제다.</td><td>서희항</td><td>없음 — 운영 규칙 작성</td></tr>
+<tr><td><code>G-t65-035</code></td><td>다 — 코드는 있는데 연결 안 됨</td><td>여섯 화면이 각자 살아 있어 「이 코드를 쓰는 상품이 몇 건인가」를 한 화면에서 못 본다. 사용처 조회는 가격 구성요소 쪽에만 있다(`price-viewer/comp/{comp_cd}/usage/`).</td><td>서희항</td><td>없음</td></tr>
+</table></details>
+</div>
+<div class="proc" id="P13">
+<div class="phead"><h3>P13 판형·제본·공정 규칙 관리</h3><div class="badges">
+<span class="b steps">3단계</span>
+<span class="b k다">다 2</span>
+<span class="b k라">라 1</span>
+</div></div>
+<p class="def">인쇄 고유의 규칙이 사는 곳. 원지에 몇 개를 앉힐 수 있는지(판걸이수), 책등이 몇 mm 인지, 어떤 공정을 함께 고를 수 없는지를 정한다.</p>
+<div class="mer"><pre class="mermaid">sequenceDiagram
+    autonumber
+    participant A as 운영자
+    participant W as webadmin
+    participant P as 가격엔진(pricing.py)
+    participant G as 위젯
+    A-&gt;&gt;W: 판형·판걸이수 등록
+    A-&gt;&gt;W: 제본 방식·책등 계산 규칙 등록
+    Note over W: catalog/spine_calc.py 가 책등폭을 계산한다
+    A-&gt;&gt;W: 공정 택일그룹 정리(옵션그룹으로 흡수됨)
+    G-&gt;&gt;P: 고객 선택값으로 견적 요청
+    P-&gt;&gt;W: 판걸이수·책등 규칙 적용
+    P--&gt;&gt;G: 계산가</pre></div>
+<div class="mer"><pre class="mermaid">flowchart TD
+    A[상품 규격 확정] --&gt; B[판형 선택]
+    B --&gt; C[판걸이수 계산 fn_calc_pansu]
+    A --&gt; D{책자인가}
+    D -- 예 --&gt; E[Max Page 기준 책등폭 계산]
+    E --&gt; F[표지 크기 산출]
+    F --&gt; G[표지보다 큰 판형 선택]
+    D -- 아니오 --&gt; C
+    C --&gt; H[인쇄비 산정]
+    G --&gt; H
+    A --&gt; I[공정 조합 제한]
+    I --&gt; J{택일그룹}
+    J -. 모델 DROP · 옵션그룹으로 흡수 .-&gt; K[다 — 이관 결과 미검증]</pre></div>
+<details><summary>단계표 3행</summary><table>
+<tr><th>#</th><th>단계</th><th>시스템</th><th>담당자</th><th>row_id</th><th>상태</th><th>근거</th></tr>
+<tr><td>1</td><td>1. 판형(출력판형)·판걸이수 관리</td><td>webadmin</td><td>서희항</td><td><code>STD-ADP-007</code></td><td>작동</td><td class="ev">https://huni-admin.printly.co.kr/admin/product-viewer/?prd=PRD_000069@2026-09-16 21:30</td></tr>
+<tr><td>2</td><td>2. 제본 방식 마스터·책등 계산 규칙</td><td>webadmin</td><td>서희항</td><td><code>STD-ADP-008</code></td><td>구현-미검증</td><td class="ev">raw/webadmin/webadmin/config/urls.py:320-330 책등(spine) 계산 규칙 · raw/webadmin/webadmin/catalog/spine_calc.py:1</td></tr>
+<tr><td>3</td><td>3. 공정 택일그룹 관리(옵션그룹 흡수분)</td><td>webadmin</td><td>서희항</td><td><code>STD-ADP-006</code></td><td>구현-미검증</td><td class="ev">raw/webadmin/webadmin/catalog/admin.py:1595 &#x27;(제거됨 — Phase 7/07-08) 공정 택일그룹 모델: 옵션그룹으로 흡수·DROP&#x27; · raw/webadmin/webadmin/config/urls.py:356-360 옵션그룹 CRUD</td></tr>
+</table></details>
+<details><summary>빠진 곳 3건</summary><table>
+<tr><th>id</th><th>종류</th><th>내용</th><th>제안 담당</th><th>선행</th></tr>
+<tr><td><code>G-t65-036</code></td><td>다 — 코드는 있는데 연결 안 됨</td><td>공정 택일그룹 모델이 제거되고 옵션그룹으로 흡수됐는데(`catalog/admin.py:1595` 「(제거됨 — Phase 7/07-08) 공정 택일그룹 모델: 옵션그룹으로 흡수·DROP」), 흡수 뒤 기존 택일 제약이 옵션그룹에서 같은 효과를 내는지 실화면으로 확인된 기록을 찾지 못했다. 원장 상태도 「구현-미검증」이다.</td><td>서희항</td><td>없음 — 실화면 검증</td></tr>
+<tr><td><code>G-t65-037</code></td><td>다 — 코드는 있는데 연결 안 됨</td><td>책등 계산(`catalog/spine_calc.py`)이 구현돼 있으나 「구현-미검증」이다. 책등폭 → 표지 크기 → 그보다 큰 판형 선택이라는 규칙이 실제 상품에서 재현되는지 확인이 남았다.</td><td>서희항</td><td>없음 — 실화면 검증</td></tr>
+<tr><td><code>G-t65-038</code></td><td>라 — 결정 미정</td><td>판걸이수 계산의 권위가 가격표 「판걸이수」 시트인데, 시트와 DB 등록값이 어긋날 때 어느 쪽을 고칠지 절차가 없다.</td><td>서희항</td><td>없음 — 운영 규칙 작성</td></tr>
+</table></details>
+</div>
+<div class="proc" id="P14">
+<div class="phead"><h3>P14 상품 등록·진열·셋트 구성</h3><div class="badges">
+<span class="b steps">9단계</span>
+<span class="b k다">다 1</span>
+<span class="b k라">라 2</span>
+</div></div>
+<p class="def">팔 물건을 만드는 흐름. 인쇄·굿즈·포장재·디자인·수작 상품을 등록하고, 카테고리에 걸고, 셋트로 묶고, 노출 상태를 정한다.</p>
+<div class="mer"><pre class="mermaid">sequenceDiagram
+    autonumber
+    participant A as 운영자
+    participant W as webadmin
+    participant S as 샵바이
+    actor C as 고객
+    A-&gt;&gt;W: 상품 등록(인쇄·굿즈·포장재·디자인)
+    A-&gt;&gt;W: 카테고리 귀속(다중분류)
+    A-&gt;&gt;W: 셋트(부품조립) 구성 — t_prd_product_sets
+    A-&gt;&gt;W: 진열/노출 상태 설정
+    W-&gt;&gt;S: 메인이미지·전시 frontDisplayYn push
+    Note over W,S: shopby_sync.py 가 미는 축은 이 둘뿐이다(P30)
+    C-&gt;&gt;S: 상품 목록·상세 열람</pre></div>
+<div class="mer"><pre class="mermaid">flowchart TD
+    A[새 상품] --&gt; B{유형}
+    B -- 완제품 .01 --&gt; C[일반 단일 또는 셋트 완제품]
+    B -- 반제품 .02 --&gt; D[셋트 구성원 · 단독 판매 안 함]
+    B -- 기성 .03 --&gt; E[제조 없음 · 직접단가]
+    B -- 추가 .05 --&gt; F[addon]
+    C --&gt; G{t_prd_product_sets 부모 등록?}
+    G -- 예 --&gt; H[셋트 완제품]
+    G -- 아니오 --&gt; I[일반 단일]
+    H --&gt; J[카테고리 귀속]
+    I --&gt; J
+    D --&gt; J
+    E --&gt; J
+    F --&gt; J
+    J --&gt; K[진열·노출 상태]
+    K --&gt; L{샵바이 동기화}
+    L -- 이미지·전시만 --&gt; M[나머지 축은 P30 미배선]</pre></div>
+<details><summary>단계표 9행</summary><table>
+<tr><th>#</th><th>단계</th><th>시스템</th><th>담당자</th><th>row_id</th><th>상태</th><th>근거</th></tr>
+<tr><td>1</td><td>1. 인쇄/제본 상품 등록</td><td>webadmin</td><td>서희항</td><td><code>STD-ADP-010</code></td><td>작동</td><td class="ev">https://huni-admin.printly.co.kr/admin/product-viewer/@2026-09-16 21:28</td></tr>
+<tr><td>2</td><td>2. 굿즈 상품 등록</td><td>webadmin</td><td>서희항</td><td><code>STD-ADP-011</code></td><td>작동</td><td class="ev">https://huni-admin.printly.co.kr/admin/product-viewer/?prd=PRD_000146@2026-09-16 21:30</td></tr>
+<tr><td>3</td><td>3. 포장재 상품 등록</td><td>webadmin</td><td>서희항</td><td><code>STD-ADP-012</code></td><td>작동</td><td class="ev">https://huni-admin.printly.co.kr/admin/sku-catalog/@2026-09-16 21:28</td></tr>
+<tr><td>4</td><td>4. 디자인 상품 등록</td><td>webadmin</td><td>서희항</td><td><code>STD-ADP-035</code></td><td>작동</td><td class="ev">https://huni-admin.printly.co.kr/admin/design-md/@2026-09-16 21:33</td></tr>
+<tr><td>5</td><td>5. 수작 상품 등록</td><td>미확인</td><td>서희항·최숙진</td><td><code>STD-ADP-034</code></td><td>미실측</td><td class="ev">L3/legacy-normalized.json#F-111,IA-111,SCOPE-111 · _workspace/huni-launch-scope/02_gap/fit-gap-matrix.csv:112 · docs/huni/후니프린팅_통합IA_일정_역할분담_260616.xlsx#02_IA마스터!A112:K112 || P1판정(260902): 수작 상품 등록은 셀러어드민 상품 등록 화면 소관 — 접속 보류로 확인 불가</td></tr>
+<tr><td>6</td><td>6. 셋트(부품조립) 상품 구성 관리</td><td>webadmin</td><td>서희항</td><td><code>STD-ADP-016</code></td><td>작동</td><td class="ev">https://huni-admin.printly.co.kr/admin/set-products/@2026-09-16 21:28</td></tr>
+<tr><td>7</td><td>7. 상품-카테고리 귀속(다중분류)</td><td>webadmin</td><td>서희항</td><td><code>STD-ADP-013</code></td><td>작동</td><td class="ev">https://huni-admin.printly.co.kr/admin/catalog/tprdproducts/@2026-09-16 21:32</td></tr>
+<tr><td>8</td><td>8. [구IA#59] 굿즈 카테고리 관리</td><td>webadmin</td><td>서희항</td><td><code>STD-ADP-036</code></td><td>작동</td><td class="ev">https://huni-admin.printly.co.kr/admin/category-master/@2026-09-16 21:28</td></tr>
+<tr><td>9</td><td>9. 상품 진열/노출 상태 관리</td><td>webadmin</td><td>서희항</td><td><code>STD-ADP-014</code></td><td>작동</td><td class="ev">https://huni-admin.printly.co.kr/admin/catalog/tprdproducts/@2026-09-16 21:32</td></tr>
+</table></details>
+<details><summary>빠진 곳 3건</summary><table>
+<tr><th>id</th><th>종류</th><th>내용</th><th>제안 담당</th><th>선행</th></tr>
+<tr><td><code>G-t65-039</code></td><td>라 — 결정 미정</td><td>수작 상품이 **어느 시스템에 사는지** 확정되지 않았다(원장 「미실측」·담당 「서희항·최숙진」 공동). webadmin 상품인지 셀러어드민 상품인지에 따라 가격·옵션·주문 경로가 통째로 달라진다.</td><td>신우진</td><td>없음 — 결정 자체가 선행</td></tr>
+<tr><td><code>G-t65-040</code></td><td>다 — 코드는 있는데 연결 안 됨</td><td>상품을 등록해도 샵바이로 넘어가는 축이 메인이미지와 전시 여부 둘뿐이다(`shopby_sync.py:118`·`:315`). 시작가·옵션은 스킨이 webadmin 을 당겨 가는 pull 이라 「등록했는데 몰에서 안 보인다」가 여기서 갈린다 — P30 에서 이어진다.</td><td>서희항</td><td>P30 동기화 축 확정</td></tr>
+<tr><td><code>G-t65-041</code></td><td>라 — 결정 미정</td><td>상품 유형 5종(완제품·반제품·기성·디자인·추가) 중 디자인상품(.04)은 폐기·재분류 대상인데 `admin/design-md/` 화면이 살아 있다. 두 정본이 공존한다.</td><td>서희항</td><td>상품유형 분류 SOT 적용 범위 확인</td></tr>
+</table></details>
+</div>
+<div class="proc" id="P15">
+<div class="phead"><h3>P15 상품 상세페이지 콘텐츠 편집·발행</h3><div class="badges">
+<span class="b steps">2단계</span>
+<span class="b k다">다 1</span>
+<span class="b k라">라 2</span>
+</div></div>
+<p class="def">상품 아래 붙는 설명 탭을 운영자가 만들어 발행하고, 몰이 그것을 읽어 보여주는 흐름. 편집은 페이지빌더(Pie Canvas), 조회는 몰이다.</p>
+<div class="mer"><pre class="mermaid">sequenceDiagram
+    autonumber
+    participant A as 운영자
+    participant B as 페이지빌더(Pie Canvas)
+    participant D as Railway DB
+    participant M as huni-mall
+    actor C as 고객
+    A-&gt;&gt;B: 상세 탭 편집
+    A-&gt;&gt;B: 발행
+    B-&gt;&gt;D: vc_v_product_detail_tabs 저장
+    C-&gt;&gt;M: 상품 상세 열기
+    M-&gt;&gt;D: fetchPublishedDetailTabs — 직접 SELECT
+    D--&gt;&gt;M: 발행된 탭
+    M--&gt;&gt;C: 상세 탭 렌더
+    Note over M,D: pg.Pool 타임아웃 없음 · DDL 소유자 미정(P30)</pre></div>
+<div class="mer"><pre class="mermaid">flowchart TD
+    A[운영자] --&gt; B[페이지빌더 편집]
+    B --&gt; C{발행}
+    C -- 발행함 --&gt; D[vc_v_product_detail_tabs]
+    C -- 미발행 --&gt; E[몰에 안 보임]
+    D --&gt; F[몰 상품 상세 조회]
+    F --&gt; G{본문 HTML}
+    G -- 무필터 렌더 --&gt; H[다 — XSS 여지 · P36]
+    B --&gt; I{페이지빌더 게이트}
+    I -- NO-GO · 15건 미해소 --&gt; J[라 — 문서 정본 승격 불가]</pre></div>
+<details><summary>단계표 2행</summary><table>
+<tr><th>#</th><th>단계</th><th>시스템</th><th>담당자</th><th>row_id</th><th>상태</th><th>근거</th></tr>
+<tr><td>1</td><td>1. 상품 상세페이지 콘텐츠 편집</td><td>페이지빌더</td><td>김동학</td><td><code>STD-ADP-015</code></td><td>부분</td><td class="ev">huni-skin-shopby/src/app/(main)/product/[slug]/page.tsx:51-56 Pie Canvas 발행 상세탭 조회</td></tr>
+<tr><td>2</td><td>2. 페이지 빌더(운영자 화면 편집) 구축</td><td>페이지빌더</td><td>김동학</td><td><code>STD-SYS-021</code></td><td>미착수</td><td class="ev">print-quote/04_design/ia.md §2.3 빌더 트랙 · L4 사유: 페이지빌더 게이트 NO-GO — 문서 정본 승격 불가. 15건 전부 미해소.</td></tr>
+</table></details>
+<details><summary>빠진 곳 3건</summary><table>
+<tr><th>id</th><th>종류</th><th>내용</th><th>제안 담당</th><th>선행</th></tr>
+<tr><td><code>G-t65-042</code></td><td>라 — 결정 미정</td><td>페이지빌더 게이트가 NO-GO 이고 미해소 15건이 남아 있어 설계 문서가 정본으로 올라가지 못했다. 그 상태에서 몰은 이미 발행 결과를 읽고 있다 — 읽는 쪽이 쓰는 쪽보다 먼저 서 있다.</td><td>신우진</td><td>없음 — 게이트 해소가 선행</td></tr>
+<tr><td><code>G-t65-043</code></td><td>다 — 코드는 있는데 연결 안 됨</td><td>몰이 Railway 뷰 `vc_v_product_detail_tabs` 를 직접 SELECT 하는데 `publications.ts:48-56` 의 `pg.Pool` 에 타임아웃 옵션이 없다. DB 가 느려지면 상품 상세가 통째로 멈춘다. 이 뷰의 DDL 소유자도 정해져 있지 않다.</td><td>김동학</td><td>뷰 소유·계약 확정(P30)</td></tr>
+<tr><td><code>G-t65-044</code></td><td>라 — 결정 미정</td><td>상세 탭을 상품마다 만들지, 상품군 공통으로 만들지가 정해지지 않았다. 상품 수만큼 탭을 만들면 운영 부담이 그대로 곱해진다.</td><td>신우진</td><td>없음 — 결정 자체가 선행</td></tr>
+</table></details>
+</div>
+<div class="proc" id="P16">
+<div class="phead"><h3>P16 옵션그룹 구성·차원 연결·무결성 검증</h3><div class="badges">
+<span class="b steps">4단계</span>
+<span class="b k나">나 1</span>
+<span class="b k다">다 1</span>
+<span class="b k라">라 1</span>
+</div></div>
+<p class="def">고객이 위젯에서 고르는 것들을 만드는 흐름. 옵션그룹을 짜고, 각 항목을 가격 차원(사이즈·용지·도수 같은 가격축)에 연결하고, 연결이 성한지 검사한다.</p>
+<div class="mer"><pre class="mermaid">sequenceDiagram
+    autonumber
+    participant A as 운영자
+    participant W as webadmin
+    participant P as 가격엔진
+    participant G as 위젯
+    A-&gt;&gt;W: 상품별 옵션그룹 구성
+    A-&gt;&gt;W: 옵션 항목 ↔ 차원 참조 연결(tmpl-combo-md)
+    A-&gt;&gt;W: 추가상품 템플릿 구성(sku-catalog)
+    A-&gt;&gt;W: 상품 유효성 검증 실행
+    W--&gt;&gt;A: 「검증 미리보기 — {상품명}」
+    G-&gt;&gt;W: 옵션 메타 요청
+    W--&gt;&gt;G: 옵션그룹·항목·차원
+    G-&gt;&gt;P: 선택값으로 견적
+    P--&gt;&gt;G: 계산가</pre></div>
+<div class="mer"><pre class="mermaid">flowchart TD
+    A[옵션그룹 구성] --&gt; B{이 옵션이 가격을 바꾸나}
+    B -- 예 --&gt; C[차원으로 등록 · 단가행이 따라야 함]
+    B -- 아니오 --&gt; D[옵션그룹으로만 · 가격 무관]
+    C --&gt; E[옵션 항목 ↔ 차원 참조 연결]
+    E --&gt; F[유효성 검증]
+    F --&gt; G{참조 깨짐?}
+    G -- 있다 --&gt; H[검증 미리보기에 표시]
+    G -- 없다 --&gt; I[위젯 렌더 가능]
+    I --&gt; J{단가행이 그 조합을 덮나}
+    J -- 아니오 --&gt; K[구성요소 제외 · 가격 누락]
+    J -- 예 --&gt; L[정상 견적]</pre></div>
+<details><summary>단계표 4행</summary><table>
+<tr><th>#</th><th>단계</th><th>시스템</th><th>담당자</th><th>row_id</th><th>상태</th><th>근거</th></tr>
+<tr><td>1</td><td>1. 상품별 옵션그룹 구성</td><td>webadmin</td><td>서희항</td><td><code>STD-ADP-017</code></td><td>구현-미검증</td><td class="ev">raw/webadmin/webadmin/config/urls.py:356-360 옵션그룹/옵션/항목 CRUD</td></tr>
+<tr><td>2</td><td>2. 옵션 항목 ↔ 차원 참조 연결</td><td>webadmin</td><td>서희항</td><td><code>STD-ADP-018</code></td><td>작동</td><td class="ev">https://huni-admin.printly.co.kr/admin/tmpl-combo-md/@2026-09-16 21:28</td></tr>
+<tr><td>3</td><td>3. 추가상품 템플릿 구성</td><td>webadmin</td><td>서희항</td><td><code>STD-ADP-020</code></td><td>작동</td><td class="ev">https://huni-admin.printly.co.kr/admin/sku-catalog/@2026-09-16 21:28</td></tr>
+<tr><td>4</td><td>4. 옵션 참조 무결성 검증</td><td>webadmin</td><td>서희항</td><td><code>STD-ADP-019</code></td><td>구현-미검증</td><td class="ev">raw/webadmin/webadmin/config/urls.py:373 상품 유효성 검증(validate)</td></tr>
+</table></details>
+<details><summary>빠진 곳 3건</summary><table>
+<tr><th>id</th><th>종류</th><th>내용</th><th>제안 담당</th><th>선행</th></tr>
+<tr><td><code>G-t65-045</code></td><td>다 — 코드는 있는데 연결 안 됨</td><td>옵션그룹 CRUD(`config/urls.py:356-360`)와 유효성 검증(`:373`)이 구현돼 있으나 둘 다 원장 상태가 「구현-미검증」이다. 검증이 무엇을 잡고 무엇을 놓치는지 실화면 기록을 찾지 못했다.</td><td>서희항</td><td>없음 — 실화면 검증</td></tr>
+<tr><td><code>G-t65-046</code></td><td>라 — 결정 미정</td><td>옵션(가격 무관)과 차원(가격축)의 경계가 화면에서 구분되지 않아 운영자가 가격에 영향 없는 것을 차원으로 올리거나 그 반대를 하기 쉽다. 적재 거버넌스 하네스가 따로 도는 이유이기도 하다.</td><td>서희항</td><td>없음 — 운영 규칙·화면 안내</td></tr>
+<tr><td><code>G-t65-047</code></td><td>나 — 행은 있는데 코드 0</td><td>유효성 검증 결과를 정기적으로 돌려 보는 절차가 없다. 지금은 사람이 생각날 때 누른다.</td><td>서희항</td><td>없음</td></tr>
+</table></details>
+</div>
+<div class="proc" id="P17">
+<div class="phead"><h3>P17 제약규칙 등록·시뮬레이션</h3><div class="badges">
+<span class="b steps">2단계</span>
+<span class="b k나">나 1</span>
+<span class="b k다">다 1</span>
+<span class="b k라">라 1</span>
+</div></div>
+<p class="def">「이건 저것과 같이 못 고른다」를 시스템에 넣는 흐름. 인쇄에서는 잘못된 조합이 곧 불량이라 고르기 전에 막아야 한다.</p>
+<div class="mer"><pre class="mermaid">sequenceDiagram
+    autonumber
+    participant A as 운영자
+    participant W as webadmin
+    participant G as 위젯
+    actor C as 고객
+    A-&gt;&gt;W: 제약규칙 등록(JSONLogic 폼빌더)
+    A-&gt;&gt;W: 시뮬레이션 실행
+    W--&gt;&gt;A: 제약 cascade — 현재 선택 → 각 차원 불가값(비활성)
+    C-&gt;&gt;G: 옵션 선택
+    G-&gt;&gt;W: price_sim_constraints
+    W--&gt;&gt;G: 불가값 목록
+    G--&gt;&gt;C: 해당 선택지 비활성 표시</pre></div>
+<div class="mer"><pre class="mermaid">flowchart TD
+    A[제약 후보 발견] --&gt; B[폼빌더에서 규칙 작성]
+    B --&gt; C[시뮬레이션 미리보기]
+    C --&gt; D{의도대로 막히나}
+    D -- 과다 차단 --&gt; E[규칙 수정 · 정상 조합까지 막힘]
+    D -- 과소 차단 --&gt; F[규칙 보강 · 불량 조합 통과]
+    D -- 맞다 --&gt; G[등록]
+    G --&gt; H[위젯 cascade 반영]
+    H --&gt; I{실화면 확인}
+    I -- 미검증 --&gt; J[다 — 구현-미검증 상태]</pre></div>
+<details><summary>단계표 2행</summary><table>
+<tr><th>#</th><th>단계</th><th>시스템</th><th>담당자</th><th>row_id</th><th>상태</th><th>근거</th></tr>
+<tr><td>1</td><td>1. 제약규칙 등록(UI 폼빌더)</td><td>webadmin</td><td>서희항</td><td><code>STD-ADP-021</code></td><td>구현-미검증</td><td class="ev">raw/webadmin/webadmin/config/urls.py:371 제약규칙(JSONLogic) 관리 · raw/webadmin/webadmin/catalog/models.py:801 제약 모델</td></tr>
+<tr><td>2</td><td>2. 제약규칙 시뮬레이션·미리보기</td><td>webadmin</td><td>서희항</td><td><code>STD-ADP-022</code></td><td>구현-미검증</td><td class="ev">raw/webadmin/webadmin/config/urls.py:169 price_sim_constraints — &#x27;제약 cascade: 현재 선택 → 각 차원 불가값(비활성)&#x27;</td></tr>
+</table></details>
+<details><summary>빠진 곳 3건</summary><table>
+<tr><th>id</th><th>종류</th><th>내용</th><th>제안 담당</th><th>선행</th></tr>
+<tr><td><code>G-t65-048</code></td><td>다 — 코드는 있는데 연결 안 됨</td><td>제약규칙 관리(`config/urls.py:371` JSONLogic)와 모델(`catalog/models.py:801`), 시뮬레이션(`config/urls.py:169` `price_sim_constraints` — 「제약 cascade: 현재 선택 → 각 차원 불가값(비활성)」)이 다 구현돼 있는데 둘 다 「구현-미검증」이다. 만든 규칙이 위젯에서 같은 결과를 내는지 실화면 기록이 없다.</td><td>서희항</td><td>없음 — 실화면 검증</td></tr>
+<tr><td><code>G-t65-049</code></td><td>라 — 결정 미정</td><td>과다 차단(정상 조합까지 막힘)을 어떻게 잡아낼지 절차가 없다. 제약은 틀려도 화면이 조용해서 매출이 조용히 새는 쪽이다.</td><td>서희항</td><td>없음 — 검증 절차 작성</td></tr>
+<tr><td><code>G-t65-050</code></td><td>나 — 행은 있는데 코드 0</td><td>제약규칙 전수 목록과 그 규칙이 붙은 상품 수를 한 화면에서 보는 곳이 없다.</td><td>서희항</td><td>없음</td></tr>
+</table></details>
+</div>
+<div class="proc" id="P18">
+<div class="phead"><h3>P18 가격공식·구성요소 설계·바인딩</h3><div class="badges">
+<span class="b steps">3단계</span>
+<span class="b k나">나 1</span>
+<span class="b k다">다 1</span>
+<span class="b k라">라 1</span>
+</div></div>
+<p class="def">가격이 어떤 항목의 합으로 이뤄지는지를 정하는 흐름. 공식을 만들고, 구성요소를 만들고, 구성요소마다 어떤 차원으로 단가를 찾을지 지정해 상품에 건다.</p>
+<div class="mer"><pre class="mermaid">sequenceDiagram
+    autonumber
+    participant A as 운영자
+    participant W as webadmin
+    participant P as 가격엔진
+    A-&gt;&gt;W: 가격공식 등록 · 상품 바인딩
+    A-&gt;&gt;W: 가격구성요소 등록(admin/price-component-md/)
+    A-&gt;&gt;W: 구성요소별 사용차원 지정
+    A-&gt;&gt;W: 단가유형(단가형/합가형) 설정
+    P-&gt;&gt;W: evaluate_price — 공식 해석
+    W--&gt;&gt;P: 구성요소 목록 + 차원
+    P-&gt;&gt;P: 차원 조합으로 단가행 조회(P19)
+    P--&gt;&gt;A: 가격뷰어 「가격 소스」 섹션에 표시</pre></div>
+<div class="mer"><pre class="mermaid">flowchart TD
+    A[상품군 가격 구조] --&gt; B{계산 방식}
+    B -- 원자합산형 --&gt; C[구성요소 합]
+    B -- 고정가형 --&gt; D[직접단가]
+    B -- 면적매트릭스형 --&gt; E[면적 × 단가]
+    C --&gt; F[구성요소마다 사용차원 지정]
+    E --&gt; F
+    F --&gt; G{단가유형}
+    G -- 단가형 --&gt; H[수량 × 단가]
+    G -- 합가형 --&gt; I[구간 합계]
+    H --&gt; J[상품에 공식 바인딩]
+    I --&gt; J
+    D --&gt; J
+    J --&gt; K{구성요소가 단가행을 찾나}
+    K -- 못 찾음 --&gt; L[제외 · 가격 누락 P20]
+    K -- 찾음 --&gt; M[정상 계산]</pre></div>
+<details><summary>단계표 3행</summary><table>
+<tr><th>#</th><th>단계</th><th>시스템</th><th>담당자</th><th>row_id</th><th>상태</th><th>근거</th></tr>
+<tr><td>1</td><td>1. 가격공식 등록·상품 바인딩</td><td>webadmin</td><td>서희항</td><td><code>STD-ADP-023</code></td><td>작동</td><td class="ev">https://huni-admin.printly.co.kr/admin/price-viewer/?prd=PRD_000069@2026-09-16 21:30</td></tr>
+<tr><td>2</td><td>2. 가격구성요소 등록·차원 지정</td><td>webadmin</td><td>서희항</td><td><code>STD-ADP-024</code></td><td>작동</td><td class="ev">https://huni-admin.printly.co.kr/admin/price-component-md/@2026-09-16 21:28</td></tr>
+<tr><td>3</td><td>3. 단가유형(단가형/합가형) 설정</td><td>webadmin</td><td>서희항</td><td><code>STD-ADP-026</code></td><td>구현-미검증</td><td class="ev">raw/webadmin/webadmin/catalog/admin.py:2816 &#x27;Phase 11: 사용차원 순서지정 위젯 + 단가유형 그룹제한(basecodes prc_typ_cd)&#x27;</td></tr>
+</table></details>
+<details><summary>빠진 곳 3건</summary><table>
+<tr><th>id</th><th>종류</th><th>내용</th><th>제안 담당</th><th>선행</th></tr>
+<tr><td><code>G-t65-051</code></td><td>다 — 코드는 있는데 연결 안 됨</td><td>단가유형 설정이 「구현-미검증」이다 — `catalog/admin.py:2816` 이 「Phase 11: 사용차원 순서지정 위젯 + 단가유형 그룹제한(basecodes prc_typ_cd)」 으로 기록돼 있으나 실제 계산에서 단가형/합가형이 갈리는 것을 확인한 기록을 찾지 못했다.</td><td>서희항</td><td>없음 — 실화면 검증</td></tr>
+<tr><td><code>G-t65-052</code></td><td>라 — 결정 미정</td><td>가격공식의 권위가 상품마스터 「계산공식집초안」 시트인데, 시트와 등록 공식이 어긋날 때 누가 어느 쪽을 고치는지 절차가 없다.</td><td>서희항</td><td>없음 — 운영 규칙 작성</td></tr>
+<tr><td><code>G-t65-053</code></td><td>나 — 행은 있는데 코드 0</td><td>구성요소가 어떤 상품군에 유효한지(배선 유효성)를 검사하는 장치가 없다. 엉뚱한 상품군에 구성요소가 붙어도 화면은 조용하다.</td><td>서희항</td><td>없음</td></tr>
+</table></details>
+</div>
+<div class="proc" id="P19">
+<div class="phead"><h3>P19 단가행 적재·할인·이력 관리</h3><div class="badges">
+<span class="b steps">5단계</span>
+<span class="b k나">나 1</span>
+<span class="b k다">다 1</span>
+<span class="b k라">라 1</span>
+</div></div>
+<p class="def">숫자가 실제로 들어가는 구간. 구성요소마다 차원 조합별 단가를 넣고, 수량 구간 할인을 걸고, 언제부터 적용할지 날짜를 붙인다.</p>
+<div class="mer"><pre class="mermaid">sequenceDiagram
+    autonumber
+    participant A as 운영자
+    participant X as 권위 엑셀(가격표)
+    participant W as webadmin
+    participant P as 가격엔진
+    A-&gt;&gt;X: 시트에서 단가 격자 확인
+    A-&gt;&gt;W: 「단가표 — {구성요소명}」 그리드 열기
+    A-&gt;&gt;W: 엑셀 복사·붙여넣기로 일괄 입력
+    Note over A,W: 그리드에 보이는 행이 곧 이 구성요소의 전체 단가표
+    A-&gt;&gt;W: 수량구간 할인테이블 설정
+    A-&gt;&gt;W: 적용시작일 지정
+    P-&gt;&gt;W: 차원 조합으로 단가 조회
+    W--&gt;&gt;P: as_of 이하 최신 행 1건</pre></div>
+<div class="mer"><pre class="mermaid">flowchart TD
+    A[가격표 엑셀] --&gt; B{단가 형태}
+    B -- 차원 조합 격자 --&gt; C[단가표 그리드 붙여넣기]
+    B -- 면적 매트릭스 --&gt; D[면적 매트릭스 단가]
+    B -- 템플릿 고정가 --&gt; E[추가상품 템플릿 직접단가]
+    C --&gt; F[수량구간 할인테이블]
+    D --&gt; F
+    E --&gt; F
+    F --&gt; G[적용시작일 지정]
+    G --&gt; H{as_of 기준 조회}
+    H --&gt; I[최신 1행만 유효]
+    C --&gt; J{격자에 빈 셀}
+    J -- 있다 --&gt; K[해당 조합 견적 0원 · P20 이 잡는다]</pre></div>
+<details><summary>단계표 5행</summary><table>
+<tr><th>#</th><th>단계</th><th>시스템</th><th>담당자</th><th>row_id</th><th>상태</th><th>근거</th></tr>
+<tr><td>1</td><td>1. 단가행 일괄 등록(엑셀 복사·붙여넣기)</td><td>webadmin</td><td>서희항</td><td><code>STD-ADP-025</code></td><td>구현-미검증</td><td class="ev">raw/webadmin/webadmin/catalog/price_views.py:1650 &#x27;그리드에 보이는 행이 곧 이 구성요소의 전체 단가표(엑셀처럼)&#x27; · raw/webadmin/webadmin/catalog/templates/catalog/comp_price_grid_page.html:142-145 엑셀 복사·붙여넣기</td></tr>
+<tr><td>2</td><td>2. 면적 매트릭스 단가 관리</td><td>webadmin</td><td>서희항</td><td><code>STD-ADP-028</code></td><td>구현-미검증</td><td class="ev">raw/webadmin/webadmin/config/urls.py:144-148 단가 그리드(차원 조합 행) · raw/webadmin/webadmin/catalog/pricing.py:1 evaluate_price</td></tr>
+<tr><td>3</td><td>3. 템플릿 직접단가 관리</td><td>webadmin</td><td>서희항</td><td><code>STD-ADP-029</code></td><td>작동</td><td class="ev">https://huni-admin.printly.co.kr/admin/price-viewer/?prd=PRD_000146@2026-09-16 21:30</td></tr>
+<tr><td>4</td><td>4. 수량구간 할인테이블 관리</td><td>webadmin</td><td>서희항</td><td><code>STD-ADP-027</code></td><td>작동</td><td class="ev">https://huni-admin.printly.co.kr/admin/discount-table-md/@2026-09-16 21:28</td></tr>
+<tr><td>5</td><td>5. 가격 적용시작일 기반 이력 관리</td><td>webadmin</td><td>서희항</td><td><code>STD-ADP-030</code></td><td>작동</td><td class="ev">https://huni-admin.printly.co.kr/admin/price-viewer/?prd=PRD_000069@2026-09-16 21:30</td></tr>
+</table></details>
+<details><summary>빠진 곳 3건</summary><table>
+<tr><th>id</th><th>종류</th><th>내용</th><th>제안 담당</th><th>선행</th></tr>
+<tr><td><code>G-t65-054</code></td><td>다 — 코드는 있는데 연결 안 됨</td><td>단가행 일괄 등록과 면적 매트릭스가 둘 다 「구현-미검증」이다. `price_views.py:1650` 이 「그리드에 보이는 행이 곧 이 구성요소의 전체 단가표(엑셀처럼)」 라고 적어 둔 대로 동작하는지, 붙여넣기 실패가 조용히 넘어가지 않는지 확인 기록을 찾지 못했다.</td><td>서희항</td><td>없음 — 실화면 검증</td></tr>
+<tr><td><code>G-t65-055</code></td><td>나 — 행은 있는데 코드 0</td><td>적재된 격자에 **빈 셀이 남았는지** 한 화면에서 보는 장치가 없다. 빈 셀은 계산에서 그 조합만 조용히 빠지므로 「가격이 이상하다」가 뒤늦게 발견된다. 가격테이블 무결성 하네스가 따로 도는 이유다.</td><td>서희항</td><td>없음</td></tr>
+<tr><td><code>G-t65-056</code></td><td>라 — 결정 미정</td><td>가격표 엑셀 최신본 판정 절차가 사람 기억에 걸려 있다. 파일명 날짜를 믿었다가 구본을 적재한 전례가 있다.</td><td>서희항</td><td>없음 — 운영 규칙 작성</td></tr>
+</table></details>
+</div>
+<div class="proc" id="P20">
+<div class="phead"><h3>P20 가격 검산·기본사양가 진단·게시 위젯 전수 대조</h3><div class="badges">
+<span class="b steps">4단계</span>
+<span class="b k나">나 1</span>
+<span class="b k다">다 1</span>
+<span class="b k라">라 1</span>
+</div></div>
+<p class="def">넣은 숫자가 맞는지 되짚는 흐름. 운영자가 손으로 검산하고, 0원으로 떨어지는 상품을 목록으로 잡고, 게시된 위젯 전수를 권위 가격과 대조한다.</p>
+<div class="mer"><pre class="mermaid">sequenceDiagram
+    autonumber
+    participant A as 운영자
+    participant W as webadmin
+    participant G as 위젯
+    participant R as 검수(1차→2차→3차)
+    A-&gt;&gt;W: 가격 시뮬레이터에서 조합 입력
+    W--&gt;&gt;A: 계산가 · 제외된 구성요소 목록
+    A-&gt;&gt;W: 가격뷰어에서 「가격 소스」·「할인」 확인
+    W--&gt;&gt;A: 「T가격없음」 배지 · 「가격 구조 보기」
+    A-&gt;&gt;W: 상품 › 상품별 기본사양가
+    W--&gt;&gt;A: 자동/수기/없음(실패) 탭 · 실패사유
+    G--&gt;&gt;R: 게시 위젯 실제 가격
+    R-&gt;&gt;R: 1차 최숙진 → 2차 김용기 → 3차 채훈희 승인</pre></div>
+<div class="mer"><pre class="mermaid">flowchart TD
+    A[적재 완료] --&gt; B[가격시뮬레이터 검산]
+    B --&gt; C{제외 구성요소 0 · PRICE≠0}
+    C -- 아니다 --&gt; D[「상품별 기본사양가」 없음·실패 탭]
+    D --&gt; E{실패사유}
+    E -- 단가행 부재 --&gt; F[P19 로 되돌아감]
+    E -- 차원 미선택 --&gt; G[P16 로 되돌아감]
+    E -- 형제 구성요소가 커버 --&gt; H[정상 미매칭 · 조치 불요]
+    C -- 맞다 --&gt; I[가격뷰어 T가격없음 배지 없음]
+    I --&gt; J[게시 위젯 전수 대조]
+    J --&gt; K{권위 가격과 일치}
+    K -- 불일치 --&gt; F
+    K -- 일치 --&gt; L[1차→2차→3차 승인]</pre></div>
+<details><summary>단계표 4행</summary><table>
+<tr><th>#</th><th>단계</th><th>시스템</th><th>담당자</th><th>row_id</th><th>상태</th><th>근거</th></tr>
+<tr><td>1</td><td>1. 가격 시뮬레이터(운영자 검산)</td><td>webadmin</td><td>서희항</td><td><code>STD-ADP-031</code></td><td>작동</td><td class="ev">https://huni-admin.printly.co.kr/admin/price-simulator/@2026-09-16 21:28</td></tr>
+<tr><td>2</td><td>2. 가격뷰어(계산 결과 조회)</td><td>webadmin</td><td>서희항</td><td><code>STD-ADP-032</code></td><td>작동</td><td class="ev">https://huni-admin.printly.co.kr/admin/price-viewer/@2026-09-16 21:28</td></tr>
+<tr><td>3</td><td>3. 가격 미산출(0원) 진단 — 「상품 › 상품별 기본사양가」 없음(실패) 탭</td><td>webadmin</td><td>서희항</td><td><code>STD-ADP-033</code></td><td>작동</td><td class="ev">https://huni-admin.printly.co.kr/admin/start-price/@2026-09-16 21:29</td></tr>
+<tr><td>4</td><td>4. 게시 위젯 가격 전수 대조(1차→2차→3차 승인)</td><td>위젯</td><td>서희항</td><td><code>STD-ADP-037</code></td><td>부분</td><td class="ev">후니정기미팅 정리260915.html §가격·템플릿 데이터 · 미결 1 / 후니-오픈잔여작업-실무진안내_260909.html §항목 1 · ④ 완료 기준</td></tr>
+</table></details>
+<details><summary>빠진 곳 3건</summary><table>
+<tr><th>id</th><th>종류</th><th>내용</th><th>제안 담당</th><th>선행</th></tr>
+<tr><td><code>G-t65-057</code></td><td>다 — 코드는 있는데 연결 안 됨</td><td>원장 행 이름은 「가격 미산출(0원) 상품 진단 리포트」인데 그 근거가 가리키는 `admin/start-price/` 화면의 실제 이름은 **「상품 › 상품별 기본사양가」** 다(운영자 매뉴얼 `tools/manual_content.py:696`·화면 title `catalog/start_price_views.py:57`). 이 화면은 진단 리포트가 아니라 **자사몰 목록에 나갈 대표가를 관리하는 화면**이고, 자동/수기/없음(실패) 탭과 실패사유 열이 0원 진단 구실을 겸한다. 매뉴얼은 기본사양가가 「예전 이름 시작가 · API 필드 `start_price` · 최저가가 아니다」 라고 못 박아 두었다(`manual_content.py:77`) — 원장 행 이름으로는 이 화면을 찾을 수 없다.</td><td>서희항</td><td>없음 — 화면명 통일 또는 원장 행 이름 정정</td></tr>
+<tr><td><code>G-t65-058</code></td><td>나 — 행은 있는데 코드 0</td><td>게시 위젯 전수 대조가 아직 「부분」이다. 대조 결과를 담는 원장이 없어 어디까지 봤는지가 사람 기억에 남는다. 3차 승인 체계만 정해져 있다.</td><td>서희항</td><td>권위 가격표 최신본 확정</td></tr>
+<tr><td><code>G-t65-059</code></td><td>라 — 결정 미정</td><td>제외된 구성요소가 「진짜 결함」인지 「형제 구성요소가 이미 커버하는 정상 미매칭」인지 자동으로 갈리지 않아 사람이 매번 판정한다. 판정 기준이 문서로 없다.</td><td>서희항</td><td>없음 — 판정 기준 작성</td></tr>
+</table></details>
+</div>
+<h2>정산·통계</h2>
+<div class="proc" id="P21">
+<div class="phead"><h3>P21 매출·결제수단·할인 집계</h3><div class="badges">
+<span class="b steps">4단계</span>
+<span class="b k라">라 2</span>
+</div></div>
+<p class="def">&quot;어제 얼마 팔렸나&quot;를 보는 흐름. 이 카드에서 유일하게 이미 작동하는 덩어리이고, 개발이 아니라 확인·설정 일이다.</p>
+<div class="mer"><pre class="mermaid">sequenceDiagram
+    autonumber
+    participant O as 운영자
+    participant S as 셀러어드민
+    O-&gt;&gt;S: /statistic/sales/period 열기
+    S--&gt;&gt;O: 월별·일별/기간별 매출
+    S--&gt;&gt;O: 결제수단별 매출 집계
+    O-&gt;&gt;S: /statistic/promotion/additionalDiscount
+    S--&gt;&gt;O: 쿠폰·할인 사용액
+    Note over O,S: 샵바이 기본 제공 — 신규 개발 없음</pre></div>
+<div class="mer"><pre class="mermaid">flowchart TD
+    A[운영자] --&gt; B[셀러어드민 통계]
+    B --&gt; C[기간별 매출]
+    B --&gt; D[결제수단별 매출]
+    B --&gt; E[쿠폰·할인 사용액]
+    C --&gt; F{후니 고유 축이 필요한가}
+    D --&gt; F
+    E --&gt; F
+    F -- 상품군·공정·외주 --&gt; G[샵바이 통계로 안 나옴 P22·P23]
+    F -- 아니다 --&gt; H[그대로 사용]</pre></div>
+<details><summary>단계표 4행</summary><table>
+<tr><th>#</th><th>단계</th><th>시스템</th><th>담당자</th><th>row_id</th><th>상태</th><th>근거</th></tr>
+<tr><td>1</td><td>1. 월별 매출 통계</td><td>셀러어드민</td><td>최숙진</td><td><code>STD-FIN-001</code></td><td>작동</td><td class="ev">https://service.shopby.co.kr/statistic/sales/period@2026-09-16 21:33</td></tr>
+<tr><td>2</td><td>2. 일별/기간별 매출 조회</td><td>셀러어드민</td><td>최숙진</td><td><code>STD-FIN-002</code></td><td>작동</td><td class="ev">https://service.shopby.co.kr/statistic/sales/period@2026-09-16 21:33</td></tr>
+<tr><td>3</td><td>3. 결제수단별 매출 집계</td><td>셀러어드민</td><td>최숙진</td><td><code>STD-FIN-003</code></td><td>작동</td><td class="ev">https://service.shopby.co.kr/statistic/sales/period@2026-09-16 21:33</td></tr>
+<tr><td>4</td><td>4. 쿠폰/할인 사용액 집계</td><td>셀러어드민</td><td>최숙진</td><td><code>STD-FIN-011</code></td><td>작동</td><td class="ev">https://service.shopby.co.kr/statistic/promotion/additionalDiscount@2026-09-16</td></tr>
+</table></details>
+<details><summary>빠진 곳 2건</summary><table>
+<tr><th>id</th><th>종류</th><th>내용</th><th>제안 담당</th><th>선행</th></tr>
+<tr><td><code>G-t65-060</code></td><td>라 — 결정 미정</td><td>네 행이 모두 셀러어드민 `/statistic/sales/period` 한 화면 하나를 근거로 「작동·provided」로 판정돼 있다. 그 한 화면이 네 질문에 다 답하는지 항목 단위로 대조한 기록은 찾지 못했다 — 특히 결제수단별 집계가 무통장·가상계좌를 따로 세는지가 1차 런칭에서 중요하다.</td><td>최숙진</td><td>없음 — 화면 항목 대조</td></tr>
+<tr><td><code>G-t65-061</code></td><td>라 — 결정 미정</td><td>매출의 권위가 샵바이 주문 라인인지 후니 계산가인지 정해져 있지 않다(원장 `X-SETTLE-AUTH` 미관측). 위젯 계산가가 카트에 주입되는 구조(P31)라 두 값이 갈리면 매출 숫자 자체가 갈린다.</td><td>신우진</td><td>P31 카트 주입 값의 권위 확정</td></tr>
+</table></details>
+</div>
+<div class="proc" id="P22">
+<div class="phead"><h3>P22 고객군·상품군 판매 통계</h3><div class="badges">
+<span class="b steps">7단계</span>
+<span class="b k나">나 1</span>
+<span class="b k라">라 2</span>
+</div></div>
+<p class="def">&quot;무엇이 누구에게 팔리나&quot;를 보는 흐름. 상품군(인쇄/굿즈/패키지/수작)별 상세 통계는 구 사이트에 있던 축이라 샵바이 기본 통계로 그대로 나오지 않는다.</p>
+<div class="mer"><pre class="mermaid">sequenceDiagram
+    autonumber
+    participant O as 운영자
+    participant S as 셀러어드민
+    participant W as webadmin
+    O-&gt;&gt;S: 상품별 판매 통계 · 회원/비회원 비중
+    S--&gt;&gt;O: 샵바이 기본 통계
+    O-&gt;&gt;S: 상품군 4종(인쇄·굿즈·패키지·수작) 상세
+    S--xO: 구 사이트 축 — 그대로는 안 나옴
+    O-&gt;&gt;W: webadmin 통계 화면
+    W--xO: 통계 화면 없음(@2026-09-16 실측)</pre></div>
+<div class="mer"><pre class="mermaid">flowchart TD
+    A[상품군별 통계 필요] --&gt; B{어느 시스템}
+    B -- 셀러어드민 --&gt; C[상품별 통계는 있다]
+    C --&gt; D{상품군 묶음}
+    D -- 인쇄·굿즈·패키지·수작 --&gt; E[샵바이 카테고리로 묶이나 미확인]
+    B -- webadmin --&gt; F[통계 화면 없음]
+    E --&gt; G{묶이면}
+    G -- 예 --&gt; H[카테고리 설정만으로 해결]
+    G -- 아니오 --&gt; I[별도 집계 필요 · 개발]</pre></div>
+<details><summary>단계표 7행</summary><table>
+<tr><th>#</th><th>단계</th><th>시스템</th><th>담당자</th><th>row_id</th><th>상태</th><th>근거</th></tr>
+<tr><td>1</td><td>1. 상품별 판매 통계</td><td>셀러어드민</td><td>최숙진</td><td><code>STD-FIN-004</code></td><td>작동</td><td class="ev">https://service.shopby.co.kr/statistic/sales/period@2026-09-16 21:33</td></tr>
+<tr><td>2</td><td>2. 상품군별 매출 비중</td><td>셀러어드민</td><td>최숙진</td><td><code>STD-FIN-005</code></td><td>작동</td><td class="ev">https://service.shopby.co.kr/statistic/sales/period@2026-09-16 21:33</td></tr>
+<tr><td>3</td><td>3. 회원/비회원 주문 비중</td><td>셀러어드민</td><td>최숙진</td><td><code>STD-FIN-006</code></td><td>작동</td><td class="ev">https://service.shopby.co.kr/statistic/sales/period@2026-09-16 21:33</td></tr>
+<tr><td>4</td><td>4. [구IA#79] 인쇄/제본 상품통계(상세보기)</td><td>셀러어드민</td><td>최숙진</td><td><code>STD-FIN-015</code></td><td>미실측</td><td class="ev">IA No.79 인쇄/제본 상품통계 · webadmin 통계 화면 없음 @ 2026-09-16 21:28 · 샵바이 통계(R1d)</td></tr>
+<tr><td>5</td><td>5. [구IA#80] 굿즈 상품통계(상세보기)</td><td>셀러어드민</td><td>최숙진</td><td><code>STD-FIN-016</code></td><td>미실측</td><td class="ev">IA No.80 굿즈 상품통계 · 동 79</td></tr>
+<tr><td>6</td><td>6. [구IA#81] 패키지 상품통계(상세보기)</td><td>셀러어드민</td><td>최숙진</td><td><code>STD-FIN-017</code></td><td>미실측</td><td class="ev">IA No.81 패키지 상품통계 · 동 79</td></tr>
+<tr><td>7</td><td>7. [구IA#82] 수작 상품통계(상세보기)</td><td>셀러어드민</td><td>최숙진</td><td><code>STD-FIN-018</code></td><td>미실측</td><td class="ev">IA No.82 수작 상품통계 · 동 79</td></tr>
+</table></details>
+<details><summary>빠진 곳 3건</summary><table>
+<tr><th>id</th><th>종류</th><th>내용</th><th>제안 담당</th><th>선행</th></tr>
+<tr><td><code>G-t65-062</code></td><td>라 — 결정 미정</td><td>구 사이트 상품군 통계 4종(인쇄/제본·굿즈·패키지·수작)이 샵바이 카테고리 묶음으로 재현되는지가 미정이다. webadmin 에는 통계 화면이 없다(@2026-09-16 실측). 재현되면 카테고리 설정만으로 끝나고, 안 되면 개발 항목이 4개 생긴다.</td><td>최숙진</td><td>P14 카테고리 귀속 정리</td></tr>
+<tr><td><code>G-t65-063</code></td><td>나 — 행은 있는데 코드 0</td><td>상품군 통계 4행이 모두 「미실측」이다 — 셀러어드민 통계 메뉴를 열어 대체 가능 여부를 판정한 사람이 아직 없다.</td><td>최숙진</td><td>없음 — 셀러어드민 실화면 확인</td></tr>
+<tr><td><code>G-t65-064</code></td><td>라 — 결정 미정</td><td>수작 상품이 어느 시스템에 사는지 미정(P14)이라 수작 통계는 분모부터 정해지지 않는다.</td><td>신우진</td><td>P14 수작 상품 시스템 결정</td></tr>
+</table></details>
+</div>
+<div class="proc" id="P23">
+<div class="phead"><h3>P23 생산·외주 작업량·발주정산</h3><div class="badges">
+<span class="b steps">3단계</span>
+<span class="b k나">나 1</span>
+<span class="b k라">라 2</span>
+</div></div>
+<p class="def">현장이 얼마나 일했고 외주에 얼마를 줄지를 세는 흐름. 커머스 바깥(MES·외주)의 숫자라 샵바이가 답해 주지 않는다.</p>
+<div class="mer"><pre class="mermaid">sequenceDiagram
+    autonumber
+    participant O as 운영자
+    participant G as MES
+    participant V as 외주처
+    O-&gt;&gt;G: 기간별 공정/팀 작업량 요청
+    G--xO: 현행 기능 여부 미확인
+    O-&gt;&gt;O: 굿즈 발주 대상 집계
+    O-&gt;&gt;V: 발주
+    V--&gt;&gt;O: 납품
+    O-&gt;&gt;O: 외주 정산 엑셀 산출
+    Note over O,G: 구 사이트에 팀별통계·발주정산 Excel 이 있었으나 구현 근거를 찾지 못했다</pre></div>
+<div class="mer"><pre class="mermaid">flowchart TD
+    A[기간 지정] --&gt; B{무엇을}
+    B -- 공정·팀 작업량 --&gt; C[MES 실적 필요]
+    C --&gt; D{MES 현행 기능?}
+    D -- 미확인 --&gt; E[라 — 신규 개발이면 외부 MES 담당]
+    B -- 외주 발주 --&gt; F[발주 대상 집계]
+    F --&gt; G[발주 · 납품]
+    G --&gt; H[정산 엑셀]
+    H --&gt; I{그릇}
+    I -- 없음 --&gt; J[나 — 산출 화면 미구현]</pre></div>
+<details><summary>단계표 3행</summary><table>
+<tr><th>#</th><th>단계</th><th>시스템</th><th>담당자</th><th>row_id</th><th>상태</th><th>근거</th></tr>
+<tr><td>1</td><td>1. 공정/팀별 작업량 통계</td><td>MES</td><td>최숙진</td><td><code>STD-FIN-007</code></td><td>미착수</td><td class="ev">print-kb/wiki/policy/custom-dev.md#CST-09 · L4 사유: 제작상품 팀별통계(Excel)가 legacy 에 있으나 구현 근거 없음</td></tr>
+<tr><td>2</td><td>2. 외주 발주/정산 엑셀 산출</td><td>미확인</td><td>최숙진</td><td><code>STD-FIN-010</code></td><td>미착수</td><td class="ev">print-quote/04_design/ia.md §2.3 SM-A-55 · L4 사유: 굿즈 발주/정산 Excel 이 legacy 에 있으나 구현 근거 없음</td></tr>
+<tr><td>3</td><td>3. [구IA#84] 굿즈 발주/정산(Excel 다운)</td><td>미확인</td><td>최숙진</td><td><code>STD-FIN-019</code></td><td>미착수</td><td class="ev">IA No.84 굿즈 발주/정산 Excel · MES 현행(auto-vs-human §2.7) · webadmin 없음 @ 2026-09-16 21:28</td></tr>
+</table></details>
+<details><summary>빠진 곳 3건</summary><table>
+<tr><th>id</th><th>종류</th><th>내용</th><th>제안 담당</th><th>선행</th></tr>
+<tr><td><code>G-t65-065</code></td><td>라 — 결정 미정</td><td>공정/팀별 작업량이 MES 현행 기능인지, 신규 개발인지가 갈리지 않았다. 신규면 담당이 사내 4인 밖(MES 담당)으로 나간다 — 범위 결정이 선행이다.</td><td>신우진</td><td>MES 연동 범위 확정(t64)</td></tr>
+<tr><td><code>G-t65-066</code></td><td>나 — 행은 있는데 코드 0</td><td>외주 발주/정산 엑셀과 굿즈 발주/정산이 구 사이트에 있었으나 새 시스템에 그릇이 없다. 두 행 모두 「사는 시스템 미확인」이다.</td><td>최숙진</td><td>외주 발주가 사는 시스템 결정</td></tr>
+<tr><td><code>G-t65-067</code></td><td>라 — 결정 미정</td><td>굿즈 외주 발주를 커머스(샵바이 주문)에서 뽑을지 생산(MES)에서 뽑을지 정해지지 않았다.</td><td>신우진</td><td>없음 — 결정 자체가 선행</td></tr>
+</table></details>
+</div>
+<div class="proc" id="P24">
+<div class="phead"><h3>P24 PG 정산 대사·계좌·미수금</h3><div class="badges">
+<span class="b steps">4단계</span>
+<span class="b k나">나 1</span>
+<span class="b k라">라 2</span>
+</div></div>
+<p class="def">돈이 실제로 들어왔는지 맞춰 보는 흐름. 주문 금액과 PG 입금액, 가상계좌 입금과 업체별 미수금을 대조한다.</p>
+<div class="mer"><pre class="mermaid">sequenceDiagram
+    autonumber
+    participant O as 운영자
+    participant P as PG
+    participant S as 셀러어드민
+    O-&gt;&gt;S: 기간 주문·결제 내역
+    O-&gt;&gt;P: 정산 내역 수령
+    O-&gt;&gt;O: 대사 — 주문 금액 vs 입금액
+    alt 차이 있음
+        O-&gt;&gt;O: 원인 추적(환불·부분취소·수수료)
+    end
+    O-&gt;&gt;O: 업체별 미수금 정리
+    Note over O,P: 가상계좌 정산한도 1,000만 원 초과 시 처리 미정</pre></div>
+<div class="mer"><pre class="mermaid">flowchart TD
+    A[정산 주기] --&gt; B[주문·결제 내역]
+    B --&gt; C[PG 정산 내역]
+    C --&gt; D{금액 일치}
+    D -- 일치 --&gt; E[정산 확정]
+    D -- 불일치 --&gt; F[환불·부분취소·수수료 확인 P03]
+    A --&gt; G[가상계좌 입금]
+    G --&gt; H{일 한도 1,000만 원}
+    H -- 초과 --&gt; I[라 — 처리 방안 미정 · 담당 외부]
+    A --&gt; J[업체별 미수금]
+    J --&gt; K{원장 그릇}
+    K -- webadmin 화면 없음 --&gt; L[나 — 미구현]</pre></div>
+<details><summary>단계표 4행</summary><table>
+<tr><th>#</th><th>단계</th><th>시스템</th><th>담당자</th><th>row_id</th><th>상태</th><th>근거</th></tr>
+<tr><td>1</td><td>1. PG 정산 대사</td><td>미확인</td><td>최숙진</td><td><code>STD-FIN-008</code></td><td>미착수</td><td class="ev">print-kb/wiki/policy/order-payment.md#PAY-02 · L4 사유: 샵바이 정산이 라인 salePrice/addPrice 를 권위로 쓰는지 미관측(X-SETTLE-AUTH) — 대사 설계 이전 단계</td></tr>
+<tr><td>2</td><td>2. [구IA#47] 계좌관리(원장용 계좌 등록)</td><td>미확인</td><td>최숙진</td><td><code>STD-FIN-013</code></td><td>미착수</td><td class="ev">docs/huni/후니정기미팅 정리260915.html 「프린팅머니 원장 — 후니 웹어드민이 잔액·원장 보유 · 배치 미정」</td></tr>
+<tr><td>3</td><td>3. [구IA#49] 업체별 미수금</td><td>미확인</td><td>최숙진</td><td><code>STD-FIN-014</code></td><td>미착수</td><td class="ev">IA No.49 업체별 미수금 · 9/15 회의 원장 배치 미정 · webadmin 해당 화면 없음 @ 2026-09-16 21:28</td></tr>
+<tr><td>4</td><td>4. 가상계좌 정산한도 1,000만 원 초과 시 처리 방안</td><td>결정(PM)</td><td>외부(토스페이먼츠)</td><td><code>STD-FIN-020</code></td><td>미착수</td><td class="ev">후니정기미팅 정리260915.html §프린팅머니 · 미결 4</td></tr>
+</table></details>
+<details><summary>빠진 곳 3건</summary><table>
+<tr><th>id</th><th>종류</th><th>내용</th><th>제안 담당</th><th>선행</th></tr>
+<tr><td><code>G-t65-068</code></td><td>라 — 결정 미정</td><td>샵바이 정산이 주문 라인의 `salePrice`/`addPrice` 를 권위로 쓰는지가 관측되지 않았다(원장 `X-SETTLE-AUTH`). 위젯이 계산한 값을 카트에 주입하는 구조(P31)에서 이 질문에 답하지 못하면 대사 설계 자체를 시작할 수 없다.</td><td>최숙진</td><td>P31 카트 주입 값의 권위 확정</td></tr>
+<tr><td><code>G-t65-069</code></td><td>라 — 결정 미정</td><td>가상계좌 정산한도 1,000만 원 초과 처리가 미정이고 담당이 외부(토스페이먼츠)다. 무통장·가상계좌가 현재 유일하게 동작하는 결제 수단이라(P29) 런칭 초기에 바로 걸린다.</td><td>신우진</td><td>PG 연동 범위 확정(P29)</td></tr>
+<tr><td><code>G-t65-070</code></td><td>나 — 행은 있는데 코드 0</td><td>계좌관리·업체별 미수금 화면이 webadmin 에 없다(@2026-09-16 실측). 프린팅머니 원장 배치가 미정(9/15 회의)이라 그릇 위치부터 정해지지 않았다.</td><td>최숙진</td><td>t62 프린팅머니 원장 소유 결정</td></tr>
+</table></details>
+</div>
+<div class="proc" id="P25">
+<div class="phead"><h3>P25 프린팅머니 부채 집계·내보내기·외부회계 연동</h3><div class="badges">
+<span class="b steps">3단계</span>
+<span class="b k나">나 1</span>
+<span class="b k라">라 2</span>
+</div></div>
+<p class="def">고객이 미리 낸 돈(프린팅머니)은 회사 입장에서 빚이다. 그 빚을 세고, 회계 시스템으로 넘기고, 필요한 숫자를 엑셀로 뽑는 흐름이다.</p>
+<div class="mer"><pre class="mermaid">sequenceDiagram
+    autonumber
+    participant O as 운영자
+    participant L as 원장 보유 시스템(미정)
+    participant E as MS·이카운트
+    O-&gt;&gt;L: 미사용 프린팅머니 총액 조회
+    L--xO: 부채 집계 화면 없음
+    Note over O,L: 고객측 잔액 조회는 되나(SB-050) 합계 화면이 없다
+    O-&gt;&gt;O: 통계·주문 데이터 엑셀 내보내기
+    O-&gt;&gt;E: 회계 반영
+    Note over O,E: 연동 방식 미정 — 수기/파일/API</pre></div>
+<div class="mer"><pre class="mermaid">flowchart TD
+    A[회계 마감] --&gt; B[미사용 잔액 총액 필요]
+    B --&gt; C{원장 소유}
+    C -- 샵바이 적립금 A안 --&gt; D[셀러어드민 집계]
+    C -- 후니 원장 B′안 --&gt; E[webadmin 집계]
+    C -- 미결정 --&gt; F[라 — 그릇부터 못 정한다]
+    B --&gt; G{적립금 만료 기본값}
+    G -- 미명문화 --&gt; H[라 — 부채 인식 시점 불명]
+    A --&gt; I[엑셀 내보내기]
+    I --&gt; J{전역 내보내기}
+    J -- 미구현 --&gt; K[나 — legacy 통계 2건에만 부분 포함]
+    I --&gt; L[MS·이카운트 연동]
+    L --&gt; M{방식 미정}</pre></div>
+<details><summary>단계표 3행</summary><table>
+<tr><th>#</th><th>단계</th><th>시스템</th><th>담당자</th><th>row_id</th><th>상태</th><th>근거</th></tr>
+<tr><td>1</td><td>1. 적립금(프린팅머니) 부채 집계</td><td>미확인</td><td>최숙진</td><td><code>STD-FIN-009</code></td><td>미착수</td><td class="ev">print-kb/wiki/policy/mypage.md#MYP-02 · L4 사유: 고객측 포인트 잔액 조회는 done(SB-050)이나 부채 집계 화면 없음. 적립금 만료 기본값도 미명문화(X-MIG-EXPIRY)</td></tr>
+<tr><td>2</td><td>2. 통계·주문 데이터 엑셀 내보내기</td><td>미확인</td><td>최숙진</td><td><code>STD-FIN-012</code></td><td>미착수</td><td class="ev">print-quote/04_design/ia.md §2.3 SM-A-56 팀별통계 Excel · L4 사유: 엑셀 내보내기는 legacy 통계 2건에 부분 포함(1:N) — 전역 내보내기 기능으로는 미구현</td></tr>
+<tr><td>3</td><td>3. 적립금·증빙 데이터의 MS·이카운트 연동 방식</td><td>결정(PM)</td><td>최숙진</td><td><code>STD-FIN-021</code></td><td>미착수</td><td class="ev">후니정기미팅 정리260915.html §증빙서류 · 미결 3 / 후니-오픈잔여작업-실무진안내_260909.html §항목 4 · 결정 필요 — 증빙서류, 이카운트 연동 방안</td></tr>
+</table></details>
+<details><summary>빠진 곳 3건</summary><table>
+<tr><th>id</th><th>종류</th><th>내용</th><th>제안 담당</th><th>선행</th></tr>
+<tr><td><code>G-t65-071</code></td><td>라 — 결정 미정</td><td>프린팅머니 원장을 샵바이 적립금(A안)으로 둘지 후니 원장(B′안)으로 둘지가 아직 결정되지 않았다(t62 `STD-MYP-051`). 부채 집계는 원장이 있는 쪽에서만 만들 수 있어 이 결정이 열리기 전에는 착수 자체가 막힌다.</td><td>신우진</td><td>t62 프린팅머니 원장 소유 결정</td></tr>
+<tr><td><code>G-t65-072</code></td><td>라 — 결정 미정</td><td>적립금 만료 기본값이 명문화돼 있지 않다(원장 `X-MIG-EXPIRY`). 만료 정책이 곧 부채가 언제 사라지는지이므로 회계 숫자가 이 하나에 매인다.</td><td>최숙진</td><td>t62 프린팅머니 원장 소유 결정</td></tr>
+<tr><td><code>G-t65-073</code></td><td>나 — 행은 있는데 코드 0</td><td>전역 엑셀 내보내기가 없다 — 구 사이트 통계 2건에 부분적으로만 붙어 있었다. MS·이카운트 연동 방식(수기/파일/API)도 정해지지 않았다.</td><td>최숙진</td><td>원장 소유 결정</td></tr>
+</table></details>
+</div>
+<h2>시스템·플랫폼</h2>
+<div class="proc" id="P26">
+<div class="phead"><h3>P26 관리자 계정·권한·감사로그</h3><div class="badges">
+<span class="b steps">6단계</span>
+<span class="b k나">나 1</span>
+<span class="b k다">다 1</span>
+<span class="b k라">라 1</span>
+</div></div>
+<p class="def">운영자가 시스템에 들어오는 문. 지금은 문이 세 개(셀러어드민·webadmin·몰 /admin)이고 그중 하나는 아무도 못 들어간다.</p>
+<div class="mer"><pre class="mermaid">sequenceDiagram
+    autonumber
+    participant M as 마스터 운영자
+    participant S as 셀러어드민
+    participant W as webadmin
+    participant A as huni-mall /admin
+    M-&gt;&gt;S: 운영자 계정 생성 · 권한그룹 배정
+    Note over S: 현재 마스터 1 · 권한그룹 0
+    M-&gt;&gt;W: webadmin 관리자 등록(admin/auth/user/ 4행)
+    M-&gt;&gt;A: 몰 /admin 진입 시도
+    A--xM: token.role 이 항상 &quot;user&quot; — 아무도 못 들어간다
+    S--&gt;&gt;M: 개인정보 접근 이력(감사로그) 조회</pre></div>
+<div class="mer"><pre class="mermaid">flowchart TD
+    A[운영 권한 필요] --&gt; B{어느 시스템}
+    B -- 셀러어드민 --&gt; C[계정 생성 + 권한그룹]
+    C --&gt; D{권한그룹 0개}
+    D --&gt; E[나 — 그룹부터 만들어야 함]
+    B -- webadmin --&gt; F[admin/auth/user 등록]
+    F --&gt; G{세분 권한}
+    G -- 미확인 --&gt; H[전체 권한 한 덩어리 가능성]
+    B -- 몰 /admin --&gt; I[빈 스캐폴드]
+    I --&gt; J[role 항상 user · 진입 불가]
+    J --&gt; K[라 — 존폐 결정]</pre></div>
+<details><summary>단계표 6행</summary><table>
+<tr><th>#</th><th>단계</th><th>시스템</th><th>담당자</th><th>row_id</th><th>상태</th><th>근거</th></tr>
+<tr><td>1</td><td>1. 실무진 운영자 계정 생성 + 권한그룹(셀러어드민)</td><td>셀러어드민</td><td>최숙진</td><td><code>STD-SYS-038</code></td><td>미착수</td><td class="ev">https://service.shopby.co.kr/admin/list·/authorityGroup/list @ 2026-09-16 21:33 (R/R1d/evidence/52-admin-list.txt·53-authority-group.txt)</td></tr>
+<tr><td>2</td><td>2. 관리자 계정 등록·관리</td><td>몰·webadmin</td><td>김동학</td><td><code>STD-SYS-001</code></td><td>부분</td><td class="ev">SB-059 stub — huni-skin-shopby/src/app/(admin)/admin/page.tsx:1-8 (자리표시) · WA-058 partial — raw/webadmin/webadmin/catalog/admin.py:2242-2310</td></tr>
+<tr><td>3</td><td>3. [구IA#44] 관리자 등록/관리(webadmin)</td><td>webadmin</td><td>서희항</td><td><code>STD-SYS-025</code></td><td>부분</td><td class="ev">https://huni-admin.printly.co.kr/admin/auth/user/ 4행 @ 2026-09-16 21:28 (webadmin 관리자) · 샵바이 운영자 등록은 셀러어드민(R1d)</td></tr>
+<tr><td>4</td><td>4. 역할 기반 세분 권한 제어</td><td>huni-mall</td><td>김동학</td><td><code>STD-SYS-002</code></td><td>부분</td><td class="ev">SB-060 partial — huni-skin-shopby/src/proxy.ts:21-23 (ADMIN 검사 미활성 주석) · src/lib/api/hooks/use-admins.ts:20</td></tr>
+<tr><td>5</td><td>5. 관리자 대시보드(/admin) 존폐 결정</td><td>결정(PM)</td><td>신우진</td><td><code>STD-SYS-042</code></td><td>미착수</td><td class="ev">huni-skin-shopby/src/app/(admin)/admin/page.tsx:2-8 스캐폴드 · src/lib/auth/auth.ts:161 `token.role = &quot;user&quot;` 무조건 · src/app/(admin)/layout.tsx:19 admin 아니면 / · SPEC-TAKEOVER-001 U-16</td></tr>
+<tr><td>6</td><td>6. 관리자 작업 감사로그</td><td>셀러어드민</td><td>최숙진</td><td><code>STD-SYS-003</code></td><td>작동</td><td class="ev">https://service.shopby.co.kr/PrivacyAccessHistories@2026-09-16</td></tr>
+</table></details>
+<details><summary>빠진 곳 3건</summary><table>
+<tr><th>id</th><th>종류</th><th>내용</th><th>제안 담당</th><th>선행</th></tr>
+<tr><td><code>G-t65-074</code></td><td>나 — 행은 있는데 코드 0</td><td>셀러어드민에 권한그룹이 0개다(마스터 1명뿐). 실무진이 각자 계정으로 들어가려면 그룹부터 만들어야 하는데, 지금은 한 계정을 나눠 쓰는 상태로 보인다 — 그러면 감사로그가 누가 했는지 구분하지 못한다.</td><td>최숙진</td><td>없음 — 바로 착수 가능</td></tr>
+<tr><td><code>G-t65-075</code></td><td>라 — 결정 미정</td><td>몰 `/admin` 이 빈 스캐폴드이고 `auth.ts:161` 이 `token.role = &quot;user&quot;` 를 무조건 넣어 `(admin)/layout.tsx:19` 에서 항상 튕겨낸다. 쓸 것이 아니면 지우고, 쓸 것이면 역할을 실제로 발급해야 한다 — 존폐 결정이 선행이다.</td><td>신우진</td><td>없음 — 결정 자체가 선행</td></tr>
+<tr><td><code>G-t65-076</code></td><td>다 — 코드는 있는데 연결 안 됨</td><td>`proxy.ts:21-23` 에 ADMIN 검사가 주석으로 비활성돼 있고 `use-admins.ts:20` 이 그 위에 서 있다. 역할 기반 권한이 코드에는 있는데 꺼져 있다.</td><td>김동학</td><td>/admin 존폐 결정</td></tr>
+</table></details>
+</div>
+<div class="proc" id="P27">
+<div class="phead"><h3>P27 몰 기초정보·도메인·발송메일 설정</h3><div class="badges">
+<span class="b steps">4단계</span>
+<span class="b k나">나 1</span>
+<span class="b k다">다 2</span>
+</div></div>
+<p class="def">몰이 법적으로·기술적으로 &quot;제대로 선&quot; 상태를 만드는 흐름. 사업자 정보를 채우고, 도메인을 하나로 맞추고, 보내는 메일이 스팸으로 안 가게 한다.</p>
+<div class="mer"><pre class="mermaid">sequenceDiagram
+    autonumber
+    participant O as 운영자
+    participant S as 셀러어드민
+    participant K as 김동학
+    O-&gt;&gt;S: 기초정보 입력(회사명·사업자등록번호·통신판매업신고번호·주소·개인정보책임자)
+    Note over S: 현재 전부 빈칸 · 대표자명 「대표 운영자」
+    K-&gt;&gt;S: 도메인 정합 확인
+    Note over K,S: PC shopby.huniprinting.com / 모바일 shoby.huniprinting.com / SNS 콜백 shoby.huniprinting.co.kr
+    O-&gt;&gt;S: 발송전용 e메일 도메인 정리
+    Note over O,S: 개인/회사 도메인은 SPF·DKIM·DMARC 인증 필요</pre></div>
+<div class="mer"><pre class="mermaid">flowchart TD
+    A[런칭 준비] --&gt; B[기초정보 입력]
+    B --&gt; C{빈칸}
+    C -- 회사명·사업자번호·통신판매업·주소·책임자 --&gt; D[법적 고지 미충족]
+    A --&gt; E[도메인 3종 확인]
+    E --&gt; F{철자 불일치}
+    F -- shopby / shoby --&gt; G[SNS 로그인 콜백 실패 위험]
+    A --&gt; H[보호 라우트 리다이렉트]
+    H --&gt; I{vercel.app 로 튐}
+    I -- 마이페이지·/admin --&gt; J[다 — 도메인 밖으로 나간다]
+    A --&gt; K[발송전용 메일]
+    K --&gt; L[SPF·DKIM·DMARC 인증]</pre></div>
+<details><summary>단계표 4행</summary><table>
+<tr><th>#</th><th>단계</th><th>시스템</th><th>담당자</th><th>row_id</th><th>상태</th><th>근거</th></tr>
+<tr><td>1</td><td>1. 기초정보 사업자 정보 입력</td><td>셀러어드민</td><td>최숙진</td><td><code>STD-SYS-037</code></td><td>미착수</td><td class="ev">https://service.shopby.co.kr/service @ 2026-09-16 21:33 — 회사명·사업자등록번호·통신판매업 신고번호·주소·업종/업태·개인정보보호책임자 빈칸 · 대표자명 「대표 운영자」 · API serviceBasicInfo companyName=&quot;&quot; (R/R1d/evidence/72-service-basic.txt)</td></tr>
+<tr><td>2</td><td>2. 쇼핑몰 도메인·SNS 콜백 URL 정합</td><td>셀러어드민</td><td>김동학</td><td><code>STD-SYS-036</code></td><td>미착수</td><td class="ev">https://service.shopby.co.kr/mall/modification/81683 @ 2026-09-16 21:31 — PC 웹 도메인 https://shopby.huniprinting.com/ · 모바일 웹 https://shoby.huniprinting.com · SNS 콜백 PC https://shoby.huniprinting.co.kr/callback/auth-callback · 실제 신규몰(p1)=https://shopby.huniprinting.co.kr/ (R/R1d/evidence/20-mall-list.txt·24-mall-modification.txt)</td></tr>
+<tr><td>3</td><td>3. 보호 라우트 리다이렉트가 vercel.app 으로 튀는 문제</td><td>huni-mall</td><td>김동학</td><td><code>STD-SYS-024</code></td><td>미착수</td><td class="ev">https://shopby.huniprinting.co.kr/mypage → https://huni-skin-shopby.vercel.app/login?callbackUrl=%2Fmypage @ 2026-09-16 21:27</td></tr>
+<tr><td>4</td><td>4. 발송전용 e-mail 도메인 정리·메일 도메인 인증</td><td>셀러어드민</td><td>최숙진</td><td><code>STD-SYS-040</code></td><td>미착수</td><td class="ev">https://service.shopby.co.kr/mall/modification/81683 @ 2026-09-16 21:31 — 고객센터/발송전용 e메일 [연락처 마스킹] · 화면 안내 「개인/회사 소유 도메인은 SPF/DKIM/DMARC 인증 필요」 · /mail/dispatch 발송 메일 동일 (R/R1d/evidence/24-mall-modification.txt·32-mail-dispatch.txt)</td></tr>
+</table></details>
+<details><summary>빠진 곳 3건</summary><table>
+<tr><th>id</th><th>종류</th><th>내용</th><th>제안 담당</th><th>선행</th></tr>
+<tr><td><code>G-t65-077</code></td><td>나 — 행은 있는데 코드 0</td><td>사업자 정보가 통째로 빈칸이다 — 회사명·사업자등록번호·통신판매업 신고번호·주소·업종/업태·개인정보보호책임자가 모두 비어 있고 대표자명이 「대표 운영자」로 남아 있다. API `serviceBasicInfo` 의 `companyName` 도 빈 문자열이다. 법적 표기 의무라 런칭 차단 사유다.</td><td>최숙진</td><td>없음 — 바로 착수 가능</td></tr>
+<tr><td><code>G-t65-078</code></td><td>다 — 코드는 있는데 연결 안 됨</td><td>도메인이 세 갈래다 — PC 웹 `shopby.huniprinting.com`, 모바일 웹 `shoby.huniprinting.com`, SNS 콜백 PC `shoby.huniprinting.co.kr`. `shopby` 와 `shoby` 철자가 갈려 있어 SNS 로그인 콜백이 어느 쪽으로 돌아오는지 불안정하다.</td><td>김동학</td><td>없음 — 바로 착수 가능</td></tr>
+<tr><td><code>G-t65-079</code></td><td>다 — 코드는 있는데 연결 안 됨</td><td>`https://shopby.huniprinting.co.kr/mypage` 로 들어가면 `https://huni-skin-shopby.vercel.app/login?callbackUrl=%2Fmypage` 로 튄다. 고객이 로그인하다가 배포 플랫폼 도메인을 보게 된다.</td><td>김동학</td><td>도메인 정합 확정</td></tr>
+</table></details>
+</div>
+<div class="proc" id="P28">
+<div class="phead"><h3>P28 알림(SMS·알림톡) 설정·발송</h3><div class="badges">
+<span class="b steps">5단계</span>
+<span class="b k나">나 2</span>
+<span class="b k라">라 1</span>
+</div></div>
+<p class="def">고객에게 소식을 보내는 길. 지금은 발신번호도 채널도 등록돼 있는데 스위치가 「사용 안 함」으로 꺼져 있다.</p>
+<div class="mer"><pre class="mermaid">sequenceDiagram
+    autonumber
+    participant O as 운영자
+    participant S as 셀러어드민
+    actor C as 고객
+    O-&gt;&gt;S: SMS 사용설정 「사용」 전환
+    Note over S: 현재 「사용 안 함」 · 잔여 1,000P · 발신번호 02-3409-8853 등록
+    O-&gt;&gt;S: 알림톡 사용여부 「사용함」
+    Note over S: 채널 @huniprinting · 발신프로필키 등록 · 템플릿 0건
+    O-&gt;&gt;S: 주문배송 항목 선택
+    Note over S: 현재 항목 전부 「사용 안 함」
+    O-&gt;&gt;S: 템플릿 등록·검수
+    S--&gt;&gt;C: 주문·배송 단계 알림 발송</pre></div>
+<div class="mer"><pre class="mermaid">flowchart TD
+    A[알림 필요] --&gt; B{SMS}
+    B --&gt; C[발신번호 인증 완료]
+    C --&gt; D{사용설정}
+    D -- 사용 안 함 --&gt; E[켜야 한다]
+    D --&gt; F{포인트}
+    F -- 1,000P --&gt; G[SMS 1,000건 / 알림톡 1,666건 · 충전 필요]
+    A --&gt; H{알림톡}
+    H --&gt; I[채널·발신프로필키 등록됨]
+    I --&gt; J{사용여부}
+    J -- 사용 안 함 --&gt; E
+    I --&gt; K{템플릿}
+    K -- 0건 --&gt; L[나 — 등록·검수 필요]
+    E --&gt; M[주문배송 항목 선택]
+    M --&gt; N[발송]</pre></div>
+<details><summary>단계표 5행</summary><table>
+<tr><th>#</th><th>단계</th><th>시스템</th><th>담당자</th><th>row_id</th><th>상태</th><th>근거</th></tr>
+<tr><td>1</td><td>1. SMS 발신번호 인증 완료</td><td>셀러어드민</td><td>최숙진</td><td><code>STD-SYS-029</code></td><td>구현-미검증</td><td class="ev">후니정기미팅 정리260915.html §회원·로그인·인증 · 확정 3</td></tr>
+<tr><td>2</td><td>2. 테스트용 SMS 충전 완료 여부 확인</td><td>셀러어드민</td><td>최숙진</td><td><code>STD-SYS-030</code></td><td>미착수</td><td class="ev">후니정기미팅 정리260915.html §회원·로그인·인증 · 미결 2</td></tr>
+<tr><td>3</td><td>3. SMS 사용설정 「사용」 전환 + 포인트 충전</td><td>셀러어드민</td><td>최숙진</td><td><code>STD-SYS-034</code></td><td>미착수</td><td class="ev">https://service.shopby.co.kr/pro/premium/sms/main/config @ 2026-09-16 21:31 — SMS 사용설정 「사용 안 함」·잔여 1,000P(SMS 1,000건/알림톡 1,666건)·발신번호 02-3409-8853 등록·부족알림 사용(100P) (R/R1d/evidence/30-sms-config.png)</td></tr>
+<tr><td>4</td><td>4. 알림톡 사용여부 「사용함」 + 주문배송 항목 선택 + 템플릿 검수</td><td>셀러어드민</td><td>최숙진</td><td><code>STD-SYS-035</code></td><td>미착수</td><td class="ev">https://service.shopby.co.kr/pro/premium/kakao/notification/config @ 2026-09-16 21:31~21:34 — 채널 @huniprinting·발신프로필키 등록·알림톡 사용여부 「사용 안 함」·주문배송 항목 전부 「사용 안 함」·템플릿 관리 0건 (R/R1d/evidence/31-kakao-alimtalk.png·33-alimtalk-order-delivery.png·35-alimtalk-template-list.txt)</td></tr>
+<tr><td>5</td><td>5. 알림(SMS/알림톡/이메일) 템플릿 설정</td><td>셀러어드민</td><td>최숙진</td><td><code>STD-SYS-006</code></td><td>미착수</td><td class="ev">print-kb/wiki/policy/order-mgmt.md#OMG-03 · L4 사유: 알림 템플릿 관리 L2 무근거. 계약 선행.</td></tr>
+</table></details>
+<details><summary>빠진 곳 3건</summary><table>
+<tr><th>id</th><th>종류</th><th>내용</th><th>제안 담당</th><th>선행</th></tr>
+<tr><td><code>G-t65-080</code></td><td>나 — 행은 있는데 코드 0</td><td>알림톡 템플릿이 0건이다. 채널(@huniprinting)과 발신프로필키는 등록돼 있는데 보낼 내용이 없다. 템플릿은 카카오 검수를 거치므로 리드타임이 있다 — 늦게 시작하면 런칭을 민다.</td><td>최숙진</td><td>주문 단계별 알림 시점 확정</td></tr>
+<tr><td><code>G-t65-081</code></td><td>나 — 행은 있는데 코드 0</td><td>SMS·알림톡 사용설정이 둘 다 「사용 안 함」이고, 주문배송 항목도 전부 「사용 안 함」이다. 스위치만 켜면 되는 일과 템플릿을 만들어야 하는 일이 섞여 있다.</td><td>최숙진</td><td>없음 — 바로 착수 가능</td></tr>
+<tr><td><code>G-t65-082</code></td><td>라 — 결정 미정</td><td>어느 시점에 무엇을 보낼지(주문접수·입금확인·제작시작·출고·클레임 접수·답변 등록)가 목록으로 정해지지 않았다. P01~P07 의 모든 흐름이 이 목록을 기다린다.</td><td>신우진</td><td>없음 — 결정 자체가 선행</td></tr>
+</table></details>
+</div>
+<div class="proc" id="P29">
+<div class="phead"><h3>P29 결제(PG)·배송비 정책 설정</h3><div class="badges">
+<span class="b steps">2단계</span>
+<span class="b k다">다 1</span>
+<span class="b k라">라 2</span>
+</div></div>
+<p class="def">돈을 받는 방법과 배송비를 정하는 흐름. 지금 실제로 동작하는 결제 수단은 무통장 하나뿐이다.</p>
+<div class="mer"><pre class="mermaid">sequenceDiagram
+    autonumber
+    participant O as 운영자
+    participant S as 셀러어드민
+    participant M as huni-mall
+    participant P as PG
+    O-&gt;&gt;S: PG 연동 설정
+    M-&gt;&gt;M: pay-config 로드(ncp-pay)
+    Note over M: checkout-form 주석 — 「PG 연동은 후속 — 현재는 무통장만 동작」
+    O-&gt;&gt;S: 배송비 정책 설정
+    Note over O,S: 도서산간 권역 정책 미확정
+    M-&gt;&gt;P: 결제 요청(카드·간편결제)
+    P--xM: 미배선</pre></div>
+<div class="mer"><pre class="mermaid">flowchart TD
+    A[결제 수단] --&gt; B{무통장·가상계좌}
+    B -- 동작 --&gt; C[주문 가능]
+    A --&gt; D{카드·간편결제}
+    D -- 미배선 --&gt; E[다 — 설정은 있고 화면 연결이 없다]
+    C --&gt; F{환불 경로}
+    F --&gt; G[환불계좌 수령 미정 P03]
+    H[배송비 정책] --&gt; I{권역}
+    I -- 일반 --&gt; J[정책 적용]
+    I -- 도서산간 --&gt; K[라 — 권역 정책 미확정]</pre></div>
+<details><summary>단계표 2행</summary><table>
+<tr><th>#</th><th>단계</th><th>시스템</th><th>담당자</th><th>row_id</th><th>상태</th><th>근거</th></tr>
+<tr><td>1</td><td>1. PG 연동 설정</td><td>셀러어드민</td><td>최숙진</td><td><code>STD-SYS-004</code></td><td>부분</td><td class="ev">SB-033 done — huni-skin-shopby/src/lib/payments/ncp-pay.ts:47-70 · src/app/api/pay-config/route.ts:8 / SB-032 absent — src/components/checkout/checkout-form.tsx:8-9 (&#x27;PG 연동은 후속 — 현재는 무통장만 동작&#x27;)</td></tr>
+<tr><td>2</td><td>2. 배송비 정책 설정</td><td>셀러어드민</td><td>최숙진</td><td><code>STD-SYS-005</code></td><td>부분</td><td class="ev">print-kb/wiki/policy/shipping.md#SHIP-02 · L4 사유: 도서산간 권역 정책 미확정(1차 W7-9).</td></tr>
+</table></details>
+<details><summary>빠진 곳 3건</summary><table>
+<tr><th>id</th><th>종류</th><th>내용</th><th>제안 담당</th><th>선행</th></tr>
+<tr><td><code>G-t65-083</code></td><td>다 — 코드는 있는데 연결 안 됨</td><td>PG 설정 쪽 코드는 있다 — `src/lib/payments/ncp-pay.ts:47-70` 과 `src/app/api/pay-config/route.ts:8` 이 동작한다. 그런데 주문서(`checkout-form.tsx:8-9`)에 「PG 연동은 후속 — 현재는 무통장만 동작」 이라고 적혀 있다. 설정과 화면이 이어져 있지 않다.</td><td>최숙진</td><td>PG 계약·수단 확정</td></tr>
+<tr><td><code>G-t65-084</code></td><td>라 — 결정 미정</td><td>도서산간 권역 배송비 정책이 확정되지 않았다(1차 런칭 W7-9 로 밀려 있다). 권역 정의가 없으면 주문서에서 배송비가 틀리게 나온다.</td><td>최숙진</td><td>없음 — 정책 확정</td></tr>
+<tr><td><code>G-t65-085</code></td><td>라 — 결정 미정</td><td>1차 런칭을 무통장·가상계좌만으로 열지, 카드까지 열지가 정해지지 않았다. 이 결정이 P03 환불 경로와 P24 정산 대사를 동시에 바꾼다.</td><td>신우진</td><td>없음 — 결정 자체가 선행</td></tr>
+</table></details>
+</div>
+<div class="proc" id="P30">
+<div class="phead"><h3>P30 상품·가격 데이터 동기화(webadmin ↔ 샵바이)</h3><div class="badges">
+<span class="b steps">6단계</span>
+<span class="b k나">나 2</span>
+<span class="b k다">다 1</span>
+<span class="b k라">라 1</span>
+</div></div>
+<p class="def">후니의 인쇄 도메인 DB 와 커머스 플랫폼을 잇는 다리. 어느 축이 밀리고 어느 축이 당겨지는지가 「등록했는데 몰에 안 보인다」의 답이다.</p>
+<div class="mer"><pre class="mermaid">sequenceDiagram
+    autonumber
+    participant W as webadmin
+    participant S as 샵바이
+    participant M as huni-mall
+    participant D as Railway
+    W-&gt;&gt;S: 메인이미지 push(shopby_sync.py:118)
+    W-&gt;&gt;S: 전시 frontDisplayYn push(:315)
+    Note over W,S: 미는 축은 이 둘뿐 — 공통 클라이언트는 shopby_client.py
+    M-&gt;&gt;W: GET /api/w/v1/catalog (시작가 pull)
+    M-&gt;&gt;D: vc_v_product_detail_tabs 직접 SELECT
+    M-&gt;&gt;S: 상품 조회 · 토큰 인증
+    Note over M,S: 상품코드 수동 매핑 7건(product-code-map.ts:41-49)</pre></div>
+<div class="mer"><pre class="mermaid">flowchart TD
+    A[webadmin 변경] --&gt; B{어느 축}
+    B -- 메인이미지·전시여부 --&gt; C[push · 자동]
+    B -- 시작가 --&gt; D[몰이 pull · GET /api/w/v1/catalog]
+    B -- 옵션·제약 --&gt; E[위젯이 직접 조회]
+    B -- 상세탭 --&gt; F[Railway 뷰 직접 SELECT]
+    B -- 그 밖 --&gt; G[다 — 배선 없음]
+    C --&gt; H{상품코드 매핑}
+    H -- 수동 7건만 --&gt; I[다 — 나머지 상품 미등록]
+    E --&gt; J{서버키 헤더}
+    J -- X-Huni-Server-Key 미전송 --&gt; K[나 — 제공자가 켜면 403]
+    F --&gt; L{뷰 소유·타임아웃}
+    L -- 미정·없음 --&gt; M[라 — 계약 협상]</pre></div>
+<details><summary>단계표 6행</summary><table>
+<tr><th>#</th><th>단계</th><th>시스템</th><th>담당자</th><th>row_id</th><th>상태</th><th>근거</th></tr>
+<tr><td>1</td><td>1. 커머스 플랫폼 API 인증·토큰 관리</td><td>huni-mall</td><td>김동학</td><td><code>STD-SYS-007</code></td><td>작동</td><td class="ev">https://shopby.huniprinting.co.kr/product/136578124@2026-09-16 21:29</td></tr>
+<tr><td>2</td><td>2. 인쇄 도메인 DB ↔ 커머스 상품 동기화</td><td>webadmin</td><td>서희항</td><td><code>STD-SYS-008</code></td><td>부분</td><td class="ev">WA-045 done — raw/webadmin/webadmin/catalog/shopby_sync.py:1-30 · WA-046 done — catalog/shopby_client.py:1-50 · SB-015 partial — huni-skin-shopby/src/lib/printly/product-code-map.ts:41-49 (수동 7건만 등록)</td></tr>
+<tr><td>3</td><td>3. 상품 텍스트옵션 라벨 huni_token 미등록 확정 → 담기 구현 정합</td><td>몰·샵바이</td><td>김동학+신우진</td><td><code>STD-SYS-041</code></td><td>미착수</td><td class="ev">API GET /products/136578130 mallProductInputs=[huni_order, huni_item] (huni_token 없음) @ 2026-09-16 21:31 (R/R1d/evidence/api-server-product-sample.json) · Q0 label-check 226건 참조</td></tr>
+<tr><td>4</td><td>4. 후니 위젯 서버키 헤더(X-Huni-Server-Key) 전송 배선</td><td>몰·webadmin</td><td>김동학+서희항</td><td><code>STD-SYS-045</code></td><td>미착수</td><td class="ev">huni-skin-shopby/src grep `X-Huni-Server-Key` 0곳 · huni-skin-next/src/lib/printly/server-key.ts(포크 구현·commit 6231dc4) · SPEC-TAKEOVER-001 spec.md:43·D-4</td></tr>
+<tr><td>5</td><td>5. Railway 상세탭 뷰 직접 SELECT — 타임아웃·DDL 소유</td><td>huni-mall</td><td>김동학</td><td><code>STD-SYS-049</code></td><td>미착수</td><td class="ev">huni-skin-shopby/src/lib/printly/publications.ts:48-56 Pool 옵션 없음·84-85 SELECT · SPEC-TAKEOVER-001 D-2 · 포크 M5(commit 5366dac) 타임아웃 적용</td></tr>
+<tr><td>6</td><td>6. 웹훅 등록 화면 위치 확인 및 등록 여부</td><td>셀러어드민</td><td>최숙진</td><td><code>STD-SYS-039</code></td><td>미착수</td><td class="ev">https://service.shopby.co.kr 전체메뉴 98링크 중 webhook 0 · 앱 상세(Huni Admin) 항목=설치정보·API 권한 8종만 · Server API GET /webhooks 404·/webhooks/failed 400 (R/R1d/evidence/01-fullmenu-links.txt·42-app-huni-admin-detail.txt·api-get-log.txt)</td></tr>
+</table></details>
+<details><summary>빠진 곳 4건</summary><table>
+<tr><th>id</th><th>종류</th><th>내용</th><th>제안 담당</th><th>선행</th></tr>
+<tr><td><code>G-t65-086</code></td><td>다 — 코드는 있는데 연결 안 됨</td><td>동기화가 미는 축이 메인이미지와 전시 여부 둘뿐이고, 상품코드 매핑은 `product-code-map.ts:41-49` 에 **수동 7건**만 등록돼 있다. 상품이 수백 건인데 다리 위에 7건만 올라가 있다.</td><td>서희항</td><td>P14 상품 등록 정리</td></tr>
+<tr><td><code>G-t65-087</code></td><td>나 — 행은 있는데 코드 0</td><td>위젯 재견적 요청에 `X-Huni-Server-Key` 헤더를 싣는 코드가 몰에 0곳이다. 제공자가 `WAPI_SERVER_KEY_REQUIRED` 를 켜는 순간 재견적이 403 으로 죽는다. 포크(`huni-skin-next/src/lib/printly/server-key.ts`)에는 구현이 있다.</td><td>김동학</td><td>포크 처리 결정(P37)</td></tr>
+<tr><td><code>G-t65-088</code></td><td>라 — 결정 미정</td><td>상세탭 뷰의 DDL 소유자가 정해져 있지 않다(계약 협상). 몰이 남의 DB 뷰를 직접 읽고 있는데 그 뷰를 누가 바꿀 수 있는지가 없다.</td><td>신우진</td><td>없음 — 결정 자체가 선행</td></tr>
+<tr><td><code>G-t65-089</code></td><td>나 — 행은 있는데 코드 0</td><td>웹훅 등록 화면을 셀러어드민에서 찾지 못했다 — 전체메뉴 98링크 중 webhook 0건, Server API `GET /webhooks` 는 404, `/webhooks/failed` 는 400 이다. 주문 발생을 밀어서 받는 길이 없으면 폴링으로 가야 한다.</td><td>최숙진</td><td>샵바이에 웹훅 지원 여부 문의</td></tr>
+</table></details>
+</div>
+<div class="proc" id="P31">
+<div class="phead"><h3>P31 가격 계산 결과 카트 주입 브리지</h3><div class="badges">
+<span class="b steps">2단계</span>
+<span class="b k나">나 1</span>
+<span class="b k다">다 1</span>
+<span class="b k라">라 1</span>
+</div></div>
+<p class="def">이 몰의 심장. 위젯이 계산한 값이 장바구니 한 줄이 되는 지점이고, 그 값이 곧 매출·정산의 출발점이다.</p>
+<div class="mer"><pre class="mermaid">sequenceDiagram
+    autonumber
+    actor C as 고객
+    participant G as 위젯
+    participant M as huni-mall
+    participant S as 샵바이 카트
+    C-&gt;&gt;G: 옵션 선택
+    G-&gt;&gt;M: 견적 요청
+    M--&gt;&gt;G: 계산가
+    C-&gt;&gt;G: 담기
+    G-&gt;&gt;M: 선택값 + 계산가 전달
+    M-&gt;&gt;S: 카트 담기(mallProductInputs = huni_order, huni_item)
+    S--&gt;&gt;C: 장바구니 표시
+    Note over M,S: 전달값에 토큰·원고 저장키·프로젝트 식별자가 평문으로 실린다</pre></div>
+<div class="mer"><pre class="mermaid">flowchart TD
+    A[위젯 견적] --&gt; B[담기]
+    B --&gt; C[전달값 조립]
+    C --&gt; D{민감정보}
+    D -- 토큰·원고키·프로젝트ID 평문 --&gt; E[나 — 서명·비노출 미적용]
+    C --&gt; F[샵바이 카트 라인 생성]
+    F --&gt; G{금액의 권위}
+    G -- 위젯 계산가 --&gt; H[정산이 이 값을 쓰는지 미관측]
+    G -- 샵바이 salePrice --&gt; H
+    H --&gt; I[라 — X-SETTLE-AUTH · P21·P24 선행]
+    F --&gt; J[주문서 · 결제]</pre></div>
+<details><summary>단계표 2행</summary><table>
+<tr><th>#</th><th>단계</th><th>시스템</th><th>담당자</th><th>row_id</th><th>상태</th><th>근거</th></tr>
+<tr><td>1</td><td>1. 가격 계산 결과 카트 주입 브리지</td><td>huni-mall</td><td>김동학</td><td><code>STD-SYS-009</code></td><td>작동</td><td class="ev">https://shopby.huniprinting.co.kr/cart@2026-09-16 21:27</td></tr>
+<tr><td>2</td><td>2. 담기 전달값의 민감정보 비노출·서명 검증</td><td>huni-mall</td><td>김동학</td><td><code>STD-SYS-023</code></td><td>미착수</td><td class="ev">L0/N3/ARCHITECTURE-v2.md §10 A-13 (토큰·원고 저장키·프로젝트 식별자 평문 노출) · §3.2 · §8 I-2</td></tr>
+</table></details>
+<details><summary>빠진 곳 3건</summary><table>
+<tr><th>id</th><th>종류</th><th>내용</th><th>제안 담당</th><th>선행</th></tr>
+<tr><td><code>G-t65-090</code></td><td>나 — 행은 있는데 코드 0</td><td>담기 전달값에 토큰·원고 저장키·프로젝트 식별자가 평문으로 실린다(`ARCHITECTURE-v2.md` §10 A-13·§3.2·§8 I-2). 서명 검증도 없다 — 고객이 값을 바꿔 담으면 가격이 바뀔 수 있다는 뜻이다.</td><td>김동학</td><td>없음 — 바로 착수 가능</td></tr>
+<tr><td><code>G-t65-091</code></td><td>라 — 결정 미정</td><td>카트에 들어간 금액이 정산의 권위인지가 관측되지 않았다(`X-SETTLE-AUTH`). P21 매출·P24 대사가 모두 이 답을 기다린다.</td><td>신우진</td><td>없음 — 관측이 선행</td></tr>
+<tr><td><code>G-t65-092</code></td><td>다 — 코드는 있는데 연결 안 됨</td><td>전달값 라벨이 `huni_order`·`huni_item` 둘이고 `huni_token` 은 등록돼 있지 않다(`GET /products/136578130` 의 `mallProductInputs` 실측). 토큰을 쓰려면 상품 텍스트옵션에 라벨을 먼저 등록해야 한다 — P30 과 같은 뿌리다.</td><td>김동학</td><td>라벨 등록 여부 결정</td></tr>
+</table></details>
+</div>
+<div class="proc" id="P32">
+<div class="phead"><h3>P32 원고 저장소·디자인 에디터 연동</h3><div class="badges">
+<span class="b steps">2단계</span>
+<span class="b k나">나 1</span>
+<span class="b k다">다 1</span>
+<span class="b k라">라 1</span>
+</div></div>
+<p class="def">고객이 올린 파일과 에디터로 만든 디자인이 주문에 붙어 생산까지 가는 길의 앞쪽 절반.</p>
+<div class="mer"><pre class="mermaid">sequenceDiagram
+    autonumber
+    actor C as 고객
+    participant M as huni-mall
+    participant W as webadmin
+    participant E as Edicus
+    participant S3 as 원고 저장소
+    alt 파일 업로드
+        C-&gt;&gt;M: 원고 업로드
+        M-&gt;&gt;W: upload/presign
+        W-&gt;&gt;S3: 임시 저장(s3_artwork.py)
+    else 에디터
+        C-&gt;&gt;E: 디자인 편집
+        E-&gt;&gt;W: 프로젝트 저장(edicus_views.py)
+    end
+    C-&gt;&gt;M: 주문 확정
+    W-&gt;&gt;S3: 확정 승격(artwork_promote.py)</pre></div>
+<div class="mer"><pre class="mermaid">flowchart TD
+    A[원고 필요] --&gt; B{경로}
+    B -- 파일 업로드 --&gt; C[presign → 임시 저장]
+    B -- 에디터 --&gt; D[Edicus 프로젝트]
+    C --&gt; E[주문 확정 시 승격]
+    D --&gt; E
+    E --&gt; F[확정 원고]
+    F --&gt; G[검판·생산 t64]
+    D --&gt; H{에디터 담당}
+    H -- 미정 · 외부 --&gt; I[라 — 사내 4담당 경계 밖]
+    C --&gt; J{구현-미검증}
+    J --&gt; K[다 — 승격 동작 확인 기록 없음]</pre></div>
+<details><summary>단계표 2행</summary><table>
+<tr><th>#</th><th>단계</th><th>시스템</th><th>담당자</th><th>row_id</th><th>상태</th><th>근거</th></tr>
+<tr><td>1</td><td>1. 원고 저장소(스토리지) 연동</td><td>webadmin</td><td>서희항</td><td><code>STD-SYS-010</code></td><td>구현-미검증</td><td class="ev">WA-037 raw/webadmin/webadmin/config/urls.py:251 upload/presign · catalog/s3_artwork.py:208-280 · WA-052 catalog/artwork_promote.py:1</td></tr>
+<tr><td>2</td><td>2. 디자인 에디터 외부 서비스 연동</td><td>미정(외부)</td><td>미정</td><td><code>STD-SYS-011</code></td><td>부분</td><td class="ev">WA-041 done — raw/webadmin/webadmin/config/urls.py:274-275 · catalog/edicus_lookup.py:214-260 · WA-047 done — catalog/edicus_views.py:278-674 / SB-020 stub — huni-skin-shopby/src/components/product/configurator-actions.tsx:170-176</td></tr>
+</table></details>
+<details><summary>빠진 곳 3건</summary><table>
+<tr><th>id</th><th>종류</th><th>내용</th><th>제안 담당</th><th>선행</th></tr>
+<tr><td><code>G-t65-093</code></td><td>다 — 코드는 있는데 연결 안 됨</td><td>업로드 presign(`config/urls.py:251`·`catalog/s3_artwork.py:208-280`)과 확정 승격(`catalog/artwork_promote.py:1`)이 구현돼 있으나 「구현-미검증」이다. 주문 확정 시 임시→확정 승격이 빠짐없이 도는지 확인 기록을 찾지 못했다.</td><td>서희항</td><td>없음 — 실동작 검증</td></tr>
+<tr><td><code>G-t65-094</code></td><td>라 — 결정 미정</td><td>에디터 연동의 담당이 「미정」이고 사내 4담당 경계 밖이다. webadmin 쪽 조회·뷰(`edicus_lookup.py:214-260`·`edicus_views.py:278-674`)는 done 인데 몰 쪽 진입점(`configurator-actions`)은 stub 이다 — 반쪽만 이어져 있다.</td><td>신우진</td><td>없음 — 담당·범위 결정</td></tr>
+<tr><td><code>G-t65-095</code></td><td>나 — 행은 있는데 코드 0</td><td>원고 보관 기간·용량 정책이 없다. 인쇄 원고는 크고 오래 남아 저장 비용이 계속 는다.</td><td>서희항</td><td>없음 — 정책 작성</td></tr>
+</table></details>
+</div>
+<div class="proc" id="P33">
+<div class="phead"><h3>P33 본인인증·주소검색·배송추적 외부 연동</h3><div class="badges">
+<span class="b steps">3단계</span>
+<span class="b k나">나 2</span>
+<span class="b k라">라 1</span>
+</div></div>
+<p class="def">외부 서비스 세 가지를 몰에 붙이는 흐름. 하나는 되고, 하나는 호출 지점이 없고, 하나는 경로를 찾지 못했다.</p>
+<div class="mer"><pre class="mermaid">sequenceDiagram
+    autonumber
+    actor C as 고객
+    participant M as huni-mall
+    participant A as 본인인증
+    participant Z as 우편번호
+    participant D as 택배사
+    C-&gt;&gt;M: 가입·주문 시 본인인증
+    M--xA: 호출 지점 없음
+    C-&gt;&gt;M: 배송지 입력
+    M-&gt;&gt;Z: 우편번호/주소 검색
+    Z--&gt;&gt;C: 주소 선택(주문서에서 동작 확인됨)
+    C-&gt;&gt;M: 배송 조회
+    M-&gt;&gt;D: 송장 추적
+    D--xM: 연동 경로 미확인</pre></div>
+<div class="mer"><pre class="mermaid">flowchart TD
+    A[외부 서비스] --&gt; B{본인인증}
+    B -- 호출 지점 없음 --&gt; C[나 — 미배선]
+    A --&gt; D{우편번호·주소}
+    D -- 동작 --&gt; E[주문서에서 확인됨]
+    A --&gt; F{택배사 추적}
+    F -- 경로 미확인 --&gt; G[나 — 연계서비스 18건에도 없음]
+    C --&gt; H{필요한가}
+    H -- 성인인증·본인확인 요건 --&gt; I[라 — 요건부터 정해야]</pre></div>
+<details><summary>단계표 3행</summary><table>
+<tr><th>#</th><th>단계</th><th>시스템</th><th>담당자</th><th>row_id</th><th>상태</th><th>근거</th></tr>
+<tr><td>1</td><td>1. 본인인증 서비스 연동</td><td>huni-mall</td><td>김동학</td><td><code>STD-SYS-012</code></td><td>부분</td><td class="ev">SB-043 absent(grep 무결과) · L2 D-17 endpoint=&#x27;(호출 지점 없음)&#x27;</td></tr>
+<tr><td>2</td><td>2. 우편번호/주소 검색 서비스 연동</td><td>huni-mall</td><td>김동학</td><td><code>STD-SYS-013</code></td><td>작동</td><td class="ev">https://shopby.huniprinting.co.kr/checkout/202609160243938684@2026-09-16 21:33</td></tr>
+<tr><td>3</td><td>3. 택배사 배송추적 연동</td><td>huni-mall</td><td>김동학</td><td><code>STD-SYS-014</code></td><td>부분</td><td class="ev">huni-shopby/01_research/order-to-delivery-contract.md §2.1 deliveryCompanyType · L4 사유: 택배사 연동·송장·배송추적 경로 미확인. L2 연계서비스 18건에도 택배사 없음.</td></tr>
+</table></details>
+<details><summary>빠진 곳 3건</summary><table>
+<tr><th>id</th><th>종류</th><th>내용</th><th>제안 담당</th><th>선행</th></tr>
+<tr><td><code>G-t65-096</code></td><td>나 — 행은 있는데 코드 0</td><td>본인인증 호출 지점이 없다(grep 무결과 · L2 D-17 `endpoint=&#x27;(호출 지점 없음)&#x27;`). 가입·주문 어디에서도 부르지 않는다.</td><td>김동학</td><td>본인인증 요건 확정</td></tr>
+<tr><td><code>G-t65-097</code></td><td>나 — 행은 있는데 코드 0</td><td>택배사 연동·송장·배송추적 경로를 찾지 못했다. 샵바이 계약의 연계서비스 18건에도 택배사가 없다. 주문 계약서에 `deliveryCompanyType` 필드는 있다.</td><td>김동학</td><td>택배사 계약 확인</td></tr>
+<tr><td><code>G-t65-098</code></td><td>라 — 결정 미정</td><td>본인인증이 1차 런칭에 필요한지가 정해지지 않았다. 인쇄물 주문에 성인인증 요건이 있는 품목이 있는지부터 확인해야 한다.</td><td>신우진</td><td>없음 — 요건 확인</td></tr>
+</table></details>
+</div>
+<div class="proc" id="P34">
+<div class="phead"><h3>P34 고객 유입·전환 품질(분석·SEO·반응형·리다이렉트)</h3><div class="badges">
+<span class="b steps">4단계</span>
+<span class="b k나">나 3</span>
+<span class="b k라">라 1</span>
+</div></div>
+<p class="def">고객이 들어와서 주문까지 가는 길의 품질. 구 사이트에서 오는 길, 검색으로 오는 길, 휴대폰으로 보는 화면, 그리고 그 길을 측정하는 도구다.</p>
+<div class="mer"><pre class="mermaid">sequenceDiagram
+    autonumber
+    actor C as 고객
+    participant G as 검색·구 사이트
+    participant M as huni-mall
+    participant A as 분석 도구
+    C-&gt;&gt;G: 검색 또는 구 URL 접근
+    G-&gt;&gt;M: 유입
+    M--xM: sitemap·robots 없음(grep 무결과)
+    M--xA: GA4·GTM 없음(grep 무결과)
+    C-&gt;&gt;M: 모바일에서 열람
+    Note over C,M: 위젯 높이 2130px 실측 — 모바일 한 화면을 크게 넘는다</pre></div>
+<div class="mer"><pre class="mermaid">flowchart TD
+    A[유입] --&gt; B{경로}
+    B -- 검색 --&gt; C{sitemap·robots}
+    C -- 없음 --&gt; D[나 — 색인 통제 없음]
+    B -- 구 사이트 URL --&gt; E{리다이렉트 맵}
+    E -- 없음 --&gt; F[나 — 기존 유입 유실]
+    B -- 모바일 --&gt; G{반응형}
+    G -- 위젯 2130px --&gt; H[나 — 전 화면 횡단 품질축]
+    D --&gt; I[전환 측정]
+    F --&gt; I
+    H --&gt; I
+    I --&gt; J{분석 도구}
+    J -- 미설치 --&gt; K[나 — 개선 근거가 안 쌓인다]</pre></div>
+<details><summary>단계표 4행</summary><table>
+<tr><th>#</th><th>단계</th><th>시스템</th><th>담당자</th><th>row_id</th><th>상태</th><th>근거</th></tr>
+<tr><td>1</td><td>1. 웹 로그/전환 분석 도구 연동</td><td>huni-mall</td><td>김동학</td><td><code>STD-SYS-015</code></td><td>미착수</td><td class="ev">[L4b보강] huni-skin-shopby/src 전역 gtag|GA4|googletagmanager|analytics grep 무결과</td></tr>
+<tr><td>2</td><td>2. SEO 메타·사이트맵</td><td>huni-mall</td><td>김동학</td><td><code>STD-SYS-020</code></td><td>미착수</td><td class="ev">[L4b보강] huni-skin-shopby/src 전역 sitemap|robots grep 무결과</td></tr>
+<tr><td>3</td><td>3. 반응형/모바일 대응</td><td>huni-mall</td><td>김동학</td><td><code>STD-SYS-019</code></td><td>미착수</td><td class="ev">print-story/02_capture/order-flow-steps.md §A 위젯 높이 2130px 실측 · L4 사유: new — 반응형은 전 화면 횡단 품질축이라 화면 단위 legacy 분모에 행이 없다. 근거 print-story 실측(오염 아님). L2 가 판정하지 않아 상태 미상.</td></tr>
+<tr><td>4</td><td>4. 구 사이트 → 신규 사이트 URL 리다이렉트</td><td>huni-mall</td><td>김동학</td><td><code>STD-SYS-022</code></td><td>미착수</td><td class="ev">print-kb/wiki/policy/membership-auth.md#MEM-01 마이그레이션 파생 · L4 사유: 구 URL 리다이렉트 맵·이전 사이트 종료 계획 미확인.</td></tr>
+</table></details>
+<details><summary>빠진 곳 4건</summary><table>
+<tr><th>id</th><th>종류</th><th>내용</th><th>제안 담당</th><th>선행</th></tr>
+<tr><td><code>G-t65-099</code></td><td>나 — 행은 있는데 코드 0</td><td>분석 도구가 없다 — `src` 전역에서 `gtag|GA4|googletagmanager|analytics` grep 이 한 건도 안 나온다. 오픈 뒤 무엇이 안 되는지 숫자로 말할 근거가 안 쌓인다.</td><td>김동학</td><td>없음 — 바로 착수 가능</td></tr>
+<tr><td><code>G-t65-100</code></td><td>나 — 행은 있는데 코드 0</td><td>`sitemap|robots` grep 도 무결과다. 검색 색인을 통제하지 못한다.</td><td>김동학</td><td>없음 — 바로 착수 가능</td></tr>
+<tr><td><code>G-t65-101</code></td><td>나 — 행은 있는데 코드 0</td><td>구 URL 리다이렉트 맵과 구 사이트 종료 계획이 없다. 구 사이트로 들어오던 고객이 어디로 갈지 정해지지 않았다.</td><td>김동학</td><td>구 사이트 종료 시점 결정</td></tr>
+<tr><td><code>G-t65-102</code></td><td>라 — 결정 미정</td><td>반응형은 화면 단위 목록에 행이 없는 횡단 품질축이라 「어디까지 하면 끝인가」가 없다. 위젯 높이 2130px 실측이 유일한 근거다.</td><td>김동학</td><td>없음 — 기준 정의</td></tr>
+</table></details>
+</div>
+<div class="proc" id="P35">
+<div class="phead"><h3>P35 장애 모니터링·백업복구·서버 환경</h3><div class="badges">
+<span class="b steps">5단계</span>
+<span class="b k나">나 2</span>
+<span class="b k다">다 1</span>
+<span class="b k라">라 1</span>
+</div></div>
+<p class="def">무언가 잘못됐을 때 알아채고 되돌리는 흐름. 지금은 알아채는 장치가 일부 있고 되돌리는 절차가 없다.</p>
+<div class="mer"><pre class="mermaid">sequenceDiagram
+    autonumber
+    participant W as webadmin
+    participant T as 텔레그램
+    participant O as 운영자
+    participant I as 인프라
+    W-&gt;&gt;W: abuse_log · rate_alerts 감지
+    W-&gt;&gt;T: 알림 발송(rate_alerts.py:61-75)
+    T--&gt;&gt;O: 담당자 수신
+    O-&gt;&gt;W: 원인 추적
+    Note over O,W: 운영 로그에 요청 ID 가 없어 한 요청을 꿰지 못한다
+    O-&gt;&gt;I: 복구 요청
+    I--xI: 백업·복구 절차 미확인</pre></div>
+<div class="mer"><pre class="mermaid">flowchart TD
+    A[이상 발생] --&gt; B{감지}
+    B -- webadmin 이상탐지 --&gt; C[텔레그램 알림]
+    B -- 몰 오류 --&gt; D{전역 오류 화면}
+    D -- 없음 --&gt; E[나 — Next 기본 404/500 노출]
+    C --&gt; F[원인 추적]
+    F --&gt; G{로그}
+    G -- console.error 24건 · 요청 ID 없음 --&gt; H[다 — 한 요청을 꿸 수 없다]
+    F --&gt; I[복구]
+    I --&gt; J{백업·복구 리허설}
+    J -- 미확인 --&gt; K[나 — 절차 없음]
+    I --&gt; L{PitStop 서버}
+    L -- 미확보 --&gt; M[라 — 담당 외부]</pre></div>
+<details><summary>단계표 5행</summary><table>
+<tr><th>#</th><th>단계</th><th>시스템</th><th>담당자</th><th>row_id</th><th>상태</th><th>근거</th></tr>
+<tr><td>1</td><td>1. 주문/결제 실패 모니터링·알림</td><td>webadmin</td><td>서희항</td><td><code>STD-SYS-016</code></td><td>부분</td><td class="ev">WA-055 done — raw/webadmin/webadmin/catalog/abuse_log.py:1 · rate_alerts.py:61-75 (텔레그램 알림)</td></tr>
+<tr><td>2</td><td>2. 전역 오류 화면(error·not-found·global-error) 부재</td><td>huni-mall</td><td>김동학</td><td><code>STD-SYS-044</code></td><td>미착수</td><td class="ev">`find huni-skin-shopby/src/app -maxdepth 2 -name error.tsx|not-found.tsx|global-error.tsx` 0개 · 포크 huni-skin-next/src/app/{error·global-error·not-found}.tsx 존재</td></tr>
+<tr><td>3</td><td>3. 운영 로그 구조화·요청 ID</td><td>huni-mall</td><td>김동학</td><td><code>STD-SYS-054</code></td><td>미착수</td><td class="ev">`grep -rnE &#x27;console\.(log|error|warn)&#x27; huni-skin-shopby/src` 24 · audit report.md:71 M2 · 포크 huni-skin-next/src/lib/observability/{logger·request-id}.ts(commit f692a43)</td></tr>
+<tr><td>4</td><td>4. 데이터 백업·복구 절차</td><td>인프라</td><td>서희항</td><td><code>STD-SYS-017</code></td><td>미착수</td><td class="ev">print-kb/wiki/huni/load-path.md 적재 경로 안전장치 · L4 사유: DB 스냅샷·복구 리허설 미확인.</td></tr>
+<tr><td>5</td><td>5. PitStop 서버 환경 확보</td><td>미정(외부)</td><td>미정</td><td><code>STD-SYS-031</code></td><td>미착수</td><td class="ev">후니정기미팅 정리260915.html §PDF 프리플라이트 · 미결 2</td></tr>
+</table></details>
+<details><summary>빠진 곳 4건</summary><table>
+<tr><th>id</th><th>종류</th><th>내용</th><th>제안 담당</th><th>선행</th></tr>
+<tr><td><code>G-t65-103</code></td><td>나 — 행은 있는데 코드 0</td><td>몰에 전역 오류 화면이 없다 — `error.tsx`·`not-found.tsx`·`global-error.tsx` 가 0개다. 고객이 Next 기본 404/500 을 그대로 본다. 포크에는 세 파일이 다 있다.</td><td>김동학</td><td>없음 — 바로 착수 가능</td></tr>
+<tr><td><code>G-t65-104</code></td><td>다 — 코드는 있는데 연결 안 됨</td><td>`console.error` 24건이 요청 ID 없이 흩어져 있어 한 고객의 한 요청을 꿰어 볼 수 없다. 포크에 구조화 로그·요청 ID 구현이 있다.</td><td>김동학</td><td>포크 처리 결정(P37)</td></tr>
+<tr><td><code>G-t65-105</code></td><td>나 — 행은 있는데 코드 0</td><td>DB 스냅샷·복구 리허설 기록이 없다. 백업이 돌고 있는지, 돌아도 되돌릴 수 있는지 확인된 적이 없다 — 「되돌릴 수 있다」는 해 본 적이 있어야 사실이다.</td><td>서희항</td><td>없음 — 리허설 수행</td></tr>
+<tr><td><code>G-t65-106</code></td><td>라 — 결정 미정</td><td>PitStop 서버 환경(Windows·RAM 16GB·AWS 별도 인스턴스)이 미확보이고 담당이 외부다. 검판이 생산의 관문이라 t64 흐름 전체가 여기에 걸린다.</td><td>신우진</td><td>없음 — 조달 결정</td></tr>
+</table></details>
+</div>
+<div class="proc" id="P36">
+<div class="phead"><h3>P36 보안 강화(프록시 가드·XSS·CSP·개인정보)</h3><div class="badges">
+<span class="b steps">4단계</span>
+<span class="b k나">나 3</span>
+</div></div>
+<p class="def">남이 우리 시스템을 함부로 못 쓰게 막는 흐름. 가장 급한 구멍 하나는 파트너 비밀 토큰을 아무나 통과시키는 프록시다.</p>
+<div class="mer"><pre class="mermaid">sequenceDiagram
+    autonumber
+    participant X as 외부 요청자
+    participant M as huni-mall
+    participant S as 샵바이 파트너 API
+    X-&gt;&gt;M: /api/shopby/{임의 경로}
+    M--xM: 인증·경로 화이트리스트 없음
+    M-&gt;&gt;S: 파트너 비밀 토큰 붙여 중계
+    S--&gt;&gt;X: 응답
+    Note over M,S: 포크에 default-deny 가드 구현이 있다</pre></div>
+<div class="mer"><pre class="mermaid">flowchart TD
+    A[요청] --&gt; B{/api/shopby 프록시}
+    B -- 가드 없음 --&gt; C[나 — 파트너 토큰 무제한 중계]
+    B -- 가드 있음·포크 --&gt; D[default-deny 화이트리스트]
+    A --&gt; E{HTML 렌더}
+    E -- 공지 본문·상품설명 --&gt; F[dangerouslySetInnerHTML]
+    F --&gt; G[나 — 저장형 XSS 여지]
+    A --&gt; H{응답 헤더}
+    H -- next.config.ts headers 없음 --&gt; I[나 — CSP 부재]
+    J[개인정보 보관·파기] --&gt; K[방침 페이지 게시됨]</pre></div>
+<details><summary>단계표 4행</summary><table>
+<tr><th>#</th><th>단계</th><th>시스템</th><th>담당자</th><th>row_id</th><th>상태</th><th>근거</th></tr>
+<tr><td>1</td><td>1. /api/shopby 범용 프록시 인증·경로 화이트리스트</td><td>huni-mall</td><td>김동학</td><td><code>STD-SYS-043</code></td><td>미착수</td><td class="ev">huni-skin-shopby/src/app/api/shopby/[...path]/route.ts:20-30 가드 없음 · artifacts/audit/iteration-1/report.md:27-33 C1·35 H1 · 포크 huni-skin-next/src/lib/api/server/shopby-proxy-guard.ts(default-deny)</td></tr>
+<tr><td>2</td><td>2. 공지 본문·상품설명 HTML 무필터 렌더 — sanitize 적용</td><td>huni-mall</td><td>김동학</td><td><code>STD-SYS-046</code></td><td>미착수</td><td class="ev">huni-skin-shopby/src/app/(main)/notice/[articleNo]/page.tsx:69 · src/components/product/configurator.tsx:77 dangerouslySetInnerHTML · audit report.md:77 M3 · 포크 huni-skin-next/src/lib/security/sanitize.ts</td></tr>
+<tr><td>3</td><td>3. 보안 응답 헤더/CSP</td><td>huni-mall</td><td>김동학</td><td><code>STD-SYS-047</code></td><td>미착수</td><td class="ev">huni-skin-shopby/next.config.ts:1-17 headers 없음 · SPEC-TAKEOVER-001 spec.md:46 · 포크 M3(commit 348a8f4) CSP Report-Only</td></tr>
+<tr><td>4</td><td>4. 개인정보 보관·파기 정책 적용</td><td>huni-mall</td><td>김동학</td><td><code>STD-SYS-018</code></td><td>작동</td><td class="ev">https://shopby.huniprinting.co.kr/privacy@2026-09-16 21:27</td></tr>
+</table></details>
+<details><summary>빠진 곳 3건</summary><table>
+<tr><th>id</th><th>종류</th><th>내용</th><th>제안 담당</th><th>선행</th></tr>
+<tr><td><code>G-t65-107</code></td><td>나 — 행은 있는데 코드 0</td><td>`/api/shopby/[...path]/route.ts:20-30` 이 인증도 경로 제한도 없이 파트너 비밀 토큰을 붙여 중계한다. 감사 보고서가 C1(Critical)·H1 로 잡아 둔 항목이고, 포크에는 `shopby-proxy-guard.ts` 의 default-deny 구현이 이미 있다.</td><td>김동학</td><td>없음 — 바로 착수 가능</td></tr>
+<tr><td><code>G-t65-108</code></td><td>나 — 행은 있는데 코드 0</td><td>`notice/[articleNo]/page.tsx:69` 와 `configurator.tsx:77` 이 `dangerouslySetInnerHTML` 로 본문을 그대로 렌더한다. 운영자 계정이 하나 뚫리면 저장형 XSS 로 번진다. 포크에 `sanitize.ts` 가 있다.</td><td>김동학</td><td>없음 — 바로 착수 가능</td></tr>
+<tr><td><code>G-t65-109</code></td><td>나 — 행은 있는데 코드 0</td><td>`next.config.ts:1-17` 에 `headers()` 가 없어 보안 응답 헤더·CSP 가 하나도 안 나간다. 포크는 CSP 를 Report-Only 로 먼저 켰다.</td><td>김동학</td><td>없음 — 바로 착수 가능</td></tr>
+</table></details>
+</div>
+<div class="proc" id="P37">
+<div class="phead"><h3>P37 코드베이스 정비·포크 처리·CI·문서</h3><div class="badges">
+<span class="b steps">7단계</span>
+<span class="b k나">나 1</span>
+<span class="b k다">다 1</span>
+<span class="b k라">라 2</span>
+</div></div>
+<p class="def">지금 저장소가 어질러져 있다. 어느 것이 정본인지, 무엇이 죽은 코드인지, 고쳐도 안 깨졌는지 확인할 방법이 없는 상태를 푸는 흐름이다.</p>
+<div class="mer"><pre class="mermaid">sequenceDiagram
+    autonumber
+    participant K as 김동학
+    participant R as huni-skin-shopby
+    participant F as huni-skin-next(포크)
+    K-&gt;&gt;F: 포크에 M0~M7 · 20커밋 누적(remote 없음)
+    K-&gt;&gt;R: 원본에 9/10~9/15 4커밋(포크 미반영)
+    Note over R,F: 두 갈래가 서로를 모른다
+    K-&gt;&gt;R: 선별 이식 또는 폐기 결정 필요
+    K-&gt;&gt;R: 테스트·CI 이식(14파일·108케이스·ci.yml)
+    K-&gt;&gt;R: 환경변수·Prisma·브랜치 정리</pre></div>
+<div class="mer"><pre class="mermaid">flowchart TD
+    A[저장소] --&gt; B{정본}
+    B -- 원본 main --&gt; C[9/10~9/15 4커밋]
+    B -- 포크 huni-skin-next --&gt; D[20커밋 · remote 없음]
+    C --&gt; E{처리 결정}
+    D --&gt; E
+    E -- 선별 이식 --&gt; F[보안·로그·타임아웃·서버키 이식]
+    E -- 폐기 --&gt; G[포크 삭제]
+    A --&gt; H{테스트}
+    H -- 0개 · CI 없음 --&gt; I[나 — 고쳐도 확인 못 함]
+    A --&gt; J{환경변수}
+    J -- 코드·example·push 스크립트 불일치 --&gt; K[다]
+    A --&gt; L{Prisma}
+    L -- 소비자 0 --&gt; M[라 — 존폐]
+    A --&gt; N{브랜치·워크트리 7개}
+    N --&gt; O[정리 필요]
+    A --&gt; P{docs stale}</pre></div>
+<details><summary>단계표 7행</summary><table>
+<tr><th>#</th><th>단계</th><th>시스템</th><th>담당자</th><th>row_id</th><th>상태</th><th>근거</th></tr>
+<tr><td>1</td><td>1. huni-skin-next 포크 처리 결정(선별 이식 vs 폐기)</td><td>결정(PM)</td><td>신우진+김동학</td><td><code>STD-SYS-050</code></td><td>미착수</td><td class="ev">huni-skin-shopby/.git/info/exclude:7 `huni-skin-next/` · huni-skin-next `git remote` 0 · `git log 0f65b32..HEAD` 20 · 원본 9/10~9/15 4커밋 미반영</td></tr>
+<tr><td>2</td><td>2. 회귀 테스트 0개·CI 없음 — 포크 테스트·ci.yml 이식</td><td>huni-mall</td><td>김동학</td><td><code>STD-SYS-048</code></td><td>미착수</td><td class="ev">`find huni-skin-shopby/src -name &#x27;*.test.*&#x27;` 0 · .github/workflows/ 에 label-sync.yml 만 · 포크 huni-skin-next: 14 test files·.github/workflows/ci.yml(commit ed448b7·77b43cd)</td></tr>
+<tr><td>3</td><td>3. 환경변수 정합(코드 vs .env.example vs push 스크립트)</td><td>huni-mall</td><td>김동학</td><td><code>STD-SYS-052</code></td><td>미착수</td><td class="ev">huni-skin-shopby/.env.example(21키) · scripts/vercel-env-push.sh(GRAPHQL_BRIDGE_SECRET·NEXT_PUBLIC_GRAPHQL_ENDPOINT) · src/lib/api/server/board.ts:14 · 포크 t10 commit 8ff573a</td></tr>
+<tr><td>4</td><td>4. Prisma 로컬 DB 존폐(소비자 0)</td><td>huni-mall</td><td>김동학</td><td><code>STD-SYS-053</code></td><td>미착수</td><td class="ev">`grep -rn &#x27;@/lib/prisma&#x27; huni-skin-shopby/src` 0(정의 파일 제외) · prisma/README.md:3 · package.json postinstall `prisma generate` · SPEC-TAKEOVER-001 U-6</td></tr>
+<tr><td>5</td><td>5. 미병합 로컬 브랜치·워크트리 7개 정리</td><td>huni-mall</td><td>김동학</td><td><code>STD-SYS-051</code></td><td>미착수</td><td class="ev">`git -C huni-skin-shopby branch --no-merged main` 7개 · `git worktree list` .claude/worktrees/{t1·t2·t3·t9·t10·t11·release-0.2.0}</td></tr>
+<tr><td>6</td><td>6. 저장소 문서 stale 정비(docs/api README)</td><td>huni-mall</td><td>김동학</td><td><code>STD-INF-013</code></td><td>미착수</td><td class="ev">huni-skin-shopby/docs/api/README.md:16-17 · docs/api/frontend/README.md:5-7 · artifacts/shopby-integration-status-report.md:6(2026-09-02 기준)</td></tr>
+<tr><td>7</td><td>7. 오픈·안정화 후 유지보수 내부 인력 이관</td><td>결정(PM)</td><td>서희항</td><td><code>STD-SYS-026</code></td><td>미착수</td><td class="ev">후니정기미팅 정리260915.html §개발 역할 분담 · 확정 2</td></tr>
+</table></details>
+<details><summary>빠진 곳 4건</summary><table>
+<tr><th>id</th><th>종류</th><th>내용</th><th>제안 담당</th><th>선행</th></tr>
+<tr><td><code>G-t65-110</code></td><td>라 — 결정 미정</td><td>포크(`huni-skin-next`)에 M0~M7 20커밋이 쌓여 있는데 remote 가 없고, 그 사이 원본 main 에 4커밋이 더 들어가 포크에 반영되지 않았다. 이 카드의 여러 항목(서버키 P30·로그 P35·보안 P36·타임아웃 P15)이 「포크에 이미 있다」로 걸려 있어, 포크 처리 결정 하나가 그 전부의 선행이다.</td><td>신우진</td><td>없음 — 결정 자체가 선행</td></tr>
+<tr><td><code>G-t65-111</code></td><td>나 — 행은 있는데 코드 0</td><td>회귀 테스트가 0개이고 CI 가 없다(`.github/workflows/` 에 `label-sync.yml` 만). 포크에는 테스트 14파일·108케이스와 `ci.yml` 이 있다. 지금 상태로는 이 카드의 어떤 수정도 「안 깨졌다」를 증명할 수 없다.</td><td>김동학</td><td>포크 처리 결정</td></tr>
+<tr><td><code>G-t65-112</code></td><td>다 — 코드는 있는데 연결 안 됨</td><td>환경변수가 세 곳에서 어긋난다 — 코드가 참조하는 키(`HUNI_WIDGET_SITE_KEY`·`SHOPBY_NOTICE_BOARD_NO`)가 `.env.example`(21키)에 없고, `vercel-env-push.sh` 는 쓰지 않는 `GRAPHQL` 2종을 밀고, `DEMO_AUTH_*` 는 아무도 안 쓴다.</td><td>김동학</td><td>없음 — 바로 착수 가능</td></tr>
+<tr><td><code>G-t65-113</code></td><td>라 — 결정 미정</td><td>Prisma 로컬 DB(23테이블)의 소비자가 0이다(`src/lib/prisma.ts` 정의 파일 외 참조 0). 그런데 `package.json` 의 `postinstall` 이 매번 `prisma generate` 를 돌린다. 지울지 쓸지 정해야 한다.</td><td>김동학</td><td>없음 — 결정</td></tr>
+</table></details>
+</div>
+<div class="proc" id="P38">
+<div class="phead"><h3>P38 런칭 범위·조직·일정 결정</h3><div class="badges">
+<span class="b steps">4단계</span>
+<span class="b k가">가 1</span>
+<span class="b k라">라 3</span>
+</div></div>
+<p class="def">만드는 일이 아니라 정하는 일. 이 카드의 다른 모든 프로세스가 여기서 내려오는 답을 기다리고 있다.</p>
+<div class="mer"><pre class="mermaid">sequenceDiagram
+    autonumber
+    participant P as 신우진(PM)
+    participant C as 채훈희(대표)
+    participant T as 서희항(CTO)
+    P-&gt;&gt;C: 사이트 전체 화면·절차 설계 + 비용 정리
+    C-&gt;&gt;C: 오픈 목표일 확정
+    C-&gt;&gt;P: 2주 테스트 시나리오 지시
+    P-&gt;&gt;T: webadmin 영역 분리 범위 협의
+    Note over T: 기술 책임 총괄 = CTO 서희항 (확정 사실 · 작업 아님)</pre></div>
+<div class="mer"><pre class="mermaid">flowchart TD
+    A[결정 안건] --&gt; B[사이트 전체 화면·절차 설계]
+    B --&gt; C[버튼 동작·결제 단계 가능 여부·비용]
+    C --&gt; D[컨펌]
+    D --&gt; E[오픈 목표일 확정]
+    E --&gt; F[2주 테스트 시나리오]
+    A --&gt; G[webadmin 영역 분리]
+    G --&gt; H{쇼핑몰 관리자 영역 / DB·생산 영역}
+    H --&gt; I[담당 경계 확정]
+    A --&gt; J[기술 책임 총괄 = CTO]
+    J --&gt; K[확정 사실 기록 · 작업 행 아님]</pre></div>
+<details><summary>단계표 4행</summary><table>
+<tr><th>#</th><th>단계</th><th>시스템</th><th>담당자</th><th>row_id</th><th>상태</th><th>근거</th></tr>
+<tr><td>1</td><td>1. 사이트 전체 화면·절차 설계(버튼 동작·결제 단계·비용 정리 후 컨펌)</td><td>결정(PM)</td><td>신우진</td><td><code>STD-SYS-033</code></td><td>미착수</td><td class="ev">후니정기미팅 정리260915.html §일정·설계 · 미결 2</td></tr>
+<tr><td>2</td><td>2. 오픈 목표일 확정 + 2주 테스트 시나리오</td><td>결정(PM)</td><td>채훈희</td><td><code>STD-SYS-032</code></td><td>부분</td><td class="ev">후니정기미팅 정리260915.html §일정·설계 · 미결 1 / 후니-오픈잔여작업-실무진안내_260909.html §항목 6 · ④ 완료 기준</td></tr>
+<tr><td>3</td><td>3. webadmin 영역 분리(쇼핑몰 관리자 영역 / DB·생산 영역)</td><td>결정(PM)</td><td>신우진</td><td><code>STD-SYS-028</code></td><td>미착수</td><td class="ev">후니정기미팅 정리260915.html §개발 역할 분담 · 미결 1</td></tr>
+<tr><td>4</td><td>4. 기술 책임 총괄 = CTO 서희항(확정 사실 기록)</td><td>기록</td><td>—</td><td><code>STD-SYS-027</code></td><td>미착수</td><td class="ev">후니정기미팅 정리260915.html §개발 역할 분담 · 확정 3</td></tr>
+</table></details>
+<details><summary>빠진 곳 4건</summary><table>
+<tr><th>id</th><th>종류</th><th>내용</th><th>제안 담당</th><th>선행</th></tr>
+<tr><td><code>G-t65-114</code></td><td>라 — 결정 미정</td><td>오픈 목표일이 확정되지 않아 무엇을 1차에서 뺄지가 정해지지 않는다. 이 카드의 「라」 항목 대부분이 「1차에 넣는가」를 먼저 물어야 답이 나온다.</td><td>채훈희</td><td>없음 — 결정 자체가 선행</td></tr>
+<tr><td><code>G-t65-115</code></td><td>라 — 결정 미정</td><td>webadmin 영역 분리(쇼핑몰 관리자 영역 vs DB·생산 영역)가 미정이라 P26 권한 설계와 P30 동기화 책임 경계가 같이 멈춰 있다.</td><td>신우진</td><td>없음 — 결정 자체가 선행</td></tr>
+<tr><td><code>G-t65-116</code></td><td>가 — 원장에 행 없음</td><td>2주 테스트 시나리오가 원장에 행으로 없다 — `STD-SYS-032` 안에 문구로만 들어 있다. 시나리오를 누가 쓰고 누가 도는지가 작업 행으로 서 있지 않다.</td><td>신우진</td><td>오픈 목표일 확정</td></tr>
+<tr><td><code>G-t65-117</code></td><td>라 — 결정 미정</td><td>`STD-SYS-027`(기술 책임 총괄 = CTO)은 원장 판정이 「불필요」다 — 확정 사실 기록이지 작업이 아니다. 단계로는 두되 잔여 작업으로 세지 않는다.</td><td>—</td><td>없음</td></tr>
+</table></details>
+</div>
+<p class="legend">근거는 원장 <code>08_system-screen/t56/rejudge.csv</code> 의 evidence 를 그대로 옮긴 것이다. 「미확인」은 확인하지 못했다는 뜻이지 없다는 뜻이 아니다.</p>
+</div><script>
+mermaid.initialize({startOnLoad:true,securityLevel:"loose",
+theme: matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "default"});
+</script></body></html>

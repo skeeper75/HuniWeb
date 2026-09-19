@@ -1,0 +1,9 @@
+PASS G1 — rejudge.csv 735행 / 김동학·남은일 189행
+PASS G2 — 원장 189행 · row_id 집합 일치
+PASS G3 — 전체 211행 = 원장 189 + 신규 22 · 축 5개 1:34 2:46 3:69 4:25 5:37
+PASS G4 — evidence 빈 행 0건
+PASS G5 — 리드 초안 접두 10개 중 미포함 []
+PASS G6 — 4월본 대비 삭제 경로 3건 {'product-server-public.yml': ['/products/{mallProductNo}'], 'promotion-shop-public.yml': ['/coupons/products/download', '/coupons/products/issuable/coupons']}
+PASS G7 — 「0건」 주장 13패턴 중 실제 히트 []
+
+결과: 전부 PASS

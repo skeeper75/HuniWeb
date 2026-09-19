@@ -1,0 +1,51 @@
+fact_id,axis,subject,yeolim_fact,huni_fact,same_or_diff,evidence
+F-01,①집합,CRT.Framework.* 프로젝트 수,13개,12개,다름,t55/inventory.py 출력 · inventory.json
+F-02,①집합,공통 프로젝트,"AWS·Asset·Core·DevExpr·Extensions·PDF·PDF.Objects·Utils·WinForms (9)","동일 9개",같음,t55/inventory.json
+F-03,①집합,한쪽 전용,"Attribute·Barcode·Pitstop·Security (4)","JSON·Net·Utils.ZipLib (3)",다름,t55/inventory.json
+F-04,①규모,공통 9개 .cs 파일 수,104,97,다름,t55/inventory.py 출력
+F-05,①규모,공통 9개 .cs 총 줄수,16213,15825,다름,t55/inventory.py 출력
+F-06,①규모,양쪽에 같은 이름으로 있으면서 내용 동일한 파일,51,51,같음,t55/filediff.py 출력
+F-07,①규모,같은 이름·내용 다른 파일,36,36,다름,t55/filediff.py 출력
+F-08,①규모,한쪽에만 있는 파일,17(열림만),10(후니만),다름,t55/filediff.py 출력
+F-09,①최신,저장소 총 커밋 수,18,244,다름,git -C <repo> log --oneline | wc -l
+F-10,①최신,공통 9개 프로젝트 최종 커밋일,"7개 2025-02-02(초기 커밋)·PDF.Objects 2025-04-09",2026-02-19 ~ 2026-09-01,다름,git -C <repo> log -1 -- <projdir>
+F-11,①최신,프레임워크 유지보수 상태,납품 시점 스냅샷(2025-02 이후 정지),계속 수정 중,다름,F-09·F-10
+F-12,①API,공개 타입 수(공통 9개 합),115,91,다름,t55/apidiff.py 출력
+F-13,①API,공개 멤버 수(공통 9개 합),632,512,다름,t55/apidiff.py 출력
+F-14,①API,한쪽에만 있는 공개 타입,36,12,다름,t55/apidiff.json
+F-15,①API,AWS 클라이언트 능력,"S3 8메서드·SQS 5메서드·S3JsonMessage(S3 원본 이벤트 DTO) 보유","S3 13메서드·SQS 13메서드(Subscribe 폴링루프·배치삭제·가시성변경)·SqsLogSink 보유·S3JsonMessage 없음",다름,CRT.Framework.AWS/S3Client.cs·SqsClient.cs 양쪽
+F-16,①API,DevExpr 접두 네이밍,CPSContextMenu·CPSGlobalColor·CPSMaskType,CRTContextMenu·CRTGlobalColor·CRTMaskType,다름,DevExpr/Common/*.cs 양쪽
+F-17,①API,PDF.Objects Marks 계층,"IMark·MarkText·MarkQRBarocde·MarkDataMatrixBarocde·MarkConvertor·BoundingRectangle·Pages (7파일)",없음,다름,PDF.Objects/Marks/*.cs (열림만)
+F-18,①API,WinForms 우편번호 조회,FrmZipCode·ZipCodeRest·ZipCodeResult 보유,없음,다름,WinForms/Controls/FrmZipCode.cs·Rest/ZipCodeRest.cs (열림만)
+F-19,②이식,CRT.Framework.Pitstop 구성,"4개 .cs(753줄)+AssemblyInfo",해당 없음,열림 전용,CRT.Framework.Pitstop/
+F-20,②이식,대상 프레임워크,.NET Framework v4.7.2,.NET Framework v4.7.2(전 프로젝트),같음,양쪽 csproj TargetFrameworkVersion
+F-21,②이식,csproj 형식,구형 MSBuild(비 SDK-style)·packages.config,동일,같음,CRT.Framework.Pitstop.csproj:2 · 후니 Framework/*.csproj
+F-22,②이식,Pitstop 선언 의존,"Newtonsoft.Json 13.0.3 + ProjectReference CRT.Framework.PDF","후니도 Newtonsoft.Json 13.0.3 보유",같음,CRT.Framework.Pitstop/packages.config · CRT.Framework.Pitstop.csproj:63-66
+F-23,②이식,Pitstop 소스의 실사용 의존,"CRT.* 참조 0건 · using 은 System.* 만(Xml.Serialization·Xml.Linq·XPath·IO) · Newtonsoft 사용 0건",해당 없음,열림 전용,"grep ""CRT\."" CRT.Framework.Pitstop/*.cs → 0건 · grep ""^using"" 결과 전부 System.*"
+F-24,②이식,따라서 실제 이식 필요물,"PitStopConfiguration.cs(318)·EnfocusReport.cs(289)·PitStopEnums.cs(93)·VariableSet.cs(53) 4파일 — 선언된 Newtonsoft·PDF 참조는 소스에서 미사용이라 떼어낼 수 있다",해당 없음,열림 전용,F-23
+F-25,②이식,네임스페이스,CRT.Framework.Pitstop,"후니 Framework 도 CRT.Framework.* 를 그대로 쓴다(리브랜딩 없음)",같음,양쪽 namespace 선언
+F-26,②이식,Utils/CommandLine.cs,"88줄 · Execute(exePath,args,ref outputString,timeoutSecond=300,hiddenWindow=false)","이미 존재 · 85줄 · 5번째 인자명 windowHidden",다름,diff 결과(아래 F-27)
+F-27,②이식,CommandLine 동작 차이,CreateNoWindow 를 항상 true 로 고정,windowHidden==true 일 때만 CreateNoWindow=true(기본 false→콘솔창 뜸),다름,"diff -u 양쪽 CommandLine.cs — Y:24 vs H:24-25"
+F-28,②이식,CommandLine 호출 호환,ExitCode==0 성공·타임아웃 시 실패 문자열 — 반환 계약 동일,동일,같음,양쪽 CommandLine.cs 본문
+F-29,②이식,설정 읽는 방식,"App.config 의 appSettings key=ConfigurationFileName → FoxConfigurationManager.AppSettings[""키""]",동일 방식,같음,"열림 ServerProcess/App.config:36 · 후니 ItfLogConsumer/App.config:7 · 양쪽 Program.cs FoxConfigurationManager.AppSettings[]"
+F-30,②이식,FoxConfiguration 제공 어셈블리,"TheOne.4.0 (NeoDEEX 4.0) · HintPath C:\Program Files (x86)\TheOne Technology\NeoDEEX 4.0\Assembly\","동일 어셈블리·동일 절대경로",같음,"열림 CRT.Yeolim.ServerProcess.csproj:55-57 · 후니 CRT.EasyMES.V2.Console.ItfLogConsumer.csproj:56-58"
+F-31,②이식,설정 키 명명 관습,PascalCase(AwsRegion·AwsKey·PitStop_ExeFileName),UPPER_SNAKE(AWS_REGION·AWS_KEY·QUEUE_URL),다름,"열림 FoxConfigurationServerProcess.config:13-20 · 후니 FoxConfiguration.example.config:30-33"
+F-32,②이식,Framework 밖에 남는 오케스트레이션,"CRT.Yeolim.ServerProcess/Program.cs 1357줄 + Common/ActionsSetList.cs 113줄(액션 카탈로그·enum→appSetting 매핑) + AppArguments 97 + AppReturnValue 67 — Framework.Pitstop 은 XML 직렬화기·리포트 파서일 뿐",해당 없음,열림 전용,wc -l 결과
+F-33,②이식,PitStop 호출 계약,"CommandLine.Execute(ExeFileName, "" -config \""<XML경로>\"""", ref out, timeoutSec)",해당 없음,열림 전용,CRT.Yeolim.ServerProcess/Program.cs:654-659
+F-34,②이식,PitStop XML 스키마 버전,"XmlRoot Namespace = .../PitStop/22/PitStopServerCLI_Configuration.xsd · Versioning.Version 기본 10 · VersioningStrategy=BestEffort",해당 없음,열림 전용,"PitStopConfiguration.cs:289 · :13 · :16"
+F-35,③AWS,AWS 설정 객체,"AwsConfig(awsKey,awsSecKey,awsRegion) → BasicAWSCredentials","파일 내용 md5 동일(45줄)",같음,양쪽 CRT.Framework.AWS/AwsConfig.cs — inventory.json md5 일치
+F-36,③AWS,AWSSDK 버전,Core 3.7.401.4 · S3 3.7.412.4 · SQS 3.7.400.84,Core 3.7.303.18 · S3 3.7.307.19 · SQS 3.7.300.78,다름,양쪽 CRT.Framework.AWS/packages.config
+F-37,③AWS,S3→SQS→워커 구조,"클라이언트 S3 멀티파트 업로드 → S3 ObjectCreated → SQS → SQSMonitorService 폴링 → 자식 프로세스 실행","동일 골격이 이미 가동 중 — DesignFileCopyToNas·DesignFileThumbnailCreator 가 SQS 를 구독해 S3 객체 생성 이벤트를 처리",같음(골격),"열림 SQSMonitorService/Program.cs · 후니 DesignFileThumbnailCreator/ThumbnailService.cs:135 · DesignFileCopyToNas/ThumbnailService.cs:85"
+F-38,③AWS,S3 이벤트 메시지 형식,"S3 원본 알림 JSON(Records[]) — CRT.Framework.AWS/S3JsonMessage.cs","EventBridge 형식(detail-type·detail.bucket.name·detail.object.key) — 앱 프로젝트에 EventBridgeS3Message.cs 로 각자 보유",다름,"열림 CRT.Framework.AWS/S3JsonMessage.cs:6 · 후니 DesignFileCopyToNas/Common/EventBridgeS3Message.cs:12"
+F-39,③AWS,SQS 소비 방식,"GetMessagesAsync 직접 호출(롱폴)·프로세스 실행 수 제한","GetMessagesAsync 와 Subscribe(콜백 폴링 루프) 둘 다 · errorAction 훅 보유",다름,"열림 SQSMonitorService/Program.cs · 후니 SqsClient.cs:28·:166"
+F-40,③AWS,DLQ·재시도,"재시도 없음 · DLQ 코드/설정 없음","DLQ 운용 중 — huni-itf-trace-log-dlq(14일 보존·maxReceiveCount 5) · dlq-triage.ps1 · 30분 백오프",다름,"후니 docs/aws/create-itf-log-queue.ps1:19-36 · docs/report/dlq-triage.ps1 · git log Framework/CRT.Framework.AWS 2026-07-23"
+F-41,③AWS,S3 버킷 설정 키,"AwsBucketNm (FoxConfiguration)","AwsInfo(accessKey,secretKey,bucketName,region) + GetS3Url() URL 조립",다름,"열림 FoxConfigurationServerProcess.config:14 · 후니 BackOffice.UI/CRT.EasyMES.V2.Core/AwsInfo.cs:33-56"
+F-42,③AWS,리전,설정값(생략),ap-northeast-2 고정 기본값,미확인,후니 AwsInfo.cs:33 · FoxConfiguration.example.config:30
+F-43,④배포,실행 파일 형태,"WinForms 클라이언트 + 콘솔 Exe 워커(SQSMonitorService·ServerProcess)","WinForms 클라이언트 + 콘솔 Exe 워커 13개 + WebApi",같음(형태),"열림 CRT.Yeolim.SQSMonitorService.csproj:8 OutputType=Exe · 후니 BackOffice.Console/ 13개"
+F-44,④배포,워커 상주화 방식,"Topshelf 사용 0건 — 콘솔 Exe 를 프로세스 개수 제한(ExecuteProcessCnt)으로 다중 실행","Topshelf 로 Windows 서비스 등록(RunAsLocalSystem) 4개 + 작업 스케줄러 실행형(MAX_INSTANCES 제한) 다수",다름,"열림 grep Topshelf 0건 · SQSMonitorService/Program.cs:41-46 · 후니 ItfLogConsumer/Program.cs:41-52 · DesignFileThumbnailCreator/Program.cs:38-54"
+F-45,④배포,인스톨러,"VS Setup 프로젝트(.vdproj) · TargetPlatform x64 · 선행조건 .NET FW 4.7.2 · NanumGothic 3종 + vcredist_x64.exe 동봉","VS Setup 프로젝트(.vdproj) · TargetPlatform x64 · 선행조건 .NET FW 4.7.2 · 폰트/vcredist 동봉 없음",다름(동봉물),"열림 CRT.Yeolim.Setup.vdproj:5187·6389·8582 · 후니 CRT.EasyMES.V2.Setup.vdproj:13185·20415"
+F-46,④배포,자동업데이트,CRT.Console.AutoUpdateZip(6파일),동일 프로젝트 보유 — 6파일 중 3개 내용 동일(AutoUpdateZipSettings.cs·UpdateXml.cs·GenerateAutoUpdateFiles.bat)·3개 다름(App.config·설정 json·Program.cs),같음(구조),diff -q 양쪽 AutoUpdateZip 6파일
+F-47,④배포,PitStop Server 설치 요건,"설정값 경로 …\Enfocus PitStop Server 23\ 의 PitStopServerCLI.exe 를 워커가 실행 — 워커와 같은 Windows 머신에 PitStop Server 23 설치·라이선스 필요",해당 없음(저장소에 PitStop 흔적 0),미확인(현장),"열림 ServerProcess/Common/ActionsSetList.cs:19 · FoxConfigurationServerProcess.config:20 · Program.cs:659"
+F-48,④배포,PitStop 액션리스트 자산,".eal 액션리스트 파일 경로 22개 appSetting(PitStopAction_* 키 grep -c = 22) + .evs 변수세트 템플릿 — 파일 자체는 저장소 밖",해당 없음,열림 전용,FoxConfigurationServerProcess.config:22-50 · :19
+F-49,④배포,install.cmd 오해 주의,해당 없음,"저장소 루트 install.cmd 는 MES 배포 스크립트가 아니라 Claude Code 설치 스크립트다",주의,후니 install.cmd:4
+F-50,공통,후니 packages.config 보일러플레이트,해당 없음,"Framework 12개 중 8개의 packages.config 가 md5 078435635886cf070ccb2b271e298a0c 로 동일 — 프로젝트별 실제 의존이 아니라 복사된 공용 목록. 패키지 목록 차이를 의존성 차이로 읽으면 안 된다",주의,md5 /Users/innojini/Dev/TS.BackOffice.Huni/Framework/*/packages.config

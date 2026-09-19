@@ -1,0 +1,53 @@
+row_id,step,title,status,owner_name,evidence
+T2-4,B2,위젯 견적·원고 업로드·편집기(Edicus) 경로 검증,부분,서희항,_workspace/huni-launch-runway/07_rebaseline/S/S5-plan/status-28.csv:9
+STD-OPT-008,B2,용지(자재) 선택,작동,서희항,https://huni-admin.printly.co.kr/admin/product-viewer/?prd=PRD_000069@2026-09-16 21:30
+STD-OPT-009,B2,평량(g/㎡) 선택,작동,서희항,https://huni-admin.printly.co.kr/admin/product-viewer/?prd=PRD_000069@2026-09-16 21:30
+STD-OPT-010,B2,비종이 소재 선택(아크릴·PVC·패브릭 등),작동,서희항,https://huni-admin.printly.co.kr/admin/product-viewer/?prd=PRD_000069@2026-09-16 21:30
+STD-OPT-011,B2,인쇄도수 선택(단면/양면·4도/8도·1도),작동,서희항,https://huni-admin.printly.co.kr/admin/product-viewer/?prd=PRD_000069@2026-09-16 21:30
+STD-OPT-012,B2,별색(spot color) 선택,작동,서희항,https://huni-admin.printly.co.kr/admin/widget-builder/?prd=PRD_000031@2026-09-16 21:34
+STD-OPT-013,B2,화이트/UV white 언더베이스 선택,작동,서희항,https://huni-admin.printly.co.kr/admin/price-simulator/@2026-09-16 21:29
+STD-OPT-014,B2,규격 사이즈 선택(프리셋),작동,서희항,https://huni-admin.printly.co.kr/admin/product-viewer/?prd=PRD_000069@2026-09-16 21:30
+STD-OPT-015,B2,비규격 사이즈 직접입력(재단 가로·세로),작동,서희항,https://huni-admin.printly.co.kr/admin/widget-builder/?prd=PRD_000146@2026-09-16 21:34
+STD-OPT-016,B2,작업 사이즈 입력·자동 도출(도련 포함),부분,최숙진,P-BLEED-32-01 HOLD_BASIS 32건 — 라이브 완제품 사이즈에 블리드 미적용(자동제외 중)
+STD-OPT-017,B2,수량 선택(구간 프리셋 + 직접입력),작동,서희항,https://huni-admin.printly.co.kr/admin/widget-builder/?prd=PRD_000146@2026-09-16 21:34
+STD-OPT-018,B2,건수(디자인 종류 수) 입력 및 총량 = 건수×수량 규칙 표시,작동,서희항,https://huni-admin.printly.co.kr/admin/widget-builder/?prd=PRD_000031@2026-09-16 21:34
+STD-OPT-019,B2,페이지 수 입력(책자류 필수 축),부분,서희항,X-ENGINE-PAGE-01 094 30P 보류(page 전송 코드트랙) · P-PHOTOBOOK-PAGEFEE-01 페이지비 전액 미청구
+STD-OPT-020,B2,표지/내지/간지 용지 개별 선택,작동,서희항,https://huni-admin.printly.co.kr/admin/widget-builder/?prd=PRD_000069@2026-09-16 21:34
+STD-OPT-021,B2,표지/내지 인쇄도수 개별 선택,작동,서희항,https://huni-admin.printly.co.kr/admin/widget-builder/?prd=PRD_000069@2026-09-16 21:34
+STD-OPT-022,B2,제본 방식 선택(중철·무선·PUR·트윈링·하드커버),작동,서희항,https://huni-admin.printly.co.kr/admin/price-simulator/@2026-09-16 21:29
+STD-OPT-023,B2,제본 방향 선택(좌철/상철 × 세로/가로),작동,서희항,https://huni-admin.printly.co.kr/admin/price-simulator/@2026-09-16 21:29
+STD-OPT-024,B2,코팅 선택(무광/유광 × 단면/양면),부분,서희항,X-ENGINE-SETCOAT-01 price_simulate_set이 coat_side_cnt 드롭 → 셋트 경로 표지 코팅비 누락(C트랙)
+STD-OPT-025,B2,박 선택(색상 다종 × 면 × 크기 × 내용같음/틀림),부분,최숙진,X-ENGINE-FOIL-01 박 엔진 미지원 — 027/028/029 박 가산 전부 0(데이터로 못 고침·C트랙)
+STD-OPT-026,B2,형압(양각/음각) 선택,부분,서희항,raw/webadmin/webadmin/config/urls.py:356-360 (옵션 축) · X-ENGINE-FOIL-01 동일 엔진 경로
+STD-OPT-027,B2,오시 선택(줄 수 × 방향),부분,서희항,raw/webadmin/webadmin/config/urls.py:356-360 · 오배선 실증 huni-product-lifecycle §7.4
+STD-OPT-028,B2,미싱 선택,부분,서희항,P-DEDUP-PROC-3-01 공정 중복정리 BLOCKED 3건(미싱086 포함) — 부모↔자식 가격사슬 단절
+STD-OPT-029,B2,타공 선택(직경 × 개수 × 위치),부분,서희항,X-WGT-PUNCH-01 시뮬레이터/위젯이 procs detail{타공수}를 전송해야 타공수별 가산 작동(코드트랙)
+STD-OPT-030,B2,귀돌이/라운딩 선택(반경 × 모서리 위치),부분,서희항,X-WGT-ATTB-01 합성 ATTB / size-linked 반경 잠복 — 컨버전 시 보정 필요
+STD-OPT-031,B2,도무송(전체/부분·모양·개수) 선택,작동,서희항,https://huni-admin.printly.co.kr/admin/product-viewer/?prd=PRD_000066@2026-09-16 21:30
+STD-OPT-032,B2,넘버링(일반/난수 × 자릿수 × 개수) 선택,미착수,서희항,print-story/02_capture/order-flow-steps.md §C-7-5 넘버링
+STD-OPT-033,B2,부분UV/에폭시 선택,부분,서희항,X-GAP-UVFORM-01 webadmin UV 변형 입력 폼 적재경로 '미상' 정직 표기 잔존
+STD-OPT-034,B2,부자재 선택(케이스·폴리백·포장),작동,서희항,https://huni-admin.printly.co.kr/admin/widget-builder/?prd=PRD_000146@2026-09-16 21:34
+STD-OPT-035,B2,상품별 기본제공 부자재 규칙 표시,미착수,최숙진,F-046/SCOPE-046/IA-046 B13 추가상품 PARTIAL·미착수
+STD-OPT-036,B2,추가상품(악세사리) 템플릿 묶음 선택,작동,서희항,https://huni-admin.printly.co.kr/admin/sku-catalog/@2026-09-16 21:28
+STD-OPT-053,B2,견적 결과 저장(옵션보관함),미착수,신우진,F-065/SCOPE-065/IA-065 F5 옵션 보관함 저장·불러오기 CUSTOM·미착수
+STD-OPT-054,B2,견적서 PDF/출력물 발급,미착수,신우진,F-051/SCOPE-051/IA-051 C3 견적서 생성·다운로드 CUSTOM·미착수
+STD-OPT-055,B2,대량주문 견적 문의 접수,미착수,최숙진,huni-skin-shopby src/app/(main) 하위 inquiry/qna 라우트 부재 (SB-056 absent)
+STD-OPT-056,B2,캘린더 가공·장수(월수) 선택,구현-미검증,서희항,"L3/legacy-normalized.json#F-045,IA-045,SCOPE-045 · _workspace/huni-launch-scope/02_gap/fit-gap-matrix.csv:46 · docs/huni/후니프린팅_통합IA_일정_역할분담_260616.xlsx#02_IA마스터!A46:K46 || P1판정(260902): huni-skin-shopby/src/components/product/configurators/calendar-configurator.tsx:167 장수 · :196 캘린더 가공"
+STD-ART-001,B3,인쇄원고 파일 업로드(PDF/AI/EPS),작동,서희항,https://huni-admin.printly.co.kr/admin/widget-builder/?prd=PRD_000069@2026-09-16 21:34
+STD-ART-002,B3,대용량 파일 분할/재개 업로드,구현-미검증,서희항,raw/webadmin/webadmin/catalog/s3_artwork.py:208-280 (멀티파트)
+STD-ART-003,B3,업로드 진행률·실패 재시도,부분,서희항,F-052/SCOPE-052/IA-052 D1 파일 업로드 CUSTOM·미착수
+STD-ART-004,B3,건수별 개별 파일 업로드(디자인 N종),부분,서희항,print-story/02_capture/order-flow-steps.md §A-4 건수 · §C-8 앞/뒷면 각각
+STD-ART-005,B3,앞면/뒷면 파일 분리 업로드,부분,서희항,print-story/02_capture/order-flow-steps.md §C-8
+STD-ART-006,B3,주문 이후 파일 업로드 경로(결제 후 입고),부분,서희항,raw/webadmin/webadmin/catalog/artwork_promote.py:1 (tmp→order 버킷 승격) · models.py:1081
+STD-ART-007,B3,파일 재업로드·버전 이력 보관,부분,서희항,raw/webadmin/webadmin/catalog/artwork_promote.py:1
+STD-ART-019,B3,업로드 파일 썸네일·PDF 미리보기,미착수,김동학,F-053/SCOPE-053/IA-053 D2 편집상품 미리보기·썸네일 CUSTOM·미착수
+STD-ART-020,B3,재단선 오버레이 미리보기,미착수,김동학,SCOPE-058/IA-058 E2 인쇄영역·도련 가이드 PARTIAL·미착수
+STD-ART-021,B3,온라인 디자인 에디터 진입,부분,최숙진,"raw/webadmin/webadmin/config/urls.py:274,275 · catalog/edicus_lookup.py:214-260 (resolve/token done) — 그러나 SB-020 stub: configurator-actions.tsx:170-176 onClick 없음(데드 버튼)"
+STD-ART-022,B3,에디터 템플릿 선택·불러오기,작동,서희항,https://huni-admin.printly.co.kr/admin/edicus-template-md/@2026-09-16 21:28
+STD-ART-023,B3,에디터 작업물 저장·재편집,미착수,신우진,X-WGTF-EDICUS-01 에디터 연동 계약 미상(U-6/U-7)
+STD-ART-024,B3,에디터 산출물 인쇄용 파일 변환·주문 연결,부분,서희항,X-WGTF-EDICUS-01 · X-EDX-D8-01 EDICUS Link Manager POD 채널 이중 등록
+STD-ART-025,B3,선택 옵션(사이즈·페이지)과 에디터 캔버스 동기화,부분,최숙진,P-EDICUS-MISSING-01 EDICUS 미등록/결손 — 셋트문구 5종·레더하드커버·벽걸이캘린더 2사이즈
+STD-ART-029,B3,가변데이터 인쇄(VDP) 데이터 업로드·병합,미착수,서희항,"L3/legacy-normalized.json#F-055,IA-055,SCOPE-055 · _workspace/huni-launch-scope/02_gap/fit-gap-matrix.csv:56 · docs/huni/후니프린팅_통합IA_일정_역할분담_260616.xlsx#02_IA마스터!A56:K56 || P1판정(260902): huni-skin-shopby 전수 grep 'vdp|가변데이터' 0건(260902)"
+STD-ART-030,B3,「옵션 조합에 연결된 편집기 템플릿 없음」 오류 — 에디쿠스 템플릿 연결 점검,미착수,서희항,후니정기미팅 정리260915.html §가격·템플릿 데이터 · 미결 3
+STD-ART-031,B3,삭제된 사이즈 코드가 연결된 템플릿 전수조사(800여 개 중 노출 대상 선별),미착수,서희항,후니정기미팅 정리260915.html §가격·템플릿 데이터 · 미결 4
+STD-ART-032,B3,에디쿠스 테스트용 단순 상품(메모패드 등) 제공,미착수,최숙진,후니정기미팅 정리260915.html §가격·템플릿 데이터 · 미결 5
