@@ -114,12 +114,13 @@ def merged_gaps():
     out = []
     n = {c: 0 for c in CARDS}
 
-    def push(card, pid, pname, kind, 내용, 담당, 선행, rowref):
+    def push(card, pid, pname, kind, 내용, 담당, 선행, rowref, 담당근거=''):
         n[card] += 1
         out.append(dict(
             gap_uid='GX-%s-%03d' % (card, n[card]), card=card, process_ref=pid, process_name=pname,
             종류=kind, 종류설명=GAP_KIND.get(kind, ''), 내용=내용.strip(),
-            제안담당=담당.strip(), 선행=선행.strip(), 관련_row_id=rowref.strip(),
+            제안담당=담당.strip(), 담당_근거=담당근거.strip(),
+            선행=선행.strip(), 관련_row_id=rowref.strip(),
         ))
 
     for r in read_csv(os.path.join(PROC, 't62', 'gaps.csv')):
@@ -129,9 +130,10 @@ def merged_gaps():
         push('t63', r['프로세스'], r['프로세스명'], kind_letter(r['종류']),
              r['내용'] + (' — ' + r['진단'] if r['진단'].strip() else ''),
              r['제안 담당'], r['선행'], r['row_id'])
+    # t64 만 `담당_근거` 열을 갖는다(260919 lane-4 보강). 다른 세 카드는 빈칸으로 둔다 — 만들어 넣지 않는다.
     for r in read_csv(os.path.join(PROC, 't64', 'gaps.csv')):
         push('t64', r['프로세스'], '', kind_letter(r['종류']),
-             r['내용'], r['제안_담당'], r['선행'], r['관련_row_id'])
+             r['내용'], r['제안_담당'], r['선행'], r['관련_row_id'], r.get('담당_근거', ''))
     for r in read_csv(os.path.join(PROC, 't65', 'gaps.csv')):
         push('t65', r['process_id'], r['process_name'], kind_letter(r['종류']),
              r['내용'], r['제안담당'], r['선행'], r['gap_id'])

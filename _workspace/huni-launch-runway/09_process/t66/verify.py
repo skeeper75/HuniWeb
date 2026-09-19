@@ -16,8 +16,8 @@ RUNWAY = os.path.dirname(PROC)
 REPO = os.path.abspath(os.path.join(RUNWAY, '..', '..'))
 LEDGER = os.path.join(RUNWAY, '08_system-screen', 't56', 'rejudge.csv')
 
-# t64 는 260919 에 빠진 곳 집계를 정정했다(65 → 169 · 커밋 9c7476bb). 기준 커밋을 그것으로 옮긴다.
-CARD_COMMIT = {'t62': 'd50770c9', 't63': '307e6a56', 't64': '9c7476bb', 't65': '21f181ec'}
+# t64 는 260919 에 두 번 고쳤다 — 집계 정정(65→169 · 9c7476bb) 뒤 담당 채움(b50011a6).
+CARD_COMMIT = {'t62': 'd50770c9', 't63': '307e6a56', 't64': 'b50011a6', 't65': '21f181ec'}
 EXPECT_OWNED = {'t62': 131, 't63': 201, 't64': 178, 't65': 151}
 EXPECT_GAPS = {'t62': 71, 't63': 168, 't64': 169, 't65': 117}
 EXPECT_TOTAL_GAPS = 525
@@ -128,6 +128,15 @@ m4 = re.search(r'\|\s*\*\*합계\*\*\s*\|\s*\*\*(\d+)\*\*\s*\|', qw_txt)
 if not m4 or int(m4.group(1)) != qw_n:
     stale.append(f'quick-wins.md 머리 {qw_n} ≠ 합계 {m4.group(1) if m4 else "없음"}')
 gate('V9c 문서 본문 건수 = 실측', not stale, str(stale or '일치'))
+
+# V9d — 제안담당 공란 0 · `담당_근거` 는 t64 만 채워져 있다(다른 세 카드는 만들어 넣지 않았다)
+blank_owner = [g['gap_uid'] for g in gaps if not g['제안담당'].strip()]
+t64_no_basis = [g['gap_uid'] for g in gaps if g['card'] == 't64' and not g['담당_근거'].strip()]
+other_basis = [g['gap_uid'] for g in gaps if g['card'] != 't64' and g['담당_근거'].strip()]
+gate('V9d 제안담당 공란 0 · 담당_근거는 t64 만',
+     not blank_owner and not t64_no_basis and not other_basis,
+     f'공란 {blank_owner[:5] or "[]"} · t64 근거없음 {t64_no_basis[:5] or "[]"} · '
+     f't64 밖 근거 {other_basis[:5] or "[]"}')
 
 # V9b — gap_uid 는 카드별로 매긴다(통번호 금지 — 한 카드가 바뀌면 인용이 통째로 밀린다)
 badid = [g['gap_uid'] for g in gaps if not re.fullmatch(r'GX-t6[2-5]-\d{3}', g['gap_uid'])]

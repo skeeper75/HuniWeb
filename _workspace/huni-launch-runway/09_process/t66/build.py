@@ -60,7 +60,8 @@ def build_tree():
 
 
 GAP_COLS = ['gap_uid', 'card', 'process_ref', 'process_name', 'L1_대분류', '종류', '종류설명',
-            '내용', '제안담당', '선행', '관련_row_id', 'root_cause_id', 'root_cause', '걸린낱말']
+            '내용', '제안담당', '담당_근거', '선행', '관련_row_id',
+            'root_cause_id', 'root_cause', '걸린낱말']
 
 
 def build_gaps(tree_rows):
