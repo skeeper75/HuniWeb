@@ -1,0 +1,822 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>시스템 연결 설계서</title>
+<style>
+:root{
+  --bg:#fbfaf8; --panel:#ffffff; --ink:#1b1a18; --ink2:#55514b; --ink3:#8b857c;
+  --line:#e3ded6; --line2:#efeae2; --accent:#9a4f1e; --accent-soft:#fdf2e9;
+  --ok:#2f6b46; --ok-bg:#eaf4ee; --warn:#9a6a10; --warn-bg:#fcf3e0;
+  --new:#9c2c3c; --new-bg:#fbecee; --unk:#5a5f78; --unk-bg:#eef0f6;
+  --mono:ui-monospace,SFMono-Regular,"SF Mono",Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#16151a; --panel:#1e1d23; --ink:#eceaf0; --ink2:#b4b0bb; --ink3:#817d8a;
+    --line:#333139; --line2:#2a2930; --accent:#e0915c; --accent-soft:#2c2118;
+    --ok:#79c69a; --ok-bg:#1a2b21; --warn:#e0b45c; --warn-bg:#2c2517;
+    --new:#e8899a; --new-bg:#2e1a1f; --unk:#a8adc8; --unk-bg:#20222e;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#16151a; --panel:#1e1d23; --ink:#eceaf0; --ink2:#b4b0bb; --ink3:#817d8a;
+  --line:#333139; --line2:#2a2930; --accent:#e0915c; --accent-soft:#2c2118;
+  --ok:#79c69a; --ok-bg:#1a2b21; --warn:#e0b45c; --warn-bg:#2c2517;
+  --new:#e8899a; --new-bg:#2e1a1f; --unk:#a8adc8; --unk-bg:#20222e;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0; background:var(--bg); color:var(--ink);
+  font-family:-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Pretendard","Noto Sans KR",sans-serif;
+  font-size:16px; line-height:1.75; -webkit-text-size-adjust:100%;
+}
+.wrap{max-width:980px; margin:0 auto; padding:0 16px 120px}
+header.top{border-bottom:1px solid var(--line); background:var(--panel); padding:34px 0 26px; margin-bottom:34px}
+header.top .wrap{padding-bottom:0}
+h1{font-size:30px; line-height:1.3; margin:0 0 10px; letter-spacing:-.02em}
+.sub{color:var(--ink2); font-size:14.5px; margin:0}
+.meta{color:var(--ink3); font-size:13px; font-family:var(--mono); margin-top:12px}
+nav.layers{display:flex; flex-wrap:wrap; gap:8px; margin-top:22px}
+nav.layers a{
+  display:inline-flex; align-items:baseline; gap:7px; text-decoration:none;
+  border:1px solid var(--line); border-radius:999px; padding:6px 14px;
+  color:var(--ink); background:var(--bg); font-size:13.5px;
+}
+nav.layers a:hover{border-color:var(--accent); color:var(--accent)}
+nav.layers a b{font-family:var(--mono); color:var(--accent); font-weight:700}
+section{margin:0 0 52px; scroll-margin-top:20px}
+h2{
+  font-size:13px; letter-spacing:.14em; text-transform:uppercase; color:var(--accent);
+  font-family:var(--mono); margin:0 0 6px; font-weight:700;
+}
+h2 + .h2sub{font-size:24px; font-weight:700; letter-spacing:-.015em; margin:0 0 20px; line-height:1.35}
+h3{font-size:18px; margin:32px 0 10px; letter-spacing:-.01em}
+h4{font-size:15px; margin:22px 0 8px; color:var(--ink2)}
+p{margin:0 0 14px}
+.lede{font-size:17px; color:var(--ink2)}
+.card{background:var(--panel); border:1px solid var(--line); border-radius:12px; padding:20px 22px; margin:18px 0}
+.card.hard{border-left:4px solid var(--new); background:var(--new-bg)}
+.card.note{border-left:4px solid var(--accent); background:var(--accent-soft)}
+code,.mono{font-family:var(--mono); font-size:.87em}
+code{background:var(--line2); padding:1px 5px; border-radius:4px; word-break:break-all}
+pre{
+  background:var(--panel); border:1px solid var(--line); border-radius:10px;
+  padding:16px; overflow-x:auto; font-family:var(--mono); font-size:12.5px; line-height:1.6;
+}
+pre.flow{font-size:11.5px; line-height:1.5}
+.tw{overflow-x:auto; margin:16px 0; border:1px solid var(--line); border-radius:10px; background:var(--panel)}
+table{border-collapse:collapse; width:100%; font-size:14px; min-width:520px}
+th,td{text-align:left; padding:9px 12px; border-bottom:1px solid var(--line2); vertical-align:top}
+th{font-size:12px; letter-spacing:.04em; color:var(--ink3); font-weight:600; white-space:nowrap; background:var(--bg)}
+tbody tr:last-child td{border-bottom:none}
+td.num{text-align:right; font-family:var(--mono)}
+.pill{display:inline-block; font-size:11.5px; font-family:var(--mono); padding:2px 8px; border-radius:999px; white-space:nowrap; font-weight:600}
+.p-ok{background:var(--ok-bg); color:var(--ok)}
+.p-part{background:var(--warn-bg); color:var(--warn)}
+.p-new{background:var(--new-bg); color:var(--new)}
+.p-unk{background:var(--unk-bg); color:var(--unk)}
+details.seam{border:1px solid var(--line); border-radius:12px; background:var(--panel); margin:12px 0; overflow:hidden}
+details.seam[open]{border-color:var(--accent)}
+details.seam > summary{
+  cursor:pointer; padding:14px 18px; list-style:none; display:flex; gap:12px;
+  align-items:center; flex-wrap:wrap; font-size:15.5px;
+}
+details.seam > summary::-webkit-details-marker{display:none}
+details.seam > summary::after{content:"▾"; margin-left:auto; color:var(--ink3); font-size:13px}
+details.seam[open] > summary::after{content:"▴"}
+details.seam > summary:hover{background:var(--bg)}
+.seam-no{font-family:var(--mono); color:var(--accent); font-weight:700; font-size:15px}
+.seam-body{padding:4px 18px 20px; border-top:1px solid var(--line2)}
+.quad{display:grid; grid-template-columns:1fr; gap:12px; margin:14px 0}
+@media(min-width:760px){.quad{grid-template-columns:1fr 1fr}}
+.q{border:1px solid var(--line2); border-radius:10px; padding:13px 15px; background:var(--bg)}
+.q h5{margin:0 0 7px; font-size:12px; letter-spacing:.09em; text-transform:uppercase; font-family:var(--mono); color:var(--ink3)}
+.q.reuse h5{color:var(--ok)} .q.build h5{color:var(--new)}
+.q.dont h5{color:var(--warn)} .q.silent h5{color:var(--unk)}
+.q ul{margin:0; padding-left:18px} .q li{margin-bottom:6px; font-size:14px}
+.q p{font-size:14px; margin:0 0 8px}
+ul,ol{margin:0 0 14px; padding-left:22px}
+li{margin-bottom:7px}
+hr{border:none; border-top:1px solid var(--line); margin:40px 0}
+.ev{font-family:var(--mono); font-size:12px; color:var(--ink3); word-break:break-all}
+footer{border-top:1px solid var(--line); margin-top:50px; padding-top:22px; color:var(--ink3); font-size:13px}
+.toggle{position:fixed; right:14px; bottom:14px; z-index:9; background:var(--panel);
+  border:1px solid var(--line); color:var(--ink2); border-radius:999px; padding:8px 15px;
+  font-size:13px; cursor:pointer; font-family:inherit}
+.toggle:hover{border-color:var(--accent); color:var(--accent)}
+</style>
+</head>
+<body>
+<button class="toggle" id="themeBtn" type="button">테마</button>
+
+<header class="top"><div class="wrap">
+  <h1>시스템 연결 설계서 — 위젯에서 생산까지</h1>
+  <p class="sub">시스템을 어떻게 연결하는지, 한 장에서 시작해 내려가며 읽는 문서.</p>
+  <p class="meta">카드 t57 · 260919 · 브랜치 WT-connect-design-doc · 읽기전용 조사 · md 짝 connect-design.md</p>
+  <nav class="layers">
+    <a href="#l0"><b>L0</b> 전체 흐름 1장</a>
+    <a href="#l1"><b>L1</b> 이음매 10 · 미결 · 결정 주체</a>
+    <a href="#l2"><b>L2</b> 이음매별 설계 입력</a>
+    <a href="#l3"><b>L3</b> 근거 부록</a>
+  </nav>
+</div></header>
+
+<div class="wrap">
+
+<section id="how">
+  <h2>읽는 법</h2>
+  <div class="h2sub">위에서 아래로 한 번만 읽으면 된다</div>
+  <p class="lede">9/16 산출이 「무엇을 이야기하는 문서인지 모르겠다」를 받은 원인은 데이터가 아니라 <b>틀</b>이었다.
+  기능 행 목록만 있고 전체 그림이 없었다. 이 문서는 네 층으로 내려간다.</p>
+  <div class="tw"><table>
+    <thead><tr><th>층</th><th>무엇</th><th>누가 읽나</th></tr></thead>
+    <tbody>
+      <tr><td><b>L0</b></td><td>전체 흐름 1장 — 시스템이 서로 어떻게 이어지는가</td><td>처음 여는 사람 전원</td></tr>
+      <tr><td><b>L1</b></td><td>이음매 10개 × 상태 · 미결 결정 · 결정 주체</td><td>무엇을 정해야 하는지 보려는 사람</td></tr>
+      <tr><td><b>L2</b></td><td>재사용 / 신규 / 베끼면 안 되는 것 / 조용히 깨지는 계약</td><td>실제로 설계·구현할 사람</td></tr>
+      <tr><td><b>L3</b></td><td>근거 — 어느 카드의 어느 줄에서 나왔는가</td><td>사실을 의심하는 사람</td></tr>
+    </tbody>
+  </table></div>
+  <div class="card note">
+    <b>이 문서가 하지 않는 것 3가지.</b>
+    ① <b>판정하지 않는다</b> — 「된다/안 된다」를 쓰지 않고 결정 안건으로 올린다.
+    ② <b>날짜를 추정하지 않는다</b> — 선행·순서만 적는다.
+    ③ <b>담당을 배정하지 않는다</b> — 담당 열은 S7-A(t56) 결과를 받아 채우며 그 전까지 비운다.
+    여기 적힌 「결정 주체」는 9/17 원장이 이미 명시한 값이고 담당 배정이 아니다.
+  </div>
+  <div class="card hard">
+    <b>[HARD] 열림PnP 코드는 후니 status 의 근거가 아니다.</b>
+    <code>/Users/innojini/Dev/CRT.DigitalEdit.V2</code> 는 타 고객 납품본이다.
+    원장 pitstop 23행은 <code>미착수</code>/<code>미확인</code> 그대로다.
+    가져가는 것은 <b>호출 방법과 구간 나눔</b>뿐이다.
+  </div>
+</section>
+
+<hr>
+
+<section id="l0">
+  <h2>L0</h2>
+  <div class="h2sub">위젯이 몸통이다 <span style="font-size:14px;color:var(--ink3);font-weight:400">(지니 확정 260919)</span></div>
+  <p>쇼핑몰 페이지에 임베드된 <b>위젯</b>이 상품선택 → 가격계산 → 에디터 → 파일업로드 → PitStop/MES 연계를 처리하고,
+  <b>쇼핑몰은 그 값을 받아</b> 카트·주문·결제를 한다. 몸통은 위젯이고, 쇼핑몰은 돈과 주문의 원장이다.</p>
+
+<pre class="flow">                    ┌──────────────── 위젯 (몸통) ────────────────┐
+고객 ──▶ 상품 선택 ──▶ 가격계산 ──▶ 에디터(Edicus) ──▶ 원고 업로드(S3 tmp)
+                    └──────────────────┬─────────────────────────┘
+                                       │ ① handoff — 서명 토큰 + 사양 + 금액
+                                       ▼
+                                  쇼핑몰(스킨)
+                                       │ ② 카트 담기
+                                       ▼
+                                    샵바이 ──── 돈·주문의 원장 ────┐
+                                       │ ③ 결제·주문 생성          │
+                                       │                          │ ⑩ 상태·송장 회신
+                                       ▼ ④ 주문 등록 + ⑤ 웹훅      │  ← 미확인 이음매
+                                  관리서버(webadmin)               │
+                                       │                          │
+                    ⑥ 원고 승격(S3 tmp → order)                    │
+                                       │                          │
+                                       ▼ ⑦ 작업 지시 (신규)        │
+                                   PitStop ── 프리플라이트          │
+                                       │ ⑧ 결과 인계 (신규·선례 0) │
+                                       ▼                          │
+Edicus 렌더 ──⑨──▶             MES(생산) ───────────────────────┘
+                                       │
+                                       ▼ NAS ──▶ 공장</pre>
+
+  <h4>읽는 법 3가지</h4>
+  <ol>
+    <li><b>관리서버를 거치지 않는 구간은 카트·결제 둘뿐이다.</b> 주문의 상태를 아는 곳이 한 군데여야 어긋나지 않는다(CTO 9/8 원문).</li>
+    <li><b>가로선(①~⑥)은 이어져 있고, 세로선(⑦~⑩)이 비어 있다.</b> 오픈 전 필수 작업은 대부분 아래쪽에 있다.</li>
+    <li><b>⑩은 한 번 일어나고 끝나지 않는다.</b> 주문이 살아 있는 동안 계속 돌고, 고객이 「내 주문 어디쯤?」을 보는 자리가 결국 여기다.</li>
+  </ol>
+
+  <h3>CTO 10구간과의 대조 — 같은 그림, 다른 각도</h3>
+  <div class="tw"><table>
+    <thead><tr><th>CTO 구간</th><th>이 문서 이음매</th><th>CTO 9/8 표기</th><th>260919 실측</th></tr></thead>
+    <tbody>
+      <tr><td>01 사양 선택·원고 업로드</td><td>(위젯 내부)</td><td><span class="pill p-ok">✓</span></td><td>위젯 128행 완료</td></tr>
+      <tr><td>02 장바구니에 담기</td><td><b>① 위젯→쇼핑몰</b></td><td><span class="pill p-ok">✓</span></td><td>완료 — 단 <b>금액 표현이 세 문서에서 다르다</b></td></tr>
+      <tr><td>03 샵바이 장바구니에 올리기</td><td><b>② 쇼핑몰→샵바이</b></td><td><span class="pill p-part">전달받음·검증 전</span></td><td>그대로 — 표시↔청구 불일치 「별도 과제」</td></tr>
+      <tr><td>04 결제·주문 생성</td><td><b>③ 샵바이 결제</b></td><td><span class="pill p-part">전달받음·검증 전</span></td><td>그대로</td></tr>
+      <tr><td>05 주문 등록</td><td><b>④ 샵바이→webadmin</b></td><td><span class="pill p-part">호출 미확인</span></td><td>그대로</td></tr>
+      <tr><td>06 원고 승격</td><td><b>⑥ S3 tmp→order</b></td><td><span class="pill p-ok">✓</span></td><td>완료 6행</td></tr>
+      <tr><td>07 주문 상태 변화 웹훅</td><td><b>⑤ 샵바이 웹훅</b></td><td><span class="pill p-part">받아서 쌓기만</span></td><td>그대로 — <b>메아리 필터 0건</b></td></tr>
+      <tr><td>08 파일 검사</td><td><b>⑦ 원고→PitStop</b></td><td><span class="pill p-new">미착수</span></td><td>23행 전부 미착수</td></tr>
+      <tr><td>09 접수 — 제작대기로</td><td><b>⑧ PitStop→MES</b> · <b>⑦′ 샵바이→MES</b></td><td><span class="pill p-new">가장 큰 공백</span></td><td>선례 0 · 자리 후보 5</td></tr>
+      <tr><td>10 MES 상태→자사몰 전달</td><td><b>⑩ MES→샵바이 회신</b></td><td><span class="pill p-new">미착수</span></td><td><b>세 카드 모두 미확인</b></td></tr>
+    </tbody>
+  </table></div>
+  <p>CTO 문서가 「✓ 만들어져 있음」으로 적은 06까지는 260919 실측과 일치한다.
+  <b>갈리는 곳은 02 하나</b> — CTO 문서는 「1원짜리 상품 × 금액만큼의 수량」이라 적었는데
+  현재 스킨 코드는 <b>10원 단가</b>로 돌고 있다.</p>
+</section>
+
+<hr>
+
+<section id="l1">
+  <h2>L1</h2>
+  <div class="h2sub">이음매 10개 — 상태 · 미결 · 결정 주체</div>
+  <p><b>상태 3값</b>
+    <span class="pill p-ok">있음</span> 코드가 실재하고 읽어 확인했다 ·
+    <span class="pill p-part">부분</span> 한쪽만 있거나 저장만 한다 ·
+    <span class="pill p-new">신규</span> 코드 0건 ·
+    <span class="pill p-unk">미확인</span> 「없다」가 아니라 <b>이번 조사로 확인하지 못했다</b>.
+  </p>
+  <div class="tw"><table>
+    <thead><tr><th>#</th><th>이음매</th><th>CTO</th><th>상태</th><th>원장 행</th><th>미결 결정</th><th>결정 주체</th></tr></thead>
+    <tbody>
+      <tr><td>①</td><td>위젯 → 쇼핑몰 (handoff)</td><td>02</td><td><span class="pill p-ok">있음</span></td><td>widget↔mall 4 · widget API 3 (전건 완료)</td><td>금액 표현 단위 정본 확정</td><td>미정</td></tr>
+      <tr><td>②</td><td>쇼핑몰 → 샵바이 (카트·주문·결제)</td><td>03·04</td><td><span class="pill p-part">부분</span></td><td>104 (완료 20 · 진행 42 · 미착수 42)</td><td>표시↔청구 불일치 해소 방식</td><td>쇼핑개발</td></tr>
+      <tr><td>③</td><td>샵바이 → webadmin 주문 등록</td><td>05</td><td><span class="pill p-part">부분</span></td><td>6 (완료 4 · 미착수 2)</td><td>결제 직후 실제로 부르는가</td><td>쇼핑개발</td></tr>
+      <tr><td>④</td><td>샵바이 웹훅 → webadmin</td><td>07</td><td><span class="pill p-part">저장만</span></td><td><code>SB-WEBHOOK</code> 2행 미착수</td><td>무엇을 골라 어떤 상태로 · <b>메아리 필터</b></td><td>미정</td></tr>
+      <tr><td>⑤</td><td>원고 승격 (S3 tmp → order)</td><td>06</td><td><span class="pill p-ok">있음</span></td><td>6 (전건 완료)</td><td>—</td><td>—</td></tr>
+      <tr><td>⑥</td><td>원고 → PitStop 작업 지시</td><td>08</td><td><span class="pill p-new">신규</span></td><td>pitstop 23 전건 미착수</td><td><b>A(큐+DB) vs B(파일+JSON)</b> — STD-ART-034</td><td>미정</td></tr>
+      <tr><td>⑦</td><td>샵바이 → MES 주문 수신</td><td>09</td><td><span class="pill p-part">변환 재사용·수신 신규</span></td><td>11 전건 미착수 · owner_side=미정</td><td><b>직접 HTTP vs 앞단 큐</b></td><td>미정</td></tr>
+      <tr><td>⑧</td><td>PitStop → MES 결과 인계</td><td>09</td><td><span class="pill p-new">신규 · 선례 0</span></td><td>1 미착수</td><td>자리 후보 5 중 어디 · 재렌더 유실</td><td>미정</td></tr>
+      <tr><td>⑨</td><td>Edicus 렌더 → MES</td><td>—</td><td><span class="pill p-ok">있음</span></td><td>1 완료</td><td>— (S3 경로가 조인 키)</td><td>—</td></tr>
+      <tr><td>⑩</td><td>MES → 샵바이 상태·송장 회신</td><td>10</td><td><span class="pill p-unk">미확인 이음매</span></td><td>6 (미착수 4 · 미확인 2)</td><td>MES→webadmin 방향 실측 자체가 없다</td><td>미정</td></tr>
+    </tbody>
+  </table></div>
+  <p>부수: <b>MES → NAS → 생산</b>은 <span class="pill p-ok">있음</span>이다(1행 완료 · 오픈 분모 밖).</p>
+
+  <div class="card hard">
+    <h3 style="margin-top:0">「있는 줄 알았는데 없는 것」 — MES WebApi 주문 API</h3>
+    <p>MES 저장소에 <code>POST /api/{companyCode}/orders</code> 가 있고 Swagger 문서도 있어
+    <b>「주문 수신 API 가 이미 있으니 샵바이만 붙이면 된다」로 읽힌다. 그렇게 읽으면 안 된다.</b></p>
+    <ul>
+      <li>솔루션 <b>빌드 대상이 아니다</b> — <code>.sln</code> 의 <code>BackOffice.WebApi</code> 는 VS <b>솔루션 폴더</b> GUID이고 csproj 항목 0 <span class="ev">TS.BackOffice.Huni.sln:102</span></li>
+      <li>호출하는 SP <code>USP_T_ORD_ORDER_C</code> 가 <b>DB 스크립트에 0건</b> (콘솔이 쓰는 <code>USP_ORD_ORDER_EXCEL_C</code> 는 4건 실재)</li>
+      <li>주문 <b>아이템이 저장되지 않는다</b> · 멱등성 0 (외부 주문번호 필드 자체가 DTO 에 없다) <span class="ev">OrderCoreEndPoints.cs:293</span></li>
+      <li>주문 CRUD 6개 <b>전부 익명</b> — <code>FallbackPolicy</code> 없음</li>
+      <li>코드가 스스로 적어 둠: <code>Notes = "New endpoint - WCF uses COrderByExcel for bulk import"</code></li>
+      <li>실제 외부 주문 유입 경로는 WebApi 가 아니라 <b>콘솔(SQS/폴링) 작업자</b></li>
+    </ul>
+    <p style="margin-bottom:0">→ <b>⑦ 샵바이→MES 의 「수신 층」은 신규다.</b> 다만 <b>변환 층은 재사용</b>이다.</p>
+  </div>
+
+  <h3>결정 사슬 — 무엇을 먼저 정해야 순서가 안 꼬이나</h3>
+<pre>STD-ART-034  연동방식(큐+DB vs 파일+JSON)      ← 여기가 막히면 아래 전부 막힌다
+      │
+      ├─▶ STD-ART-035  작업범위 산정 4갈래(프로파일·파일이동·결과표시·대용량)
+      │         │
+      │         └─▶ STD-ART-033  소요시간 미팅 상정·일정 반영
+      │
+      ├─▶ BLK-S2-4    PitStop 구매·라이선스·인스턴스        결정 주체 = 대표(채훈희)
+      ├─▶ T4-3        파일 검수 경로(PitStop 조달 vs 사람)   결정 주체 = 대표(채훈희)
+      └─▶ STD-MYP-024 PitStop 연동 담당 확정                (선행 STD-ART-016)
+
+STD-ADO-010  검수 게이트를 현행 MES 상태값으로 대신할지     결정 주체 = 미정
+STD-MYP-031  보관함 저장 시점  ──▶  STD-OPT-053  개발 주체   결정 주체 = 신우진(PM)</pre>
+  <p><b>읽는 법</b>: 7건 중 <b>결정 주체가 정해진 것은 4건</b>(대표 2 · PM 2)이고 <b>3건이 「미정」</b>이다.
+  <code>STD-ART-034</code> 가 사슬의 뿌리인데 결정 주체가 미정이다 — 이것이 ⑥·⑧ 이음매의 작업량을 낼 수 없는 직접 원인이다.</p>
+</section>
+
+<hr>
+
+<section id="l2">
+  <h2>L2</h2>
+  <div class="h2sub">이음매별 설계 입력 <span style="font-size:14px;color:var(--ink3);font-weight:400">— 이음매를 눌러 펼친다</span></div>
+  <p>각 이음매마다 네 칸이다. <b>재사용 자산</b>(있는 것을 쓴다) · <b>새로 만들 것</b>(없다) ·
+  <b>베끼면 안 되는 것</b>(선례에 있지만 따라가면 깨진다) · <b>조용히 깨지는 계약</b>(예외를 던지지 않고 틀리는 자리).</p>
+
+<details class="seam" open>
+  <summary><span class="seam-no">①</span> 위젯 → 쇼핑몰 (handoff) <span class="pill p-ok">있음</span></summary>
+  <div class="seam-body">
+    <div class="quad">
+      <div class="q reuse"><h5>재사용 자산 — 전건 완료</h5><ul>
+        <li><code>POST /api/w/v1/handoff</code> 재계산 + HMAC 서명 토큰 <span class="ev">config/urls.py:255</span></li>
+        <li><code>/handoff/verify</code> 서버-투-서버 서명·금액 검증 <span class="ev">urls.py:256 · widget_api.py:183</span></li>
+        <li><code>/handoff/requote</code> 결제 직전 재견적 <span class="ev">urls.py:257 · widget_api.py:5011</span></li>
+        <li><code>GET /catalog</code> 카탈로그 + 시작가 <span class="ev">urls.py:248 · widget_api.py:5841</span></li>
+        <li>위젯 <code>submit</code> — canOrder → validate → 토큰 → <code>huni:submit</code> <span class="ev">widget.js:953 · :1015</span></li>
+        <li>스킨 수신 — <code>optionInputs</code> 에 <code>huni_order</code>(JSON)·<code>huni_token</code> <span class="ev">huni-skin-shopby/README.md:64-67</span></li>
+      </ul></div>
+      <div class="q build"><h5>새로 만들 것</h5>
+        <p>없다. 단 원장에 <code>handoff/verify 재검증 호출</code> 1행이 <b>미착수</b>로 남아 있다
+        (<span class="ev">S1-skin/api-wiring.csv C1 — 호출 0건</span>).</p>
+        <p style="margin-bottom:0"><b>서명을 발급하는 쪽은 완성이고 검증을 부르는 쪽이 비어 있다.</b></p>
+      </div>
+    </div>
+    <div class="q silent"><h5>조용히 깨지는 계약 — 금액 표현이 세 문서에서 다르다 [결정 안건]</h5>
+      <div class="tw"><table>
+        <thead><tr><th>출처</th><th>적힌 것</th></tr></thead>
+        <tbody>
+          <tr><td>CTO 9/8 문서</td><td><b>1원</b>짜리 상품 × 금액만큼의 수량 (8/26 샵바이 회신으로 확정)</td></tr>
+          <tr><td>원장 t48:209</td><td>「<b>10원×수량</b>」 모델 정합 검증 — 미착수</td></tr>
+          <tr><td>스킨 실코드</td><td><code>"판매가 10원 상품 × 수량(=금액÷10)" 으로 결제 금액을 표현한다(후니 §11 확정)</code> · <code>총액은 10원 배수라 반올림은 정확</code> <span class="ev">huni-skin-shopby/src/lib/api/widget-order.ts:22-23,29-30</span></td></tr>
+        </tbody>
+      </table></div>
+      <p><b>돌고 있는 코드는 10원이다.</b> CTO 문서의 1원은 9/8 시점 표기이거나 이후 바뀐 것이다.
+      이 문서는 어느 쪽이 맞다고 판정하지 않는다 — 정본을 한 줄로 확정하는 것이 결정 안건이다.</p>
+      <p style="margin-bottom:0">10원 단가는 「후니 가격엔진이 1원 단위를 절삭해 항상 10원 배수」라는 <b>전제 위에 서 있다</b>.
+      그 전제가 깨지는 상품이 하나라도 있으면 청구액이 조용히 어긋난다.</p>
+    </div>
+  </div>
+</details>
+
+<details class="seam">
+  <summary><span class="seam-no">②</span> 쇼핑몰 → 샵바이 (카트·주문·결제) <span class="pill p-part">부분</span></summary>
+  <div class="seam-body">
+    <div class="quad">
+      <div class="q reuse"><h5>재사용 자산</h5>
+        <p>카트 조회·수량/옵션 수정·삭제·비회원 카트가 전부 완료
+        <span class="ev">라이브 확인 shopby.huniprinting.co.kr/cart @2026-09-16 21:27</span></p>
+        <p style="margin-bottom:0">결제 복귀 URL(NCPPay <code>confirmUrl</code>)은 <b>진행</b>.</p>
+      </div>
+      <div class="q dont"><h5>베끼면 안 되는 것</h5>
+        <p style="margin-bottom:0">담기 전달값에 <b>토큰·원고 저장키·프로젝트 식별자가 평문으로 노출</b>되는 구조.
+        원장 <code>STD-SYS-023 · 미착수</code> <span class="ev">L0/N3/ARCHITECTURE-v2.md §10 A-13</span></p>
+      </div>
+    </div>
+    <div class="q silent"><h5>조용히 깨지는 계약 — 표시↔청구 불일치 [알려진 이슈 · 별도 과제]</h5>
+      <blockquote style="margin:0 0 10px; padding-left:14px; border-left:3px solid var(--line); color:var(--ink2)">
+        결제 표시 금액은 위젯 총액을 따르지만, 실제 PG 청구액은 shopby 가 서버에서 옵션가 기준으로 확정한다
+        <span class="ev">huni-skin-shopby/README.md:70-71</span>
+      </blockquote>
+      <p style="margin-bottom:0">표시와 청구가 다른 자리다. <b>예외가 나지 않고 금액만 다르게 결제된다.</b>
+      원장은 <code>STD-PAY-031 · 미착수</code>로 들고 있다. ①의 단위 정본과 같은 뿌리다.</p>
+    </div>
+  </div>
+</details>
+
+<details class="seam">
+  <summary><span class="seam-no">③④</span> 샵바이 → webadmin (주문 등록 · 웹훅) <span class="pill p-part">저장만</span></summary>
+  <div class="seam-body">
+    <div class="quad">
+      <div class="q reuse"><h5>재사용 자산</h5><ul>
+        <li>웹훅 수신 핸들러 — 결제완료·취소·배송지변경 · 경로 마지막 조각이 비밀키(불일치 404) · 원문 저장 후 즉시 200 <span class="ev">config/urls.py:273 · shopby_hook.py:82</span></li>
+        <li>클레임(반품·교환) 웹훅 저장 — <code>shop_clm_sts</code> 포함 <span class="ev">shopby_hook.py:112-121</span></li>
+        <li>상품·이미지·전시 동기화 <span class="ev">shopby_sync.py:118 · admin.py:2301</span></li>
+      </ul></div>
+      <div class="q build"><h5>새로 만들 것 — 읽고 판단하는 층이 통째로 없다</h5>
+        <p>CTO 문서 원문: 「지금은 받아서 원문 그대로 쌓는 것까지만 되어 있고, <b>읽고 판단해 MES에 반영하는 부분이 없습니다</b>.」</p>
+        <p style="margin-bottom:0">260919 재확인 결과 그대로다 — <code>shopby_hook.py:121</code> 은 <code>TOrdWebhooks</code> 저장만 한다.</p>
+      </div>
+      <div class="q dont"><h5>베끼면 안 되는 것</h5>
+        <p style="margin-bottom:0">우커머스 선례는 <b>서명 검증이 없다</b>(헤더 6종을 읽지만 <code>x-wc-webhook-signature</code> 는 읽지 않음).
+        샵바이 스펙은 <code>X-Webhook-Signature</code>(HMAC-SHA256) 검증을 요구하므로 <b>그대로 베끼면 스펙 미달</b>이다.
+        HMAC 은 사내에 아웃바운드 <b>서명 생성만</b> 있고 <b>검증 코드 0건</b>.</p>
+      </div>
+      <div class="q silent"><h5>조용히 깨지는 계약 — 메아리 필터 [F7]</h5>
+        <p>우리가 샵바이에 올린 상태 변경이 <b>웹훅으로 되돌아온다.</b> 자기 변경인지 가리는 코드가 0건이다
+        (<code>STD-MFG-030 · 미착수</code> <span class="ev">shopby_hook.py:112-121 에 필터 없음 — t48 직접 확인 260919</span>).</p>
+        <p style="margin-bottom:0">무한루프이거나, 자기 변경을 남의 변경으로 읽어 상태를 덮는다. <b>둘 다 예외를 던지지 않는다.</b></p>
+      </div>
+    </div>
+  </div>
+</details>
+
+<details class="seam">
+  <summary><span class="seam-no">⑤</span> 원고 승격 (S3 tmp → order) <span class="pill p-ok">있음</span></summary>
+  <div class="seam-body">
+    <p><code>s3 ↔ webadmin</code> 6행 전건 완료. 입금 전(가상계좌)에도 옮긴다 —
+    「파일을 지키는 것과 생산을 시작하는 것은 다른 일」(CTO 9/8).</p>
+    <p style="margin-bottom:0"><b>조용히 깨지는 계약</b>: S3 키 경로가 곧 조인 키다 → ⑨ 참조.</p>
+  </div>
+</details>
+
+<details class="seam">
+  <summary><span class="seam-no">⑥</span> 원고 → PitStop 작업 지시 <span class="pill p-new">신규</span></summary>
+  <div class="seam-body">
+    <h4>선례는 두 갈래다 — 「핫폴더 vs CLI」가 아니다</h4>
+    <p>열림PnP 는 <b>둘 다 만들었고 둘 다 CLI 다.</b> <code>CRT.Yeolim.ServerProcess.HotFolder</code> 의 "HotFolder" 는
+    Enfocus 제품 기능이 아니라 <b>자체 exe 이름</b>이고, 내부는 SQS 판과 똑같이 <code>PitStopServerCLI.exe -config</code> 를 3회 부른다.
+    Enfocus 핫폴더 API·SDK 바인딩 0건 · <code>.ppp</code> 프로파일 미사용 <span class="ev">ServerProcess/Program.cs:636</span></p>
+    <p><b>실제로 갈린 축은 「PitStop 을 어떻게 부르나」가 아니라 「작업 지시를 어디서 받나」다.</b></p>
+    <div class="tw"><table>
+      <thead><tr><th></th><th>A · 큐 + DB</th><th>B · 파일 + JSON</th></tr></thead>
+      <tbody>
+        <tr><td>입력</td><td>S3 이벤트 → SQS → 다운로드</td><td>파일 경로 인자 <code>-i</code></td></tr>
+        <tr><td>옵션 출처</td><td>DB <code>SETTING_JSON</code>(주문 시점 동결)</td><td><b>JSON 파일 인자 <code>-c</code></b></td></tr>
+        <tr><td>작업 식별</td><td>DB <code>jobId</code> = 파일명 숫자 접두 <span class="ev">AppArguments.cs:57</span></td><td>파일명 규약 <code>yyMMdd_코드</code> <span class="ev">HotFolder/AppArguments.cs:66-99</span></td></tr>
+        <tr><td>상태·결과</td><td>DB 로그 <code>USP_JOB_LOG_C</code> + 클라이언트 그리드</td><td><b>파일</b> <code>{이름}_레포트_{정상|주의|오류}.json/.pdf</code> <span class="ev">AppReturnValue.cs:274-288</span></td></tr>
+        <tr><td>DB 결합</td><td>있음</td><td><b>0</b> — <code>CJobLog</code> 7곳 전부 주석 · 살아있는 호출 0건</td></tr>
+      </tbody>
+    </table></div>
+    <div class="card note" style="margin:14px 0">
+      <b><code>STD-ART-034</code> 의 결정 문장을 이 축으로 다시 쓰는 편이 정확하다.</b><br>
+      <b>B 는 후니 쪽 결합면이 가장 얇다</b> — webadmin 이 옵션 JSON 을 파일로 떨구고 exe 를 부르면 되므로
+      <b>PitStop 서버가 후니 DB 를 전혀 모르게</b> 만들 수 있다.
+    </div>
+
+    <div class="quad">
+      <div class="q reuse"><h5>재사용 자산 — 옮기면 되는 것은 753줄뿐</h5>
+        <p><code>CRT.Framework.Pitstop</code> 4파일 753줄: <code>PitStopConfiguration.cs</code>(318 · 설정 XML 직렬화) ·
+        <code>EnfocusReport.cs</code>(289 · 리포트 파서) · <code>PitStopEnums.cs</code>(93) · <code>VariableSet.cs</code>(53).</p>
+        <p>선언된 의존 2개(<code>Newtonsoft.Json 13.0.3</code> · <code>CRT.Framework.PDF</code>)는 <b>소스에서 미사용</b>이고
+        using 은 전부 <code>System.*</code>. 양쪽 다 .NET Framework 4.7.2 · 같은 csproj 형식 · 같은 네임스페이스라 <b>이름 충돌 자리가 없다.</b></p>
+        <p style="margin-bottom:0">최소 완결 예제: <code>RunPitstopCLI/Form1.cs</code>(184줄) — 변수세트 치환(<code>:114-119</code>)
+        → 조립(<code>:125</code>) → <code>Save</code>(<code>:164</code>) → <code>-config</code>(<code>:168</code>)
+        → <code>Execute</code>(<code>:170</code>) → <code>Deserialize</code>(<code>:174</code>).
+        <b>PoC 에 그대로 베낄 수 있는 유일한 파일.</b></p>
+      </div>
+      <div class="q build"><h5>새로 만들 것 — 부피는 Framework 밖에 있다</h5>
+        <ul>
+          <li>3단계 오케스트레이션·옵션→액션 선택·후처리 <span class="ev">ServerProcess/Program.cs · 1,357줄</span></li>
+          <li>액션 카탈로그 <code>PitStopAction_{Enum}</code> 규약 <span class="ev">ActionsSetList.cs · 113줄</span></li>
+          <li>인자 파싱 · 반환 규약 <span class="ev">AppArguments.cs 97 + AppReturnValue.cs 67</span></li>
+          <li><b>상품별 프로파일</b>(<code>.eal</code>·<code>.evs</code>) — <b>선례 없음</b>. 열림은 상품 개념 자체가 없고 작업별 옵션 불리언으로 액션을 고른다. <b>실물 0개</b></li>
+          <li>기동 주체(감시자·스케줄러) — <b>저장소 밖</b>. <code>FileSystemWatcher</code>·<code>ServiceBase</code>·<code>Topshelf</code>·<code>TaskScheduler</code> 0건</li>
+        </ul>
+        <p style="margin-bottom:0"><b>753줄 복사</b>와 <b>파이프라인 세우기</b>는 규모가 다르다.</p>
+      </div>
+    </div>
+
+    <h4>단계별 파라미터 — 설계에 그대로 쓸모 있는 구분</h4>
+    <div class="tw"><table>
+      <thead><tr><th>단계</th><th>하는 일</th><th>변수세트</th><th>조건</th></tr></thead>
+      <tbody>
+        <tr><td>PitStop01</td><td>문서 구조 검사</td><td><b>없음</b></td><td>무조건</td></tr>
+        <tr><td>PitStop02</td><td>본 처리</td><td><b>있음</b> (색상 타깃·DPI·근접거리·리샘플 DPI)</td><td>무조건</td></tr>
+        <tr><td>PitStop03</td><td>폰트 플래튼</td><td><b>없음</b></td><td>폰트 미임베드 <b>그리고</b> 옵션 켬</td></tr>
+      </tbody>
+    </table></div>
+    <p>살아있는 변수세트 대입은 두 곳뿐이고 <b>둘 다 PitStop02</b>
+    <span class="ev">ServerProcess/Program.cs:1019 · HotFolder/Program.cs:1051</span>. 01·03 은 세 판본 모두 주석이다.
+    → <b>구조 검사와 폰트 플래튼은 변수 없이 돈다.</b></p>
+
+    <div class="q dont"><h5>베끼면 안 되는 것 [3건]</h5><ol>
+      <li><b>동시성 상한이 없다.</b> 프로세스 수 가드가 <code>&gt;</code> 비교라 <code>ExecuteProcessCnt=4</code> 인데 <b>최대 5개</b>가 공존하고
+      <span class="ev">SQSMonitorService/Program.cs:41-46</span>, 프로세스 안에서는 메시지마다 <code>Task.Run</code> 을 만들어 전부 동시에 띄운다
+      <span class="ev">:116-175 · 상한은 MaxMsgCntAtATime=10 뿐</span>.
+      곱하면 <b>최악 5×10=50개</b>가 동시에 돌고 각자 CLI 를 3회까지 부른다. <b>PitStop 라이선스 동시 실행 한도를 넘길 구조다.</b></li>
+      <li><b>Win32 창 원격 조작.</b> <code>FindWindow</code>/<code>SetForegroundWindow</code> 로 Foxit GUI 창을 조작한다
+      <span class="ev">SaveAsErrorPdf/Program.cs:166-172 · FoxitSaveAs/Form1.cs:71-77</span>.
+      <b>무인 서버에서 포커스·창 제목에 의존하는 자동화는 조용히 깨진다.</b></li>
+      <li><b>실패 시 메시지를 지우지 않는다</b> → 작업 전체가 재실행되는데 <b>멱등 가드가 없다</b>
+      <span class="ev">:109 bDeleteMsgOnSuccess:false + :155 성공 시에만 삭제</span>. 재시도도 없다(타임아웃 1800/2400초).</li>
+    </ol></div>
+
+    <div class="q silent"><h5>조용히 깨지는 계약 [2건]</h5>
+      <p><b>1. <code>CommandLine.Execute</code> 는 후니에 이미 있고 동작이 다르다.</b></p>
+      <div class="tw"><table>
+        <thead><tr><th></th><th>열림(88줄)</th><th>후니(85줄)</th></tr></thead>
+        <tbody>
+          <tr><td>5번째 인자명</td><td><code>hiddenWindow</code></td><td><b><code>windowHidden</code></b></td></tr>
+          <tr><td><code>CreateNoWindow</code></td><td><b>항상 <code>true</code></b></td><td><b><code>windowHidden==true</code> 일 때만</b> (기본 <code>false</code>)</td></tr>
+        </tbody>
+      </table></div>
+      <p>열림 호출부는 5번째 인자를 넘기지 않는다(4인자 호출 <span class="ev">Program.cs:659</span>).
+      <b>같은 호출을 후니 <code>CommandLine</code> 으로 하면 기본값 <code>false</code> 라 콘솔 창이 뜬다.</b>
+      상주 워커에서는 동작 차이가 된다. 인자명이 달라 named argument 로 쓴 호출부는 <b>컴파일이 깨진다.</b><br>
+      → <code>CommandLine.cs</code> 는 <b>「옮길 파일」이 아니라 「동작 차이를 확인할 파일」이다.</b></p>
+      <p style="margin-bottom:0"><b>2. 버전 숫자가 셋 다 다르다</b> — 코드 <code>Versioning.Version</code> 기본값 <b>10</b>(<code>:13</code>) ·
+      XmlRoot 스키마 네임스페이스 <b>22</b>(<code>:289</code>) · 설치본 <b>23</b>.
+      <code>VersioningStrategy = BestEffort</code>(<code>:16</code>) 로 넘긴다.</p>
+    </div>
+
+    <div class="card">
+      <b>이 이음매가 결정 못 한 채로 남는 것</b><br>
+      PitStop Server 23 의 <b>라이선스 형태·동시 처리 수·CPU/메모리 요건</b>은 두 저장소 어디에도 없다(Enfocus 문서 영역).
+      <b>「후니 워커 서버에 같이 얹히는가」는 코드로 답할 수 없다</b> — 현장 서버 실사 또는 인프라 담당 확인이 필요하다.
+      CTO 문서는 이 자리에 「설치할 서버(EC2 윈도우 인스턴스) 확보」를 적어 두었다.
+    </div>
+  </div>
+</details>
+
+<details class="seam">
+  <summary><span class="seam-no">⑦</span> 샵바이 → MES 주문 수신 <span class="pill p-part">수신 신규 · 변환 재사용</span></summary>
+  <div class="seam-body">
+    <p><b>스펙</b>: <code>docs/api/shopby-integration-api.yaml</code> — 경로 11 · 오퍼레이션 11 · 구현 <code>.cs</code> <b>0건</b>.
+    11개 전부 <b>MES 가 서버</b>(base <code>…/api/integration/shopby</code>).</p>
+    <h4>재사용 판정: 복제 0 · 부분 9 · 신규 2</h4>
+    <div class="tw"><table>
+      <thead><tr><th>판정</th><th>대상</th><th>이유</th></tr></thead>
+      <tbody>
+        <tr><td><span class="pill p-new">신규 2</span></td><td><code>POST /inventory/sync</code>(양방향) · <code>POST /webhook</code>(HMAC 인바운드)</td>
+        <td>사내 연동은 전부 <b>단방향 전용 앱으로 분리</b>돼 있다(<code>Cafe24Interface</code> vs <code>.Update</code>) — 양방향 조정 로직 0건. 인바운드 HTTP 라우트 0건 · HMAC <b>검증</b> 코드 0건</td></tr>
+        <tr><td><span class="pill p-part">부분 9</span></td><td>나머지</td>
+        <td>형태(페이징 목록·단건 조회·JWT·FluentValidation)는 베낄 수 있으나 <b>대상 엔티티가 통째로 없다</b> — <code>ProductMapping</code>·수신주문·웹훅이벤트로그의 모델/리포지토리/테이블이 코드에도 DB 스크립트에도 없다</td></tr>
+        <tr><td><span class="pill p-ok">복제 0</span></td><td>—</td><td>「대상만 바꾸면 되는」 것이 하나도 없다</td></tr>
+      </tbody>
+    </table></div>
+    <div class="quad">
+      <div class="q reuse"><h5>가장 두꺼운 재사용 자산 — 변환 층</h5>
+        <p>외부 주문 → MES 주문 변환이 셋 다 완성 코드로 있다:
+        <code>Cafe24Interface DoCreateOrder</code> · 우커머스 <code>CreateUpdateOrder</code> ·
+        <code>ProductItemFactory</code> 의 외부 라인아이템 → <code>ITEM_MDL_CD</code> 매칭.</p>
+        <p style="margin-bottom:0">→ <b><code>POST /orders/receive</code> 는 수신 층만 신규고 변환 층은 재사용이다.</b></p>
+      </div>
+      <div class="q build"><h5>미결 [결정 안건] — 직접 HTTP vs 앞단 큐</h5>
+        <p>현행 4채널 중 <b>HTTP 웹훅을 직접 받는 것이 하나도 없다</b> — 전부 SQS 구독이거나 폴링이다.
+        샵바이 스펙은 MES 가 HTTP 엔드포인트를 노출하고 서명을 검증하라고 요구한다.</p>
+        <p style="margin-bottom:0">「직접 노출」을 고르면 <b>사내 선례가 없는 구간이 2개 더 생긴다.</b>
+        그 전까지 두 행의 작업량은 산정할 수 없다(<code>owner_side=미정</code> 11건 유지).</p>
+      </div>
+      <div class="q silent"><h5>조용히 깨지는 계약 — 인증이 넷 다 다르다</h5>
+        <p style="margin-bottom:0">카페24=OAuth2 · 우커머스=<b>서명검증 없음</b> · 성원=토큰 없음(쿠키+<code>company_id</code>) ·
+        이카운트=<code>SESSION_ID</code> 쿼리스트링. 스펙의 <code>bearerAuth</code>(JWT)는 MES WebApi 자체 JWT 와 같아 재사용 가능하나,
+        <code>X-Webhook-Signature</code> 는 <b>선례 없음</b>.</p>
+      </div>
+      <div class="q dont"><h5>저장소 어디에도 없는 것</h5>
+        <p style="margin-bottom:0"><b>샵바이의 무엇이 <code>USR_ORD_CD</code> / <code>MARKET_ORD_ITEM_NO</code> 가 되는지.</b>
+        스펙 yaml 은 <code>orderNo</code> · <code>items[].productId</code> 만 정의한다.
+        <b>조인 키를 정하지 않으면 주문이 붙지 않는다.</b></p>
+      </div>
+    </div>
+  </div>
+</details>
+
+<details class="seam">
+  <summary><span class="seam-no">⑧</span> PitStop → MES 결과 인계 <span class="pill p-new">신규 · 선례 0</span></summary>
+  <div class="seam-body">
+    <p><b>선례가 사내에도 타사에도 없다.</b> 열림 저장소의 유일한 흔적은 리포트 어셈블리 네임스페이스 공유뿐이고
+    <span class="ev">HotFolder/Program.cs:24</span>, <code>CRT.Yeolim.IF</code> 는 WCF 서비스 계약일 뿐이다.
+    후니 MES 에 PitStop 은 <b>코드 0 · 문서 0 · 유사 개념어 0</b>
+    <span class="ev">grep -ril pitstop 0건 · preflight|검판|전산검수 0건</span>.</p>
+    <h4>자리 후보 5개 — 「빈 자리」 목록이지 구현이 아니다</h4>
+    <div class="tw"><table>
+      <thead><tr><th>후보</th><th>기존 그릇</th><th>새로 필요한 것</th></tr></thead>
+      <tbody>
+        <tr><td><b>A.</b> <code>T_ORD_ORDER_FILES</code> 에 파일 종류 추가</td>
+        <td><code>FILE_TYP</code> 이 <code>T_COM_CD</code> 코드 도메인 · <code>UPR_SEQ</code> 부모-자식 · <code>PRCS_CD</code> 공정 축</td>
+        <td>코드값 추가(<b>varchar(10)</b>) + C# <code>enum FileType</code> 확장 + <b>재렌더 시 삭제 범위 확인</b></td></tr>
+        <tr><td><b>B.</b> 「접수완료」 게이트</td>
+        <td><code>FrmOrder2.DoSave()</code> 가 <code>STAT_0100 → STAT_0400</code> 전 <b>이미 파일필수 검사</b>를 한다</td>
+        <td>검판 결과 조회 + 차단/경고 정책 결정. <b>선례가 같은 모양</b></td></tr>
+        <tr><td><b>C.</b> NAS 배포 게이트</td>
+        <td><code>DesignFileCopyToNas</code> 가 <code>ORD_DTL_STAT_CD != DOWNLOAD_STATUS</code> 면 복사하지 않는다</td>
+        <td><b>코드 변경 없이 상태값만으로 생산 차단 가능</b></td></tr>
+        <tr><td><b>D.</b> 주문상세 화면</td><td><code>UcOrderDetail</code> 에 원본/접수/공정 3격자 + 썸네일 탐색기</td>
+        <td>격자 1개 추가 또는 공정 격자에 합부 열</td></tr>
+        <tr><td><b>E.</b> <code>ItfTrace</code> 로깅</td><td>전 작업자 공통 · 컨텍스트가 이미 주문 단위</td><td>이벤트 코드 정의</td></tr>
+      </tbody>
+    </table></div>
+    <div class="card note">
+      <b>가장 값싼 길은 C 다</b> — 코드를 안 고치고 상태값만으로 생산을 막을 수 있다.<br>
+      <b>가장 자연스러운 길은 B 다</b> — 파일필수 검사가 이미 같은 자리에 같은 모양으로 있다.
+    </div>
+    <div class="q silent"><h5>조용히 깨지는 계약 — 검판 결과 재렌더 유실 [확정 전 반드시 확인]</h5>
+      <p><b>A 를 택하면 검판 결과가 재렌더 때 파일행과 함께 지워질 수 있다.</b>
+      <code>USP_ORD_ORDER_FILES_D</code>(전체 삭제) → <code>USP_ORD_ORDER_FILES_C</code>(재삽입)가 <b>매 렌더 반영 전에 호출</b>된다.</p>
+      <p style="margin-bottom:0">라이브 SP 본문을 보지 못했으므로 「지워진다」가 아니라 <b>「확인해야 한다」</b>로 남긴다
+      (<code>USP_ORD_ORDER_FILES_D</code> 의 <code>FILE_TYP</code> 필터 유무 — t54 미확인 #15).</p>
+    </div>
+    <p><b>사람이 한 번 보는 자리</b>라는 점도 설계 입력이다. CTO 문서 원문:
+    「접수자가 그 결과를 화면에서 봅니다 — 프리플라이트 결과와 미리보기를 확인하고, 필요하면 원본 파일을 직접 열어 검수합니다.」
+    → D(주문상세 화면)는 선택이 아니라 사실상 필수다.</p>
+    <p><b>미결 1건</b>: Edicus 산출물은 파일검수를 건너뛸지(템플릿 생성물이라 검사가 불필요할 수 있다 — CTO 제기).</p>
+    <div class="q reuse"><h5>판정 규칙은 베낄 수 있다</h5>
+      <p style="margin-bottom:0">오류&gt;0 → <code>오류</code> · 경고&gt;0 → <code>주의</code> · 아니면 <code>정상</code>
+      <span class="ev">HotFolder/Common/AppReturnValue.cs:274-288</span>.
+      판정 입력은 리포트 XML 5범주(<code>EnfocusReport.cs:66-162</code>) + 종료코드 + 출력 실재(<code>Program.cs:676-680</code>).</p>
+    </div>
+  </div>
+</details>
+
+<details class="seam">
+  <summary><span class="seam-no">⑨</span> Edicus 렌더 → MES <span class="pill p-ok">있음</span></summary>
+  <div class="seam-body">
+<pre>Edicus(모션원) 렌더완료
+  └SQS→ MotionOneInterface ─S3 업로드 2벌→ {CMPNY_CD}/Order/Original/{ORD_YMD}/{ORD_CD}/{파일}
+                             │              {CMPNY_CD}/Order/Design/{ORD_YMD}/{ORD_CD}/{파일} (S3 내부 Copy)
+                             └WCF→ USP_ORD_ORDER_S4 → USP_ORD_ORDER_DTL_EDICUS_CU
+                                    → USP_ORD_ORDER_FILES_D → USP_ORD_ORDER_FILES_C
+                                    → USP_ORD_ORDER_DTL_EDICUS_COMPLETE
+  S3 업로드 이벤트 ─EventBridge→SQS→ ① ThumbnailCreator  ② DesignFileCopyToNas</pre>
+    <p class="ev">BackOffice.Console/CRT.EasyMES.V2.Console.MotionOneInterface/Program.cs:41</p>
+    <div class="q silent"><h5>조용히 깨지는 계약 — S3 키 경로가 곧 조인 키다</h5>
+      <div class="tw"><table>
+        <thead><tr><th>겹</th><th>키</th><th>성질</th></tr></thead>
+        <tbody>
+          <tr><td>외부주문 → MES주문</td><td><code>USR_ORD_CD</code> + <code>MARKET_ORD_ITEM_NO</code> + <code>EDICUS_EDITOR_ITEM_ID</code></td>
+          <td>주석이 각각 「네이버 주문번호 / 네이버 상품주문번호 / 에디쿠스 편집아이템ID」</td></tr>
+          <tr><td>MES주문 → 파일행</td><td><code>ORD_CD</code> + <code>ORD_DTL_SEQ</code> + <code>ORD_DTL_ITEM_NBR</code></td>
+          <td><code>ORD_DTL_SEQ</code> 미존재 시 <code>EditorItemIndex</code> 대체</td></tr>
+          <tr><td><b>S3 이벤트 → 주문</b></td><td><b>S3 키 문자열의 부모 디렉터리 이름</b></td>
+          <td>썸네일·NAS 두 작업자가 <code>parentDirectory.Name</code> 을 <code>ORD_CD</code> 로 쓴다</td></tr>
+        </tbody>
+      </table></div>
+      <p style="margin-bottom:0">→ <b>샵바이 경로를 새로 만들 때 <code>…/{ORD_YMD}/{ORD_CD}/{파일명}</code> 모양을 깨면 하류 두 작업자가 주문을 못 찾는다.</b>
+      <b>예외가 아니라 skip 이다</b> — 아무 일도 안 일어난 것처럼 보인다.</p>
+    </div>
+    <div class="card">
+      <b>설계 입력 1건</b>: 렌더 경로의 「접수파일」은 <b>원본의 S3 내부 복사본</b>이다(주석: 「원본 파일 = 디자인접수파일 인 경우」).
+      <b>검수를 거친 산출물이라는 의미가 코드에 없다.</b> PitStop 을 넣는다면 이 자리의 의미가 바뀐다.
+    </div>
+  </div>
+</details>
+
+<details class="seam">
+  <summary><span class="seam-no">⑩</span> MES → 샵바이 상태·송장 회신 <span class="pill p-unk">미확인 이음매</span></summary>
+  <div class="seam-body">
+    <p><b>이 이음매는 「없다」가 아니라 「세 카드가 모두 확인하지 못했다」다.</b></p>
+    <p>webadmin → 샵바이 <b>쓰기 방향</b>은 원장에 6행 있는데 전부 열려 있다:</p>
+    <div class="tw"><table>
+      <thead><tr><th>행</th><th>상태</th></tr></thead>
+      <tbody>
+        <tr><td><code>STD-MFG-027</code> 샵바이 상품준비중 전환(취소 창구 닫기)</td><td><span class="pill p-new">미착수</span></td></tr>
+        <tr><td><code>STD-MFG-029</code> 샵바이 배송처리(송장 등록·정정)</td><td><span class="pill p-new">미착수</span></td></tr>
+        <tr><td><code>STD-MFG-114</code> 한 주문에 다중 송장 부여</td><td><span class="pill p-new">미착수</span></td></tr>
+        <tr><td><code>STD-MFG-123</code> 재출고 신규송장 부여</td><td><span class="pill p-new">미착수</span></td></tr>
+        <tr><td><code>STD-SHP-012</code> 송장번호 등록(판매자)</td><td><span class="pill p-unk">미확인</span></td></tr>
+        <tr><td><code>STD-SHP-013</code> 송장 기반 배송상태 일괄변경</td><td><span class="pill p-unk">미확인</span></td></tr>
+      </tbody>
+    </table></div>
+    <p>evidence 는 6행 모두 <code>catalog/shopby_client.py:137</code> 로 같다 — <b>범용 request 함수 하나</b>이고,
+    주문·송장 <b>전용 호출 함수가 없다</b>(F2).</p>
+    <div class="q silent"><h5>MES → webadmin 방향은 실측 자체가 없다</h5>
+      <p>MES 쪽 push-back 선례는 3개뿐이고(카페24 <code>.Update</code> · 성원 <code>setStatus/setInvoiceNo/SendDelv</code> ·
+      CommandHandler 우커머스) <b>전부 오픈 분모 밖 기존 자산</b>이다.</p>
+      <p style="margin-bottom:0">그중 <code>CommandHandler.UpdateTracking</code> 은 <b>본문이 비어 있다</b> —
+      송장 명령을 받아도 아무것도 보내지 않고 SQS 메시지를 삭제한다
+      <span class="ev">CommandHandler/CommandService.cs:206-214</span>. 의도인지 미구현인지는 코드로 알 수 없다.</p>
+    </div>
+    <div class="card note" style="margin-bottom:0">
+      <b>결정 안건</b>: MES 가 상태를 밀어 주는가(push), webadmin 이 끌어 오는가(pull), 아니면 사람이 넣는가.<br>
+      CTO 문서는 이 자리를 「고객이 "내 주문 어디쯤?"을 보는 자리가 결국 여기」라고 적었다.
+    </div>
+  </div>
+</details>
+</section>
+
+<hr>
+
+<section id="l3">
+  <h2>L3</h2>
+  <div class="h2sub">근거 부록</div>
+
+  <h3>입력 카드와 그 성격</h3>
+  <div class="tw"><table>
+    <thead><tr><th>카드</th><th>대상</th><th>성격</th><th>이 문서가 가져온 것</th></tr></thead>
+    <tbody>
+      <tr><td><b>t51</b> <code>t51/merged.csv</code></td><td>원장 747행</td><td>화면·기능 원장(정본)</td><td>L1 상태·행수 전부</td></tr>
+      <tr><td><b>t52</b></td><td>미수록 83행 재판정</td><td>분모 보정</td><td>(직접 인용 없음)</td></tr>
+      <tr><td><b>t53</b> <code>t53/verdict.md</code></td><td>열림PnP <code>CRT.DigitalEdit.V2</code></td><td><b>타 고객 코드</b> — status 근거 아님</td><td>L2-⑥ 두 갈래·단계별 파라미터·베끼면 안 되는 것</td></tr>
+      <tr><td><b>t54</b> <code>t54/verdict.md</code></td><td>후니 MES <code>TS.BackOffice.Huni</code></td><td>읽기전용 실독</td><td>L1 WebApi · L2-⑦⑧⑨</td></tr>
+      <tr><td><b>t55</b> <code>t55/verdict.md</code></td><td>두 저장소 뼈대 대조</td><td>읽기전용 실독</td><td>L2-⑥ 이식 조건·<code>CommandLine</code> 차이</td></tr>
+      <tr><td>CTO 9/8</td><td><code>docs/huni/후니-주문흐름-…_서희항_260908.html</code></td><td>10구간 사고 틀</td><td>L0 구간 대조표</td></tr>
+      <tr><td>프린팅머니</td><td><code>../PRINTMONEY-BRIEF.md</code> (미트래킹 유일본 · 읽기만)</td><td>리드 브리프</td><td>아래 재기준 절</td></tr>
+    </tbody>
+  </table></div>
+
+  <h3>원장 수치 <span style="font-size:13px;color:var(--ink3);font-weight:400">— 직접 재계산 <code>t57/seams.py</code></span></h3>
+  <p>전 747행 · <code>scope=in</code> 683 · <code>out</code> 64.
+  <code>work_type</code>: build 378 · integrate 229 · config 99 · provided 35 · manual 6.</p>
+  <div class="tw"><table>
+    <thead><tr><th>system</th><th>완료</th><th>진행</th><th>미착수</th><th>미확인</th><th>계</th></tr></thead>
+    <tbody>
+      <tr><td>webadmin</td><td class="num">146</td><td class="num">0</td><td class="num">0</td><td class="num">1</td><td class="num">147</td></tr>
+      <tr><td>widget</td><td class="num">128</td><td class="num">2</td><td class="num">0</td><td class="num">3</td><td class="num">133</td></tr>
+      <tr><td>mes</td><td class="num">77</td><td class="num">0</td><td class="num">11</td><td class="num">0</td><td class="num">88</td></tr>
+      <tr><td>huni-mall</td><td class="num">31</td><td class="num">50</td><td class="num">94</td><td class="num">2</td><td class="num">177</td></tr>
+      <tr><td>shopby</td><td class="num">9</td><td class="num">8</td><td class="num">55</td><td class="num">22</td><td class="num">94</td></tr>
+      <tr><td>edicus</td><td class="num">13</td><td class="num">3</td><td class="num">4</td><td class="num">3</td><td class="num">23</td></tr>
+      <tr><td>pagebuilder</td><td class="num">0</td><td class="num">1</td><td class="num">44</td><td class="num">17</td><td class="num">62</td></tr>
+      <tr><td><b>pitstop</b></td><td class="num"><b>0</b></td><td class="num"><b>0</b></td><td class="num"><b>23</b></td><td class="num"><b>0</b></td><td class="num"><b>23</b></td></tr>
+    </tbody>
+  </table></div>
+  <div class="card hard">
+    <b>읽는 법</b>: <code>status=완료</code> 는 <b>「코드가 있다」이지 「오픈 시나리오에서 돈다」가 아니다</b>
+    (실주문 확인 0 · 메뉴 DB 등록 미확인 — t50 정정).
+    webadmin·widget 의 높은 완료율을 「준비됐다」로 읽으면 안 된다.
+  </div>
+
+  <h3>프린팅머니 행 재기준</h3>
+  <p>브리프가 <b>낡은 것으로 지목한 원장 행</b>이다. 이 문서는 행을 고치지 않는다 — 재기준 대상임을 기록만 한다.</p>
+  <div class="tw"><table>
+    <thead><tr><th>위치</th><th>지금 적힌 것</th><th>문제</th></tr></thead>
+    <tbody>
+      <tr><td><code>STD-MYP-042</code></td><td>M0 — 어드민 설정 + 충전권 상품 6종</td><td>A안 유물. 토스 직접 발급에선 충전권 상품이 없다</td></tr>
+      <tr><td><code>STD-MYP-048</code></td><td>M6 — PG 계약 후 카드 충전 활성</td><td>「충전은 현금만」 확정과 충돌</td></tr>
+      <tr><td><code>STD-MYP-044</code></td><td>M2 — <code>useChargePoint</code> → 충전권 주문서</td><td>대상이 후니 충전 API 로 바뀐다</td></tr>
+      <tr><td><code>STD-MYP-007</code></td><td>충전(PG 결제→적립 전환)</td><td>구 표현</td></tr>
+      <tr><td><code>STD-MYP-008</code></td><td>구매확정 적립금 자동 지급 · provided</td><td>켜 두면 후니 원장에 리워드가 들어온다</td></tr>
+      <tr><td><code>STD-MYP-051</code></td><td>원장 소유 A vs B′ 미결</td><td>미팅은 B′ 로 닫았다</td></tr>
+      <tr><td><code>STD-MYP-052</code></td><td>충전 전용 입금계좌·과입금 정책</td><td>토스는 금액 정확 일치만 받는다 — 안건 소멸</td></tr>
+      <tr><td><code>STD-MYP-025</code></td><td>완료 기준 「충전권 상품 적립률 0」</td><td>충전권 상품이 없다</td></tr>
+      <tr><td><code>STD-MYP-026</code></td><td>구 DB 미제공 · 스냅샷만</td><td>9/17 지니: 구 DB 직접 분석</td></tr>
+      <tr><td>t52 프린트머니 4행</td><td>「M1 은 A 채택 시 불요」</td><td>방향이 반대 — A형 M1 이 <b>B′ 에서</b> 불요</td></tr>
+    </tbody>
+  </table></div>
+  <p><b>원장에 아예 없는 것</b>: 외부포인트 API 5종 · 원장 스키마 · 가용성/모니터링 · 토스 발급·웹훅·환불 ·
+  충전 운영 화면 · 일 마감 대사 · 탈퇴 시 잔액 환불.</p>
+  <div class="card note">
+    <b>슬롯이 하나다 [구조 결정]</b>: 외부포인트 연동은 프린팅머니 전용 통로가 아니라
+    <b>샵바이 적립금 기능 전체를 후니로 돌리는 것</b>이다. 두 지갑 병행은 가이드만으로 성립이 확인되지 않았고,
+    그대로 두면 <b>리워드(할인)와 선수금(부채)이 후니 원장 한 통에 섞인다.</b>
+  </div>
+
+  <h3>리드 정정 3건 — 이 세션이 직접 재확인</h3>
+  <p>계약 보충 4(교차 사실은 인용하는 쪽이 직접 <code>path:line</code> 확인)에 따라
+  <b>세 건 모두 직접 열어 봤다. 셋 다 리드가 옳다.</b></p>
+  <div class="tw"><table>
+    <thead><tr><th>#</th><th>원 문서</th><th>정정</th><th>이 세션 재확인</th></tr></thead>
+    <tbody>
+      <tr><td>1</td><td>t53 §3-7 — 캡처 변수 재대입을 <code>SQSMonitorService/Program.cs:120-121</code></td><td>→ <b><code>:125-126</code></b></td>
+      <td><code>:125</code> 가 <code>savePdfFileDirectory = Path.Combine(savePdfFileDirectory</code> · <code>:126</code> 이 이어지는 인자.
+      <code>:120-121</code> 은 <code>{</code>·<code>try</code> 뿐 — <b>정정 채택</b></td></tr>
+      <tr><td>2</td><td>t55 F-50 — 후니 <code>packages.config</code> md5 동일 <b>8</b>개</td><td>→ <b>9개</b></td>
+      <td><code>md5 -q Framework/*/packages.config | sort | uniq -c</code> → <code>9 078435635886cf070ccb2b271e298a0c</code> — <b>정정 채택</b></td></tr>
+      <tr><td>3</td><td>t55 §2-B — <code>grep "CRT\." Pitstop/*.cs</code> <b>0건</b></td><td>→ <b>4건</b></td>
+      <td>4건 전부 <code>namespace CRT.Framework.Pitstop</code> <b>선언</b>이다
+      (<code>EnfocusReport.cs:9</code>·<code>PitStopConfiguration.cs:7</code>·<code>VariableSet.cs:11</code>·<code>PitStopEnums.cs:7</code>).
+      <b>grep 수치는 정정 채택</b>하되 원 결론(「CRT 타입 <b>참조</b> 0」)은 유지된다 — 선언은 참조가 아니다</td></tr>
+    </tbody>
+  </table></div>
+  <p>3번은 <b>정정이 결론을 뒤집지 않는 사례</b>다. 수치는 고치되 「753줄만 옮기면 된다」는 판단은 그대로다.</p>
+
+  <h3>인용 승격표 — 본문 축약 ↔ 전체경로</h3>
+  <p>t54 가 짚은 함정이다: <b>이 저장소들에서 <code>path:line</code> 축약 인용은 위험하다.</b>
+  같은 파일명이 프로젝트마다 반복된다(<code>Program.cs</code> 17개 · <code>OrderDac.cs</code> 4개 ·
+  열림에는 <code>ProgramOld.cs</code> 죽은 사본까지 두 벌).
+  본문은 읽기 쉽게 축약을 쓰되 <b>모든 축약을 여기서 전체경로로 승격</b>한다.
+  <code>t57/verify.py</code> C3 가 이 표를 기계 대조한다.</p>
+  <div class="tw"><table>
+    <thead><tr><th>본문 표기</th><th>전체경로</th></tr></thead>
+    <tbody>
+      <tr><td><code>ServerProcess/Program.cs</code></td><td class="ev">/Users/innojini/Dev/CRT.DigitalEdit.V2/CRT.Yeolim.ServerProcess/Program.cs</td></tr>
+      <tr><td><code>HotFolder/Program.cs</code></td><td class="ev">/Users/innojini/Dev/CRT.DigitalEdit.V2/CRT.Yeolim.ServerProcess.HotFolder/Program.cs</td></tr>
+      <tr><td><code>SQSMonitorService/Program.cs</code></td><td class="ev">/Users/innojini/Dev/CRT.DigitalEdit.V2/CRT.Yeolim.SQSMonitorService/Program.cs</td></tr>
+      <tr><td><code>AppArguments.cs</code> (A판)</td><td class="ev">/Users/innojini/Dev/CRT.DigitalEdit.V2/CRT.Yeolim.ServerProcess/Common/AppArguments.cs</td></tr>
+      <tr><td><code>HotFolder/AppArguments.cs</code></td><td class="ev">/Users/innojini/Dev/CRT.DigitalEdit.V2/CRT.Yeolim.ServerProcess.HotFolder/Common/AppArguments.cs</td></tr>
+      <tr><td><code>AppReturnValue.cs</code></td><td class="ev">/Users/innojini/Dev/CRT.DigitalEdit.V2/CRT.Yeolim.ServerProcess.HotFolder/Common/AppReturnValue.cs</td></tr>
+      <tr><td><code>ActionsSetList.cs</code></td><td class="ev">/Users/innojini/Dev/CRT.DigitalEdit.V2/CRT.Yeolim.ServerProcess/Common/ActionsSetList.cs</td></tr>
+      <tr><td><code>PitStopConfiguration.cs</code></td><td class="ev">/Users/innojini/Dev/CRT.DigitalEdit.V2/CRT.Framework.Pitstop/PitStopConfiguration.cs</td></tr>
+      <tr><td><code>EnfocusReport.cs</code></td><td class="ev">/Users/innojini/Dev/CRT.DigitalEdit.V2/CRT.Framework.Pitstop/EnfocusReport.cs</td></tr>
+      <tr><td><code>VariableSet.cs</code></td><td class="ev">/Users/innojini/Dev/CRT.DigitalEdit.V2/CRT.Framework.Pitstop/VariableSet.cs</td></tr>
+      <tr><td><code>PitStopEnums.cs</code></td><td class="ev">/Users/innojini/Dev/CRT.DigitalEdit.V2/CRT.Framework.Pitstop/PitStopEnums.cs</td></tr>
+      <tr><td><code>RunPitstopCLI/Form1.cs</code></td><td class="ev">/Users/innojini/Dev/CRT.DigitalEdit.V2/RunPitstopCLI/Form1.cs</td></tr>
+      <tr><td><code>SaveAsErrorPdf/Program.cs</code></td><td class="ev">/Users/innojini/Dev/CRT.DigitalEdit.V2/CRT.Yeolim.SaveAsErrorPdf/Program.cs</td></tr>
+      <tr><td><code>FoxitSaveAs/Form1.cs</code></td><td class="ev">/Users/innojini/Dev/CRT.DigitalEdit.V2/FoxitSaveAs/Form1.cs</td></tr>
+      <tr><td><code>OrderCoreEndPoints.cs</code></td><td class="ev">/Users/innojini/Dev/TS.BackOffice.Huni/BackOffice.WebApi/CRT.EasyMES.V2.Web.Api/EndPoints/OrderCoreEndPoints.cs</td></tr>
+      <tr><td><code>CommandHandler/CommandService.cs</code></td><td class="ev">/Users/innojini/Dev/TS.BackOffice.Huni/BackOffice.Console/TS.BackOffice.WooCommerce.CommandHandler/CommandService.cs</td></tr>
+      <tr><td><code>TS.BackOffice.Huni.sln</code></td><td class="ev">/Users/innojini/Dev/TS.BackOffice.Huni/TS.BackOffice.Huni.sln</td></tr>
+      <tr><td><code>MotionOneInterface/Program.cs</code></td><td class="ev">/Users/innojini/Dev/TS.BackOffice.Huni/BackOffice.Console/CRT.EasyMES.V2.Console.MotionOneInterface/Program.cs</td></tr>
+      <tr><td><code>config/urls.py</code> · <code>urls.py</code></td><td class="ev">/Users/innojini/Dev/HuniWeb/raw/webadmin/webadmin/config/urls.py</td></tr>
+      <tr><td><code>widget_api.py</code></td><td class="ev">/Users/innojini/Dev/HuniWeb/raw/webadmin/webadmin/catalog/widget_api.py</td></tr>
+      <tr><td><code>shopby_hook.py</code></td><td class="ev">/Users/innojini/Dev/HuniWeb/raw/webadmin/webadmin/catalog/shopby_hook.py</td></tr>
+      <tr><td><code>shopby_sync.py</code></td><td class="ev">/Users/innojini/Dev/HuniWeb/raw/webadmin/webadmin/catalog/shopby_sync.py</td></tr>
+      <tr><td><code>shopby_client.py</code></td><td class="ev">/Users/innojini/Dev/HuniWeb/raw/webadmin/webadmin/catalog/shopby_client.py</td></tr>
+      <tr><td><code>admin.py</code></td><td class="ev">/Users/innojini/Dev/HuniWeb/raw/webadmin/webadmin/catalog/admin.py</td></tr>
+      <tr><td><code>widget.js</code></td><td class="ev">/Users/innojini/Dev/HuniWeb/raw/webadmin/webadmin/catalog/static/catalog/widget.js</td></tr>
+      <tr><td><code>widget-order.ts</code></td><td class="ev">/Users/innojini/Dev/huni-skin-shopby/src/lib/api/widget-order.ts</td></tr>
+      <tr><td>스킨 <code>README.md</code></td><td class="ev">/Users/innojini/Dev/huni-skin-shopby/README.md</td></tr>
+      <tr><td><code>CARDS-S.md</code></td><td class="ev">/Users/innojini/Dev/HuniWeb/_workspace/huni-launch-runway/07_rebaseline/S/CARDS-S.md</td></tr>
+    </tbody>
+  </table></div>
+  <div class="card note">
+    <b>주의 2건.</b>
+    ① 열림 저장소에는 <code>ProgramOld.cs</code> <b>죽은 사본</b>이 두 벌 있어 grep 하면 같은 줄이 더 나온다 —
+    이 문서의 인용은 전부 <b>살아있는 <code>Program.cs</code></b> 쪽이다.
+    ② <code>AppArguments.cs</code> 는 A판·B판의 <b>작업 식별 규약이 서로 달라</b>
+    (숫자 jobId 접두 ↔ 파일명 <code>yyMMdd_코드</code>) 승격표에서 둘을 갈라 두었다 — 섞어 인용하면 결론이 뒤집힌다.
+  </div>
+
+  <h3>이 문서가 확정하지 못한 것</h3>
+  <div class="tw"><table>
+    <thead><tr><th>#</th><th>미확인</th><th>왜</th></tr></thead>
+    <tbody>
+      <tr><td>1</td><td>금액 표현 단위 정본 (1원 vs 10원)</td><td>세 문서가 다르다 — 결정 안건</td></tr>
+      <tr><td>2</td><td>자사몰이 결제 직후 주문등록 창구를 실제로 부르는가</td><td>라이브 미확인(CTO 9/8 이후 변동 없음)</td></tr>
+      <tr><td>3</td><td><code>USP_ORD_ORDER_FILES_D</code> 의 <code>FILE_TYP</code> 필터 유무</td><td>라이브 SP 본문 미접속</td></tr>
+      <tr><td>4</td><td>샵바이의 무엇이 <code>USR_ORD_CD</code>/<code>MARKET_ORD_ITEM_NO</code> 가 되는가</td><td>스펙에도 코드에도 없다</td></tr>
+      <tr><td>5</td><td>PitStop Server 23 라이선스·동시성·사양</td><td>Enfocus 문서 영역</td></tr>
+      <tr><td>6</td><td>후니 워커 서버에 PitStop 이 같이 얹히는가</td><td>서버 실사 필요</td></tr>
+      <tr><td>7</td><td>MES → webadmin 상태 push 경로</td><td>세 카드 모두 미실측</td></tr>
+      <tr><td>8</td><td><code>CommandHandler.UpdateTracking</code> 빈 본문이 의도인지 미구현인지</td><td>코드로 알 수 없다</td></tr>
+    </tbody>
+  </table></div>
+  <p><b>「없다」는 전부 「찾지 못했다」다.</b> 돌린 grep 패턴은 각 카드 verdict 에 적혀 있고,
+  패턴 밖 구현이 있다면 이 판정은 틀린다.</p>
+
+  <div class="card hard">
+    <b>담당 열 — 비워 둔다</b><br>
+    이 문서에는 <b>담당 배정이 없다.</b> S7-A(t56)가 담당 판정을 내면 L1 표에 열을 추가한다.
+    여기 적힌 「결정 주체」는 9/17 원장 <code>owner_name</code> 이 이미 명시한 값이며
+    (대표 채훈희 2건 · PM 신우진 2건 · 미정 3건), <b>작업 담당과 다른 축</b>이다.
+  </div>
+</section>
+
+<footer>
+  <p><b>금지 준수</b> — DB write 0 · 라이브 DB 접속 0 · 라이브 COMMIT 0 ·
+  세 대상 저장소(<code>CRT.DigitalEdit.V2</code> · <code>TS.BackOffice.Huni</code> · <code>huni-skin-shopby</code>)
+  <b>쓰기 0 · 빌드 0 · 실행 0 · git 조작 0</b> · 자격증명 값 전사 0 · <b>날짜 추정 0</b> ·
+  작업량(일수) 추정 0 · 푸시 0 · <code>PRINTMONEY-BRIEF.md</code> 읽기만(워크트리 복사 0).</p>
+  <p>카드 t57 · 오픈일정 S7-B · 브랜치 <code>WT-connect-design-doc</code> · md 짝 <code>connect-design.md</code> · 검산 <code>verify.py</code></p>
+</footer>
+
+</div>
+
+<script>
+(function(){
+  var b=document.getElementById('themeBtn'), r=document.documentElement;
+  function cur(){
+    var t=r.getAttribute('data-theme');
+    if(t) return t;
+    return window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';
+  }
+  try{ var s=localStorage.getItem('t57-theme'); if(s) r.setAttribute('data-theme',s); }catch(e){}
+  b.addEventListener('click',function(){
+    var n = cur()==='dark' ? 'light' : 'dark';
+    r.setAttribute('data-theme',n);
+    try{ localStorage.setItem('t57-theme',n); }catch(e){}
+  });
+})();
+</script>
+</body>
+</html>
