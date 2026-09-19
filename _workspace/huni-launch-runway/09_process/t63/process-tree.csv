@@ -45,64 +45,64 @@ t63 프로세스 정리 B — 탐색~결제,상품·카탈로그,상품상세(�
 t63 프로세스 정리 B — 탐색~결제,상품·카탈로그,상품상세(디자인 상품),P04,디자인 상품 고르기,3,STD-CAT-036,디자인 목록 API — webadmin 등록분을 신규몰이 불러오는 연동,webadmin,서희항,미착수,raw/webadmin/webadmin/config/urls.py:288,t65 — 디자인 등록·그룹핑 운영(STD-ADP)은 t65
 t63 프로세스 정리 B — 탐색~결제,상품·카탈로그,상품상세(디자인 상품),P04,디자인 상품 고르기,4,STD-CAT-037,디자인 그룹핑 기준(태그·그룹·복수 그룹 등록·노출 순서),webadmin,최숙진,미착수,raw/webadmin/webadmin/catalog/designs.py:235-236,t65 — 디자인 등록·그룹핑 운영(STD-ADP)은 t65
 t63 프로세스 정리 B — 탐색~결제,상품·카탈로그,상품상세(디자인 상품),P04,디자인 상품 고르기,5,STD-CAT-038,디자인 목록용 API·어드민 기능 개발자 협의,webadmin,신우진,미착수,「미확인」 — 찾지못했다 디자인 목록용 API-어드민 기능에 대한 개발자 협의 자체는 코드/명세 대상이 아닌 프로세스 항목 - raw/webadmin 및 docs/shopby 어디에도 협의 회의록-TODO 주석 형태의 근거 없음,t65 — 디자인 등록·그룹핑 운영(STD-ADP)은 t65
-t63 프로세스 정리 B — 탐색~결제,옵션·견적,옵션위젯 · 제약,P05,옵션 위젯 띄우고 고르기,1,STD-OPT-001,상품 상세 내 주문옵션 위젯 마운트(격리 렌더),미확인,서희항,작동,「미확인」,t65 — 제약규칙 등록·관리(webadmin 폼빌더)는 운영 쪽
-t63 프로세스 정리 B — 탐색~결제,옵션·견적,옵션위젯 · 제약,P05,옵션 위젯 띄우고 고르기,2,STD-OPT-002,정규화 옵션 데이터 계약 기반 위젯 구동,미확인,서희항,작동,「미확인」,t65 — 제약규칙 등록·관리(webadmin 폼빌더)는 운영 쪽
-t63 프로세스 정리 B — 탐색~결제,옵션·견적,옵션위젯 · 제약,P05,옵션 위젯 띄우고 고르기,3,STD-OPT-003,옵션 컴포넌트 타입 다형 렌더(셀렉트·라디오·체크·수치입력·이미지선택),미확인,서희항,작동,「미확인」,t65 — 제약규칙 등록·관리(webadmin 폼빌더)는 운영 쪽
-t63 프로세스 정리 B — 탐색~결제,옵션·견적,옵션위젯 · 제약,P05,옵션 위젯 띄우고 고르기,4,STD-OPT-006,옵션 그룹 접기/펼치기·진행 스텝 표시,미확인,서희항,부분,「미확인」,t65 — 제약규칙 등록·관리(webadmin 폼빌더)는 운영 쪽
-t63 프로세스 정리 B — 탐색~결제,옵션·견적,옵션위젯 · 제약,P05,옵션 위젯 띄우고 고르기,5,STD-OPT-004,옵션 선택 캐스케이드(상위 선택이 하위 목록 갱신),미확인,서희항,부분,raw/webadmin/webadmin/config/urls.py:249 (선행 카드 증거 · 실재 확인),t65 — 제약규칙 등록·관리(webadmin 폼빌더)는 운영 쪽
-t63 프로세스 정리 B — 탐색~결제,옵션·견적,옵션위젯 · 제약,P05,옵션 위젯 띄우고 고르기,6,STD-OPT-005,토글형 후가공 섹션(켜야 하위 선택지 노출),미확인,서희항,부분,「미확인」,t65 — 제약규칙 등록·관리(webadmin 폼빌더)는 운영 쪽
-t63 프로세스 정리 B — 탐색~결제,옵션·견적,옵션위젯 · 제약,P05,옵션 위젯 띄우고 고르기,7,STD-OPT-037,옵션 조합 제약 규칙 평가(불가 조합 차단·사유 표시),미확인,서희항,부분,raw/webadmin/webadmin/config/urls.py:371 (선행 카드 증거 · 실재 확인),t65 — 제약규칙 등록·관리(webadmin 폼빌더)는 운영 쪽
-t63 프로세스 정리 B — 탐색~결제,옵션·견적,옵션위젯 · 제약,P05,옵션 위젯 띄우고 고르기,8,STD-OPT-038,자재→가능 인쇄방식 게이팅,미확인,서희항,부분,raw/webadmin/webadmin/config/urls.py:371 (선행 카드 증거 · 실재 확인),t65 — 제약규칙 등록·관리(webadmin 폼빌더)는 운영 쪽
-t63 프로세스 정리 B — 탐색~결제,옵션·견적,옵션위젯 · 제약,P05,옵션 위젯 띄우고 고르기,9,STD-OPT-039,공정 택일 그룹(상호배타) 처리,미확인,서희항,부분,raw/webadmin/webadmin/config/urls.py:371 (선행 카드 증거 · 실재 확인),t65 — 제약규칙 등록·관리(webadmin 폼빌더)는 운영 쪽
-t63 프로세스 정리 B — 탐색~결제,옵션·견적,옵션위젯 · 제약,P05,옵션 위젯 띄우고 고르기,10,STD-OPT-040,필수 동반 옵션 강제(예 인쇄없음 시 후가공 필수),미확인,서희항,부분,「미확인」,t65 — 제약규칙 등록·관리(webadmin 폼빌더)는 운영 쪽
-t63 프로세스 정리 B — 탐색~결제,옵션·견적,옵션위젯 · 제약,P05,옵션 위젯 띄우고 고르기,11,STD-OPT-041,수량 최소/최대/증분 검증,미확인,서희항,작동,「미확인」,t65 — 제약규칙 등록·관리(webadmin 폼빌더)는 운영 쪽
-t63 프로세스 정리 B — 탐색~결제,옵션·견적,옵션위젯 · 제약,P05,옵션 위젯 띄우고 고르기,12,STD-OPT-042,사이즈 범위·비율 검증(매트릭스 밖 사이즈 차단),미확인,서희항,부분,「미확인」,t65 — 제약규칙 등록·관리(webadmin 폼빌더)는 운영 쪽
-t63 프로세스 정리 B — 탐색~결제,옵션·견적,옵션위젯 · 제약,P05,옵션 위젯 띄우고 고르기,13,STD-OPT-007,선택 요약 패널(현재 사양 한눈에),미확인,서희항,작동,「미확인」,t65 — 제약규칙 등록·관리(webadmin 폼빌더)는 운영 쪽
-t63 프로세스 정리 B — 탐색~결제,옵션·견적,옵션축,P06,인쇄 사양 축 입력하기,1,STD-OPT-008,용지(자재) 선택,미확인,서희항,작동,「미확인」,
-t63 프로세스 정리 B — 탐색~결제,옵션·견적,옵션축,P06,인쇄 사양 축 입력하기,2,STD-OPT-009,평량(g/㎡) 선택,미확인,서희항,작동,「미확인」,
-t63 프로세스 정리 B — 탐색~결제,옵션·견적,옵션축,P06,인쇄 사양 축 입력하기,3,STD-OPT-010,비종이 소재 선택(아크릴·PVC·패브릭 등),미확인,서희항,작동,「미확인」,
-t63 프로세스 정리 B — 탐색~결제,옵션·견적,옵션축,P06,인쇄 사양 축 입력하기,4,STD-OPT-058,주문가능 자재(용지) 목록 모달,미확인,김동학+최숙진,미착수,_workspace/huni-launch-scope/02_gap/fit-gap-matrix.csv:60 (선행 카드 증거 · 실재 확인),
-t63 프로세스 정리 B — 탐색~결제,옵션·견적,옵션축,P06,인쇄 사양 축 입력하기,5,STD-OPT-011,인쇄도수 선택(단면/양면·4도/8도·1도),미확인,서희항,작동,「미확인」,
-t63 프로세스 정리 B — 탐색~결제,옵션·견적,옵션축,P06,인쇄 사양 축 입력하기,6,STD-OPT-012,별색(spot color) 선택,미확인,서희항,작동,「미확인」,
-t63 프로세스 정리 B — 탐색~결제,옵션·견적,옵션축,P06,인쇄 사양 축 입력하기,7,STD-OPT-013,화이트/UV white 언더베이스 선택,미확인,서희항,작동,「미확인」,
-t63 프로세스 정리 B — 탐색~결제,옵션·견적,옵션축,P06,인쇄 사양 축 입력하기,8,STD-OPT-014,규격 사이즈 선택(프리셋),미확인,서희항,작동,「미확인」,
-t63 프로세스 정리 B — 탐색~결제,옵션·견적,옵션축,P06,인쇄 사양 축 입력하기,9,STD-OPT-015,비규격 사이즈 직접입력(재단 가로·세로),미확인,서희항,작동,「미확인」,
-t63 프로세스 정리 B — 탐색~결제,옵션·견적,옵션축,P06,인쇄 사양 축 입력하기,10,STD-OPT-016,작업 사이즈 입력·자동 도출(도련 포함),미확인,서희항,부분,「미확인」,
-t63 프로세스 정리 B — 탐색~결제,옵션·견적,옵션축,P06,인쇄 사양 축 입력하기,11,STD-OPT-057,규격 가이드 모달(사이즈 안내 팝업),미확인,김동학+최숙진,미착수,「미확인」,
-t63 프로세스 정리 B — 탐색~결제,옵션·견적,옵션축,P06,인쇄 사양 축 입력하기,12,STD-OPT-017,수량 선택(구간 프리셋 + 직접입력),미확인,서희항,작동,「미확인」,
-t63 프로세스 정리 B — 탐색~결제,옵션·견적,옵션축,P06,인쇄 사양 축 입력하기,13,STD-OPT-018,건수(디자인 종류 수) 입력 및 총량 = 건수×수량 규칙 표시,미확인,서희항,작동,「미확인」,
-t63 프로세스 정리 B — 탐색~결제,옵션·견적,옵션축,P06,인쇄 사양 축 입력하기,14,STD-OPT-019,페이지 수 입력(책자류 필수 축),미확인,서희항,부분,「미확인」,
-t63 프로세스 정리 B — 탐색~결제,옵션·견적,옵션축,P06,인쇄 사양 축 입력하기,15,STD-OPT-020,표지/내지/간지 용지 개별 선택,미확인,서희항,작동,「미확인」,
-t63 프로세스 정리 B — 탐색~결제,옵션·견적,옵션축,P06,인쇄 사양 축 입력하기,16,STD-OPT-021,표지/내지 인쇄도수 개별 선택,미확인,서희항,작동,「미확인」,
-t63 프로세스 정리 B — 탐색~결제,옵션·견적,옵션축,P06,인쇄 사양 축 입력하기,17,STD-OPT-022,제본 방식 선택(중철·무선·PUR·트윈링·하드커버),미확인,서희항,작동,「미확인」,
-t63 프로세스 정리 B — 탐색~결제,옵션·견적,옵션축,P06,인쇄 사양 축 입력하기,18,STD-OPT-023,제본 방향 선택(좌철/상철 × 세로/가로),미확인,서희항,작동,「미확인」,
-t63 프로세스 정리 B — 탐색~결제,옵션·견적,옵션축,P06,인쇄 사양 축 입력하기,19,STD-OPT-056,캘린더 가공·장수(월수) 선택,미확인,김동학,구현-미검증,_workspace/huni-launch-scope/02_gap/fit-gap-matrix.csv:46 · huni-skin-shopby/src/components/product/configurators/calendar-configurator.tsx:167 (선행 카드 증거 · 실재 확인),
-t63 프로세스 정리 B — 탐색~결제,옵션·견적,후가공 · 부자재,P07,후가공·부자재 고르기,1,STD-OPT-024,코팅 선택(무광/유광 × 단면/양면),미확인,서희항,부분,「미확인」,t64 — 선택된 공정은 MES 공정 전개의 입력이 된다
-t63 프로세스 정리 B — 탐색~결제,옵션·견적,후가공 · 부자재,P07,후가공·부자재 고르기,2,STD-OPT-025,박 선택(색상 다종 × 면 × 크기 × 내용같음/틀림),미확인,서희항,부분,「미확인」,t64 — 선택된 공정은 MES 공정 전개의 입력이 된다
-t63 프로세스 정리 B — 탐색~결제,옵션·견적,후가공 · 부자재,P07,후가공·부자재 고르기,3,STD-OPT-026,형압(양각/음각) 선택,미확인,서희항,부분,raw/webadmin/webadmin/config/urls.py:356 (선행 카드 증거 · 실재 확인),t64 — 선택된 공정은 MES 공정 전개의 입력이 된다
-t63 프로세스 정리 B — 탐색~결제,옵션·견적,후가공 · 부자재,P07,후가공·부자재 고르기,4,STD-OPT-027,오시 선택(줄 수 × 방향),미확인,서희항,부분,raw/webadmin/webadmin/config/urls.py:356 (선행 카드 증거 · 실재 확인),t64 — 선택된 공정은 MES 공정 전개의 입력이 된다
-t63 프로세스 정리 B — 탐색~결제,옵션·견적,후가공 · 부자재,P07,후가공·부자재 고르기,5,STD-OPT-028,미싱 선택,미확인,서희항,부분,「미확인」,t64 — 선택된 공정은 MES 공정 전개의 입력이 된다
-t63 프로세스 정리 B — 탐색~결제,옵션·견적,후가공 · 부자재,P07,후가공·부자재 고르기,6,STD-OPT-029,타공 선택(직경 × 개수 × 위치),미확인,서희항,부분,「미확인」,t64 — 선택된 공정은 MES 공정 전개의 입력이 된다
-t63 프로세스 정리 B — 탐색~결제,옵션·견적,후가공 · 부자재,P07,후가공·부자재 고르기,7,STD-OPT-030,귀돌이/라운딩 선택(반경 × 모서리 위치),미확인,서희항,부분,「미확인」,t64 — 선택된 공정은 MES 공정 전개의 입력이 된다
-t63 프로세스 정리 B — 탐색~결제,옵션·견적,후가공 · 부자재,P07,후가공·부자재 고르기,8,STD-OPT-031,도무송(전체/부분·모양·개수) 선택,미확인,서희항,작동,「미확인」,t64 — 선택된 공정은 MES 공정 전개의 입력이 된다
-t63 프로세스 정리 B — 탐색~결제,옵션·견적,후가공 · 부자재,P07,후가공·부자재 고르기,9,STD-OPT-032,넘버링(일반/난수 × 자릿수 × 개수) 선택,미확인,서희항,미착수,「미확인」,t64 — 선택된 공정은 MES 공정 전개의 입력이 된다
-t63 프로세스 정리 B — 탐색~결제,옵션·견적,후가공 · 부자재,P07,후가공·부자재 고르기,10,STD-OPT-033,부분UV/에폭시 선택,미확인,서희항,부분,「미확인」,t64 — 선택된 공정은 MES 공정 전개의 입력이 된다
-t63 프로세스 정리 B — 탐색~결제,옵션·견적,후가공 · 부자재,P07,후가공·부자재 고르기,11,STD-OPT-034,부자재 선택(케이스·폴리백·포장),미확인,서희항,작동,「미확인」,t64 — 선택된 공정은 MES 공정 전개의 입력이 된다
-t63 프로세스 정리 B — 탐색~결제,옵션·견적,후가공 · 부자재,P07,후가공·부자재 고르기,12,STD-OPT-035,상품별 기본제공 부자재 규칙 표시,미확인,서희항,미착수,「미확인」,t64 — 선택된 공정은 MES 공정 전개의 입력이 된다
-t63 프로세스 정리 B — 탐색~결제,옵션·견적,후가공 · 부자재,P07,후가공·부자재 고르기,13,STD-OPT-036,추가상품(악세사리) 템플릿 묶음 선택,미확인,서희항,작동,「미확인」,t64 — 선택된 공정은 MES 공정 전개의 입력이 된다
-t63 프로세스 정리 B — 탐색~결제,옵션·견적,가격,P08,실시간 견적 받기,1,STD-OPT-043,옵션 변경 시 실시간 재견적,미확인,서희항,작동,「미확인」,
-t63 프로세스 정리 B — 탐색~결제,옵션·견적,가격,P08,실시간 견적 받기,2,STD-OPT-044,서버 권위 가격 계산(클라이언트 계산 금지),미확인,서희항,작동,「미확인」,
-t63 프로세스 정리 B — 탐색~결제,옵션·견적,가격,P08,실시간 견적 받기,3,STD-OPT-049,원자합산형 가격 계산(디지털인쇄),미확인,서희항,작동,「미확인」,
-t63 프로세스 정리 B — 탐색~결제,옵션·견적,가격,P08,실시간 견적 받기,4,STD-OPT-048,면적 기반 가격 계산(실사·현수막·아크릴),미확인,서희항,부분,raw/webadmin/webadmin/catalog/pricing.py:1 (선행 카드 증거 · 실재 확인),
-t63 프로세스 정리 B — 탐색~결제,옵션·견적,가격,P08,실시간 견적 받기,5,STD-OPT-050,고정가형 가격 계산(수량×옵션),미확인,서희항,부분,raw/webadmin/webadmin/catalog/pricing.py:1 (선행 카드 증거 · 실재 확인),
-t63 프로세스 정리 B — 탐색~결제,옵션·견적,가격,P08,실시간 견적 받기,6,STD-OPT-051,셋트/부품조립 상품 합산 가격 계산,미확인,서희항,부분,raw/webadmin/webadmin/config/urls.py:336 (선행 카드 증거 · 실재 확인),
-t63 프로세스 정리 B — 탐색~결제,옵션·견적,가격,P08,실시간 견적 받기,7,STD-OPT-052,판걸이수 기반 판형 원가 반영,미확인,서희항,작동,「미확인」,
-t63 프로세스 정리 B — 탐색~결제,옵션·견적,가격,P08,실시간 견적 받기,8,STD-OPT-047,수량구간 할인 적용,미확인,서희항,작동,「미확인」,
-t63 프로세스 정리 B — 탐색~결제,옵션·견적,가격,P08,실시간 견적 받기,9,STD-OPT-046,가격 내역 분해 표시(인쇄비·후가공비·부가세),미확인,서희항,작동,「미확인」,
-t63 프로세스 정리 B — 탐색~결제,옵션·견적,가격,P08,실시간 견적 받기,10,STD-OPT-045,가격 0원/계산불가 상태 처리 및 사용자 안내,미확인,최숙진,부분,「미확인」,
-t63 프로세스 정리 B — 탐색~결제,옵션·견적,견적,P09,견적 저장·대량주문 문의,1,STD-OPT-053,견적 결과 저장(옵션보관함),미확인,서희항,미착수,「미확인」,t62 — 저장된 견적을 다시 보는 자리는 마이페이지(STD-MYP) / t65 — 대량주문 문의 응대는 운영자 CS
-t63 프로세스 정리 B — 탐색~결제,옵션·견적,견적,P09,견적 저장·대량주문 문의,2,STD-OPT-054,견적서 PDF/출력물 발급,미확인,서희항,미착수,「미확인」,t62 — 저장된 견적을 다시 보는 자리는 마이페이지(STD-MYP) / t65 — 대량주문 문의 응대는 운영자 CS
-t63 프로세스 정리 B — 탐색~결제,옵션·견적,견적,P09,견적 저장·대량주문 문의,3,STD-OPT-055,대량주문 견적 문의 접수,미확인,김동학,미착수,「미확인」,t62 — 저장된 견적을 다시 보는 자리는 마이페이지(STD-MYP) / t65 — 대량주문 문의 응대는 운영자 CS
+t63 프로세스 정리 B — 탐색~결제,옵션·견적,옵션위젯 · 제약,P05,옵션 위젯 띄우고 고르기,1,STD-OPT-001,상품 상세 내 주문옵션 위젯 마운트(격리 렌더),widget,서희항,작동,raw/webadmin/webadmin/catalog/static/catalog/widget.js:136 · raw/webadmin/webadmin/catalog/static/catalog/widget.js:1032 · huni-skin-shopby/src/components/product/huni-widget.tsx:304-313,t65 — 제약규칙 등록·관리(webadmin 폼빌더)는 운영 쪽
+t63 프로세스 정리 B — 탐색~결제,옵션·견적,옵션위젯 · 제약,P05,옵션 위젯 띄우고 고르기,2,STD-OPT-002,정규화 옵션 데이터 계약 기반 위젯 구동,widget,서희항,작동,raw/webadmin/webadmin/catalog/static/catalog/widget.js:145 · raw/webadmin/webadmin/catalog/widget_api.py:1172,t65 — 제약규칙 등록·관리(webadmin 폼빌더)는 운영 쪽
+t63 프로세스 정리 B — 탐색~결제,옵션·견적,옵션위젯 · 제약,P05,옵션 위젯 띄우고 고르기,3,STD-OPT-003,옵션 컴포넌트 타입 다형 렌더(셀렉트·라디오·체크·수치입력·이미지선택),widget,서희항,작동,raw/webadmin/webadmin/catalog/static/catalog/widget_renderer.js:5019 · raw/webadmin/webadmin/catalog/static/catalog/widget_renderer.js:5159 · raw/webadmin/webadmin/catalog/static/catalog/widget_renderer.js:5182 · raw/webadmin/webadmin/catalog/static/catalog/widget_renderer.js:2454-2493 · raw/webadmin/webadmin/catalog/static/catalog/widget_renderer.js:789-841,t65 — 제약규칙 등록·관리(webadmin 폼빌더)는 운영 쪽
+t63 프로세스 정리 B — 탐색~결제,옵션·견적,옵션위젯 · 제약,P05,옵션 위젯 띄우고 고르기,4,STD-OPT-006,옵션 그룹 접기/펼치기·진행 스텝 표시,widget,서희항,부분,raw/webadmin/webadmin/catalog/static/catalog/widget_renderer.js:5289-5307,t65 — 제약규칙 등록·관리(webadmin 폼빌더)는 운영 쪽
+t63 프로세스 정리 B — 탐색~결제,옵션·견적,옵션위젯 · 제약,P05,옵션 위젯 띄우고 고르기,5,STD-OPT-004,옵션 선택 캐스케이드(상위 선택이 하위 목록 갱신),widget,서희항,부분,raw/webadmin/webadmin/catalog/static/catalog/widget_renderer.js:2918-2934 · raw/webadmin/webadmin/catalog/static/catalog/widget_renderer.js:690-760,t65 — 제약규칙 등록·관리(webadmin 폼빌더)는 운영 쪽
+t63 프로세스 정리 B — 탐색~결제,옵션·견적,옵션위젯 · 제약,P05,옵션 위젯 띄우고 고르기,6,STD-OPT-005,토글형 후가공 섹션(켜야 하위 선택지 노출),widget,서희항,부분,raw/webadmin/webadmin/catalog/static/catalog/widget_renderer.js:5491-5646,t65 — 제약규칙 등록·관리(webadmin 폼빌더)는 운영 쪽
+t63 프로세스 정리 B — 탐색~결제,옵션·견적,옵션위젯 · 제약,P05,옵션 위젯 띄우고 고르기,7,STD-OPT-037,옵션 조합 제약 규칙 평가(불가 조합 차단·사유 표시),webadmin,서희항,부분,raw/webadmin/webadmin/catalog/models.py:814-829 · raw/webadmin/webadmin/catalog/widget_api.py:3370-3409 · raw/webadmin/webadmin/catalog/widget_api.py:4389-4392 · raw/webadmin/webadmin/catalog/static/catalog/widget.js:924-939 · raw/webadmin/webadmin/catalog/static/catalog/constraint_engine.js:1-54,t65 — 제약규칙 등록·관리(webadmin 폼빌더)는 운영 쪽
+t63 프로세스 정리 B — 탐색~결제,옵션·견적,옵션위젯 · 제약,P05,옵션 위젯 띄우고 고르기,8,STD-OPT-038,자재→가능 인쇄방식 게이팅,webadmin,서희항,부분,raw/webadmin/webadmin/catalog/models.py:814-829 · raw/webadmin/webadmin/catalog/static/catalog/widget_renderer.js:4066-4067,t65 — 제약규칙 등록·관리(webadmin 폼빌더)는 운영 쪽
+t63 프로세스 정리 B — 탐색~결제,옵션·견적,옵션위젯 · 제약,P05,옵션 위젯 띄우고 고르기,9,STD-OPT-039,공정 택일 그룹(상호배타) 처리,webadmin,서희항,부분,raw/webadmin/webadmin/catalog/static/catalog/widget_renderer.js:4029-4131,t65 — 제약규칙 등록·관리(webadmin 폼빌더)는 운영 쪽
+t63 프로세스 정리 B — 탐색~결제,옵션·견적,옵션위젯 · 제약,P05,옵션 위젯 띄우고 고르기,10,STD-OPT-040,필수 동반 옵션 강제(예 인쇄없음 시 후가공 필수),webadmin,서희항,부분,raw/webadmin/webadmin/catalog/static/catalog/widget_renderer.js:4100-4101,t65 — 제약규칙 등록·관리(webadmin 폼빌더)는 운영 쪽
+t63 프로세스 정리 B — 탐색~결제,옵션·견적,옵션위젯 · 제약,P05,옵션 위젯 띄우고 고르기,11,STD-OPT-041,수량 최소/최대/증분 검증,widget,서희항,작동,raw/webadmin/webadmin/catalog/static/catalog/widget_renderer.js:2804-2901 · raw/webadmin/webadmin/catalog/models.py:539-541,t65 — 제약규칙 등록·관리(webadmin 폼빌더)는 운영 쪽
+t63 프로세스 정리 B — 탐색~결제,옵션·견적,옵션위젯 · 제약,P05,옵션 위젯 띄우고 고르기,12,STD-OPT-042,사이즈 범위·비율 검증(매트릭스 밖 사이즈 차단),widget,서희항,부분,raw/webadmin/webadmin/catalog/static/catalog/widget_renderer.js:3921-3930 · raw/webadmin/webadmin/catalog/models.py:555-560,t65 — 제약규칙 등록·관리(webadmin 폼빌더)는 운영 쪽
+t63 프로세스 정리 B — 탐색~결제,옵션·견적,옵션위젯 · 제약,P05,옵션 위젯 띄우고 고르기,13,STD-OPT-007,선택 요약 패널(현재 사양 한눈에),widget,서희항,작동,raw/webadmin/webadmin/catalog/static/catalog/widget_renderer.js:7867-7900,t65 — 제약규칙 등록·관리(webadmin 폼빌더)는 운영 쪽
+t63 프로세스 정리 B — 탐색~결제,옵션·견적,옵션축,P06,인쇄 사양 축 입력하기,1,STD-OPT-008,용지(자재) 선택,webadmin,서희항,작동,raw/webadmin/webadmin/catalog/models.py:155-160 · raw/webadmin/webadmin/catalog/static/catalog/widget_renderer.js:714,
+t63 프로세스 정리 B — 탐색~결제,옵션·견적,옵션축,P06,인쇄 사양 축 입력하기,2,STD-OPT-009,평량(g/㎡) 선택,webadmin,서희항,작동,raw/webadmin/webadmin/catalog/models.py:167 · raw/webadmin/webadmin/catalog/paper_views.py:419,
+t63 프로세스 정리 B — 탐색~결제,옵션·견적,옵션축,P06,인쇄 사양 축 입력하기,3,STD-OPT-010,비종이 소재 선택(아크릴·PVC·패브릭 등),webadmin,서희항,작동,raw/webadmin/webadmin/catalog/models.py:160-161 · raw/webadmin/webadmin/catalog/tmpl_combo.py:54,
+t63 프로세스 정리 B — 탐색~결제,옵션·견적,옵션축,P06,인쇄 사양 축 입력하기,4,STD-OPT-058,주문가능 자재(용지) 목록 모달,webadmin,김동학+최숙진,미착수,_workspace/huni-launch-scope/02_gap/fit-gap-matrix.csv:60 (선행 카드 증거 · 실재 확인),
+t63 프로세스 정리 B — 탐색~결제,옵션·견적,옵션축,P06,인쇄 사양 축 입력하기,5,STD-OPT-011,인쇄도수 선택(단면/양면·4도/8도·1도),webadmin,서희항,작동,raw/webadmin/webadmin/catalog/models.py:48-56,
+t63 프로세스 정리 B — 탐색~결제,옵션·견적,옵션축,P06,인쇄 사양 축 입력하기,6,STD-OPT-012,별색(spot color) 선택,webadmin,서희항,작동,raw/webadmin/webadmin/catalog/models.py:213 · raw/webadmin/webadmin/catalog/static/catalog/widget_renderer.js:3995-4005,
+t63 프로세스 정리 B — 탐색~결제,옵션·견적,옵션축,P06,인쇄 사양 축 입력하기,7,STD-OPT-013,화이트/UV white 언더베이스 선택,widget,서희항,작동,raw/webadmin/webadmin/catalog/static/catalog/widget_renderer.js:4001-4067,
+t63 프로세스 정리 B — 탐색~결제,옵션·견적,옵션축,P06,인쇄 사양 축 입력하기,8,STD-OPT-014,규격 사이즈 선택(프리셋),webadmin,서희항,작동,raw/webadmin/webadmin/catalog/models.py:534-550 · raw/webadmin/webadmin/catalog/static/catalog/widget_renderer.js:2795,
+t63 프로세스 정리 B — 탐색~결제,옵션·견적,옵션축,P06,인쇄 사양 축 입력하기,9,STD-OPT-015,비규격 사이즈 직접입력(재단 가로·세로),webadmin,서희항,작동,raw/webadmin/webadmin/catalog/models.py:555-560 · raw/webadmin/webadmin/catalog/static/catalog/widget_renderer.js:3114-3174,
+t63 프로세스 정리 B — 탐색~결제,옵션·견적,옵션축,P06,인쇄 사양 축 입력하기,10,STD-OPT-016,작업 사이즈 입력·자동 도출(도련 포함),webadmin,서희항,부분,raw/webadmin/webadmin/catalog/static/catalog/widget_renderer.js:3921-3930,
+t63 프로세스 정리 B — 탐색~결제,옵션·견적,옵션축,P06,인쇄 사양 축 입력하기,11,STD-OPT-057,규격 가이드 모달(사이즈 안내 팝업),shopby,김동학+최숙진,미착수,「미확인」 — 찾지 못했다(huni-skin-shopby/src 전체 및 raw/webadmin/webadmin/catalog/static/catalog/*.js에서 사이즈 안내 모달 관련 코드 grep 0건),
+t63 프로세스 정리 B — 탐색~결제,옵션·견적,옵션축,P06,인쇄 사양 축 입력하기,12,STD-OPT-017,수량 선택(구간 프리셋 + 직접입력),widget,서희항,작동,raw/webadmin/webadmin/catalog/static/catalog/widget_renderer.js:5010-5024 · raw/webadmin/webadmin/catalog/static/catalog/widget_renderer.js:5033-5041,
+t63 프로세스 정리 B — 탐색~결제,옵션·견적,옵션축,P06,인쇄 사양 축 입력하기,13,STD-OPT-018,건수(디자인 종류 수) 입력 및 총량 = 건수×수량 규칙 표시,widget,서희항,작동,raw/webadmin/webadmin/catalog/static/catalog/widget_renderer.js:5045-5052 · raw/webadmin/webadmin/catalog/static/catalog/widget_renderer.js:2977,
+t63 프로세스 정리 B — 탐색~결제,옵션·견적,옵션축,P06,인쇄 사양 축 입력하기,14,STD-OPT-019,페이지 수 입력(책자류 필수 축),webadmin,서희항,부분,raw/webadmin/webadmin/catalog/models.py:215 · raw/webadmin/webadmin/catalog/static/catalog/widget_renderer.js:894,
+t63 프로세스 정리 B — 탐색~결제,옵션·견적,옵션축,P06,인쇄 사양 축 입력하기,15,STD-OPT-020,표지/내지/간지 용지 개별 선택,widget,서희항,작동,raw/webadmin/webadmin/catalog/models.py:889 · raw/webadmin/webadmin/catalog/static/catalog/widget_renderer.js:690-760,
+t63 프로세스 정리 B — 탐색~결제,옵션·견적,옵션축,P06,인쇄 사양 축 입력하기,16,STD-OPT-021,표지/내지 인쇄도수 개별 선택,widget,서희항,작동,raw/webadmin/webadmin/catalog/static/catalog/widget_renderer.js:1104 · raw/webadmin/webadmin/catalog/static/catalog/widget_renderer.js:1805-1806,
+t63 프로세스 정리 B — 탐색~결제,옵션·견적,옵션축,P06,인쇄 사양 축 입력하기,17,STD-OPT-022,제본 방식 선택(중철·무선·PUR·트윈링·하드커버),webadmin,서희항,작동,raw/webadmin/webadmin/catalog/models.py:589-624 · raw/webadmin/webadmin/catalog/spine_calc.py:1,
+t63 프로세스 정리 B — 탐색~결제,옵션·견적,옵션축,P06,인쇄 사양 축 입력하기,18,STD-OPT-023,제본 방향 선택(좌철/상철 × 세로/가로),webadmin,서희항,작동,raw/webadmin/webadmin/catalog/spine_calc.py:48-58,
+t63 프로세스 정리 B — 탐색~결제,옵션·견적,옵션축,P06,인쇄 사양 축 입력하기,19,STD-OPT-056,캘린더 가공·장수(월수) 선택,shopby,김동학,구현-미검증,huni-skin-shopby/src/components/product/configurators/calendar-configurator.tsx:59 · huni-skin-shopby/src/components/product/configurators/calendar-configurator.tsx:167-169 · huni-skin-shopby/src/components/product/configurators/calendar-configurator.tsx:196-211,
+t63 프로세스 정리 B — 탐색~결제,옵션·견적,후가공 · 부자재,P07,후가공·부자재 고르기,1,STD-OPT-024,코팅 선택(무광/유광 × 단면/양면),widget,서희항,부분,raw/webadmin/webadmin/catalog/static/catalog/widget_renderer.js:696 · raw/webadmin/webadmin/catalog/static/catalog/widget_renderer.js:3995,t64 — 선택된 공정은 MES 공정 전개의 입력이 된다
+t63 프로세스 정리 B — 탐색~결제,옵션·견적,후가공 · 부자재,P07,후가공·부자재 고르기,2,STD-OPT-025,박 선택(색상 다종 × 면 × 크기 × 내용같음/틀림),webadmin,서희항,부분,raw/webadmin/webadmin/catalog/models.py:589-608,t64 — 선택된 공정은 MES 공정 전개의 입력이 된다
+t63 프로세스 정리 B — 탐색~결제,옵션·견적,후가공 · 부자재,P07,후가공·부자재 고르기,3,STD-OPT-026,형압(양각/음각) 선택,webadmin,서희항,부분,raw/webadmin/webadmin/catalog/models.py:596-601,t64 — 선택된 공정은 MES 공정 전개의 입력이 된다
+t63 프로세스 정리 B — 탐색~결제,옵션·견적,후가공 · 부자재,P07,후가공·부자재 고르기,4,STD-OPT-027,오시 선택(줄 수 × 방향),webadmin,서희항,부분,raw/webadmin/webadmin/catalog/models.py:589-624,t64 — 선택된 공정은 MES 공정 전개의 입력이 된다
+t63 프로세스 정리 B — 탐색~결제,옵션·견적,후가공 · 부자재,P07,후가공·부자재 고르기,5,STD-OPT-028,미싱 선택,webadmin,서희항,부분,raw/webadmin/webadmin/catalog/models.py:589-624,t64 — 선택된 공정은 MES 공정 전개의 입력이 된다
+t63 프로세스 정리 B — 탐색~결제,옵션·견적,후가공 · 부자재,P07,후가공·부자재 고르기,6,STD-OPT-029,타공 선택(직경 × 개수 × 위치),webadmin,서희항,부분,raw/webadmin/webadmin/catalog/models.py:589-624,t64 — 선택된 공정은 MES 공정 전개의 입력이 된다
+t63 프로세스 정리 B — 탐색~결제,옵션·견적,후가공 · 부자재,P07,후가공·부자재 고르기,7,STD-OPT-030,귀돌이/라운딩 선택(반경 × 모서리 위치),webadmin,서희항,부분,raw/webadmin/webadmin/catalog/models.py:589-624,t64 — 선택된 공정은 MES 공정 전개의 입력이 된다
+t63 프로세스 정리 B — 탐색~결제,옵션·견적,후가공 · 부자재,P07,후가공·부자재 고르기,8,STD-OPT-031,도무송(전체/부분·모양·개수) 선택,webadmin,서희항,작동,raw/webadmin/webadmin/catalog/models.py:589-624 · raw/webadmin/webadmin/catalog/views.py:2610,t64 — 선택된 공정은 MES 공정 전개의 입력이 된다
+t63 프로세스 정리 B — 탐색~결제,옵션·견적,후가공 · 부자재,P07,후가공·부자재 고르기,9,STD-OPT-032,넘버링(일반/난수 × 자릿수 × 개수) 선택,webadmin,서희항,미착수,「미확인」 — 찾지 못했다(raw/webadmin/webadmin/catalog/*.py 및 static/catalog/*.js 전체에서 넘버링 문자열 grep 0건),t64 — 선택된 공정은 MES 공정 전개의 입력이 된다
+t63 프로세스 정리 B — 탐색~결제,옵션·견적,후가공 · 부자재,P07,후가공·부자재 고르기,10,STD-OPT-033,부분UV/에폭시 선택,webadmin,서희항,부분,raw/webadmin/webadmin/catalog/models.py:589-624,t64 — 선택된 공정은 MES 공정 전개의 입력이 된다
+t63 프로세스 정리 B — 탐색~결제,옵션·견적,후가공 · 부자재,P07,후가공·부자재 고르기,11,STD-OPT-034,부자재 선택(케이스·폴리백·포장),webadmin,서희항,작동,raw/webadmin/webadmin/catalog/models.py:281-294,t64 — 선택된 공정은 MES 공정 전개의 입력이 된다
+t63 프로세스 정리 B — 탐색~결제,옵션·견적,후가공 · 부자재,P07,후가공·부자재 고르기,12,STD-OPT-035,상품별 기본제공 부자재 규칙 표시,webadmin,서희항,미착수,「미확인」 — 찾지 못했다(models.py TPrdProductAddons에 기본제공/자동포함 여부 컬럼 없음 · widget_renderer.js ADDON dflt_val 외 기본제공 규칙 표시 로직 없음),t64 — 선택된 공정은 MES 공정 전개의 입력이 된다
+t63 프로세스 정리 B — 탐색~결제,옵션·견적,후가공 · 부자재,P07,후가공·부자재 고르기,13,STD-OPT-036,추가상품(악세사리) 템플릿 묶음 선택,widget,서희항,작동,raw/webadmin/webadmin/catalog/models.py:281-294 · raw/webadmin/webadmin/catalog/static/catalog/widget_renderer.js:851,t64 — 선택된 공정은 MES 공정 전개의 입력이 된다
+t63 프로세스 정리 B — 탐색~결제,옵션·견적,가격,P08,실시간 견적 받기,1,STD-OPT-043,옵션 변경 시 실시간 재견적,widget,서희항,작동,raw/webadmin/webadmin/catalog/static/catalog/widget.js:682,
+t63 프로세스 정리 B — 탐색~결제,옵션·견적,가격,P08,실시간 견적 받기,2,STD-OPT-044,서버 권위 가격 계산(클라이언트 계산 금지),webadmin,서희항,작동,raw/webadmin/webadmin/catalog/pricing.py:838 · raw/webadmin/webadmin/catalog/widget_api.py:3029,
+t63 프로세스 정리 B — 탐색~결제,옵션·견적,가격,P08,실시간 견적 받기,3,STD-OPT-049,원자합산형 가격 계산(디지털인쇄),webadmin,서희항,작동,raw/webadmin/webadmin/catalog/pricing.py:83 · raw/webadmin/webadmin/catalog/pricing.py:17,
+t63 프로세스 정리 B — 탐색~결제,옵션·견적,가격,P08,실시간 견적 받기,4,STD-OPT-048,면적 기반 가격 계산(실사·현수막·아크릴),webadmin,서희항,부분,raw/webadmin/webadmin/catalog/pricing.py:68-78,
+t63 프로세스 정리 B — 탐색~결제,옵션·견적,가격,P08,실시간 견적 받기,5,STD-OPT-050,고정가형 가격 계산(수량×옵션),webadmin,서희항,부분,raw/webadmin/webadmin/catalog/pricing.py:85,
+t63 프로세스 정리 B — 탐색~결제,옵션·견적,가격,P08,실시간 견적 받기,6,STD-OPT-051,셋트/부품조립 상품 합산 가격 계산,webadmin,서희항,부분,raw/webadmin/webadmin/catalog/pricing.py:1873-1931,
+t63 프로세스 정리 B — 탐색~결제,옵션·견적,가격,P08,실시간 견적 받기,7,STD-OPT-052,판걸이수 기반 판형 원가 반영,webadmin,서희항,작동,raw/webadmin/webadmin/catalog/pricing.py:20-22 · raw/webadmin/webadmin/catalog/pricing.py:392-413,
+t63 프로세스 정리 B — 탐색~결제,옵션·견적,가격,P08,실시간 견적 받기,8,STD-OPT-047,수량구간 할인 적용,webadmin,서희항,작동,raw/webadmin/webadmin/catalog/pricing.py:1476-1509,
+t63 프로세스 정리 B — 탐색~결제,옵션·견적,가격,P08,실시간 견적 받기,9,STD-OPT-046,가격 내역 분해 표시(인쇄비·후가공비·부가세),webadmin,서희항,작동,raw/webadmin/webadmin/catalog/pricing.py:147-179 · raw/webadmin/webadmin/catalog/static/catalog/widget.js:682-745,
+t63 프로세스 정리 B — 탐색~결제,옵션·견적,가격,P08,실시간 견적 받기,10,STD-OPT-045,가격 0원/계산불가 상태 처리 및 사용자 안내,widget,최숙진,부분,raw/webadmin/webadmin/catalog/static/catalog/widget.js:688-691 · raw/webadmin/webadmin/catalog/pricing.py:114-119,
+t63 프로세스 정리 B — 탐색~결제,옵션·견적,견적,P09,견적 저장·대량주문 문의,1,STD-OPT-053,견적 결과 저장(옵션보관함),webadmin,서희항,미착수,「미확인」 — 찾지 못했다(raw/webadmin/webadmin/catalog/*.py·static/catalog/*.js 및 huni-skin-shopby/src 전체에서 보관함 문자열 grep 0건),t62 — 저장된 견적을 다시 보는 자리는 마이페이지(STD-MYP) / t65 — 대량주문 문의 응대는 운영자 CS
+t63 프로세스 정리 B — 탐색~결제,옵션·견적,견적,P09,견적 저장·대량주문 문의,2,STD-OPT-054,견적서 PDF/출력물 발급,webadmin,서희항,미착수,「미확인」 — 찾지 못했다(raw/webadmin/webadmin/catalog/*.py·static/catalog/*.js 및 huni-skin-shopby/src 전체에서 견적서/PDF 발급 로직 grep 0건 — PDF 관련 코드는 전부 원고 업로드 파일형식 검증용),t62 — 저장된 견적을 다시 보는 자리는 마이페이지(STD-MYP) / t65 — 대량주문 문의 응대는 운영자 CS
+t63 프로세스 정리 B — 탐색~결제,옵션·견적,견적,P09,견적 저장·대량주문 문의,3,STD-OPT-055,대량주문 견적 문의 접수,webadmin,김동학,미착수,「미확인」 — 찾지 못했다(raw/webadmin·huni-skin-shopby/src 전체에서 대량주문 코드 grep 0건 — raw/webadmin/.planning 기획문서에만 언급),t62 — 저장된 견적을 다시 보는 자리는 마이페이지(STD-MYP) / t65 — 대량주문 문의 응대는 운영자 CS
 t63 프로세스 정리 B — 탐색~결제,원고·파일,업로드,P10,원고 올리기,1,STD-ART-001,인쇄원고 파일 업로드(PDF/AI/EPS),widget,서희항,작동,raw/webadmin/webadmin/catalog/static/catalog/widget.js:773 · raw/webadmin/webadmin/catalog/static/catalog/widget.js:799 · raw/webadmin/webadmin/catalog/s3_artwork.py:83-88,t64 — 올라간 파일의 검판(STD-ART-008~018)·생산 전달(STD-ART-028)은 t64
 t63 프로세스 정리 B — 탐색~결제,원고·파일,업로드,P10,원고 올리기,2,STD-ART-002,대용량 파일 분할/재개 업로드,widget,서희항,구현-미검증,raw/webadmin/webadmin/catalog/static/catalog/widget.js:819 · raw/webadmin/webadmin/catalog/s3_artwork.py:56-57 · raw/webadmin/webadmin/catalog/static/catalog/widget_renderer.js:628-666,t64 — 올라간 파일의 검판(STD-ART-008~018)·생산 전달(STD-ART-028)은 t64
 t63 프로세스 정리 B — 탐색~결제,원고·파일,업로드,P10,원고 올리기,3,STD-ART-003,업로드 진행률·실패 재시도,widget,서희항,부분,raw/webadmin/webadmin/catalog/static/catalog/widget_renderer.js:3283-3289 · raw/webadmin/webadmin/catalog/static/catalog/widget_renderer.js:5408 · raw/webadmin/webadmin/catalog/static/catalog/widget_renderer.js:8036,t64 — 올라간 파일의 검판(STD-ART-008~018)·생산 전달(STD-ART-028)은 t64
