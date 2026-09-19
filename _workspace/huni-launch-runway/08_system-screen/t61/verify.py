@@ -3,7 +3,7 @@
 
 G1 분모       : rejudge.csv 에서 김동학·남은 일이 189행인가
 G2 보존       : axis-rows.csv 의 원장 행이 189행이고 row_id 집합이 G1 과 같은가
-G3 축 분포    : 5축 합이 원장 189 + 신규 16 = 205 인가
+G3 축 분포    : 5축 합이 원장 189 + 신규 22 = 211 인가
 G4 근거 필수  : 모든 행에 evidence 가 있는가(빈 칸 0)
 G5 축 누락    : 리드 5축 초안이 든 접두 10개가 전부 어느 축엔가 들어갔는가
 G6 명세 diff  : 최신 샵바이 명세에서 삭제 3경로 · promotion-shop 삭제 2경로가 맞는가
@@ -45,7 +45,7 @@ check("G2", {r["row_id"] for r in led} == {r["row_id"] for r in kd},
 
 # ── G3
 c = collections.Counter(r["axis"] for r in ax)
-check("G3", len(ax) == 205 and len(c) == 5 and len(new) == 16,
+check("G3", len(ax) == 211 and len(c) == 5 and len(new) == 22,
       f"전체 {len(ax)}행 = 원장 {len(led)} + 신규 {len(new)} · 축 {len(c)}개 " +
       " ".join(f"{k.split('.')[0]}:{v}" for k, v in sorted(c.items())))
 
