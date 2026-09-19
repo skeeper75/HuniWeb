@@ -4,7 +4,7 @@
 생성(assign.py·build_tree.py·processes/*.md)과 분리된 검증기다.
 원장·정본을 다시 읽어 독립적으로 센다. 실패 시 exit 1.
 """
-import csv, os, re, sys
+import collections, csv, os, re, sys
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 RUNWAY = os.path.abspath(os.path.join(HERE, "..", ".."))
@@ -93,6 +93,30 @@ def main():
     badpid = sorted({g["프로세스"] for g in gaps} - pids)
     check("V7", not badkind and not badpid,
           f"gaps {len(gaps)}건 · 분류 오류 {badkind} · 프로세스 오류 {badpid}")
+
+    # V9 gaps.csv 종류별 수 = processes/*.md §5 소절의 실제 항목 수
+    #    (260919 리드 t66 적발 — 본문 수와 CSV 수가 어긋났다. §5 를 기준으로 고정한다)
+    sys.path.insert(0, HERE)
+    from count_gaps import per_process  # noqa: E402
+    per = per_process(PROCDIR)
+    s5 = collections.Counter()
+    for d in per.values():
+        for k, n in d.items():
+            s5[k] += n
+    gc = collections.Counter(g["종류"][0] for g in gaps)
+    diff = {k: (s5[k], gc[k]) for k in "가나다라" if s5[k] != gc[k]}
+    check("V9", not diff, f"§5 항목 수 = gaps.csv 수 · 종류별 {[f'{k}{s5[k]}' for k in '가나다라']} · 불일치 {diff}")
+
+    # V10 verdict.md 본문에 적힌 종류별 수 = gaps.csv 수 (본문이 CSV 를 앞지르지 못하게)
+    vd = open(os.path.join(HERE, "verdict.md"), encoding="utf-8").read()
+    pat = re.compile(r"빠진 곳 (\d+)건\*\* — 가\(원장에 행 없음\) \*\*(\d+)\*\* · "
+                     r"나\(행은 있는데 코드 0\) \*\*(\d+)\*\* · 다\(코드는 있는데 연결 안 됨\) \*\*(\d+)\*\* · "
+                     r"라\(결정 미정\) \*\*(\d+)\*\*")
+    hits = pat.findall(vd)
+    want = (str(len(gaps)), str(gc["가"]), str(gc["나"]), str(gc["다"]), str(gc["라"]))
+    bad = [h for h in hits if tuple(h) != want]
+    check("V10", hits and not bad,
+          f"verdict 본문 집계 {len(hits)}곳 = gaps.csv {want} · 어긋남 {bad}")
 
     # V8 gaps 가 참조한 row_id 가 원장에 실재하는가(범위 표기 · — 제외)
     bad_ref = []
