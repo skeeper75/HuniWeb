@@ -1,0 +1,56 @@
+id,메모줄,주장 요지,인용 경로,인용 행,판정,실측
+C01,19,PitStopServerCLI.exe 를 appSetting PitStop_ExeFileName 으로 잡는다,CRT.Yeolim.ServerProcess/Common/ActionsSetList.cs,19,일치,"ExeFileName = FoxConfigurationManager.AppSettings[\"PitStop_ExeFileName\"]"
+C02,19,설정값이 Enfocus PitStop Server 23 경로,CRT.Yeolim.ServerProcess/FoxConfigurationServerProcess.config,20,일치,"value=\"C:\Program Files\Enfocus\Enfocus PitStop Server 23\PitStopServerCLI.exe\""
+C03,20,인자는 -config 플래그 하나,CRT.Yeolim.ServerProcess/Program.cs,654-655,일치,"args.Append($\" -config \\\"{configFilePath}\\\"\") — 다른 인자 0"
+C04,21,stdout/stderr 리다이렉트·ExitCode·타임아웃 실행기,CRT.Framework.Utils/CommandLine.cs,13-86,일치,Execute(exePath,args,ref outputString,timeoutSecond=300,hiddenWindow) 전문 일치
+C05,22,루트 Configuration·네임스페이스 PitStop/22,CRT.Framework.Pitstop/PitStopConfiguration.cs,289,일치,"XmlRoot(ElementName=\"Configuration\", Namespace=\".../PitStop/22/PitStopServerCLI_Configuration.xsd\")"
+C06,22,Save() 직렬화,CRT.Framework.Pitstop/PitStopConfiguration.cs,303-315,일치,XmlSerializer + xsi/cf 네임스페이스 2종
+C07,23,코드 스키마 22 / VersioningStrategy=BestEffort,CRT.Framework.Pitstop/PitStopConfiguration.cs,16,부분,":16 은 VersioningStrategy=BestEffort 만. 「스키마 22」의 근거는 :289 와 :307 이다(같은 파일 다른 줄)"
+C08,25,설정 XML 에 SmartPreflight/VariableSet(.evl) 를 채운다,CRT.Yeolim.ServerProcess/Program.cs,607-649,어긋남,":639 는 //config.Process.SmartPreflight.VariableSet — 주석 처리. 이 블록(PitStop01)은 변수세트를 쓰지 않는다. 실제 대입은 PitStop02 의 :1019 뿐"
+C09,25,PreflightProfile 항상 빈 값,CRT.Yeolim.ServerProcess/Program.cs,636,일치,config.Process.Mutators.PreflightProfile = String.Empty
+C10,30,운영자가 고른 불리언이 ProcessOptions,CRT.Yeolim.Objects/ProcessOptions.cs,12-58,부분,"ProcessOptions 자체는 컨테이너(CutSize·ArtSize + FontOptions·ChangeColorToCMYK·PageOptions·EtcOptions·WaringOptions 5종). 불리언은 그 중첩 클래스에 있다"
+C11,30,옵션→.eal 선택 블록,CRT.Yeolim.ServerProcess/Program.cs,782-943,부분,"선언은 :780 부터, 블록 뒤 :945 에 무조건 수행 SyncCropBoxAndTrimBox 가 이어진다. 782-943 은 Font~Waring 구간으로 맞음"
+C12,31,enum→appSetting 키 규약 PitStopAction_{EnumActionType},CRT.Yeolim.ServerProcess/Common/ActionsSetList.cs,55-70,일치,"appSettingKey = $\"PitStopAction_{actionType.ToString()}\" (:59)"
+C13,31,액션 enum,CRT.Yeolim.ServerProcess/Common/ActionsSetList.cs,82-113,부분,멤버는 :82-111(None 포함 23종) · :112-113 은 닫는 괄호
+C14,32,폰트 미임베드일 때만 AddBackground,CRT.Yeolim.ServerProcess/Program.cs,784-788,일치,if (pdfInfo.IsFontEmbededAll == false && processOpts.FontOptions.NotEmbededFontFlatten)
+C15,32,TrimBox 있을 때만 RemovePrinterMarks,CRT.Yeolim.ServerProcess/Program.cs,884-885,일치,if (pdfInfo.PageInfoList.Exists(t => t.TrimBox != null))
+C16,33,.evs→.evl 치환기,CRT.Framework.Pitstop/VariableSet.cs,28-49,일치,SetVariable 이 XPath 로 Operator 값 치환 · 예외를 삼킨다(:46-48)
+C17,33,변수 7종,CRT.Yeolim.ServerProcess/Program.cs,976-982,일치,01_TargetCyan~04_TargetBlack·DPI·CloseObjectDistance·ResampleDpi
+C18,34,제본방향 파일명 토큰·8쪽 이하 무시,CRT.Yeolim.ServerProcess.HotFolder/Utils/ObjectCloseToPageOuter.cs,11-57,일치,#좌철#/#우철#/#상철#/#하철# 4종 · pageCount <= 8 이면 없음(:27-28)
+C19,38,ExitCode 0 아니면 실패,CRT.Framework.Utils/CommandLine.cs,67-74,일치,if (process.ExitCode == 0) retVal = true; else outputString = error
+C20,39,성공이어도 출력 PDF 없으면 실패,CRT.Yeolim.ServerProcess/Program.cs,676-680,일치,if (isCliSuccess && !File.Exists(returnValue.OutputPdfFilePath)) isCliSuccess = false
+C21,40,리포트 XML 해석기,CRT.Framework.Pitstop/EnfocusReport.cs,11-163,일치,Warnings/Failures/Fixes/NonCriticalFailures/Errors 5종 Get*Message + GetWarningMessageExt(페이지별 집계)
+C22,43,리포트 문구 DB 컬럼→그리드,CRT.Yeolim.Module.Order/FrmOrder.cs,634-637,일치,RPT_DESC_WARN/FIX/FAIL/ERR 4종을 dt 로 분해
+C23,44,HotFolder 는 리포트 json+pdf 를 낸다,CRT.Yeolim.ServerProcess.HotFolder/Program.cs,510-521,일치,"{이름}_레포트_{결과}.json / .pdf (RptJobOrderA4)"
+C24,51,클라이언트가 PDF 선택,CRT.Yeolim.Module.Order/FrmOrderNew3.cs,518-519,일치,XtraOpenFileDialog · filter pdf · Multiselect
+C25,51,로컬 분석,CRT.Yeolim.Module.Order/FrmOrderNew3.cs,674,일치,PDFLibHelper.GetPDFInfo(filePath)
+C26,52,DB 행 먼저 생성해 jobId 확보,CRT.Yeolim.Module.Order/FrmOrderNew3.cs,404,일치,int jobId = ordData.CJob(...)
+C27,52,PDF_INFO_JSON+SETTING_JSON 을 이 시점에 얼린다,CRT.Yeolim.Data/Dac/OrderDac.cs,28-53,일치,":45-46 두 JSON · :47 STATUS=STAT_010 · :53 USP_JOB_JOB_C"
+C28,54,S3 key = Original/yyyy-MM-dd/{jobId}_{이름}.pdf,CRT.Yeolim.Module.Order/FrmOrderNew3.cs,407-417,일치,serverFilePath 구성(:407-408) + MultiPartUploadFileAsync(:412-417)
+C29,55,업로드 완료 STAT_020,CRT.Yeolim.Module.Order/FrmOrderNew3.cs,420-431,일치,STATUS=STAT_020 · CJobLog 호출
+C30,57,SQS 20초 롱폴·최대 10건,CRT.Yeolim.SQSMonitorService/Program.cs,109-110,어긋남,"그 줄에는 두 숫자가 없다. 20초=CRT.Framework.AWS/SqsClient.cs:52 기본값 iWaitTimeSeconds=20 · 10건=FoxConfigurationSQSMonitor.config:11 MaxMsgCntAtATime"
+C31,57,파일 내려받기,CRT.Yeolim.SQSMonitorService/Program.cs,136,일치,await s3Client.DownloadFile(bucketNm, s3Key, savePdfFilePath)
+C32,58,워커 자식 프로세스 -in,CRT.Yeolim.SQSMonitorService/Program.cs,143-149,일치,"sb.Append($\" -in \\\"{savePdfFilePath}\\\"\") → CommandLine.Execute"
+C33,59,jobId 는 파일명 접두에서 복원,CRT.Yeolim.ServerProcess/Common/AppArguments.cs,57,일치,Convert.ToInt32(this.InputPdfFileName.Split('_')[0]) — 메모의 :52→:57 정정이 맞다
+C34,61,PitStop01 구조 검사,CRT.Yeolim.ServerProcess/Program.cs,554,일치,private static bool PitStop01(...)
+C35,61,PitStop02 본 처리,CRT.Yeolim.ServerProcess/Program.cs,753,일치,private static bool PitStop02(...)
+C36,61,PitStop03 폰트 플래튼 조건부,CRT.Yeolim.ServerProcess/Program.cs,191,일치,if (processOpts.FontOptions.NotEmbededFontFlatten && pdfInfo.IsFontEmbededAll == false)
+C37,62,후처리 리사이즈,CRT.Yeolim.ServerProcess/Program.cs,235,일치,PDFLibHelper.ResizePdf(...) — PitStop 아님
+C38,62,후처리 여백 제거,CRT.Yeolim.ServerProcess/Program.cs,293,일치,PDFLibHelper.ClearMargin(...) — PitStop 아님
+C39,63,결과 복사 후 STAT_050,CRT.Yeolim.ServerProcess/Program.cs,404-441,부분,"기본은 STAT_040(:424)이고 bucketNm 이 비었을 때만 STAT_050(:425-428). 「검판용」은 하드코딩이 아니라 appSetting PostfixForOutoutFileName(:404 · config:10)"
+C40,64,완료 토스트,CRT.Yeolim.Module.Order/FrmOrder.cs,818-840,일치,alertControl.Show(... \"파일 위치 열기\" ...) · ERR_YN=Y 면 문구 분기
+C41,67,단계마다 [HHmmss] Config/Report/VariableSet 산출,CRT.Yeolim.ServerProcess/Program.cs,565-590,일치,"timeString(:565)·_Config.xml(:575)·_Report.xml(:590) — 단 _VariableSet.evl(:587)은 주석"
+C42,73,STAT_010 세팅 주체,CRT.Yeolim.Data/Dac/OrderDac.cs,47,일치,parameters.AddWithValue(\"@STATUS\", \"STAT_010\")
+C43,74,STAT_020 세팅 주체,CRT.Yeolim.Module.Order/FrmOrderNew3.cs,428,일치,param.Add(\"STATUS\", \"STAT_020\")
+C44,75,STAT_030 세팅 주체,CRT.Yeolim.ServerProcess/Program.cs,113,일치,param.Add(\"STATUS\", \"STAT_030\")
+C45,76,STAT_040 세팅 주체,CRT.Yeolim.ServerProcess/Program.cs,363,일치,paramSuc.Add(\"STATUS\", \"STAT_040\")
+C46,77,STAT_050 세팅 주체(427),CRT.Yeolim.ServerProcess/Program.cs,427,일치,statusCd = \"STAT_050\" — bucketNm 이 빈 경우의 분기
+C47,77,STAT_050 세팅 주체(509),CRT.Yeolim.ServerProcess/Program.cs,509,일치,paramSuc.Add(\"STATUS\", \"STAT_050\")
+C48,79,STAT_999 사용자 취소,CRT.Yeolim.Module.Order/FrmOrder.cs,407,일치,"targetStatusCd = \"STAT_999\" · CJobLog 로 기록(:421)"
+C49,95,업로드를 publicRead:true 로 올린다,CRT.Yeolim.Module.Order/FrmOrderNew3.cs,412-417,일치,publicRead: true
+C50,96,FTPS 인증서 검증을 끈다,CRT.Yeolim.Module.Order/FrmOrderNew3.cs,452-456,일치,"ftp.ValidateCertificate += (control, e) => { e.Accept = true; } (:456)"
+C51,98,리포트 없으면 널 참조로 죽는다,CRT.Yeolim.ServerProcess/Program.cs,703,일치,":700 은 enfocusReport != null 로 가드하는데 :703 은 무가드 enfocusReport.GetFailureMessage()"
+C52,104,AWS 키가 평문으로 커밋,CRT.Yeolim.SQSMonitorService/FoxConfigurationSQSMonitor.config,8-9,일치,AwsKey·AwsSecKey 평문(값 전사 생략)
+C53,105,FTP 계정,FtpTlsTest/Form1.cs,24,일치,new FtpClient(host, id, pw) 생성자에 평문(값 전사 생략)
+C54,106,로그인 응답이 사용자별 FTP/AWS 자격증명을 내려준다,CRT.Yeolim.Main/FrmLogin.cs,173-180,일치,FTP_HOST/PORT/ID/PASS·AWS_KEY/SEC_KEY/UPLOAD_BUCKET_NM 7종
+C55,115,CRT.EasyMES.V2 네임스페이스 공유,CRT.Yeolim.ServerProcess.HotFolder/Program.cs,24,일치,using CRT.EasyMES.V2.Module.Reports — 리포트 어셈블리뿐
