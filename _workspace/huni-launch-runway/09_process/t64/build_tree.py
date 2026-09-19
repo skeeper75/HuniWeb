@@ -88,7 +88,7 @@ def main():
     cols = ["L0", "L1_대분류", "L2_중분류", "L3_프로세스", "L4_단계_row_id", "기능",
             "status", "owner_proposed", "step", "track", "원장출처", "cross", "귀속"]
     with open(os.path.join(HERE, "process-tree.csv"), "w", encoding="utf-8", newline="") as f:
-        w = csv.DictWriter(f, fieldnames=cols)
+        w = csv.DictWriter(f, fieldnames=cols, lineterminator="\n")
         w.writeheader()
         w.writerows(out)
 
