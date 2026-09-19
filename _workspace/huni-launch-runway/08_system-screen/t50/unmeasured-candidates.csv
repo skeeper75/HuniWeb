@@ -1,0 +1,6 @@
+row_id,step,title,matched_cols,status,evidence,t50_판정
+STD-MFG-059,C4,품목관리 디자인파일여부 Y/N 로 원본 자동 접수 처리,status,미실측,후니프린팅_주문프로세스_20251001.pdf p.11 §09 case1 || P1판정(260902): PDF p.11 §09 case1 · auto-vs-human §2.2 #24 「지금」 칸이 「—」,후보(미확인)
+STD-MFG-060,C4,Edicus Prepress 랜더링 결과 접수파일 등록,status,미실측,후니프린팅_주문프로세스_20251001.pdf p.11 §09 case1 · p.1 랜더링전/랜더링완료 || P1판정(260902): PDF p.11 §09 case1 · auto-vs-human §5 A-4 「랜더링 트리거 주체 색 판독 불가」,코드 실재 확인
+STD-MFG-061,C4,접수파일 인쇄공정 파일 기준 썸네일 자동 생성,status,미실측,[상위:STD-ART-019] 후니프린팅_주문프로세스_20251001.pdf p.11 §09 server · p.10 §10 || P1판정(260902): PDF p.11 §09 server · auto-vs-human §5 A-3 「server 가 어느 서버인가 미확인」,코드 실재 확인
+STD-MFG-090,C5,앞공정 미완료 시 다음공정 차단(선후관계 interlock),evidence|status,미실측,후니프린팅_공정관리_시행초안_20260210.pdf p.1 「앞공정은 안찍으면 다음공정 못찍히게」 || P1판정(260902): auto-vs-human §5 A-5 「interlock 을 MES 가 이미 구현했는지 미확인 — MES 소스 없음」,후보(미확인)
+STD-MFG-133,C5,오프라인 주문 등록(거래처별 EXCEL·금액 직접 입력),status,미실측,[상위:STD-ORD-027] 후니프린팅_주문프로세스_20251001.pdf p.4 §04 ★오프라인 주문 || P1판정(260902): auto-vs-human §5 A-6 「오프라인 주문이 신규 시스템 범위인지 범위 미결 — PM」,후보(미확인)

@@ -1,0 +1,343 @@
+system,group,screen_id,screen_name,role,function,work_type,counterpart,direction,owner_side,plan_row_id,status,evidence
+pagebuilder,가이드북,pc-guidebook-file-bind,가이드 파일의 페이지빌더 바인딩,시스템(무인),api/w/v1/guides 파일 목록을 동적 페이지 블록에 바인딩,integrate,webadmin,pagebuilder→webadmin,webadmin,STD-CAT-020,미확인,raw/webadmin/webadmin/config/urls.py:281 · _workspace/huni-page-compose/01_recon/pie-canvas-engine-capabilities.md:85-96 (data-proxy 허용 도메인 미공개라 연결 가부 판정 불가)
+pagebuilder,가이드북,pc-guidebook-file-source,작업가이드 파일 원천 경계,시스템(무인),가이드 파일 실체는 webadmin S3 업로드·관리 — 소비자는 자사몰 웹서버(pagebuilder 경유 아님),integrate,webadmin,webadmin→huni-mall,webadmin,STD-ADC-014,미확인,raw/webadmin/webadmin/config/urls.py:72-89 · raw/webadmin/webadmin/catalog/widget_api.py:6003-6012 (「소비자가 브라우저가 아니라 자사몰 웹서버」 — Pie Canvas 소비 근거 0건)
+pagebuilder,가이드북,pc-guidebook-tab-content,디자인가이드 본문 콘텐츠,운영자(CS·상품),가이드 본문(뼈대·문구)을 Pie Canvas 페이지에서 편집,config,,,,STD-INF-007,미착수,_workspace/huni-page-compose/99_proposal/report.html:554 · 01_recon/pie-canvas-surface-recon.md:52 (사이트 페이지 「디자인가이드」)
+pagebuilder,게시·운영,pc-publish,미리보기·게시,운영자(CS·상품),게시 스냅샷 공개(공개 페이지는 마지막 스냅샷만 노출),provided,,,,STD-SYS-021,미착수,_workspace/huni-page-compose/01_recon/pie-canvas-model.md:80 · 99_proposal/proposal.md:151
+pagebuilder,게시·운영,pc-site-json-backup,사이트 전체 JSON 조회,시스템(무인),GET /api/sites/{host} — 백업·감사·마이그레이션 원천,integrate,webadmin,pagebuilder→webadmin,pagebuilder,NEW,미확인,_workspace/huni-page-compose/01_recon/pie-canvas-engine-capabilities.md:383 (NEW — 인증 영역이라 게이트 재실측 실패 06_gate/gate-verdict.md:16)
+pagebuilder,게시·운영,pc-template-export,페이지·사이트를 템플릿으로 저장,운영자(CS·상품),.template.json 무손실 내보내기(id·userId·host 제거),provided,,,,STD-SYS-021,미착수,_workspace/huni-page-compose/01_recon/pie-canvas-engine-capabilities.md:326-334 · :360-372
+pagebuilder,게시·운영,pc-template-gallery,템플릿 갤러리,운영자(CS·상품),파트너사가 서버에 심은 템플릿 선택 — 후니는 갤러리에 추가 불가,provided,,,,STD-SYS-021,미착수,_workspace/huni-page-compose/01_recon/pie-canvas-engine-capabilities.md:300-322
+pagebuilder,게시·운영,pc-template-import,내 템플릿 가져오기,운영자(CS·상품),.template.json 가져오기 — 브라우저 localStorage 20개 상한(계정 동기화 아님),provided,,,,STD-SYS-021,미착수,_workspace/huni-page-compose/01_recon/pie-canvas-engine-capabilities.md:335-346 · :375-380
+pagebuilder,동적 페이지·콘텐츠 모델,pc-content-field,콘텐츠 필드 편집(타입 22종),운영자(CS·상품),Label·Key·Type·Required·Help·Options 정의,config,,,,STD-SYS-021,미착수,_workspace/huni-page-compose/01_recon/pie-canvas-engine-capabilities.md:255-277
+pagebuilder,동적 페이지·콘텐츠 모델,pc-content-model,콘텐츠 모델 만들기,운영자(CS·상품),모델+콘텐츠 뷰+page.dynamic 동시 생성,config,,,,STD-SYS-021,미착수,_workspace/huni-page-compose/01_recon/pie-canvas-engine-capabilities.md:198 · :210-221
+pagebuilder,동적 페이지·콘텐츠 모델,pc-content-view,콘텐츠 뷰(표·보드·캘린더),운영자(CS·상품),저장 뷰 정의 + 여러 페이지에서 재사용,config,,,,STD-SYS-021,미착수,_workspace/huni-page-compose/01_recon/pie-canvas-engine-capabilities.md:219 · :388
+pagebuilder,동적 페이지·콘텐츠 모델,pc-dynamic-page,동적 페이지 설정(routePattern),운영자(CS·상품),페이지 1개로 URL N개 생성 — 상품별 복제 제거,config,,,,STD-SYS-021,미착수,_workspace/huni-page-compose/01_recon/pie-canvas-engine-capabilities.md:38-56 · :199-201
+pagebuilder,동적 페이지·콘텐츠 모델,pc-entry-add,콘텐츠 항목 추가,운영자(CS·상품),상품 1개 = 항목 1행 등록(slug·status),config,,,,STD-SYS-021,미착수,_workspace/huni-page-compose/01_recon/pie-canvas-engine-capabilities.md:202-206
+pagebuilder,동적 페이지·콘텐츠 모델,pc-entry-export,콘텐츠 항목 JSON·CSV 내보내기,운영자(CS·상품),항목 양방향 반출,provided,,,,STD-SYS-021,미착수,_workspace/huni-page-compose/01_recon/pie-canvas-engine-capabilities.md:385
+pagebuilder,동적 페이지·콘텐츠 모델,pc-entry-import,콘텐츠 항목 CSV·JSON 일괄 가져오기,운영자(CS·상품),상품마스터 CSV로 N건 일괄 등록(전부 draft 진입),config,,,,STD-SYS-021,미착수,_workspace/huni-page-compose/01_recon/pie-canvas-engine-capabilities.md:225-244
+pagebuilder,동적 페이지·콘텐츠 모델,pc-entry-status,항목 상태 전환(초안·예약·공개·보관),운영자(CS·상품),검수 후 일괄 공개 전환,config,,,,STD-SYS-021,미착수,_workspace/huni-page-compose/01_recon/pie-canvas-engine-capabilities.md:205-207
+pagebuilder,동적 페이지·콘텐츠 모델,pc-entry-version,항목 버전·직전 버전 복원,운영자(CS·상품),버전 N·이전 기록 M개 표시 + 1단계 롤백,provided,,,,STD-SYS-021,미착수,_workspace/huni-page-compose/01_recon/pie-canvas-engine-capabilities.md:279-281
+pagebuilder,동적 페이지·콘텐츠 모델,pc-template-binding,템플릿 값 바인딩({{entry.필드}}),운영자(CS·상품),템플릿 텍스트를 공개 항목 값으로 치환,config,,,,STD-SYS-021,미착수,_workspace/huni-page-compose/01_recon/pie-canvas-engine-capabilities.md:248-252
+pagebuilder,블록 편집,pc-block-backlink,백링크 패널,운영자(CS·상품),현재 대상을 참조하는 블록 위치 역추적,provided,,,,STD-SYS-021,미착수,_workspace/huni-page-compose/01_recon/pie-canvas-engine-capabilities.md:120
+pagebuilder,블록 편집,pc-block-external,외부 콘텐츠(임베드) 블록,운영자(CS·상품),허용 HTTPS만 iframe 임베드 — 갤러리·리뷰 병합의 유일 경로,config,,,,STD-SYS-021,미확인,_workspace/huni-page-compose/01_recon/pie-canvas-model.md:74 · 허용 도메인 정책 미공개(_workspace/huni-page-compose/99_proposal/proposal.md:171 S1)
+pagebuilder,블록 편집,pc-block-linked,연결된 페이지·섹션 블록,운영자(CS·상품),다른 페이지·섹션의 최신 내용을 원본 ID로 참조,config,,,,STD-SYS-021,미착수,_workspace/huni-page-compose/01_recon/pie-canvas-engine-capabilities.md:14-15
+pagebuilder,블록 편집,pc-block-palette,블록 팔레트(30종),운영자(CS·상품),텍스트·미디어·데이터·임베드·레이아웃 블록 삽입,provided,,,,STD-SYS-021,미착수,_workspace/huni-page-compose/01_recon/pie-canvas-engine-capabilities.md:12-31
+pagebuilder,블록 편집,pc-block-synced,동기화 블록,운영자(CS·상품),원본 1벌 편집 → 같은 사이트 전 인스턴스 동시 반영,config,,,,STD-SYS-021,미착수,_workspace/huni-page-compose/01_recon/pie-canvas-engine-capabilities.md:104-118
+pagebuilder,블록 편집,pc-block-synced-detach,동기화 블록 연결 해제,운영자(CS·상품),특정 위치만 다르게 편집(detach) · 원본 삭제해도 모양 유지,config,,,,STD-SYS-021,미착수,_workspace/huni-page-compose/01_recon/pie-canvas-engine-capabilities.md:106-116
+pagebuilder,블록 편집,pc-block-synced-scope,동기화 범위 경계(사이트 내부),시스템(무인),사이트 간 원본 참조 불가 — 묶음(사이트) 분할 경계를 결정,provided,,,,STD-SYS-021,미착수,_workspace/huni-page-compose/01_recon/pie-canvas-engine-capabilities.md:126-146
+pagebuilder,블록 편집,pc-block-tabs,탭 레이아웃 블록,운영자(CS·상품),한 페이지 안에서 블록을 탭으로 배치,provided,,,,STD-CAT-034,미확인,_workspace/huni-page-compose/01_recon/pie-canvas-model.md:75 (도움말 근거만 · 편집기 실물 미확인)
+pagebuilder,빌더 기존 자산(분모밖),pc-design-workspace,디자인(design) 작업공간,운영자(CS·상품),인쇄물 디자인(명함·엽서·포스터) 컴포넌트·Variant 편집·내보내기,provided,,,,NEW,미확인,[오픈분모밖] _workspace/huni-page-compose/01_recon/pie-canvas-model.md:43 (NEW — 오픈 분모 밖 · Pie Canvas 1급 개념 · 후니 상세페이지 surface 아님 · 역공학 문서로만 확인)
+pagebuilder,빌더 기존 자산(분모밖),pc-project-kanban,프로젝트(project) 칸반 보드,운영자(CS·상품),고객·멤버·산출물을 칸반으로 관리,provided,,,,NEW,미확인,[오픈분모밖] _workspace/huni-page-compose/01_recon/pie-canvas-model.md:44 (NEW — 오픈 분모 밖 · Pie Canvas 1급 개념 · 후니 상세페이지 surface 아님 · 역공학 문서로만 확인)
+pagebuilder,사이트·페이지 관리,pc-dashboard,Pie Canvas 대시보드,운영자(CS·상품),내 사이트·디자인·프로젝트 목록 조회,provided,,,,STD-SYS-021,미확인,_workspace/huni-page-compose/01_recon/pie-canvas-model.md:25-31 (테스트 계정 사이트 0개 · 대시보드 200 확인까지)
+pagebuilder,사이트·페이지 관리,pc-editor-hardnav,편집기 하드 내비 진입,운영자(CS·상품),주소 직접입력·새로고침으로 편집기 열기 — 현재 HTTP 500(P0 버그 B1),integrate,pagebuilder,pagebuilder→pagebuilder,pagebuilder,NEW,미착수,_workspace/huni-page-compose/99_proposal/proposal.md:170 (NEW — 파트너사 코드 수정이라 후니 계획행에 대응 없음 · 우리가 고칠 수 없음)
+pagebuilder,사이트·페이지 관리,pc-site-duplicate,사이트·페이지 복제,운영자(CS·상품),사이트 전체 또는 페이지 복제(복제본은 별도 주소·저장기록 — 현행 fan-out 원인),config,,,,STD-SYS-021,진행,_workspace/huni-page-compose/01_recon/pie-canvas-model.md:56-61 · 실측 사이트 3개(_workspace/huni-page-compose/99_proposal/proposal.md:22-26)
+pagebuilder,사이트·페이지 관리,pc-site-headerfooter,사이트 공통영역(Header/Footer),운영자(CS·상품),여러 페이지 공통 머리말·꼬리말 1벌 편집,config,,,,STD-SYS-021,미착수,_workspace/huni-page-compose/01_recon/pie-canvas-model.md:81
+pagebuilder,사이트·페이지 관리,pc-site-list,사이트 목록(/sites),운영자(CS·상품),사이트 생성·열기 진입점,provided,,,,STD-SYS-021,미확인,_workspace/huni-page-compose/01_recon/pie-canvas-model.md:29 (테스트 계정에서 HTTP 500 재현 — 파트너사 확인 요청 C4)
+pagebuilder,사이트·페이지 관리,pc-site-pages,사이트 페이지 구성,운영자(CS·상품),페이지 추가·slug 지정·정렬·네비 숨김(page 스키마),config,,,,STD-SYS-021,미착수,_workspace/huni-page-compose/01_recon/pie-canvas-engine-capabilities.md:38-47
+pagebuilder,사이트·페이지 관리,pc-site-theme,사이트 테마,운영자(CS·상품),사이트 단위 테마 적용,config,,,,STD-SYS-021,미착수,_workspace/huni-page-compose/01_recon/pie-canvas-model.md:39
+pagebuilder,상세페이지 탭,pc-tab-assembly,스토어프론트 탭 조립(D4),시스템(무인),Pie Canvas 게시 스냅샷(slug=prodCode) + 갤러리·리뷰 임베드를 탭 6종으로 배치,integrate,huni-mall,pagebuilder→huni-mall,huni-mall,STD-CAT-034,미착수,_workspace/huni-page-compose/99_proposal/proposal.md:203
+pagebuilder,상세페이지 탭,pc-tab-checklist,탭② 체크리스트(/checklist),운영자(CS·상품),표 서식은 1곳 + 값은 상품 API 바인딩,config,,,,STD-CAT-012,미착수,_workspace/huni-page-compose/99_proposal/report.html:553
+pagebuilder,상세페이지 탭,pc-tab-design,탭④ 디자인보기(/design),운영자(CS·상품),갤러리 임베드 URL(?prd_cd=) + iframe 허용 헤더(D2),integrate,webadmin,pagebuilder→webadmin,webadmin,STD-CAT-034,미착수,_workspace/huni-page-compose/99_proposal/proposal.md:201 · raw/webadmin/webadmin/config/urls.py:288-290 (api/w/v1/designs·design-image)
+pagebuilder,상세페이지 탭,pc-tab-detail,탭① 상품설명,운영자(CS·상품),동적 페이지 템플릿 1벌 + {{entry.name}} 바인딩,config,,,,STD-CAT-007,미착수,_workspace/huni-page-compose/99_proposal/report.html:552
+pagebuilder,상세페이지 탭,pc-tab-guide,탭③ 디자인가이드(/guide),운영자(CS·상품),뼈대 1벌 + sizes[] 반복 블록으로 규격별 전개,config,,,,STD-CAT-019,미착수,_workspace/huni-page-compose/99_proposal/report.html:554
+pagebuilder,상세페이지 탭,pc-tab-review,탭⑥ 상품리뷰,운영자(CS·상품),ShopBy 소유 리뷰 위젯을 embed 블록으로 임베드(D3),integrate,shopby,pagebuilder→shopby,shopby,STD-CAT-014,미착수,_workspace/huni-page-compose/99_proposal/proposal.md:202 · report.html:557
+pagebuilder,상세페이지 탭,pc-tab-shipping,탭⑤ 포장/배송,운영자(CS·상품),동기화 블록으로 사이트 전체 공통 반영,config,,,,NEW,미착수,_workspace/huni-page-compose/99_proposal/report.html:556 (NEW — 계획행에 포장/배송 탭 단독 행 없음)
+pagebuilder,운영진 관리 화면,pc-admin-backref,⑥ 역참조,운영자(CS·상품),묶음별 참조 위치·삭제 영향 표시(삭제 기능 없음),build,,,,NEW,미착수,_workspace/huni-page-compose/08_ux/ux-spec.md:20
+pagebuilder,운영진 관리 화면,pc-admin-bulk-confirm,④ 일괄 반영 확인,운영자(CS·상품),「N개 상품에 반영됩니다」 선표시 + 확인 체크 없으면 저장 비활성,build,,,,NEW,미착수,_workspace/huni-page-compose/08_ux/ux-spec.md:18 (부분 실패 경로 스펙 부재 99_proposal/proposal.md:196)
+pagebuilder,운영진 관리 화면,pc-admin-common-list,① 공통 컨텐츠 목록,운영자(CS·상품),무엇이 공통인지 목록화(재사용 현황·거버넌스 진입점),build,,,,NEW,미착수,_workspace/huni-page-compose/08_ux/ux-spec.md:15 (프로토타입만 · 결함 4건 선해소 조건 99_proposal/proposal.md:204)
+pagebuilder,운영진 관리 화면,pc-admin-override,③ 예외(override) 지정,운영자(CS·상품),상품 선택 후 칸 채움=예외·비움=공통 복귀,build,,,,NEW,미착수,_workspace/huni-page-compose/08_ux/ux-spec.md:17 · 06_gate/gate-verdict.md:39 (PASS 조건부 — 의도적 빈 값 표현 불가·확인 게이트 부재)
+pagebuilder,운영진 관리 화면,pc-admin-rollback,⑤ 롤백·버전 비교,운영자(CS·상품),버전 선택 → 복원(새 버전으로 기록),build,,,,NEW,미착수,_workspace/huni-page-compose/08_ux/ux-spec.md:19 (되돌리기 버튼 5개 전부 대상 미전달 — 06_gate/gate-verdict.md:20 E6)
+pagebuilder,운영진 관리 화면,pc-admin-scope-preview,② 반영 범위 미리보기,운영자(CS·상품),저장 전에 도달 N/미도달 M/예외 K를 묶음별로 표시,build,,,,NEW,미착수,_workspace/huni-page-compose/08_ux/ux-spec.md:16
+pagebuilder,파트너사 개발 요청,pc-req-f1-display-cond,템플릿 표시 조건(F1),시스템(무인),전체·카테고리·태그·개별로 템플릿 적용 범위 지정,integrate,pagebuilder,pagebuilder→pagebuilder,pagebuilder,NEW,미착수,_workspace/huni-page-compose/99_proposal/proposal.md:183 (NEW — 파트너사 코드 · 후니 불가)
+pagebuilder,파트너사 개발 요청,pc-req-f2-partial-override,동기화 블록 부분 override(F2),시스템(무인),뼈대는 공유하고 일부 문구만 인스턴스별로 덮어쓰기,integrate,pagebuilder,pagebuilder→pagebuilder,pagebuilder,NEW,미착수,_workspace/huni-page-compose/99_proposal/proposal.md:184 (NEW — 파트너사 코드 · 후니 불가)
+pagebuilder,파트너사 개발 요청,pc-req-f3-link-1n,사이트↔상품 1:N 연결(F3),시스템(무인),link-product를 복수 productId로 확장 — C7 구조 충돌 해소,integrate,webadmin,pagebuilder→webadmin,pagebuilder,NEW,미착수,_workspace/huni-page-compose/99_proposal/proposal.md:185 · :173 (NEW — 파트너사 코드 · 후니 불가)
+pagebuilder,파트너사 개발 요청,pc-req-s1-domain-allow,외부 콘텐츠 허용 도메인 등록(S1),시스템(무인),후니 갤러리·리뷰 도메인을 임베드 허용 목록에 등록,integrate,pagebuilder,pagebuilder→pagebuilder,pagebuilder,NEW,미착수,_workspace/huni-page-compose/99_proposal/proposal.md:171 (NEW — 파트너사 설정 · 후니 불가)
+pagebuilder,후니 상품 연동,pc-api-extend-d1,상품 상세 데이터 API 확장(D1),시스템(무인),/api/printly/products에 제본·제작기간·유의사항 필드 추가 — 체크리스트·디자인가이드의 데이터 공급원,integrate,webadmin,webadmin→pagebuilder,webadmin,STD-CAT-011,미착수,_workspace/huni-page-compose/99_proposal/proposal.md:200
+pagebuilder,후니 상품 연동,pc-data-binding,섹션 데이터 바인딩 설정,운영자(CS·상품),블록에 API 소스 연결 + 바인딩 배지 표시,config,,,,STD-SYS-021,미확인,_workspace/huni-page-compose/01_recon/pie-canvas-engine-capabilities.md:70-84 (번들 코드 근거 · 편집기 실화면 미확인)
+pagebuilder,후니 상품 연동,pc-data-connections,데이터 연결 관리,운영자(CS·상품),연결 식별자만 블록에 저장(비밀값은 서버 암호화),config,,,,STD-SYS-021,미확인,_workspace/huni-page-compose/01_recon/pie-canvas-model.md:76 · pie-canvas-engine-capabilities.md:387
+pagebuilder,후니 상품 연동,pc-data-proxy,서버 데이터 프록시(/api/data-proxy),시스템(무인),블록 데이터바인딩용 서버측 외부 API 호출(CORS 우회·cacheSeconds),integrate,webadmin,pagebuilder→webadmin,pagebuilder,NEW,미확인,_workspace/huni-page-compose/01_recon/pie-canvas-engine-capabilities.md:85-96 (405 확인까지 · 허용 도메인·인증 정책 미공개 S2)
+pagebuilder,후니 상품 연동,pc-edicus-link,에디쿠스 연동,운영자(CS·상품),제작·편집 연동 기능,provided,,,,NEW,미확인,_workspace/huni-page-compose/01_recon/pie-canvas-model.md:79 · :92 (NEW — 도움말 1행 외 근거 없음 · 연결 범위 미조사 G2)
+pagebuilder,후니 상품 연동,pc-link-product,상품 연결(사이트↔상품),운영자(CS·상품),GET/POST/DELETE link-product — productId 단수로 1:1 고정,integrate,webadmin,pagebuilder→webadmin,pagebuilder,NEW,미확인,_workspace/huni-page-compose/01_recon/pie-canvas-engine-capabilities.md:414-421 (NEW — 파트너사 엔드포인트 · 실측 사이트 2곳 모두 linked:false · C7 구조 충돌)
+pagebuilder,후니 상품 연동,pc-new-product,상품 상세 만들기(/sites/new-product),운영자(CS·상품),후니 전용 상품 상세 생성 진입점 — 현재 「서비스 준비중」 미구현,integrate,webadmin,pagebuilder→webadmin,pagebuilder,NEW,미착수,_workspace/huni-page-compose/01_recon/pie-canvas-engine-capabilities.md:400-406 (NEW — 파트너사 미구현 · 우리가 만들 수 없음)
+pagebuilder,후니 상품 연동,pc-product-collection,상품 컬렉션 블록,운영자(CS·상품),상품 카탈로그를 카드 격자로 표시,provided,,,,STD-SYS-021,미확인,_workspace/huni-page-compose/01_recon/pie-canvas-engine-capabilities.md:17 · :171 (데이터 출처가 후니 연동인지 수동 입력인지 불명)
+pagebuilder,후니 상품 연동,pc-products-api,후니 상품 API 소비(/api/printly/products),시스템(무인),상품 257건 반환 — 콘텐츠 항목 CSV의 원천,integrate,webadmin,pagebuilder→webadmin,pagebuilder,NEW,미확인,_workspace/huni-page-compose/06_gate/gate-verdict.md:16 (E3 — HTTP 401로 재현 불가 · 257은 미재실측)
+pagebuilder,후니 상품 연동,pc-shop-publish,쇼핑몰 발행,운영자(CS·상품),연동 활성 계정에만 노출되는 발행 흐름,provided,,,,STD-SYS-021,미확인,_workspace/huni-page-compose/01_recon/pie-canvas-model.md:80 (도움말 근거만 · 후니 계정 미확인)
+webadmin,가격 관리,discount_grid_page,할인 구간 그리드 편집 (팝업),운영자(CS·상품),수량 구간 그리드 편집기 팝업 열기,build,,,,STD-ADP-027,완료,raw/webadmin/webadmin/config/urls.py:179
+webadmin,가격 관리,discount_grid_page,할인 구간 그리드 편집 (팝업),운영자(CS·상품),수량 구간 행 조회,build,,,,STD-ADP-027,완료,raw/webadmin/webadmin/config/urls.py:181
+webadmin,가격 관리,discount_grid_page,할인 구간 그리드 편집 (팝업),운영자(CS·상품),수량 구간별 할인(정률 %/정액 원) 변경분 저장,build,,,,STD-ADP-027,완료,raw/webadmin/webadmin/config/urls.py:183
+webadmin,가격 관리,discount_table_md,할인테이블 (수량구간) MD,운영자(CS·상품),할인테이블 목록 검색·선택 / + 새 할인테이블 추가,build,,,,STD-ADP-027,완료,raw/webadmin/webadmin/config/urls.py:139
+webadmin,가격 관리,discount_table_md,할인테이블 (수량구간) MD,운영자(CS·상품),이 할인테이블을 쓰는 상품 조회(가격뷰어 링크),build,,,,STD-ADP-027,완료,raw/webadmin/webadmin/config/urls.py:142
+webadmin,가격 관리,price_component_md,가격구성요소 (MD),운영자(CS·상품),구성요소 목록 선택(배지=단가표 행 수),build,,,,STD-ADP-024,완료,raw/webadmin/webadmin/config/urls.py:40
+webadmin,가격 관리,price_component_md,가격구성요소 (MD),운영자(CS·상품),구성요소 속성 편집 — 단가유형(단가형/합가형/고정금액)·사용차원(use_dims) 순서 지정,build,,,,STD-ADP-026,완료,raw/webadmin/tools/manual_content.py:557
+webadmin,가격 관리,price_component_md,가격구성요소 (MD),운영자(CS·상품),이 구성요소를 쓰는 가격공식 조회(가격공식MD 링크),build,,,,STD-ADP-024,완료,raw/webadmin/webadmin/config/urls.py:136
+webadmin,가격 관리,price_diagram,가격 구조 다이어그램,운영자(CS·상품),공식→구성요소→단가표 구조 라이브 다이어그램 새 탭 조회·노드 펼침,build,,,,STD-ADP-032,완료,raw/webadmin/webadmin/config/urls.py:159
+webadmin,가격 관리,price_formula_md,가격공식 (MD),운영자(CS·상품),가격공식 목록 검색·선택(구성요소 수·사용 상품 수 배지),build,,,,STD-ADP-023,완료,raw/webadmin/webadmin/config/urls.py:37
+webadmin,가격 관리,price_formula_md,가격공식 (MD),운영자(CS·상품),+ 새 공식 추가 / 공식 폼·구성요소 구성 저장,build,,,,STD-ADP-023,완료,raw/webadmin/tools/manual_content.py:544
+webadmin,가격 관리,price_formula_md,가격공식 (MD),운영자(CS·상품),공식 삭제 — 살아있는 상품 사용 시 차단 · 삭제된 상품이 남긴 잠든 연결은 고지 후 동반 정리,build,,,,STD-ADP-023,완료,raw/webadmin/tools/manual_content.py:535
+webadmin,가격 관리,price_formula_md,가격공식 (MD),운영자(CS·상품),이 공식을 사용하는 상품 조회(가격뷰어 링크),build,,,,STD-ADP-023,완료,raw/webadmin/webadmin/config/urls.py:133
+webadmin,가격 관리,price_grid_page,단가표 그리드 편집 (팝업),운영자(CS·상품),구성요소 단가표 그리드 편집기 팝업 열기,build,,,,STD-ADP-025,완료,raw/webadmin/webadmin/config/urls.py:146
+webadmin,가격 관리,price_grid_page,단가표 그리드 편집 (팝업),운영자(CS·상품),차원 조합별 단가 행 조회(엑셀식 정렬·필터),build,,,,STD-ADP-025,완료,raw/webadmin/webadmin/config/urls.py:148
+webadmin,가격 관리,price_grid_page,단가표 그리드 편집 (팝업),운영자(CS·상품),변경분 저장 — 엑셀 복사·붙여넣기 입력분 일괄 반영,build,,,,STD-ADP-025,완료,raw/webadmin/webadmin/config/urls.py:150
+webadmin,가격 관리,price_grid_page,단가표 그리드 편집 (팝업),운영자(CS·상품),선택영역 새 적용일로 개정(시계열 복제),build,,,,STD-ADP-030,완료,raw/webadmin/tools/manual_content.py:594
+webadmin,가격 관리,price_grid_page,단가표 그리드 편집 (팝업),운영자(CS·상품),중복 검사 — 같은 차원 조합에 중복 단가 행 점검,build,,,,STD-ADP-025,완료,raw/webadmin/webadmin/config/urls.py:154
+webadmin,가격 관리,price_grid_page,단가표 그리드 편집 (팝업),운영자(CS·상품),구성요소 사용처(어느 공식·상품에 쓰이는지) 조회,build,,,,STD-ADP-024,완료,raw/webadmin/webadmin/config/urls.py:152
+webadmin,가격 관리,price_sim_products,가격 시뮬레이터 › 상품 목록 API,시스템(무인),시뮬레이터 상품 목록 JSON(위젯빌더 팔레트 소스와 공용) — 매뉴얼 미기술,build,,,,STD-ADP-031,미확인,raw/webadmin/webadmin/config/urls.py:176
+webadmin,가격 관리,price_simulator,가격 시뮬레이터,운영자(CS·상품),시뮬레이션 대상 상품 목록 검색,build,,,,STD-ADP-031,완료,raw/webadmin/webadmin/config/urls.py:176
+webadmin,가격 관리,price_simulator,가격 시뮬레이터,운영자(CS·상품),상품별 입력 조건 메타 생성(차원·옵션·공정·수량 폼),build,,,,STD-ADP-031,완료,raw/webadmin/webadmin/config/urls.py:164
+webadmin,가격 관리,price_simulator,가격 시뮬레이터,운영자(CS·상품),가격 계산 실행 — 구성요소별 단가·할인·총합계 리포트(끼워팔기 합산 포함),build,,,,STD-ADP-031,완료,raw/webadmin/webadmin/config/urls.py:166
+webadmin,가격 관리,price_simulator,가격 시뮬레이터,운영자(CS·상품),셋트상품 가격 계산 — 구성원별 사이즈 출처 표기 포함,build,,,,STD-OPT-051,완료,raw/webadmin/webadmin/config/urls.py:171
+webadmin,가격 관리,price_simulator,가격 시뮬레이터,운영자(CS·상품),제약 cascade — 현재 선택 기준 각 차원 불가값 비활성 표시,build,,,,STD-ADP-022,완료,raw/webadmin/webadmin/config/urls.py:169
+webadmin,가격 관리,price_simulator,가격 시뮬레이터,운영자(CS·상품),사이드바 전용 시뮬레이터 페이지 진입,build,,,,STD-ADP-031,완료,raw/webadmin/webadmin/config/urls.py:174
+webadmin,가격 관리,price_std_admin,가격공식·구성요소·할인테이블 (표준 목록),운영자(CS·상품),3종 표준 목록 화면 — 목록 행에서 단가표/수량구간 할인 편집 팝업 직행 버튼,build,,,,STD-ADP-023,완료,raw/webadmin/webadmin/catalog/admin.py:2830
+webadmin,가격 관리,price_viewer,가격 뷰어,운영자(CS·상품),좌측 상품 트리 검색·선택(주카테고리 기준 그룹),build,,,,STD-ADP-032,완료,raw/webadmin/webadmin/config/urls.py:34
+webadmin,가격 관리,price_viewer,가격 뷰어,운영자(CS·상품),상품별 가격 원천 상세 조회 — 직접단가/가격공식/할인테이블 × 적용일자,build,,,,STD-ADP-032,완료,raw/webadmin/webadmin/config/urls.py:156
+webadmin,가격 관리,price_viewer,가격 뷰어,운영자(CS·상품),가격 원천 연결 저장 — 적용일자별 다건 등록(최신 적용분이 현재가),build,,,,STD-ADP-030,완료,raw/webadmin/webadmin/config/urls.py:161
+webadmin,가격 관리,price_viewer,가격 뷰어,운영자(CS·상품),할인 적용 대상 지정 — 전체 금액 할인 / 구성요소별 할인 나란히 연결,build,,,,STD-ADP-027,완료,raw/webadmin/tools/manual_content.py:498
+webadmin,가격 관리,price_viewer,가격 뷰어,운영자(CS·상품),선택 옵션 메타(연결 후보 공식·할인테이블 목록) 조회,build,,,,STD-ADP-023,완료,raw/webadmin/webadmin/config/urls.py:144
+webadmin,고객관리,tcuscustomers_admin,고객,운영자(CS·상품),고객 마스터 목록·검색·등록·편집·논리삭제,build,,,,NEW,완료,raw/webadmin/tools/manual_content.py:823 || plan_row_id=NEW 사유: _planrows-A.csv·_planrows-misc.csv 에 고객 마스터 관리 화면을 다루는 행 없음
+webadmin,기준정보,basecode_master,기초코드정보 (자기참조 MD),운영자(CS·상품),기초코드 그룹/코드 2단 분할 조회 + 팝업 CRUD,build,,,,STD-ADP-009,완료,raw/webadmin/webadmin/config/urls.py:353
+webadmin,기준정보,basecode_master,기초코드정보 (자기참조 MD),운영자(CS·상품),기초코드 논리삭제(삭제금지 정책상 use_yn 전환 운영),build,,,,STD-ADP-009,완료,raw/webadmin/webadmin/config/urls.py:355
+webadmin,기준정보,category_master,카테고리 (밀러 칼럼),운영자(CS·상품),대>중>소 3단계 밀러 칼럼 탐색,build,,,,STD-ADP-036,완료,raw/webadmin/webadmin/config/urls.py:363
+webadmin,기준정보,category_master,카테고리 (밀러 칼럼),운영자(CS·상품),단계별 카테고리 추가(상위 자동 지정)·편집 팝업,build,,,,STD-ADP-036,완료,raw/webadmin/tools/manual_content.py:419
+webadmin,기준정보,cover_rule,표지 규칙 (책등 설정과 독립),운영자(CS·상품),표지 규칙 저장 — 권당 조각 수·판 확장(좌상우하)·싸바리 여유(좌상우하),build,,,,STD-ADP-008,완료,raw/webadmin/webadmin/config/urls.py:337
+webadmin,기준정보,cover_rule,표지 규칙 (책등 설정과 독립),운영자(CS·상품),표지 규칙 삭제,build,,,,STD-ADP-008,완료,raw/webadmin/webadmin/config/urls.py:339
+webadmin,기준정보,master_delete,마스터 제네릭 논리삭제,운영자(CS·상품),기초코드/공정/자재/카테고리 공용 하위 항목 논리삭제,build,,,,STD-ADP-009,완료,raw/webadmin/webadmin/config/urls.py:358
+webadmin,기준정보,master_detail,자재·공정 마스터-디테일,운영자(CS·상품),자재 2단 마스터-디테일 — 상위 검색·하위 표 조회·추가·편집,build,,,,STD-ADP-002,완료,raw/webadmin/webadmin/config/urls.py:360
+webadmin,기준정보,master_detail,자재·공정 마스터-디테일,운영자(CS·상품),공정 2단 마스터-디테일 — 상위/하위 공정 관리 + 「사용 상품」 배지(3갈래 중복 제거·상위공정 하위 전개),build,,,,STD-ADP-005,완료,raw/webadmin/tools/manual_content.py:443
+webadmin,기준정보,paper_management,용지 관리,운영자(CS·상품),좌측 용지 목록 조회·선택(종이 MAT_TYPE.01 한정),build,,,,STD-ADP-003,완료,raw/webadmin/webadmin/config/urls.py:306
+webadmin,기준정보,paper_management,용지 관리,운영자(CS·상품),+ 용지 등록 — 신규 용지 자동채번·종이 유형 고정 생성,build,,,,STD-ADP-003,완료,raw/webadmin/webadmin/config/urls.py:309
+webadmin,기준정보,paper_management,용지 관리,운영자(CS·상품),기본정보 탭 저장 — 용지명·평량·두께(책등계산용 mm)·상위용지,build,,,,STD-ADP-003,완료,raw/webadmin/webadmin/config/urls.py:312
+webadmin,기준정보,paper_management,용지 관리,운영자(CS·상품),단가 탭 — 용지비(COMP_PAPER) mat_cd 스코프 부분 upsert 저장,build,,,,STD-ADP-024,완료,raw/webadmin/webadmin/config/urls.py:315
+webadmin,기준정보,printopt_admin,인쇄옵션 (표준 목록),운영자(CS·상품),인쇄 방식·앞뒷면 도수 기준정보 등록·편집,build,,,,STD-ADP-004,완료,raw/webadmin/tools/manual_content.py:816
+webadmin,기준정보,proc_usage_page,공정 › 사용 상품 팝업,운영자(CS·상품),공정을 쓰는 상품 목록 팝업(상품명·코드·연결 부분 배지 · 읽기 전용),build,,,,STD-ADP-005,완료,raw/webadmin/webadmin/config/urls.py:344
+webadmin,기준정보,spine_page,책등 계산 설정 (공정별 팝업),운영자(CS·상품),공정 목록 책등계산 열 아이콘 → 책등 계산 설정 팝업 페이지 열기,build,,,,STD-ADP-008,완료,raw/webadmin/webadmin/config/urls.py:324
+webadmin,기준정보,spine_page,책등 계산 설정 (공정별 팝업),운영자(CS·상품),공정별 책등 설정 메타 조회,build,,,,STD-ADP-008,완료,raw/webadmin/webadmin/config/urls.py:326
+webadmin,기준정보,spine_page,책등 계산 설정 (공정별 팝업),운영자(CS·상품),책등 설정 저장 — 여유분(mm)·올림 방식(정수/짝수/규격표)·표지 두께 포함 여부,build,,,,STD-ADP-008,완료,raw/webadmin/webadmin/config/urls.py:328
+webadmin,기준정보,spine_page,책등 계산 설정 (공정별 팝업),운영자(CS·상품),규격표 저장 — 색상·직경·길이·자재 행(트윈링 등 부속 규격),build,,,,STD-ADP-008,완료,raw/webadmin/webadmin/config/urls.py:330
+webadmin,기준정보,spine_page,책등 계산 설정 (공정별 팝업),운영자(CS·상품),규격표 자재 검색(정적 경로 materials),build,,,,STD-ADP-008,완료,raw/webadmin/webadmin/config/urls.py:322
+webadmin,기준정보,spine_page,책등 계산 설정 (공정별 팝업),운영자(CS·상품),책등 계산 설정 삭제,build,,,,STD-ADP-008,완료,raw/webadmin/webadmin/config/urls.py:332
+webadmin,기준정보,swatch_stage,스와치 이미지 업로드 (공용),운영자(CS·상품),자재·공정·용지 공용 스와치 이미지 multipart 업로드 스테이징(대상 실재·권한 검사 후 S3 적재),integrate,s3,webadmin→s3,webadmin,STD-ADP-002,완료,raw/webadmin/webadmin/config/urls.py:318
+webadmin,기준정보,tclrcolorcounts_admin,도수정보 (표준 목록),운영자(CS·상품),인쇄 도수(색 수) 마스터 등록·편집,build,,,,STD-ADP-004,완료,raw/webadmin/tools/manual_content.py:815
+webadmin,기준정보,tmatmaterials_admin,자재정보 (표준 목록),운영자(CS·상품),자재 마스터 등록·편집(스와치 이미지·태그 지원),build,,,,STD-ADP-002,완료,raw/webadmin/tools/manual_content.py:821
+webadmin,기준정보,tprocprocesses_admin,공정정보 (표준 목록),운영자(CS·상품),공정 마스터 등록 + 면별선택여부·고객노출설명·스와치이미지·작업여백 설정,build,,,,STD-ADP-005,완료,raw/webadmin/tools/manual_content.py:817
+webadmin,기준정보,tsizsizes_admin,사이즈정보 (표준 목록),운영자(CS·상품),완제품 사이즈(가로×세로)·재단/작업/여백·조판 여부 등록·태그 분류·검색,build,,,,STD-ADP-001,완료,raw/webadmin/tools/manual_content.py:814
+webadmin,도구,assistant_chat,관리자 비서 에이전트,운영자(CS·상품),관리자 화면 질의응답 채팅(SSE 스트리밍 · staff 게이트),build,,,,NEW,완료,raw/webadmin/webadmin/config/urls.py:292 || plan_row_id=NEW 사유: 계획행에 관리자 비서 에이전트 항목 없음
+webadmin,도구,assistant_meta,관리자 비서 에이전트,운영자(CS·상품),비서 메타(가용 컨텍스트) 조회,build,,,,NEW,완료,raw/webadmin/webadmin/config/urls.py:293 || plan_row_id=NEW 사유: 계획행에 관리자 비서 에이전트 항목 없음
+webadmin,도구,assistant_report,이슈 보고 (A-09),운영자(CS·상품),이슈 스크린샷 업로드,build,,,,NEW,완료,raw/webadmin/webadmin/config/urls.py:296 || plan_row_id=NEW 사유: 계획행에 이슈 보고 기능 항목 없음
+webadmin,도구,assistant_report,이슈 보고 (A-09),운영자(CS·상품),업로드된 이슈 스크린샷 조회(admin/ 하위 인증 서빙),build,,,,NEW,완료,raw/webadmin/webadmin/config/urls.py:298 || plan_row_id=NEW 사유: 계획행에 이슈 보고 기능 항목 없음
+webadmin,도구,assistant_report,이슈 보고 (A-09),운영자(CS·상품),이슈 보고 제출,build,,,,NEW,완료,raw/webadmin/webadmin/config/urls.py:300 || plan_row_id=NEW 사유: 계획행에 이슈 보고 기능 항목 없음
+webadmin,도구,assistant_report,이슈 보고 (A-09),운영자(CS·상품),이슈 보고 취소,build,,,,NEW,완료,raw/webadmin/webadmin/config/urls.py:302 || plan_row_id=NEW 사유: 계획행에 이슈 보고 기능 항목 없음
+webadmin,도구,impact_detail,사용처 상세 (영향도),운영자(CS·상품),마스터 값이 어디에 쓰이는지 standalone 사용처 목록 조회(수정 전 영향 확인),build,,,,STD-ADP-009,완료,raw/webadmin/webadmin/config/urls.py:389
+webadmin,문서,manual,관리자 사용 메뉴얼,운영자(CS·상품),docs/admin-manual.html 을 admin 인증 하에 서빙(새 탭),build,,,,NEW,완료,raw/webadmin/webadmin/config/urls.py:397 || plan_row_id=NEW 사유: 계획행에 webadmin 내장 문서 화면 항목 없음
+webadmin,문서,quickstart,퀵스타트 가이드,운영자(CS·상품),docs/admin-quickstart.html 서빙 — 예시 상품 1건 종단 따라하기,build,,,,NEW,완료,raw/webadmin/webadmin/config/urls.py:395 || plan_row_id=NEW 사유: 계획행에 webadmin 내장 문서 화면 항목 없음
+webadmin,문서,table_spec,테이블 명세서,관리자,docs/table-spec.html 서빙 — t_* 테이블 명세 조회,build,,,,NEW,완료,raw/webadmin/webadmin/config/urls.py:400 || plan_row_id=NEW 사유: 계획행에 webadmin 내장 문서 화면 항목 없음
+webadmin,문서,widget_manual,위젯빌더 메뉴얼,운영자(CS·상품),docs/widget-manual.html 서빙(위젯빌더 사용법 전용 문서·새 탭),build,,,,NEW,완료,raw/webadmin/webadmin/config/urls.py:399 || plan_row_id=NEW 사유: 계획행에 webadmin 내장 문서 화면 항목 없음
+webadmin,상품,constraints,상품 뷰어 › 제약 폼빌더,운영자(CS·상품),제약규칙 조건그룹 추가·AND/OR 논리연산 지정·JSONLogic 직접 편집 저장,build,,,,STD-ADP-021,완료,raw/webadmin/webadmin/config/urls.py:385
+webadmin,상품,design_md,상품별 디자인,운영자(CS·상품),좌측 상품 목록(등록 디자인 수 배지) 검색·선택,build,,,,STD-ADP-035,완료,raw/webadmin/webadmin/config/urls.py:122
+webadmin,상품,design_md,상품별 디자인,운영자(CS·상품),상품별 디자인 목록(썸네일·태그·고정사양·표시여부) 조회,build,,,,STD-ADP-035,완료,raw/webadmin/webadmin/config/urls.py:124
+webadmin,상품,design_md,상품별 디자인,운영자(CS·상품),디자인 저장 — PSCode·URI·태그·고정 사양(대상+항목+값)·표시여부 등록/수정,build,,,,STD-CAT-033,완료,raw/webadmin/webadmin/config/urls.py:128
+webadmin,상품,design_md,상품별 디자인,운영자(CS·상품),[저장 후 계속 추가] 연속 등록 / 행 [복제]로 유사 디자인 추가,build,,,,STD-ADP-035,완료,raw/webadmin/tools/manual_content.py:780
+webadmin,상품,design_md,상품별 디자인,운영자(CS·상품),디자인 논리삭제(복구 가능),build,,,,STD-ADP-035,완료,raw/webadmin/webadmin/config/urls.py:130
+webadmin,상품,design_md,상품별 디자인,운영자(CS·상품),썸네일 S3 직결 업로드 presign 발급,integrate,s3,webadmin→s3,webadmin,STD-ADP-035,완료,raw/webadmin/webadmin/config/urls.py:126
+webadmin,상품,dim_choices,상품 뷰어 › 차원 후보 Ajax,시스템(무인),상품 한정 차원 후보값(dim_choices) 조회 API,build,,,,STD-ADP-018,완료,raw/webadmin/webadmin/config/urls.py:382
+webadmin,상품,edicus_template_md,상품별 Edicus 템플릿 연결,운영자(CS·상품),판매 완제품 목록 + 등록 행 수(파랑)·편집기 미연결 조합 수(빨강) 배지 검사 표시,build,,,,STD-CAT-035,완료,raw/webadmin/webadmin/config/urls.py:43
+webadmin,상품,edicus_template_md,상품별 Edicus 템플릿 연결,운영자(CS·상품),상품별 사용차원·기존 템플릿 시트 메타 조회,build,,,,STD-CAT-035,완료,raw/webadmin/webadmin/config/urls.py:45
+webadmin,상품,edicus_template_md,상품별 Edicus 템플릿 연결,운영자(CS·상품),사용차원 칩 선택·열 순서 저장,build,,,,STD-CAT-035,완료,raw/webadmin/webadmin/config/urls.py:47
+webadmin,상품,edicus_template_md,상품별 Edicus 템플릿 연결,운영자(CS·상품),조합별 PSCode·템플릿 URI 시트 저장(엑셀 복붙 지원·미사용 행 자동 논리삭제),build,,,,STD-CAT-035,완료,raw/webadmin/webadmin/config/urls.py:49
+webadmin,상품,edicus_template_md,상품별 Edicus 템플릿 연결,운영자(CS·상품),상품의 템플릿 연결 전체 해제,build,,,,STD-CAT-035,완료,raw/webadmin/webadmin/config/urls.py:51
+webadmin,상품,guide_file_md,상품별 작업가이드 파일,운영자(CS·상품),좌 완제품 목록 + 우 가이드 파일 행 목록 조회,build,,,,STD-ADC-014,완료,raw/webadmin/webadmin/config/urls.py:74
+webadmin,상품,guide_file_md,상품별 작업가이드 파일,운영자(CS·상품),활성 가이드 파일 목록(del_yn=N) 조회,build,,,,STD-ADC-014,완료,raw/webadmin/webadmin/config/urls.py:77
+webadmin,상품,guide_file_md,상품별 작업가이드 파일,운영자(CS·상품),표시명·태그·순서·비고 prd_cd 스코프 부분 upsert 저장(원본파일명·키 불변),build,,,,STD-ADC-014,완료,raw/webadmin/webadmin/config/urls.py:83
+webadmin,상품,guide_file_md,상품별 작업가이드 파일,운영자(CS·상품),가이드 파일 논리삭제(S3 객체는 보존),build,,,,STD-ADC-014,완료,raw/webadmin/webadmin/config/urls.py:86
+webadmin,상품,guide_file_md,상품별 작업가이드 파일,운영자(CS·상품),업로드 presign 발급 — 확장자·크기 fail-closed 검증 후 S3 직결 PUT,integrate,s3,webadmin→s3,webadmin,STD-CAT-020,완료,raw/webadmin/webadmin/config/urls.py:80
+webadmin,상품,guide_file_md,상품별 작업가이드 파일,운영자(CS·상품),저장 안 한 업로드 S3 객체 즉시 정리(discard),integrate,s3,webadmin→s3,webadmin,STD-ADC-014,완료,raw/webadmin/webadmin/config/urls.py:89
+webadmin,상품,main_img_md,상품별 메인이미지,운영자(CS·상품),좌 완제품 목록(이미지 수·대표 썸네일·샵바이 동기화 배지) 조회,build,,,,STD-ADP-014,완료,raw/webadmin/webadmin/config/urls.py:93
+webadmin,상품,main_img_md,상품별 메인이미지,운영자(CS·상품),활성 메인이미지 목록(del_yn=N) 조회,build,,,,STD-ADP-014,완료,raw/webadmin/webadmin/config/urls.py:96
+webadmin,상품,main_img_md,상품별 메인이미지,운영자(CS·상품),메인이미지 부분 upsert 저장 + 대표/목록용 서버 권위 결정,build,,,,STD-ADP-014,완료,raw/webadmin/webadmin/config/urls.py:102
+webadmin,상품,main_img_md,상품별 메인이미지,운영자(CS·상품),메인이미지 논리삭제(S3 객체는 보존),build,,,,STD-ADP-014,완료,raw/webadmin/webadmin/config/urls.py:105
+webadmin,상품,main_img_md,상품별 메인이미지,운영자(CS·상품),업로드 presign 발급(확장자·크기 fail-closed · S3 직결 PUT),integrate,s3,webadmin→s3,webadmin,STD-ADP-014,완료,raw/webadmin/webadmin/config/urls.py:99
+webadmin,상품,main_img_md,상품별 메인이미지,운영자(CS·상품),저장 안 한 업로드 S3 객체 즉시 정리(discard),integrate,s3,webadmin→s3,webadmin,STD-ADP-014,완료,raw/webadmin/webadmin/config/urls.py:108
+webadmin,상품,main_img_md,상품별 메인이미지,시스템(무인),저장 직후 샵바이 상품 이미지 통째 교체 동기화(sync_main_images — 외부 URL 방식·실패해도 관리자 저장 비차단),integrate,shopby,webadmin→shopby,webadmin,T2-3,완료,raw/webadmin/webadmin/catalog/shopby_sync.py:118
+webadmin,상품,main_img_md,상품별 메인이미지,운영자(CS·상품),[샵바이 재시도] — 실패/대기 상태 상품의 이미지 동기화 재호출,integrate,shopby,webadmin→shopby,webadmin,T2-3,완료,raw/webadmin/webadmin/config/urls.py:111
+webadmin,상품,option_groups,상품 뷰어 › 옵션그룹,운영자(CS·상품),옵션그룹 목록 조회·추가·인라인 편집·논리삭제,build,,,,STD-ADP-017,완료,raw/webadmin/webadmin/config/urls.py:370
+webadmin,상품,option_items,상품 뷰어 › 옵션항목,운영자(CS·상품),옵션항목 CRUD(차원 참조값 지정 포함),build,,,,STD-ADP-018,완료,raw/webadmin/webadmin/config/urls.py:374
+webadmin,상품,options,상품 뷰어 › 옵션,운영자(CS·상품),옵션 목록 CRUD + ▲▼ 표시순서 재배치 후 저장,build,,,,STD-ADP-017,완료,raw/webadmin/webadmin/config/urls.py:372
+webadmin,상품,product_viewer,상품 뷰어,운영자(CS·상품),좌측 상품 트리 카테고리별 그룹 렌더·상품명/코드 검색 좁히기,build,,,,STD-ADP-010,완료,raw/webadmin/webadmin/config/urls.py:347
+webadmin,상품,product_viewer,상품 뷰어,운영자(CS·상품),선택 상품의 우측 상세(옵션·추가상품 템플릿·제약 전체 구성) 조회,build,,,,STD-ADP-010,완료,raw/webadmin/webadmin/config/urls.py:365
+webadmin,상품,product_viewer,상품 뷰어,운영자(CS·상품),사이즈 섹션 편집 — 규격목록·기본여부·표시순서·사이즈별 최소/최대 수량·증분·셋트 구성원 적용완제품사이즈 짝 저장,build,,,,STD-ADP-001,완료,raw/webadmin/tools/manual_content.py:262
+webadmin,상품,product_viewer,상품 뷰어,운영자(CS·상품),도수/인쇄옵션 섹션 편집 — 사용 인쇄옵션 선택·고객 표시명 지정,build,,,,STD-ADP-004,완료,raw/webadmin/tools/manual_content.py:275
+webadmin,상품,product_viewer,상품 뷰어,운영자(CS·상품),판형 섹션 편집 — 완제품 사이즈별 인쇄판·출력파일/용지유형·기본판형 지정,build,,,,STD-ADP-007,완료,raw/webadmin/tools/manual_content.py:278
+webadmin,상품,product_viewer,상품 뷰어,운영자(CS·상품),자재 섹션 편집 — 자재·용도·기본여부·고객선택여부 지정,build,,,,STD-ADP-002,완료,raw/webadmin/tools/manual_content.py:281
+webadmin,상품,product_viewer,상품 뷰어,운영자(CS·상품),공정 섹션 편집 — 상품별 공정 연결·필수여부·공정별 상세입력 최소/최대 범위,build,,,,STD-ADP-005,완료,raw/webadmin/tools/manual_content.py:284
+webadmin,상품,product_viewer,상품 뷰어,운영자(CS·상품),묶음수 섹션 편집 — 낱장·10매·100매 등 판매 묶음 단위 등록,build,,,,STD-OPT-041,완료,raw/webadmin/tools/manual_content.py:289
+webadmin,상품,product_viewer,상품 뷰어,운영자(CS·상품),추가상품 섹션 편집 — 이 상품에 끼워 팔 추가상품 템플릿 지정,build,,,,STD-ADP-020,완료,raw/webadmin/tools/manual_content.py:290
+webadmin,상품,product_viewer,상품 뷰어,운영자(CS·상품),페이지룰 섹션 편집 — 책자류 인쇄옵션별 페이지 최소·최대·증분,build,,,,STD-OPT-041,완료,raw/webadmin/tools/manual_content.py:291
+webadmin,상품,product_viewer,상품 뷰어,운영자(CS·상품),섹션 편집 팝업 공통 저장 처리(저장 후 상세 자동 새로고침),build,,,,STD-ADP-010,완료,raw/webadmin/webadmin/config/urls.py:367
+webadmin,상품,set_products,셋트상품 관리,운영자(CS·상품),셋트 구성 보유 상품 목록 검색·조회,build,,,,STD-ADP-016,완료,raw/webadmin/webadmin/config/urls.py:350
+webadmin,상품,set_products,셋트상품 관리,운영자(CS·상품),+ 새 셋트 생성 — 상품 선택 드롭다운으로 셋트 대상 지정,build,,,,STD-ADP-016,완료,raw/webadmin/tools/manual_content.py:355
+webadmin,상품,set_products,셋트상품 관리,운영자(CS·상품),셋트 구성원·구성원 수량·묶음 규칙 편집 폼(iframe) 저장,build,,,,STD-ADP-016,완료,raw/webadmin/tools/manual_content.py:358
+webadmin,상품,sku_catalog,추가상품 템플릿 카탈로그,운영자(CS·상품),전체 추가상품 템플릿 카탈로그 조회 + 상품별 편집 진입,build,,,,STD-ADP-012,완료,raw/webadmin/webadmin/config/urls.py:391
+webadmin,상품,sku_list,상품 뷰어 › 추가상품 템플릿(상품별),운영자(CS·상품),상품별 추가상품 템플릿 목록 조회·추가·템플릿명/기준상품/표시순서 인라인 편집,build,,,,STD-ADP-020,완료,raw/webadmin/webadmin/config/urls.py:377
+webadmin,상품,sku_selections,상품 뷰어 › 템플릿 선택값,운영자(CS·상품),템플릿에 고정된 옵션 선택값 드릴다운 조회·편집,build,,,,STD-ADP-020,완료,raw/webadmin/webadmin/config/urls.py:379
+webadmin,상품,start_price_md,상품별 기본사양가,운영자(CS·상품),상태 필터(전체/자동/수기/없음)·상품명 검색 목록 조회,build,,,,STD-ADP-033,완료,raw/webadmin/webadmin/config/urls.py:115
+webadmin,상품,start_price_md,상품별 기본사양가,운영자(CS·상품),자동 계산 실패 사유 표시(기본값 미지정·가격소스 없음/0원·판수 환산 불가),build,,,,STD-ADP-033,완료,raw/webadmin/tools/manual_content.py:716
+webadmin,상품,start_price_md,상품별 기본사양가,운영자(CS·상품),수기 금액·기준수량 저장 / 금액 비우고 저장해 수기 해제,build,,,,STD-CAT-039,완료,raw/webadmin/webadmin/config/urls.py:117
+webadmin,상품,start_price_md,상품별 기본사양가,운영자(CS·상품),행별 [지금 다시 계산] — 그 상품만 기본사양가 즉시 재계산,build,,,,STD-ADP-033,완료,raw/webadmin/webadmin/config/urls.py:119
+webadmin,상품,tmpl_combo_md,구성템플릿 조합 (내부 대조표),운영자(CS·상품),좌측 상품 목록 검색·선택,build,,,,STD-ADP-018,완료,raw/webadmin/webadmin/config/urls.py:54
+webadmin,상품,tmpl_combo_md,구성템플릿 조합 (내부 대조표),운영자(CS·상품),상품별 조합 메타(차원·기존 시트) 조회,build,,,,STD-ADP-018,완료,raw/webadmin/webadmin/config/urls.py:56
+webadmin,상품,tmpl_combo_md,구성템플릿 조합 (내부 대조표),운영자(CS·상품),조합 차원 선택(칩) 저장,build,,,,STD-ADP-018,완료,raw/webadmin/webadmin/config/urls.py:58
+webadmin,상품,tmpl_combo_md,구성템플릿 조합 (내부 대조표),운영자(CS·상품),조합 생성/갱신 — 선택 차원의 가능 조합 전개(기존 입력 유지),build,,,,STD-ADP-018,완료,raw/webadmin/tools/manual_content.py:389
+webadmin,상품,tmpl_combo_md,구성템플릿 조합 (내부 대조표),운영자(CS·상품),조합별 자재 지정 시트 전체 저장(빠진 행은 삭제 처리),build,,,,STD-ADP-018,완료,raw/webadmin/webadmin/config/urls.py:60
+webadmin,상품,tmpl_combo_regs,구성템플릿 조합 › 등록(차원 설정 벌),운영자(CS·상품),등록 벌 목록 조회·추가(seq 단위로 자재별 결정 차원 분리),build,,,,STD-ADP-018,완료,raw/webadmin/webadmin/config/urls.py:65
+webadmin,상품,tmpl_combo_regs,구성템플릿 조합 › 등록(차원 설정 벌),운영자(CS·상품),등록 벌 이름변경·삭제,build,,,,STD-ADP-018,완료,raw/webadmin/webadmin/config/urls.py:69
+webadmin,상품,tprdproducts_admin,상품정보 (표준 목록·편집),운영자(CS·상품),상품 마스터 표준 목록·검색·정렬·필터·추가·편집·논리삭제,build,,,,STD-ADP-010,완료,raw/webadmin/tools/manual_content.py:811
+webadmin,상품,tprdproducts_admin,상품정보 (표준 목록·편집),운영자(CS·상품),상품 스위치 설정 — 비규격여부·파일업로드여부·편집기여부·게시여부,build,,,,STD-ADP-014,완료,raw/webadmin/tools/manual_content.py:829
+webadmin,상품,tprdproducts_admin,상품정보 (표준 목록·편집),운영자(CS·상품),상품-카테고리 귀속 편집(다중분류·주카테고리여부),build,,,,STD-ADP-013,완료,raw/webadmin/tools/manual_content.py:97
+webadmin,상품,tprdproducts_admin,상품정보 (표준 목록·편집),시스템(무인),저장 커밋 후 샵바이 전시(front display) 동기화 — on_commit 으로 롤백 저장은 미전송,integrate,shopby,webadmin→shopby,webadmin,T2-3,완료,raw/webadmin/webadmin/catalog/admin.py:2301
+webadmin,상품,tprdproducts_admin,상품정보 (표준 목록·편집),운영자(CS·상품),목록 「자사몰」 전시 동기화 배지 표시 + 동기화 상태 필터,build,,,,T2-3,완료,raw/webadmin/webadmin/catalog/admin.py:690
+webadmin,상품,tprdtemplates_admin,추가상품 템플릿 (표준 목록),운영자(CS·상품),끼워팔기용 추가상품 템플릿 표준 목록·편집(선택값 인라인·논리삭제),build,,,,STD-ADP-020,완료,raw/webadmin/tools/manual_content.py:813
+webadmin,상품,validate_preview,상품 뷰어 › 검증 미리보기,운영자(CS·상품),입력 조합 즉시 검증 미리보기(이 조합 검사),build,,,,STD-ADP-022,완료,raw/webadmin/webadmin/config/urls.py:387
+webadmin,연동,shopby_webhook,샵바이 웹훅 수신,시스템(무인),결제완료·취소·배송지변경 웹훅 수신 — 경로 마지막 조각이 비밀키(불일치 404) · 원문 저장 후 즉시 200,integrate,shopby,shopby→webadmin,webadmin,STD-PAY-031,완료,raw/webadmin/webadmin/config/urls.py:273
+webadmin,연동,wapi_cart_add,장바구니 항목 보관소,시스템(무인),장바구니 항목 등록 — 금액·사양·원고 파일 키 payload 보관(X-Huni-Server-Key 필수·CORS 미개방),integrate,huni-mall,huni-mall→webadmin,webadmin,STD-SYS-045,완료,raw/webadmin/webadmin/config/urls.py:262
+webadmin,연동,wapi_cart_fetch,장바구니 항목 보관소,시스템(무인),보관된 장바구니 항목 일괄 조회(서버-투-서버),integrate,huni-mall,huni-mall→webadmin,webadmin,STD-SYS-045,완료,raw/webadmin/webadmin/config/urls.py:263
+webadmin,연동,wapi_cart_item,장바구니 항목 보관소,시스템(무인),항목 단건 PUT(갱신)·DELETE(정리),integrate,huni-mall,huni-mall→webadmin,webadmin,STD-SYS-045,완료,raw/webadmin/webadmin/config/urls.py:265
+webadmin,연동,wapi_design_image,디자인 썸네일 공개 서빙,시스템(무인),디자인 썸네일 이미지 공개 서빙,integrate,huni-mall,webadmin→huni-mall,webadmin,STD-CAT-036,완료,raw/webadmin/webadmin/config/urls.py:290
+webadmin,연동,wapi_designs,디자인 목록 API,시스템(무인),상품별 디자인 목록 제공(자사몰 디자인 고르기 페이지 데이터원),integrate,huni-mall,webadmin→huni-mall,webadmin,STD-CAT-036,완료,raw/webadmin/webadmin/config/urls.py:288
+webadmin,연동,wapi_guides,가이드 파일 조회 API,시스템(무인),상품별 작업가이드 파일 목록 제공(자사몰 웹서버 전용 · site_key + gd: rate 버킷),integrate,huni-mall,webadmin→huni-mall,webadmin,STD-CAT-020,완료,raw/webadmin/webadmin/config/urls.py:281
+webadmin,연동,wapi_main_image,메인이미지 공개 서빙,시스템(무인),활성 행 file_key 정확 일치만 이미지 서빙(키 추측 스캔 차단 · site_key 게이트 없음),integrate,huni-mall,webadmin→huni-mall,webadmin,STD-ADP-014,완료,raw/webadmin/webadmin/config/urls.py:284
+webadmin,연동,wapi_main_images,메인이미지 조회 API,시스템(무인),상품별 메인이미지 목록 제공(자사몰 웹서버 전용 · site_key + mi: rate 버킷),integrate,huni-mall,webadmin→huni-mall,webadmin,STD-ADP-014,완료,raw/webadmin/webadmin/config/urls.py:286
+webadmin,연동,wapi_order_register,주문 등록 수신 API,시스템(무인),쇼핑몰이 주문 생성 직후 호출 — 사양·원고를 주문번호에 묶어 저장(서버-투-서버 · site_key),integrate,huni-mall,huni-mall→webadmin,webadmin,STD-PAY-031,완료,raw/webadmin/webadmin/config/urls.py:268
+webadmin,연동,wapi_swatch_image,스와치 이미지 공개 서빙,시스템(무인),공정/자재 마스터 스와치 이미지 공개 서빙(site_key 게이트 없음),integrate,huni-mall,webadmin→huni-mall,webadmin,STD-ADP-002,완료,raw/webadmin/webadmin/config/urls.py:278
+webadmin,인증 및 권한,auth_user_admin,사용자,관리자,관리자 계정 등록·비밀번호·권한(그룹·개별 permission) 관리,build,,,,NEW,완료,raw/webadmin/webadmin/catalog/admin.py:2929 || plan_row_id=NEW 사유: 계획행에 webadmin 계정·권한 관리 항목 없음
+widget,SDK·임베드,sdk_api,위젯 SDK API,시스템(무인),mount·destroy·getState·getSummary·setSelection·price·validate·submit·canOrder·getStatus·setNotice·on·off 제공,build,,,,STD-OPT-001,완료,raw/webadmin/webadmin/catalog/static/catalog/widget.js:1036 HuniWidgetSDK.prototype.mount ~ raw/webadmin/webadmin/catalog/static/catalog/widget.js:1112
+widget,SDK·임베드,sdk_cart_guide,장바구니 연동 가이드(/sdk/cart-guide/),관리자,쇼핑몰 개발 담당자용 장바구니 연동 공개 가이드 서빙,build,,,,STD-SYS-045,완료,raw/webadmin/webadmin/config/urls.py:246 cart_guide
+widget,SDK·임베드,sdk_demo,SDK 데모(/sdk/demo/),관리자,게시 위젯 실임베드 데모 서빙(site_key 게이트 포함·우회 없음),build,,,,NEW,완료,raw/webadmin/webadmin/config/urls.py:243 sdk_demo · 대응 런웨이 행 없음
+widget,SDK·임베드,sdk_embed,임베드 운영 요건,관리자,허용 사이트(도메인 + 사이트 키)로 등록된 도메인에서만 위젯 API 응답,build,,,,NEW,완료,raw/webadmin/tools/widget_manual_content.py:968 EMBED_NOTES 「사이트 키」 · 대응 런웨이 행 없음
+widget,SDK·임베드,sdk_embed,임베드 운영 요건,관리자,오픈 전 과업 — 신규몰 도메인을 허용 사이트(도메인 + 사이트 키)에 등록,config,,,,NEW,미확인,raw/webadmin/tools/widget_manual_content.py:968 EMBED_NOTES 「새 도메인에 붙이려면 허용 사이트에 도메인을 먼저 등록해야 합니다」 — ⓑ 오픈 전 필수 세팅 근거 · 등록 여부 미실측
+widget,SDK·임베드,sdk_guide,SDK 개발자 가이드(/sdk/guide/),관리자,외부 파트너 개발자용 공개 임베드 가이드 서빙(docs/widget-sdk-guide.html),build,,,,NEW,완료,raw/webadmin/webadmin/config/urls.py:242 sdk_guide · 대응 런웨이 행 없음
+widget,위젯 API,wapi_catalog,GET /api/w/v1/catalog,시스템(무인),게시 위젯 카탈로그 + 상품별 시작가 조회,integrate,huni-mall,huni-mall→webadmin,webadmin,STD-CAT-043,완료,raw/webadmin/webadmin/config/urls.py:248 · raw/webadmin/webadmin/catalog/widget_api.py:5841
+widget,위젯 API,wapi_editor_resolve,POST /api/w/v1/editor/resolve,시스템(무인),옵션조합 → Edicus PSCode·템플릿 URI 해석,integrate,widget,widget→webadmin,webadmin,STD-ART-030,완료,raw/webadmin/webadmin/config/urls.py:275 · raw/webadmin/webadmin/catalog/static/catalog/widget.js:392
+widget,위젯 API,wapi_editor_token,POST /api/w/v1/editor/token,시스템(무인),Edicus 사용자 토큰 대리 발급,integrate,widget,widget→webadmin,webadmin,STD-ART-021,완료,raw/webadmin/webadmin/config/urls.py:276 · raw/webadmin/webadmin/catalog/static/catalog/widget.js:584
+widget,위젯 API,wapi_handoff,POST /api/w/v1/handoff,시스템(무인),재계산 + HMAC 서명 토큰 발급(주문 인계),integrate,widget,widget→webadmin,webadmin,STD-PAY-031,완료,raw/webadmin/webadmin/config/urls.py:255 · raw/webadmin/webadmin/catalog/widget_api.py:3416
+widget,위젯 API,wapi_handoff_requote,POST /api/w/v1/handoff/requote,시스템(무인),장바구니 재견적(결제 직전 갱신·수량 변경),integrate,huni-mall,huni-mall→webadmin,webadmin,STD-SYS-045,완료,raw/webadmin/webadmin/config/urls.py:257 · raw/webadmin/webadmin/catalog/widget_api.py:5011
+widget,위젯 API,wapi_handoff_verify,POST /api/w/v1/handoff/verify,시스템(무인),쇼핑몰 서버가 서명 토큰·금액 검증(서버-투-서버),integrate,huni-mall,huni-mall→webadmin,webadmin,STD-PAY-031,완료,raw/webadmin/webadmin/config/urls.py:256 · raw/webadmin/webadmin/catalog/widget_api.py:183
+widget,위젯 API,wapi_multipart,POST /api/w/v1/upload/multipart/<action>,시스템(무인),멀티파트 업로드 create|sign|complete|abort,integrate,widget,widget→webadmin,webadmin,STD-ART-002,완료,raw/webadmin/webadmin/config/urls.py:253 · raw/webadmin/webadmin/catalog/static/catalog/widget.js:819
+widget,위젯 API,wapi_presign,POST /api/w/v1/upload/presign,시스템(무인),원고 단일 업로드 presign 발급,integrate,widget,widget→webadmin,webadmin,STD-ART-001,완료,raw/webadmin/webadmin/config/urls.py:251 · raw/webadmin/webadmin/catalog/static/catalog/widget.js:799
+widget,위젯 API,wapi_price,POST /api/w/v1/price,시스템(무인),서버 권위 가격 계산(구성요소·셋트 구성원·할인 단계 반환),integrate,widget,widget→webadmin,webadmin,STD-OPT-044,완료,raw/webadmin/webadmin/config/urls.py:249 · raw/webadmin/webadmin/catalog/static/catalog/widget.js:682
+widget,위젯 API,wapi_validate,POST /api/w/v1/validate,시스템(무인),주문 전 사양 검증,integrate,widget,widget→webadmin,webadmin,T2-4,완료,raw/webadmin/webadmin/config/urls.py:250 · raw/webadmin/webadmin/catalog/static/catalog/widget.js:924
+widget,위젯 API,wapi_widget,GET /api/w/v1/widgets/<wgt_cd>,시스템(무인),게시 위젯 설정·메타 조회(site_key 게이트),integrate,widget,widget→webadmin,webadmin,STD-OPT-002,완료,raw/webadmin/webadmin/config/urls.py:247 · raw/webadmin/webadmin/catalog/static/catalog/widget.js:145 클라이언트 호출 확인
+widget,위젯 런타임(고객),rt_constraint,제약 평가,고객,옵션 제약 규칙 평가로 선택지 비활성/숨김 및 충돌 선택 자동 해제 안내,build,,,,STD-OPT-037,완료,raw/webadmin/webadmin/catalog/static/catalog/widget_renderer.js:2186 · raw/webadmin/tools/widget_manual_content.py:873
+widget,위젯 런타임(고객),rt_cta,담기 CTA,고객,장바구니 담기 버튼 렌더 및 미충족 사유 표시,build,,,,STD-OPT-007,완료,raw/webadmin/webadmin/catalog/static/catalog/widget_renderer.js:5936 pv-cta-btn · raw/webadmin/webadmin/catalog/static/catalog/widget_renderer.js:5944 renderCanOrder
+widget,위젯 런타임(고객),rt_design,디자인 상품 진입,고객,디자인 코드로 고정 사양 잠금 + 디자인 배너 표시,build,,,,STD-CAT-033,완료,raw/webadmin/webadmin/catalog/static/catalog/widget.js:171 fetch /api/w/v1/designs · raw/webadmin/webadmin/catalog/static/catalog/widget.js:195 _applyDesignLock · raw/webadmin/webadmin/catalog/static/catalog/widget.js:225 _designBanner
+widget,위젯 런타임(고객),rt_editor,편집기 진입,고객,편집기 버튼 클릭 시 선택 옵션조합 → PSCode·템플릿 URI 해석 요청,integrate,webadmin,widget→webadmin,widget,STD-ART-030,완료,raw/webadmin/webadmin/catalog/static/catalog/widget.js:392 post /api/w/v1/editor/resolve
+widget,위젯 런타임(고객),rt_editor,편집기 오버레이,고객,Edicus 편집기 SDK 로드 후 오버레이 기동 및 save/close/error 수신,integrate,edicus,widget→edicus,widget,STD-ART-021,완료,raw/webadmin/webadmin/catalog/static/catalog/widget.js:414 _ensureEditorSdk(huni_editor_sdk.js) · raw/webadmin/webadmin/catalog/static/catalog/widget.js:593 · raw/webadmin/webadmin/catalog/static/catalog/widget.js:613 sdk.on(save) — 브리지 코드가 widget.js 안에 있어 owner_side=widget
+widget,위젯 런타임(고객),rt_editor,편집기 토큰,고객,편집기 사용자 토큰 대리 발급 요청(비회원은 게스트 토큰),integrate,webadmin,widget→webadmin,widget,STD-ART-021,완료,raw/webadmin/webadmin/catalog/static/catalog/widget.js:584 post /api/w/v1/editor/token · raw/webadmin/webadmin/catalog/static/catalog/widget.js:449 _guestToken
+widget,위젯 런타임(고객),rt_editor,편집기 결과 수용,고객,setEditorResult 로 편집 산출물(docInfo)을 해당 항목에 반영,build,,,,STD-ART-024,완료,raw/webadmin/webadmin/catalog/static/catalog/widget.js:331 setEditorResult · raw/webadmin/webadmin/catalog/static/catalog/widget.js:349 summarizeDocInfo
+widget,위젯 런타임(고객),rt_events,이벤트 방출,고객,ready·change·priced·state·submit 커스텀 이벤트로 임베드 페이지에 상태 전달,build,,,,NEW,완료,raw/webadmin/webadmin/catalog/static/catalog/widget.js:125 _emit · raw/webadmin/webadmin/catalog/static/catalog/widget.js:871 _emitState · 대응 런웨이 행 없음
+widget,위젯 런타임(고객),rt_guard,이탈 방지,고객,편집 중 페이지 이탈 경고 가드,build,,,,NEW,완료,raw/webadmin/webadmin/catalog/static/catalog/widget.js:100 _attachUnloadGuard · 대응 런웨이 행 없음
+widget,위젯 런타임(고객),rt_guest,비회원 토큰,고객,게스트 토큰 발급·로컬 보관(레거시 guest id 승계),build,,,,NEW,완료,raw/webadmin/webadmin/catalog/static/catalog/widget.js:446 _guestTokenKey · raw/webadmin/webadmin/catalog/static/catalog/widget.js:465 _legacyGuestId · 대응 런웨이 행 없음
+widget,위젯 런타임(고객),rt_mount,위젯 런타임 마운트,고객,커스텀 엘리먼트 마운트 + 의존 스크립트 지연 로드(json-logic·constraint_engine·spine_calc·cover_rule·renderer),build,,,,STD-OPT-001,완료,raw/webadmin/webadmin/catalog/static/catalog/widget.js:48 ensureDeps
+widget,위젯 런타임(고객),rt_mount,위젯 런타임 마운트,고객,site_key 로 게시 위젯 설정 조회 후 렌더,integrate,webadmin,widget→webadmin,widget,STD-OPT-002,완료,raw/webadmin/webadmin/catalog/static/catalog/widget.js:145 fetch /api/w/v1/widgets/<wgt_cd> · 런타임 코드는 webadmin static 에 배포되나 호출 주체는 위젯이라 owner_side=widget
+widget,위젯 런타임(고객),rt_price,실시간 견적,고객,선택 변경 시 서버 가격 재계산 요청,integrate,webadmin,widget→webadmin,widget,STD-OPT-043,완료,raw/webadmin/webadmin/catalog/static/catalog/widget.js:682 post /api/w/v1/price
+widget,위젯 런타임(고객),rt_price,가격 표시,고객,구성요소별 금액 박스 렌더(셋트는 구성원별 분해),build,,,,STD-OPT-046,완료,raw/webadmin/webadmin/catalog/static/catalog/widget_renderer.js:6411 renderPriceBoxes
+widget,위젯 런타임(고객),rt_price,가격 표시,고객,수량 구간 할인 박스 렌더,build,,,,STD-OPT-047,완료,raw/webadmin/webadmin/catalog/static/catalog/widget_renderer.js:6513 renderTierBoxes
+widget,위젯 런타임(고객),rt_render,옵션 렌더,고객,20종 소스유형(차원·옵션그룹·수량·추가상품·패널·가격·파일·편집기·비규격·피커·후가공·건수·제목·머리말·부속색상·책등표시 등) 다형 렌더,build,,,,STD-OPT-003,완료,raw/webadmin/webadmin/catalog/static/catalog/widget_renderer.js:28 SRC 맵 · raw/webadmin/webadmin/catalog/static/catalog/widget_renderer.js:6642 render()
+widget,위젯 런타임(고객),rt_render,옵션 렌더,고객,판매 불가 후보 사전 제거 — 화면에는 보이는데 담기에서 422 나는 비대칭 차단,build,,,,STD-OPT-004,완료,raw/webadmin/webadmin/catalog/static/catalog/widget_renderer.js:986 · raw/webadmin/webadmin/catalog/static/catalog/widget_renderer.js:3017
+widget,위젯 런타임(고객),rt_submit,장바구니 담기,고객,canOrder → validate → handoff 서명 토큰 발급 → huni:submit 이벤트 방출,integrate,huni-mall,widget→huni-mall,widget,STD-PAY-031,완료,raw/webadmin/webadmin/catalog/static/catalog/widget.js:953 submit · raw/webadmin/webadmin/catalog/static/catalog/widget.js:1015 post /api/w/v1/handoff
+widget,위젯 런타임(고객),rt_theme,테마 적용,고객,CSS 변수(--hw-*)로 임베드 사이트 색·글꼴·간격 반영,build,,,,NEW,완료,raw/webadmin/tools/widget_manual_content.py:972 EMBED_NOTES · 대응 런웨이 행 없음
+widget,위젯 런타임(고객),rt_upload,원고 업로드,고객,단일 파일 presign 발급 후 직접 PUT 업로드 및 진행률 보고,integrate,webadmin,widget→webadmin,widget,STD-ART-001,완료,raw/webadmin/webadmin/catalog/static/catalog/widget.js:799 _uploadSingle → /api/w/v1/upload/presign
+widget,위젯 런타임(고객),rt_upload,원고 업로드,고객,100MB 이상 멀티파트 업로드(create→sign→complete·실패 시 abort),integrate,webadmin,widget→webadmin,widget,STD-ART-002,완료,raw/webadmin/webadmin/catalog/static/catalog/widget.js:819 _uploadMultipart
+widget,위젯 런타임(고객),rt_upload,원고 업로드,고객,건수(디자인 N종)별 파일 순차 업로드·실패 항목 표시,build,,,,STD-ART-004,완료,raw/webadmin/webadmin/catalog/static/catalog/widget.js:773 _upload — descs.reduce 순차 체인
+widget,위젯 런타임(고객),rt_validate,주문 전 검증,고객,담기 전 서버 validate 호출(옵션·셋트 본문·디자인을 handoff 와 같은 자리로 전송),integrate,webadmin,widget→webadmin,widget,T2-4,완료,raw/webadmin/webadmin/catalog/static/catalog/widget.js:924 validate → /api/w/v1/validate
+widget,위젯빌더(운영자),builder_io,위젯 작업본 로드·저장,운영자(CS·상품),위젯 항목 전체 로드 및 편집 0.6초 뒤 자동저장,build,,,,NEW,완료,raw/webadmin/webadmin/config/urls.py:192 widget_load · raw/webadmin/webadmin/config/urls.py:194 widget_save · raw/webadmin/tools/widget_manual_content.py:882 PUBLISH_NOTES
+widget,위젯빌더(운영자),builder_io,위젯 작업본 로드·저장,운영자(CS·상품),동시 편집 충돌 감지 시 자동저장 중단·서버 최신본 재로드 / 브라우저 크래시 복구본 이어쓰기,build,,,,NEW,완료,raw/webadmin/tools/widget_manual_content.py:957 PUBLISH_NOTES 「동시 편집 · 크래시 복구」
+widget,위젯빌더(운영자),builder_templates,템플릿에서 시작,운영자(CS·상품),새 위젯 생성 시 템플릿 목록에서 골라 항목 전체(배치·속성·기본값) 복제,build,,,,NEW,완료,raw/webadmin/webadmin/config/urls.py:236 widget_templates · raw/webadmin/tools/widget_manual_content.py:918 PUBLISH_NOTES 「템플릿」
+widget,위젯빌더(운영자),builder_usage,위젯 사용 현황,운영자(CS·상품),삭제 전 사용 현황 조회(게시 여부·게시 버전 수·허용 사이트·최근 사용),build,,,,NEW,완료,raw/webadmin/webadmin/config/urls.py:200 widget_usage · raw/webadmin/tools/widget_manual_content.py:953 PUBLISH_NOTES 「위젯 삭제」
+widget,위젯빌더(운영자),comp_addon,속성 — 추가상품(체크박스),운영자(CS·상품),추가상품 체크박스 배치,build,,,,STD-OPT-034,완료,raw/webadmin/tools/widget_manual_content.py:561
+widget,위젯빌더(운영자),comp_casecnt,속성 — 건수,운영자(CS·상품),사양·수량은 같고 원고만 다른 반복 건수 입력 배치,build,,,,STD-OPT-018,완료,raw/webadmin/tools/widget_manual_content.py:705 · raw/webadmin/tools/widget_manual_content.py:429
+widget,위젯빌더(운영자),comp_common,공통 속성,운영자(CS·상품),라벨 텍스트·라벨 표시·컨트롤 유형·컨트롤 숨김·제약 위반 시(비활성/숨김)·너비·여백·버튼 열 수·props JSON 지정,build,,,,STD-OPT-003,완료,raw/webadmin/tools/widget_manual_content.py:783 COMMON_PROPS
+widget,위젯빌더(운영자),comp_common,공통 속성,운영자(CS·상품),항목 기본값 지정(비우면 상품설정 기본여부를 따름),build,,,,T2-2,완료,raw/webadmin/tools/widget_manual_content.py:793 COMMON_PROPS 「기본값」
+widget,위젯빌더(운영자),comp_common,공통 속성,운영자(CS·상품),오픈 전 과업 — 게시 위젯 전수 기본값 미지정 점검·지정 후 재게시,config,,,,T2-2,진행,raw/webadmin/tools/widget_manual_content.py:793 COMMON_PROPS 「기본값」 · _workspace/huni-launch-runway/08_system-screen/t49/_planrows-A.csv:3 T2-2 「위젯 기본값 미지정 교정·재게시」(부분) — ⓐ 원장 대응
+widget,위젯빌더(운영자),comp_common,컨트롤 유형,운영자(CS·상품),버튼그룹·셀렉트박스·라디오그룹·토글·텍스트필드·수량스텝퍼·이미지 스와치·체크박스그룹·버튼그룹(다중)·라벨 중 선택,build,,,,STD-OPT-003,완료,raw/webadmin/tools/widget_manual_content.py:814 CTRL_TYPES
+widget,위젯빌더(운영자),comp_dim,속성 — 차원,운영자(CS·상품),사이즈·자재·인쇄옵션 차원의 컨트롤·치수 표시·비규격 직접입력·스와치 모양 지정,build,,,,STD-OPT-014,완료,raw/webadmin/tools/widget_manual_content.py:514 COMPONENTS 차원 · raw/webadmin/tools/widget_manual_content.py:411
+widget,위젯빌더(운영자),comp_divider,속성 — 가로선,운영자(CS·상품),구분선 배치,build,,,,NEW,완료,raw/webadmin/tools/widget_manual_content.py:662 · 구조 요소 단위 런웨이 행 없음
+widget,위젯빌더(운영자),comp_divider,속성 — 빈 공백,운영자(CS·상품),여백 배치(삭제만 가능),build,,,,NEW,완료,raw/webadmin/tools/widget_manual_content.py:616 · 구조 요소 단위 런웨이 행 없음
+widget,위젯빌더(운영자),comp_editor,속성 — 편집기 버튼,운영자(CS·상품),Edicus 편집기 진입 버튼 속성 지정(상품 편집기여부=Y 필요),build,,,,STD-ART-021,완료,raw/webadmin/tools/widget_manual_content.py:604 · raw/webadmin/tools/widget_manual_content.py:462
+widget,위젯빌더(운영자),comp_file,속성 — 파일 업로드,운영자(CS·상품),원고 접수 규칙(형식·개수·용량·필수 여부) 지정,build,,,,STD-ART-001,완료,raw/webadmin/tools/widget_manual_content.py:591 · raw/webadmin/tools/widget_manual_content.py:426
+widget,위젯빌더(운영자),comp_head,속성 — 머리말,운영자(CS·상품),구역 섹션 헤더 라벨·아이콘 지정(셋트는 비우면 역할명 표기),build,,,,NEW,완료,raw/webadmin/tools/widget_manual_content.py:681 · 대응 런웨이 행 없음
+widget,위젯빌더(운영자),comp_member,속성 — 구성원 스코프,운영자(CS·상품),셋트상품 입력의 본품(공통)/구성원(표지·내지) 귀속 지정,build,,,,STD-OPT-020,완료,raw/webadmin/tools/widget_manual_content.py:465 · raw/webadmin/tools/widget_manual_content.py:804 COMMON_PROPS 구성원 스코프
+widget,위젯빌더(운영자),comp_nonspec,속성 — 비규격 치수,운영자(CS·상품),가로·세로 직접입력 범위 지정(상품 비규격여부=Y 필요),build,,,,STD-OPT-015,완료,raw/webadmin/tools/widget_manual_content.py:621 · raw/webadmin/tools/widget_manual_content.py:453
+widget,위젯빌더(운영자),comp_nonspec,속성 — 추가상품 피커,운영자(CS·상품),끼워팔기 목록·개당 단가 표시 지정,build,,,,STD-OPT-036,완료,raw/webadmin/tools/widget_manual_content.py:630 · raw/webadmin/tools/widget_manual_content.py:455
+widget,위젯빌더(운영자),comp_optgrp,속성 — 옵션그룹,운영자(CS·상품),상품 옵션그룹을 선택지로 배치(단일/다중은 옵션그룹 마스터가 결정),build,,,,STD-ADP-017,완료,raw/webadmin/tools/widget_manual_content.py:525 · raw/webadmin/tools/widget_manual_content.py:414
+widget,위젯빌더(운영자),comp_panel,속성 — 패널,운영자(CS·상품),접기 그룹 생성·제목 지정,build,,,,STD-OPT-006,완료,raw/webadmin/tools/widget_manual_content.py:567 · raw/webadmin/tools/widget_manual_content.py:432
+widget,위젯빌더(운영자),comp_panel,속성 — 라벨,운영자(CS·상품),고정 라벨 텍스트 배치,build,,,,NEW,완료,raw/webadmin/tools/widget_manual_content.py:573 · 구조 요소 단위 런웨이 행 없음
+widget,위젯빌더(운영자),comp_panel,속성 — 안내문,운영자(CS·상품),안내 문구 블록 배치,build,,,,NEW,완료,raw/webadmin/tools/widget_manual_content.py:579 · 구조 요소 단위 런웨이 행 없음
+widget,위젯빌더(운영자),comp_price,속성 — 가격 요약,운영자(CS·상품),합계만 표시할지 구성요소별로 펼칠지 지정,build,,,,STD-OPT-046,완료,raw/webadmin/tools/widget_manual_content.py:584 · raw/webadmin/tools/widget_manual_content.py:423
+widget,위젯빌더(운영자),comp_procsel,속성 — 후가공(공정선택),운영자(CS·상품),표시 방식·표시 공정·기본 선택·적용면(공통/앞면/뒷면) 지정,build,,,,NEW,완료,raw/webadmin/tools/widget_manual_content.py:639 · raw/webadmin/tools/widget_manual_content.py:420 · 개별 공정 행(STD-OPT-024~033)에 분산돼 빌더 속성 단위 행 없음
+widget,위젯빌더(운영자),comp_qty,속성 — 수량,운영자(CS·상품),주문 수량 입력 방식·수량 구간할인 표시 여부 지정,build,,,,STD-OPT-017,완료,raw/webadmin/tools/widget_manual_content.py:537 · raw/webadmin/tools/widget_manual_content.py:417
+widget,위젯빌더(운영자),comp_spineclr,속성 — 부속 색상,운영자(CS·상품),링 등 부속 색상 선택 배치,build,,,,STD-OPT-025,완료,raw/webadmin/tools/widget_manual_content.py:718
+widget,위젯빌더(운영자),comp_spinedisp,속성 — 책등/표지 사이즈,운영자(CS·상품),작업 사이즈(여백·책등 포함) 한 줄 표시 배치,build,,,,STD-OPT-016,완료,raw/webadmin/tools/widget_manual_content.py:735
+widget,위젯빌더(운영자),comp_title,속성 — 제작물 제목,운영자(CS·상품),주문서에 실릴 제목을 고객이 적는 칸 배치,build,,,,NEW,완료,raw/webadmin/tools/widget_manual_content.py:672 · 대응 런웨이 행 없음
+widget,위젯빌더(운영자),ui_canvas,캔버스 편집,운영자(CS·상품),행과 행 사이에 드롭 = 새 줄 배치,build,,,,NEW,완료,raw/webadmin/tools/widget_manual_content.py:861 CANVAS_OPS
+widget,위젯빌더(운영자),ui_canvas,캔버스 편집,운영자(CS·상품),항목 오른쪽에 드롭 = 같은 줄 2열 배치(한 행 최대 2열),build,,,,NEW,완료,raw/webadmin/tools/widget_manual_content.py:864
+widget,위젯빌더(운영자),ui_canvas,캔버스 편집,운영자(CS·상품),패널 안에 드롭 = 접기 그룹 자식으로 편입(패널 중첩 불가),build,,,,NEW,완료,raw/webadmin/tools/widget_manual_content.py:866
+widget,위젯빌더(운영자),ui_canvas,캔버스 편집,운영자(CS·상품),옆칸에 빈 공백을 놓아 왼쪽 입력을 반 폭으로 만들기,build,,,,NEW,완료,raw/webadmin/tools/widget_manual_content.py:865
+widget,위젯빌더(운영자),ui_canvas,캔버스 편집,운영자(CS·상품),카드 ↑ ↓ 버튼으로 순서 한 칸씩 이동,build,,,,NEW,완료,raw/webadmin/tools/widget_manual_content.py:245 · raw/webadmin/tools/widget_manual_content.py:863
+widget,위젯빌더(운영자),ui_canvas,캔버스 편집,운영자(CS·상품),카드 드래그로 순서 이동,build,,,,NEW,완료,raw/webadmin/tools/widget_manual_content.py:863
+widget,위젯빌더(운영자),ui_canvas,캔버스 편집,운영자(CS·상품),카드 × 또는 속성창 [항목 삭제]로 항목 제거(확인 1회),build,,,,NEW,완료,raw/webadmin/tools/widget_manual_content.py:246 · raw/webadmin/tools/widget_manual_content.py:867
+widget,위젯빌더(운영자),ui_canvas,캔버스 편집,운영자(CS·상품),카드 클릭 = 선택(속성창 열림) + 나란히 모드에서 미리보기 해당 항목 강조,build,,,,NEW,완료,raw/webadmin/tools/widget_manual_content.py:243 · raw/webadmin/tools/widget_manual_content.py:869
+widget,위젯빌더(운영자),ui_canvas,캔버스 편집,운영자(CS·상품),배치 순서를 제약 우선순위로 해석(위·왼쪽 항목이 이기고 아래쪽 충돌 선택이 자동 해제),build,,,,STD-OPT-037,완료,raw/webadmin/tools/widget_manual_content.py:873 CANVAS_OPS 「배치 순서 = 제약 우선순위」
+widget,위젯빌더(운영자),ui_canvas,캔버스 편집,운영자(CS·상품),항목 카드 상태 배지 표시(삭제됨·본품스코프페이지수·기본값삭제됨·기본값무효·유형바뀜·공정겹침·적용면어긋남·사용안함N·숨김),build,,,,NEW,완료,raw/webadmin/tools/widget_manual_content.py:831 BADGES
+widget,위젯빌더(운영자),ui_layout,화면 구성,운영자(CS·상품),상품 콤보에서 위젯 만들 상품 검색·선택(위젯 개수·최근 작업일 표시),build,,,,NEW,완료,raw/webadmin/tools/widget_manual_content.py:190 · 빌더 운영 도구 자체를 가리키는 런웨이 행 없음
+widget,위젯빌더(운영자),ui_layout,화면 구성,운영자(CS·상품),위젯 콤보에서 그 상품에 만들어 둔 위젯 선택,build,,,,NEW,완료,raw/webadmin/tools/widget_manual_content.py:191 · 빌더 운영 도구 행 없음
+widget,위젯빌더(운영자),ui_layout,화면 구성,운영자(CS·상품),상품 선택 시 기본 위젯 자동 판정(게시본 우선 → 최근수정 → 직전 선택 복원),build,,,,NEW,완료,raw/webadmin/webadmin/catalog/static/catalog/widget_pick.js:41 defaultWidget · 빌더 운영 도구 행 없음
+widget,위젯빌더(운영자),ui_layout,화면 구성,운영자(CS·상품),3분할 본문(팔레트 → 캔버스 → 속성창) + 상·하단 띠 배치,build,,,,NEW,완료,raw/webadmin/tools/widget_manual_content.py:184 · 빌더 운영 도구 행 없음
+widget,위젯빌더(운영자),ui_manager,상품별 위젯 관리,운영자(CS·상품),상품명·코드 검색,build,,,,NEW,완료,raw/webadmin/tools/widget_manual_content.py:475 · raw/webadmin/webadmin/config/urls.py:218 widget_manager_tree
+widget,위젯빌더(운영자),ui_manager,상품별 위젯 관리,운영자(CS·상품),상태 필터(게시됨 / 작성중 있음 / 게시중단 / 위젯 없음),build,,,,NEW,완료,raw/webadmin/tools/widget_manual_content.py:476
+widget,위젯빌더(운영자),ui_manager,상품별 위젯 관리,운영자(CS·상품),상품 트리 배지 표시(게시 N · 중단 N · 작성 N · 위젯 없음),build,,,,NEW,완료,raw/webadmin/tools/widget_manual_content.py:477
+widget,위젯빌더(운영자),ui_manager,상품별 위젯 관리,운영자(CS·상품),상품별 위젯 목록(상태·항목수·버전수·최종수정·최근사용),build,,,,NEW,완료,raw/webadmin/webadmin/config/urls.py:220 widget_manager_list · raw/webadmin/tools/widget_manual_content.py:489
+widget,위젯빌더(운영자),ui_manager,상품별 위젯 관리,운영자(CS·상품),상품 설정 요약 표시(파일업로드·편집기·비규격 플래그),build,,,,NEW,완료,raw/webadmin/tools/widget_manual_content.py:484
+widget,위젯빌더(운영자),ui_manager,상품별 위젯 관리,운영자(CS·상품),[빌더에서 열기 ↗] — 해당 위젯 선택된 채 빌더 진입,build,,,,NEW,완료,raw/webadmin/tools/widget_manual_content.py:486
+widget,위젯빌더(운영자),ui_manager,상품별 위젯 관리,운영자(CS·상품),게시 중단·다시 게시 상태 변경,build,,,,T2-2,완료,raw/webadmin/webadmin/config/urls.py:222 widget_set_status · raw/webadmin/tools/widget_manual_content.py:487
+widget,위젯빌더(운영자),ui_manager,상품별 위젯 관리,운영자(CS·상품),위젯 삭제(사용 현황 표시 후 2단계 확인),build,,,,NEW,완료,raw/webadmin/tools/widget_manual_content.py:488
+widget,위젯빌더(운영자),ui_manager,상품별 위젯 관리,운영자(CS·상품),위젯 이름 변경(전용 엔드포인트 — widget_save 로 대체 금지),build,,,,NEW,완료,raw/webadmin/webadmin/config/urls.py:234 widget_rename
+widget,위젯빌더(운영자),ui_palette,팔레트(부품 목록),운영자(CS·상품),컴포넌트 이름·코드 검색으로 목록 좁히기,build,,,,NEW,완료,raw/webadmin/tools/widget_manual_content.py:230
+widget,위젯빌더(운영자),ui_palette,팔레트(부품 목록),운영자(CS·상품),분류 머리글 접기(소스—차원 / 옵션그룹 / 수량·추가상품 / 구조 요소 / 파일·에디터),build,,,,NEW,완료,raw/webadmin/tools/widget_manual_content.py:231
+widget,위젯빌더(운영자),ui_palette,팔레트(부품 목록),운영자(CS·상품),손잡이(⠿) 드래그로 부품을 캔버스에 투입,build,,,,NEW,완료,raw/webadmin/tools/widget_manual_content.py:232
+widget,위젯빌더(운영자),ui_palette,팔레트(부품 목록),운영자(CS·상품),상품 설정 미충족 부품 잠금(파일업로드여부·편집기여부·비규격여부 N이면 회색),build,,,,NEW,완료,raw/webadmin/tools/widget_manual_content.py:983 FAQ · raw/webadmin/tools/widget_manual_content.py:484 wm-flags
+widget,위젯빌더(운영자),ui_palette,팔레트(부품 목록),운영자(CS·상품),위젯당 1개 제한 컴포넌트에 「사용 중」 배지 표시,build,,,,NEW,완료,raw/webadmin/tools/widget_manual_content.py:987 FAQ
+widget,위젯빌더(운영자),ui_panes,좁은 화면 · 패널 접기,운영자(CS·상품),좌우 패널 핀으로 고정 / 접힘 / 겹쳐열림 3상태 전환,build,,,,NEW,완료,raw/webadmin/tools/widget_manual_content.py:304
+widget,위젯빌더(운영자),ui_panes,좁은 화면 · 패널 접기,운영자(CS·상품),접힌 띠 클릭·호버 0.15초로 겹쳐 열기(캔버스가 밀리지 않음),build,,,,NEW,완료,raw/webadmin/tools/widget_manual_content.py:316
+widget,위젯빌더(운영자),ui_panes,좁은 화면 · 패널 접기,운영자(CS·상품),화면 폭 구간(s/m/l)별 패널 폭·접힘 상태 기억,build,,,,NEW,완료,raw/webadmin/tools/widget_manual_content.py:340 · raw/webadmin/tools/widget_manual_content.py:36 _panes()
+widget,위젯빌더(운영자),ui_panes,좁은 화면 · 패널 접기,운영자(CS·상품),캔버스 자리 600px 미만이면 [나란히] 잠금 + [구성] 자동 전환,build,,,,NEW,완료,raw/webadmin/tools/widget_manual_content.py:406
+widget,위젯빌더(운영자),ui_panes,좁은 화면 · 패널 접기,운영자(CS·상품),좁은 화면에서 상단바 2줄 접기(버튼 잘림 방지),build,,,,NEW,완료,raw/webadmin/tools/widget_manual_content.py:405
+widget,위젯빌더(운영자),ui_preview,미리보기 · 나란히 보기,운영자(CS·상품),고객 화면을 실제 런타임 렌더러로 그대로 렌더,build,,,,STD-OPT-001,완료,raw/webadmin/tools/widget_manual_content.py:250 · raw/webadmin/webadmin/catalog/static/catalog/widget_renderer.js:6642 render()
+widget,위젯빌더(운영자),ui_preview,미리보기 · 나란히 보기,운영자(CS·상품),미리보기 폭 320~800px 지정 및 남는 자리 자동 축소(지정값이 상한),build,,,,NEW,완료,raw/webadmin/tools/widget_manual_content.py:256
+widget,위젯빌더(운영자),ui_preview,미리보기 · 나란히 보기,운영자(CS·상품),가격 진단 — 가격 소스·구성요소별 매칭/제외 사유·할인 단계·필수공정 누락·구성원 사이즈 유래 표시,build,,,,STD-ADP-033,완료,raw/webadmin/tools/widget_manual_content.py:257
+widget,위젯빌더(운영자),ui_preview,미리보기 · 나란히 보기,운영자(CS·상품),게시 위젯 가격 전수 대조·3단계 승인(1차 최숙진 → 2차 김용기 → 3차 채훈희),manual,,,,STD-ADP-037,진행,"_workspace/huni-launch-runway/08_system-screen/t49/_planrows-A.csv:116 STD-ADP-037 「게시 위젯 가격 전수 대조(1차 최숙진 → 2차 김용기 → 3차 채훈희 승인)」(부분·최숙진) — ⓐ 원장 대응 · 대조가 수행되는 화면 = raw/webadmin/tools/widget_manual_content.py:257 가격 진단(가격 소스·구성요소별 매칭/제외 사유·할인 단계, 작업자 전용) · 승인 절차 자체는 시스템 밖"
+widget,위젯빌더(운영자),ui_preview,미리보기 · 나란히 보기,운영자(CS·상품),주문 미리보기 — 담기 시 넘어가는 본문을 저장 없이 확인,build,,,,NEW,완료,raw/webadmin/webadmin/config/urls.py:202 widget_order_preview · raw/webadmin/tools/widget_manual_content.py:975 EMBED_NOTES
+widget,위젯빌더(운영자),ui_preview,미리보기 · 나란히 보기,운영자(CS·상품),미리보기 원고 업로드 presign 발급,integrate,s3,webadmin→s3,webadmin,STD-ART-001,미확인,raw/webadmin/webadmin/config/urls.py:196 widget_preview_presign · 라우트만 확인(구현 미독)
+widget,위젯빌더(운영자),ui_preview,미리보기 · 나란히 보기,운영자(CS·상품),미리보기 대용량 멀티파트 업로드(create|sign|complete|abort),integrate,s3,webadmin→s3,webadmin,STD-ART-002,미확인,raw/webadmin/webadmin/config/urls.py:198 widget_preview_multipart · 라우트만 확인(구현 미독)
+widget,위젯빌더(운영자),ui_statusbar,상태바 — 필수공정 자동 청구,운영자(CS·상품),본품·구성원 스코프별 필수공정 상시 표시(항목 없이도 가격·주문에 자동 탑재),build,,,,STD-OPT-035,완료,raw/webadmin/tools/widget_manual_content.py:287 · raw/webadmin/tools/widget_manual_content.py:293
+widget,위젯빌더(운영자),ui_templates,위젯 템플릿 관리,운영자(CS·상품),템플릿 목록 조회(상품 구분 없는 전역 단일 목록),build,,,,NEW,완료,raw/webadmin/webadmin/config/urls.py:227 widget_template_rows · raw/webadmin/tools/widget_manual_content.py:501
+widget,위젯빌더(운영자),ui_templates,위젯 템플릿 관리,운영자(CS·상품),[＋ 템플릿 지정] — 후보 위젯 검색 후 템플릿으로 지정,build,,,,NEW,완료,raw/webadmin/webadmin/config/urls.py:229 widget_template_candidates · raw/webadmin/tools/widget_manual_content.py:500
+widget,위젯빌더(운영자),ui_templates,위젯 템플릿 관리,운영자(CS·상품),템플릿 상세 — 구성 항목과 상품 종속 항목(옵션그룹·추가상품·셋트 구성원) 개수 경고,build,,,,NEW,완료,raw/webadmin/webadmin/config/urls.py:231 widget_template_detail · raw/webadmin/tools/widget_manual_content.py:502
+widget,위젯빌더(운영자),ui_templates,위젯 템플릿 관리,운영자(CS·상품),[템플릿 목록에서 빼기] — 위젯은 남기고 템플릿 지정만 해제,build,,,,NEW,완료,raw/webadmin/tools/widget_manual_content.py:503
+widget,위젯빌더(운영자),ui_templates,위젯 템플릿 관리,운영자(CS·상품),템플릿 이름 변경(구성은 유지),build,,,,NEW,완료,raw/webadmin/tools/widget_manual_content.py:504 · raw/webadmin/webadmin/config/urls.py:234 widget_rename
+widget,위젯빌더(운영자),ui_toolbar,상단바 버튼,운영자(CS·상품),＋ 새 위젯 생성(이름 입력 후 빈 위젯 또는 템플릿에서 시작),build,,,,NEW,완료,raw/webadmin/tools/widget_manual_content.py:205 · raw/webadmin/webadmin/config/urls.py:190 widget_create · 빌더 운영 도구 행 없음
+widget,위젯빌더(운영자),ui_toolbar,상단바 버튼,운영자(CS·상품),[구성] 탭 — 캔버스 단독 보기로 전환,build,,,,NEW,완료,raw/webadmin/tools/widget_manual_content.py:206
+widget,위젯빌더(운영자),ui_toolbar,상단바 버튼,운영자(CS·상품),[나란히] 탭 — 캔버스+미리보기 동시 보기로 전환(위젯 열 때 기본),build,,,,NEW,완료,raw/webadmin/tools/widget_manual_content.py:207
+widget,위젯빌더(운영자),ui_toolbar,상단바 버튼,운영자(CS·상품),[미리보기] 탭 — 고객 화면만 실제 렌더러로 크게 보기,build,,,,NEW,완료,raw/webadmin/tools/widget_manual_content.py:208
+widget,위젯빌더(운영자),ui_toolbar,상단바 버튼,운영자(CS·상품),실행취소 Ctrl+Z (최근 100단계),build,,,,NEW,완료,raw/webadmin/tools/widget_manual_content.py:209
+widget,위젯빌더(운영자),ui_toolbar,상단바 버튼,운영자(CS·상품),다시실행 Ctrl+Shift+Z,build,,,,NEW,완료,raw/webadmin/tools/widget_manual_content.py:210
+widget,위젯빌더(운영자),ui_toolbar,상단바 버튼,운영자(CS·상품),[게시] — 작업본을 버전으로 굳혀 고객 화면에 내보냄,build,,,,T2-2,완료,raw/webadmin/tools/widget_manual_content.py:211 · raw/webadmin/webadmin/config/urls.py:207 widget_publish
+widget,위젯빌더(운영자),ui_toolbar,상단바 버튼,운영자(CS·상품),[버전…] 패널 열기(게시 이력·롤백),build,,,,NEW,완료,raw/webadmin/tools/widget_manual_content.py:212 · raw/webadmin/webadmin/config/urls.py:209 widget_versions
+widget,위젯빌더(운영자),ui_toolbar,상단바 버튼,운영자(CS·상품),[템플릿 지정]/[템플릿 해제] 토글,build,,,,NEW,완료,raw/webadmin/tools/widget_manual_content.py:213 · raw/webadmin/webadmin/config/urls.py:213 widget_template_toggle
+widget,위젯빌더(운영자),ui_toolbar,상단바 버튼,운영자(CS·상품),[삭제] — 사용 현황 표시 후 2단계 확인 논리삭제,build,,,,NEW,완료,raw/webadmin/tools/widget_manual_content.py:214 · raw/webadmin/webadmin/config/urls.py:204 widget_delete
+widget,위젯빌더(운영자),ui_toolbar,상단바 버튼,운영자(CS·상품),자동저장 상태 표시(변경됨 → 저장 중… → 마지막 저장 N초 전),build,,,,NEW,완료,raw/webadmin/tools/widget_manual_content.py:215 · raw/webadmin/webadmin/config/urls.py:194 widget_save
+widget,위젯빌더(운영자),ui_toolbar,상단바 버튼,운영자(CS·상품),「이 상품 다른 화면에서 열기」 드롭다운 — 상품정보·상품뷰어·가격뷰어·Edicus 템플릿 연결·작업가이드·메인이미지·디자인 새 탭 진입,build,,,,NEW,완료,raw/webadmin/tools/widget_manual_content.py:216
+widget,위젯빌더(운영자),ui_versions,게시 · 버전 · 롤백,운영자(CS·상품),게시 직전 경고 목록 + 버전 메모를 한 창에 모아 확인,build,,,,T2-2,완료,raw/webadmin/tools/widget_manual_content.py:886 PUBLISH_NOTES 「게시 전 확인 절차」
+widget,위젯빌더(운영자),ui_versions,게시 · 버전 · 롤백,운영자(CS·상품),게시 버전 목록 조회 및 활성 버전 표시,build,,,,NEW,완료,raw/webadmin/tools/widget_manual_content.py:276 · raw/webadmin/webadmin/config/urls.py:209 widget_versions
+widget,위젯빌더(운영자),ui_versions,게시 · 버전 · 롤백,운영자(CS·상품),[이 버전으로 롤백] — 활성 버전 교체 + 작업본도 그 내용으로 되돌림,build,,,,NEW,완료,raw/webadmin/webadmin/config/urls.py:211 widget_rollback · raw/webadmin/tools/widget_manual_content.py:899 PUBLISH_NOTES 「버전 · 롤백」
+widget,위젯빌더(운영자),ui_versions,게시 · 버전 · 롤백,운영자(CS·상품),[게시 중단] — 고객 화면에서만 내림(버전 보존),build,,,,T2-2,완료,raw/webadmin/tools/widget_manual_content.py:277 · raw/webadmin/tools/widget_manual_content.py:903
+widget,위젯빌더(운영자),ui_versions,게시 · 버전 · 롤백,운영자(CS·상품),[다시 게시] — 내리기 전 활성 버전 그대로 재노출(최초 게시는 [게시]로만 가능),build,,,,T2-2,완료,raw/webadmin/tools/widget_manual_content.py:903 PUBLISH_NOTES 「게시 취소(내리기)와 다시 올리기」
+widget,위젯빌더(운영자),ui_versions,게시 · 버전 · 롤백,운영자(CS·상품),상태 배지 표시(작성중 / 게시됨 / 게시중단 + 템플릿),build,,,,NEW,완료,raw/webadmin/tools/widget_manual_content.py:273

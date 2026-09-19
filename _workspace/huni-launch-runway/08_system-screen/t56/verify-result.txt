@@ -1,0 +1,17 @@
+PASS V1 입력 plan-rows 735행 실측 735
+PASS V2 입력 merged 747행 실측 747
+PASS V3 출력 행수 = 입력 행수 735 vs 735
+PASS V4 row_id 집합 동일 
+PASS V5 판정값이 5분류(+불필요) 안에만 ['provided', '담당맞음', '미정', '분할', '불필요', '재배정']
+PASS V6 근거등급이 정의된 5종 안에만 ['evidence-path', 'manual-read', 'merged-owner_side', 'rule-step', 'rule-track']
+PASS V7 판정 미기입 0건 
+PASS V8 owner_now 가 원장 owner_name 과 전건 일치 
+PASS V9 status 가 원장과 전건 일치 
+PASS V10 remaining 은 status 로만 파생 
+PASS V11 재배정·분할 행에 근거 문자열 존재 []
+
+[판정 분포] {'담당맞음': 457, '재배정': 141, '분할': 36, '미정': 63, 'provided': 37, '불필요': 1}
+[근거등급] {'rule-step': 89, 'merged-owner_side': 366, 'rule-track': 95, 'evidence-path': 177, 'manual-read': 8}
+[남은 일 Y/N] {'Y': 620, 'N': 115}
+
+실패 0

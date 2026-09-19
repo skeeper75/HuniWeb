@@ -1,0 +1,1263 @@
+{
+ "yeolim_root": "/Users/innojini/Dev/CRT.DigitalEdit.V2",
+ "huni_root": "/Users/innojini/Dev/TS.BackOffice.Huni/Framework",
+ "yeolim": {
+  "CRT.Framework.AWS": {
+   "file_count": 5,
+   "line_total": 454,
+   "files": {
+    "IMessageInfo.cs": {
+     "bytes": 192,
+     "lines": 11,
+     "md5": "de2c3c57925527495311faaaac59aa66"
+    },
+    "SqsClient.cs": {
+     "bytes": 4205,
+     "lines": 120,
+     "md5": "8f72fbf6fd1e9ee694d3d2295d0fddc3"
+    },
+    "S3JsonMessage.cs": {
+     "bytes": 3590,
+     "lines": 128,
+     "md5": "3417688d115f0a943811b6bbe74fc3e9"
+    },
+    "S3Client.cs": {
+     "bytes": 4940,
+     "lines": 150,
+     "md5": "8d0793931cdcac04792de676bc8b1231"
+    },
+    "AwsConfig.cs": {
+     "bytes": 1114,
+     "lines": 45,
+     "md5": "7b70c063d85e7772592d3459cedd9565"
+    }
+   }
+  },
+  "CRT.Framework.Asset": {
+   "file_count": 4,
+   "line_total": 439,
+   "files": {
+    "Enums.cs": {
+     "bytes": 620,
+     "lines": 35,
+     "md5": "70a081c8ee31b20fa086d3f908406ee2"
+    },
+    "ImageAsset.cs": {
+     "bytes": 1967,
+     "lines": 75,
+     "md5": "db4821e2feaf985ec2eb7635be2c0829"
+    },
+    "Properties/AssemblyInfo.cs": {
+     "bytes": 1501,
+     "lines": 36,
+     "md5": "4d1758237ef7dd337b4f0d3e67da5c45"
+    },
+    "Properties/Resources.Designer.cs": {
+     "bytes": 11806,
+     "lines": 293,
+     "md5": "eee80787243af70198e8951aa4a4f5a0"
+    }
+   }
+  },
+  "CRT.Framework.Attribute": {
+   "file_count": 2,
+   "line_total": 65,
+   "files": {
+    "StringValueAttribute.cs": {
+     "bytes": 737,
+     "lines": 29,
+     "md5": "567e7151411086ff062e560ede570b43"
+    },
+    "Properties/AssemblyInfo.cs": {
+     "bytes": 1509,
+     "lines": 36,
+     "md5": "427315f4de4cf0ccdc1444a03f2d9500"
+    }
+   }
+  },
+  "CRT.Framework.Barcode": {
+   "file_count": 2,
+   "line_total": 237,
+   "files": {
+    "ZXingHelper.cs": {
+     "bytes": 8387,
+     "lines": 201,
+     "md5": "21ea62b53514b2dcb7352ae2e4669d7c"
+    },
+    "Properties/AssemblyInfo.cs": {
+     "bytes": 1505,
+     "lines": 36,
+     "md5": "0f429e9414ed40b2ba1b41ce91845cec"
+    }
+   }
+  },
+  "CRT.Framework.Core": {
+   "file_count": 8,
+   "line_total": 648,
+   "files": {
+    "ParameterSetItem.cs": {
+     "bytes": 315,
+     "lines": 21,
+     "md5": "522b9f6aebffe3effde7f55ea9237416"
+    },
+    "Enumerations.cs": {
+     "bytes": 636,
+     "lines": 36,
+     "md5": "b6a7c89fdac9270e1cb576ddd15e5ec9"
+    },
+    "ParameterSet.cs": {
+     "bytes": 7017,
+     "lines": 281,
+     "md5": "a67f5e782fa274e2029e3dbf14a3e093"
+    },
+    "GlobalConstants.cs": {
+     "bytes": 367,
+     "lines": 16,
+     "md5": "80826fc3055632a0eda9f0edff5f2de3"
+    },
+    "Configuration/AppSettings.cs": {
+     "bytes": 2467,
+     "lines": 75,
+     "md5": "19c6ba1acaa9aedd3ca1df42bb60bbc6"
+    },
+    "Security/UserInfoContext.cs": {
+     "bytes": 3359,
+     "lines": 167,
+     "md5": "bea35f2e41cd35f5bf2c9308c7bf73bc"
+    },
+    "Properties/AssemblyInfo.cs": {
+     "bytes": 1499,
+     "lines": 36,
+     "md5": "7044f49ee737157f764ff9b283b7c460"
+    },
+    "Text/MessageInfo.cs": {
+     "bytes": 363,
+     "lines": 16,
+     "md5": "068b86ed5ca8895d07c9cde63fc02e08"
+    }
+   }
+  },
+  "CRT.Framework.DevExpr": {
+   "file_count": 30,
+   "line_total": 5336,
+   "files": {
+    "Enums.cs": {
+     "bytes": 1642,
+     "lines": 73,
+     "md5": "80759da1f80b9c58ddffc4ff87827e29"
+    },
+    "Extensions/ControlExtension.cs": {
+     "bytes": 8887,
+     "lines": 236,
+     "md5": "d1cb05362e53e3da1083419ef3ccad3a"
+    },
+    "Extensions/MaskExtension.cs": {
+     "bytes": 15630,
+     "lines": 317,
+     "md5": "c1045b1b0289b8e4e9c7f0b809058b3e"
+    },
+    "Extensions/LayoutControlExtension.cs": {
+     "bytes": 1511,
+     "lines": 43,
+     "md5": "ccc7e8567045b21c07aebf4545953dd4"
+    },
+    "Extensions/CheckedListBoxExtension.cs": {
+     "bytes": 2547,
+     "lines": 68,
+     "md5": "831b03947287d1cfb31ea9864c3bd227"
+    },
+    "Extensions/TreeExtension.cs": {
+     "bytes": 8215,
+     "lines": 220,
+     "md5": "26eca829485fe65b0831fddaa914b5cc"
+    },
+    "Extensions/SpinEditExtension.cs": {
+     "bytes": 1612,
+     "lines": 43,
+     "md5": "e15c0898f60583b560fe698cd6475e0c"
+    },
+    "Extensions/ToggleSwitchExtension.cs": {
+     "bytes": 1723,
+     "lines": 41,
+     "md5": "15b518012a8240e4c7dd80719ebe8780"
+    },
+    "Extensions/GridViewExtension.cs": {
+     "bytes": 81082,
+     "lines": 1884,
+     "md5": "cee7e74cb2684e8ac5e214bc428cd669"
+    },
+    "Extensions/CheckEditExtension.cs": {
+     "bytes": 1277,
+     "lines": 35,
+     "md5": "bd2871d20b4126cd2b2f8b4de670b9c6"
+    },
+    "Extensions/RepositoryExtension.cs": {
+     "bytes": 19317,
+     "lines": 456,
+     "md5": "be65cfadd37f8a81e50aec79cd7e20b6"
+    },
+    "Extensions/GridLookUpEditExtension.cs": {
+     "bytes": 13932,
+     "lines": 334,
+     "md5": "9acda2ec352a690426ee99f5dd3a2642"
+    },
+    "Extensions/PanelControlExtension.cs": {
+     "bytes": 1773,
+     "lines": 51,
+     "md5": "2b347ef57d6fa7f57af886403f352eec"
+    },
+    "Extensions/GridHeaderCheckManager.cs": {
+     "bytes": 12292,
+     "lines": 374,
+     "md5": "b07e9f120b7e2cfef63982f75f6bb474"
+    },
+    "Extensions/TokenEditExtension.cs": {
+     "bytes": 1741,
+     "lines": 51,
+     "md5": "1b8d5afcea750664ab58947a495e41c5"
+    },
+    "Extensions/ObjectExtensions.cs": {
+     "bytes": 16370,
+     "lines": 400,
+     "md5": "a2f476c865f10c48508ddada81872834"
+    },
+    "Extensions/ListExtension.cs": {
+     "bytes": 1125,
+     "lines": 35,
+     "md5": "a47cfb9fdc667e6708291de87e85dc1b"
+    },
+    "Extensions/CheckedComboExtension.cs": {
+     "bytes": 1642,
+     "lines": 44,
+     "md5": "2fd24637c4b52acfdbfd93fb996c259d"
+    },
+    "Extensions/DateEditExtension.cs": {
+     "bytes": 2091,
+     "lines": 54,
+     "md5": "84b9e2eab26048e30c42ff0819e9819d"
+    },
+    "Extensions/RadioGroupExtension.cs": {
+     "bytes": 1646,
+     "lines": 52,
+     "md5": "0c46ab4be9bf1b84da50c9ddc679a7ee"
+    },
+    "Extensions/DataTableExtension.cs": {
+     "bytes": 1996,
+     "lines": 47,
+     "md5": "5eaae2b16dae5472674c5bd38c03ab47"
+    },
+    "Extensions/EnumExtension.cs": {
+     "bytes": 1761,
+     "lines": 53,
+     "md5": "d4c937b447e531344f8f36dfe299fd90"
+    },
+    "Controls/AutoClosingMessageBox.cs": {
+     "bytes": 1672,
+     "lines": 41,
+     "md5": "9560a7ca388a7e9efffeb10f3317bb6c"
+    },
+    "Controls/WaitCtrl.cs": {
+     "bytes": 1917,
+     "lines": 69,
+     "md5": "7d9bb82ccd992bb4242a2ca18a86901e"
+    },
+    "Controls/WaitCtrl.designer.cs": {
+     "bytes": 2923,
+     "lines": 70,
+     "md5": "6a5dc1516f81239ba147377b973896d8"
+    },
+    "Common/CPSGlobalColor.cs": {
+     "bytes": 2522,
+     "lines": 82,
+     "md5": "a51763cc5bedef69f53a86e8944cc76c"
+    },
+    "Common/ColumnTag.cs": {
+     "bytes": 398,
+     "lines": 19,
+     "md5": "a581836e7e25d1bc22363072af2452c0"
+    },
+    "Common/CPSContextMenu.cs": {
+     "bytes": 2344,
+     "lines": 82,
+     "md5": "5f6710a276758dd84ba1dee72be789ce"
+    },
+    "Properties/AssemblyInfo.cs": {
+     "bytes": 1505,
+     "lines": 36,
+     "md5": "740687b77a4520d36ef710b4706faf69"
+    },
+    "Properties/Settings.Designer.cs": {
+     "bytes": 1158,
+     "lines": 26,
+     "md5": "509b633af41e01a667172072b5c08b00"
+    }
+   }
+  },
+  "CRT.Framework.Extensions": {
+   "file_count": 13,
+   "line_total": 3785,
+   "files": {
+    "ControlExtension.cs": {
+     "bytes": 1261,
+     "lines": 37,
+     "md5": "15847de4025a8c56dd08c7419f5cc2ff"
+    },
+    "DateTimeExtension.cs": {
+     "bytes": 4440,
+     "lines": 111,
+     "md5": "84689c5cc6862da283a0c77818185a62"
+    },
+    "DataRowExtension.cs": {
+     "bytes": 1091,
+     "lines": 40,
+     "md5": "cf6d614936ec6e0f4ae84fa70c02604f"
+    },
+    "ListExtension.cs": {
+     "bytes": 1117,
+     "lines": 35,
+     "md5": "26f3e84ef09b62ee07e605cf974ff45d"
+    },
+    "StringExtension.cs": {
+     "bytes": 79621,
+     "lines": 2060,
+     "md5": "68e4ccf7580328ded994eac25f1a464d"
+    },
+    "NumericLib.cs": {
+     "bytes": 14314,
+     "lines": 322,
+     "md5": "8406916de135fdfb76196fc03e96b321"
+    },
+    "DataTableExtension.cs": {
+     "bytes": 4936,
+     "lines": 118,
+     "md5": "be726a9143b65c1ad7b816a204b67f25"
+    },
+    "ObjectExtension.cs": {
+     "bytes": 15311,
+     "lines": 383,
+     "md5": "34ec63d2af9746e74d3d9046e07f7157"
+    },
+    "EnumExtension.cs": {
+     "bytes": 1753,
+     "lines": 53,
+     "md5": "50b08e6eed1b9375a34f40bed82674cf"
+    },
+    "DateTimeLib.cs": {
+     "bytes": 18187,
+     "lines": 501,
+     "md5": "683d2f2580f7538daa45ed7be024f479"
+    },
+    "Properties/AssemblyInfo.cs": {
+     "bytes": 1501,
+     "lines": 36,
+     "md5": "abb239b7fc174bf8b101c6fc97b228d9"
+    },
+    "Properties/Settings.Designer.cs": {
+     "bytes": 1161,
+     "lines": 26,
+     "md5": "f7546d79c02be47b743a2a93181a87e2"
+    },
+    "Properties/Resources.Designer.cs": {
+     "bytes": 3087,
+     "lines": 63,
+     "md5": "7c7dce206a216d60caca08b12b2c1670"
+    }
+   }
+  },
+  "CRT.Framework.PDF": {
+   "file_count": 8,
+   "line_total": 1618,
+   "files": {
+    "UnitConvert.cs": {
+     "bytes": 1843,
+     "lines": 72,
+     "md5": "26eeec71385c30a876bf38fc6b28aacc"
+    },
+    "Syncfusion/SyncPdfHelper.cs": {
+     "bytes": 8460,
+     "lines": 273,
+     "md5": "c6f93db2ad26864a37c6d076112e0dd7"
+    },
+    "Properties/AssemblyInfo.cs": {
+     "bytes": 1497,
+     "lines": 36,
+     "md5": "96f4fd4381045e0b3cd3b0046ae3b20c"
+    },
+    "Properties/Resources.Designer.cs": {
+     "bytes": 3422,
+     "lines": 72,
+     "md5": "496f992e7e70266bd02c5c4953ea051f"
+    },
+    "PDFLib/Enums.cs": {
+     "bytes": 362,
+     "lines": 22,
+     "md5": "10918c5fc6d8baf734d5547eb83801cb"
+    },
+    "PDFLib/PDFLibHelper.cs": {
+     "bytes": 16597,
+     "lines": 408,
+     "md5": "a864f5252f69714148ab9bd52bc7a4d9"
+    },
+    "PDFLib/MergePdfInfo.cs": {
+     "bytes": 1079,
+     "lines": 39,
+     "md5": "427e1b61016fda19bfa7b1fee4dc3619"
+    },
+    "PDFLib/PDFLibCreator.cs": {
+     "bytes": 25493,
+     "lines": 696,
+     "md5": "2b840a9ec6530ad5c0771e8b625c2428"
+    }
+   }
+  },
+  "CRT.Framework.PDF.Objects": {
+   "file_count": 14,
+   "line_total": 1178,
+   "files": {
+    "UnitConvert.cs": {
+     "bytes": 7239,
+     "lines": 219,
+     "md5": "fdce96a096febf3beef062947f7c9a35"
+    },
+    "FontInfo.cs": {
+     "bytes": 661,
+     "lines": 30,
+     "md5": "d245c4333fffb987bdf476d7d367e36b"
+    },
+    "Enums.cs": {
+     "bytes": 1578,
+     "lines": 76,
+     "md5": "8f192b7104c72567ad40ce677c0cea3b"
+    },
+    "BoxInfo.cs": {
+     "bytes": 2772,
+     "lines": 130,
+     "md5": "b1f94874b11e83e970cc7cba267263f3"
+    },
+    "PageInfo.cs": {
+     "bytes": 1586,
+     "lines": 68,
+     "md5": "98392c53b7b225ff050f58dfd2017945"
+    },
+    "PDFInfo.cs": {
+     "bytes": 6080,
+     "lines": 230,
+     "md5": "788179e3b757ce969cce5ece3643bf8a"
+    },
+    "Marks/MarkText.cs": {
+     "bytes": 1101,
+     "lines": 38,
+     "md5": "ad08465586fa62fa8f0c6722d666fe77"
+    },
+    "Marks/MarkConvertor.cs": {
+     "bytes": 1256,
+     "lines": 43,
+     "md5": "0b759645731836dad9e229984ef17463"
+    },
+    "Marks/MarkDataMatrixBarocde.cs": {
+     "bytes": 1127,
+     "lines": 39,
+     "md5": "c669cb34bfb8c24d69b02599eee3a811"
+    },
+    "Marks/MarkQRBarocde.cs": {
+     "bytes": 1009,
+     "lines": 37,
+     "md5": "067e33b6e9971ca8a6216d1e0b76501c"
+    },
+    "Marks/Pages.cs": {
+     "bytes": 1705,
+     "lines": 62,
+     "md5": "c0ba989a833d0458ba06e599b0ce553e"
+    },
+    "Marks/IMark.cs": {
+     "bytes": 736,
+     "lines": 29,
+     "md5": "e2cf09663d1a86235023a6f35e2a44a5"
+    },
+    "Marks/BoundingRectangle.cs": {
+     "bytes": 3799,
+     "lines": 141,
+     "md5": "df23b620a3e3e0fecff78990116cb5ef"
+    },
+    "Properties/AssemblyInfo.cs": {
+     "bytes": 1513,
+     "lines": 36,
+     "md5": "0cc5245f85b2fc71baba8c29895b9d96"
+    }
+   }
+  },
+  "CRT.Framework.Pitstop": {
+   "file_count": 5,
+   "line_total": 789,
+   "files": {
+    "PitStopEnums.cs": {
+     "bytes": 1087,
+     "lines": 93,
+     "md5": "38d6918d0aebc215166483702031664f"
+    },
+    "VariableSet.cs": {
+     "bytes": 1435,
+     "lines": 53,
+     "md5": "4c2824d30494afcd8d3450a37e27dabe"
+    },
+    "EnfocusReport.cs": {
+     "bytes": 7688,
+     "lines": 289,
+     "md5": "f436a0c5613de348c199bf453a9a5d6e"
+    },
+    "PitStopConfiguration.cs": {
+     "bytes": 12795,
+     "lines": 318,
+     "md5": "7e02f1a8c51abda9cb690f6a4e4f5fb3"
+    },
+    "Properties/AssemblyInfo.cs": {
+     "bytes": 1505,
+     "lines": 36,
+     "md5": "41a920e99784396f2d2500044552a7fb"
+    }
+   }
+  },
+  "CRT.Framework.Security": {
+   "file_count": 4,
+   "line_total": 257,
+   "files": {
+    "AES.cs": {
+     "bytes": 4240,
+     "lines": 124,
+     "md5": "1788fd3427282be5048386ef24d111b5"
+    },
+    "HardwareInfo.cs": {
+     "bytes": 1751,
+     "lines": 63,
+     "md5": "b2a436a69830df668375c6db06ad3bfb"
+    },
+    "RegiUtil.cs": {
+     "bytes": 870,
+     "lines": 34,
+     "md5": "43d31b1a06abf2237766fe8346970103"
+    },
+    "Properties/AssemblyInfo.cs": {
+     "bytes": 1507,
+     "lines": 36,
+     "md5": "e18a89ff1bee583dd2f5d3f762d7a2e4"
+    }
+   }
+  },
+  "CRT.Framework.Utils": {
+   "file_count": 4,
+   "line_total": 305,
+   "files": {
+    "PathUtil.cs": {
+     "bytes": 4436,
+     "lines": 125,
+     "md5": "e965793ecd8e066ee650c8cb5e93f1a0"
+    },
+    "CommandLine.cs": {
+     "bytes": 3186,
+     "lines": 88,
+     "md5": "8b28905799a6a047e19080c0343929bd"
+    },
+    "SystemUtil.cs": {
+     "bytes": 1483,
+     "lines": 56,
+     "md5": "a70af30df2752c58612bb84c86584a14"
+    },
+    "Properties/AssemblyInfo.cs": {
+     "bytes": 1501,
+     "lines": 36,
+     "md5": "f1654d049d9a7180d40a5356a11d696d"
+    }
+   }
+  },
+  "CRT.Framework.WinForms": {
+   "file_count": 18,
+   "line_total": 2450,
+   "files": {
+    "CommandGroup.cs": {
+     "bytes": 2490,
+     "lines": 84,
+     "md5": "947680a38c5cd8cdaff5e8acaaa26820"
+    },
+    "Enums.cs": {
+     "bytes": 2143,
+     "lines": 92,
+     "md5": "fdf617d36a91ef4152b2bb57e0764326"
+    },
+    "Command.cs": {
+     "bytes": 2029,
+     "lines": 64,
+     "md5": "07c911d54688d54c5bb3e11970d7681b"
+    },
+    "Forms/BasePopupForm.Designer.cs": {
+     "bytes": 1569,
+     "lines": 49,
+     "md5": "9af06e76221214815c878bd4730793fa"
+    },
+    "Forms/BasePopupForm.cs": {
+     "bytes": 721,
+     "lines": 32,
+     "md5": "736ff4d4892b2921672cb42d5e9b2cf1"
+    },
+    "Forms/BaseRibbonForm.cs": {
+     "bytes": 8028,
+     "lines": 206,
+     "md5": "47cc5aa04bb54127e9465a2bfc288a8e"
+    },
+    "Forms/BaseForm.Designer.cs": {
+     "bytes": 1222,
+     "lines": 39,
+     "md5": "122df9903d7c3a9c29938c7bc4664433"
+    },
+    "Forms/BaseRibbonForm.Designer.cs": {
+     "bytes": 1234,
+     "lines": 39,
+     "md5": "9d7929cfffdac886c9b15203456d30e3"
+    },
+    "Forms/BaseForm.cs": {
+     "bytes": 15423,
+     "lines": 404,
+     "md5": "f3a3f3714af7db738a5fb99a944a094c"
+    },
+    "Objects/ZipCodeResult.cs": {
+     "bytes": 3856,
+     "lines": 152,
+     "md5": "bd78a07de0592699a5c1da04726fdb92"
+    },
+    "Controls/ImageButton.cs": {
+     "bytes": 10418,
+     "lines": 321,
+     "md5": "f7017fdac197795afa0a0fc17edb345b"
+    },
+    "Controls/FolderSelectDialog.cs": {
+     "bytes": 11634,
+     "lines": 337,
+     "md5": "89557d87d867e8e740f92cdd30dbb39d"
+    },
+    "Controls/FrmZipCode.Designer.cs": {
+     "bytes": 12568,
+     "lines": 231,
+     "md5": "7b8e8a94aa57024f513d6ab0ac13a0cc"
+    },
+    "Controls/FrmZipCode.cs": {
+     "bytes": 5972,
+     "lines": 175,
+     "md5": "b479fee1afd3eedb39c36e23179d83e3"
+    },
+    "Properties/AssemblyInfo.cs": {
+     "bytes": 1507,
+     "lines": 36,
+     "md5": "8cc7d81407a2c951a1764514f5d620ee"
+    },
+    "Properties/Settings.Designer.cs": {
+     "bytes": 1159,
+     "lines": 26,
+     "md5": "651bc48ed05eee608ceaf8f9f676df73"
+    },
+    "Properties/Resources.Designer.cs": {
+     "bytes": 3764,
+     "lines": 81,
+     "md5": "cb854066abb9d815cbf4381d59e92b15"
+    },
+    "Rest/ZipCodeRest.cs": {
+     "bytes": 2958,
+     "lines": 82,
+     "md5": "2c482849e919f5ef726e904b7cc7edd4"
+    }
+   }
+  }
+ },
+ "huni": {
+  "CRT.Framework.AWS": {
+   "file_count": 5,
+   "line_total": 743,
+   "files": {
+    "IMessageInfo.cs": {
+     "bytes": 318,
+     "lines": 15,
+     "md5": "dffaf95e8cdab50d7add63d394f4da65"
+    },
+    "SqsClient.cs": {
+     "bytes": 12085,
+     "lines": 303,
+     "md5": "d534925e836860876eceacb0503a80f2"
+    },
+    "S3Client.cs": {
+     "bytes": 11148,
+     "lines": 312,
+     "md5": "4c8d834fa814650c85519303925f4163"
+    },
+    "SqsLogSink.cs": {
+     "bytes": 3398,
+     "lines": 68,
+     "md5": "43c163133d48eda657feea087d966f98"
+    },
+    "AwsConfig.cs": {
+     "bytes": 1114,
+     "lines": 45,
+     "md5": "7b70c063d85e7772592d3459cedd9565"
+    }
+   }
+  },
+  "CRT.Framework.Asset": {
+   "file_count": 4,
+   "line_total": 450,
+   "files": {
+    "Enums.cs": {
+     "bytes": 647,
+     "lines": 36,
+     "md5": "e9a74fa15b0364188453324c75563737"
+    },
+    "ImageAsset.cs": {
+     "bytes": 1967,
+     "lines": 75,
+     "md5": "db4821e2feaf985ec2eb7635be2c0829"
+    },
+    "Properties/AssemblyInfo.cs": {
+     "bytes": 1501,
+     "lines": 36,
+     "md5": "4d1758237ef7dd337b4f0d3e67da5c45"
+    },
+    "Properties/Resources.Designer.cs": {
+     "bytes": 12203,
+     "lines": 303,
+     "md5": "4d7412d595e96cf0d279e678bcdcc489"
+    }
+   }
+  },
+  "CRT.Framework.Core": {
+   "file_count": 8,
+   "line_total": 601,
+   "files": {
+    "ParameterSetItem.cs": {
+     "bytes": 315,
+     "lines": 21,
+     "md5": "522b9f6aebffe3effde7f55ea9237416"
+    },
+    "Enumerations.cs": {
+     "bytes": 566,
+     "lines": 30,
+     "md5": "bafaf147f94f460ba4c8c2328eefbfd2"
+    },
+    "ParameterSet.cs": {
+     "bytes": 7017,
+     "lines": 281,
+     "md5": "a67f5e782fa274e2029e3dbf14a3e093"
+    },
+    "GlobalConstants.cs": {
+     "bytes": 282,
+     "lines": 14,
+     "md5": "70b5b99e39cbce2f13a28973cc5d9693"
+    },
+    "Configuration/AppSettings.cs": {
+     "bytes": 2200,
+     "lines": 74,
+     "md5": "f6be7d12010938b27223b38e8db5d156"
+    },
+    "Security/UserInfoContext.cs": {
+     "bytes": 2654,
+     "lines": 129,
+     "md5": "397ff93cf8756c3e84b4566214a9699d"
+    },
+    "Properties/AssemblyInfo.cs": {
+     "bytes": 1499,
+     "lines": 36,
+     "md5": "7044f49ee737157f764ff9b283b7c460"
+    },
+    "Text/MessageInfo.cs": {
+     "bytes": 363,
+     "lines": 16,
+     "md5": "068b86ed5ca8895d07c9cde63fc02e08"
+    }
+   }
+  },
+  "CRT.Framework.DevExpr": {
+   "file_count": 32,
+   "line_total": 6057,
+   "files": {
+    "Enums.cs": {
+     "bytes": 1674,
+     "lines": 75,
+     "md5": "f70c82f36f14c354c429fb4a199044b2"
+    },
+    "Extensions/ControlExtension.cs": {
+     "bytes": 9630,
+     "lines": 256,
+     "md5": "c951bc95d0666b377051d604a3bb8449"
+    },
+    "Extensions/MaskExtension.cs": {
+     "bytes": 16197,
+     "lines": 323,
+     "md5": "a14674bbb6d7bea120d6ef1b7b2bfdfa"
+    },
+    "Extensions/LayoutControlExtension.cs": {
+     "bytes": 1511,
+     "lines": 43,
+     "md5": "ccc7e8567045b21c07aebf4545953dd4"
+    },
+    "Extensions/CheckedListBoxExtension.cs": {
+     "bytes": 2547,
+     "lines": 68,
+     "md5": "831b03947287d1cfb31ea9864c3bd227"
+    },
+    "Extensions/TreeExtension.cs": {
+     "bytes": 8215,
+     "lines": 220,
+     "md5": "26eca829485fe65b0831fddaa914b5cc"
+    },
+    "Extensions/SpinEditExtension.cs": {
+     "bytes": 1612,
+     "lines": 43,
+     "md5": "e15c0898f60583b560fe698cd6475e0c"
+    },
+    "Extensions/ToggleSwitchExtension.cs": {
+     "bytes": 1723,
+     "lines": 41,
+     "md5": "15b518012a8240e4c7dd80719ebe8780"
+    },
+    "Extensions/GridViewExtension.cs": {
+     "bytes": 87014,
+     "lines": 2008,
+     "md5": "959a365bff075442a380cba2eb637376"
+    },
+    "Extensions/CheckEditExtension.cs": {
+     "bytes": 1277,
+     "lines": 35,
+     "md5": "bd2871d20b4126cd2b2f8b4de670b9c6"
+    },
+    "Extensions/RepositoryExtension.cs": {
+     "bytes": 22636,
+     "lines": 546,
+     "md5": "6fa25d73ff8d5f5f1f962e9f15f8ca67"
+    },
+    "Extensions/GridLookUpEditExtension.cs": {
+     "bytes": 14392,
+     "lines": 350,
+     "md5": "5258d1810dccd6f98e47d168201bd651"
+    },
+    "Extensions/PanelControlExtension.cs": {
+     "bytes": 1773,
+     "lines": 51,
+     "md5": "2b347ef57d6fa7f57af886403f352eec"
+    },
+    "Extensions/GridHeaderCheckManager.cs": {
+     "bytes": 12292,
+     "lines": 374,
+     "md5": "b07e9f120b7e2cfef63982f75f6bb474"
+    },
+    "Extensions/TokenEditExtension.cs": {
+     "bytes": 1872,
+     "lines": 53,
+     "md5": "9ae340ba0e28fb2fb881fa86bbc09e14"
+    },
+    "Extensions/ObjectExtensions.cs": {
+     "bytes": 16836,
+     "lines": 414,
+     "md5": "99351694d35682dc613c18ae7044da68"
+    },
+    "Extensions/ListExtension.cs": {
+     "bytes": 1125,
+     "lines": 35,
+     "md5": "a47cfb9fdc667e6708291de87e85dc1b"
+    },
+    "Extensions/PictureEditExtension.cs": {
+     "bytes": 3658,
+     "lines": 104,
+     "md5": "73f39ec8c6d0d90951b42246f8f6ce29"
+    },
+    "Extensions/CheckedComboExtension.cs": {
+     "bytes": 1642,
+     "lines": 44,
+     "md5": "2fd24637c4b52acfdbfd93fb996c259d"
+    },
+    "Extensions/DateEditExtension.cs": {
+     "bytes": 2091,
+     "lines": 54,
+     "md5": "84b9e2eab26048e30c42ff0819e9819d"
+    },
+    "Extensions/RadioGroupExtension.cs": {
+     "bytes": 1646,
+     "lines": 52,
+     "md5": "0c46ab4be9bf1b84da50c9ddc679a7ee"
+    },
+    "Extensions/DataTableExtension.cs": {
+     "bytes": 1996,
+     "lines": 47,
+     "md5": "5eaae2b16dae5472674c5bd38c03ab47"
+    },
+    "Controls/AutoClosingMessageBox.cs": {
+     "bytes": 1672,
+     "lines": 41,
+     "md5": "9560a7ca388a7e9efffeb10f3317bb6c"
+    },
+    "Controls/WaitCtrl.cs": {
+     "bytes": 1917,
+     "lines": 69,
+     "md5": "7d9bb82ccd992bb4242a2ca18a86901e"
+    },
+    "Controls/GridViewForGroupRowSortByDragDrop.cs": {
+     "bytes": 11597,
+     "lines": 326,
+     "md5": "8eccb42ccb0a089112016d6a05e91baf"
+    },
+    "Controls/DragFeedback.cs": {
+     "bytes": 2007,
+     "lines": 70,
+     "md5": "668d19a992568e7440887e18b4212a26"
+    },
+    "Controls/WaitCtrl.designer.cs": {
+     "bytes": 2923,
+     "lines": 70,
+     "md5": "6a5dc1516f81239ba147377b973896d8"
+    },
+    "Common/CRTGlobalColor.cs": {
+     "bytes": 2521,
+     "lines": 82,
+     "md5": "63cee544b6a4d6b17229b0f30e25e91c"
+    },
+    "Common/ColumnTag.cs": {
+     "bytes": 398,
+     "lines": 19,
+     "md5": "a581836e7e25d1bc22363072af2452c0"
+    },
+    "Common/CRTContextMenu.cs": {
+     "bytes": 2344,
+     "lines": 82,
+     "md5": "925cc09109ce6f66bced29a46b20a9a8"
+    },
+    "Properties/AssemblyInfo.cs": {
+     "bytes": 1505,
+     "lines": 36,
+     "md5": "740687b77a4520d36ef710b4706faf69"
+    },
+    "Properties/Settings.Designer.cs": {
+     "bytes": 1158,
+     "lines": 26,
+     "md5": "509b633af41e01a667172072b5c08b00"
+    }
+   }
+  },
+  "CRT.Framework.Extensions": {
+   "file_count": 13,
+   "line_total": 3819,
+   "files": {
+    "ControlExtension.cs": {
+     "bytes": 1261,
+     "lines": 37,
+     "md5": "15847de4025a8c56dd08c7419f5cc2ff"
+    },
+    "DateTimeExtension.cs": {
+     "bytes": 4440,
+     "lines": 111,
+     "md5": "84689c5cc6862da283a0c77818185a62"
+    },
+    "DataRowExtension.cs": {
+     "bytes": 1583,
+     "lines": 55,
+     "md5": "36453f80e3fd6dc76284896ab56c3b7b"
+    },
+    "ListExtension.cs": {
+     "bytes": 1117,
+     "lines": 35,
+     "md5": "26f3e84ef09b62ee07e605cf974ff45d"
+    },
+    "StringExtension.cs": {
+     "bytes": 79621,
+     "lines": 2060,
+     "md5": "68e4ccf7580328ded994eac25f1a464d"
+    },
+    "NumericLib.cs": {
+     "bytes": 14314,
+     "lines": 322,
+     "md5": "8406916de135fdfb76196fc03e96b321"
+    },
+    "DataTableExtension.cs": {
+     "bytes": 4936,
+     "lines": 118,
+     "md5": "be726a9143b65c1ad7b816a204b67f25"
+    },
+    "ObjectExtension.cs": {
+     "bytes": 15311,
+     "lines": 383,
+     "md5": "34ec63d2af9746e74d3d9046e07f7157"
+    },
+    "EnumExtension.cs": {
+     "bytes": 2301,
+     "lines": 72,
+     "md5": "f241c09efe5224f3c39a5fb2a41cfb95"
+    },
+    "DateTimeLib.cs": {
+     "bytes": 18187,
+     "lines": 501,
+     "md5": "683d2f2580f7538daa45ed7be024f479"
+    },
+    "Properties/AssemblyInfo.cs": {
+     "bytes": 1501,
+     "lines": 36,
+     "md5": "abb239b7fc174bf8b101c6fc97b228d9"
+    },
+    "Properties/Settings.Designer.cs": {
+     "bytes": 1161,
+     "lines": 26,
+     "md5": "f7546d79c02be47b743a2a93181a87e2"
+    },
+    "Properties/Resources.Designer.cs": {
+     "bytes": 3087,
+     "lines": 63,
+     "md5": "7c7dce206a216d60caca08b12b2c1670"
+    }
+   }
+  },
+  "CRT.Framework.JSON": {
+   "file_count": 2,
+   "line_total": 76,
+   "files": {
+    "DataRowConverter.cs": {
+     "bytes": 1475,
+     "lines": 40,
+     "md5": "493c99bd30903ee5e7a07d6b3c4557c0"
+    },
+    "Properties/AssemblyInfo.cs": {
+     "bytes": 1499,
+     "lines": 36,
+     "md5": "06eabd0077ecc71b68dce40dac3a13f0"
+    }
+   }
+  },
+  "CRT.Framework.Net": {
+   "file_count": 3,
+   "line_total": 512,
+   "files": {
+    "SerialPortManager.cs": {
+     "bytes": 5520,
+     "lines": 174,
+     "md5": "fcad36da001b0292a6ab72148fefd4e2"
+    },
+    "SerialSettings.cs": {
+     "bytes": 9544,
+     "lines": 302,
+     "md5": "3a2acb96ab54582bc05af7bdd848da38"
+    },
+    "Properties/AssemblyInfo.cs": {
+     "bytes": 1501,
+     "lines": 36,
+     "md5": "f1654d049d9a7180d40a5356a11d696d"
+    }
+   }
+  },
+  "CRT.Framework.PDF": {
+   "file_count": 8,
+   "line_total": 1117,
+   "files": {
+    "ZXingHelper.cs": {
+     "bytes": 1936,
+     "lines": 62,
+     "md5": "883f9b2a2439a31105c0cdf896546e68"
+    },
+    "UnitConvert.cs": {
+     "bytes": 1418,
+     "lines": 52,
+     "md5": "93bac0b697043a5fac902c4841d92cfc"
+    },
+    "Syncfusion/SyncPdfHelper.cs": {
+     "bytes": 10535,
+     "lines": 329,
+     "md5": "2bca1310c2052665dba7edf9ce0d003a"
+    },
+    "Properties/AssemblyInfo.cs": {
+     "bytes": 1497,
+     "lines": 36,
+     "md5": "96f4fd4381045e0b3cd3b0046ae3b20c"
+    },
+    "Properties/Resources.Designer.cs": {
+     "bytes": 3422,
+     "lines": 72,
+     "md5": "85165f68e34f268e728a4b99096484e4"
+    },
+    "PDFLib/Enums.cs": {
+     "bytes": 319,
+     "lines": 21,
+     "md5": "6f75df1aa7685cd78d40de8b831c19e9"
+    },
+    "PDFLib/PDFLibHelper.cs": {
+     "bytes": 21276,
+     "lines": 518,
+     "md5": "eb258752d68826f2b249c80d672520c8"
+    },
+    "PDFLib/BlockInfo.cs": {
+     "bytes": 763,
+     "lines": 27,
+     "md5": "9a8cf986f29714bb27d2e659abdc1349"
+    }
+   }
+  },
+  "CRT.Framework.PDF.Objects": {
+   "file_count": 7,
+   "line_total": 390,
+   "files": {
+    "UnitConvert.cs": {
+     "bytes": 1426,
+     "lines": 52,
+     "md5": "653e9d5d13791cc3144ea1e56dd57cfb"
+    },
+    "FontInfo.cs": {
+     "bytes": 661,
+     "lines": 30,
+     "md5": "d245c4333fffb987bdf476d7d367e36b"
+    },
+    "Enums.cs": {
+     "bytes": 265,
+     "lines": 16,
+     "md5": "358d075b0d3512bef26839be7e2fc827"
+    },
+    "BoxInfo.cs": {
+     "bytes": 2148,
+     "lines": 98,
+     "md5": "c2fbccb8cc963fae6c461996265275a3"
+    },
+    "PageInfo.cs": {
+     "bytes": 1002,
+     "lines": 46,
+     "md5": "8692cde689dc89bd195cf845ebdbfb0a"
+    },
+    "PDFInfo.cs": {
+     "bytes": 2651,
+     "lines": 112,
+     "md5": "7f2bcb2214910d3078f6e380fb7a1752"
+    },
+    "Properties/AssemblyInfo.cs": {
+     "bytes": 1513,
+     "lines": 36,
+     "md5": "0cc5245f85b2fc71baba8c29895b9d96"
+    }
+   }
+  },
+  "CRT.Framework.Utils": {
+   "file_count": 6,
+   "line_total": 478,
+   "files": {
+    "PathUtil.cs": {
+     "bytes": 4019,
+     "lines": 110,
+     "md5": "f3c075af8d00ba5e82c2e43859fb276d"
+    },
+    "CommandLine.cs": {
+     "bytes": 3090,
+     "lines": 85,
+     "md5": "19fb4b33b36bcb34da156e35fff7c19b"
+    },
+    "ImageUtil.cs": {
+     "bytes": 2516,
+     "lines": 75,
+     "md5": "ed5fee17d17de09ec26ff7475a2110d9"
+    },
+    "SystemUtil.cs": {
+     "bytes": 1483,
+     "lines": 56,
+     "md5": "a70af30df2752c58612bb84c86584a14"
+    },
+    "UserIdleDetector.cs": {
+     "bytes": 4030,
+     "lines": 116,
+     "md5": "83bcfc95cc74d661389074dba6d95809"
+    },
+    "Properties/AssemblyInfo.cs": {
+     "bytes": 1501,
+     "lines": 36,
+     "md5": "f1654d049d9a7180d40a5356a11d696d"
+    }
+   }
+  },
+  "CRT.Framework.Utils.ZipLib": {
+   "file_count": 2,
+   "line_total": 72,
+   "files": {
+    "ZipHelper.cs": {
+     "bytes": 1198,
+     "lines": 36,
+     "md5": "b1e2ef1c3d9b7527e21b18779f4f55a7"
+    },
+    "Properties/AssemblyInfo.cs": {
+     "bytes": 1515,
+     "lines": 36,
+     "md5": "f8fbc59cb176a4deb4df1cff1ceb019d"
+    }
+   }
+  },
+  "CRT.Framework.WinForms": {
+   "file_count": 14,
+   "line_total": 2170,
+   "files": {
+    "CommandGroup.cs": {
+     "bytes": 2490,
+     "lines": 84,
+     "md5": "947680a38c5cd8cdaff5e8acaaa26820"
+    },
+    "Enums.cs": {
+     "bytes": 3857,
+     "lines": 165,
+     "md5": "1e79582b6f2d507941069fbe0f8cc4f0"
+    },
+    "Command.cs": {
+     "bytes": 2029,
+     "lines": 64,
+     "md5": "07c911d54688d54c5bb3e11970d7681b"
+    },
+    "Forms/BasePopupForm.Designer.cs": {
+     "bytes": 1569,
+     "lines": 49,
+     "md5": "9af06e76221214815c878bd4730793fa"
+    },
+    "Forms/BasePopupForm.cs": {
+     "bytes": 811,
+     "lines": 34,
+     "md5": "87bb9c0c51bfe58f80867767c39b5885"
+    },
+    "Forms/BaseRibbonForm.cs": {
+     "bytes": 8612,
+     "lines": 223,
+     "md5": "0bd8ca57e4a9a72a7ec6b168e977bad9"
+    },
+    "Forms/BaseForm.Designer.cs": {
+     "bytes": 1222,
+     "lines": 39,
+     "md5": "122df9903d7c3a9c29938c7bc4664433"
+    },
+    "Forms/BaseRibbonForm.Designer.cs": {
+     "bytes": 1234,
+     "lines": 39,
+     "md5": "9d7929cfffdac886c9b15203456d30e3"
+    },
+    "Forms/BaseForm.cs": {
+     "bytes": 26460,
+     "lines": 672,
+     "md5": "c5edf1e1f941a06b4958d519833abffd"
+    },
+    "Controls/ImageButton.cs": {
+     "bytes": 10418,
+     "lines": 321,
+     "md5": "f7017fdac197795afa0a0fc17edb345b"
+    },
+    "Controls/FolderSelectDialog.cs": {
+     "bytes": 11634,
+     "lines": 337,
+     "md5": "89557d87d867e8e740f92cdd30dbb39d"
+    },
+    "Properties/AssemblyInfo.cs": {
+     "bytes": 1507,
+     "lines": 36,
+     "md5": "8cc7d81407a2c951a1764514f5d620ee"
+    },
+    "Properties/Settings.Designer.cs": {
+     "bytes": 1159,
+     "lines": 26,
+     "md5": "651bc48ed05eee608ceaf8f9f676df73"
+    },
+    "Properties/Resources.Designer.cs": {
+     "bytes": 3761,
+     "lines": 81,
+     "md5": "bede4fe49b38b2b2276d65330f9de1e2"
+    }
+   }
+  }
+ }
+}

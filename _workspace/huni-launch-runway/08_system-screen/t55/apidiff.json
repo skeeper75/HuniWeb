@@ -1,0 +1,464 @@
+{
+ "CRT.Framework.AWS": {
+  "TYPE": {
+   "only_yeolim": [
+    "Bucket",
+    "Object",
+    "OwnerIdentity",
+    "Record",
+    "RequestParameters",
+    "ResponseElements",
+    "S3",
+    "S3JsonMessage",
+    "UserIdentity"
+   ],
+   "only_huni": [
+    "SqsLogSink"
+   ],
+   "both": 4
+  },
+  "MEMBER": {
+   "only_yeolim": [
+    "Bucket.Arn",
+    "Bucket.Name",
+    "Bucket.OwnerIdentity",
+    "Object.ETag",
+    "Object.GetKeyByDecode()",
+    "Object.Key",
+    "Object.Sequencer",
+    "Object.Size",
+    "Object.VersionId",
+    "OwnerIdentity.PrincipalId",
+    "Record.AwsRegion",
+    "Record.EventName",
+    "Record.EventSource",
+    "Record.EventTime",
+    "Record.EventVersion",
+    "Record.RequestParameters",
+    "Record.ResponseElements",
+    "Record.S3",
+    "Record.UserIdentity",
+    "RequestParameters.sourceIPAddress",
+    "ResponseElements.x_amz_id_2",
+    "ResponseElements.x_amz_request_id",
+    "S3.Bucket",
+    "S3.ConfigurationId",
+    "S3.Object",
+    "S3.S3SchemaVersion",
+    "S3JsonMessage.DeserializeError",
+    "S3JsonMessage.ErrorMessage",
+    "S3JsonMessage.ReceiptHandle",
+    "S3JsonMessage.Records",
+    "S3JsonMessage.ToString()",
+    "UserIdentity.PrincipalId"
+   ],
+   "only_huni": [
+    "S3Client.CopyFileAsync()",
+    "S3Client.DeleteFileAsync()",
+    "S3Client.DownloadFileAsync()",
+    "SqsClient.ChangeMessageVisibility()",
+    "SqsClient.DeleteMessage()",
+    "SqsClient.DeleteMessageBatch()",
+    "SqsClient.IsListening()",
+    "SqsClient.PutMessageAsync()",
+    "SqsClient.PutMessageFifoAsync()",
+    "SqsClient.Unsubscribe()",
+    "SqsLogSink.Dispose()",
+    "SqsLogSink.Send()",
+    "SqsLogSink.SqsLogSink()"
+   ],
+   "both": 21
+  }
+ },
+ "CRT.Framework.Asset": {
+  "TYPE": {
+   "only_yeolim": [],
+   "only_huni": [],
+   "both": 2
+  },
+  "MEMBER": {
+   "only_yeolim": [],
+   "only_huni": [],
+   "both": 2
+  }
+ },
+ "CRT.Framework.Core": {
+  "TYPE": {
+   "only_yeolim": [
+    "FileTransferType"
+   ],
+   "only_huni": [],
+   "both": 10
+  },
+  "MEMBER": {
+   "only_yeolim": [
+    "GlobalConstants.DOMAIN_KEY",
+    "UserInfoContext.FileTransferType"
+   ],
+   "only_huni": [],
+   "both": 20
+  }
+ },
+ "CRT.Framework.DevExpr": {
+  "TYPE": {
+   "only_yeolim": [
+    "CPSContextMenu",
+    "CPSGlobalColor",
+    "CPSMaskType",
+    "EnumExtension"
+   ],
+   "only_huni": [
+    "CRTContextMenu",
+    "CRTGlobalColor",
+    "CRTMaskType",
+    "GridViewForGroupRowSortByDragDrop",
+    "PictureEditExtension"
+   ],
+   "both": 28
+  },
+  "MEMBER": {
+   "only_yeolim": [
+    "CPSContextMenu.CPSContextMenu()",
+    "CPSContextMenu.CreateItems()",
+    "CPSContextMenu.MenuList",
+    "CPSGlobalColor.AddedRowBackColor",
+    "CPSGlobalColor.AddedRowForeColor",
+    "CPSGlobalColor.CheckedRowColor",
+    "CPSGlobalColor.DeleteRowBackColor",
+    "CPSGlobalColor.DeleteRowForeColor",
+    "CPSGlobalColor.EvenRowBackColor",
+    "CPSGlobalColor.MessageDefaultColor",
+    "CPSGlobalColor.MessageErrorColor",
+    "CPSGlobalColor.MessageInfoColor",
+    "CPSGlobalColor.MessageQuestionColor",
+    "CPSGlobalColor.MessageWarnColor",
+    "CPSGlobalColor.ModifiedRowBackColor",
+    "CPSGlobalColor.ModifiedRowForeColor",
+    "CPSGlobalColor.ReadOnlyBackColor",
+    "CPSGlobalColor.ReadOnlyForeColor",
+    "CPSGlobalColor.RequiredBackColor",
+    "CPSGlobalColor.RequiredForeColor",
+    "EnumExtension.x_GetStringValue()"
+   ],
+   "only_huni": [
+    "CRTContextMenu.CRTContextMenu()",
+    "CRTContextMenu.CreateItems()",
+    "CRTContextMenu.MenuList",
+    "CRTGlobalColor.AddedRowBackColor",
+    "CRTGlobalColor.AddedRowForeColor",
+    "CRTGlobalColor.CheckedRowColor",
+    "CRTGlobalColor.DeleteRowBackColor",
+    "CRTGlobalColor.DeleteRowForeColor",
+    "CRTGlobalColor.EvenRowBackColor",
+    "CRTGlobalColor.MessageDefaultColor",
+    "CRTGlobalColor.MessageErrorColor",
+    "CRTGlobalColor.MessageInfoColor",
+    "CRTGlobalColor.MessageQuestionColor",
+    "CRTGlobalColor.MessageWarnColor",
+    "CRTGlobalColor.ModifiedRowBackColor",
+    "CRTGlobalColor.ModifiedRowForeColor",
+    "CRTGlobalColor.ReadOnlyBackColor",
+    "CRTGlobalColor.ReadOnlyForeColor",
+    "CRTGlobalColor.RequiredBackColor",
+    "CRTGlobalColor.RequiredForeColor",
+    "GridLookUpEditExtension.x_SetEditValueByIndex()",
+    "GridViewExtension.GridDefaultColumnPanelRowHeight",
+    "GridViewExtension.GridDefaultFont",
+    "GridViewExtension.GridDefaultRowHeight",
+    "GridViewExtension.x_GetRowHandleLastVisible()",
+    "GridViewForGroupRowSortByDragDrop.CurrentGroupRowInfo",
+    "GridViewForGroupRowSortByDragDrop.DragRowInfo",
+    "GridViewForGroupRowSortByDragDrop.GridViewForGroupRowSortByDragDrop()",
+    "GridViewForGroupRowSortByDragDrop.OnCustomColumnSort()",
+    "GridViewForGroupRowSortByDragDrop.OnCustomDrawGroupRow()",
+    "GridViewForGroupRowSortByDragDrop.OnDataSourceChanged()",
+    "GridViewForGroupRowSortByDragDrop.OnDrop()",
+    "GridViewForGroupRowSortByDragDrop.OnGroupDragDropStateChanged()",
+    "GridViewForGroupRowSortByDragDrop.OnGroupRowCollapsing()",
+    "GridViewForGroupRowSortByDragDrop.OnMouseDown()",
+    "GridViewForGroupRowSortByDragDrop.OnMouseMove()",
+    "GridViewForGroupRowSortByDragDrop.OnMouseUp()",
+    "ObjectExtensions.x_IsNullOrEmptyString()",
+    "PictureEditExtension.x_ClearImage()",
+    "PictureEditExtension.x_LoadImageFromUrl()",
+    "RepositoryExtension.x_AddRepositoryItemSearchLookUpEdit()"
+   ],
+   "both": 117
+  }
+ },
+ "CRT.Framework.Extensions": {
+  "TYPE": {
+   "only_yeolim": [],
+   "only_huni": [
+    "StringValueAttribute"
+   ],
+   "both": 11
+  },
+  "MEMBER": {
+   "only_yeolim": [],
+   "only_huni": [
+    "DataRowExtension.x_ToJson()",
+    "StringValueAttribute.StringValue",
+    "StringValueAttribute.StringValueAttribute()"
+   ],
+   "both": 130
+  }
+ },
+ "CRT.Framework.PDF": {
+  "TYPE": {
+   "only_yeolim": [
+    "EnumRotate",
+    "LineInfo",
+    "MergePdfInfo",
+    "PDFLibCreator"
+   ],
+   "only_huni": [
+    "BlockInfo",
+    "EnumBlockType",
+    "ZXingHelper"
+   ],
+   "both": 4
+  },
+  "MEMBER": {
+   "only_yeolim": [
+    "LineInfo.EndPt",
+    "LineInfo.LineInfo()",
+    "LineInfo.LineWidth",
+    "LineInfo.StartPt",
+    "LineInfo.StrokeCMYKColor",
+    "MergePdfInfo.MergePdfFiles",
+    "MergePdfInfo.MergePdfInfo()",
+    "MergePdfInfo.OutputPdfFilePath",
+    "MergePdfInfo.ResizeMode",
+    "MergePdfInfo.TargetSize",
+    "PDFLibCreator.BeginPage()",
+    "PDFLibCreator.Close()",
+    "PDFLibCreator.Dispose()",
+    "PDFLibCreator.DrawImage()",
+    "PDFLibCreator.DrawLine()",
+    "PDFLibCreator.DrawPDF()",
+    "PDFLibCreator.DrawSVG()",
+    "PDFLibCreator.DrawText()",
+    "PDFLibCreator.EndPage()",
+    "PDFLibCreator.ErrorEntityList",
+    "PDFLibCreator.GetBoxSize()",
+    "PDFLibCreator.GetPageHeightMilimeter()",
+    "PDFLibCreator.GetPageHeightPt()",
+    "PDFLibCreator.GetPageWidthMilimeter()",
+    "PDFLibCreator.GetPageWidthPt()",
+    "PDFLibCreator.IsDisposed",
+    "PDFLibCreator.LoadFont()",
+    "PDFLibCreator.OpenDoc",
+    "PDFLibCreator.PDFLibCreator()",
+    "PDFLibCreator.PageCount",
+    "PDFLibHelper.MergePdfFiles()",
+    "UnitConvert.ConvertToPositiveDegree()"
+   ],
+   "only_huni": [
+    "BlockInfo.BlockType",
+    "BlockInfo.ImageFilePath",
+    "BlockInfo.Name",
+    "BlockInfo.Text",
+    "PDFLibHelper.CreatePdfFromBlockPdf()",
+    "PDFLibHelper.MergeLabelPdfFiles()",
+    "SyncPdfHelper.ExtractImage()",
+    "SyncPdfHelper.ExtractText()",
+    "SyncPdfHelper.PrintPdf()",
+    "ZXingHelper.GenerateQRCode()",
+    "ZXingHelper.GetBarcodeFromImage()"
+   ],
+   "both": 11
+  }
+ },
+ "CRT.Framework.PDF.Objects": {
+  "TYPE": {
+   "only_yeolim": [
+    "BarcodeType",
+    "BoundingRectangle",
+    "DataMatrixSymbolType",
+    "IMark",
+    "MacroType",
+    "MarkConvertor",
+    "MarkDataMatrixBarocde",
+    "MarkQRBarocde",
+    "MarkText",
+    "Pages",
+    "PlacementSide",
+    "PositionAroundPage"
+   ],
+   "only_huni": [],
+   "both": 6
+  },
+  "MEMBER": {
+   "only_yeolim": [
+    "BoundingRectangle.BoundingRectangle()",
+    "BoundingRectangle.GetRectangle()",
+    "BoundingRectangle.GetRectanglePt()",
+    "BoundingRectangle.Height",
+    "BoundingRectangle.OffsetX",
+    "BoundingRectangle.OffsetY",
+    "BoundingRectangle.Rotate",
+    "BoundingRectangle.ToString()",
+    "BoundingRectangle.Width",
+    "MarkConvertor.CanConvert()",
+    "MarkConvertor.ReadJson()",
+    "MarkConvertor.WriteJson()",
+    "MarkDataMatrixBarocde.BoundingRectangle",
+    "MarkDataMatrixBarocde.ID",
+    "MarkDataMatrixBarocde.MarcroString",
+    "MarkDataMatrixBarocde.Margin",
+    "MarkDataMatrixBarocde.MarkDataMatrixBarocde()",
+    "MarkDataMatrixBarocde.Pages",
+    "MarkDataMatrixBarocde.PositionAroundPage",
+    "MarkDataMatrixBarocde.PureBarcode",
+    "MarkDataMatrixBarocde.SaveFilePath",
+    "MarkDataMatrixBarocde.SymbolType",
+    "MarkDataMatrixBarocde.TypeName",
+    "MarkQRBarocde.BoundingRectangle",
+    "MarkQRBarocde.ID",
+    "MarkQRBarocde.MarcroString",
+    "MarkQRBarocde.Margin",
+    "MarkQRBarocde.MarkQRBarocde()",
+    "MarkQRBarocde.Pages",
+    "MarkQRBarocde.PositionAroundPage",
+    "MarkQRBarocde.PureBarcode",
+    "MarkQRBarocde.SaveFilePath",
+    "MarkQRBarocde.TypeName",
+    "MarkText.BoundingRectangle",
+    "MarkText.FontColor",
+    "MarkText.FontName",
+    "MarkText.FontSize",
+    "MarkText.ID",
+    "MarkText.MarcroString",
+    "MarkText.MarkText()",
+    "MarkText.Pages",
+    "MarkText.PositionAroundPage",
+    "MarkText.ShowBoarder",
+    "MarkText.TypeName",
+    "PDFInfo.PageSizeList()",
+    "PDFInfo.TrimBoxSizeList()",
+    "PDFInfo.TrimBoxX1Y1List()",
+    "Pages.FistPages",
+    "Pages.GetPlacementPages()",
+    "Pages.LastPages",
+    "Pages.Pages()",
+    "Pages.PlacementSide",
+    "UnitConvert.ConvertLeftTopToLeftBottom()",
+    "UnitConvert.ConvertLeftTopToRightBottom()",
+    "UnitConvert.ConvertLeftTopToRightTop()",
+    "UnitConvert.ConvertMillimeterToPixel()",
+    "UnitConvert.ConvertMillimeterToPixelX()",
+    "UnitConvert.ConvertMillimeterToPixelY()",
+    "UnitConvert.ConvertPixelToMillimeter()",
+    "UnitConvert.ConvertPixelXToMillimeter()",
+    "UnitConvert.ConvertPixelYToMillimeter()",
+    "UnitConvert.ConvertPointToPixel()",
+    "UnitConvert.ConvertPointToPixelX()",
+    "UnitConvert.ConvertPointToPixelY()",
+    "UnitConvert.DpiX",
+    "UnitConvert.DpiY"
+   ],
+   "only_huni": [],
+   "both": 28
+  }
+ },
+ "CRT.Framework.Utils": {
+  "TYPE": {
+   "only_yeolim": [],
+   "only_huni": [
+    "ImageUtil",
+    "UserIdleDetector"
+   ],
+   "both": 3
+  },
+  "MEMBER": {
+   "only_yeolim": [
+    "PathUtil.WaitForFile()"
+   ],
+   "only_huni": [
+    "ImageUtil.GetImageFromUrl()",
+    "ImageUtil.GetWebRequest()",
+    "ImageUtil.TimeoutWebClient()",
+    "PathUtil.GetShortId()",
+    "UserIdleDetector.GetIdleTime()",
+    "UserIdleDetector.GetLastInputTimeMs()",
+    "UserIdleDetector.IsIdle()",
+    "UserIdleDetector.ResetIdleTime()",
+    "UserIdleDetector.UserIdleDetector()",
+    "UserIdleDetector.cbSize",
+    "UserIdleDetector.dwTime"
+   ],
+   "both": 8
+  }
+ },
+ "CRT.Framework.WinForms": {
+  "TYPE": {
+   "only_yeolim": [
+    "Common",
+    "FrmZipCode",
+    "Juso",
+    "Results",
+    "ZipCodeRest",
+    "ZipCodeResult"
+   ],
+   "only_huni": [],
+   "both": 11
+  },
+  "MEMBER": {
+   "only_yeolim": [
+    "BaseForm.DefaultGridFont",
+    "Common.Common()",
+    "Common.CountPerPage",
+    "Common.CurrentPage",
+    "Common.ErrorCode",
+    "Common.ErrorMessage",
+    "Common.TotalCount",
+    "FrmZipCode.FrmZipCode()",
+    "FrmZipCode.OnActivated()",
+    "FrmZipCode.OnLoad()",
+    "FrmZipCode.OnShown()",
+    "FrmZipCode.SelectedAddr1",
+    "FrmZipCode.SelectedZipCode",
+    "Juso.AdmCd",
+    "Juso.BdKdcd",
+    "Juso.BdMgtSn",
+    "Juso.BdNm",
+    "Juso.BuldMnnm",
+    "Juso.BuldSlno",
+    "Juso.DetBdNmList",
+    "Juso.EmdNm",
+    "Juso.EmdNo",
+    "Juso.EngAddr",
+    "Juso.JibunAddr",
+    "Juso.Juso()",
+    "Juso.LiNm",
+    "Juso.LnbrMnnm",
+    "Juso.LnbrSlno",
+    "Juso.MtYn",
+    "Juso.Rn",
+    "Juso.RnMgtSn",
+    "Juso.RoadAddr",
+    "Juso.RoadAddrPart1",
+    "Juso.RoadAddrPart2",
+    "Juso.SggNm",
+    "Juso.SiNm",
+    "Juso.UdrtYn",
+    "Juso.ZipNo",
+    "Results.Common",
+    "Results.Juso",
+    "Results.Results()",
+    "ZipCodeRest.CheckSpecialKeyword()",
+    "ZipCodeRest.CheckSqlKeyword()",
+    "ZipCodeRest.GetAddress()",
+    "ZipCodeResult.GetResultToDataTable()",
+    "ZipCodeResult.Results",
+    "ZipCodeResult.ZipCodeResult()"
+   ],
+   "only_huni": [
+    "BaseForm.AllowFloating",
+    "BasePopupForm.CloseWindowWhenEscKey"
+   ],
+   "both": 94
+  }
+ }
+}

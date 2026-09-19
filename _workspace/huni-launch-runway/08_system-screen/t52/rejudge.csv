@@ -1,0 +1,84 @@
+plan_row_id,내용,넘긴곳(t51),판정,정정대상시스템,근거,근거 요지
+STD-ORD-027,오프라인 주문 별도 등록 경로,webadmin,라우팅 대상 오류,mes,t50/screens.csv:30,MES-ORD-FrmOrderOffline 오프라인 주문 등록(STD-MFG-133·build/완료·[오픈분모밖]) — 넘긴곳 webadmin 오배정
+STD-MYP-028,충전 입금 확인 = 토스페이먼츠 가상계좌 API 직접 발급,webadmin↔토스,빠진 일,webadmin↔토스,t49/screens.csv:199,webadmin 원장 147행에 토스 counterpart 행 0 · 샵바이 가상계좌(t48/screens.csv:90 STD-PAY-003)는 주문결제용 provided 로 충전 발급과 별건. 선행 결정 STD-PAY-023·STD-MYP-023(t48/huni-mall-decisions.md)
+STD-MYP-029,입금 확인 자동화 — 가상계좌 DEPOSIT_CALLBACK 웹훅 수신→자동 충전,webadmin,빠진 일,webadmin,t49/screens.csv:199,기존 shopby_webhook 는 결제완료·취소·배송지변경만 수신(STD-PAY-031) — 입금 콜백→충전 적립 분기 행 없음
+STD-MYP-043,프린트머니 구현 M1 — webadmin t_pm_charge_txn + 감지·지급 잡(폴링) + 웹훅 신호 연결,webadmin,빠진 일,webadmin,t48/screens.csv:34,"프린트머니 M0(t48:34)·M2(t48/screens.csv:116)·M3(t48/screens.csv:227)·M6(t48/screens.csv:10)은 원장 실재, M1 만 부재. 단 원장 소유 결정 STD-MYP-051(t48/shopby-decisions.md) 에서 A(샵바이 적립금) 채택 시 불요"
+STD-MYP-046,프린트머니 구현 M4 — 충전 취소/환불 처리 + 운영 화면(txn 목록·재시도),webadmin,빠진 일,webadmin,t48/screens.csv:34,M4(충전 취소/환불 + txn 운영화면) 대응 행 0 — M0/M2/M3/M6 만 실재
+STD-MYP-047,프린트머니 구현 M5 — 구 잔액 마이그레이션 시드 실행(260630 스펙),webadmin,라우팅 대상 오류,shopby,t48/screens.csv:93,SB-POINT 기존 프린트머니 잔액 이관(STD-MYP-009·integrate/미착수)이 M5 와 같은 일
+STD-PRM-017,[구IA#71] 체험단관리 (등록/수정/신청내역),webadmin,빠진 일,shopby,t48/screens.csv:255,MALL-EVENT 체험단 모집·신청·당첨·후기(STD-PRM-011)는 고객 화면 — 운영자 관리 화면 행 0. STD-ADC-016 과 동일 기능의 구IA 표기(t48 선례상 두 plan_row_id 를 한 화면에 병기)
+STD-B2B-001,거래처(기업회원) 등록·관리,webadmin,라우팅 대상 오류,shopby,t48/screens.csv:86,SB-MEMBER [구IA#45] 거래처관리 (등록/수정/처리)(STD-B2B-013·config/미확인)
+STD-B2B-002,거래처별 단가/할인율 설정,webadmin,빠진 일,shopby,t48/screens.csv:86,거래처별 커머스 단가/할인율 행 0(MES 고객별 제지 할인율 t50/screens.csv:44 는 생산원가축으로 별건)
+STD-B2B-003,거래처 소속 담당자 다계정,webadmin,빠진 일,shopby,t48/screens.csv:86,거래처 소속 담당자 다계정 행 0
+STD-B2B-004,후불 여신한도 설정,webadmin,빠진 일,shopby,t48/screens.csv:245,MALL-CHECKOUT B2B 후불결제(STD-PAY-010)는 고객 주문서 측 — 여신한도 설정 행 0
+STD-B2B-005,후불 주문 승인·미결제 관리,webadmin,빠진 일,shopby,t48/screens.csv:245,후불 주문 승인·미결제 관리(운영자) 행 0
+STD-B2B-006,월 마감 청구서 발행,webadmin,빠진 일,shopby,t48/screens.csv:51,SB-ORDER 증빙서류 발급 관리(STD-ADO-024)는 건별 증빙 — 월 마감 청구서 행 0
+STD-B2B-007,업체별 미수금 관리,webadmin,빠진 일,shopby,t52/ledger-index.txt,원장 747행 「미수금」 0건(grep 실측) · STD-FIN-014 와 동일 기능의 구IA 표기
+STD-B2B-008,거래처 원장(온·오프라인 통합),webadmin,빠진 일,shopby,t50/screens.csv:30,온·오프라인 통합 거래처 원장 행 0(MES 오프라인 주문 등록은 주문 단건)
+STD-B2B-009,원장 데이터 파일 생성(.txt 연계),webadmin,빠진 일,shopby,t52/ledger-index.txt,원장 데이터 .txt 산출 행 0(grep 실측)
+STD-B2B-010,대량 견적 요청 접수·회신,webadmin,빠진 일,shopby,t48/screens.csv:103,MALL-INQUIRY 기업인쇄 상담 접수(STD-CLM-019)·디자인 상담 접수(t48/screens.csv:104 STD-CLM-020)만 실재 — 대량견적 전용 접수·회신 행 0
+STD-B2B-011,견적서 발행(사업자 양식),webadmin,빠진 일,shopby,t50/screens.csv:53,MES-SAL-FrmEstimate 견적서 출력(build/완료·[오픈분모밖])은 오프라인 영업용 — 커머스 B2B 견적서 발행 행 0(재사용 후보)
+STD-B2B-012,세금계산서 일괄 발행,webadmin,라우팅 대상 오류,shopby,t48/screens.csv:51,SB-ORDER 증빙서류 발급 관리(STD-ADO-024·config/미착수)가 운영자 발행 창구 · 「일괄」 여부는 그 행의 세부로 흡수
+STD-B2B-015,[구IA#91] 주문관리-후불결제,webadmin,빠진 일,shopby,t48/screens.csv:245,운영자 후불결제 주문관리 행 0(고객측 STD-PAY-010 만 실재) · STD-B2B-005 와 동일 축의 구IA 표기
+STD-ADC-001,회원 목록·검색·상세,webadmin,라우팅 대상 오류,shopby,t48/screens.csv:85,SB-MEMBER [구IA#73] 회원관리 (주문내역/정보확인)(STD-ADC-017·config/미확인)
+STD-ADC-002,회원등급 수동 조정,webadmin,빠진 일,shopby,t48/screens.csv:87,SB-MEMBER 회원등급 산정·자동 승급(STD-MEM-018)만 실재 — 수동 조정 행 0
+STD-ADC-003,탈퇴회원 관리,webadmin,빠진 일,shopby,t48/screens.csv:153,MALL-MY-WITHDRAW 회원탈퇴(STD-MEM-017)는 고객 신청 · SB-MEMBER 5행에 탈퇴회원 관리 행 0
+STD-ADC-005,쿠폰 생성·발행 관리,webadmin,라우팅 대상 오류,shopby,t48/screens.csv:82,SB-COUPON [구IA#76] 쿠폰관리 (발행/매칭/사용내역)(STD-PRM-018) + 쿠폰 등록·사용 내역 조회(t48/screens.csv:72 STD-ADC-006) — SB-COUPON 그룹 13행 실측
+STD-ADC-007,공지사항 관리,webadmin,라우팅 대상 오류,shopby,t48/screens.csv:7,SB-BOARD [구IA#64] 공지사항 관리 (등록/수정/html생성)(STD-INF-009) — SB-BOARD 그룹 8행 실측
+STD-ADC-008,FAQ 관리,webadmin,라우팅 대상 오류,shopby,t48/screens.csv:8,SB-BOARD [구IA#65] 자주묻는질문 관리(STD-INF-010)
+STD-ADC-009,상품Q&A 답변 관리,webadmin,라우팅 대상 오류,shopby,t48/screens.csv:5,SB-BOARD [구IA#69] 상품Q&A (확인/답변)(STD-CLM-024)
+STD-ADC-010,1:1 문의 답변 관리,webadmin,라우팅 대상 오류,shopby,t48/screens.csv:6,SB-BOARD [구IA#70] 1:1문의 (확인/답변)(STD-CLM-025)
+STD-ADC-011,이용후기(리뷰) 관리·블라인드,webadmin,라우팅 대상 오류,shopby,t48/screens.csv:9,SB-BOARD [구IA#72] 이용후기관리 (관리자등록/수정)(STD-INF-011) · 「블라인드」 세부는 그 행의 하위
+STD-ADC-012,대량견적/기업상담/디자인상담 접수 관리,webadmin,라우팅 대상 오류,shopby,t48/screens.csv:3,SB-BOARD [구IA#67] 기업인쇄상담(STD-CLM-022)·[구IA#68] 디자인상담(t48/screens.csv:4 STD-CLM-023) — 대량견적 몫만 STD-B2B-010 으로 남음
+STD-ADC-013,메인/기획전 배너 관리,webadmin,빠진 일,shopby,t48/screens.csv:257,MALL-HOME 메인 기획전/배너 영역(STD-CAT-021·integrate/진행)은 고객 화면 — 운영자 배너 등록 행 0
+STD-ADC-015,매장(거래처) 게시판 관리,webadmin,라우팅 대상 오류,shopby,t48/screens.csv:2,SB-BOARD [구IA#46] 매장게시판(STD-B2B-014·config/미확인)
+STD-ADC-016,체험단 모집·신청내역 관리(운영자),webadmin,빠진 일,shopby,t48/screens.csv:255,운영자 체험단 모집·신청내역 관리 행 0(고객측 STD-PRM-011 만 실재) · STD-PRM-017 과 동일 기능
+STD-FIN-001,월별 매출 통계,webadmin,빠진 일,shopby,t48/screens.csv:68,SB-STAT 4행은 [구IA#79~82] 상품통계뿐 — 월별 매출 통계 행 0
+STD-FIN-002,일별/기간별 매출 조회,webadmin,빠진 일,shopby,t48/screens.csv:68,SB-STAT 에 일별/기간별 매출 조회 행 0
+STD-FIN-003,결제수단별 매출 집계,webadmin,빠진 일,shopby,t48/screens.csv:68,SB-STAT 에 결제수단별 매출 집계 행 0
+STD-FIN-004,상품별 판매 통계,webadmin,빠진 일,shopby,t48/screens.csv:68,[구IA#79~82]는 상품군 4종 통계 화면 — 상품별 판매 통계 행 0
+STD-FIN-005,상품군별 매출 비중,webadmin,빠진 일,shopby,t48/screens.csv:68,SB-STAT 에 상품군별 매출 비중 행 0
+STD-FIN-006,회원/비회원 주문 비중,webadmin,빠진 일,shopby,t48/screens.csv:68,SB-STAT 에 회원/비회원 주문 비중 행 0
+STD-FIN-008,PG 정산 대사,webadmin,빠진 일,shopby,t48/screens.csv:62,SB-CLAIM 환불 실행·정산 반영(STD-ADO-023)은 클레임축 — PG 정산 대사 행 0
+STD-FIN-009,적립금(프린팅머니) 부채 집계,webadmin,빠진 일,webadmin,t48/screens.csv:93,SB-POINT 3행(수동 지급·구매확정 적립·잔액 이관)만 실재 — 적립금 부채 집계 행 0
+STD-FIN-010,외주 발주/정산 엑셀 산출,webadmin,빠진 일,mes,t50/screens.csv:25,MES-MFG-FrmMnfOutsource 외주 관리(STD-MFG-100·build/완료·[오픈분모밖])는 발주 등록 — 정산 엑셀 산출 행 0(재사용 후보)
+STD-FIN-011,쿠폰/할인 사용액 집계,webadmin,빠진 일,shopby,t48/screens.csv:68,SB-COUPON 13행은 발행·보상 정책 — 쿠폰/할인 사용액 집계 행 0
+STD-FIN-012,통계·주문 데이터 엑셀 내보내기,webadmin,빠진 일,shopby,t48/screens.csv:68,통계·주문 데이터 엑셀 내보내기 행 0
+STD-FIN-013,[구IA#47] 계좌관리 (원장용 계좌 등록),webadmin,빠진 일,shopby,t48/screens.csv:17,SB-PAY 무통장 입금 계좌 등록(STD-PAY-028·config/완료)은 쇼핑몰 수납계좌 — B2B 원장용 계좌 등록은 별건·행 0
+STD-FIN-014,[구IA#49] 업체별 미수금,webadmin,빠진 일,shopby,t52/ledger-index.txt,원장 747행 「미수금」 0건 · STD-B2B-007 과 동일 기능의 구IA 표기
+STD-FIN-019,[구IA#84] 굿즈 발주/정산 (Excel 다운),webadmin,빠진 일,mes,t50/screens.csv:25,굿즈 발주/정산 Excel 다운 행 0(MES 외주 관리와 별건)
+STD-FIN-020,"가상계좌 정산한도 1,000만 원 초과 시 처리 방안",외부(토스),불필요,-,t48/shopby-decisions.md:26,화면·기능 없는 외부 회신 대기 안건(보충 4) — 토스 정산한도는 BLK-S3-7 「정산한도·환불계좌 절차」로 이미 선행 입력에 실재
+STD-FIN-021,적립금·증빙 데이터의 MS·이카운트 연동 방식,외부,불필요,-,t48/huni-mall-decisions.md:5,「연동 방식」 결정 안건(보충 4 명시 제외 대상) · MES 이카운트 매출전송(t50/screens.csv:71)은 [오픈분모밖] 기존 자산으로 별도 실재
+STD-SYS-001,관리자 계정 등록·관리,webadmin,라우팅 대상 오류,webadmin,t49/screens.csv:210,auth_user_admin 관리자 계정 등록·비밀번호·권한 관리(build/완료·plan_row_id=NEW) — NEW→STD-SYS-001 재연결
+STD-SYS-002,역할 기반 세분 권한 제어,webadmin,라우팅 대상 오류,webadmin,t49/screens.csv:210,같은 행이 「그룹·개별 permission」을 담당 · MES 측 짝 t50/screens.csv:2~6(권한그룹·메뉴권한 5행)
+STD-SYS-003,관리자 작업 감사로그,webadmin,빠진 일,webadmin,t52/ledger-index.txt,원장 747행에 관리자 감사로그 행 0(grep 「감사」 = pitstop PS-20·pagebuilder 백업 2건뿐)
+STD-SYS-010,원고 저장소(스토리지) 연동,widget·webadmin,라우팅 대상 오류,webadmin,t49/screens.csv:224,wapi_presign 원고 단일 업로드 presign(STD-ART-001·integrate/완료) + rt_upload(t49/screens.csv:247·248) + comp_file(t49/screens.csv:265) — 원고 S3 저장소 배선 실재
+STD-SYS-011,디자인 에디터 외부 서비스 연동,edicus,라우팅 대상 오류,edicus,t50/screens.csv:90,edicus 레인 23행(t50/screens.csv:90~112 EDI-01~23)이 편집기 외부 서비스 연동 일체
+STD-SYS-025,[구IA#44] 관리자 등록/관리,webadmin,라우팅 대상 오류,webadmin,t49/screens.csv:210,STD-SYS-001 과 같은 행 — [구IA#44] 관리자 등록/관리의 구IA 표기
+STD-SYS-028,webadmin 영역 분리(쇼핑몰 관리자 영역 / DB·생산 영역),webadmin,불필요,-,t48/huni-mall-decisions.md:5,화면 없는 구조·작업범위 결정 안건(보충 4) — webadmin-decisions.md 로 이관 대상
+STD-MFG-022,주문 상태머신(REGISTERED/PROMOTING/PROMOTED/HOLD/PAID/FILE_CHECK/FILE_HOLD/MES_SENT/IN_PRODUCTION/PRODUCED/SHIPPED/DONE/CANCELED),webadmin,빠진 일,webadmin,t49/screens.csv:199,13상태 상태머신 정의 행 0(shopby_webhook STD-PAY-031 은 수신구 · PS-25 t50/screens.csv:132 STD-MFG-057 은 한 상태 유지 규칙)
+STD-MFG-023,상태 단위=주문상품옵션(orderProductOptionNo)·주문 단위는 롤업,webadmin,빠진 일,webadmin,t49/screens.csv:208,wapi_order_register 는 주문번호 단위 저장 — orderProductOptionNo 단위 상태·롤업 행 0
+STD-MFG-024,3시스템 매핑 테이블(handoff_id·orderNo+orderProductOptionNo·MES 작업번호),webadmin,빠진 일,webadmin,t50/screens.csv:85,MES-ITF-Shopby-04 는 상품 매핑 — handoff_id×orderNo+옵션번호×MES 작업번호 3시스템 매핑 행 0
+STD-MFG-025,FR-1 MES 주문 상태 변경 통보 수신(접수완료/생산대기/생산중/생산완료),mes,빠진 일,mes,t48/screens.csv:66,FR-3(STD-MFG-031)·FR-5(t48/screens.csv:67)·FR-6(t50/screens.csv:128)·FR-7(t48/screens.csv:54)은 실재 — FR-1 수신 행만 0
+STD-MFG-026,접수완료 시 취소 잠금 원자적 전환(cancelable CAS),webadmin,빠진 일,webadmin,t48/screens.csv:52,샵바이 측 짝 TO-2 취소 창구 닫기(STD-MFG-027)만 실재 — webadmin 측 cancelable CAS 행 0
+STD-MFG-028,FR-2 MES 송장번호 등록 수신,mes,빠진 일,mes,t48/screens.csv:53,샵바이 측 짝 TO-3 배송처리(STD-MFG-029)·송장번호 등록(t48/screens.csv:59 STD-SHP-012)만 실재 — FR-2 수신 행 0
+STD-MFG-033,생산 시작 후 도착한 취소는 자동 처리하지 않고 담당자 에스컬레이션,webadmin,빠진 일,webadmin,t48/screens.csv:64,SB-CLAIM 판매자 클레임 승인·거부(STD-CLM-013)는 샵바이 화면 — 생산 착수 후 에스컬레이션 분기 행 0
+STD-MFG-035,MES 화면 신규 버튼(취소·재업로드 요청·취소요청 승인거부)+사유 입력,mes,빠진 일,mes,t52/ledger-index.txt,t50 mes 88행에 취소·재업로드요청·승인거부 버튼 화면 0 — 상대측 회신 대기 중이나 행 자체는 필요
+STD-MFG-106,1차포장 처리,mes,빠진 일,mes,t50/screens.csv:12,MES-DLV-FrmDelivery 출고 처리(패킹·송장 STD-MFG-111)만 실재 — 1차포장 처리 행 0
+STD-MFG-107,박스포장 처리(실사·대형 상품군),mes,빠진 일,mes,t50/screens.csv:12,박스포장(실사·대형) 처리 행 0
+STD-MFG-108,제작번호별 바코드 입력→포장완료 상태변경,mes,빠진 일,mes,t50/screens.csv:12,제작번호 바코드 입력→포장완료 상태변경 행 0
+STD-MFG-109,전 상품 포장완료 시 제작완료 자동 전환,mes,빠진 일,mes,t50/screens.csv:12,전 상품 포장완료 시 제작완료 자동 전환 행 0
+STD-MFG-112,납품명세서 출력(퀵),mes,빠진 일,mes,t50/screens.csv:13,송장 출력(RptHJInvoiceFS·STD-MFG-111)만 실재 — 납품명세서(퀵) 출력 행 0
+STD-MFG-113,출고명세서 출력(직접방문),mes,빠진 일,mes,t50/screens.csv:13,출고명세서(직접방문) 출력 행 0
+STD-MFG-115,합배송 리스트 식별,mes,빠진 일,mes,t50/screens.csv:16,MES-DLV-FrmDeliveryReadyList 출고대기 목록(STD-MFG-116)은 분모 — 합배송 식별 행 0(재사용 후보)
+STD-MFG-117,재고상품(상품 액세서리) 관리,mes,빠진 일,mes,t50/screens.csv:38,MES-PRD-FrmMaterial 자재 관리(재고관리여부·적정재고수량)는 생산자재 — 판매 액세서리 재고상품 행 0(재사용 후보)
+STD-MFG-118,제작완료 썸네일 확인 화면,mes,빠진 일,mes,t50/screens.csv:73,MES-ITF-DesignFile-ThumbnailCreate(STD-MFG-061)는 생성측 — 제작완료 썸네일 확인 화면 행 0
+STD-MFG-119,일부 재제작+재배송 지시(MES 주문복사),mes,빠진 일,mes,t52/ledger-index.txt,t50 mes 88행에 주문복사·재제작 지시 행 0 · 상위 정책은 STD-CLM-015(t48/huni-mall-decisions.md:11) 미결
+STD-MFG-120,전체 재제작+재배송 지시,mes,빠진 일,mes,t52/ledger-index.txt,전체 재제작+재배송 지시 행 0
+STD-MFG-121,반송 접수·반송여부 체크,mes,빠진 일,mes,t52/ledger-index.txt,원장 747행 「반송」 0건(grep 실측)
+STD-MFG-122,주문 내 정산 메모필드(반송비·재제작 비용 부담),mes,빠진 일,mes,t48/screens.csv:54,FR-7 주문 메모→샵바이 업무메시지(STD-MFG-034)는 커머스축 — MES 주문 내 정산 메모필드 행 0
+STD-MFG-125,파일 오류 재업로드 요청 알림톡 발송(자동·담당자 발),webadmin,라우팅 대상 오류,pitstop,t50/screens.csv:129,PS-22 치명 오류 자동 재업로드 요청(알림톡+링크·STD-MFG-054) + PS-30 담당자 발 알림톡 발송(t50/screens.csv:135 STD-MFG-049) — 자동·담당자 발 양쪽 실재
+STD-MFG-126,재업로드 접수 확인 알림,webadmin,빠진 일,pitstop,t50/screens.csv:131,PS-24 재업로드 시 회차 증가+자동 재검사(STD-MFG-056)만 실재 — 고객 접수 확인 알림 행 0
+STD-MFG-127,편집상품 수정요청 알림(주문번호·편집번호·안내),webadmin,라우팅 대상 오류,edicus,t50/screens.csv:104,EDI-16 편집기 상품 수정요청·수정완료 왕복(STD-MFG-064·manual/미착수)
+STD-MFG-128,알림톡 템플릿 사전 심사·승인 관리,webadmin,라우팅 대상 오류,shopby,t48/screens.csv:46,SB-NOTIFY 알림톡 사용여부+템플릿 검수(STD-SYS-035) + 알림 템플릿 설정(t48/screens.csv:42 STD-SYS-006)
+STD-MFG-129,알림톡 발송 실패 시 SMS/LMS 자동 대체,webadmin,빠진 일,webadmin,t48/screens.csv:42,SB-NOTIFY 11행에 발송 실패 시 SMS/LMS 자동 대체 행 0
+BLK-S2-1,[선행 입력] Railway 운영 변수 4종 설정 여부(값 아님) — `WAPI_SERVER_KEY_REQUIRED`·`SHOPBY_WEBHOOK_SECRET`·`SHOPBY_SYSTEM_KEY`·`SHOPBY_ACCESS_TOKEN`,webadmin,불필요,-,t48/shopby-decisions.md:22,「[선행 입력]」 계열은 t48 이 이미 decisions.md 로 분류한 형식(BLK-S2-2 등) — 화면·기능 없는 선행 입력 확인 안건(보충 4)
