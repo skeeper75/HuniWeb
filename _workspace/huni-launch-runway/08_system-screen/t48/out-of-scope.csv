@@ -1,0 +1,90 @@
+plan_row_id,step,title,owner_name,plan_status,routed_system,reason
+STD-ORD-027,B7,오프라인 주문 별도 등록 경로,김동학,부분,webadmin,webadmin 오프라인 주문 등록
+STD-MYP-028,D5,충전 입금 확인 = 토스페이먼츠 가상계좌 API 직접 발급,미정,미착수,webadmin↔토스,webadmin↔토스 가상계좌 발급
+STD-MYP-029,D5,입금 확인 자동화 — 가상계좌 DEPOSIT_CALLBACK 웹훅 수신→자동 충전,미정,미착수,webadmin,webadmin 입금 웹훅 수신
+STD-MYP-043,D5,프린트머니 구현 M1 — webadmin t_pm_charge_txn + 감지·지급 잡(폴링) + 웹훅 신호 연결,미정,미착수,webadmin,webadmin t_pm_charge_txn
+STD-MYP-046,D5,프린트머니 구현 M4 — 충전 취소/환불 처리 + 운영 화면(txn 목록·재시도),미정,미착수,webadmin,webadmin 충전 운영화면
+STD-MYP-047,D5,프린트머니 구현 M5 — 구 잔액 마이그레이션 시드 실행(260630 스펙),미정,미착수,webadmin,webadmin 잔액 마이그레이션
+STD-PRM-017,D2,[구IA#71] 체험단관리 (등록/수정/신청내역),신우진,미실측,webadmin,webadmin 체험단관리
+STD-B2B-001,E1,거래처(기업회원) 등록·관리,김동학,부분,webadmin,webadmin 거래처 관리
+STD-B2B-002,E1,거래처별 단가/할인율 설정,김동학,미착수,webadmin,webadmin 거래처 단가
+STD-B2B-003,E1,거래처 소속 담당자 다계정,김동학,미착수,webadmin,webadmin 거래처 담당자
+STD-B2B-004,D5,후불 여신한도 설정,김동학,미착수,webadmin,webadmin 여신한도
+STD-B2B-005,D5,후불 주문 승인·미결제 관리,김동학,미착수,webadmin,webadmin 후불 승인
+STD-B2B-006,E1,월 마감 청구서 발행,김동학,미착수,webadmin,webadmin 청구서
+STD-B2B-007,E1,업체별 미수금 관리,김동학,미착수,webadmin,webadmin 미수금
+STD-B2B-008,D5,거래처 원장(온·오프라인 통합),김동학,미착수,webadmin,webadmin 거래처 원장
+STD-B2B-009,D5,원장 데이터 파일 생성(.txt 연계),김동학,미착수,webadmin,webadmin 원장 파일
+STD-B2B-010,E1,대량 견적 요청 접수·회신,김동학,미착수,webadmin,webadmin 대량견적
+STD-B2B-011,E1,견적서 발행(사업자 양식),김동학,미착수,webadmin,webadmin 견적서
+STD-B2B-012,D4,세금계산서 일괄 발행,미정,미착수,webadmin,webadmin 세금계산서 일괄
+STD-B2B-015,D5,[구IA#91] 주문관리-후불결제,신우진,미실측,webadmin,webadmin 후불결제 주문관리
+STD-ADC-001,D2,회원 목록·검색·상세,김동학,작동,webadmin,webadmin 회원관리 화면
+STD-ADC-002,D2,회원등급 수동 조정,김동학,미착수,webadmin,webadmin 회원등급 수동조정
+STD-ADC-003,D2,탈퇴회원 관리,김동학,작동,webadmin,webadmin 탈퇴회원 관리
+STD-ADC-005,D2,쿠폰 생성·발행 관리,김동학,미착수,webadmin,webadmin 쿠폰 생성·발행
+STD-ADC-007,A5,공지사항 관리,김동학,작동,webadmin,webadmin 공지 관리
+STD-ADC-008,A5,FAQ 관리,김동학,작동,webadmin,webadmin FAQ 관리
+STD-ADC-009,A5,상품Q&A 답변 관리,김동학,작동,webadmin,webadmin 상품Q&A 답변
+STD-ADC-010,A5,1:1 문의 답변 관리,김동학,작동,webadmin,webadmin 1:1 답변
+STD-ADC-011,A5,이용후기(리뷰) 관리·블라인드,김동학,작동,webadmin,webadmin 리뷰 관리
+STD-ADC-012,A5,대량견적/기업상담/디자인상담 접수 관리,김동학,미착수,webadmin,webadmin 상담 접수 관리
+STD-ADC-013,A5,메인/기획전 배너 관리,김동학,미착수,webadmin,webadmin 배너 관리
+STD-ADC-014,A5,인쇄 가이드 콘텐츠 관리,김동학,구현-미검증,webadmin,webadmin 가이드 콘텐츠 관리
+STD-ADC-015,A5,매장(거래처) 게시판 관리,김동학,미착수,webadmin,webadmin 매장 게시판 관리
+STD-ADC-016,A5,체험단 모집·신청내역 관리(운영자),김동학,미착수,webadmin,webadmin 체험단 관리
+STD-FIN-001,E1,월별 매출 통계,김동학,작동,webadmin,webadmin 매출 통계
+STD-FIN-002,E1,일별/기간별 매출 조회,김동학,작동,webadmin,webadmin 매출 조회
+STD-FIN-003,E1,결제수단별 매출 집계,김동학,작동,webadmin,webadmin 결제수단 집계
+STD-FIN-004,E1,상품별 판매 통계,김동학,작동,webadmin,webadmin 상품 통계
+STD-FIN-005,E1,상품군별 매출 비중,김동학,작동,webadmin,webadmin 상품군 비중
+STD-FIN-006,E1,회원/비회원 주문 비중,김동학,작동,webadmin,webadmin 주문 비중
+STD-FIN-007,E1,공정/팀별 작업량 통계,최숙진,미착수,webadmin,webadmin 공정 통계
+STD-FIN-008,E1,PG 정산 대사,김동학,미착수,webadmin,webadmin PG 정산 대사
+STD-FIN-009,E1,적립금(프린팅머니) 부채 집계,김동학,미착수,webadmin,webadmin 적립금 부채
+STD-FIN-010,E1,외주 발주/정산 엑셀 산출,김동학,미착수,webadmin,webadmin 외주 정산
+STD-FIN-011,E1,쿠폰/할인 사용액 집계,김동학,작동,webadmin,webadmin 쿠폰 집계
+STD-FIN-012,E1,통계·주문 데이터 엑셀 내보내기,김동학,미착수,webadmin,webadmin 엑셀 내보내기
+STD-FIN-013,E1,[구IA#47] 계좌관리 (원장용 계좌 등록),신우진,미착수,webadmin,webadmin 계좌관리
+STD-FIN-014,E1,[구IA#49] 업체별 미수금,신우진,미착수,webadmin,webadmin 미수금
+STD-FIN-019,E1,[구IA#84] 굿즈 발주/정산 (Excel 다운),최숙진,미착수,webadmin,webadmin 굿즈 발주정산
+STD-FIN-020,E1,"가상계좌 정산한도 1,000만 원 초과 시 처리 방안",외부(토스페이먼츠),미착수,외부(토스),외부(토스) 정산한도
+STD-FIN-021,E1,적립금·증빙 데이터의 MS·이카운트 연동 방식,김용기,미착수,외부,외부 회계(MS·이카운트) 연동
+STD-SYS-001,E1,관리자 계정 등록·관리,김동학,부분,webadmin,webadmin 관리자 계정
+STD-SYS-002,E1,역할 기반 세분 권한 제어,김동학,부분,webadmin,webadmin 권한 제어
+STD-SYS-003,E1,관리자 작업 감사로그,김동학,작동,webadmin,webadmin 감사로그
+STD-SYS-010,C3,원고 저장소(스토리지) 연동,김동학,구현-미검증,widget·webadmin,widget·webadmin 원고 저장소
+STD-SYS-011,C3,디자인 에디터 외부 서비스 연동,미정,부분,edicus,edicus 에디터 연동
+STD-SYS-025,E1,[구IA#44] 관리자 등록/관리,최숙진,부분,webadmin,webadmin 관리자 등록
+STD-SYS-028,E1,webadmin 영역 분리(쇼핑몰 관리자 영역 / DB·생산 영역),신우진,미착수,webadmin,webadmin 영역 분리
+STD-SYS-031,C3,PitStop 서버 환경 확보(Windows·RAM 16GB·AWS 별도 인스턴스),미정,미착수,pitstop,pitstop 서버 환경
+STD-MFG-022,C7,주문 상태머신(REGISTERED/PROMOTING/PROMOTED/HOLD/PAID/FILE_CHECK/FILE_HOLD/MES_SENT/IN_PRODUCTION/PRODUCED/SHIPPED/DONE/CANCELED),서희항,부분,webadmin,webadmin 주문 상태머신
+STD-MFG-023,C7,상태 단위=주문상품옵션(orderProductOptionNo)·주문 단위는 롤업,서희항,부분,webadmin,webadmin 상태 단위
+STD-MFG-024,C7,3시스템 매핑 테이블(handoff_id·orderNo+orderProductOptionNo·MES 작업번호),서희항,부분,webadmin,webadmin 매핑 테이블
+STD-MFG-025,C7,FR-1 MES 주문 상태 변경 통보 수신(접수완료/생산대기/생산중/생산완료),서희항,미착수,mes,mes 상태 통보 수신
+STD-MFG-026,C7,접수완료 시 취소 잠금 원자적 전환(cancelable CAS),서희항,미착수,webadmin,webadmin 취소 잠금
+STD-MFG-028,C7,FR-2 MES 송장번호 등록 수신,서희항,미착수,mes,mes 송장 수신
+STD-MFG-033,C7,생산 시작 후 도착한 취소는 자동 처리하지 않고 담당자 에스컬레이션,서희항,미착수,webadmin,webadmin 에스컬레이션
+STD-MFG-035,C7,MES 화면 신규 버튼(취소·재업로드 요청·취소요청 승인거부)+사유 입력,외부(상대측 회신 대기),미착수,mes,mes 화면 신규 버튼
+STD-MFG-106,C6,1차포장 처리,최숙진,미착수,mes,mes 1차포장
+STD-MFG-107,C6,박스포장 처리(실사·대형 상품군),최숙진,미착수,mes,mes 박스포장
+STD-MFG-108,C6,제작번호별 바코드 입력→포장완료 상태변경,최숙진,미착수,mes,mes 바코드 포장완료
+STD-MFG-109,C6,전 상품 포장완료 시 제작완료 자동 전환,최숙진,미착수,mes,mes 제작완료 전환
+STD-MFG-110,C6,주문번호별 바코드 입력→출고완료 전환,최숙진,미착수,mes,mes 출고완료 전환
+STD-MFG-111,C6,송장 출력·송장 추가출력(택배),최숙진,미착수,mes,mes 송장 출력
+STD-MFG-112,C6,납품명세서 출력(퀵),최숙진,미착수,mes,mes 납품명세서
+STD-MFG-113,C6,출고명세서 출력(직접방문),최숙진,미착수,mes,mes 출고명세서
+STD-MFG-115,C6,합배송 리스트 식별,서희항,미착수,mes,mes 합배송 식별
+STD-MFG-116,C6,전 상품 출고지 단일화(오프라인 주문 외),최숙진,미착수,mes,mes 출고지 단일화
+STD-MFG-117,C6,재고상품(상품 액세서리) 관리,최숙진,미착수,mes,mes 재고상품 관리
+STD-MFG-118,C6,제작완료 썸네일 확인 화면,최숙진,미착수,mes,mes 썸네일 확인
+STD-MFG-119,C6,일부 재제작+재배송 지시(MES 주문복사),최숙진,미착수,mes,mes 일부 재제작
+STD-MFG-120,C6,전체 재제작+재배송 지시,최숙진,미착수,mes,mes 전체 재제작
+STD-MFG-121,C6,반송 접수·반송여부 체크,최숙진,미착수,mes,mes 반송 접수
+STD-MFG-122,C6,주문 내 정산 메모필드(반송비·재제작 비용 부담),최숙진,미착수,mes,mes 정산 메모
+STD-MFG-125,D1,파일 오류 재업로드 요청 알림톡 발송(자동·담당자 발),서희항,미착수,webadmin,webadmin 파일오류 알림
+STD-MFG-126,D1,재업로드 접수 확인 알림,서희항,미착수,webadmin,webadmin 재업로드 알림
+STD-MFG-127,D1,편집상품 수정요청 알림(주문번호·편집번호·안내),서희항,미착수,webadmin,webadmin 편집 수정요청 알림
+STD-MFG-128,D1,알림톡 템플릿 사전 심사·승인 관리,신우진,미착수,webadmin,webadmin 템플릿 심사관리
+STD-MFG-129,D1,알림톡 발송 실패 시 SMS/LMS 자동 대체,서희항,미착수,webadmin,webadmin 알림 대체발송
+BLK-S2-1,C1,[선행 입력] Railway 운영 변수 4종 설정 여부(값 아님) — `WAPI_SERVER_KEY_REQUIRED`·`SHOPBY_WEBHOOK_SECRET`·`SHOPBY_SYSTEM_KEY`·`SHOPBY_ACCESS_TOKEN`,서희항,미착수,webadmin,webadmin Railway 운영변수
