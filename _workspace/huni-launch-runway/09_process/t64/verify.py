@@ -129,6 +129,35 @@ def main():
                 bad_ref.append(f"{g['gap_id']}:{rid}")
     check("V8", not bad_ref, f"gaps 참조 row_id 실재 · 오류 {bad_ref}")
 
+    # V11 제안_담당 공란 0 · 담당_근거가 ①/②/③ 중 하나로 표기됐는가
+    #     (260919 리드 지시 — 공란 105건이 t66 의 「미정」으로 그대로 흘러갔다)
+    blank = [g["gap_id"] for g in gaps if not (g.get("제안_담당") or "").strip()]
+    nobasis = [g["gap_id"] for g in gaps if not (g.get("담당_근거") or "").strip()]
+    badbasis = [g["gap_id"] for g in gaps if (g.get("담당_근거") or "")[:1] not in ("①", "②", "③")]
+    rulec = collections.Counter((g.get("담당_근거") or "?")[0] for g in gaps)
+    check("V11", not blank and not nobasis and not badbasis,
+          f"제안_담당 공란 {len(blank)}{blank} · 담당_근거 공란 {len(nobasis)}{nobasis} · "
+          f"근거표기 오류 {badbasis} · 규칙별 " + " · ".join(f"{k}{rulec[k]}" for k in "①②③")
+          + f" · 남은 「미정」 {sum(1 for g in gaps if g['제안_담당'] == '미정')}")
+
+    # V12 ① 로 채운 행의 담당이 원장 owner_proposed 와 실제로 같은가(생성기를 믿지 않고 다시 조인)
+    lowner = {r["row_id"]: r["owner_proposed"].strip() for r in ledger}
+    mism = []
+    for g in gaps:
+        if not (g.get("담당_근거") or "").startswith("① "):
+            continue
+        want = []
+        for rid in g["관련_row_id"].split(";"):
+            rid = rid.strip()
+            if not rid or rid == "—" or "~" in rid:
+                continue
+            o = lowner.get(rid, "")
+            if o and o not in want:
+                want.append(o)
+        if " ; ".join(want) != g["제안_담당"]:
+            mism.append(f"{g['gap_id']}({g['제안_담당']}≠{' ; '.join(want)})")
+    check("V12", not mism, f"① 승계 담당 = 원장 owner_proposed 재조인 · 불일치 {mism}")
+
     for line in NOTES + FAILS:
         print(line)
     print(f"\n담당 범위 {len(scope)}행 · 프로세스 {len(procs)} · tree {len(tree)}행 · gaps {len(gaps)}건")

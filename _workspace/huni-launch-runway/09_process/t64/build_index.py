@@ -32,7 +32,8 @@ for r in tree:
 for pid, p in procs.items():
     g = [x for x in gaps if x["프로세스"] == pid]
     p["gaps"] = [{"id": x["gap_id"], "kind": x["종류"], "text": x["내용"],
-                  "owner": x["제안_담당"], "prereq": x["선행"]} for x in g]
+                  "owner": x["제안_담당"], "basis": x.get("담당_근거", ""),
+                  "prereq": x["선행"]} for x in g]
     path = os.path.join(PROCDIR, f"{p['full']}.md")
     body = open(path, encoding="utf-8").read() if os.path.exists(path) else ""
     # 1절의 한 줄 정의
@@ -150,7 +151,7 @@ document.getElementById("cards").innerHTML = D.map(p=>`
     <td>${esc(s.owner)}</td><td>${esc(s.step)}</td></tr>`).join("")}</tbody></table></div>
   ${p.gaps.length?`<div class="gp"><h4>빠진 곳 ${p.gaps.length}건</h4>${p.gaps.map(g=>
     `<div class="g"><span class="k k${KIND(g.kind)}">${esc(g.kind)}</span>${esc(g.text)}
-     <div class="w">${esc(g.id)} · 제안 담당 ${esc(g.owner)} · 선행 ${esc(g.prereq)}</div></div>`).join("")}</div>`:""}
+     <div class="w">${esc(g.id)} · 제안 담당 ${esc(g.owner)}${g.basis?` <b>[${esc(g.basis.slice(0,1))}]</b> ${esc(g.basis)}`:""} · 선행 ${esc(g.prereq)}</div></div>`).join("")}</div>`:""}
 </div>`).join("");
 
 let sel = null;
