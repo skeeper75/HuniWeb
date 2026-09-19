@@ -39,5 +39,15 @@ PASS G37 t56 원장 STD-ART-034 제목에 「핫폴더 vs CLI」 실재(정정 �
 PASS G38 CARDS-S §0-A 「오픈 테스트는 Lightsail 위에서」 실재
 PASS G39 런북 F3-11 「되돌릴 수 없는 단계 — 오픈 테스트 통과 후에만」 실재
 PASS G40 신규 제안 4건 row_id 원장 충돌 0 — 충돌 0
+PASS G41 ⑤ 인프라 행을 prereq 로 단 행 17 — 17
+PASS G42 ⑤ → 김동학 나가는 원장 간선은 F4-4 하나뿐 — ['F4-4']
+PASS G43 F4-4.prereq 에 F2-1 실재 — F2-1
+PASS G44 F4-2.prereq 에 F1 계열 없음(간선 제안이 맞다) — F4-1
+PASS G45 prereq 에 「오픈 테스트」가 적힌 행은 F4-8 하나뿐 — ['F4-8']
+PASS G46 F3-11 은 prereq 에 오픈테스트 없음 · 같은 조건이 T1-3 제목에만 있다 — F3-10 안정 + vc_ 웹팀 확인
+PASS G47 페이지빌더 Lightsail 이전 행 0 (찾지 못했다) — 0
+PASS G48 EXT-PIECANVAS 를 prereq 로 단 행 0 — 정정이 원장 선후를 바꾸지 않는다
+PASS G49 페이지빌더 언급 행 2 · 전건 김동학(정정과 이미 일치) — [('STD-ADP-015', '김동학'), ('STD-SYS-021', '김동학')]
+PASS G50 pie-canvas-model.md 가 「벤더」로 적고 있다(정정 대상 표기 실재)
 
 실패 0

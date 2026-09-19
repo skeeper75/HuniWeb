@@ -198,4 +198,44 @@ gate('되돌릴 수 없는 단계 — 오픈 테스트 통과 후에만' in mp,
 NEW = ['NEW-S1', 'NEW-S2', 'NEW-S3', 'NEW-S4']
 gate(not (set(NEW) & ids), f'G40 신규 제안 {len(NEW)}건 row_id 원장 충돌 0', sorted(set(NEW) & ids) or '충돌 0')
 
+# --- 보강(⑤ 통합 대상 4개 · 나가는 간선 · 오픈 테스트 선행) ---
+INF_PREFIX = ('F1-', 'F2-', 'F3-')
+INF_ROWS = {'T1-1', 'T1-2', 'T1-3'}
+out_edges = []
+for r in plan:
+    ts = [t.strip() for t in (r['prereq'] or '').split(';') if t.strip() and t.strip() != '—']
+    if any(t in INF_ROWS or t.startswith(INF_PREFIX) for t in ts):
+        out_edges.append(r)
+gate(len(out_edges) == 17, 'G41 ⑤ 인프라 행을 prereq 로 단 행 17', len(out_edges))
+to_kdh = [r for r in out_edges if r['owner_name'] == '김동학']
+gate([r['row_id'] for r in to_kdh] == ['F4-4'],
+     'G42 ⑤ → 김동학 나가는 원장 간선은 F4-4 하나뿐', [r['row_id'] for r in to_kdh])
+gate('F2-1' in (planm['F4-4']['prereq'] or ''), 'G43 F4-4.prereq 에 F2-1 실재', planm['F4-4']['prereq'])
+gate(not any(t.startswith('F1-') for t in (planm['F4-2']['prereq'] or '').split(';')),
+     'G44 F4-2.prereq 에 F1 계열 없음(간선 제안이 맞다)', planm['F4-2']['prereq'])
+
+opentest = [r for r in plan if '오픈 테스트' in (r['prereq'] or '')]
+gate([r['row_id'] for r in opentest] == ['F4-8'],
+     'G45 prereq 에 「오픈 테스트」가 적힌 행은 F4-8 하나뿐', [r['row_id'] for r in opentest])
+gate('오픈 테스트' not in (planm['F3-11']['prereq'] or '')
+     and '오픈 테스트 통과 전 금지' in planm['T1-3']['title'],
+     'G46 F3-11 은 prereq 에 오픈테스트 없음 · 같은 조건이 T1-3 제목에만 있다',
+     planm['F3-11']['prereq'])
+
+pcrx = re.compile(r'(페이지빌더|pagebuilder|Pie ?Canvas).*(이전|이관|마이그|Lightsail|컨테이너|배포)'
+                  r'|(이전|이관|Lightsail).*(페이지빌더|pagebuilder|Pie ?Canvas)', re.I)
+pcmig = [r for r in plan if pcrx.search(' '.join([r['title'], r.get('note') or '', r.get('evidence') or '']))]
+gate(len(pcmig) == 0, 'G47 페이지빌더 Lightsail 이전 행 0 (찾지 못했다)', len(pcmig))
+gate(sum(1 for r in plan if 'EXT-PIECANVAS' in (r['prereq'] or '')) == 0,
+     'G48 EXT-PIECANVAS 를 prereq 로 단 행 0 — 정정이 원장 선후를 바꾸지 않는다')
+pcall = [r for r in plan if re.search(r'페이지빌더|pagebuilder|Pie ?Canvas', ' '.join(
+    [r['title'], r.get('note') or '', r.get('evidence') or '']), re.I)]
+gate(len(pcall) == 2 and {r['owner_name'] for r in pcall} == {'김동학'},
+     'G49 페이지빌더 언급 행 2 · 전건 김동학(정정과 이미 일치)',
+     [(r['row_id'], r['owner_name']) for r in pcall])
+PCDOC = '/Users/innojini/Dev/HuniWeb/_workspace/huni-page-compose/01_recon/pie-canvas-model.md'
+gate(os.path.exists(PCDOC) and '벤더' in open(PCDOC, encoding='utf-8').read(),
+     'G50 pie-canvas-model.md 가 「벤더」로 적고 있다(정정 대상 표기 실재)')
+
+
 print(f"\n실패 {len(fails)}" + (': ' + '; '.join(fails) if fails else ''))

@@ -14,8 +14,8 @@
 | `axis-rows.csv` | ㉮ 행 원장 **186행**(축·근거강도·prereq·evidence·배분 사유 13열) |
 | `lead-recount.md` | 리드 「241행·181」 대조 — **재현 실패**와 그 탐색 과정 |
 | `inputs-check.md` | 카드 지정 입력 6종 + 절대경로 5종 실재 확인 · 열지 않은 것 명시 |
-| `scan.py`·`build_axis.py`·`prereq.py`·`axis_prereq.py`·`gap_scan.py`·`count_probe.py`·`count_probe2.py`·`dump.py`·`dump2.py` | 결정론 스캔·배분·선후 실측·공백 탐색 |
-| `verify.py` · `verify-result.txt` | 검산 **41게이트 · 실패 0** |
+| `scan.py`·`build_axis.py`·`prereq.py`·`axis_prereq.py`·`gap_scan.py`·`edges_out.py`·`piecanvas_scan.py`·`count_probe.py`·`count_probe2.py`·`dump.py`·`dump2.py` | 결정론 스캔·배분·선후 실측·공백 탐색 |
+| `verify.py` · `verify-result.txt` | 검산 **51게이트 · 실패 0** |
 
 ## 2. 행수·분포
 
@@ -111,11 +111,35 @@ t59 가 편 것은 **위쪽 절반**(최숙진이 무엇을 정의해야 하는�
 담당이 **서희항+신우진**이다. **계약서가 없으면 부를 수 없다.** t61(김동학 5축)의 ① 호출부와 맞물리는 지점이 이 표다.
 **t61 산출은 보지 않았고, 양쪽 저장소를 내가 직접 연 것만 적었다.**
 
-### 4-6. ⑤ 이전 순서와 「오픈 테스트는 Lightsail 위에서」 — 완료
+### 4-6. ⑤ 이전 순서와 「오픈 테스트는 Lightsail 위에서」 — 완료 (+ 리드 보강 3건 반영)
 
 `CARDS-S.md` §0-A 원문 확인(G38). 런북 F3-11 이 **「되돌릴 수 없는 단계 — 오픈 테스트 통과 후에만」**이라고 스스로 적었고(G39),
 원장 `T1-3` 제목도 같은 말을 단다. → **순서 = F1 → F2 → F3-1~10 → 〔오픈 테스트〕 → F3-11 → F3-12.**
 ⑤의 진짜 뿌리는 **외부(인프라팀) OIDC·시크릿·SSH 터널 회신** 하나다 — 서희항이 할 수 있는 건 요청뿐이다.
+
+**(a) 통합 대상 4개와 담당 구분** — 인프라 구축 자체·webadmin·DB = **서희항**(= 이 축 19행) /
+huni-mall·페이지빌더 = **김동학**(`F4-2`~`F4-6`·`T1-4` · ⑤ 에 안 들어옴).
+「파트너사」 정정(지니 확정 260919 · 리드 전달)이 **원장에 미치는 영향을 실측**했다:
+`EXT-PIECANVAS` 를 `prereq` 로 단 행 **0**(G48 — 토큰은 `LEDGER.md:106` 에 정의만 돼 있고 안 쓰인다) ·
+페이지빌더 언급 행 **2행 전건 김동학**(G49 — 정정과 이미 일치). → **원장 선후 구조는 안 바뀐다.**
+바뀌는 것은 **판정 문서**다 — `pie-canvas-model.md:9-10` 「벤더」(G50) · `t49/progress.md:51-52` 「파트너사 소유 SaaS · 코어 수정 통제 밖」·「NO-GO(대외배포)」가
+**상대가 통제 밖 외부라는 전제** 위에 있다. **이 카드는 t49 를 재판정하지 않았다**(범위 밖) — 사실만 적었다.
+
+**(b) 나가는 간선** — ⑤ 인프라 행을 `prereq` 로 단 행은 원장 전체에 **17행**인데(G41),
+**김동학에게 나가는 것은 `F4-4`(DATABASE_URL 목적지 결정) ← `F2-1` 단 하나**다(G42·G43).
+나머지 16행은 ⑤ 자기 안이거나 최숙진·신우진이다. → **원장은 「서희항 인프라가 김동학 이전을 문다」를 거의 기록하지 않는다.**
+간선 제안 3건을 ㉰ 표에 추가했다: `F1` 계열 → `F4` 계열(`F4-2` 가 「webadmin 것을 본떠」 만든다고 적었는데 `prereq` 는 `F4-1` 뿐 · G44) ·
+⑤ → 페이지빌더 이전(**행 자체가 없다** · G47) · 〔오픈 테스트〕 → `F3-11`.
+
+**(c) 오픈 테스트 시점에 무엇이 올라와 있어야 하나** — 「구 환경 정지」 행 둘이 거꾸로 답을 준다.
+
+| 대상 | 어디까지 | 근거 강도 |
+|---|---|---|
+| webadmin + DB | **`F3-10` 까지** | 런북 위험란·`T1-3` 제목에만 명시. **`F3-11.prereq` 에 「오픈 테스트」가 없다**(G46) |
+| huni-mall | **`F4-6` 까지** | **`F4-8.prereq` = 「F4-6 + 오픈 테스트」 — 735행 중 「오픈 테스트」를 `prereq` 로 단 유일한 행**(G45) |
+| 페이지빌더 | **찾지 못했다** | 전수 검색 **적중 0행**(G47). 「필요 없다」가 아니라 「원장이 말하지 않는다」 |
+
+**테스트 시점에 구 환경(Railway·Vercel)은 아직 살아 있다** — `F3-11`·`F4-8` 이 둘 다 테스트 뒤다. 되돌릴 곳이 남아 있다는 뜻이다.
 
 ### 4-7. ④ 「세 저장소 전부 코드 0」 — **맞다. 내가 직접 돌려서 확인했다**
 
@@ -148,6 +172,9 @@ MES 저장소의 유일한 외부 커머스 연동은 **Cafe24**(`Cafe24Interfac
 8. **라이브 접속 0.** `STD-MFG-010` 의 「269개 중 15개 매핑」은 t56 evidence 안의 **260902 실측 인용**이며 현재값이 아니다.
 9. **⑥ 축은 제안이다.** 5축으로 가기로 하면 30행을 어디에 넣을지 다시 정해야 하고, 그때 치르는 대가를 본문 §7 에 적어 두었다.
 10. **`docs/huni/` 의 회의록·엑셀을 열지 않았다.** 본문에 나오는 `후니정기미팅 정리260915.html` 는 t56 evidence 안의 인용이며 내가 확인한 것이 아니다.
+11. **「파트너사 = 김동학 대표」는 리드 lane-1 이 전달한 지니 확정(260919)이다.** 지니 발언 원문을 내가 확인한 것이 아니다. 내가 확인한 것은 기존 문서의 표기와 그 토큰이 `prereq` 에서 0회 쓰인다는 사실뿐이다.
+12. **오픈 테스트에 페이지빌더가 필요한지 답하지 못했다.** 이전 행이 0행이다. 상세페이지 탭이 발행본에 의존하므로(`STD-CAT-034`) 무관하다고 보기는 어렵다.
+13. **t61(김동학 5축) 산출을 보지 않았다.** ⑤에 적은 김동학 쪽 행(`F4`·`T1-4`)은 내가 `plan-rows.csv` 에서 직접 읽은 것이다.
 
 ## 6. 검산 (`python3 verify.py` 출력 그대로 · `verify-result.txt`)
 
@@ -157,15 +184,15 @@ PASS G2 입력 t56 rejudge 735행 — 735
 PASS G3 서희항 몫 246 · 남은 일 186 — (246, 186)
 PASS G4 axis-rows 186행 — 186
 PASS G5 미배치 0건 — 0
-PASS G6 축별 행수 39/30/18/50/19/30
+PASS G6 축별 행수 39/30/18/50/19/30 — {'1': 39, '2': 30, '3': 18, '4': 50, '5': 19, '6': 30}
 PASS G7 row_id 중복 0 — 186
 PASS G8 축 행 전건 t56 원장 실재
-PASS G9 judged_by 66/59/7/42/12
+PASS G9 judged_by 66/59/7/42/12 — {'evidence-path': 59, 'merged-owner_side': 66, 'rule-step': 42, 'rule-track': 12, 'manual-read': 7}
 PASS G10 약한 근거 54행 = 29% — (54, 29)
-PASS G11 축별 선행없음 34/12/8/3/1/18
-PASS G12 축별 외부 선행 3/11/12/55/9/6
+PASS G11 축별 선행없음 34/12/8/3/1/18 — {'1': 34, '2': 12, '3': 8, '4': 3, '5': 1, '6': 18}
+PASS G12 축별 외부 선행 3/11/12/55/9/6 — {'1': 3, '2': 11, '3': 12, '4': 55, '5': 9, '6': 6}
 PASS G13 ④ 외의 다섯 축 외부 선행 합 41 — 41
-PASS G14 ④ EXT-PITSTOP 24 · EXT-MES 20 · EXT-NHN 9
+PASS G14 ④ EXT-PITSTOP 24 · EXT-MES 20 · EXT-NHN 9 — {'EXT-PITSTOP': 24, 'EXT-MES': 20, 'EXT-NHN': 9, 'EXT-PG': 1}
 PASS G15 ④ 외 다섯 축 선행없음 합 73 — 73
 PASS G16 provided 8행 전건 ④ — 8
 PASS G17 STD-ART 남은 27 · provided 7 → 20 (리드 표기와 일치) — (27, 7)
@@ -175,7 +202,7 @@ PASS G20 api/w/v1 라우트 22개 — 22
 PASS G21 huni-mall order/register 호출 0건 — 0
 PASS G22 huni-mall 서버키 헤더 0건 — 0
 PASS G23 huni-mall handoff/verify = 주석 2줄뿐(실호출 0) — 2
-PASS G24 requote 헬퍼 호출처 = cart-page.tsx 뿐
+PASS G24 requote 헬퍼 호출처 = cart-page.tsx 뿐 — ['/Users/innojini/Dev/huni-skin-shopby/src/components/cart/cart-page.tsx']
 PASS G25 webadmin PitStop 0건
 PASS G26 webadmin MES 전송 코드 0건
 PASS G27 webadmin(앱) mes_item_cd 8곳 — 전부 그릇(필드·안내·중복검증) — 8
@@ -184,7 +211,7 @@ PASS G29 MES 저장소 shopby 0건
 PASS G30 huni-mall PitStop/MES 0건
 PASS G31 Edicus miss 합계 21 · blocked 1상품 — (21, ['/products/PRD_000226'])
 PASS G32 TWgtSites Django admin 미등록(0건)
-PASS G33 allow_domains 쓰기 = 테스트 픽스처 2곳뿐 · 운영 도구·화면 0곳
+PASS G33 allow_domains 쓰기 = 테스트 픽스처 2곳뿐 · 운영 도구·화면 0곳 — ['tests/test_catalog_include_unpublished.py', 'tests/test_prd_sellable_gate.py']
 PASS G33b allow_domains 등장 21곳(저장소 전체) — 21
 PASS G34 widget_api.py:710 「미설정=통과」 원문 실재
 PASS G35 인용 경로 22개 전건 실재 — 없음 0
@@ -193,6 +220,16 @@ PASS G37 t56 원장 STD-ART-034 제목에 「핫폴더 vs CLI」 실재(정정 �
 PASS G38 CARDS-S §0-A 「오픈 테스트는 Lightsail 위에서」 실재
 PASS G39 런북 F3-11 「되돌릴 수 없는 단계 — 오픈 테스트 통과 후에만」 실재
 PASS G40 신규 제안 4건 row_id 원장 충돌 0 — 충돌 0
+PASS G41 ⑤ 인프라 행을 prereq 로 단 행 17 — 17
+PASS G42 ⑤ → 김동학 나가는 원장 간선은 F4-4 하나뿐 — ['F4-4']
+PASS G43 F4-4.prereq 에 F2-1 실재 — F2-1
+PASS G44 F4-2.prereq 에 F1 계열 없음(간선 제안이 맞다) — F4-1
+PASS G45 prereq 에 「오픈 테스트」가 적힌 행은 F4-8 하나뿐 — ['F4-8']
+PASS G46 F3-11 은 prereq 에 오픈테스트 없음 · 같은 조건이 T1-3 제목에만 있다 — F3-10 안정 + vc_ 웹팀 확인
+PASS G47 페이지빌더 Lightsail 이전 행 0 (찾지 못했다) — 0
+PASS G48 EXT-PIECANVAS 를 prereq 로 단 행 0 — 정정이 원장 선후를 바꾸지 않는다
+PASS G49 페이지빌더 언급 행 2 · 전건 김동학(정정과 이미 일치) — [('STD-ADP-015', '김동학'), ('STD-SYS-021', '김동학')]
+PASS G50 pie-canvas-model.md 가 「벤더」로 적고 있다(정정 대상 표기 실재)
 
 실패 0
 ```
