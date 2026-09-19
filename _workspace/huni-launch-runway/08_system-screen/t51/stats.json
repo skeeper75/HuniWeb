@@ -1,0 +1,885 @@
+{
+  "raw_total": 747,
+  "merged_total": 747,
+  "merged_pairs": 0,
+  "merged_rows_folded": 0,
+  "same_path_different_edge": [
+    {
+      "dup_key": "raw/webadmin/webadmin/catalog/shopby_sync.py:118",
+      "edges": [
+        [
+          "shopby"
+        ],
+        [
+          "shopby",
+          "webadmin"
+        ]
+      ]
+    },
+    {
+      "dup_key": "raw/webadmin/webadmin/config/urls.py:249",
+      "edges": [
+        [
+          "huni-mall",
+          "shopby"
+        ],
+        [
+          "widget"
+        ]
+      ]
+    },
+    {
+      "dup_key": "raw/webadmin/webadmin/config/urls.py:281",
+      "edges": [
+        [
+          "huni-mall",
+          "webadmin"
+        ],
+        [
+          "pagebuilder",
+          "webadmin"
+        ]
+      ]
+    }
+  ],
+  "by_card": {
+    "t48": 271,
+    "t49": 342,
+    "t50": 134
+  },
+  "by_scope": {
+    "in": 683,
+    "out": 64
+  },
+  "by_scope_card": {
+    "t48/in": 271,
+    "t49/in": 340,
+    "t49/out": 2,
+    "t50/in": 72,
+    "t50/out": 62
+  },
+  "by_system": {
+    "edicus": 23,
+    "huni-mall": 177,
+    "mes": 88,
+    "pagebuilder": 62,
+    "pitstop": 23,
+    "shopby": 94,
+    "webadmin": 147,
+    "widget": 133
+  },
+  "by_work_type": {
+    "build": 378,
+    "config": 99,
+    "integrate": 229,
+    "manual": 6,
+    "provided": 35
+  },
+  "by_status": {
+    "미착수": 231,
+    "미확인": 48,
+    "완료": 404,
+    "진행": 64
+  },
+  "by_role": {
+    "고객": 185,
+    "관리자": 34,
+    "생산(MES)": 28,
+    "시스템(무인)": 117,
+    "운영자(CS·상품)": 383
+  },
+  "in_by_status": {
+    "미착수": 231,
+    "미확인": 45,
+    "완료": 343,
+    "진행": 64
+  },
+  "in_by_work_type": {
+    "build": 329,
+    "config": 99,
+    "integrate": 219,
+    "manual": 6,
+    "provided": 30
+  },
+  "new_rows": 183,
+  "new_by_card": {
+    "t48": 6,
+    "t49": 103,
+    "t50": 74
+  },
+  "no_dup_key": 202,
+  "in_remaining": 340,
+  "in_remaining_by_system": {
+    "edicus": 9,
+    "huni-mall": 146,
+    "mes": 11,
+    "pagebuilder": 60,
+    "pitstop": 23,
+    "shopby": 85,
+    "webadmin": 1,
+    "widget": 5
+  },
+  "in_remaining_by_work_type": {
+    "build": 60,
+    "config": 93,
+    "integrate": 154,
+    "manual": 6,
+    "provided": 27
+  },
+  "by_system_status": {
+    "edicus/미착수": 4,
+    "edicus/미확인": 2,
+    "edicus/완료": 11,
+    "edicus/진행": 3,
+    "huni-mall/미착수": 94,
+    "huni-mall/미확인": 2,
+    "huni-mall/완료": 31,
+    "huni-mall/진행": 50,
+    "mes/미착수": 11,
+    "mes/완료": 18,
+    "pagebuilder/미착수": 44,
+    "pagebuilder/미확인": 15,
+    "pagebuilder/진행": 1,
+    "pitstop/미착수": 23,
+    "shopby/미착수": 55,
+    "shopby/미확인": 22,
+    "shopby/완료": 9,
+    "shopby/진행": 8,
+    "webadmin/미확인": 1,
+    "webadmin/완료": 146,
+    "widget/미확인": 3,
+    "widget/완료": 128,
+    "widget/진행": 2
+  },
+  "by_system_group": {
+    "edicus/썸네일·미리보기": 2,
+    "edicus/원고 저장·반환": 8,
+    "edicus/템플릿·상품 매핑": 5,
+    "edicus/편집 캔버스": 3,
+    "edicus/편집기 진입": 5,
+    "huni-mall/고객지원": 14,
+    "huni-mall/마이페이지": 50,
+    "huni-mall/상품상세": 17,
+    "huni-mall/상품탐색": 6,
+    "huni-mall/서버·배포": 18,
+    "huni-mall/장바구니": 11,
+    "huni-mall/전역": 9,
+    "huni-mall/정책·정보": 4,
+    "huni-mall/주문·결제": 28,
+    "huni-mall/주문조회": 2,
+    "huni-mall/프로모션": 2,
+    "huni-mall/홈": 2,
+    "huni-mall/회원·인증": 14,
+    "mes/DB 동기화": 1,
+    "mes/WebApi(견적)": 5,
+    "mes/개발도구": 1,
+    "mes/거래처": 2,
+    "mes/공통·기초": 3,
+    "mes/생산": 9,
+    "mes/설치·설정": 1,
+    "mes/수주·주문": 8,
+    "mes/영업": 4,
+    "mes/원고·파일 인터페이스": 3,
+    "mes/인증·권한": 5,
+    "mes/인터페이스 로그·모니터": 2,
+    "mes/주문 인터페이스": 19,
+    "mes/출하·배송": 5,
+    "mes/통계·리포트": 1,
+    "mes/품목·제품": 19,
+    "pagebuilder/가이드북": 3,
+    "pagebuilder/게시·운영": 5,
+    "pagebuilder/동적 페이지·콘텐츠 모델": 10,
+    "pagebuilder/블록 편집": 8,
+    "pagebuilder/빌더 기존 자산(분모밖)": 2,
+    "pagebuilder/사이트·페이지 관리": 7,
+    "pagebuilder/상세페이지 탭": 7,
+    "pagebuilder/운영진 관리 화면": 6,
+    "pagebuilder/파트너사 개발 요청": 4,
+    "pagebuilder/후니 상품 연동": 10,
+    "pitstop/반려·재요청": 5,
+    "pitstop/사람 육안 검수": 2,
+    "pitstop/서버·프로파일 설정": 2,
+    "pitstop/원고 수집": 1,
+    "pitstop/판정·리포트": 3,
+    "pitstop/프리플라이트 실행": 10,
+    "shopby/셀러어드민 게시판": 8,
+    "shopby/셀러어드민 결제": 9,
+    "shopby/셀러어드민 기초": 2,
+    "shopby/셀러어드민 배송": 12,
+    "shopby/셀러어드민 상품": 3,
+    "shopby/셀러어드민 알림": 11,
+    "shopby/셀러어드민 운영": 2,
+    "shopby/셀러어드민 주문": 12,
+    "shopby/셀러어드민 클레임": 7,
+    "shopby/셀러어드민 통계": 4,
+    "shopby/셀러어드민 프로모션": 13,
+    "shopby/셀러어드민 회원": 5,
+    "shopby/연동": 6,
+    "webadmin/가격 관리": 32,
+    "webadmin/고객관리": 1,
+    "webadmin/기준정보": 26,
+    "webadmin/도구": 7,
+    "webadmin/문서": 4,
+    "webadmin/상품": 65,
+    "webadmin/연동": 11,
+    "webadmin/인증 및 권한": 1,
+    "widget/SDK·임베드": 6,
+    "widget/위젯 API": 11,
+    "widget/위젯 런타임(고객)": 23,
+    "widget/위젯빌더(운영자)": 93
+  },
+  "integrate_owner_side_undecided": 11,
+  "decisions": {
+    "t48/huni-mall-decisions.md": 31,
+    "t48/shopby-decisions.md": 20,
+    "t49/pagebuilder-decisions.md": 3,
+    "t50/edicus-decisions.md": 2,
+    "t50/pitstop-decisions.md": 7
+  },
+  "out_of_scope_crosscheck": {
+    "total": 89,
+    "hit": 6,
+    "hit_rows": [
+      {
+        "plan_row_id": "STD-ADC-014",
+        "cards": [
+          "t49"
+        ]
+      },
+      {
+        "plan_row_id": "STD-FIN-007",
+        "cards": [
+          "t50"
+        ]
+      },
+      {
+        "plan_row_id": "STD-SYS-031",
+        "cards": [
+          "t50"
+        ]
+      },
+      {
+        "plan_row_id": "STD-MFG-110",
+        "cards": [
+          "t50"
+        ]
+      },
+      {
+        "plan_row_id": "STD-MFG-111",
+        "cards": [
+          "t50"
+        ]
+      },
+      {
+        "plan_row_id": "STD-MFG-116",
+        "cards": [
+          "t50"
+        ]
+      }
+    ],
+    "miss_count": 83,
+    "miss_by_routed_system": {
+      "webadmin": 62,
+      "mes": 16,
+      "webadmin↔토스": 1,
+      "외부(토스)": 1,
+      "외부": 1,
+      "widget·webadmin": 1,
+      "edicus": 1
+    },
+    "miss_by_owner": {
+      "김동학": 40,
+      "최숙진": 14,
+      "서희항": 13,
+      "미정": 7,
+      "신우진": 6,
+      "외부(토스페이먼츠)": 1,
+      "김용기": 1,
+      "외부(상대측 회신 대기)": 1
+    },
+    "miss": [
+      {
+        "plan_row_id": "STD-ORD-027",
+        "title": "오프라인 주문 별도 등록 경로",
+        "routed_system": "webadmin",
+        "owner_name": "김동학",
+        "plan_status": "부분"
+      },
+      {
+        "plan_row_id": "STD-MYP-028",
+        "title": "충전 입금 확인 = 토스페이먼츠 가상계좌 API 직접 발급",
+        "routed_system": "webadmin↔토스",
+        "owner_name": "미정",
+        "plan_status": "미착수"
+      },
+      {
+        "plan_row_id": "STD-MYP-029",
+        "title": "입금 확인 자동화 — 가상계좌 DEPOSIT_CALLBACK 웹훅 수신→자동 충전",
+        "routed_system": "webadmin",
+        "owner_name": "미정",
+        "plan_status": "미착수"
+      },
+      {
+        "plan_row_id": "STD-MYP-043",
+        "title": "프린트머니 구현 M1 — webadmin t_pm_charge_txn + 감지·지급 잡(폴링) + 웹훅 신호 연결",
+        "routed_system": "webadmin",
+        "owner_name": "미정",
+        "plan_status": "미착수"
+      },
+      {
+        "plan_row_id": "STD-MYP-046",
+        "title": "프린트머니 구현 M4 — 충전 취소/환불 처리 + 운영 화면(txn 목록·재시도)",
+        "routed_system": "webadmin",
+        "owner_name": "미정",
+        "plan_status": "미착수"
+      },
+      {
+        "plan_row_id": "STD-MYP-047",
+        "title": "프린트머니 구현 M5 — 구 잔액 마이그레이션 시드 실행(260630 스펙)",
+        "routed_system": "webadmin",
+        "owner_name": "미정",
+        "plan_status": "미착수"
+      },
+      {
+        "plan_row_id": "STD-PRM-017",
+        "title": "[구IA#71] 체험단관리 (등록/수정/신청내역)",
+        "routed_system": "webadmin",
+        "owner_name": "신우진",
+        "plan_status": "미실측"
+      },
+      {
+        "plan_row_id": "STD-B2B-001",
+        "title": "거래처(기업회원) 등록·관리",
+        "routed_system": "webadmin",
+        "owner_name": "김동학",
+        "plan_status": "부분"
+      },
+      {
+        "plan_row_id": "STD-B2B-002",
+        "title": "거래처별 단가/할인율 설정",
+        "routed_system": "webadmin",
+        "owner_name": "김동학",
+        "plan_status": "미착수"
+      },
+      {
+        "plan_row_id": "STD-B2B-003",
+        "title": "거래처 소속 담당자 다계정",
+        "routed_system": "webadmin",
+        "owner_name": "김동학",
+        "plan_status": "미착수"
+      },
+      {
+        "plan_row_id": "STD-B2B-004",
+        "title": "후불 여신한도 설정",
+        "routed_system": "webadmin",
+        "owner_name": "김동학",
+        "plan_status": "미착수"
+      },
+      {
+        "plan_row_id": "STD-B2B-005",
+        "title": "후불 주문 승인·미결제 관리",
+        "routed_system": "webadmin",
+        "owner_name": "김동학",
+        "plan_status": "미착수"
+      },
+      {
+        "plan_row_id": "STD-B2B-006",
+        "title": "월 마감 청구서 발행",
+        "routed_system": "webadmin",
+        "owner_name": "김동학",
+        "plan_status": "미착수"
+      },
+      {
+        "plan_row_id": "STD-B2B-007",
+        "title": "업체별 미수금 관리",
+        "routed_system": "webadmin",
+        "owner_name": "김동학",
+        "plan_status": "미착수"
+      },
+      {
+        "plan_row_id": "STD-B2B-008",
+        "title": "거래처 원장(온·오프라인 통합)",
+        "routed_system": "webadmin",
+        "owner_name": "김동학",
+        "plan_status": "미착수"
+      },
+      {
+        "plan_row_id": "STD-B2B-009",
+        "title": "원장 데이터 파일 생성(.txt 연계)",
+        "routed_system": "webadmin",
+        "owner_name": "김동학",
+        "plan_status": "미착수"
+      },
+      {
+        "plan_row_id": "STD-B2B-010",
+        "title": "대량 견적 요청 접수·회신",
+        "routed_system": "webadmin",
+        "owner_name": "김동학",
+        "plan_status": "미착수"
+      },
+      {
+        "plan_row_id": "STD-B2B-011",
+        "title": "견적서 발행(사업자 양식)",
+        "routed_system": "webadmin",
+        "owner_name": "김동학",
+        "plan_status": "미착수"
+      },
+      {
+        "plan_row_id": "STD-B2B-012",
+        "title": "세금계산서 일괄 발행",
+        "routed_system": "webadmin",
+        "owner_name": "미정",
+        "plan_status": "미착수"
+      },
+      {
+        "plan_row_id": "STD-B2B-015",
+        "title": "[구IA#91] 주문관리-후불결제",
+        "routed_system": "webadmin",
+        "owner_name": "신우진",
+        "plan_status": "미실측"
+      },
+      {
+        "plan_row_id": "STD-ADC-001",
+        "title": "회원 목록·검색·상세",
+        "routed_system": "webadmin",
+        "owner_name": "김동학",
+        "plan_status": "작동"
+      },
+      {
+        "plan_row_id": "STD-ADC-002",
+        "title": "회원등급 수동 조정",
+        "routed_system": "webadmin",
+        "owner_name": "김동학",
+        "plan_status": "미착수"
+      },
+      {
+        "plan_row_id": "STD-ADC-003",
+        "title": "탈퇴회원 관리",
+        "routed_system": "webadmin",
+        "owner_name": "김동학",
+        "plan_status": "작동"
+      },
+      {
+        "plan_row_id": "STD-ADC-005",
+        "title": "쿠폰 생성·발행 관리",
+        "routed_system": "webadmin",
+        "owner_name": "김동학",
+        "plan_status": "미착수"
+      },
+      {
+        "plan_row_id": "STD-ADC-007",
+        "title": "공지사항 관리",
+        "routed_system": "webadmin",
+        "owner_name": "김동학",
+        "plan_status": "작동"
+      },
+      {
+        "plan_row_id": "STD-ADC-008",
+        "title": "FAQ 관리",
+        "routed_system": "webadmin",
+        "owner_name": "김동학",
+        "plan_status": "작동"
+      },
+      {
+        "plan_row_id": "STD-ADC-009",
+        "title": "상품Q&A 답변 관리",
+        "routed_system": "webadmin",
+        "owner_name": "김동학",
+        "plan_status": "작동"
+      },
+      {
+        "plan_row_id": "STD-ADC-010",
+        "title": "1:1 문의 답변 관리",
+        "routed_system": "webadmin",
+        "owner_name": "김동학",
+        "plan_status": "작동"
+      },
+      {
+        "plan_row_id": "STD-ADC-011",
+        "title": "이용후기(리뷰) 관리·블라인드",
+        "routed_system": "webadmin",
+        "owner_name": "김동학",
+        "plan_status": "작동"
+      },
+      {
+        "plan_row_id": "STD-ADC-012",
+        "title": "대량견적/기업상담/디자인상담 접수 관리",
+        "routed_system": "webadmin",
+        "owner_name": "김동학",
+        "plan_status": "미착수"
+      },
+      {
+        "plan_row_id": "STD-ADC-013",
+        "title": "메인/기획전 배너 관리",
+        "routed_system": "webadmin",
+        "owner_name": "김동학",
+        "plan_status": "미착수"
+      },
+      {
+        "plan_row_id": "STD-ADC-015",
+        "title": "매장(거래처) 게시판 관리",
+        "routed_system": "webadmin",
+        "owner_name": "김동학",
+        "plan_status": "미착수"
+      },
+      {
+        "plan_row_id": "STD-ADC-016",
+        "title": "체험단 모집·신청내역 관리(운영자)",
+        "routed_system": "webadmin",
+        "owner_name": "김동학",
+        "plan_status": "미착수"
+      },
+      {
+        "plan_row_id": "STD-FIN-001",
+        "title": "월별 매출 통계",
+        "routed_system": "webadmin",
+        "owner_name": "김동학",
+        "plan_status": "작동"
+      },
+      {
+        "plan_row_id": "STD-FIN-002",
+        "title": "일별/기간별 매출 조회",
+        "routed_system": "webadmin",
+        "owner_name": "김동학",
+        "plan_status": "작동"
+      },
+      {
+        "plan_row_id": "STD-FIN-003",
+        "title": "결제수단별 매출 집계",
+        "routed_system": "webadmin",
+        "owner_name": "김동학",
+        "plan_status": "작동"
+      },
+      {
+        "plan_row_id": "STD-FIN-004",
+        "title": "상품별 판매 통계",
+        "routed_system": "webadmin",
+        "owner_name": "김동학",
+        "plan_status": "작동"
+      },
+      {
+        "plan_row_id": "STD-FIN-005",
+        "title": "상품군별 매출 비중",
+        "routed_system": "webadmin",
+        "owner_name": "김동학",
+        "plan_status": "작동"
+      },
+      {
+        "plan_row_id": "STD-FIN-006",
+        "title": "회원/비회원 주문 비중",
+        "routed_system": "webadmin",
+        "owner_name": "김동학",
+        "plan_status": "작동"
+      },
+      {
+        "plan_row_id": "STD-FIN-008",
+        "title": "PG 정산 대사",
+        "routed_system": "webadmin",
+        "owner_name": "김동학",
+        "plan_status": "미착수"
+      },
+      {
+        "plan_row_id": "STD-FIN-009",
+        "title": "적립금(프린팅머니) 부채 집계",
+        "routed_system": "webadmin",
+        "owner_name": "김동학",
+        "plan_status": "미착수"
+      },
+      {
+        "plan_row_id": "STD-FIN-010",
+        "title": "외주 발주/정산 엑셀 산출",
+        "routed_system": "webadmin",
+        "owner_name": "김동학",
+        "plan_status": "미착수"
+      },
+      {
+        "plan_row_id": "STD-FIN-011",
+        "title": "쿠폰/할인 사용액 집계",
+        "routed_system": "webadmin",
+        "owner_name": "김동학",
+        "plan_status": "작동"
+      },
+      {
+        "plan_row_id": "STD-FIN-012",
+        "title": "통계·주문 데이터 엑셀 내보내기",
+        "routed_system": "webadmin",
+        "owner_name": "김동학",
+        "plan_status": "미착수"
+      },
+      {
+        "plan_row_id": "STD-FIN-013",
+        "title": "[구IA#47] 계좌관리 (원장용 계좌 등록)",
+        "routed_system": "webadmin",
+        "owner_name": "신우진",
+        "plan_status": "미착수"
+      },
+      {
+        "plan_row_id": "STD-FIN-014",
+        "title": "[구IA#49] 업체별 미수금",
+        "routed_system": "webadmin",
+        "owner_name": "신우진",
+        "plan_status": "미착수"
+      },
+      {
+        "plan_row_id": "STD-FIN-019",
+        "title": "[구IA#84] 굿즈 발주/정산 (Excel 다운)",
+        "routed_system": "webadmin",
+        "owner_name": "최숙진",
+        "plan_status": "미착수"
+      },
+      {
+        "plan_row_id": "STD-FIN-020",
+        "title": "가상계좌 정산한도 1,000만 원 초과 시 처리 방안",
+        "routed_system": "외부(토스)",
+        "owner_name": "외부(토스페이먼츠)",
+        "plan_status": "미착수"
+      },
+      {
+        "plan_row_id": "STD-FIN-021",
+        "title": "적립금·증빙 데이터의 MS·이카운트 연동 방식",
+        "routed_system": "외부",
+        "owner_name": "김용기",
+        "plan_status": "미착수"
+      },
+      {
+        "plan_row_id": "STD-SYS-001",
+        "title": "관리자 계정 등록·관리",
+        "routed_system": "webadmin",
+        "owner_name": "김동학",
+        "plan_status": "부분"
+      },
+      {
+        "plan_row_id": "STD-SYS-002",
+        "title": "역할 기반 세분 권한 제어",
+        "routed_system": "webadmin",
+        "owner_name": "김동학",
+        "plan_status": "부분"
+      },
+      {
+        "plan_row_id": "STD-SYS-003",
+        "title": "관리자 작업 감사로그",
+        "routed_system": "webadmin",
+        "owner_name": "김동학",
+        "plan_status": "작동"
+      },
+      {
+        "plan_row_id": "STD-SYS-010",
+        "title": "원고 저장소(스토리지) 연동",
+        "routed_system": "widget·webadmin",
+        "owner_name": "김동학",
+        "plan_status": "구현-미검증"
+      },
+      {
+        "plan_row_id": "STD-SYS-011",
+        "title": "디자인 에디터 외부 서비스 연동",
+        "routed_system": "edicus",
+        "owner_name": "미정",
+        "plan_status": "부분"
+      },
+      {
+        "plan_row_id": "STD-SYS-025",
+        "title": "[구IA#44] 관리자 등록/관리",
+        "routed_system": "webadmin",
+        "owner_name": "최숙진",
+        "plan_status": "부분"
+      },
+      {
+        "plan_row_id": "STD-SYS-028",
+        "title": "webadmin 영역 분리(쇼핑몰 관리자 영역 / DB·생산 영역)",
+        "routed_system": "webadmin",
+        "owner_name": "신우진",
+        "plan_status": "미착수"
+      },
+      {
+        "plan_row_id": "STD-MFG-022",
+        "title": "주문 상태머신(REGISTERED/PROMOTING/PROMOTED/HOLD/PAID/FILE_CHECK/FILE_HOLD/MES_SENT/IN_PRODUCTION/PRODUCED/SHIPPED/DONE/CANCELED)",
+        "routed_system": "webadmin",
+        "owner_name": "서희항",
+        "plan_status": "부분"
+      },
+      {
+        "plan_row_id": "STD-MFG-023",
+        "title": "상태 단위=주문상품옵션(orderProductOptionNo)·주문 단위는 롤업",
+        "routed_system": "webadmin",
+        "owner_name": "서희항",
+        "plan_status": "부분"
+      },
+      {
+        "plan_row_id": "STD-MFG-024",
+        "title": "3시스템 매핑 테이블(handoff_id·orderNo+orderProductOptionNo·MES 작업번호)",
+        "routed_system": "webadmin",
+        "owner_name": "서희항",
+        "plan_status": "부분"
+      },
+      {
+        "plan_row_id": "STD-MFG-025",
+        "title": "FR-1 MES 주문 상태 변경 통보 수신(접수완료/생산대기/생산중/생산완료)",
+        "routed_system": "mes",
+        "owner_name": "서희항",
+        "plan_status": "미착수"
+      },
+      {
+        "plan_row_id": "STD-MFG-026",
+        "title": "접수완료 시 취소 잠금 원자적 전환(cancelable CAS)",
+        "routed_system": "webadmin",
+        "owner_name": "서희항",
+        "plan_status": "미착수"
+      },
+      {
+        "plan_row_id": "STD-MFG-028",
+        "title": "FR-2 MES 송장번호 등록 수신",
+        "routed_system": "mes",
+        "owner_name": "서희항",
+        "plan_status": "미착수"
+      },
+      {
+        "plan_row_id": "STD-MFG-033",
+        "title": "생산 시작 후 도착한 취소는 자동 처리하지 않고 담당자 에스컬레이션",
+        "routed_system": "webadmin",
+        "owner_name": "서희항",
+        "plan_status": "미착수"
+      },
+      {
+        "plan_row_id": "STD-MFG-035",
+        "title": "MES 화면 신규 버튼(취소·재업로드 요청·취소요청 승인거부)+사유 입력",
+        "routed_system": "mes",
+        "owner_name": "외부(상대측 회신 대기)",
+        "plan_status": "미착수"
+      },
+      {
+        "plan_row_id": "STD-MFG-106",
+        "title": "1차포장 처리",
+        "routed_system": "mes",
+        "owner_name": "최숙진",
+        "plan_status": "미착수"
+      },
+      {
+        "plan_row_id": "STD-MFG-107",
+        "title": "박스포장 처리(실사·대형 상품군)",
+        "routed_system": "mes",
+        "owner_name": "최숙진",
+        "plan_status": "미착수"
+      },
+      {
+        "plan_row_id": "STD-MFG-108",
+        "title": "제작번호별 바코드 입력→포장완료 상태변경",
+        "routed_system": "mes",
+        "owner_name": "최숙진",
+        "plan_status": "미착수"
+      },
+      {
+        "plan_row_id": "STD-MFG-109",
+        "title": "전 상품 포장완료 시 제작완료 자동 전환",
+        "routed_system": "mes",
+        "owner_name": "최숙진",
+        "plan_status": "미착수"
+      },
+      {
+        "plan_row_id": "STD-MFG-112",
+        "title": "납품명세서 출력(퀵)",
+        "routed_system": "mes",
+        "owner_name": "최숙진",
+        "plan_status": "미착수"
+      },
+      {
+        "plan_row_id": "STD-MFG-113",
+        "title": "출고명세서 출력(직접방문)",
+        "routed_system": "mes",
+        "owner_name": "최숙진",
+        "plan_status": "미착수"
+      },
+      {
+        "plan_row_id": "STD-MFG-115",
+        "title": "합배송 리스트 식별",
+        "routed_system": "mes",
+        "owner_name": "서희항",
+        "plan_status": "미착수"
+      },
+      {
+        "plan_row_id": "STD-MFG-117",
+        "title": "재고상품(상품 액세서리) 관리",
+        "routed_system": "mes",
+        "owner_name": "최숙진",
+        "plan_status": "미착수"
+      },
+      {
+        "plan_row_id": "STD-MFG-118",
+        "title": "제작완료 썸네일 확인 화면",
+        "routed_system": "mes",
+        "owner_name": "최숙진",
+        "plan_status": "미착수"
+      },
+      {
+        "plan_row_id": "STD-MFG-119",
+        "title": "일부 재제작+재배송 지시(MES 주문복사)",
+        "routed_system": "mes",
+        "owner_name": "최숙진",
+        "plan_status": "미착수"
+      },
+      {
+        "plan_row_id": "STD-MFG-120",
+        "title": "전체 재제작+재배송 지시",
+        "routed_system": "mes",
+        "owner_name": "최숙진",
+        "plan_status": "미착수"
+      },
+      {
+        "plan_row_id": "STD-MFG-121",
+        "title": "반송 접수·반송여부 체크",
+        "routed_system": "mes",
+        "owner_name": "최숙진",
+        "plan_status": "미착수"
+      },
+      {
+        "plan_row_id": "STD-MFG-122",
+        "title": "주문 내 정산 메모필드(반송비·재제작 비용 부담)",
+        "routed_system": "mes",
+        "owner_name": "최숙진",
+        "plan_status": "미착수"
+      },
+      {
+        "plan_row_id": "STD-MFG-125",
+        "title": "파일 오류 재업로드 요청 알림톡 발송(자동·담당자 발)",
+        "routed_system": "webadmin",
+        "owner_name": "서희항",
+        "plan_status": "미착수"
+      },
+      {
+        "plan_row_id": "STD-MFG-126",
+        "title": "재업로드 접수 확인 알림",
+        "routed_system": "webadmin",
+        "owner_name": "서희항",
+        "plan_status": "미착수"
+      },
+      {
+        "plan_row_id": "STD-MFG-127",
+        "title": "편집상품 수정요청 알림(주문번호·편집번호·안내)",
+        "routed_system": "webadmin",
+        "owner_name": "서희항",
+        "plan_status": "미착수"
+      },
+      {
+        "plan_row_id": "STD-MFG-128",
+        "title": "알림톡 템플릿 사전 심사·승인 관리",
+        "routed_system": "webadmin",
+        "owner_name": "신우진",
+        "plan_status": "미착수"
+      },
+      {
+        "plan_row_id": "STD-MFG-129",
+        "title": "알림톡 발송 실패 시 SMS/LMS 자동 대체",
+        "routed_system": "webadmin",
+        "owner_name": "서희항",
+        "plan_status": "미착수"
+      },
+      {
+        "plan_row_id": "BLK-S2-1",
+        "title": "[선행 입력] Railway 운영 변수 4종 설정 여부(값 아님) — `WAPI_SERVER_KEY_REQUIRED`·`SHOPBY_WEBHOOK_SECRET`·`SHOPBY_SYSTEM_KEY`·`SHOPBY_ACCESS_TOKEN`",
+        "routed_system": "webadmin",
+        "owner_name": "서희항",
+        "plan_status": "미착수"
+      }
+    ]
+  },
+  "decisions_total": 63
+}
