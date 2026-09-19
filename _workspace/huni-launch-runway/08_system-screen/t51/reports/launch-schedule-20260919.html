@@ -78,7 +78,7 @@ details:not([open]) .body{display:block} .controls{display:none}}
 <p class="meta">작성 2026-09-19 · 카드 t51 · 입력 = t48(shopby·huni-mall) + t49(webadmin·widget·pagebuilder) + t50(mes·edicus·pitstop)
 · 일정 입력 = 9/17 원장 735행</p>
 
-<div class="kpis"><div class="kpi"><div class="k">통합 원장</div><div class="v">747행</div><div class="d">세 레인 747행 · 레인 간 실제 중복 0행</div></div><div class="kpi"><div class="k">오픈 분모 안</div><div class="v">683행</div><div class="d">분모 밖(사내 선례) 64행은 집계에서 뺀다</div></div><div class="kpi"><div class="k">남은 일</div><div class="v">340행</div><div class="d">분모 안에서 상태가 완료가 아닌 행</div></div><div class="kpi"><div class="k">원장에 없던 행</div><div class="v">183행</div><div class="d">9/17 원장보다 단위가 잘아 새로 생긴 행</div></div><div class="kpi"><div class="k">결정·관리 안건</div><div class="v">63건</div><div class="d">화면도 기능도 아니라 원장 밖에 둔 것</div></div><div class="kpi"><div class="k">미수록</div><div class="v">83건</div><div class="d">t48 이 넘겼는데 받는 원장에 없는 행</div></div></div>
+<div class="kpis"><div class="kpi"><div class="k">통합 원장</div><div class="v">747행</div><div class="d">세 레인 747행 · 레인 간 실제 중복 0행</div></div><div class="kpi"><div class="k">오픈 분모 안</div><div class="v">683행</div><div class="d">분모 밖(사내 선례) 64행은 집계에서 뺀다</div></div><div class="kpi"><div class="k">남은 일</div><div class="v">340행</div><div class="d">분모 안에서 상태가 완료가 아닌 행</div></div><div class="kpi"><div class="k">원장에 없던 행</div><div class="v">183행</div><div class="d">9/17 원장보다 단위가 잘아 새로 생긴 행</div></div><div class="kpi"><div class="k">결정·관리 안건</div><div class="v">63건</div><div class="d">화면도 기능도 아니라 원장 밖에 둔 것</div></div><div class="kpi"><div class="k">미수록</div><div class="v">83건</div><div class="d">넘긴 행 번호가 받는 원장에 없음 · 그중 낱말 흔적조차 없는 것 6건</div></div></div>
 
 <div class="note">
 <b>이 문서의 숫자가 뜻하는 것 — 먼저 읽어 주세요.</b><br>
@@ -159,7 +159,8 @@ details:not([open]) .body{display:block} .controls{display:none}}
 <tr><td>webadmin (관리서버)</td><td class="num">147</td><td class="num">146</td><td class="num"><strong>1</strong></td><td class="num">1</td><td class="num">127</td><td class="num">20</td><td class="num">0</td></tr>
 </tbody></table>
 <p class="sm">webadmin 의 남은 일이 1행뿐인 것은 「할 일이 없다」는 뜻이 아닙니다.
-webadmin 몫의 남은 일은 대부분 <a href="#miss">6절 미수록 83건</a> 쪽에 있습니다.</p>
+t48 이 webadmin 으로 넘긴 62건이 webadmin 원장에서 같은 번호로 확인되지 않았습니다 —
+<a href="#miss">7절</a>에서 따로 다룹니다.</p>
 
 <h2>3. 직접 구현과 연동을 갈라 보기</h2>
 <p class="lead">한 화면에 성격이 다른 일이 같이 있으면 행을 나눴습니다. 그래서 「만드는 일」과 「잇는 일」이 섞이지 않습니다.</p>
@@ -513,98 +514,114 @@ webadmin 몫의 남은 일은 대부분 <a href="#miss">6절 미수록 83건</a>
 </tbody></table>
 
 <h2 id="miss">7. 미수록 83건 — 카드 사이로 빠진 행</h2>
-<p class="lead">t48 이 「이건 우리 담당이 아니다」며 넘긴 89건 가운데, 받는 쪽(t49·t50) 원장에 실제로 들어 있는 것은
-<strong>6건</strong>뿐이었습니다. 나머지 <strong>83건</strong>은 어느 화면 원장에도 없습니다.
-「공지사항·쿠폰·미수금·감사로그」로 찾아봐도 두 원장 모두 0건이었습니다.</p>
-<div class="note"><b>지어내지 않았습니다.</b> 이 83건은 <u>없는 것으로 확인된 것</u>이지,
-「어딘가에 있을 텐데 못 찾은 것」이 아닙니다. 다만 <strong>이 행들이 실제로 필요 없는 일인지, 아니면 조사에서 빠진 일인지는 아직 판정하지 않았습니다</strong> —
-그 판정에는 webadmin 을 다시 훑는 한 번의 조사가 필요합니다.
+<p class="lead">t48 이 「이건 우리 담당이 아니다」며 넘긴 89건 가운데, 넘겨받은 쪽(t49·t50) 원장에
+<u>같은 원장 행 번호로</u> 들어 있는 것은 <strong>6건</strong>뿐이었습니다.
+나머지 <strong>83건</strong>은 넘겨받은 원장에서 그 번호를 찾을 수 없습니다.</p>
+
+<div class="note"><b>다만 「번호가 없다」와 「그 일이 없다」는 다릅니다.</b>
+같은 기능이 <u>다른 원장 행 번호로</u> 이미 실려 있을 수 있습니다.
+실제로 「쿠폰 생성·발행 관리」와 「공지사항 관리」는 webadmin 으로 넘겼지만,
+t48 의 shopby 원장에 셀러어드민 설정 행으로 <strong>쿠폰 18행 · 공지 11행</strong>이 다른 번호로 실려 있습니다.
+그러니 이 83건은 <strong>「빠진 일」과 「넘긴 곳을 잘못 적은 것」이 섞여 있습니다.</strong></div>
+
+<h3>그래서 둘로 갈라 셌습니다 — 단정 대신 범위로</h3>
+<p class="lead">83건의 제목에서 흔한 낱말(관리·등록·설정 따위)을 뺀 낱말을 뽑아, 그 낱말이 세 원장 어디에든 나오는지 기계로 훑었습니다.</p>
+<table><thead><tr><th>구분</th><th class="num">건수</th><th>읽는 법</th></tr></thead><tbody>
+<tr><td><strong>흔적이 전혀 없음</strong></td><td class="num">6</td>
+<td>어느 원장에서도 비슷한 낱말조차 찾지 못했습니다. <strong>「빠진 일」의 하한</strong>입니다.</td></tr>
+<tr><td>어딘가에 낱말 흔적 있음</td><td class="num">77</td>
+<td>넘긴 곳이 틀렸을 <u>후보</u>입니다. 낱말 일치라 <strong>과다 계상되니 상한으로만</strong> 읽어야 합니다
+(예: 「충전 입금 확인」은 세 카드에 모두 걸립니다).</td></tr>
+</tbody></table>
+<p class="sm">흔적이 전혀 없는 6건: STD-B2B-006 월 마감 청구서 발행 · STD-ADC-003 탈퇴회원 관리 · STD-MFG-106 1차포장 처리 · STD-MFG-112 납품명세서 출력(퀵) · STD-MFG-113 출고명세서 출력(직접방문) · STD-MFG-117 재고상품(상품 액세서리) 관리</p>
+<div class="note"><b>아직 판정하지 않았습니다.</b> 어느 쪽이든 「정말 필요 없는 일인지, 넘긴 곳이 틀린 것인지, 조사에서 빠진 것인지」를
+가리려면 webadmin 과 셀러어드민을 한 번 다시 훑어야 합니다. 그 일은 이 문서의 범위 밖입니다.
 넘긴 쪽 분포는 webadmin 62건 · mes 16건이고,
 담당으로는 김동학 40건 · 최숙진 14건 · 서희항 13건입니다.</div>
-<div class="scroll"><table><thead><tr><th>원장 행</th><th>내용</th><th>넘긴 곳</th><th>담당</th><th>원장 상태</th></tr></thead>
-<tbody><tr><td class="mono">STD-ORD-027</td><td>오프라인 주문 별도 등록 경로</td><td>webadmin</td><td>김동학</td><td>부분</td></tr>
-<tr><td class="mono">STD-MYP-028</td><td>충전 입금 확인 = 토스페이먼츠 가상계좌 API 직접 발급</td><td>webadmin↔토스</td><td>미정</td><td>미착수</td></tr>
-<tr><td class="mono">STD-MYP-029</td><td>입금 확인 자동화 — 가상계좌 DEPOSIT_CALLBACK 웹훅 수신→자동 충전</td><td>webadmin</td><td>미정</td><td>미착수</td></tr>
-<tr><td class="mono">STD-MYP-043</td><td>프린트머니 구현 M1 — webadmin t_pm_charge_txn + 감지·지급 잡(폴링) + 웹훅 신호 연결</td><td>webadmin</td><td>미정</td><td>미착수</td></tr>
-<tr><td class="mono">STD-MYP-046</td><td>프린트머니 구현 M4 — 충전 취소/환불 처리 + 운영 화면(txn 목록·재시도)</td><td>webadmin</td><td>미정</td><td>미착수</td></tr>
-<tr><td class="mono">STD-MYP-047</td><td>프린트머니 구현 M5 — 구 잔액 마이그레이션 시드 실행(260630 스펙)</td><td>webadmin</td><td>미정</td><td>미착수</td></tr>
-<tr><td class="mono">STD-PRM-017</td><td>[구IA#71] 체험단관리 (등록/수정/신청내역)</td><td>webadmin</td><td>신우진</td><td>미실측</td></tr>
-<tr><td class="mono">STD-B2B-001</td><td>거래처(기업회원) 등록·관리</td><td>webadmin</td><td>김동학</td><td>부분</td></tr>
-<tr><td class="mono">STD-B2B-002</td><td>거래처별 단가/할인율 설정</td><td>webadmin</td><td>김동학</td><td>미착수</td></tr>
-<tr><td class="mono">STD-B2B-003</td><td>거래처 소속 담당자 다계정</td><td>webadmin</td><td>김동학</td><td>미착수</td></tr>
-<tr><td class="mono">STD-B2B-004</td><td>후불 여신한도 설정</td><td>webadmin</td><td>김동학</td><td>미착수</td></tr>
-<tr><td class="mono">STD-B2B-005</td><td>후불 주문 승인·미결제 관리</td><td>webadmin</td><td>김동학</td><td>미착수</td></tr>
-<tr><td class="mono">STD-B2B-006</td><td>월 마감 청구서 발행</td><td>webadmin</td><td>김동학</td><td>미착수</td></tr>
-<tr><td class="mono">STD-B2B-007</td><td>업체별 미수금 관리</td><td>webadmin</td><td>김동학</td><td>미착수</td></tr>
-<tr><td class="mono">STD-B2B-008</td><td>거래처 원장(온·오프라인 통합)</td><td>webadmin</td><td>김동학</td><td>미착수</td></tr>
-<tr><td class="mono">STD-B2B-009</td><td>원장 데이터 파일 생성(.txt 연계)</td><td>webadmin</td><td>김동학</td><td>미착수</td></tr>
-<tr><td class="mono">STD-B2B-010</td><td>대량 견적 요청 접수·회신</td><td>webadmin</td><td>김동학</td><td>미착수</td></tr>
-<tr><td class="mono">STD-B2B-011</td><td>견적서 발행(사업자 양식)</td><td>webadmin</td><td>김동학</td><td>미착수</td></tr>
-<tr><td class="mono">STD-B2B-012</td><td>세금계산서 일괄 발행</td><td>webadmin</td><td>미정</td><td>미착수</td></tr>
-<tr><td class="mono">STD-B2B-015</td><td>[구IA#91] 주문관리-후불결제</td><td>webadmin</td><td>신우진</td><td>미실측</td></tr>
-<tr><td class="mono">STD-ADC-001</td><td>회원 목록·검색·상세</td><td>webadmin</td><td>김동학</td><td>작동</td></tr>
-<tr><td class="mono">STD-ADC-002</td><td>회원등급 수동 조정</td><td>webadmin</td><td>김동학</td><td>미착수</td></tr>
-<tr><td class="mono">STD-ADC-003</td><td>탈퇴회원 관리</td><td>webadmin</td><td>김동학</td><td>작동</td></tr>
-<tr><td class="mono">STD-ADC-005</td><td>쿠폰 생성·발행 관리</td><td>webadmin</td><td>김동학</td><td>미착수</td></tr>
-<tr><td class="mono">STD-ADC-007</td><td>공지사항 관리</td><td>webadmin</td><td>김동학</td><td>작동</td></tr>
-<tr><td class="mono">STD-ADC-008</td><td>FAQ 관리</td><td>webadmin</td><td>김동학</td><td>작동</td></tr>
-<tr><td class="mono">STD-ADC-009</td><td>상품Q&amp;A 답변 관리</td><td>webadmin</td><td>김동학</td><td>작동</td></tr>
-<tr><td class="mono">STD-ADC-010</td><td>1:1 문의 답변 관리</td><td>webadmin</td><td>김동학</td><td>작동</td></tr>
-<tr><td class="mono">STD-ADC-011</td><td>이용후기(리뷰) 관리·블라인드</td><td>webadmin</td><td>김동학</td><td>작동</td></tr>
-<tr><td class="mono">STD-ADC-012</td><td>대량견적/기업상담/디자인상담 접수 관리</td><td>webadmin</td><td>김동학</td><td>미착수</td></tr>
-<tr><td class="mono">STD-ADC-013</td><td>메인/기획전 배너 관리</td><td>webadmin</td><td>김동학</td><td>미착수</td></tr>
-<tr><td class="mono">STD-ADC-015</td><td>매장(거래처) 게시판 관리</td><td>webadmin</td><td>김동학</td><td>미착수</td></tr>
-<tr><td class="mono">STD-ADC-016</td><td>체험단 모집·신청내역 관리(운영자)</td><td>webadmin</td><td>김동학</td><td>미착수</td></tr>
-<tr><td class="mono">STD-FIN-001</td><td>월별 매출 통계</td><td>webadmin</td><td>김동학</td><td>작동</td></tr>
-<tr><td class="mono">STD-FIN-002</td><td>일별/기간별 매출 조회</td><td>webadmin</td><td>김동학</td><td>작동</td></tr>
-<tr><td class="mono">STD-FIN-003</td><td>결제수단별 매출 집계</td><td>webadmin</td><td>김동학</td><td>작동</td></tr>
-<tr><td class="mono">STD-FIN-004</td><td>상품별 판매 통계</td><td>webadmin</td><td>김동학</td><td>작동</td></tr>
-<tr><td class="mono">STD-FIN-005</td><td>상품군별 매출 비중</td><td>webadmin</td><td>김동학</td><td>작동</td></tr>
-<tr><td class="mono">STD-FIN-006</td><td>회원/비회원 주문 비중</td><td>webadmin</td><td>김동학</td><td>작동</td></tr>
-<tr><td class="mono">STD-FIN-008</td><td>PG 정산 대사</td><td>webadmin</td><td>김동학</td><td>미착수</td></tr>
-<tr><td class="mono">STD-FIN-009</td><td>적립금(프린팅머니) 부채 집계</td><td>webadmin</td><td>김동학</td><td>미착수</td></tr>
-<tr><td class="mono">STD-FIN-010</td><td>외주 발주/정산 엑셀 산출</td><td>webadmin</td><td>김동학</td><td>미착수</td></tr>
-<tr><td class="mono">STD-FIN-011</td><td>쿠폰/할인 사용액 집계</td><td>webadmin</td><td>김동학</td><td>작동</td></tr>
-<tr><td class="mono">STD-FIN-012</td><td>통계·주문 데이터 엑셀 내보내기</td><td>webadmin</td><td>김동학</td><td>미착수</td></tr>
-<tr><td class="mono">STD-FIN-013</td><td>[구IA#47] 계좌관리 (원장용 계좌 등록)</td><td>webadmin</td><td>신우진</td><td>미착수</td></tr>
-<tr><td class="mono">STD-FIN-014</td><td>[구IA#49] 업체별 미수금</td><td>webadmin</td><td>신우진</td><td>미착수</td></tr>
-<tr><td class="mono">STD-FIN-019</td><td>[구IA#84] 굿즈 발주/정산 (Excel 다운)</td><td>webadmin</td><td>최숙진</td><td>미착수</td></tr>
-<tr><td class="mono">STD-FIN-020</td><td>가상계좌 정산한도 1,000만 원 초과 시 처리 방안</td><td>외부(토스)</td><td>외부(토스페이먼츠)</td><td>미착수</td></tr>
-<tr><td class="mono">STD-FIN-021</td><td>적립금·증빙 데이터의 MS·이카운트 연동 방식</td><td>외부</td><td>김용기</td><td>미착수</td></tr>
-<tr><td class="mono">STD-SYS-001</td><td>관리자 계정 등록·관리</td><td>webadmin</td><td>김동학</td><td>부분</td></tr>
-<tr><td class="mono">STD-SYS-002</td><td>역할 기반 세분 권한 제어</td><td>webadmin</td><td>김동학</td><td>부분</td></tr>
-<tr><td class="mono">STD-SYS-003</td><td>관리자 작업 감사로그</td><td>webadmin</td><td>김동학</td><td>작동</td></tr>
-<tr><td class="mono">STD-SYS-010</td><td>원고 저장소(스토리지) 연동</td><td>widget·webadmin</td><td>김동학</td><td>구현-미검증</td></tr>
-<tr><td class="mono">STD-SYS-011</td><td>디자인 에디터 외부 서비스 연동</td><td>edicus</td><td>미정</td><td>부분</td></tr>
-<tr><td class="mono">STD-SYS-025</td><td>[구IA#44] 관리자 등록/관리</td><td>webadmin</td><td>최숙진</td><td>부분</td></tr>
-<tr><td class="mono">STD-SYS-028</td><td>webadmin 영역 분리(쇼핑몰 관리자 영역 / DB·생산 영역)</td><td>webadmin</td><td>신우진</td><td>미착수</td></tr>
-<tr><td class="mono">STD-MFG-022</td><td>주문 상태머신(REGISTERED/PROMOTING/PROMOTED/HOLD/PAID/FILE_CHECK/FILE_HOLD/MES_SENT/IN_PRODUCTION/PRODUCED/SHIPPED/DONE/CANCELED)</td><td>webadmin</td><td>서희항</td><td>부분</td></tr>
-<tr><td class="mono">STD-MFG-023</td><td>상태 단위=주문상품옵션(orderProductOptionNo)·주문 단위는 롤업</td><td>webadmin</td><td>서희항</td><td>부분</td></tr>
-<tr><td class="mono">STD-MFG-024</td><td>3시스템 매핑 테이블(handoff_id·orderNo+orderProductOptionNo·MES 작업번호)</td><td>webadmin</td><td>서희항</td><td>부분</td></tr>
-<tr><td class="mono">STD-MFG-025</td><td>FR-1 MES 주문 상태 변경 통보 수신(접수완료/생산대기/생산중/생산완료)</td><td>mes</td><td>서희항</td><td>미착수</td></tr>
-<tr><td class="mono">STD-MFG-026</td><td>접수완료 시 취소 잠금 원자적 전환(cancelable CAS)</td><td>webadmin</td><td>서희항</td><td>미착수</td></tr>
-<tr><td class="mono">STD-MFG-028</td><td>FR-2 MES 송장번호 등록 수신</td><td>mes</td><td>서희항</td><td>미착수</td></tr>
-<tr><td class="mono">STD-MFG-033</td><td>생산 시작 후 도착한 취소는 자동 처리하지 않고 담당자 에스컬레이션</td><td>webadmin</td><td>서희항</td><td>미착수</td></tr>
-<tr><td class="mono">STD-MFG-035</td><td>MES 화면 신규 버튼(취소·재업로드 요청·취소요청 승인거부)+사유 입력</td><td>mes</td><td>외부(상대측 회신 대기)</td><td>미착수</td></tr>
-<tr><td class="mono">STD-MFG-106</td><td>1차포장 처리</td><td>mes</td><td>최숙진</td><td>미착수</td></tr>
-<tr><td class="mono">STD-MFG-107</td><td>박스포장 처리(실사·대형 상품군)</td><td>mes</td><td>최숙진</td><td>미착수</td></tr>
-<tr><td class="mono">STD-MFG-108</td><td>제작번호별 바코드 입력→포장완료 상태변경</td><td>mes</td><td>최숙진</td><td>미착수</td></tr>
-<tr><td class="mono">STD-MFG-109</td><td>전 상품 포장완료 시 제작완료 자동 전환</td><td>mes</td><td>최숙진</td><td>미착수</td></tr>
-<tr><td class="mono">STD-MFG-112</td><td>납품명세서 출력(퀵)</td><td>mes</td><td>최숙진</td><td>미착수</td></tr>
-<tr><td class="mono">STD-MFG-113</td><td>출고명세서 출력(직접방문)</td><td>mes</td><td>최숙진</td><td>미착수</td></tr>
-<tr><td class="mono">STD-MFG-115</td><td>합배송 리스트 식별</td><td>mes</td><td>서희항</td><td>미착수</td></tr>
-<tr><td class="mono">STD-MFG-117</td><td>재고상품(상품 액세서리) 관리</td><td>mes</td><td>최숙진</td><td>미착수</td></tr>
-<tr><td class="mono">STD-MFG-118</td><td>제작완료 썸네일 확인 화면</td><td>mes</td><td>최숙진</td><td>미착수</td></tr>
-<tr><td class="mono">STD-MFG-119</td><td>일부 재제작+재배송 지시(MES 주문복사)</td><td>mes</td><td>최숙진</td><td>미착수</td></tr>
-<tr><td class="mono">STD-MFG-120</td><td>전체 재제작+재배송 지시</td><td>mes</td><td>최숙진</td><td>미착수</td></tr>
-<tr><td class="mono">STD-MFG-121</td><td>반송 접수·반송여부 체크</td><td>mes</td><td>최숙진</td><td>미착수</td></tr>
-<tr><td class="mono">STD-MFG-122</td><td>주문 내 정산 메모필드(반송비·재제작 비용 부담)</td><td>mes</td><td>최숙진</td><td>미착수</td></tr>
-<tr><td class="mono">STD-MFG-125</td><td>파일 오류 재업로드 요청 알림톡 발송(자동·담당자 발)</td><td>webadmin</td><td>서희항</td><td>미착수</td></tr>
-<tr><td class="mono">STD-MFG-126</td><td>재업로드 접수 확인 알림</td><td>webadmin</td><td>서희항</td><td>미착수</td></tr>
-<tr><td class="mono">STD-MFG-127</td><td>편집상품 수정요청 알림(주문번호·편집번호·안내)</td><td>webadmin</td><td>서희항</td><td>미착수</td></tr>
-<tr><td class="mono">STD-MFG-128</td><td>알림톡 템플릿 사전 심사·승인 관리</td><td>webadmin</td><td>신우진</td><td>미착수</td></tr>
-<tr><td class="mono">STD-MFG-129</td><td>알림톡 발송 실패 시 SMS/LMS 자동 대체</td><td>webadmin</td><td>서희항</td><td>미착수</td></tr>
-<tr><td class="mono">BLK-S2-1</td><td>[선행 입력] Railway 운영 변수 4종 설정 여부(값 아님) — `WAPI_SERVER_KEY_REQUIRED`·`SHOPBY_WEBHOOK_SECRET`·`SHOPBY_SYSTEM_KEY`·`SHOPBY_ACCESS_TOKEN`</td><td>webadmin</td><td>서희항</td><td>미착수</td></tr></tbody></table></div>
+<div class="scroll"><table><thead><tr><th>원장 행</th><th>내용</th><th>넘긴 곳</th><th>담당</th><th>원장 상태</th><th>낱말 흔적</th></tr></thead>
+<tbody><tr><td class="mono">STD-ORD-027</td><td>오프라인 주문 별도 등록 경로</td><td>webadmin</td><td>김동학</td><td>부분</td><td class="sm">흔적 t50</td></tr>
+<tr><td class="mono">STD-MYP-028</td><td>충전 입금 확인 = 토스페이먼츠 가상계좌 API 직접 발급</td><td>webadmin↔토스</td><td>미정</td><td>미착수</td><td class="sm">흔적 t48, t49, t50</td></tr>
+<tr><td class="mono">STD-MYP-029</td><td>입금 확인 자동화 — 가상계좌 DEPOSIT_CALLBACK 웹훅 수신→자동 충전</td><td>webadmin</td><td>미정</td><td>미착수</td><td class="sm">흔적 t48, t49, t50</td></tr>
+<tr><td class="mono">STD-MYP-043</td><td>프린트머니 구현 M1 — webadmin t_pm_charge_txn + 감지·지급 잡(폴링) + 웹훅 신호 연결</td><td>webadmin</td><td>미정</td><td>미착수</td><td class="sm">흔적 t48, t49, t50</td></tr>
+<tr><td class="mono">STD-MYP-046</td><td>프린트머니 구현 M4 — 충전 취소/환불 처리 + 운영 화면(txn 목록·재시도)</td><td>webadmin</td><td>미정</td><td>미착수</td><td class="sm">흔적 t48, t49, t50</td></tr>
+<tr><td class="mono">STD-MYP-047</td><td>프린트머니 구현 M5 — 구 잔액 마이그레이션 시드 실행(260630 스펙)</td><td>webadmin</td><td>미정</td><td>미착수</td><td class="sm">흔적 t48, t49, t50</td></tr>
+<tr><td class="mono">STD-PRM-017</td><td>[구IA#71] 체험단관리 (등록/수정/신청내역)</td><td>webadmin</td><td>신우진</td><td>미실측</td><td class="sm">흔적 t48</td></tr>
+<tr><td class="mono">STD-B2B-001</td><td>거래처(기업회원) 등록·관리</td><td>webadmin</td><td>김동학</td><td>부분</td><td class="sm">흔적 t48, t50</td></tr>
+<tr><td class="mono">STD-B2B-002</td><td>거래처별 단가/할인율 설정</td><td>webadmin</td><td>김동학</td><td>미착수</td><td class="sm">흔적 t49, t50</td></tr>
+<tr><td class="mono">STD-B2B-003</td><td>거래처 소속 담당자 다계정</td><td>webadmin</td><td>김동학</td><td>미착수</td><td class="sm">흔적 t48, t49, t50</td></tr>
+<tr><td class="mono">STD-B2B-004</td><td>후불 여신한도 설정</td><td>webadmin</td><td>김동학</td><td>미착수</td><td class="sm">흔적 t48</td></tr>
+<tr><td class="mono">STD-B2B-005</td><td>후불 주문 승인·미결제 관리</td><td>webadmin</td><td>김동학</td><td>미착수</td><td class="sm">흔적 t48, t49</td></tr>
+<tr><td class="mono">STD-B2B-006</td><td>월 마감 청구서 발행</td><td>webadmin</td><td>김동학</td><td>미착수</td><td class="sm"><strong>흔적 없음</strong></td></tr>
+<tr><td class="mono">STD-B2B-007</td><td>업체별 미수금 관리</td><td>webadmin</td><td>김동학</td><td>미착수</td><td class="sm">흔적 t50</td></tr>
+<tr><td class="mono">STD-B2B-008</td><td>거래처 원장(온·오프라인 통합)</td><td>webadmin</td><td>김동학</td><td>미착수</td><td class="sm">흔적 t48, t50</td></tr>
+<tr><td class="mono">STD-B2B-009</td><td>원장 데이터 파일 생성(.txt 연계)</td><td>webadmin</td><td>김동학</td><td>미착수</td><td class="sm">흔적 t48, t49, t50</td></tr>
+<tr><td class="mono">STD-B2B-010</td><td>대량 견적 요청 접수·회신</td><td>webadmin</td><td>김동학</td><td>미착수</td><td class="sm">흔적 t48, t49, t50</td></tr>
+<tr><td class="mono">STD-B2B-011</td><td>견적서 발행(사업자 양식)</td><td>webadmin</td><td>김동학</td><td>미착수</td><td class="sm">흔적 t48, t50</td></tr>
+<tr><td class="mono">STD-B2B-012</td><td>세금계산서 일괄 발행</td><td>webadmin</td><td>미정</td><td>미착수</td><td class="sm">흔적 t48, t49, t50</td></tr>
+<tr><td class="mono">STD-B2B-015</td><td>[구IA#91] 주문관리-후불결제</td><td>webadmin</td><td>신우진</td><td>미실측</td><td class="sm">흔적 t48</td></tr>
+<tr><td class="mono">STD-ADC-001</td><td>회원 목록·검색·상세</td><td>webadmin</td><td>김동학</td><td>작동</td><td class="sm">흔적 t48, t49, t50</td></tr>
+<tr><td class="mono">STD-ADC-002</td><td>회원등급 수동 조정</td><td>webadmin</td><td>김동학</td><td>미착수</td><td class="sm">흔적 t48</td></tr>
+<tr><td class="mono">STD-ADC-003</td><td>탈퇴회원 관리</td><td>webadmin</td><td>김동학</td><td>작동</td><td class="sm"><strong>흔적 없음</strong></td></tr>
+<tr><td class="mono">STD-ADC-005</td><td>쿠폰 생성·발행 관리</td><td>webadmin</td><td>김동학</td><td>미착수</td><td class="sm">흔적 t48</td></tr>
+<tr><td class="mono">STD-ADC-007</td><td>공지사항 관리</td><td>webadmin</td><td>김동학</td><td>작동</td><td class="sm">흔적 t48</td></tr>
+<tr><td class="mono">STD-ADC-008</td><td>FAQ 관리</td><td>webadmin</td><td>김동학</td><td>작동</td><td class="sm">흔적 t48</td></tr>
+<tr><td class="mono">STD-ADC-009</td><td>상품Q&amp;A 답변 관리</td><td>webadmin</td><td>김동학</td><td>작동</td><td class="sm">흔적 t48</td></tr>
+<tr><td class="mono">STD-ADC-010</td><td>1:1 문의 답변 관리</td><td>webadmin</td><td>김동학</td><td>작동</td><td class="sm">흔적 t48</td></tr>
+<tr><td class="mono">STD-ADC-011</td><td>이용후기(리뷰) 관리·블라인드</td><td>webadmin</td><td>김동학</td><td>작동</td><td class="sm">흔적 t48, t49</td></tr>
+<tr><td class="mono">STD-ADC-012</td><td>대량견적/기업상담/디자인상담 접수 관리</td><td>webadmin</td><td>김동학</td><td>미착수</td><td class="sm">흔적 t48</td></tr>
+<tr><td class="mono">STD-ADC-013</td><td>메인/기획전 배너 관리</td><td>webadmin</td><td>김동학</td><td>미착수</td><td class="sm">흔적 t48, t49</td></tr>
+<tr><td class="mono">STD-ADC-015</td><td>매장(거래처) 게시판 관리</td><td>webadmin</td><td>김동학</td><td>미착수</td><td class="sm">흔적 t48, t50</td></tr>
+<tr><td class="mono">STD-ADC-016</td><td>체험단 모집·신청내역 관리(운영자)</td><td>webadmin</td><td>김동학</td><td>미착수</td><td class="sm">흔적 t48, t49</td></tr>
+<tr><td class="mono">STD-FIN-001</td><td>월별 매출 통계</td><td>webadmin</td><td>김동학</td><td>작동</td><td class="sm">흔적 t48, t50</td></tr>
+<tr><td class="mono">STD-FIN-002</td><td>일별/기간별 매출 조회</td><td>webadmin</td><td>김동학</td><td>작동</td><td class="sm">흔적 t48, t50</td></tr>
+<tr><td class="mono">STD-FIN-003</td><td>결제수단별 매출 집계</td><td>webadmin</td><td>김동학</td><td>작동</td><td class="sm">흔적 t48, t50</td></tr>
+<tr><td class="mono">STD-FIN-004</td><td>상품별 판매 통계</td><td>webadmin</td><td>김동학</td><td>작동</td><td class="sm">흔적 t48, t49, t50</td></tr>
+<tr><td class="mono">STD-FIN-005</td><td>상품군별 매출 비중</td><td>webadmin</td><td>김동학</td><td>작동</td><td class="sm">흔적 t48, t49, t50</td></tr>
+<tr><td class="mono">STD-FIN-006</td><td>회원/비회원 주문 비중</td><td>webadmin</td><td>김동학</td><td>작동</td><td class="sm">흔적 t48, t49</td></tr>
+<tr><td class="mono">STD-FIN-008</td><td>PG 정산 대사</td><td>webadmin</td><td>김동학</td><td>미착수</td><td class="sm">흔적 t48</td></tr>
+<tr><td class="mono">STD-FIN-009</td><td>적립금(프린팅머니) 부채 집계</td><td>webadmin</td><td>김동학</td><td>미착수</td><td class="sm">흔적 t48</td></tr>
+<tr><td class="mono">STD-FIN-010</td><td>외주 발주/정산 엑셀 산출</td><td>webadmin</td><td>김동학</td><td>미착수</td><td class="sm">흔적 t48, t49, t50</td></tr>
+<tr><td class="mono">STD-FIN-011</td><td>쿠폰/할인 사용액 집계</td><td>webadmin</td><td>김동학</td><td>작동</td><td class="sm">흔적 t48, t49, t50</td></tr>
+<tr><td class="mono">STD-FIN-012</td><td>통계·주문 데이터 엑셀 내보내기</td><td>webadmin</td><td>김동학</td><td>미착수</td><td class="sm">흔적 t48, t49, t50</td></tr>
+<tr><td class="mono">STD-FIN-013</td><td>[구IA#47] 계좌관리 (원장용 계좌 등록)</td><td>webadmin</td><td>신우진</td><td>미착수</td><td class="sm">흔적 t48</td></tr>
+<tr><td class="mono">STD-FIN-014</td><td>[구IA#49] 업체별 미수금</td><td>webadmin</td><td>신우진</td><td>미착수</td><td class="sm">흔적 t48, t50</td></tr>
+<tr><td class="mono">STD-FIN-019</td><td>[구IA#84] 굿즈 발주/정산 (Excel 다운)</td><td>webadmin</td><td>최숙진</td><td>미착수</td><td class="sm">흔적 t48, t49, t50</td></tr>
+<tr><td class="mono">STD-FIN-020</td><td>가상계좌 정산한도 1,000만 원 초과 시 처리 방안</td><td>외부(토스)</td><td>외부(토스페이먼츠)</td><td>미착수</td><td class="sm">흔적 t48</td></tr>
+<tr><td class="mono">STD-FIN-021</td><td>적립금·증빙 데이터의 MS·이카운트 연동 방식</td><td>외부</td><td>김용기</td><td>미착수</td><td class="sm">흔적 t48, t49, t50</td></tr>
+<tr><td class="mono">STD-SYS-001</td><td>관리자 계정 등록·관리</td><td>webadmin</td><td>김동학</td><td>부분</td><td class="sm">흔적 t48, t49, t50</td></tr>
+<tr><td class="mono">STD-SYS-002</td><td>역할 기반 세분 권한 제어</td><td>webadmin</td><td>김동학</td><td>부분</td><td class="sm">흔적 t48, t49, t50</td></tr>
+<tr><td class="mono">STD-SYS-003</td><td>관리자 작업 감사로그</td><td>webadmin</td><td>김동학</td><td>작동</td><td class="sm">흔적 t48, t49, t50</td></tr>
+<tr><td class="mono">STD-SYS-010</td><td>원고 저장소(스토리지) 연동</td><td>widget·webadmin</td><td>김동학</td><td>구현-미검증</td><td class="sm">흔적 t48, t49, t50</td></tr>
+<tr><td class="mono">STD-SYS-011</td><td>디자인 에디터 외부 서비스 연동</td><td>edicus</td><td>미정</td><td>부분</td><td class="sm">흔적 t48, t49, t50</td></tr>
+<tr><td class="mono">STD-SYS-025</td><td>[구IA#44] 관리자 등록/관리</td><td>webadmin</td><td>최숙진</td><td>부분</td><td class="sm">흔적 t48</td></tr>
+<tr><td class="mono">STD-SYS-028</td><td>webadmin 영역 분리(쇼핑몰 관리자 영역 / DB·생산 영역)</td><td>webadmin</td><td>신우진</td><td>미착수</td><td class="sm">흔적 t48, t49, t50</td></tr>
+<tr><td class="mono">STD-MFG-022</td><td>주문 상태머신(REGISTERED/PROMOTING/PROMOTED/HOLD/PAID/FILE_CHECK/FILE_HOLD/MES_SENT/IN_PRODUCTION/PRODUCED/SHIPPED/DONE/CANCELED)</td><td>webadmin</td><td>서희항</td><td>부분</td><td class="sm">흔적 t50</td></tr>
+<tr><td class="mono">STD-MFG-023</td><td>상태 단위=주문상품옵션(orderProductOptionNo)·주문 단위는 롤업</td><td>webadmin</td><td>서희항</td><td>부분</td><td class="sm">흔적 t48, t49, t50</td></tr>
+<tr><td class="mono">STD-MFG-024</td><td>3시스템 매핑 테이블(handoff_id·orderNo+orderProductOptionNo·MES 작업번호)</td><td>webadmin</td><td>서희항</td><td>부분</td><td class="sm">흔적 t48, t49, t50</td></tr>
+<tr><td class="mono">STD-MFG-025</td><td>FR-1 MES 주문 상태 변경 통보 수신(접수완료/생산대기/생산중/생산완료)</td><td>mes</td><td>서희항</td><td>미착수</td><td class="sm">흔적 t48, t49, t50</td></tr>
+<tr><td class="mono">STD-MFG-026</td><td>접수완료 시 취소 잠금 원자적 전환(cancelable CAS)</td><td>webadmin</td><td>서희항</td><td>미착수</td><td class="sm">흔적 t48, t49, t50</td></tr>
+<tr><td class="mono">STD-MFG-028</td><td>FR-2 MES 송장번호 등록 수신</td><td>mes</td><td>서희항</td><td>미착수</td><td class="sm">흔적 t48, t50</td></tr>
+<tr><td class="mono">STD-MFG-033</td><td>생산 시작 후 도착한 취소는 자동 처리하지 않고 담당자 에스컬레이션</td><td>webadmin</td><td>서희항</td><td>미착수</td><td class="sm">흔적 t48, t49, t50</td></tr>
+<tr><td class="mono">STD-MFG-035</td><td>MES 화면 신규 버튼(취소·재업로드 요청·취소요청 승인거부)+사유 입력</td><td>mes</td><td>외부(상대측 회신 대기)</td><td>미착수</td><td class="sm">흔적 t48, t49, t50</td></tr>
+<tr><td class="mono">STD-MFG-106</td><td>1차포장 처리</td><td>mes</td><td>최숙진</td><td>미착수</td><td class="sm"><strong>흔적 없음</strong></td></tr>
+<tr><td class="mono">STD-MFG-107</td><td>박스포장 처리(실사·대형 상품군)</td><td>mes</td><td>최숙진</td><td>미착수</td><td class="sm">흔적 t48</td></tr>
+<tr><td class="mono">STD-MFG-108</td><td>제작번호별 바코드 입력→포장완료 상태변경</td><td>mes</td><td>최숙진</td><td>미착수</td><td class="sm">흔적 t48, t50</td></tr>
+<tr><td class="mono">STD-MFG-109</td><td>전 상품 포장완료 시 제작완료 자동 전환</td><td>mes</td><td>최숙진</td><td>미착수</td><td class="sm">흔적 t48, t49, t50</td></tr>
+<tr><td class="mono">STD-MFG-112</td><td>납품명세서 출력(퀵)</td><td>mes</td><td>최숙진</td><td>미착수</td><td class="sm"><strong>흔적 없음</strong></td></tr>
+<tr><td class="mono">STD-MFG-113</td><td>출고명세서 출력(직접방문)</td><td>mes</td><td>최숙진</td><td>미착수</td><td class="sm"><strong>흔적 없음</strong></td></tr>
+<tr><td class="mono">STD-MFG-115</td><td>합배송 리스트 식별</td><td>mes</td><td>서희항</td><td>미착수</td><td class="sm">흔적 t48, t49, t50</td></tr>
+<tr><td class="mono">STD-MFG-117</td><td>재고상품(상품 액세서리) 관리</td><td>mes</td><td>최숙진</td><td>미착수</td><td class="sm"><strong>흔적 없음</strong></td></tr>
+<tr><td class="mono">STD-MFG-118</td><td>제작완료 썸네일 확인 화면</td><td>mes</td><td>최숙진</td><td>미착수</td><td class="sm">흔적 t49, t50</td></tr>
+<tr><td class="mono">STD-MFG-119</td><td>일부 재제작+재배송 지시(MES 주문복사)</td><td>mes</td><td>최숙진</td><td>미착수</td><td class="sm">흔적 t48, t50</td></tr>
+<tr><td class="mono">STD-MFG-120</td><td>전체 재제작+재배송 지시</td><td>mes</td><td>최숙진</td><td>미착수</td><td class="sm">흔적 t50</td></tr>
+<tr><td class="mono">STD-MFG-121</td><td>반송 접수·반송여부 체크</td><td>mes</td><td>최숙진</td><td>미착수</td><td class="sm">흔적 t48, t49</td></tr>
+<tr><td class="mono">STD-MFG-122</td><td>주문 내 정산 메모필드(반송비·재제작 비용 부담)</td><td>mes</td><td>최숙진</td><td>미착수</td><td class="sm">흔적 t48</td></tr>
+<tr><td class="mono">STD-MFG-125</td><td>파일 오류 재업로드 요청 알림톡 발송(자동·담당자 발)</td><td>webadmin</td><td>서희항</td><td>미착수</td><td class="sm">흔적 t48, t49, t50</td></tr>
+<tr><td class="mono">STD-MFG-126</td><td>재업로드 접수 확인 알림</td><td>webadmin</td><td>서희항</td><td>미착수</td><td class="sm">흔적 t48, t50</td></tr>
+<tr><td class="mono">STD-MFG-127</td><td>편집상품 수정요청 알림(주문번호·편집번호·안내)</td><td>webadmin</td><td>서희항</td><td>미착수</td><td class="sm">흔적 t48, t49, t50</td></tr>
+<tr><td class="mono">STD-MFG-128</td><td>알림톡 템플릿 사전 심사·승인 관리</td><td>webadmin</td><td>신우진</td><td>미착수</td><td class="sm">흔적 t48, t49, t50</td></tr>
+<tr><td class="mono">STD-MFG-129</td><td>알림톡 발송 실패 시 SMS/LMS 자동 대체</td><td>webadmin</td><td>서희항</td><td>미착수</td><td class="sm">흔적 t48, t49, t50</td></tr>
+<tr><td class="mono">BLK-S2-1</td><td>[선행 입력] Railway 운영 변수 4종 설정 여부(값 아님) — `WAPI_SERVER_KEY_REQUIRED`·`SHOPBY_WEBHOOK_SECRET`·`SHOPBY_SYSTEM_KEY`·`SHOPBY_ACCESS_TOKEN`</td><td>webadmin</td><td>서희항</td><td>미착수</td><td class="sm">흔적 t48, t49, t50</td></tr></tbody></table></div>
 
 <h2>8. 지니 결정이 필요한 것</h2>
 <ol><li><strong>위젯빌더 운영 도구 NEW 71행을 런웨이에 올릴 것인가</strong> — 직접 구현이고 이미 완료라 「남은 일」 집계에는 잡히지 않는다. 원장에 실을지 여부가 결정 사항이다.</li>

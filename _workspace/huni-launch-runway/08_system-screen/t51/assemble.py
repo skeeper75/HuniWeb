@@ -130,11 +130,47 @@ def crosscheck_out_of_scope(rows):
                     "owner_name": (r.get("owner_name") or "").strip(),
                     "plan_status": (r.get("plan_status") or "").strip(),
                 })
+    # 미수록 = plan_row_id 기준 판정이다. 같은 기능이 다른 plan_row_id 로 어느 원장에
+    # 실려 있을 수 있다(리드 lane-1 표본 지적 260919: 「쿠폰 생성·발행 관리」는 webadmin 으로
+    # 넘겼지만 t48 shopby 원장에 쿠폰 행이 있다). 그래서 기능 흔적을 전 원장에서 다시 찾는다.
+    # 결과는 「라우팅 대상이 틀렸을 후보」이지 확정이 아니다.
+    GENERIC = {
+        "관리", "등록", "설정", "처리", "조회", "발행", "화면", "연동", "확인", "자동", "수동",
+        "목록", "내역", "데이터", "기능", "사용", "주문", "상품", "회원", "생성", "수정", "삭제",
+        "별도", "경로", "직접", "입력", "출력", "방안", "여부", "기준", "단위", "구현", "관리자",
+        "시스템", "서비스", "요청", "접수", "전송", "수신", "통합", "전체", "일부",
+    }
+    haystacks = collections.defaultdict(list)
+    for r in rows:
+        haystacks[r["card"]].append(
+            f'{r["group"]} {r["screen_name"]} {r["function"]}')
+    all_hay = [(c, h) for c, hs in haystacks.items() for h in hs]
+
+    def trace(title):
+        toks = {t for t in re.split(r"[^\w가-힣]+", title)
+                if len(t) >= 2 and t not in GENERIC and not t.isdigit()}
+        hits = collections.Counter()
+        for tok in toks:
+            for card, hay in all_hay:
+                if tok in hay:
+                    hits[card] += 1
+        return sorted(hits), toks
+
+    for m in miss:
+        cards, toks = trace(m["title"])
+        m["function_trace_cards"] = cards
+        m["function_trace"] = bool(cards)
+
     by_routed = collections.Counter(m["routed_system"] for m in miss)
     by_owner = collections.Counter(m["owner_name"] for m in miss)
     return {
         "total": total, "hit": hit, "hit_rows": hit_rows,
         "miss_count": len(miss),
+        # 미수록 중 기능 흔적이 다른 원장에 있는 것(= 라우팅 대상 오류 후보) / 없는 것
+        "miss_traced_count": sum(1 for m in miss if m["function_trace"]),
+        "miss_untraced_count": sum(1 for m in miss if not m["function_trace"]),
+        "miss_traced_by_card": dict(collections.Counter(
+            c for m in miss for c in m["function_trace_cards"]).most_common()),
         "miss_by_routed_system": dict(by_routed.most_common()),
         "miss_by_owner": dict(by_owner.most_common()),
         "miss": miss,

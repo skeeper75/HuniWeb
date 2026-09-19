@@ -187,7 +187,9 @@ def miss_rows():
     return "\n".join(
         f'<tr><td class="mono">{e(m["plan_row_id"])}</td><td>{e(m["title"])}</td>'
         f'<td>{e(m["routed_system"])}</td><td>{e(m["owner_name"])}</td>'
-        f'<td>{e(m["plan_status"])}</td></tr>' for m in OOS["miss"])
+        f'<td>{e(m["plan_status"])}</td>'
+        f'<td class="sm">{"흔적 " + e(", ".join(m["function_trace_cards"])) if m["function_trace"] else "<strong>흔적 없음</strong>"}</td>'
+        '</tr>' for m in OOS["miss"])
 
 
 def edge_rows():
@@ -275,7 +277,8 @@ def build_html():
         ("남은 일", f'{n("in_remaining")}행', "분모 안에서 상태가 완료가 아닌 행"),
         ("원장에 없던 행", f'{n("new_rows")}행', "9/17 원장보다 단위가 잘아 새로 생긴 행"),
         ("결정·관리 안건", f'{n("decisions_total")}건', "화면도 기능도 아니라 원장 밖에 둔 것"),
-        ("미수록", f'{OOS["miss_count"]}건', "t48 이 넘겼는데 받는 원장에 없는 행"),
+        ("미수록", f'{OOS["miss_count"]}건',
+         f'넘긴 행 번호가 받는 원장에 없음 · 그중 낱말 흔적조차 없는 것 {OOS["miss_untraced_count"]}건'),
     ]
 
     drill_json = json.dumps({"cols": COLS, "rows": DATA, "sysLabel": SYS_LABEL,
@@ -417,7 +420,8 @@ details:not([open]) .body{{display:block}} .controls{{display:none}}}}
 {li(sys_summary, lambda x: f'<tr><td>{e(x["label"])}</td><td class="num">{x["in"]}</td><td class="num">{x["done"]}</td><td class="num"><strong>{x["remaining"]}</strong></td><td class="num">{x["unknown"]}</td><td class="num">{x["build"]}</td><td class="num">{x["integrate"]}</td><td class="num">{x["out"]}</td></tr>')}
 </tbody></table>
 <p class="sm">webadmin 의 남은 일이 {n("in_remaining_by_system","webadmin")}행뿐인 것은 「할 일이 없다」는 뜻이 아닙니다.
-webadmin 몫의 남은 일은 대부분 <a href="#miss">6절 미수록 {OOS["miss_count"]}건</a> 쪽에 있습니다.</p>
+t48 이 webadmin 으로 넘긴 {OOS["miss_by_routed_system"].get("webadmin",0)}건이 webadmin 원장에서 같은 번호로 확인되지 않았습니다 —
+<a href="#miss">7절</a>에서 따로 다룹니다.</p>
 
 <h2>3. 직접 구현과 연동을 갈라 보기</h2>
 <p class="lead">한 화면에 성격이 다른 일이 같이 있으면 행을 나눴습니다. 그래서 「만드는 일」과 「잇는 일」이 섞이지 않습니다.</p>
@@ -484,15 +488,31 @@ webadmin 몫의 남은 일은 대부분 <a href="#miss">6절 미수록 {OOS["mis
 </tbody></table>
 
 <h2 id="miss">7. 미수록 {OOS["miss_count"]}건 — 카드 사이로 빠진 행</h2>
-<p class="lead">t48 이 「이건 우리 담당이 아니다」며 넘긴 {OOS["total"]}건 가운데, 받는 쪽(t49·t50) 원장에 실제로 들어 있는 것은
-<strong>{OOS["hit"]}건</strong>뿐이었습니다. 나머지 <strong>{OOS["miss_count"]}건</strong>은 어느 화면 원장에도 없습니다.
-「공지사항·쿠폰·미수금·감사로그」로 찾아봐도 두 원장 모두 0건이었습니다.</p>
-<div class="note"><b>지어내지 않았습니다.</b> 이 {OOS["miss_count"]}건은 <u>없는 것으로 확인된 것</u>이지,
-「어딘가에 있을 텐데 못 찾은 것」이 아닙니다. 다만 <strong>이 행들이 실제로 필요 없는 일인지, 아니면 조사에서 빠진 일인지는 아직 판정하지 않았습니다</strong> —
-그 판정에는 webadmin 을 다시 훑는 한 번의 조사가 필요합니다.
+<p class="lead">t48 이 「이건 우리 담당이 아니다」며 넘긴 {OOS["total"]}건 가운데, 넘겨받은 쪽(t49·t50) 원장에
+<u>같은 원장 행 번호로</u> 들어 있는 것은 <strong>{OOS["hit"]}건</strong>뿐이었습니다.
+나머지 <strong>{OOS["miss_count"]}건</strong>은 넘겨받은 원장에서 그 번호를 찾을 수 없습니다.</p>
+
+<div class="note"><b>다만 「번호가 없다」와 「그 일이 없다」는 다릅니다.</b>
+같은 기능이 <u>다른 원장 행 번호로</u> 이미 실려 있을 수 있습니다.
+실제로 「쿠폰 생성·발행 관리」와 「공지사항 관리」는 webadmin 으로 넘겼지만,
+t48 의 shopby 원장에 셀러어드민 설정 행으로 <strong>쿠폰 18행 · 공지 11행</strong>이 다른 번호로 실려 있습니다.
+그러니 이 {OOS["miss_count"]}건은 <strong>「빠진 일」과 「넘긴 곳을 잘못 적은 것」이 섞여 있습니다.</strong></div>
+
+<h3>그래서 둘로 갈라 셌습니다 — 단정 대신 범위로</h3>
+<p class="lead">83건의 제목에서 흔한 낱말(관리·등록·설정 따위)을 뺀 낱말을 뽑아, 그 낱말이 세 원장 어디에든 나오는지 기계로 훑었습니다.</p>
+<table><thead><tr><th>구분</th><th class="num">건수</th><th>읽는 법</th></tr></thead><tbody>
+<tr><td><strong>흔적이 전혀 없음</strong></td><td class="num">{OOS["miss_untraced_count"]}</td>
+<td>어느 원장에서도 비슷한 낱말조차 찾지 못했습니다. <strong>「빠진 일」의 하한</strong>입니다.</td></tr>
+<tr><td>어딘가에 낱말 흔적 있음</td><td class="num">{OOS["miss_traced_count"]}</td>
+<td>넘긴 곳이 틀렸을 <u>후보</u>입니다. 낱말 일치라 <strong>과다 계상되니 상한으로만</strong> 읽어야 합니다
+(예: 「충전 입금 확인」은 세 카드에 모두 걸립니다).</td></tr>
+</tbody></table>
+<p class="sm">흔적이 전혀 없는 {OOS["miss_untraced_count"]}건: {" · ".join(e(m["plan_row_id"]) + " " + e(m["title"]) for m in OOS["miss"] if not m["function_trace"])}</p>
+<div class="note"><b>아직 판정하지 않았습니다.</b> 어느 쪽이든 「정말 필요 없는 일인지, 넘긴 곳이 틀린 것인지, 조사에서 빠진 것인지」를
+가리려면 webadmin 과 셀러어드민을 한 번 다시 훑어야 합니다. 그 일은 이 문서의 범위 밖입니다.
 넘긴 쪽 분포는 webadmin {OOS["miss_by_routed_system"].get("webadmin",0)}건 · mes {OOS["miss_by_routed_system"].get("mes",0)}건이고,
 담당으로는 김동학 {OOS["miss_by_owner"].get("김동학",0)}건 · 최숙진 {OOS["miss_by_owner"].get("최숙진",0)}건 · 서희항 {OOS["miss_by_owner"].get("서희항",0)}건입니다.</div>
-<div class="scroll"><table><thead><tr><th>원장 행</th><th>내용</th><th>넘긴 곳</th><th>담당</th><th>원장 상태</th></tr></thead>
+<div class="scroll"><table><thead><tr><th>원장 행</th><th>내용</th><th>넘긴 곳</th><th>담당</th><th>원장 상태</th><th>낱말 흔적</th></tr></thead>
 <tbody>{miss_rows()}</tbody></table></div>
 
 <h2>8. 지니 결정이 필요한 것</h2>
@@ -622,13 +642,19 @@ def build_md():
     a("\n## 발견")
     for f in FINDINGS:
         a(f"- **{f[0]}** {f[1]} ({f[3]} · {f[4]})")
-    a(f"\n## 미수록 {OOS['miss_count']}건")
-    a(f"라우팅 {OOS['total']}건 중 받는 원장에 실재 {OOS['hit']}건. 분포: "
+    a(f"\n## 미수록 {OOS['miss_count']}건 (plan_row_id 기준)")
+    a(f"라우팅 {OOS['total']}건 중 받는 원장에 같은 id 실재 {OOS['hit']}건. 분포: "
       + " · ".join(f"{k} {v}" for k, v in OOS["miss_by_routed_system"].items()))
-    a("| plan_row_id | 내용 | 넘긴 곳 | 담당 | 원장 상태 |")
-    a("|---|---|---|---|---|")
+    a("[주의] 「id 없음」 ≠ 「그 일 없음」. 같은 기능이 다른 id 로 실려 있을 수 있다 "
+      "(실측: 쿠폰·공지는 webadmin 으로 넘겼으나 t48 shopby 원장에 쿠폰 18행·공지 11행 존재).")
+    a(f"낱말 흔적 기계 대조 결과 — 흔적 전무 {OOS['miss_untraced_count']}건(= 「빠진 일」 하한) · "
+      f"어딘가 흔적 있음 {OOS['miss_traced_count']}건(= 라우팅 오류 후보 **상한**, 낱말 일치라 과다 계상).")
+    a("어느 쪽도 확정 아님 — webadmin·셀러어드민 재조사 필요.")
+    a("| plan_row_id | 내용 | 넘긴 곳 | 담당 | 원장 상태 | 낱말 흔적 |")
+    a("|---|---|---|---|---|---|")
     for m in OOS["miss"]:
-        a(f"| {m['plan_row_id']} | {m['title']} | {m['routed_system']} | {m['owner_name']} | {m['plan_status']} |")
+        tr = ", ".join(m["function_trace_cards"]) if m["function_trace"] else "**없음**"
+        a(f"| {m['plan_row_id']} | {m['title']} | {m['routed_system']} | {m['owner_name']} | {m['plan_status']} | {tr} |")
     a("\n## 지니 결정 필요")
     for i, d in enumerate(DECISIONS_FOR_GENIE, 1):
         a(f"{i}. {html.unescape(d[0].replace('<code>','`').replace('</code>','`'))} — {d[1]}")

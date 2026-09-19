@@ -83,8 +83,12 @@ def main():
         ("달력 날짜가 아니라 작업량의 아래쪽 한계이며, 동시 진행분과 대기 시간은 들어 있지 않습니다.", False),
         ("하한이 0 인 단계는 「일이 없다」가 아니라 원장이 아직 산정하지 않았다는 뜻입니다.", False),
         ("", False),
-        (f"미수록 시트: t48 이 넘긴 {OOS['total']}건 중 받는 원장에 실재하는 것은 {OOS['hit']}건뿐이고, {OOS['miss_count']}건은 어느 화면 원장에도 없습니다.", True),
-        ("없는 것으로 확인된 것이지 못 찾은 것이 아닙니다. 다만 정말 불필요한 일인지 조사에서 빠진 일인지는 아직 판정하지 않았습니다.", False),
+        (f"미수록 시트: t48 이 넘긴 {OOS['total']}건 중 받는 원장에 같은 행 번호로 실재하는 것은 {OOS['hit']}건뿐이고, {OOS['miss_count']}건은 그 번호를 찾을 수 없습니다.", True),
+        ("「행 번호가 없다」와 「그 일이 없다」는 다릅니다 — 같은 기능이 다른 번호로 실려 있을 수 있습니다.", False),
+        ("실측: 쿠폰·공지는 webadmin 으로 넘겼지만 t48 의 shopby 원장에 쿠폰 18행·공지 11행이 다른 번호로 있습니다.", False),
+        (f"그래서 낱말 흔적으로 갈라 셌습니다 — 흔적 전무 {OOS['miss_untraced_count']}건(「빠진 일」의 하한) · "
+         f"어딘가 흔적 있음 {OOS['miss_traced_count']}건(넘긴 곳이 틀렸을 후보의 상한, 낱말 일치라 과다 계상).", False),
+        ("어느 쪽도 확정이 아닙니다. 가리려면 webadmin·셀러어드민을 한 번 다시 훑어야 합니다.", False),
         ("", False),
         ("DB 쓰기 0 · 라이브 접속 0 · 날짜 추정 0 · 숫자는 전부 assemble.py / schedule.py 가 계산했습니다.", False),
     ]
@@ -145,10 +149,11 @@ def main():
 
     # 미수록
     sheet(wb, "미수록",
-          ["원장행", "내용", "넘긴곳", "담당", "원장상태"],
-          [[m["plan_row_id"], m["title"], m["routed_system"], m["owner_name"], m["plan_status"]]
+          ["원장행", "내용", "넘긴곳", "담당", "원장상태", "낱말흔적"],
+          [[m["plan_row_id"], m["title"], m["routed_system"], m["owner_name"], m["plan_status"],
+            ", ".join(m["function_trace_cards"]) if m["function_trace"] else "없음"]
            for m in OOS["miss"]],
-          widths=[16, 78, 16, 16, 13], wrap_cols=(2,))
+          widths=[16, 78, 16, 16, 13, 16], wrap_cols=(2,))
 
     # 결정 안건 (건수 집계 — 본문은 각 *-decisions.md)
     sheet(wb, "결정안건", ["출처 문서", "건수", "비고"],

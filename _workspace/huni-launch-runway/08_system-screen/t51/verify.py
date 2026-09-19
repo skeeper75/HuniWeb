@@ -176,6 +176,18 @@ def main():
          f"실린 주석 {len(duties)-len(absent_d)}/{len(duties)}" +
          (f" · 빠짐 {absent_d}" if absent_d else ""))
 
+    # V7b — 미수록을 「그 일이 없다」로 단정하지 않았는가 (리드 lane-1 표본 지적 260919)
+    # t48 shopby 원장에 쿠폰·공지 행이 실재하므로, plan_row_id 미수록 = 기능 부재가 아니다.
+    t48_kw = {kw: sum(1 for r in src if r["_card"] == "t48"
+                      and kw in f'{r["screen_name"]}{r["function"]}')
+              for kw in ("쿠폰", "공지")}
+    overclaim = [p for p in ("어느 화면 원장에도 없", "없는 것으로 확인된 것") if p in htxt]
+    hedged = all(p in htxt for p in ("흔적 없음", "상한", "하한"))
+    gate("V7b", "미수록 단정 금지", not overclaim and hedged and all(v > 0 for v in t48_kw.values()),
+         f"t48 실재 {t48_kw} · 단정 표현 {overclaim or '없음'} "
+         f"· 상·하한 표기 {'있음' if hedged else '없음'} "
+         f"(흔적 전무 {their['miss_untraced_count']} / 흔적 있음 {their['miss_traced_count']})")
+
     # V10 — verdict.md 의 손으로 쓴 표가 계산값과 같은가 (사람 전사 오류 차단)
     vp = HERE / "verdict.md"
     vtxt = vp.read_text(encoding="utf-8") if vp.exists() else ""

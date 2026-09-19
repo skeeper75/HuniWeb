@@ -78,93 +78,96 @@ EXT-MES 33, EXT-PG 26, EXT-PITSTOP 24, EXT-NHN 12, EXT-ALIMTALK 8, EXT-EDICUS 3,
 - **F7** 웹훅 메아리 필터가 구현되어 있지 않다 (리드 직접 확인 · 중간)
 - **F8** 9/17 원장이 MES 코드를 읽지 않아 오해가 이어졌다 (레인 보고 · 중간)
 
-## 미수록 83건
-라우팅 89건 중 받는 원장에 실재 6건. 분포: webadmin 62 · mes 16 · webadmin↔토스 1 · 외부(토스) 1 · 외부 1 · widget·webadmin 1 · edicus 1
-| plan_row_id | 내용 | 넘긴 곳 | 담당 | 원장 상태 |
-|---|---|---|---|---|
-| STD-ORD-027 | 오프라인 주문 별도 등록 경로 | webadmin | 김동학 | 부분 |
-| STD-MYP-028 | 충전 입금 확인 = 토스페이먼츠 가상계좌 API 직접 발급 | webadmin↔토스 | 미정 | 미착수 |
-| STD-MYP-029 | 입금 확인 자동화 — 가상계좌 DEPOSIT_CALLBACK 웹훅 수신→자동 충전 | webadmin | 미정 | 미착수 |
-| STD-MYP-043 | 프린트머니 구현 M1 — webadmin t_pm_charge_txn + 감지·지급 잡(폴링) + 웹훅 신호 연결 | webadmin | 미정 | 미착수 |
-| STD-MYP-046 | 프린트머니 구현 M4 — 충전 취소/환불 처리 + 운영 화면(txn 목록·재시도) | webadmin | 미정 | 미착수 |
-| STD-MYP-047 | 프린트머니 구현 M5 — 구 잔액 마이그레이션 시드 실행(260630 스펙) | webadmin | 미정 | 미착수 |
-| STD-PRM-017 | [구IA#71] 체험단관리 (등록/수정/신청내역) | webadmin | 신우진 | 미실측 |
-| STD-B2B-001 | 거래처(기업회원) 등록·관리 | webadmin | 김동학 | 부분 |
-| STD-B2B-002 | 거래처별 단가/할인율 설정 | webadmin | 김동학 | 미착수 |
-| STD-B2B-003 | 거래처 소속 담당자 다계정 | webadmin | 김동학 | 미착수 |
-| STD-B2B-004 | 후불 여신한도 설정 | webadmin | 김동학 | 미착수 |
-| STD-B2B-005 | 후불 주문 승인·미결제 관리 | webadmin | 김동학 | 미착수 |
-| STD-B2B-006 | 월 마감 청구서 발행 | webadmin | 김동학 | 미착수 |
-| STD-B2B-007 | 업체별 미수금 관리 | webadmin | 김동학 | 미착수 |
-| STD-B2B-008 | 거래처 원장(온·오프라인 통합) | webadmin | 김동학 | 미착수 |
-| STD-B2B-009 | 원장 데이터 파일 생성(.txt 연계) | webadmin | 김동학 | 미착수 |
-| STD-B2B-010 | 대량 견적 요청 접수·회신 | webadmin | 김동학 | 미착수 |
-| STD-B2B-011 | 견적서 발행(사업자 양식) | webadmin | 김동학 | 미착수 |
-| STD-B2B-012 | 세금계산서 일괄 발행 | webadmin | 미정 | 미착수 |
-| STD-B2B-015 | [구IA#91] 주문관리-후불결제 | webadmin | 신우진 | 미실측 |
-| STD-ADC-001 | 회원 목록·검색·상세 | webadmin | 김동학 | 작동 |
-| STD-ADC-002 | 회원등급 수동 조정 | webadmin | 김동학 | 미착수 |
-| STD-ADC-003 | 탈퇴회원 관리 | webadmin | 김동학 | 작동 |
-| STD-ADC-005 | 쿠폰 생성·발행 관리 | webadmin | 김동학 | 미착수 |
-| STD-ADC-007 | 공지사항 관리 | webadmin | 김동학 | 작동 |
-| STD-ADC-008 | FAQ 관리 | webadmin | 김동학 | 작동 |
-| STD-ADC-009 | 상품Q&A 답변 관리 | webadmin | 김동학 | 작동 |
-| STD-ADC-010 | 1:1 문의 답변 관리 | webadmin | 김동학 | 작동 |
-| STD-ADC-011 | 이용후기(리뷰) 관리·블라인드 | webadmin | 김동학 | 작동 |
-| STD-ADC-012 | 대량견적/기업상담/디자인상담 접수 관리 | webadmin | 김동학 | 미착수 |
-| STD-ADC-013 | 메인/기획전 배너 관리 | webadmin | 김동학 | 미착수 |
-| STD-ADC-015 | 매장(거래처) 게시판 관리 | webadmin | 김동학 | 미착수 |
-| STD-ADC-016 | 체험단 모집·신청내역 관리(운영자) | webadmin | 김동학 | 미착수 |
-| STD-FIN-001 | 월별 매출 통계 | webadmin | 김동학 | 작동 |
-| STD-FIN-002 | 일별/기간별 매출 조회 | webadmin | 김동학 | 작동 |
-| STD-FIN-003 | 결제수단별 매출 집계 | webadmin | 김동학 | 작동 |
-| STD-FIN-004 | 상품별 판매 통계 | webadmin | 김동학 | 작동 |
-| STD-FIN-005 | 상품군별 매출 비중 | webadmin | 김동학 | 작동 |
-| STD-FIN-006 | 회원/비회원 주문 비중 | webadmin | 김동학 | 작동 |
-| STD-FIN-008 | PG 정산 대사 | webadmin | 김동학 | 미착수 |
-| STD-FIN-009 | 적립금(프린팅머니) 부채 집계 | webadmin | 김동학 | 미착수 |
-| STD-FIN-010 | 외주 발주/정산 엑셀 산출 | webadmin | 김동학 | 미착수 |
-| STD-FIN-011 | 쿠폰/할인 사용액 집계 | webadmin | 김동학 | 작동 |
-| STD-FIN-012 | 통계·주문 데이터 엑셀 내보내기 | webadmin | 김동학 | 미착수 |
-| STD-FIN-013 | [구IA#47] 계좌관리 (원장용 계좌 등록) | webadmin | 신우진 | 미착수 |
-| STD-FIN-014 | [구IA#49] 업체별 미수금 | webadmin | 신우진 | 미착수 |
-| STD-FIN-019 | [구IA#84] 굿즈 발주/정산 (Excel 다운) | webadmin | 최숙진 | 미착수 |
-| STD-FIN-020 | 가상계좌 정산한도 1,000만 원 초과 시 처리 방안 | 외부(토스) | 외부(토스페이먼츠) | 미착수 |
-| STD-FIN-021 | 적립금·증빙 데이터의 MS·이카운트 연동 방식 | 외부 | 김용기 | 미착수 |
-| STD-SYS-001 | 관리자 계정 등록·관리 | webadmin | 김동학 | 부분 |
-| STD-SYS-002 | 역할 기반 세분 권한 제어 | webadmin | 김동학 | 부분 |
-| STD-SYS-003 | 관리자 작업 감사로그 | webadmin | 김동학 | 작동 |
-| STD-SYS-010 | 원고 저장소(스토리지) 연동 | widget·webadmin | 김동학 | 구현-미검증 |
-| STD-SYS-011 | 디자인 에디터 외부 서비스 연동 | edicus | 미정 | 부분 |
-| STD-SYS-025 | [구IA#44] 관리자 등록/관리 | webadmin | 최숙진 | 부분 |
-| STD-SYS-028 | webadmin 영역 분리(쇼핑몰 관리자 영역 / DB·생산 영역) | webadmin | 신우진 | 미착수 |
-| STD-MFG-022 | 주문 상태머신(REGISTERED/PROMOTING/PROMOTED/HOLD/PAID/FILE_CHECK/FILE_HOLD/MES_SENT/IN_PRODUCTION/PRODUCED/SHIPPED/DONE/CANCELED) | webadmin | 서희항 | 부분 |
-| STD-MFG-023 | 상태 단위=주문상품옵션(orderProductOptionNo)·주문 단위는 롤업 | webadmin | 서희항 | 부분 |
-| STD-MFG-024 | 3시스템 매핑 테이블(handoff_id·orderNo+orderProductOptionNo·MES 작업번호) | webadmin | 서희항 | 부분 |
-| STD-MFG-025 | FR-1 MES 주문 상태 변경 통보 수신(접수완료/생산대기/생산중/생산완료) | mes | 서희항 | 미착수 |
-| STD-MFG-026 | 접수완료 시 취소 잠금 원자적 전환(cancelable CAS) | webadmin | 서희항 | 미착수 |
-| STD-MFG-028 | FR-2 MES 송장번호 등록 수신 | mes | 서희항 | 미착수 |
-| STD-MFG-033 | 생산 시작 후 도착한 취소는 자동 처리하지 않고 담당자 에스컬레이션 | webadmin | 서희항 | 미착수 |
-| STD-MFG-035 | MES 화면 신규 버튼(취소·재업로드 요청·취소요청 승인거부)+사유 입력 | mes | 외부(상대측 회신 대기) | 미착수 |
-| STD-MFG-106 | 1차포장 처리 | mes | 최숙진 | 미착수 |
-| STD-MFG-107 | 박스포장 처리(실사·대형 상품군) | mes | 최숙진 | 미착수 |
-| STD-MFG-108 | 제작번호별 바코드 입력→포장완료 상태변경 | mes | 최숙진 | 미착수 |
-| STD-MFG-109 | 전 상품 포장완료 시 제작완료 자동 전환 | mes | 최숙진 | 미착수 |
-| STD-MFG-112 | 납품명세서 출력(퀵) | mes | 최숙진 | 미착수 |
-| STD-MFG-113 | 출고명세서 출력(직접방문) | mes | 최숙진 | 미착수 |
-| STD-MFG-115 | 합배송 리스트 식별 | mes | 서희항 | 미착수 |
-| STD-MFG-117 | 재고상품(상품 액세서리) 관리 | mes | 최숙진 | 미착수 |
-| STD-MFG-118 | 제작완료 썸네일 확인 화면 | mes | 최숙진 | 미착수 |
-| STD-MFG-119 | 일부 재제작+재배송 지시(MES 주문복사) | mes | 최숙진 | 미착수 |
-| STD-MFG-120 | 전체 재제작+재배송 지시 | mes | 최숙진 | 미착수 |
-| STD-MFG-121 | 반송 접수·반송여부 체크 | mes | 최숙진 | 미착수 |
-| STD-MFG-122 | 주문 내 정산 메모필드(반송비·재제작 비용 부담) | mes | 최숙진 | 미착수 |
-| STD-MFG-125 | 파일 오류 재업로드 요청 알림톡 발송(자동·담당자 발) | webadmin | 서희항 | 미착수 |
-| STD-MFG-126 | 재업로드 접수 확인 알림 | webadmin | 서희항 | 미착수 |
-| STD-MFG-127 | 편집상품 수정요청 알림(주문번호·편집번호·안내) | webadmin | 서희항 | 미착수 |
-| STD-MFG-128 | 알림톡 템플릿 사전 심사·승인 관리 | webadmin | 신우진 | 미착수 |
-| STD-MFG-129 | 알림톡 발송 실패 시 SMS/LMS 자동 대체 | webadmin | 서희항 | 미착수 |
-| BLK-S2-1 | [선행 입력] Railway 운영 변수 4종 설정 여부(값 아님) — `WAPI_SERVER_KEY_REQUIRED`·`SHOPBY_WEBHOOK_SECRET`·`SHOPBY_SYSTEM_KEY`·`SHOPBY_ACCESS_TOKEN` | webadmin | 서희항 | 미착수 |
+## 미수록 83건 (plan_row_id 기준)
+라우팅 89건 중 받는 원장에 같은 id 실재 6건. 분포: webadmin 62 · mes 16 · webadmin↔토스 1 · 외부(토스) 1 · 외부 1 · widget·webadmin 1 · edicus 1
+[주의] 「id 없음」 ≠ 「그 일 없음」. 같은 기능이 다른 id 로 실려 있을 수 있다 (실측: 쿠폰·공지는 webadmin 으로 넘겼으나 t48 shopby 원장에 쿠폰 18행·공지 11행 존재).
+낱말 흔적 기계 대조 결과 — 흔적 전무 6건(= 「빠진 일」 하한) · 어딘가 흔적 있음 77건(= 라우팅 오류 후보 **상한**, 낱말 일치라 과다 계상).
+어느 쪽도 확정 아님 — webadmin·셀러어드민 재조사 필요.
+| plan_row_id | 내용 | 넘긴 곳 | 담당 | 원장 상태 | 낱말 흔적 |
+|---|---|---|---|---|---|
+| STD-ORD-027 | 오프라인 주문 별도 등록 경로 | webadmin | 김동학 | 부분 | t50 |
+| STD-MYP-028 | 충전 입금 확인 = 토스페이먼츠 가상계좌 API 직접 발급 | webadmin↔토스 | 미정 | 미착수 | t48, t49, t50 |
+| STD-MYP-029 | 입금 확인 자동화 — 가상계좌 DEPOSIT_CALLBACK 웹훅 수신→자동 충전 | webadmin | 미정 | 미착수 | t48, t49, t50 |
+| STD-MYP-043 | 프린트머니 구현 M1 — webadmin t_pm_charge_txn + 감지·지급 잡(폴링) + 웹훅 신호 연결 | webadmin | 미정 | 미착수 | t48, t49, t50 |
+| STD-MYP-046 | 프린트머니 구현 M4 — 충전 취소/환불 처리 + 운영 화면(txn 목록·재시도) | webadmin | 미정 | 미착수 | t48, t49, t50 |
+| STD-MYP-047 | 프린트머니 구현 M5 — 구 잔액 마이그레이션 시드 실행(260630 스펙) | webadmin | 미정 | 미착수 | t48, t49, t50 |
+| STD-PRM-017 | [구IA#71] 체험단관리 (등록/수정/신청내역) | webadmin | 신우진 | 미실측 | t48 |
+| STD-B2B-001 | 거래처(기업회원) 등록·관리 | webadmin | 김동학 | 부분 | t48, t50 |
+| STD-B2B-002 | 거래처별 단가/할인율 설정 | webadmin | 김동학 | 미착수 | t49, t50 |
+| STD-B2B-003 | 거래처 소속 담당자 다계정 | webadmin | 김동학 | 미착수 | t48, t49, t50 |
+| STD-B2B-004 | 후불 여신한도 설정 | webadmin | 김동학 | 미착수 | t48 |
+| STD-B2B-005 | 후불 주문 승인·미결제 관리 | webadmin | 김동학 | 미착수 | t48, t49 |
+| STD-B2B-006 | 월 마감 청구서 발행 | webadmin | 김동학 | 미착수 | **없음** |
+| STD-B2B-007 | 업체별 미수금 관리 | webadmin | 김동학 | 미착수 | t50 |
+| STD-B2B-008 | 거래처 원장(온·오프라인 통합) | webadmin | 김동학 | 미착수 | t48, t50 |
+| STD-B2B-009 | 원장 데이터 파일 생성(.txt 연계) | webadmin | 김동학 | 미착수 | t48, t49, t50 |
+| STD-B2B-010 | 대량 견적 요청 접수·회신 | webadmin | 김동학 | 미착수 | t48, t49, t50 |
+| STD-B2B-011 | 견적서 발행(사업자 양식) | webadmin | 김동학 | 미착수 | t48, t50 |
+| STD-B2B-012 | 세금계산서 일괄 발행 | webadmin | 미정 | 미착수 | t48, t49, t50 |
+| STD-B2B-015 | [구IA#91] 주문관리-후불결제 | webadmin | 신우진 | 미실측 | t48 |
+| STD-ADC-001 | 회원 목록·검색·상세 | webadmin | 김동학 | 작동 | t48, t49, t50 |
+| STD-ADC-002 | 회원등급 수동 조정 | webadmin | 김동학 | 미착수 | t48 |
+| STD-ADC-003 | 탈퇴회원 관리 | webadmin | 김동학 | 작동 | **없음** |
+| STD-ADC-005 | 쿠폰 생성·발행 관리 | webadmin | 김동학 | 미착수 | t48 |
+| STD-ADC-007 | 공지사항 관리 | webadmin | 김동학 | 작동 | t48 |
+| STD-ADC-008 | FAQ 관리 | webadmin | 김동학 | 작동 | t48 |
+| STD-ADC-009 | 상품Q&A 답변 관리 | webadmin | 김동학 | 작동 | t48 |
+| STD-ADC-010 | 1:1 문의 답변 관리 | webadmin | 김동학 | 작동 | t48 |
+| STD-ADC-011 | 이용후기(리뷰) 관리·블라인드 | webadmin | 김동학 | 작동 | t48, t49 |
+| STD-ADC-012 | 대량견적/기업상담/디자인상담 접수 관리 | webadmin | 김동학 | 미착수 | t48 |
+| STD-ADC-013 | 메인/기획전 배너 관리 | webadmin | 김동학 | 미착수 | t48, t49 |
+| STD-ADC-015 | 매장(거래처) 게시판 관리 | webadmin | 김동학 | 미착수 | t48, t50 |
+| STD-ADC-016 | 체험단 모집·신청내역 관리(운영자) | webadmin | 김동학 | 미착수 | t48, t49 |
+| STD-FIN-001 | 월별 매출 통계 | webadmin | 김동학 | 작동 | t48, t50 |
+| STD-FIN-002 | 일별/기간별 매출 조회 | webadmin | 김동학 | 작동 | t48, t50 |
+| STD-FIN-003 | 결제수단별 매출 집계 | webadmin | 김동학 | 작동 | t48, t50 |
+| STD-FIN-004 | 상품별 판매 통계 | webadmin | 김동학 | 작동 | t48, t49, t50 |
+| STD-FIN-005 | 상품군별 매출 비중 | webadmin | 김동학 | 작동 | t48, t49, t50 |
+| STD-FIN-006 | 회원/비회원 주문 비중 | webadmin | 김동학 | 작동 | t48, t49 |
+| STD-FIN-008 | PG 정산 대사 | webadmin | 김동학 | 미착수 | t48 |
+| STD-FIN-009 | 적립금(프린팅머니) 부채 집계 | webadmin | 김동학 | 미착수 | t48 |
+| STD-FIN-010 | 외주 발주/정산 엑셀 산출 | webadmin | 김동학 | 미착수 | t48, t49, t50 |
+| STD-FIN-011 | 쿠폰/할인 사용액 집계 | webadmin | 김동학 | 작동 | t48, t49, t50 |
+| STD-FIN-012 | 통계·주문 데이터 엑셀 내보내기 | webadmin | 김동학 | 미착수 | t48, t49, t50 |
+| STD-FIN-013 | [구IA#47] 계좌관리 (원장용 계좌 등록) | webadmin | 신우진 | 미착수 | t48 |
+| STD-FIN-014 | [구IA#49] 업체별 미수금 | webadmin | 신우진 | 미착수 | t48, t50 |
+| STD-FIN-019 | [구IA#84] 굿즈 발주/정산 (Excel 다운) | webadmin | 최숙진 | 미착수 | t48, t49, t50 |
+| STD-FIN-020 | 가상계좌 정산한도 1,000만 원 초과 시 처리 방안 | 외부(토스) | 외부(토스페이먼츠) | 미착수 | t48 |
+| STD-FIN-021 | 적립금·증빙 데이터의 MS·이카운트 연동 방식 | 외부 | 김용기 | 미착수 | t48, t49, t50 |
+| STD-SYS-001 | 관리자 계정 등록·관리 | webadmin | 김동학 | 부분 | t48, t49, t50 |
+| STD-SYS-002 | 역할 기반 세분 권한 제어 | webadmin | 김동학 | 부분 | t48, t49, t50 |
+| STD-SYS-003 | 관리자 작업 감사로그 | webadmin | 김동학 | 작동 | t48, t49, t50 |
+| STD-SYS-010 | 원고 저장소(스토리지) 연동 | widget·webadmin | 김동학 | 구현-미검증 | t48, t49, t50 |
+| STD-SYS-011 | 디자인 에디터 외부 서비스 연동 | edicus | 미정 | 부분 | t48, t49, t50 |
+| STD-SYS-025 | [구IA#44] 관리자 등록/관리 | webadmin | 최숙진 | 부분 | t48 |
+| STD-SYS-028 | webadmin 영역 분리(쇼핑몰 관리자 영역 / DB·생산 영역) | webadmin | 신우진 | 미착수 | t48, t49, t50 |
+| STD-MFG-022 | 주문 상태머신(REGISTERED/PROMOTING/PROMOTED/HOLD/PAID/FILE_CHECK/FILE_HOLD/MES_SENT/IN_PRODUCTION/PRODUCED/SHIPPED/DONE/CANCELED) | webadmin | 서희항 | 부분 | t50 |
+| STD-MFG-023 | 상태 단위=주문상품옵션(orderProductOptionNo)·주문 단위는 롤업 | webadmin | 서희항 | 부분 | t48, t49, t50 |
+| STD-MFG-024 | 3시스템 매핑 테이블(handoff_id·orderNo+orderProductOptionNo·MES 작업번호) | webadmin | 서희항 | 부분 | t48, t49, t50 |
+| STD-MFG-025 | FR-1 MES 주문 상태 변경 통보 수신(접수완료/생산대기/생산중/생산완료) | mes | 서희항 | 미착수 | t48, t49, t50 |
+| STD-MFG-026 | 접수완료 시 취소 잠금 원자적 전환(cancelable CAS) | webadmin | 서희항 | 미착수 | t48, t49, t50 |
+| STD-MFG-028 | FR-2 MES 송장번호 등록 수신 | mes | 서희항 | 미착수 | t48, t50 |
+| STD-MFG-033 | 생산 시작 후 도착한 취소는 자동 처리하지 않고 담당자 에스컬레이션 | webadmin | 서희항 | 미착수 | t48, t49, t50 |
+| STD-MFG-035 | MES 화면 신규 버튼(취소·재업로드 요청·취소요청 승인거부)+사유 입력 | mes | 외부(상대측 회신 대기) | 미착수 | t48, t49, t50 |
+| STD-MFG-106 | 1차포장 처리 | mes | 최숙진 | 미착수 | **없음** |
+| STD-MFG-107 | 박스포장 처리(실사·대형 상품군) | mes | 최숙진 | 미착수 | t48 |
+| STD-MFG-108 | 제작번호별 바코드 입력→포장완료 상태변경 | mes | 최숙진 | 미착수 | t48, t50 |
+| STD-MFG-109 | 전 상품 포장완료 시 제작완료 자동 전환 | mes | 최숙진 | 미착수 | t48, t49, t50 |
+| STD-MFG-112 | 납품명세서 출력(퀵) | mes | 최숙진 | 미착수 | **없음** |
+| STD-MFG-113 | 출고명세서 출력(직접방문) | mes | 최숙진 | 미착수 | **없음** |
+| STD-MFG-115 | 합배송 리스트 식별 | mes | 서희항 | 미착수 | t48, t49, t50 |
+| STD-MFG-117 | 재고상품(상품 액세서리) 관리 | mes | 최숙진 | 미착수 | **없음** |
+| STD-MFG-118 | 제작완료 썸네일 확인 화면 | mes | 최숙진 | 미착수 | t49, t50 |
+| STD-MFG-119 | 일부 재제작+재배송 지시(MES 주문복사) | mes | 최숙진 | 미착수 | t48, t50 |
+| STD-MFG-120 | 전체 재제작+재배송 지시 | mes | 최숙진 | 미착수 | t50 |
+| STD-MFG-121 | 반송 접수·반송여부 체크 | mes | 최숙진 | 미착수 | t48, t49 |
+| STD-MFG-122 | 주문 내 정산 메모필드(반송비·재제작 비용 부담) | mes | 최숙진 | 미착수 | t48 |
+| STD-MFG-125 | 파일 오류 재업로드 요청 알림톡 발송(자동·담당자 발) | webadmin | 서희항 | 미착수 | t48, t49, t50 |
+| STD-MFG-126 | 재업로드 접수 확인 알림 | webadmin | 서희항 | 미착수 | t48, t50 |
+| STD-MFG-127 | 편집상품 수정요청 알림(주문번호·편집번호·안내) | webadmin | 서희항 | 미착수 | t48, t49, t50 |
+| STD-MFG-128 | 알림톡 템플릿 사전 심사·승인 관리 | webadmin | 신우진 | 미착수 | t48, t49, t50 |
+| STD-MFG-129 | 알림톡 발송 실패 시 SMS/LMS 자동 대체 | webadmin | 서희항 | 미착수 | t48, t49, t50 |
+| BLK-S2-1 | [선행 입력] Railway 운영 변수 4종 설정 여부(값 아님) — `WAPI_SERVER_KEY_REQUIRED`·`SHOPBY_WEBHOOK_SECRET`·`SHOPBY_SYSTEM_KEY`·`SHOPBY_ACCESS_TOKEN` | webadmin | 서희항 | 미착수 | t48, t49, t50 |
 
 ## 지니 결정 필요
 1. 위젯빌더 운영 도구 NEW 71행을 런웨이에 올릴 것인가 — 직접 구현이고 이미 완료라 「남은 일」 집계에는 잡히지 않는다. 원장에 실을지 여부가 결정 사항이다.
