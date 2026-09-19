@@ -108,6 +108,27 @@ gate(f'V9 결정 {EXPECT_DECISIONS}건',
      dec_n == EXPECT_DECISIONS and kinds['라'] == EXPECT_DECISIONS,
      f'decisions.md {dec_n} · 라 {kinds["라"]}')
 
+# V9c — 문서 제목·본문에 적힌 건수가 실측과 같은가
+#       (260919: t64 가 65→169 로 바뀌자 상수로 박아 둔 「105건」·「421건」이 낡아 남았다.
+#        이제 build.py 가 계산값으로 쓰고, 여기서 낡은 수가 남아 있지 않은지 다시 본다.)
+stale = []
+dec_txt = open(os.path.join(HERE, 'decisions.md'), encoding='utf-8').read()
+qw_txt = open(os.path.join(HERE, 'quick-wins.md'), encoding='utf-8').read()
+m = re.search(r'^# t66 — 지니가 정해야 하는 것 (\d+)건', dec_txt, re.M)
+if not m or int(m.group(1)) != kinds['라']:
+    stale.append(f'decisions.md 제목 {m.group(1) if m else "없음"} ≠ 라 {kinds["라"]}')
+for label, txt, pat in [('decisions.md', dec_txt, r'`기다리는것` = (\d+)건 중'),
+                        ('quick-wins.md', qw_txt, r'네 카드의 빠진 곳 (\d+)건 중')]:
+    m2 = re.search(pat, txt)
+    if not m2 or int(m2.group(1)) != len(gaps):
+        stale.append(f'{label} 분모 {m2.group(1) if m2 else "없음"} ≠ {len(gaps)}')
+m3 = re.search(r'^\*\*(\d+)건\*\* — 담당자별로', qw_txt, re.M)
+qw_n = int(m3.group(1)) if m3 else -1
+m4 = re.search(r'\|\s*\*\*합계\*\*\s*\|\s*\*\*(\d+)\*\*\s*\|', qw_txt)
+if not m4 or int(m4.group(1)) != qw_n:
+    stale.append(f'quick-wins.md 머리 {qw_n} ≠ 합계 {m4.group(1) if m4 else "없음"}')
+gate('V9c 문서 본문 건수 = 실측', not stale, str(stale or '일치'))
+
 # V9b — gap_uid 는 카드별로 매긴다(통번호 금지 — 한 카드가 바뀌면 인용이 통째로 밀린다)
 badid = [g['gap_uid'] for g in gaps if not re.fullmatch(r'GX-t6[2-5]-\d{3}', g['gap_uid'])]
 gate('V9b gap_uid 카드별 고정', not badid and len({g['gap_uid'] for g in gaps}) == len(gaps),
