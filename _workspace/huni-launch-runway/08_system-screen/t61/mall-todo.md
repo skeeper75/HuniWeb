@@ -14,6 +14,45 @@
 
 ---
 
+## ★ 오픈 전 필수 — `/api/shopby` 보안 가드 (지니 지시 2026-09-19 · 리드 보강)
+
+원장 행은 이미 있다 — **`STD-SYS-043`**(⑤축 · 김동학 · 미착수 · 「보안 Critical」). 27행 중 한 줄로 묻혀 있어
+맨 위로 올린다. 새 행을 세우지 않는다.
+
+**무엇이 문제인가.** `src/app/api/shopby/[...path]/route.ts`(77줄)는 path·query·body·method 를 **그대로**
+샵바이 **서버 API**(`server-api.e-ncp.com`)로 넘기면서 비밀 헤더 `authorization: Bearer SHOPBY_ACCESS_TOKEN` ·
+`systemkey`(`src/lib/api/config.ts:51-52`)를 붙인다. 로그인 검사 없음 · 경로 제한 없음 ·
+`GET/POST/PUT/PATCH/DELETE` 전부 열림(`route.ts:63-77`). 몰의 문지기 `src/proxy.ts:82-84` matcher 는
+`api` 를 **제외**하므로 앞단 보호도 없다. 주소를 아는 누구나 몰의 서버 권한으로 샵바이 서버 API 를 부를 수 있는 구조다
+(상품·회원·주문 조회와 변경이 같은 권한에 있다).
+
+**실제로 쓰는 곳은 거의 없다.** 이 통로를 부르는 코드는 `apiFetch` 하나이고(`src/lib/api/client.ts:153-158`),
+그 호출은 `useAdmins` 의 `GET /admins` **1건뿐**이다(`src/lib/api/hooks/use-admins.ts:23`). `useAdmins` 를 쓰는
+화면은 **찾지 못했다**(`src` 전수 grep — `index.ts:12` 의 재수출만 있다). 막아서 깨질 고객 기능이 없다.
+
+**김동학이 할 일**
+
+1. 포크 `huni-skin-next` 에 구현돼 있는 default-deny 가드를 원본으로 가져온다 —
+   `src/lib/api/server/shopby-proxy-guard.ts`(허용 목록 `[{GET, /^admins$/}]` · `:46-49`) +
+   `src/app/api/shopby/[...path]/route.ts`(허용 목록 밖 403 → 미인증 401 → 관리자 미판정 403) +
+   테스트 `src/lib/api/server/__tests__/shopby-proxy-guard.test.ts`.
+   더 간단한 길: `useAdmins` 를 쓰는 화면이 없으면 **라우트 자체를 지운다**(둘 중 택1 — 김동학 판단).
+2. 가드 적용 뒤 확인 — 비로그인 `GET /api/shopby/products/search?size=1` → **403**, `DELETE` 임의 경로 → **403**.
+   (운영 주소에서는 이 두 호출만. 그 외 경로를 두드리지 않는다.)
+3. **이미 노출됐을 가능성 처리** — 운영에 이 라우트가 떠 있던 기간이 있으면 `SHOPBY_ACCESS_TOKEN` 을
+   **재발급**한다(재발급 절차·주체는 **확인하지 않았다** — 샵바이 파트너 콘솔 쪽).
+4. 같은 모양의 `/api/shop` 프록시(`src/app/api/shop/[...path]/route.ts`)는 **shop(프론트) API** 용이고
+   `clientId` 만 붙인다 — 비밀 토큰 중계가 아니다. 다만 회원 `accessToken` 자동 주입이 있으므로(`:51-60`)
+   허용 경로 목록을 같이 검토한다(우선순위는 1~3 뒤).
+
+선행: 없다. 결정도 외부 회신도 필요 없다. 다만 포크 처리 방침(`STD-SYS-050`)이 안 정해져 있어
+「포크에서 가져온다」가 이 한 건에 한해 먼저 일어난다는 점을 적어 둔다.
+
+확인하지 못한 것: **운영 주소에서 실제로 열려 있는지**는 두드려 보지 않았다(남의 비밀 토큰으로 운영 서버를
+호출하는 일이라 하지 않았다). 코드로만 확인했다 — 몰 `943f984` · 포크 `bf19c22`(원격 0개).
+
+---
+
 ## 0. 한 장 요약
 
 **분모.** `rejudge.csv` 735행 중 `owner_proposed` 에 「김동학」이 들어간 행 **219**, 그중 남은 일
