@@ -1,0 +1,21 @@
+row_id,found,system,evidence,note
+STD-CAT-001,Y,huni-mall,huni-skin-shopby/src/lib/api/server/catalog.ts:6 catalog.ts comment plus header.tsx:280-288 plus mobile-nav.tsx:118-160,대분류(depth1)-중분류(depth2) 2단 트리를 GNB-모바일내비가 렌더. 소분류(3depth)는 카테고리가 아니라 해당 중분류 소속 상품으로 별도 취급 - 엄밀한 3단 트리는 아님.
+STD-CAT-002,Y,huni-mall,huni-skin-shopby/src/lib/api/server/catalog.ts:337-344 plus shop-list.tsx:14-24,서버가 shopby 카탈로그를 정렬순으로 내려주고 shop-list.tsx 가 정렬(신상품-리뷰순-인기순)-페이지네이션(PER=8)을 클라이언트에서 처리. 부분=정렬 옵션이 3종뿐.
+STD-CAT-003,N,huni-mall,찾지못했다 huni-skin-shopby app main 하위 상품군 전용 랜딩 라우트 grep 0건,상품군 전용 랜딩페이지 5종 미구현. 카테고리 목록으로만 진입 가능.
+STD-CAT-004,Y,huni-mall,huni-skin-shopby/src/app/(main)/search/page.tsx:1-14 plus catalog.ts:181-182,서버가 shopby shop-api GET /products/search 를 키워드+정렬+페이징으로 호출해 상품명 통합검색을 구현.
+STD-CAT-005,N,huni-mall,찾지못했다 소재 필터 관련 코드 없음,검색은 상품명 키워드 매칭뿐. 예시 `test` 백틱.
+STD-CAT-006,Y,huni-mall,huni-skin-shopby/src/app/(main)/search/page.tsx:1-6 plus use-search.ts:1-16,인기검색어는 shop API GET /products/favoriteKeywords 로 구현(usePopularKeywords). 자동완성은 grep 0건 - 부분 구현.
+STD-CAT-007,Y,huni-mall,huni-skin-shopby/src/app/(main)/product/[slug]/page.tsx:39-60 plus product-sections.tsx:1-15,shopby 상품상세(v3) 조회 + vibe-canvas 발행 탭 우선, 없으면 정적 섹션 폴백. 이미지-설명 블록 본문 존재.
+STD-CAT-008,N,huni-mall,찾지못했다 계열 분기 안내 UI grep 0건 - MENU_PRODUCTS 는 메뉴 슬러그 분기일 뿐,일반명함/고급지명함/부분UV명함처럼 같은 계열 상품 간 분기를 안내하는 UI 없음.
+STD-CAT-009,Y,huni-mall,huni-skin-shopby/src/lib/guide-data.ts:178-184,인쇄가이드 후가공 섹션에 도무송-형압-귀도리-오시-박(포일) 항목이 정적 목록(스텁)으로만 존재. 상품 상세 화면 내 인라인 툴팁은 아니고 별도 가이드 페이지 목록 - 스텁 상태.
+STD-CAT-010,Y,huni-mall,huni-skin-shopby/src/lib/guide-data.ts:87,90,가이드 목록에 작업사이즈와 재단사이즈 안전선 항목 존재하나 stub() 헬퍼 구조상 본문은 준비중 스텁일 가능성 높음 - 원장 status 작동이나 코드상 스텁 흔적 발견.
+STD-CAT-011,Y,huni-mall,huni-skin-shopby/src/components/product/product-sections.tsx:151,208,정적 섹션에 제작접수 후 3박4일(영업일 기준) 소요일-출고 기준 문구가 하드코딩. 상품별 차등 소요일이 아니라 전 상품 공통 고정 문구.
+STD-CAT-012,Y,huni-mall,huni-skin-shopby/src/lib/guide-data.ts:100,105,110,115,120,폰트 아웃라인(Create Outlines) 미적용시 해결법 문구가 가이드 목록에 5회 반복 등록. stub() 구조상 본문은 준비중 상태로 추정 - 고지는 있으나 상세 목록은 미완.
+STD-CAT-013,N,huni-mall + shopby,찾지못했다 huni-skin-shopby app main 하위 inquiry-qna 문의 라우트 grep 0건. docs shopby-api product-shop-public.yml products/inquiries 및 display-shop-public.yml ProductInquiry 태그(3180-3360행)에 명세는 존재,Shopby API 스펙(전체/상품별 문의 목록 조회)은 있으나 huni-mall 코드에 이를 호출-렌더하는 라우트나 컴포넌트가 없음.
+STD-CAT-014,Y,huni-mall,huni-skin-shopby/src/components/product/product-sections-interactive.tsx:247-248 plus use-product-reviews.ts:1-16,shop API GET /products/{productNo}/product-reviews 로 리뷰 목록-평점(rate)을 조회해 ReviewSection 에 렌더.
+STD-CAT-015,Y,huni-mall,huni-skin-shopby/src/lib/api/hooks/use-product-reviews.ts:16-34,리뷰 아이템에 fileUrls(사진) 필드가 있어 목록에 사진이 섞여 나오나 사진만 모아 보는 전용 갤러리 뷰-필터는 grep 상 확인 안 됨 - 부분(목록 내 포함만).
+STD-CAT-016,N,huni-mall + shopby,찾지못했다 huni-skin-shopby 에 관련상품-함께주문 UI grep 0건. docs shopby-api product-shop-public.yml:2583,10455 relatedProductNos 필드는 스펙상 존재,Shopby 상품 응답에 relatedProductNos 필드가 있으나 huni-mall 이 이를 읽어 추천 섹션을 렌더하는 코드는 없음.
+STD-CAT-017,N,huni-mall + shopby,찾지못했다 huni-skin-shopby src 전체에서 recent-products 최근본 grep 0건. docs shopby-api product-shop-public.yml:780(guest/recent-products) 및 4452,4635(profile/recent-products) 스펙 존재,Shopby 최근 본 상품 API(회원-비회원 둘 다)가 스펙엔 있으나 huni-mall 코드에서 호출하는 곳이 없음.
+STD-CAT-018,N,huni-mall + shopby,huni-skin-shopby/src/components/cart/cart-page.tsx:6(주석 찜은 별도 like-products). docs shopby-api product-shop-public.yml:4222(GET /profile/like-products) 스펙 존재,찜 기능은 주석상 별도 있음으로 언급되나 실제 like-products 를 호출하는 코드-화면(버튼-목록)은 grep 0건 - 미구현으로 판단.
+STD-CAT-019,Y,huni-mall,huni-skin-shopby/src/lib/guide-data.ts:158-206,파일작업-책자-인쇄와종이-후가공-주문-편집기 6개 카테고리 각 12개씩 인쇄가이드 항목 등록(원장 표기 11종). stub() 헬퍼로 본문은 이 가이드는 준비중입니다 로 대부분 스텁.
+STD-CAT-020,N,huni-mall,찾지못했다 guide-data.ts 전체에서 실제 파일 다운로드 링크-템플릿/샘플 파일 경로 grep 0건 - 템플릿 불러오기와 저장(204행)은 편집기 사용법 가이드 제목일 뿐 다운로드 기능 아님,템플릿/샘플 다운로드 제공 기능 코드 없음. 가이드 항목 제목만 존재.
