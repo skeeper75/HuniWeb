@@ -1,0 +1,126 @@
+row_id,step,title,status,owner_name,evidence
+T2-1,A1,상품·가격 데이터 충전 — 기본사양가 없음 2건·0원 조합 교정,부분,최숙진,_workspace/huni-launch-runway/07_rebaseline/S/S5-plan/status-28.csv:3
+T2-2,A3,위젯 기본값 미지정 교정·재게시,부분,최숙진,_workspace/huni-launch-runway/07_rebaseline/S/S5-plan/status-28.csv:4
+T2-3,A4,샵바이 상품 연동 — 시작가 「10원~」 교정·상품 수 296/291/297 불일치 규명,부분,서희항,_workspace/huni-launch-runway/07_rebaseline/S/S5-plan/status-28.csv:5
+STD-CAT-001,A4,대분류/중분류/소분류 다단 카테고리 트리 노출,작동,김동학,https://shopby.huniprinting.co.kr/@2026-09-16 21:33
+STD-CAT-002,A4,카테고리별 상품 리스팅(정렬·페이징),부분,김동학,huni-skin-shopby/src/lib/api/server/catalog.ts:5 · src/components/shop/shop-list.tsx:18-24
+STD-CAT-003,A4,상품군 전용 랜딩(출력/책자/실사/패키지/굿즈),미착수,김동학,F-088/SCOPE-088/IA-088 랜딩페이지 5종(종이·제본·캘린더·파우치·스티커) 미착수
+STD-CAT-007,A5,상품 상세페이지 본문(이미지·설명 블록),부분,김동학,huni-skin-shopby/src/app/(main)/product/[slug]/page.tsx:42-47 · :51-56 · src/components/product/product-sections.tsx:1
+STD-CAT-008,A5,동일 계열 상품 분기 안내(일반명함/고급지명함/부분UV명함 등),미착수,김동학,print-story/02_capture/order-flow-steps.md §A-0 레드프린팅 상품 분할 전략
+STD-CAT-009,A5,후가공 용어 설명 툴팁(도무송·오시·형압·귀돌이),미착수,김동학,print-story/02_capture/order-flow-steps.md §E-4 3사 용어 불일치
+STD-CAT-010,A5,재단사이즈 vs 작업사이즈 설명 가이드,작동,김동학,https://shopby.huniprinting.co.kr/product/136578124@2026-09-16 21:29
+STD-CAT-011,A5,상품별 제작 소요일/출고 기준 안내,미착수,김동학,print-story/02_capture/order-flow-steps.md §C-6 출고 옵션
+STD-CAT-012,A5,재작업 불가 사항 고지(폰트 아웃라인 등),부분,김동학,"huni-skin-shopby/src/lib/guide-data.ts:41-50,158-202 (대부분 '준비중' 스텁)"
+STD-CAT-013,A5,상품 Q&A 게시,미착수,김동학,huni-skin-shopby/src/app/(main) 하위 inquiry/qna 라우트 부재 (SB-056 absent)
+STD-CAT-014,A5,상품 리뷰 목록·평점 노출,작동,김동학,https://shopby.huniprinting.co.kr/product/136578124@2026-09-16 21:34
+STD-CAT-015,A5,사진 리뷰 갤러리,부분,김동학,huni-skin-shopby/src/lib/api/hooks/use-product-reviews.ts:41 (목록만)
+STD-CAT-016,A5,관련상품/함께 주문한 상품 추천,미착수,김동학,print-quote/04_design/ia.md §2.1 리스팅 파생
+STD-CAT-017,A5,최근 본 상품,미착수,김동학,print-quote/04_design/ia.md §2.1 GNB 파생
+STD-CAT-018,A5,찜/관심상품,미착수,김동학,print-kb/wiki/policy/mypage.md 파생
+STD-CAT-021,A5,메인 기획전/배너 영역,부분,김동학,huni-skin-shopby/src/app/(main)/page.tsx:1 · BEST 큐레이션 stub src/lib/legacy-data/hooks.ts:60
+STD-CAT-022,A4,품절/판매중지 상품 표시 및 대체 안내,미착수,김동학,huni-shopby/01_research/order-to-delivery-contract.md §4.2 OUT_OF_STOCK
+STD-CAT-023,A1,상품 기본정보 세팅·로드(상품코드·주문가능여부·회원전용 노출 게이팅),작동,김동학,https://shopby.huniprinting.co.kr/product/136578124@2026-09-16 21:29
+STD-CAT-024,A1,포장재 상품군 주문 경로(전용 옵션·주문 흐름),부분,김동학,"L3/legacy-normalized.json#F-091,IA-091,SCOPE-091 · _workspace/huni-launch-scope/02_gap/fit-gap-matrix.csv:92 · docs/huni/후니프린팅_통합IA_일정_역할분담_260616.xlsx#02_IA마스터!A92:K92 || P1판정(260902): huni-skin-shopby 에 「포장재」 전용 경로 grep 0건 · 샵바이 카테고리로 흡수됐는지 미확인"
+STD-CAT-025,A1,굿즈 상품군 주문 경로(파우치·백 포함),부분,김동학,"L3/legacy-normalized.json#F-092,IA-092,SCOPE-092 · _workspace/huni-launch-scope/02_gap/fit-gap-matrix.csv:93 · docs/huni/후니프린팅_통합IA_일정_역할분담_260616.xlsx#02_IA마스터!A93:K93 || P1판정(260902): huni-skin-shopby/src/components/home/home-content.ts:120 「아크릴굿즈」 메뉴 실재 — 카탈로그 노출은 됨"
+STD-CAT-026,A1,수작 상품 메인·상품페이지 경로,미착수,신우진,"L3/legacy-normalized.json#F-093,IA-093,SCOPE-093 · _workspace/huni-launch-scope/02_gap/fit-gap-matrix.csv:94 · docs/huni/후니프린팅_통합IA_일정_역할분담_260616.xlsx#02_IA마스터!A94:K94 || P1판정(260902): huni-skin-shopby 에 「수작」 grep 0건 · 상품 등록 여부는 셀러어드민 확인 필요"
+STD-CAT-027,A5,홈 더미 콘텐츠 정리(BEST 8종 /product/1 404 · 프로모션 ZONE·새소식 영문 문구),미착수,김동학,https://shopby.huniprinting.co.kr/ @ 2026-09-16 21:26
+STD-CAT-028,A2,목록·검색 시작가 「10원~」 표시(샵바이 salePrice 더미),미착수,최숙진,https://shopby.huniprinting.co.kr/shop/1142983 @ 2026-09-16 21:26
+STD-CAT-029,A5,메뉴 슬러그형 목업 상세(/product/calendar 등) 잔존 — 「(44 Reviews)」·더미 옵션,미착수,김동학,https://shopby.huniprinting.co.kr/product/calendar @ 2026-09-16 21:27
+STD-CAT-030,A4,상품 0개 중분류(스티커 팩 0 등) 노출 정리,미착수,최숙진,https://shopby.huniprinting.co.kr/shop/1142983 @ 2026-09-16 21:26
+STD-CAT-031,A1,캘린더 4종 1차 오픈 포함 확정,부분,최숙진,후니정기미팅 정리260915.html §디자인 상품·편집기·보관함 · 확정 1 / 후니-오픈잔여작업-실무진안내_260909.html §항목 8 · ④ 완료 기준
+STD-CAT-032,A1,포토앨범 1차 오픈 제외 — 전달·문의 멘트 통일,부분,최숙진,후니정기미팅 정리260915.html §디자인 상품·편집기·보관함 · 확정 1 / 후니-오픈잔여작업-실무진안내_260909.html §항목 7 · ④ 완료 기준
+STD-CAT-033,A1,디자인 상품 화면 구조 — 카테고리 → 디자인 목록 → 상세 페이지,미착수,김동학,후니정기미팅 정리260915.html §디자인 상품·편집기·보관함 · 확정 2
+STD-CAT-034,A5,상세페이지 탭 6종 자동 등록(디자인가이드·디자인보기 포함),부분,김동학,후니정기미팅 정리260915.html §디자인 상품·편집기·보관함 · 확정 3 / 후니-오픈잔여작업-실무진안내_260909.html §항목 2 · ④ 완료 기준
+STD-CAT-035,A1,디자인 식별 규약 — PS코드 1개 + 템플릿 경로(이름) 구분·정사각형 공용 템플릿,미착수,서희항,후니정기미팅 정리260915.html §디자인 상품·편집기·보관함 · 확정 4
+STD-CAT-036,A1,디자인 목록 API — webadmin 등록분을 신규몰이 불러오는 연동,미착수,서희항,후니정기미팅 정리260915.html §디자인 상품·편집기·보관함 · 확정 5
+STD-CAT-037,A1,디자인 그룹핑 기준(태그·그룹·복수 그룹 등록·노출 순서),미착수,최숙진,후니정기미팅 정리260915.html §디자인 상품·편집기·보관함 · 미결 1
+STD-CAT-038,A1,디자인 목록용 API·어드민 기능 개발자 협의,미착수,신우진,후니정기미팅 정리260915.html §디자인 상품·편집기·보관함 · 미결 5
+STD-CAT-039,A1,목록 시작가 자동 계산(위젯 기본값) — 오리지널 명함만 수기 입력,부분,서희항,후니정기미팅 정리260915.html §가격·템플릿 데이터 · 확정 1
+STD-CAT-040,A1,시작가가 API 로 샵바이에 내려가는데 쇼핑몰에 반영되지 않는 원인 확인,미착수,신우진,후니정기미팅 정리260915.html §가격·템플릿 데이터 · 미결 2
+STD-CAT-041,A1,판매중 상품 수 3갈래(대시보드 291·상품목록 판매중 297/검색 291·API ONSALE 226) 기준 정리,미착수,김동학,https://service.shopby.co.kr/ 대시보드 「판매중인 상품 291」 · /product/list 「판매중 297건·검색결과 291」 · API saleStatusType ONSALE 226/STOP 71 @ 2026-09-16 21:27~21:34 (R/R1d/evidence/00-dashboard.txt·80-product-list.txt·api-server-products-search.json)
+STD-CAT-042,A5,레거시 mock 훅 제거 — legacy-data 참조 17파일(configurator 11종·홈 뉴스/프로모·포인트 모달),미착수,김동학,`grep -rl legacy-data huni-skin-shopby/src` 17 · src/lib/legacy-data/hooks.ts:4 「순수 mock」 · SPEC-TAKEOVER-001 D-6·related SPEC-LEGACY-MOCK-001(문서 부재)
+STD-CAT-043,A4,목록·검색 시작가를 webadmin `GET /api/w/v1/catalog`(게시 위젯+시작가) 로 이관 — 「10원~」 더미 대체 개발안,미착수,김동학,SPEC-TAKEOVER-001 spec.md D-2 ① · huni-skin-shopby/src/lib/api/server/catalog.ts(shopby salePrice 사용)
+STD-CAT-019,A5,인쇄 가이드 콘텐츠(11종),부분,최숙진,"huni-skin-shopby/src/lib/guide-data.ts:41-50,158-202"
+STD-CAT-020,A5,템플릿/샘플 다운로드 제공,미실측,미정,"raw/webadmin/webadmin/config/urls.py:280,283,285,287,288 (가이드파일 조회) · :72-87 (업로드/관리)"
+STD-INF-005,A5,공지사항 고객 화면(목록·상세),부분,최숙진,https://shopby.huniprinting.co.kr/notice @ 2026-09-16 21:27
+STD-INF-006,A5,자주묻는질문(FAQ) 고객 화면,미착수,김동학,https://shopby.huniprinting.co.kr/faq 404 @ 2026-09-16 21:27
+STD-INF-007,A5,가이드북 고객 화면(작업 유의사항 11종),부분,최숙진,https://shopby.huniprinting.co.kr/guide @ 2026-09-16 21:27
+STD-INF-009,A5,[구IA#64] 공지사항 관리 (등록/수정/html생성),미실측,최숙진,IA No.64 공지사항 · webadmin 해당 없음 @ 2026-09-16 21:28 · 샵바이 게시판(R1d 미확인)
+STD-INF-010,A5,[구IA#65] 자주묻는질문 관리,미실측,최숙진,IA No.65 FAQ · webadmin 해당 없음 @ 2026-09-16 21:28
+STD-INF-011,A5,[구IA#72] 이용후기관리 (관리자등록/수정),미실측,최숙진,IA No.72 이용후기 · 샵바이 상품후기(R1d 미확인)
+STD-INF-012,A5,뉴스·소식 공간 신설(갤러리형/게시판형/커뮤니티형 중 택1 + 메뉴명),미착수,채훈희,후니-오픈잔여작업-실무진안내_260909.html §항목 5 · ④ 완료 기준
+STD-INF-013,A5,저장소 문서 stale 정비 — docs/api/README 「코드는 아직 backend API 기준」·frontend README 「서버 확정 시 기입」·연동 현황 보고서(9/2) 갱신,미착수,김동학,huni-skin-shopby/docs/api/README.md:16-17 · docs/api/frontend/README.md:5-7 · artifacts/shopby-integration-status-report.md:6(2026-09-02 기준)
+STD-OPT-001,A3,상품 상세 내 주문옵션 위젯 마운트(격리 렌더),작동,서희항,https://huni-admin.printly.co.kr/admin/widget-builder/?prd=PRD_000069@2026-09-16 21:34
+STD-OPT-002,A3,정규화 옵션 데이터 계약 기반 위젯 구동,작동,서희항,https://huni-admin.printly.co.kr/sdk/guide/@2026-09-16 21:29
+STD-OPT-003,A3,옵션 컴포넌트 타입 다형 렌더(셀렉트·라디오·체크·수치입력·이미지선택),작동,서희항,https://huni-admin.printly.co.kr/admin/widget-builder/?prd=PRD_000031@2026-09-16 21:34
+STD-OPT-004,A3,옵션 선택 캐스케이드(상위 선택이 하위 목록 갱신),부분,서희항,raw/webadmin/webadmin/config/urls.py:249 (validate) · :368 (dim-choices)
+STD-OPT-005,A3,토글형 후가공 섹션(켜야 하위 선택지 노출),부분,서희항,print-story/02_capture/order-flow-steps.md §A-7 토글형 후가공
+STD-OPT-006,A3,옵션 그룹 접기/펼치기·진행 스텝 표시,부분,서희항,print-story/02_capture/order-flow-steps.md §C 옵션 테이블 복잡도
+STD-OPT-007,A3,선택 요약 패널(현재 사양 한눈에),작동,서희항,https://huni-admin.printly.co.kr/admin/widget-builder/?prd=PRD_000031@2026-09-16 21:34
+STD-OPT-037,A3,옵션 조합 제약 규칙 평가(불가 조합 차단·사유 표시),부분,서희항,raw/webadmin/webadmin/config/urls.py:371 (제약규칙 관리) · :249 (validate) — 그러나 X-CR-ENFORCE-CLIENT-01: 위젯/장바구니/주문 어디에도 validate 호출 없음
+STD-OPT-038,A3,자재→가능 인쇄방식 게이팅,부분,서희항,raw/webadmin/webadmin/config/urls.py:371 · X-CR-ENFORCE-ENGINE-01 가격엔진이 제약을 전혀 참조하지 않음
+STD-OPT-039,A3,공정 택일 그룹(상호배타) 처리,부분,최숙진,raw/webadmin/webadmin/config/urls.py:371 · P-CPQ-CLASSA-01 PRD_000146 고리 그룹 sel_typ/min/max NULL
+STD-OPT-040,A3,필수 동반 옵션 강제(예 인쇄없음 시 후가공 필수),부분,서희항,X-CR-C9-01 폼빌더에 수치 범위 조건 타입 부재 — 자유치수 19건+raw-only 7건 UI 관리 불가
+STD-OPT-041,A3,수량 최소/최대/증분 검증,작동,서희항,https://huni-admin.printly.co.kr/admin/product-viewer/?prd=PRD_000066@2026-09-16 21:30
+STD-OPT-042,A3,사이즈 범위·비율 검증(매트릭스 밖 사이즈 차단),부분,서희항,X-CR-C9-01 수치 범위 조건 타입 부재
+STD-OPT-043,A2,옵션 변경 시 실시간 재견적,작동,서희항,https://huni-admin.printly.co.kr/admin/widget-builder/?prd=PRD_000031@2026-09-16 21:34
+STD-OPT-044,A2,서버 권위 가격 계산(클라이언트 계산 금지),작동,서희항,https://huni-admin.printly.co.kr/sdk/guide/@2026-09-16 21:29
+STD-OPT-045,A2,가격 0원/계산불가 상태 처리 및 사용자 안내,부분,최숙진,P-ZEROQUOTE-119-01 0원 견적 조합 119건/32상품 — 손님이 0원에 주문 가능(4주째 OPEN)
+STD-OPT-046,A2,가격 내역 분해 표시(인쇄비·후가공비·부가세),작동,서희항,https://huni-admin.printly.co.kr/admin/widget-builder/?prd=PRD_000069@2026-09-16 21:34
+STD-OPT-047,A2,수량구간 할인 적용,작동,서희항,https://huni-admin.printly.co.kr/admin/price-viewer/?prd=PRD_000146@2026-09-16 21:30
+STD-OPT-048,A2,면적 기반 가격 계산(실사·현수막·아크릴),부분,최숙진,raw/webadmin/webadmin/catalog/pricing.py:1 · P-ACRYL-INTEGRITY-156-01 면적 미적재 156셀 + 12/13 상품 공식 0바인딩
+STD-OPT-049,A2,원자합산형 가격 계산(디지털인쇄),작동,서희항,https://huni-admin.printly.co.kr/admin/widget-builder/?prd=PRD_000031@2026-09-16 21:34
+STD-OPT-050,A2,고정가형 가격 계산(수량×옵션),부분,최숙진,raw/webadmin/webadmin/catalog/pricing.py:1 · config/urls.py:113-117 (시작가) · P-GOODS-DIRECTPRICE-01 굿즈파우치 직접단가 110건 미적재
+STD-OPT-051,A2,셋트/부품조립 상품 합산 가격 계산,부분,최숙진,raw/webadmin/webadmin/config/urls.py:336 (셋트상품 관리) · :169 (셋트 가격 시뮬레이션) · X-SET-SIZCD-01 고정가형 셋트 화면 0원
+STD-OPT-052,A2,판걸이수 기반 판형 원가 반영,작동,서희항,https://huni-admin.printly.co.kr/admin/widget-builder/?prd=PRD_000069@2026-09-16 21:34
+STD-OPT-057,A5,규격 가이드 모달(사이즈 안내 팝업),미착수,서희항,"L3/legacy-normalized.json#IA-057,SCOPE-057 · docs/huni/후니프린팅_통합IA_일정_역할분담_260616.xlsx#02_IA마스터!A58:K58 || P1판정(260902): huni-skin-shopby 에 규격 가이드 모달 컴포넌트 grep 0건 · guide-data.ts:90 은 가이드 문서(모달 아님)"
+STD-OPT-058,A5,주문가능 자재(용지) 목록 모달,미착수,서희항,"L3/legacy-normalized.json#F-059,IA-059,SCOPE-059 · _workspace/huni-launch-scope/02_gap/fit-gap-matrix.csv:60 · docs/huni/후니프린팅_통합IA_일정_역할분담_260616.xlsx#02_IA마스터!A60:K60 || P1판정(260902): huni-skin-shopby 에 「주문가능 자재(용지) 목록 모달」 컴포넌트 grep 0건 · guide-data.ts:161,170 은 가이드 문서"
+STD-PRM-010,A5,기획전/할인 이벤트 페이지,미착수,김동학,SB-001 partial — huni-skin-shopby/src/lib/legacy-data/hooks.ts:352-360 (프로모 데이터원 legacy mock 빈배열)
+STD-PRM-015,A5,(IA r59 기능명 공란),미실측,신우진,docs/huni/후니프린팅_IA.xlsx:IA 확인!r59 (기능명 없음)
+STD-ADP-001,A1,사이즈 마스터 등록·관리,작동,서희항,https://huni-admin.printly.co.kr/admin/catalog/tsizsizes/@2026-09-16 21:28
+STD-ADP-002,A1,소재(자재) 마스터 등록·관리,작동,서희항,https://huni-admin.printly.co.kr/admin/master/mat/@2026-09-16 21:28
+STD-ADP-003,A1,용지·평량 마스터 관리,작동,서희항,https://huni-admin.printly.co.kr/admin/paper-management/@2026-09-16 21:28
+STD-ADP-004,A1,도수/색상 코드 관리,작동,서희항,https://huni-admin.printly.co.kr/admin/catalog/tclrcolorcounts/@2026-09-16 21:28
+STD-ADP-005,A1,공정(후가공) 마스터 관리,작동,서희항,https://huni-admin.printly.co.kr/admin/master/proc/@2026-09-16 21:33
+STD-ADP-006,A1,공정 택일그룹 관리,구현-미검증,서희항,raw/webadmin/webadmin/catalog/admin.py:1595 '(제거됨 — Phase 7/07-08) 공정 택일그룹 모델: 옵션그룹으로 흡수·DROP' · raw/webadmin/webadmin/config/urls.py:356-360 옵션그룹 CRUD
+STD-ADP-007,A1,판형(출력판형)·판걸이수 관리,작동,서희항,https://huni-admin.printly.co.kr/admin/product-viewer/?prd=PRD_000069@2026-09-16 21:30
+STD-ADP-008,A1,제본 방식 마스터 관리,구현-미검증,서희항,raw/webadmin/webadmin/config/urls.py:320-330 책등(spine) 계산 규칙 · raw/webadmin/webadmin/catalog/spine_calc.py:1
+STD-ADP-009,A1,기초코드 논리삭제·이름변경 정책 적용,작동,서희항,https://huni-admin.printly.co.kr/admin/basecode-master/@2026-09-16 21:28
+STD-ADP-010,A1,인쇄/제본 상품 등록,작동,서희항,https://huni-admin.printly.co.kr/admin/product-viewer/@2026-09-16 21:28
+STD-ADP-011,A1,굿즈 상품 등록,작동,서희항,https://huni-admin.printly.co.kr/admin/product-viewer/?prd=PRD_000146@2026-09-16 21:30
+STD-ADP-012,A1,포장재 상품 등록,작동,서희항,https://huni-admin.printly.co.kr/admin/sku-catalog/@2026-09-16 21:28
+STD-ADP-013,A1,상품-카테고리 귀속(다중분류),작동,서희항,https://huni-admin.printly.co.kr/admin/catalog/tprdproducts/@2026-09-16 21:32
+STD-ADP-014,A1,상품 진열/노출 상태 관리,작동,서희항,https://huni-admin.printly.co.kr/admin/catalog/tprdproducts/@2026-09-16 21:32
+STD-ADP-015,A1,상품 상세페이지 콘텐츠 편집,부분,김동학,huni-skin-shopby/src/app/(main)/product/[slug]/page.tsx:51-56 Pie Canvas 발행 상세탭 조회
+STD-ADP-016,A1,셋트(부품조립) 상품 구성 관리,작동,서희항,https://huni-admin.printly.co.kr/admin/set-products/@2026-09-16 21:28
+STD-ADP-017,A3,상품별 옵션그룹 구성,구현-미검증,서희항,raw/webadmin/webadmin/config/urls.py:356-360 옵션그룹/옵션/항목 CRUD
+STD-ADP-018,A3,옵션 항목 ↔ 차원 참조 연결,작동,서희항,https://huni-admin.printly.co.kr/admin/tmpl-combo-md/@2026-09-16 21:28
+STD-ADP-019,A3,옵션 참조 무결성 검증,구현-미검증,서희항,raw/webadmin/webadmin/config/urls.py:373 상품 유효성 검증(validate)
+STD-ADP-020,A3,추가상품 템플릿 구성,작동,서희항,https://huni-admin.printly.co.kr/admin/sku-catalog/@2026-09-16 21:28
+STD-ADP-021,A3,제약규칙 등록(UI 폼빌더),구현-미검증,서희항,raw/webadmin/webadmin/config/urls.py:371 제약규칙(JSONLogic) 관리 · raw/webadmin/webadmin/catalog/models.py:801 제약 모델
+STD-ADP-022,A3,제약규칙 시뮬레이션·미리보기,구현-미검증,서희항,raw/webadmin/webadmin/config/urls.py:169 price_sim_constraints — '제약 cascade: 현재 선택 → 각 차원 불가값(비활성)'
+STD-ADP-023,A2,가격공식 등록·상품 바인딩,작동,서희항,https://huni-admin.printly.co.kr/admin/price-viewer/?prd=PRD_000069@2026-09-16 21:30
+STD-ADP-024,A2,가격구성요소 등록·차원 지정,작동,서희항,https://huni-admin.printly.co.kr/admin/price-component-md/@2026-09-16 21:28
+STD-ADP-025,A2,단가행 일괄 등록(엑셀 업로드),구현-미검증,서희항,raw/webadmin/webadmin/catalog/price_views.py:1650 '그리드에 보이는 행이 곧 이 구성요소의 전체 단가표(엑셀처럼)' · raw/webadmin/webadmin/catalog/templates/catalog/comp_price_grid_page.html:142-145 엑셀 복사·붙여넣기
+STD-ADP-026,A2,단가유형(단가형/합가형) 설정,구현-미검증,서희항,raw/webadmin/webadmin/catalog/admin.py:2816 'Phase 11: 사용차원 순서지정 위젯 + 단가유형 그룹제한(basecodes prc_typ_cd)'
+STD-ADP-027,A2,수량구간 할인테이블 관리,작동,서희항,https://huni-admin.printly.co.kr/admin/discount-table-md/@2026-09-16 21:28
+STD-ADP-028,A2,면적 매트릭스 단가 관리,구현-미검증,서희항,raw/webadmin/webadmin/config/urls.py:144-148 단가 그리드(차원 조합 행) · raw/webadmin/webadmin/catalog/pricing.py:1 evaluate_price
+STD-ADP-029,A2,템플릿 직접단가 관리,작동,서희항,https://huni-admin.printly.co.kr/admin/price-viewer/?prd=PRD_000146@2026-09-16 21:30
+STD-ADP-030,A2,가격 적용시작일 기반 이력 관리,작동,서희항,https://huni-admin.printly.co.kr/admin/price-viewer/?prd=PRD_000069@2026-09-16 21:30
+STD-ADP-031,A2,가격 시뮬레이터(운영자 검산),작동,서희항,https://huni-admin.printly.co.kr/admin/price-simulator/@2026-09-16 21:28
+STD-ADP-032,A2,가격뷰어(계산 결과 조회),작동,서희항,https://huni-admin.printly.co.kr/admin/price-viewer/@2026-09-16 21:28
+STD-ADP-033,A2,가격 미산출(0원) 상품 진단 리포트,작동,서희항,https://huni-admin.printly.co.kr/admin/start-price/@2026-09-16 21:29
+STD-ADP-034,A1,수작 상품 등록,미실측,신우진,"L3/legacy-normalized.json#F-111,IA-111,SCOPE-111 · _workspace/huni-launch-scope/02_gap/fit-gap-matrix.csv:112 · docs/huni/후니프린팅_통합IA_일정_역할분담_260616.xlsx#02_IA마스터!A112:K112 || P1판정(260902): 수작 상품 등록은 셀러어드민 상품 등록 화면 소관 — 접속 보류로 확인 불가"
+STD-ADP-035,A1,디자인 상품 등록,작동,서희항,https://huni-admin.printly.co.kr/admin/design-md/@2026-09-16 21:33
+STD-ADP-036,A1,[구IA#59] 굿즈 카테고리관리,작동,서희항,https://huni-admin.printly.co.kr/admin/category-master/@2026-09-16 21:28
+STD-ADP-037,A2,게시 위젯 가격 전수 대조(1차 최숙진 → 2차 김용기 → 3차 채훈희 승인),부분,최숙진,후니정기미팅 정리260915.html §가격·템플릿 데이터 · 미결 1 / 후니-오픈잔여작업-실무진안내_260909.html §항목 1 · ④ 완료 기준
+STD-ADC-007,A5,공지사항 관리,작동,김동학,https://service.shopby.co.kr/board/article@2026-09-16
+STD-ADC-008,A5,FAQ 관리,작동,김동학,https://service.shopby.co.kr/board@2026-09-16
+STD-ADC-009,A5,상품Q&A 답변 관리,작동,김동학,https://service.shopby.co.kr/product/inquiry@2026-09-16
+STD-ADC-010,A5,1:1 문의 답변 관리,작동,김동학,https://service.shopby.co.kr/inquiry@2026-09-16
+STD-ADC-011,A5,이용후기(리뷰) 관리·블라인드,작동,김동학,https://service.shopby.co.kr/review@2026-09-16
+STD-ADC-012,A5,대량견적/기업상담/디자인상담 접수 관리,미착수,김동학,print-quote/04_design/ia.md §2.3 SM-A-32 SM-A-33 SM-A-34 · L4 사유: 대량견적·기업상담·디자인상담 접수 관리 화면 근거 없음
+STD-ADC-013,A5,메인/기획전 배너 관리,미착수,김동학,print-quote/04_design/ia.md §2.1 메인 · L4 사유: 메인 배너·BEST 큐레이션의 데이터원이 legacy mock 빈배열/정적 상수(SB-002 stub·SB-003 partial) — 운영자가 바꿀 자리가 없다
+STD-ADC-014,A5,인쇄 가이드 콘텐츠 관리,구현-미검증,김동학,raw/webadmin/webadmin/config/urls.py:72-87 가이드파일 업로드/관리 · raw/webadmin/webadmin/catalog/s3_guide.py:266-350
+STD-ADC-015,A5,매장(거래처) 게시판 관리,미착수,김동학,"L3/legacy-normalized.json#F-096,IA-096,SCOPE-096 · _workspace/huni-launch-scope/02_gap/fit-gap-matrix.csv:97 · docs/huni/후니프린팅_통합IA_일정_역할분담_260616.xlsx#02_IA마스터!A97:K97 || P1판정(260902): huni-skin-shopby 전수 grep '거래처 게시판|매장' 0건 · 운영자 기능은 셀러어드민 소관"
+STD-ADC-016,A5,체험단 모집·신청내역 관리(운영자),미착수,김동학,"L3/legacy-normalized.json#F-121,IA-121,SCOPE-121 · _workspace/huni-launch-scope/02_gap/fit-gap-matrix.csv:122 · docs/huni/후니프린팅_통합IA_일정_역할분담_260616.xlsx#02_IA마스터!A122:K122 || P1판정(260902): huni-skin-shopby 전수 grep '체험단' 0건"

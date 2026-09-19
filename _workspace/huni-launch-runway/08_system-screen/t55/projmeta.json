@@ -1,0 +1,806 @@
+{
+ "yeolim": {
+  "CRT.Framework.AWS": {
+   "csproj": "CRT.Framework.AWS.csproj",
+   "tfm": [
+    "v4.7.2"
+   ],
+   "outtype": "Library",
+   "packages": {
+    "AWSSDK.Core": "3.7.401.4",
+    "AWSSDK.S3": "3.7.412.4",
+    "AWSSDK.SQS": "3.7.400.84",
+    "Newtonsoft.Json": "13.0.3"
+   },
+   "projrefs": [],
+   "asmver": null,
+   "asmname": "CRT.Framework.AWS",
+   "sdk": false,
+   "hintrefs": [
+    "AWSSDK.Core.dll",
+    "AWSSDK.S3.dll",
+    "AWSSDK.SQS.dll",
+    "Newtonsoft.Json.dll"
+   ]
+  },
+  "CRT.Framework.Asset": {
+   "csproj": "CRT.Framework.Asset.csproj",
+   "tfm": [
+    "v4.7.2"
+   ],
+   "outtype": "Library",
+   "packages": {},
+   "projrefs": [],
+   "asmver": "1.0.*",
+   "asmname": "CRT.Framework.Asset",
+   "sdk": false,
+   "hintrefs": []
+  },
+  "CRT.Framework.Attribute": {
+   "csproj": "CRT.Framework.Attribute.csproj",
+   "tfm": [
+    "v4.7.2"
+   ],
+   "outtype": "Library",
+   "packages": {},
+   "projrefs": [],
+   "asmver": "1.0.*",
+   "asmname": "CRT.Framework.Attribute",
+   "sdk": false,
+   "hintrefs": []
+  },
+  "CRT.Framework.Barcode": {
+   "csproj": "CRT.Framework.Barcode.csproj",
+   "tfm": [
+    "v4.7.2"
+   ],
+   "outtype": "Library",
+   "packages": {
+    "ZXing.Net": "0.16.9"
+   },
+   "projrefs": [
+    "CRT.Framework.Utils.csproj"
+   ],
+   "asmver": "1.0.*",
+   "asmname": "CRT.Framework.Barcode",
+   "sdk": false,
+   "hintrefs": [
+    "zxing.dll",
+    "zxing.presentation.dll"
+   ]
+  },
+  "CRT.Framework.Core": {
+   "csproj": "CRT.Framework.Core.csproj",
+   "tfm": [
+    "v4.7.2"
+   ],
+   "outtype": "Library",
+   "packages": {
+    "Newtonsoft.Json": "13.0.3"
+   },
+   "projrefs": [],
+   "asmver": "1.0.*",
+   "asmname": "CRT.Framework.Core",
+   "sdk": false,
+   "hintrefs": [
+    "Newtonsoft.Json.dll",
+    "TheOne.4.0.dll"
+   ]
+  },
+  "CRT.Framework.DevExpr": {
+   "csproj": "CRT.Framework.DevExpr.csproj",
+   "tfm": [
+    "v4.7.2"
+   ],
+   "outtype": "Library",
+   "packages": {},
+   "projrefs": [
+    "CRT.Framework.Asset.csproj",
+    "CRT.Framework.Attribute.csproj"
+   ],
+   "asmver": "1.0.*",
+   "asmname": "CRT.Framework.DevExpr",
+   "sdk": false,
+   "hintrefs": []
+  },
+  "CRT.Framework.Extensions": {
+   "csproj": "CRT.Framework.Extensions.csproj",
+   "tfm": [
+    "v4.7.2"
+   ],
+   "outtype": "Library",
+   "packages": {},
+   "projrefs": [
+    "CRT.Framework.Attribute.csproj",
+    "CRT.Framework.Core.csproj"
+   ],
+   "asmver": "1.0.*",
+   "asmname": "CRT.Framework.Extensions",
+   "sdk": false,
+   "hintrefs": []
+  },
+  "CRT.Framework.PDF": {
+   "csproj": "CRT.Framework.PDF.csproj",
+   "tfm": [
+    "v4.7.2"
+   ],
+   "outtype": "Library",
+   "packages": {},
+   "projrefs": [
+    "CRT.Framework.Barcode.csproj",
+    "CRT.Framework.PDF.Objects.csproj",
+    "CRT.Framework.Utils.csproj"
+   ],
+   "asmver": "1.0.*",
+   "asmname": "CRT.Framework.PDF",
+   "sdk": false,
+   "hintrefs": [
+    "PDFlib_dotnet.dll"
+   ]
+  },
+  "CRT.Framework.PDF.Objects": {
+   "csproj": "CRT.Framework.PDF.Objects.csproj",
+   "tfm": [
+    "v4.7.2"
+   ],
+   "outtype": "Library",
+   "packages": {
+    "Newtonsoft.Json": "13.0.3"
+   },
+   "projrefs": [
+    "CRT.Framework.Attribute.csproj",
+    "CRT.Framework.Extensions.csproj"
+   ],
+   "asmver": "1.0.*",
+   "asmname": "CRT.Framework.PDF.Objects",
+   "sdk": false,
+   "hintrefs": [
+    "Newtonsoft.Json.dll"
+   ]
+  },
+  "CRT.Framework.Pitstop": {
+   "csproj": "CRT.Framework.Pitstop.csproj",
+   "tfm": [
+    "v4.7.2"
+   ],
+   "outtype": "Library",
+   "packages": {
+    "Newtonsoft.Json": "13.0.3"
+   },
+   "projrefs": [
+    "CRT.Framework.PDF.csproj"
+   ],
+   "asmver": "1.0.*",
+   "asmname": "CRT.Framework.Pitstop",
+   "sdk": false,
+   "hintrefs": [
+    "Newtonsoft.Json.dll"
+   ]
+  },
+  "CRT.Framework.Security": {
+   "csproj": "CRT.Framework.Security.csproj",
+   "tfm": [
+    "v4.7.2"
+   ],
+   "outtype": "Library",
+   "packages": {},
+   "projrefs": [],
+   "asmver": "1.0.*",
+   "asmname": "CRT.Framework.Security",
+   "sdk": false,
+   "hintrefs": []
+  },
+  "CRT.Framework.Utils": {
+   "csproj": "CRT.Framework.Utils.csproj",
+   "tfm": [
+    "v4.7.2"
+   ],
+   "outtype": "Library",
+   "packages": {},
+   "projrefs": [],
+   "asmver": "1.0.*",
+   "asmname": "CRT.Framework.Utils",
+   "sdk": false,
+   "hintrefs": []
+  },
+  "CRT.Framework.WinForms": {
+   "csproj": "CRT.Framework.WinForms.csproj",
+   "tfm": [
+    "v4.7.2"
+   ],
+   "outtype": "Library",
+   "packages": {
+    "Microsoft.Bcl.AsyncInterfaces": "9.0.1",
+    "Newtonsoft.Json": "13.0.3",
+    "RestSharp": "110.2.0",
+    "System.Buffers": "4.6.0",
+    "System.IO.Pipelines": "9.0.1",
+    "System.Memory": "4.6.0",
+    "System.Numerics.Vectors": "4.6.0",
+    "System.Runtime.CompilerServices.Unsafe": "6.1.0",
+    "System.Text.Encodings.Web": "9.0.1",
+    "System.Text.Json": "7.0.3",
+    "System.Threading.Tasks.Extensions": "4.6.0",
+    "System.ValueTuple": "4.5.0"
+   },
+   "projrefs": [
+    "CRT.Framework.Asset.csproj",
+    "CRT.Framework.DevExpr.csproj"
+   ],
+   "asmver": "1.0.*",
+   "asmname": "CRT.Framework.WinForms",
+   "sdk": false,
+   "hintrefs": [
+    "Microsoft.Bcl.AsyncInterfaces.dll",
+    "Newtonsoft.Json.dll",
+    "RestSharp.dll",
+    "System.Buffers.dll",
+    "System.IO.Pipelines.dll",
+    "System.Memory.dll",
+    "System.Numerics.Vectors.dll",
+    "System.Runtime.CompilerServices.Unsafe.dll",
+    "System.Text.Encodings.Web.dll",
+    "System.Text.Json.dll",
+    "System.Threading.Tasks.Extensions.dll",
+    "System.ValueTuple.dll"
+   ]
+  }
+ },
+ "huni": {
+  "CRT.Framework.AWS": {
+   "csproj": "CRT.Framework.AWS.csproj",
+   "tfm": [
+    "v4.7.2"
+   ],
+   "outtype": "Library",
+   "packages": {
+    "AWSSDK.Core": "3.7.303.18",
+    "AWSSDK.S3": "3.7.307.19",
+    "AWSSDK.SQS": "3.7.300.78",
+    "Magick.NET.Core": "14.10.0",
+    "Magick.NET-Q8-x64": "14.10.0",
+    "Microsoft.Bcl.AsyncInterfaces": "10.0.3",
+    "Newtonsoft.Json": "13.0.3",
+    "RestSharp": "110.2.0",
+    "RestSharp.Serializers.NewtonsoftJson": "110.2.0",
+    "System.Buffers": "4.6.1",
+    "System.IO.Pipelines": "10.0.3",
+    "System.Memory": "4.6.3",
+    "System.Numerics.Vectors": "4.6.1",
+    "System.Runtime.CompilerServices.Unsafe": "6.1.2",
+    "System.Text.Encodings.Web": "10.0.3",
+    "System.Text.Json": "10.0.3",
+    "System.Threading.Tasks.Extensions": "4.6.3",
+    "System.ValueTuple": "4.6.1"
+   },
+   "projrefs": [],
+   "asmver": null,
+   "asmname": "CRT.Framework.AWS",
+   "sdk": false,
+   "hintrefs": [
+    "AWSSDK.Core.dll",
+    "AWSSDK.S3.dll",
+    "AWSSDK.SQS.dll",
+    "Magick.NET-Q8-x64.dll",
+    "Magick.NET.Core.dll",
+    "Microsoft.Bcl.AsyncInterfaces.dll",
+    "Newtonsoft.Json.dll",
+    "RestSharp.Serializers.NewtonsoftJson.dll",
+    "RestSharp.dll",
+    "System.Buffers.dll",
+    "System.IO.Pipelines.dll",
+    "System.Memory.dll",
+    "System.Numerics.Vectors.dll",
+    "System.Runtime.CompilerServices.Unsafe.dll",
+    "System.Text.Encodings.Web.dll",
+    "System.Text.Json.dll",
+    "System.Threading.Tasks.Extensions.dll"
+   ]
+  },
+  "CRT.Framework.Asset": {
+   "csproj": "CRT.Framework.Asset.csproj",
+   "tfm": [
+    "v4.7.2"
+   ],
+   "outtype": "Library",
+   "packages": {
+    "Magick.NET.Core": "14.10.0",
+    "Magick.NET-Q8-x64": "14.10.0",
+    "Microsoft.Bcl.AsyncInterfaces": "10.0.3",
+    "Newtonsoft.Json": "13.0.3",
+    "RestSharp": "110.2.0",
+    "RestSharp.Serializers.NewtonsoftJson": "110.2.0",
+    "System.Buffers": "4.6.1",
+    "System.IO.Pipelines": "10.0.3",
+    "System.Memory": "4.6.3",
+    "System.Numerics.Vectors": "4.6.1",
+    "System.Runtime.CompilerServices.Unsafe": "6.1.2",
+    "System.Text.Encodings.Web": "10.0.3",
+    "System.Text.Json": "10.0.3",
+    "System.Threading.Tasks.Extensions": "4.6.3",
+    "System.ValueTuple": "4.6.1"
+   },
+   "projrefs": [],
+   "asmver": "1.0.*",
+   "asmname": "CRT.Framework.Asset",
+   "sdk": false,
+   "hintrefs": [
+    "Magick.NET-Q8-x64.dll",
+    "Magick.NET.Core.dll",
+    "Microsoft.Bcl.AsyncInterfaces.dll",
+    "Newtonsoft.Json.dll",
+    "RestSharp.Serializers.NewtonsoftJson.dll",
+    "RestSharp.dll",
+    "System.Buffers.dll",
+    "System.IO.Pipelines.dll",
+    "System.Memory.dll",
+    "System.Numerics.Vectors.dll",
+    "System.Runtime.CompilerServices.Unsafe.dll",
+    "System.Text.Encodings.Web.dll",
+    "System.Text.Json.dll",
+    "System.Threading.Tasks.Extensions.dll"
+   ]
+  },
+  "CRT.Framework.Core": {
+   "csproj": "CRT.Framework.Core.csproj",
+   "tfm": [
+    "v4.7.2"
+   ],
+   "outtype": "Library",
+   "packages": {
+    "Magick.NET.Core": "14.10.0",
+    "Magick.NET-Q8-x64": "14.10.0",
+    "Microsoft.Bcl.AsyncInterfaces": "10.0.3",
+    "Newtonsoft.Json": "13.0.3",
+    "RestSharp": "110.2.0",
+    "RestSharp.Serializers.NewtonsoftJson": "110.2.0",
+    "System.Buffers": "4.6.1",
+    "System.IO.Pipelines": "10.0.3",
+    "System.Memory": "4.6.3",
+    "System.Numerics.Vectors": "4.6.1",
+    "System.Runtime.CompilerServices.Unsafe": "6.1.2",
+    "System.Text.Encodings.Web": "10.0.3",
+    "System.Text.Json": "10.0.3",
+    "System.Threading.Tasks.Extensions": "4.6.3",
+    "System.ValueTuple": "4.6.1"
+   },
+   "projrefs": [],
+   "asmver": "1.0.*",
+   "asmname": "CRT.Framework.Core",
+   "sdk": false,
+   "hintrefs": [
+    "Magick.NET-Q8-x64.dll",
+    "Magick.NET.Core.dll",
+    "Microsoft.Bcl.AsyncInterfaces.dll",
+    "Newtonsoft.Json.dll",
+    "RestSharp.Serializers.NewtonsoftJson.dll",
+    "RestSharp.dll",
+    "System.Buffers.dll",
+    "System.IO.Pipelines.dll",
+    "System.Memory.dll",
+    "System.Numerics.Vectors.dll",
+    "System.Runtime.CompilerServices.Unsafe.dll",
+    "System.Text.Encodings.Web.dll",
+    "System.Text.Json.dll",
+    "System.Threading.Tasks.Extensions.dll",
+    "TheOne.4.0.dll"
+   ]
+  },
+  "CRT.Framework.DevExpr": {
+   "csproj": "CRT.Framework.DevExpr.csproj",
+   "tfm": [
+    "v4.7.2"
+   ],
+   "outtype": "Library",
+   "packages": {
+    "Magick.NET.Core": "14.10.0",
+    "Magick.NET-Q8-x64": "14.10.0",
+    "Microsoft.Bcl.AsyncInterfaces": "10.0.3",
+    "Newtonsoft.Json": "13.0.3",
+    "RestSharp": "110.2.0",
+    "RestSharp.Serializers.NewtonsoftJson": "110.2.0",
+    "System.Buffers": "4.6.1",
+    "System.IO.Pipelines": "10.0.3",
+    "System.Memory": "4.6.3",
+    "System.Numerics.Vectors": "4.6.1",
+    "System.Runtime.CompilerServices.Unsafe": "6.1.2",
+    "System.Text.Encodings.Web": "10.0.3",
+    "System.Text.Json": "10.0.3",
+    "System.Threading.Tasks.Extensions": "4.6.3",
+    "System.ValueTuple": "4.6.1"
+   },
+   "projrefs": [
+    "CRT.Framework.Asset.csproj",
+    "CRT.Framework.Core.csproj",
+    "CRT.Framework.Utils.csproj"
+   ],
+   "asmver": "1.0.*",
+   "asmname": "CRT.Framework.DevExpr",
+   "sdk": false,
+   "hintrefs": [
+    "Magick.NET-Q8-x64.dll",
+    "Magick.NET.Core.dll",
+    "Microsoft.Bcl.AsyncInterfaces.dll",
+    "Newtonsoft.Json.dll",
+    "RestSharp.Serializers.NewtonsoftJson.dll",
+    "RestSharp.dll",
+    "System.Buffers.dll",
+    "System.IO.Pipelines.dll",
+    "System.Memory.dll",
+    "System.Numerics.Vectors.dll",
+    "System.Runtime.CompilerServices.Unsafe.dll",
+    "System.Text.Encodings.Web.dll",
+    "System.Text.Json.dll",
+    "System.Threading.Tasks.Extensions.dll"
+   ]
+  },
+  "CRT.Framework.Extensions": {
+   "csproj": "CRT.Framework.Extensions.csproj",
+   "tfm": [
+    "v4.7.2"
+   ],
+   "outtype": "Library",
+   "packages": {
+    "Magick.NET.Core": "14.10.0",
+    "Magick.NET-Q8-x64": "14.10.0",
+    "Microsoft.Bcl.AsyncInterfaces": "10.0.3",
+    "Newtonsoft.Json": "13.0.3",
+    "RestSharp": "110.2.0",
+    "RestSharp.Serializers.NewtonsoftJson": "110.2.0",
+    "System.Buffers": "4.6.1",
+    "System.IO.Pipelines": "10.0.3",
+    "System.Memory": "4.6.3",
+    "System.Numerics.Vectors": "4.6.1",
+    "System.Runtime.CompilerServices.Unsafe": "6.1.2",
+    "System.Text.Encodings.Web": "10.0.3",
+    "System.Text.Json": "10.0.3",
+    "System.Threading.Tasks.Extensions": "4.6.3",
+    "System.ValueTuple": "4.6.1"
+   },
+   "projrefs": [
+    "CRT.Framework.Core.csproj",
+    "CRT.Framework.JSON.csproj"
+   ],
+   "asmver": "1.0.*",
+   "asmname": "CRT.Framework.Extensions",
+   "sdk": false,
+   "hintrefs": [
+    "Magick.NET-Q8-x64.dll",
+    "Magick.NET.Core.dll",
+    "Microsoft.Bcl.AsyncInterfaces.dll",
+    "Newtonsoft.Json.dll",
+    "RestSharp.Serializers.NewtonsoftJson.dll",
+    "RestSharp.dll",
+    "System.Buffers.dll",
+    "System.IO.Pipelines.dll",
+    "System.Memory.dll",
+    "System.Numerics.Vectors.dll",
+    "System.Runtime.CompilerServices.Unsafe.dll",
+    "System.Text.Encodings.Web.dll",
+    "System.Text.Json.dll",
+    "System.Threading.Tasks.Extensions.dll"
+   ]
+  },
+  "CRT.Framework.JSON": {
+   "csproj": "CRT.Framework.JSON.csproj",
+   "tfm": [
+    "v4.7.2"
+   ],
+   "outtype": "Library",
+   "packages": {
+    "Magick.NET.Core": "14.10.0",
+    "Magick.NET-Q8-x64": "14.10.0",
+    "Microsoft.Bcl.AsyncInterfaces": "10.0.3",
+    "Newtonsoft.Json": "13.0.3",
+    "RestSharp": "110.2.0",
+    "RestSharp.Serializers.NewtonsoftJson": "110.2.0",
+    "System.Buffers": "4.6.1",
+    "System.IO.Pipelines": "10.0.3",
+    "System.Memory": "4.6.3",
+    "System.Numerics.Vectors": "4.6.1",
+    "System.Runtime.CompilerServices.Unsafe": "6.1.2",
+    "System.Text.Encodings.Web": "10.0.3",
+    "System.Text.Json": "10.0.3",
+    "System.Threading.Tasks.Extensions": "4.6.3",
+    "System.ValueTuple": "4.6.1"
+   },
+   "projrefs": [],
+   "asmver": "1.0.*",
+   "asmname": "CRT.Framework.JSON",
+   "sdk": false,
+   "hintrefs": [
+    "Magick.NET-Q8-x64.dll",
+    "Magick.NET.Core.dll",
+    "Microsoft.Bcl.AsyncInterfaces.dll",
+    "Newtonsoft.Json.dll",
+    "RestSharp.Serializers.NewtonsoftJson.dll",
+    "RestSharp.dll",
+    "System.Buffers.dll",
+    "System.IO.Pipelines.dll",
+    "System.Memory.dll",
+    "System.Numerics.Vectors.dll",
+    "System.Runtime.CompilerServices.Unsafe.dll",
+    "System.Text.Encodings.Web.dll",
+    "System.Text.Json.dll",
+    "System.Threading.Tasks.Extensions.dll"
+   ]
+  },
+  "CRT.Framework.Net": {
+   "csproj": "CRT.Framework.Net.csproj",
+   "tfm": [
+    "v4.7.2"
+   ],
+   "outtype": "Library",
+   "packages": {
+    "Magick.NET.Core": "14.10.0",
+    "Magick.NET-Q8-x64": "14.10.0",
+    "Microsoft.Bcl.AsyncInterfaces": "10.0.3",
+    "Newtonsoft.Json": "13.0.3",
+    "RestSharp": "110.2.0",
+    "RestSharp.Serializers.NewtonsoftJson": "110.2.0",
+    "System.Buffers": "4.6.1",
+    "System.IO.Pipelines": "10.0.3",
+    "System.Memory": "4.6.3",
+    "System.Numerics.Vectors": "4.6.1",
+    "System.Runtime.CompilerServices.Unsafe": "6.1.2",
+    "System.Text.Encodings.Web": "10.0.3",
+    "System.Text.Json": "10.0.3",
+    "System.Threading.Tasks.Extensions": "4.6.3",
+    "System.ValueTuple": "4.6.1"
+   },
+   "projrefs": [],
+   "asmver": "1.0.*",
+   "asmname": "CRT.Framework.Net",
+   "sdk": false,
+   "hintrefs": [
+    "Magick.NET-Q8-x64.dll",
+    "Magick.NET.Core.dll",
+    "Microsoft.Bcl.AsyncInterfaces.dll",
+    "Newtonsoft.Json.dll",
+    "RestSharp.Serializers.NewtonsoftJson.dll",
+    "RestSharp.dll",
+    "System.Buffers.dll",
+    "System.IO.Pipelines.dll",
+    "System.Memory.dll",
+    "System.Numerics.Vectors.dll",
+    "System.Runtime.CompilerServices.Unsafe.dll",
+    "System.Text.Encodings.Web.dll",
+    "System.Text.Json.dll",
+    "System.Threading.Tasks.Extensions.dll"
+   ]
+  },
+  "CRT.Framework.PDF": {
+   "csproj": "CRT.Framework.PDF.csproj",
+   "tfm": [
+    "v4.7.2"
+   ],
+   "outtype": "Library",
+   "packages": {
+    "Magick.NET.Core": "14.10.0",
+    "Magick.NET-Q8-x64": "14.10.0",
+    "Microsoft.Bcl.AsyncInterfaces": "10.0.3",
+    "Newtonsoft.Json": "13.0.3",
+    "RestSharp": "110.2.0",
+    "RestSharp.Serializers.NewtonsoftJson": "110.2.0",
+    "System.Buffers": "4.6.1",
+    "System.IO.Pipelines": "10.0.3",
+    "System.Memory": "4.6.3",
+    "System.Numerics.Vectors": "4.6.1",
+    "System.Runtime.CompilerServices.Unsafe": "6.1.2",
+    "System.Text.Encodings.Web": "10.0.3",
+    "System.Text.Json": "10.0.3",
+    "System.Threading.Tasks.Extensions": "4.6.3",
+    "System.ValueTuple": "4.6.1",
+    "ZXing.Net": "0.16.9"
+   },
+   "projrefs": [
+    "CRT.Framework.PDF.Objects.csproj",
+    "CRT.Framework.Utils.csproj"
+   ],
+   "asmver": "1.0.*",
+   "asmname": "CRT.Framework.PDF",
+   "sdk": false,
+   "hintrefs": [
+    "Magick.NET-Q8-x64.dll",
+    "Magick.NET.Core.dll",
+    "Microsoft.Bcl.AsyncInterfaces.dll",
+    "Newtonsoft.Json.dll",
+    "PDFlib_dotnet.dll",
+    "RestSharp.Serializers.NewtonsoftJson.dll",
+    "RestSharp.dll",
+    "System.Buffers.dll",
+    "System.IO.Pipelines.dll",
+    "System.Memory.dll",
+    "System.Numerics.Vectors.dll",
+    "System.Runtime.CompilerServices.Unsafe.dll",
+    "System.Text.Encodings.Web.dll",
+    "System.Text.Json.dll",
+    "System.Threading.Tasks.Extensions.dll",
+    "zxing.dll",
+    "zxing.presentation.dll"
+   ]
+  },
+  "CRT.Framework.PDF.Objects": {
+   "csproj": "CRT.Framework.PDF.Objects.csproj",
+   "tfm": [
+    "v4.7.2"
+   ],
+   "outtype": "Library",
+   "packages": {
+    "Magick.NET.Core": "14.10.0",
+    "Magick.NET-Q8-x64": "14.10.0",
+    "Microsoft.Bcl.AsyncInterfaces": "10.0.3",
+    "Newtonsoft.Json": "13.0.3",
+    "RestSharp": "110.2.0",
+    "RestSharp.Serializers.NewtonsoftJson": "110.2.0",
+    "System.Buffers": "4.6.1",
+    "System.IO.Pipelines": "10.0.3",
+    "System.Memory": "4.6.3",
+    "System.Numerics.Vectors": "4.6.1",
+    "System.Runtime.CompilerServices.Unsafe": "6.1.2",
+    "System.Text.Encodings.Web": "10.0.3",
+    "System.Text.Json": "10.0.3",
+    "System.Threading.Tasks.Extensions": "4.6.3",
+    "System.ValueTuple": "4.6.1"
+   },
+   "projrefs": [],
+   "asmver": "1.0.*",
+   "asmname": "CRT.Framework.PDF.Objects",
+   "sdk": false,
+   "hintrefs": [
+    "Magick.NET-Q8-x64.dll",
+    "Magick.NET.Core.dll",
+    "Microsoft.Bcl.AsyncInterfaces.dll",
+    "Newtonsoft.Json.dll",
+    "RestSharp.Serializers.NewtonsoftJson.dll",
+    "RestSharp.dll",
+    "System.Buffers.dll",
+    "System.IO.Pipelines.dll",
+    "System.Memory.dll",
+    "System.Numerics.Vectors.dll",
+    "System.Runtime.CompilerServices.Unsafe.dll",
+    "System.Text.Encodings.Web.dll",
+    "System.Text.Json.dll",
+    "System.Threading.Tasks.Extensions.dll"
+   ]
+  },
+  "CRT.Framework.Utils": {
+   "csproj": "CRT.Framework.Utils.csproj",
+   "tfm": [
+    "v4.7.2"
+   ],
+   "outtype": "Library",
+   "packages": {
+    "Magick.NET.Core": "14.10.0",
+    "Magick.NET-Q8-x64": "14.10.0",
+    "Microsoft.Bcl.AsyncInterfaces": "10.0.3",
+    "Newtonsoft.Json": "13.0.3",
+    "RestSharp": "110.2.0",
+    "RestSharp.Serializers.NewtonsoftJson": "110.2.0",
+    "shortid": "4.0.0",
+    "System.Buffers": "4.6.1",
+    "System.IO.Pipelines": "10.0.3",
+    "System.Memory": "4.6.3",
+    "System.Numerics.Vectors": "4.6.1",
+    "System.Runtime.CompilerServices.Unsafe": "6.1.2",
+    "System.Text.Encodings.Web": "10.0.3",
+    "System.Text.Json": "10.0.3",
+    "System.Threading.Tasks.Extensions": "4.6.3",
+    "System.ValueTuple": "4.6.1"
+   },
+   "projrefs": [],
+   "asmver": "1.0.*",
+   "asmname": "CRT.Framework.Utils",
+   "sdk": false,
+   "hintrefs": [
+    "Magick.NET-Q8-x64.dll",
+    "Magick.NET.Core.dll",
+    "Microsoft.Bcl.AsyncInterfaces.dll",
+    "Newtonsoft.Json.dll",
+    "RestSharp.Serializers.NewtonsoftJson.dll",
+    "RestSharp.dll",
+    "System.Buffers.dll",
+    "System.IO.Pipelines.dll",
+    "System.Memory.dll",
+    "System.Numerics.Vectors.dll",
+    "System.Runtime.CompilerServices.Unsafe.dll",
+    "System.Text.Encodings.Web.dll",
+    "System.Text.Json.dll",
+    "System.Threading.Tasks.Extensions.dll",
+    "shortid.dll"
+   ]
+  },
+  "CRT.Framework.Utils.ZipLib": {
+   "csproj": "CRT.Framework.Utils.ZipLib.csproj",
+   "tfm": [
+    "v4.7.2"
+   ],
+   "outtype": "Library",
+   "packages": {
+    "Magick.NET.Core": "14.10.0",
+    "Magick.NET-Q8-x64": "14.10.0",
+    "Microsoft.Bcl.AsyncInterfaces": "10.0.3",
+    "Newtonsoft.Json": "13.0.3",
+    "RestSharp": "110.2.0",
+    "RestSharp.Serializers.NewtonsoftJson": "110.2.0",
+    "System.Buffers": "4.6.1",
+    "System.IO.Pipelines": "10.0.3",
+    "System.Memory": "4.6.3",
+    "System.Numerics.Vectors": "4.6.1",
+    "System.Runtime.CompilerServices.Unsafe": "6.1.2",
+    "System.Text.Encodings.Web": "10.0.3",
+    "System.Text.Json": "10.0.3",
+    "System.Threading.Tasks.Extensions": "4.6.3",
+    "System.ValueTuple": "4.6.1"
+   },
+   "projrefs": [],
+   "asmver": "1.0.*",
+   "asmname": "CRT.Framework.Utils.ZipLib",
+   "sdk": false,
+   "hintrefs": [
+    "Magick.NET-Q8-x64.dll",
+    "Magick.NET.Core.dll",
+    "Microsoft.Bcl.AsyncInterfaces.dll",
+    "Newtonsoft.Json.dll",
+    "RestSharp.Serializers.NewtonsoftJson.dll",
+    "RestSharp.dll",
+    "System.Buffers.dll",
+    "System.IO.Pipelines.dll",
+    "System.Memory.dll",
+    "System.Numerics.Vectors.dll",
+    "System.Runtime.CompilerServices.Unsafe.dll",
+    "System.Text.Encodings.Web.dll",
+    "System.Text.Json.dll",
+    "System.Threading.Tasks.Extensions.dll"
+   ]
+  },
+  "CRT.Framework.WinForms": {
+   "csproj": "CRT.Framework.WinForms.csproj",
+   "tfm": [
+    "v4.7.2"
+   ],
+   "outtype": "Library",
+   "packages": {
+    "Magick.NET.Core": "14.10.0",
+    "Magick.NET-Q8-x64": "14.10.0",
+    "Microsoft.Bcl.AsyncInterfaces": "10.0.3",
+    "Newtonsoft.Json": "13.0.3",
+    "RestSharp": "110.2.0",
+    "RestSharp.Serializers.NewtonsoftJson": "110.2.0",
+    "System.Buffers": "4.6.1",
+    "System.IO.Pipelines": "10.0.3",
+    "System.Memory": "4.6.3",
+    "System.Numerics.Vectors": "4.6.1",
+    "System.Runtime.CompilerServices.Unsafe": "6.1.2",
+    "System.Text.Encodings.Web": "10.0.3",
+    "System.Text.Json": "10.0.3",
+    "System.Threading.Tasks.Extensions": "4.6.3",
+    "System.ValueTuple": "4.6.1"
+   },
+   "projrefs": [
+    "CRT.Framework.Asset.csproj",
+    "CRT.Framework.DevExpr.csproj"
+   ],
+   "asmver": "1.0.*",
+   "asmname": "CRT.Framework.WinForms",
+   "sdk": false,
+   "hintrefs": [
+    "Magick.NET-Q8-x64.dll",
+    "Magick.NET.Core.dll",
+    "Microsoft.Bcl.AsyncInterfaces.dll",
+    "Newtonsoft.Json.dll",
+    "RestSharp.Serializers.NewtonsoftJson.dll",
+    "RestSharp.dll",
+    "System.Buffers.dll",
+    "System.IO.Pipelines.dll",
+    "System.Memory.dll",
+    "System.Numerics.Vectors.dll",
+    "System.Runtime.CompilerServices.Unsafe.dll",
+    "System.Text.Encodings.Web.dll",
+    "System.Text.Json.dll",
+    "System.Threading.Tasks.Extensions.dll",
+    "System.ValueTuple.dll"
+   ]
+  }
+ }
+}

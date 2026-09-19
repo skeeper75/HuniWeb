@@ -1,0 +1,731 @@
+[
+ {
+  "seam": "huni-mall <-> shopby",
+  "n": 104,
+  "status": {
+   "진행": 42,
+   "미착수": 42,
+   "완료": 20
+  },
+  "owner_side": {
+   "huni-mall": 104
+  },
+  "scope": {
+   "in": 104
+  },
+  "samples": [
+   [
+    "MALL-FAQ",
+    "공지사항·FAQ 열람",
+    "huni-skin-shopby/src/app/(main)/notice/page.tsx:1-27 · src/lib/api/server/board."
+   ],
+   [
+    "MALL-FAQ",
+    "자주묻는질문(FAQ) 고객 화면",
+    "https://shopby.huniprinting.co.kr/faq 404 @ 2026-09-16 21:27"
+   ],
+   [
+    "MALL-INQUIRY",
+    "1:1 문의 등록·답변",
+    "huni-skin-shopby/src/app/(main) 하위 inquiry/qna 라우트 부재 (SB-056 absent)"
+   ]
+  ]
+ },
+ {
+  "seam": "huni-mall <-> webadmin",
+  "n": 19,
+  "status": {
+   "미착수": 8,
+   "진행": 1,
+   "완료": 10
+  },
+  "owner_side": {
+   "huni-mall": 9,
+   "webadmin": 10
+  },
+  "scope": {
+   "in": 19
+  },
+  "samples": [
+   [
+    "MALL-MY-CHARGE",
+    "프린트머니 구현 M2 — 스킨 충전 화면 배선(useChargePoint → 충전권 주문서)",
+    "_workspace/huni-shopby/17_prepaid-money/prepaid-money-design-260915.md:290"
+   ],
+   [
+    "MALL-MY-ORDER",
+    "인쇄 공정 단계 상태 노출(검판·출력·후가공)",
+    "SCOPE-162 주문/주문상세 런타임 그릇 구축 PARTIAL·미착수"
+   ],
+   [
+    "MALL-PDP",
+    "상세페이지 탭 6종 자동 등록(디자인가이드·디자인보기 포함)",
+    "후니정기미팅 정리260915.html §디자인 상품·편집기·보관함 · 확정 3 / 후니-오픈잔여작업-실무진안내_260909.html §항목 2 "
+   ]
+  ]
+ },
+ {
+  "seam": "shopby <-> shopby",
+  "n": 16,
+  "status": {
+   "진행": 1,
+   "완료": 2,
+   "미착수": 11,
+   "미확인": 2
+  },
+  "owner_side": {
+   "webadmin": 16
+  },
+  "scope": {
+   "in": 16
+  },
+  "samples": [
+   [
+    "SB-PRODUCT",
+    "인쇄 도메인 DB ↔ 커머스 상품 동기화",
+    "raw/webadmin/webadmin/catalog/shopby_sync.py:118·315 (sync_main_images·sync_fron"
+   ],
+   [
+    "SB-ORDER",
+    "송장 등록·일괄 업로드",
+    "raw/webadmin/webadmin/catalog/shopby_client.py:137 (request 범용 호출만 존재 — 주문·송장·회원"
+   ],
+   [
+    "SB-ORDER",
+    "출고 처리·배송중 전이",
+    "raw/webadmin/webadmin/catalog/shopby_client.py:137 (request 범용 호출만 존재 — 주문·송장·회원"
+   ]
+  ]
+ },
+ {
+  "seam": "mes <-> shopby",
+  "n": 11,
+  "status": {
+   "미착수": 11
+  },
+  "owner_side": {
+   "미정": 11
+  },
+  "scope": {
+   "in": 11
+  },
+  "samples": [
+   [
+    "MES-ITF-Shopby-01-ProductsSync",
+    "syncProducts - 전체/증분 상품 동기화(syncMode=full|incremental)",
+    "docs/api/shopby-integration-api.yaml:43-44 (POST /products/sync, operationId=syn"
+   ],
+   [
+    "MES-ITF-Shopby-02-ProductsList",
+    "getProducts - 연동된 상품 매핑 목록 조회",
+    "docs/api/shopby-integration-api.yaml:91-92 (GET /products, operationId=getProduc"
+   ],
+   [
+    "MES-ITF-Shopby-03-ProductDetail",
+    "getProductById - 특정 Shopby 상품의 매핑 상세/동기화 이력 조회",
+    "docs/api/shopby-integration-api.yaml:130-131 (GET /products/{shopbyId}, operatio"
+   ]
+  ]
+ },
+ {
+  "seam": "pagebuilder <-> webadmin",
+  "n": 10,
+  "status": {
+   "미확인": 6,
+   "미착수": 4
+  },
+  "owner_side": {
+   "webadmin": 4,
+   "pagebuilder": 6
+  },
+  "scope": {
+   "in": 10
+  },
+  "samples": [
+   [
+    "pc-guidebook-file-bind",
+    "api/w/v1/guides 파일 목록을 동적 페이지 블록에 바인딩",
+    "raw/webadmin/webadmin/config/urls.py:281 · _workspace/huni-page-compose/01_recon"
+   ],
+   [
+    "pc-guidebook-file-source",
+    "가이드 파일 실체는 webadmin S3 업로드·관리 — 소비자는 자사몰 웹서버(pagebuilder 경유 ",
+    "raw/webadmin/webadmin/config/urls.py:72-89 · raw/webadmin/webadmin/catalog/widge"
+   ],
+   [
+    "pc-site-json-backup",
+    "GET /api/sites/{host} — 백업·감사·마이그레이션 원천",
+    "_workspace/huni-page-compose/01_recon/pie-canvas-engine-capabilities.md:383 (NEW"
+   ]
+  ]
+ },
+ {
+  "seam": "widget <-> widget",
+  "n": 8,
+  "status": {
+   "완료": 8
+  },
+  "owner_side": {
+   "webadmin": 8
+  },
+  "scope": {
+   "in": 8
+  },
+  "samples": [
+   [
+    "wapi_editor_resolve",
+    "옵션조합 → Edicus PSCode·템플릿 URI 해석",
+    "raw/webadmin/webadmin/config/urls.py:275 · raw/webadmin/webadmin/catalog/static/"
+   ],
+   [
+    "wapi_editor_token",
+    "Edicus 사용자 토큰 대리 발급",
+    "raw/webadmin/webadmin/config/urls.py:276 · raw/webadmin/webadmin/catalog/static/"
+   ],
+   [
+    "wapi_handoff",
+    "재계산 + HMAC 서명 토큰 발급(주문 인계)",
+    "raw/webadmin/webadmin/config/urls.py:255 · raw/webadmin/webadmin/catalog/widget_"
+   ]
+  ]
+ },
+ {
+  "seam": "webadmin <-> widget",
+  "n": 7,
+  "status": {
+   "완료": 7
+  },
+  "owner_side": {
+   "widget": 7
+  },
+  "scope": {
+   "in": 7
+  },
+  "samples": [
+   [
+    "rt_editor",
+    "편집기 버튼 클릭 시 선택 옵션조합 → PSCode·템플릿 URI 해석 요청",
+    "raw/webadmin/webadmin/catalog/static/catalog/widget.js:392 post /api/w/v1/editor"
+   ],
+   [
+    "rt_editor",
+    "편집기 사용자 토큰 대리 발급 요청(비회원은 게스트 토큰)",
+    "raw/webadmin/webadmin/catalog/static/catalog/widget.js:584 post /api/w/v1/editor"
+   ],
+   [
+    "rt_mount",
+    "site_key 로 게시 위젯 설정 조회 후 렌더",
+    "raw/webadmin/webadmin/catalog/static/catalog/widget.js:145 fetch /api/w/v1/widge"
+   ]
+  ]
+ },
+ {
+  "seam": "edicus <-> edicus",
+  "n": 6,
+  "status": {
+   "미착수": 2,
+   "진행": 1,
+   "완료": 2,
+   "미확인": 1
+  },
+  "owner_side": {
+   "webadmin": 4,
+   "mes": 1,
+   "widget": 1
+  },
+  "scope": {
+   "in": 6
+  },
+  "samples": [
+   [
+    "EDI-17",
+    "편집 완료 후 썸네일/미리보기 이미지 URL을 받아오는 API — 호출 함수 없음(미사용)",
+    "_workspace/huni-edicus-live/DEV-HANDOFF-260818/edicus-server-api.md 엔드포인트 #9 GET"
+   ],
+   [
+    "EDI-11",
+    "tentative_order/definitive_order/cancel_order/clone_project/",
+    "raw/webadmin/webadmin/catalog/edicus_lookup.py:319-417(get_project/tentative_ord"
+   ],
+   [
+    "EDI-14",
+    "테스트결제 1건의 주문등록 payload에 편집기 결과(템플릿·산출물)가 실려 있는지 확인",
+    "planrows-edicus.csv row STD-ART-024: X-WGTF-EDICUS-01 · X-EDX-D8-01 EDICUS Link "
+   ]
+  ]
+ },
+ {
+  "seam": "pitstop <-> pitstop",
+  "n": 6,
+  "status": {
+   "미착수": 6
+  },
+  "owner_side": {
+   "webadmin": 6
+  },
+  "scope": {
+   "in": 6
+  },
+  "samples": [
+   [
+    "PS-22",
+    "자동목록 판정 시 즉시 알림톡+재업로드 링크 발급, 상태 FILE_HOLD",
+    "raw/webadmin/docs/order-to-mes-process.md §5.3·§8.4 FR-4 · planrows-pitstop.csv "
+   ],
+   [
+    "PS-24",
+    "업로드되면 회차(r2,r3…)가 올라가고 검사·프리플라이트가 자동 재실행",
+    "raw/webadmin/docs/order-to-mes-process.md §5.3 '회차가 올라가고 검사·프리플라이트가 자동 재실행' · pl"
+   ],
+   [
+    "PS-08",
+    "order 버킷 승격 완료본을 PitStop 서버(핫폴더/CLI)로 전달",
+    "_workspace/huni-launch-runway/07_rebaseline/L0/M3/preflight-architecture.md §4 '"
+   ]
+  ]
+ },
+ {
+  "seam": "shopby <-> webadmin",
+  "n": 6,
+  "status": {
+   "미착수": 2,
+   "완료": 4
+  },
+  "owner_side": {
+   "webadmin": 6
+  },
+  "scope": {
+   "in": 6
+  },
+  "samples": [
+   [
+    "SB-WEBHOOK",
+    "우리가 올린 상태변경 웹훅 메아리 필터(무한루프 방지)",
+    "raw/webadmin/webadmin/catalog/shopby_hook.py:82 (shopby_webhook 수신 핸들러 실재) · 메아리"
+   ],
+   [
+    "SB-WEBHOOK",
+    "반품·교환 웹훅 기록만 하고 MES 작업 자동생성 안 함",
+    "raw/webadmin/webadmin/catalog/shopby_hook.py:112-121 (shop_clm_sts 포함 클레임 웹훅 저장까"
+   ],
+   [
+    "main_img_md",
+    "저장 직후 샵바이 상품 이미지 통째 교체 동기화(sync_main_images — 외부 URL 방식·실패해도",
+    "raw/webadmin/webadmin/catalog/shopby_sync.py:118"
+   ]
+  ]
+ },
+ {
+  "seam": "s3 <-> webadmin",
+  "n": 6,
+  "status": {
+   "완료": 6
+  },
+  "owner_side": {
+   "webadmin": 6
+  },
+  "scope": {
+   "in": 6
+  },
+  "samples": [
+   [
+    "swatch_stage",
+    "자재·공정·용지 공용 스와치 이미지 multipart 업로드 스테이징(대상 실재·권한 검사 후 S3 적재)",
+    "raw/webadmin/webadmin/config/urls.py:318"
+   ],
+   [
+    "design_md",
+    "썸네일 S3 직결 업로드 presign 발급",
+    "raw/webadmin/webadmin/config/urls.py:126"
+   ],
+   [
+    "guide_file_md",
+    "업로드 presign 발급 — 확장자·크기 fail-closed 검증 후 S3 직결 PUT",
+    "raw/webadmin/webadmin/config/urls.py:80"
+   ]
+  ]
+ },
+ {
+  "seam": "pagebuilder <-> pagebuilder",
+  "n": 4,
+  "status": {
+   "미착수": 4
+  },
+  "owner_side": {
+   "pagebuilder": 4
+  },
+  "scope": {
+   "in": 4
+  },
+  "samples": [
+   [
+    "pc-editor-hardnav",
+    "주소 직접입력·새로고침으로 편집기 열기 — 현재 HTTP 500(P0 버그 B1)",
+    "_workspace/huni-page-compose/99_proposal/proposal.md:170 (NEW — 파트너사 코드 수정이라 후니 "
+   ],
+   [
+    "pc-req-f1-display-cond",
+    "전체·카테고리·태그·개별로 템플릿 적용 범위 지정",
+    "_workspace/huni-page-compose/99_proposal/proposal.md:183 (NEW — 파트너사 코드 · 후니 불가)"
+   ],
+   [
+    "pc-req-f2-partial-override",
+    "뼈대는 공유하고 일부 문구만 인스턴스별로 덮어쓰기",
+    "_workspace/huni-page-compose/99_proposal/proposal.md:184 (NEW — 파트너사 코드 · 후니 불가)"
+   ]
+  ]
+ },
+ {
+  "seam": "huni-mall <-> widget",
+  "n": 4,
+  "status": {
+   "완료": 4
+  },
+  "owner_side": {
+   "webadmin": 3,
+   "widget": 1
+  },
+  "scope": {
+   "in": 4
+  },
+  "samples": [
+   [
+    "wapi_catalog",
+    "게시 위젯 카탈로그 + 상품별 시작가 조회",
+    "raw/webadmin/webadmin/config/urls.py:248 · raw/webadmin/webadmin/catalog/widget_"
+   ],
+   [
+    "wapi_handoff_requote",
+    "장바구니 재견적(결제 직전 갱신·수량 변경)",
+    "raw/webadmin/webadmin/config/urls.py:257 · raw/webadmin/webadmin/catalog/widget_"
+   ],
+   [
+    "wapi_handoff_verify",
+    "쇼핑몰 서버가 서명 토큰·금액 검증(서버-투-서버)",
+    "raw/webadmin/webadmin/config/urls.py:256 · raw/webadmin/webadmin/catalog/widget_"
+   ]
+  ]
+ },
+ {
+  "seam": "cafe24 <-> mes",
+  "n": 3,
+  "status": {
+   "완료": 3
+  },
+  "owner_side": {
+   "mes": 3
+  },
+  "scope": {
+   "out": 3
+  },
+  "samples": [
+   [
+    "MES-ITF-Cafe24-OrderIntake",
+    "Cafe24 주문 Webhook(SQS 수신)→신규주문/결제갱신/주문취소 처리→MES DB 저장(CRT.Ea",
+    "[오픈분모밖] BackOffice.Console/CRT.EasyMES.V2.Console.Cafe24Interface.Update/Program"
+   ],
+   [
+    "MES-ITF-Cafe24-StatusPush",
+    "MES 발송처리(택배사코드·방문수령 포함) → Cafe24 REST API로 배송정보 갱신 전송",
+    "[오픈분모밖] BackOffice.Console/CRT.EasyMES.V2.Console.Cafe24Interface/Program.cs:1-6"
+   ],
+   [
+    "MES-ITF-Cafe24-TokenRefresh",
+    "Cafe24 OAuth2 access/refresh token 발급·갱신(별도 상주 프로세스)",
+    "[오픈분모밖] BackOffice.Console/CRT.EasyMES.V2.Console.Cafe24Interface.Token/Program."
+   ]
+  ]
+ },
+ {
+  "seam": "edicus <-> widget",
+  "n": 2,
+  "status": {
+   "미확인": 1,
+   "완료": 1
+  },
+  "owner_side": {
+   "widget": 2
+  },
+  "scope": {
+   "in": 2
+  },
+  "samples": [
+   [
+    "EDI-10",
+    "create_project 성공 시 project_id를 후니 주문/장바구니에 저장해야 이후 주문확정·미리보",
+    "_workspace/huni-edicus-product-map/02_contract/editor-launch-contract.md §5(콜백 계"
+   ],
+   [
+    "rt_editor",
+    "Edicus 편집기 SDK 로드 후 오버레이 기동 및 save/close/error 수신",
+    "raw/webadmin/webadmin/catalog/static/catalog/widget.js:414 _ensureEditorSdk(huni"
+   ]
+  ]
+ },
+ {
+  "seam": "edicus <-> webadmin",
+  "n": 2,
+  "status": {
+   "진행": 1,
+   "미착수": 1
+  },
+  "owner_side": {
+   "widget": 2
+  },
+  "scope": {
+   "in": 2
+  },
+  "samples": [
+   [
+    "EDI-07",
+    "위젯 화면에서 「에디터로 편집하기」를 눌러 resolve/token 두 API를 순차 호출해 에디터를 띄운다",
+    "planrows-edicus.csv row STD-ART-021: raw/webadmin/webadmin/config/urls.py:274,27"
+   ],
+   [
+    "EDI-19",
+    "webadmin 등록분 디자인 목록을 위젯이 불러와 화면에 렌더 — 위젯측 소비 코드 미확인",
+    "planrows-edicus.csv row STD-CAT-036: 'webadmin 에 디자인 1건을 등록한 뒤 신규몰 디자인 목록을 새로고침해"
+   ]
+  ]
+ },
+ {
+  "seam": "edicus <-> huni-mall",
+  "n": 2,
+  "status": {
+   "미착수": 2
+  },
+  "owner_side": {
+   "huni-mall": 2
+  },
+  "scope": {
+   "in": 2
+  },
+  "samples": [
+   [
+    "MALL-MY-ORDER",
+    "편집상품 미리보기",
+    "SB-020 stub — huni-skin-shopby/src/components/product/configurator-actions.tsx:1"
+   ],
+   [
+    "MALL-STORAGE",
+    "편집 디자인 보관함 — 편집 종료 후 보관, 장바구니 담기 전까지 수정 가능",
+    "후니정기미팅 정리260915.html §디자인 상품·편집기·보관함 · 확정 7 / 후니-오픈잔여작업-실무진안내_260909.html §항목 11"
+   ]
+  ]
+ },
+ {
+  "seam": "mes <-> 외부(성원 adpiamall.com)",
+  "n": 2,
+  "status": {
+   "완료": 2
+  },
+  "owner_side": {
+   "mes": 2
+  },
+  "scope": {
+   "out": 2
+  },
+  "samples": [
+   [
+    "MES-ITF-SWOrder-발송상태전송",
+    "제작완료 건의 송장번호(setInvoiceNo)·발송처리(SendDelv)를 성원 사이트로 전송(순서 의존 ",
+    "[오픈분모밖] BackOffice.Console/CRT.EasyMES.V2.Console.SWOrderInterface/Program.cs:39"
+   ],
+   [
+    "MES-ITF-SWOrder-외주수신",
+    "성원(partner.adpiamall.com) 주문 조회 후 원고 다운로드·S3 업로드·DB 저장(로그인세션",
+    "[오픈분모밖] BackOffice.Console/CRT.EasyMES.V2.Console.SWOrderInterface/Program.cs:96"
+   ]
+  ]
+ },
+ {
+  "seam": "mes <-> woocommerce",
+  "n": 2,
+  "status": {
+   "완료": 2
+  },
+  "owner_side": {
+   "mes": 2
+  },
+  "scope": {
+   "out": 2
+  },
+  "samples": [
+   [
+    "MES-ITF-WooCommerce-CommandPush",
+    "MES에서 발행한 상태변경 커맨드(UpdateStatusCmd/UpdateTrackingCmd)를 큐로 전달",
+    "[오픈분모밖] BackOffice.Console/TS.BackOffice.WooCommerce.Command/{UpdateStatusCmd,Up"
+   ],
+   [
+    "MES-ITF-WooCommerce-Webhook",
+    "WooCommerce 주문/결제/취소 Webhook 수신(SQS)→ProductItemFactory로 상품옵",
+    "[오픈분모밖] BackOffice.Console/TS.BackOffice.WebHookHandler.WooCommerce/WebHookServi"
+   ]
+  ]
+ },
+ {
+  "seam": "s3 <-> widget",
+  "n": 2,
+  "status": {
+   "미확인": 2
+  },
+  "owner_side": {
+   "webadmin": 2
+  },
+  "scope": {
+   "in": 2
+  },
+  "samples": [
+   [
+    "ui_preview",
+    "미리보기 원고 업로드 presign 발급",
+    "raw/webadmin/webadmin/config/urls.py:196 widget_preview_presign · 라우트만 확인(구현 미독)"
+   ],
+   [
+    "ui_preview",
+    "미리보기 대용량 멀티파트 업로드(create|sign|complete|abort)",
+    "raw/webadmin/webadmin/config/urls.py:198 widget_preview_multipart · 라우트만 확인(구현 미"
+   ]
+  ]
+ },
+ {
+  "seam": "edicus <-> mes",
+  "n": 1,
+  "status": {
+   "완료": 1
+  },
+  "owner_side": {
+   "mes": 1
+  },
+  "scope": {
+   "in": 1
+  },
+  "samples": [
+   [
+    "EDI-15",
+    "편집기 산출물이 렌더링되어 생산(MES)로 접수되는 경로 — 현행 구현 여부 미실측",
+    "직접 확인(TS.BackOffice.Huni 읽기전용): BackOffice.Console/CRT.EasyMES.V2.Console.Motion"
+   ]
+  ]
+ },
+ {
+  "seam": "mes <-> 외부(사내 NAS)",
+  "n": 1,
+  "status": {
+   "완료": 1
+  },
+  "owner_side": {
+   "mes": 1
+  },
+  "scope": {
+   "out": 1
+  },
+  "samples": [
+   [
+    "MES-ITF-DesignFile-CopyToNas",
+    "작업 스케줄러 무인 실행으로 접수파일을 사내 NAS로 복사(디버깅용 FrmMain 창은 미사용)",
+    "[오픈분모밖] BackOffice.Console/CRT.EasyMES.V2.DesignFileCopyToNas/Program.cs:19-54 ("
+   ]
+  ]
+ },
+ {
+  "seam": "mes <-> 외부(MotionOne 렌더링 엔진/Edicus)",
+  "n": 1,
+  "status": {
+   "완료": 1
+  },
+  "owner_side": {
+   "mes": 1
+  },
+  "scope": {
+   "out": 1
+  },
+  "samples": [
+   [
+    "MES-ITF-MotionOne-RenderWebhook",
+    "렌더링 엔진(MotionOne) 완료 Webhook(SQS) 수신→렌더 결과 파일 S3 업로드→주문정보 저장",
+    "[오픈분모밖] BackOffice.Console/CRT.EasyMES.V2.Console.MotionOneInterface/Program.cs:"
+   ]
+  ]
+ },
+ {
+  "seam": "mes <-> 외부(이카운트 ERP)",
+  "n": 1,
+  "status": {
+   "완료": 1
+  },
+  "owner_side": {
+   "mes": 1
+  },
+  "scope": {
+   "out": 1
+  },
+  "samples": [
+   [
+    "MES-ITF-ECount-매출전송",
+    "접수완료·이카운트 미전송 주문 조회→이카운트 RestAPI 전송→이카운트 주문번호 DB 갱신→우커머스 상태(",
+    "[오픈분모밖] BackOffice.Console/TS.BackOffice.SendData.ECount/Program.cs:27-33 (프로세스 "
+   ]
+  ]
+ },
+ {
+  "seam": "huni-mall <-> pagebuilder",
+  "n": 1,
+  "status": {
+   "미착수": 1
+  },
+  "owner_side": {
+   "huni-mall": 1
+  },
+  "scope": {
+   "in": 1
+  },
+  "samples": [
+   [
+    "pc-tab-assembly",
+    "Pie Canvas 게시 스냅샷(slug=prodCode) + 갤러리·리뷰 임베드를 탭 6종으로 배치",
+    "_workspace/huni-page-compose/99_proposal/proposal.md:203"
+   ]
+  ]
+ },
+ {
+  "seam": "pagebuilder <-> shopby",
+  "n": 1,
+  "status": {
+   "미착수": 1
+  },
+  "owner_side": {
+   "shopby": 1
+  },
+  "scope": {
+   "in": 1
+  },
+  "samples": [
+   [
+    "pc-tab-review",
+    "ShopBy 소유 리뷰 위젯을 embed 블록으로 임베드(D3)",
+    "_workspace/huni-page-compose/99_proposal/proposal.md:202 · report.html:557"
+   ]
+  ]
+ },
+ {
+  "seam": "mes <-> pitstop",
+  "n": 1,
+  "status": {
+   "미착수": 1
+  },
+  "owner_side": {
+   "webadmin": 1
+  },
+  "scope": {
+   "in": 1
+  },
+  "samples": [
+   [
+    "PS-21",
+    "담당자가 MES에서 재검사를 원할 때 검사 큐 재투입",
+    "raw/webadmin/docs/order-to-mes-process.md §8.4 FR-6 표 · planrows-pitstop.csv STD"
+   ]
+  ]
+ }
+]

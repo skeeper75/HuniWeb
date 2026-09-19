@@ -1,0 +1,148 @@
+system,group,screen_id,screen_name,role,function,work_type,counterpart,direction,owner_side,plan_row_id,status,evidence
+webadmin,상품,product_viewer,상품 뷰어,운영자(CS·상품),좌측 상품 트리 카테고리별 그룹 렌더·상품명/코드 검색 좁히기,build,,,,STD-ADP-010,완료,raw/webadmin/webadmin/config/urls.py:347
+webadmin,상품,product_viewer,상품 뷰어,운영자(CS·상품),선택 상품의 우측 상세(옵션·추가상품 템플릿·제약 전체 구성) 조회,build,,,,STD-ADP-010,완료,raw/webadmin/webadmin/config/urls.py:365
+webadmin,상품,product_viewer,상품 뷰어,운영자(CS·상품),사이즈 섹션 편집 — 규격목록·기본여부·표시순서·사이즈별 최소/최대 수량·증분·셋트 구성원 적용완제품사이즈 짝 저장,build,,,,STD-ADP-001,완료,raw/webadmin/tools/manual_content.py:262
+webadmin,상품,product_viewer,상품 뷰어,운영자(CS·상품),도수/인쇄옵션 섹션 편집 — 사용 인쇄옵션 선택·고객 표시명 지정,build,,,,STD-ADP-004,완료,raw/webadmin/tools/manual_content.py:275
+webadmin,상품,product_viewer,상품 뷰어,운영자(CS·상품),판형 섹션 편집 — 완제품 사이즈별 인쇄판·출력파일/용지유형·기본판형 지정,build,,,,STD-ADP-007,완료,raw/webadmin/tools/manual_content.py:278
+webadmin,상품,product_viewer,상품 뷰어,운영자(CS·상품),자재 섹션 편집 — 자재·용도·기본여부·고객선택여부 지정,build,,,,STD-ADP-002,완료,raw/webadmin/tools/manual_content.py:281
+webadmin,상품,product_viewer,상품 뷰어,운영자(CS·상품),공정 섹션 편집 — 상품별 공정 연결·필수여부·공정별 상세입력 최소/최대 범위,build,,,,STD-ADP-005,완료,raw/webadmin/tools/manual_content.py:284
+webadmin,상품,product_viewer,상품 뷰어,운영자(CS·상품),묶음수 섹션 편집 — 낱장·10매·100매 등 판매 묶음 단위 등록,build,,,,STD-OPT-041,완료,raw/webadmin/tools/manual_content.py:289
+webadmin,상품,product_viewer,상품 뷰어,운영자(CS·상품),추가상품 섹션 편집 — 이 상품에 끼워 팔 추가상품 템플릿 지정,build,,,,STD-ADP-020,완료,raw/webadmin/tools/manual_content.py:290
+webadmin,상품,product_viewer,상품 뷰어,운영자(CS·상품),페이지룰 섹션 편집 — 책자류 인쇄옵션별 페이지 최소·최대·증분,build,,,,STD-OPT-041,완료,raw/webadmin/tools/manual_content.py:291
+webadmin,상품,product_viewer,상품 뷰어,운영자(CS·상품),섹션 편집 팝업 공통 저장 처리(저장 후 상세 자동 새로고침),build,,,,STD-ADP-010,완료,raw/webadmin/webadmin/config/urls.py:367
+webadmin,상품,option_groups,상품 뷰어 › 옵션그룹,운영자(CS·상품),옵션그룹 목록 조회·추가·인라인 편집·논리삭제,build,,,,STD-ADP-017,완료,raw/webadmin/webadmin/config/urls.py:370
+webadmin,상품,options,상품 뷰어 › 옵션,운영자(CS·상품),옵션 목록 CRUD + ▲▼ 표시순서 재배치 후 저장,build,,,,STD-ADP-017,완료,raw/webadmin/webadmin/config/urls.py:372
+webadmin,상품,option_items,상품 뷰어 › 옵션항목,운영자(CS·상품),옵션항목 CRUD(차원 참조값 지정 포함),build,,,,STD-ADP-018,완료,raw/webadmin/webadmin/config/urls.py:374
+webadmin,상품,dim_choices,상품 뷰어 › 차원 후보 Ajax,시스템(무인),상품 한정 차원 후보값(dim_choices) 조회 API,build,,,,STD-ADP-018,완료,raw/webadmin/webadmin/config/urls.py:382
+webadmin,상품,constraints,상품 뷰어 › 제약 폼빌더,운영자(CS·상품),제약규칙 조건그룹 추가·AND/OR 논리연산 지정·JSONLogic 직접 편집 저장,build,,,,STD-ADP-021,완료,raw/webadmin/webadmin/config/urls.py:385
+webadmin,상품,validate_preview,상품 뷰어 › 검증 미리보기,운영자(CS·상품),입력 조합 즉시 검증 미리보기(이 조합 검사),build,,,,STD-ADP-022,완료,raw/webadmin/webadmin/config/urls.py:387
+webadmin,상품,sku_list,상품 뷰어 › 추가상품 템플릿(상품별),운영자(CS·상품),상품별 추가상품 템플릿 목록 조회·추가·템플릿명/기준상품/표시순서 인라인 편집,build,,,,STD-ADP-020,완료,raw/webadmin/webadmin/config/urls.py:377
+webadmin,상품,sku_selections,상품 뷰어 › 템플릿 선택값,운영자(CS·상품),템플릿에 고정된 옵션 선택값 드릴다운 조회·편집,build,,,,STD-ADP-020,완료,raw/webadmin/webadmin/config/urls.py:379
+webadmin,상품,sku_catalog,추가상품 템플릿 카탈로그,운영자(CS·상품),전체 추가상품 템플릿 카탈로그 조회 + 상품별 편집 진입,build,,,,STD-ADP-012,완료,raw/webadmin/webadmin/config/urls.py:391
+webadmin,상품,set_products,셋트상품 관리,운영자(CS·상품),셋트 구성 보유 상품 목록 검색·조회,build,,,,STD-ADP-016,완료,raw/webadmin/webadmin/config/urls.py:350
+webadmin,상품,set_products,셋트상품 관리,운영자(CS·상품),+ 새 셋트 생성 — 상품 선택 드롭다운으로 셋트 대상 지정,build,,,,STD-ADP-016,완료,raw/webadmin/tools/manual_content.py:355
+webadmin,상품,set_products,셋트상품 관리,운영자(CS·상품),셋트 구성원·구성원 수량·묶음 규칙 편집 폼(iframe) 저장,build,,,,STD-ADP-016,완료,raw/webadmin/tools/manual_content.py:358
+webadmin,상품,tmpl_combo_md,구성템플릿 조합 (내부 대조표),운영자(CS·상품),좌측 상품 목록 검색·선택,build,,,,STD-ADP-018,완료,raw/webadmin/webadmin/config/urls.py:54
+webadmin,상품,tmpl_combo_md,구성템플릿 조합 (내부 대조표),운영자(CS·상품),상품별 조합 메타(차원·기존 시트) 조회,build,,,,STD-ADP-018,완료,raw/webadmin/webadmin/config/urls.py:56
+webadmin,상품,tmpl_combo_md,구성템플릿 조합 (내부 대조표),운영자(CS·상품),조합 차원 선택(칩) 저장,build,,,,STD-ADP-018,완료,raw/webadmin/webadmin/config/urls.py:58
+webadmin,상품,tmpl_combo_md,구성템플릿 조합 (내부 대조표),운영자(CS·상품),조합 생성/갱신 — 선택 차원의 가능 조합 전개(기존 입력 유지),build,,,,STD-ADP-018,완료,raw/webadmin/tools/manual_content.py:389
+webadmin,상품,tmpl_combo_md,구성템플릿 조합 (내부 대조표),운영자(CS·상품),조합별 자재 지정 시트 전체 저장(빠진 행은 삭제 처리),build,,,,STD-ADP-018,완료,raw/webadmin/webadmin/config/urls.py:60
+webadmin,상품,tmpl_combo_regs,구성템플릿 조합 › 등록(차원 설정 벌),운영자(CS·상품),등록 벌 목록 조회·추가(seq 단위로 자재별 결정 차원 분리),build,,,,STD-ADP-018,완료,raw/webadmin/webadmin/config/urls.py:65
+webadmin,상품,tmpl_combo_regs,구성템플릿 조합 › 등록(차원 설정 벌),운영자(CS·상품),등록 벌 이름변경·삭제,build,,,,STD-ADP-018,완료,raw/webadmin/webadmin/config/urls.py:69
+webadmin,상품,edicus_template_md,상품별 Edicus 템플릿 연결,운영자(CS·상품),판매 완제품 목록 + 등록 행 수(파랑)·편집기 미연결 조합 수(빨강) 배지 검사 표시,build,,,,STD-CAT-035,완료,raw/webadmin/webadmin/config/urls.py:43
+webadmin,상품,edicus_template_md,상품별 Edicus 템플릿 연결,운영자(CS·상품),상품별 사용차원·기존 템플릿 시트 메타 조회,build,,,,STD-CAT-035,완료,raw/webadmin/webadmin/config/urls.py:45
+webadmin,상품,edicus_template_md,상품별 Edicus 템플릿 연결,운영자(CS·상품),사용차원 칩 선택·열 순서 저장,build,,,,STD-CAT-035,완료,raw/webadmin/webadmin/config/urls.py:47
+webadmin,상품,edicus_template_md,상품별 Edicus 템플릿 연결,운영자(CS·상품),조합별 PSCode·템플릿 URI 시트 저장(엑셀 복붙 지원·미사용 행 자동 논리삭제),build,,,,STD-CAT-035,완료,raw/webadmin/webadmin/config/urls.py:49
+webadmin,상품,edicus_template_md,상품별 Edicus 템플릿 연결,운영자(CS·상품),상품의 템플릿 연결 전체 해제,build,,,,STD-CAT-035,완료,raw/webadmin/webadmin/config/urls.py:51
+webadmin,상품,start_price_md,상품별 기본사양가,운영자(CS·상품),상태 필터(전체/자동/수기/없음)·상품명 검색 목록 조회,build,,,,STD-ADP-033,완료,raw/webadmin/webadmin/config/urls.py:115
+webadmin,상품,start_price_md,상품별 기본사양가,운영자(CS·상품),자동 계산 실패 사유 표시(기본값 미지정·가격소스 없음/0원·판수 환산 불가),build,,,,STD-ADP-033,완료,raw/webadmin/tools/manual_content.py:716
+webadmin,상품,start_price_md,상품별 기본사양가,운영자(CS·상품),수기 금액·기준수량 저장 / 금액 비우고 저장해 수기 해제,build,,,,STD-CAT-039,완료,raw/webadmin/webadmin/config/urls.py:117
+webadmin,상품,start_price_md,상품별 기본사양가,운영자(CS·상품),행별 [지금 다시 계산] — 그 상품만 기본사양가 즉시 재계산,build,,,,STD-ADP-033,완료,raw/webadmin/webadmin/config/urls.py:119
+webadmin,상품,design_md,상품별 디자인,운영자(CS·상품),좌측 상품 목록(등록 디자인 수 배지) 검색·선택,build,,,,STD-ADP-035,완료,raw/webadmin/webadmin/config/urls.py:122
+webadmin,상품,design_md,상품별 디자인,운영자(CS·상품),상품별 디자인 목록(썸네일·태그·고정사양·표시여부) 조회,build,,,,STD-ADP-035,완료,raw/webadmin/webadmin/config/urls.py:124
+webadmin,상품,design_md,상품별 디자인,운영자(CS·상품),디자인 저장 — PSCode·URI·태그·고정 사양(대상+항목+값)·표시여부 등록/수정,build,,,,STD-CAT-033,완료,raw/webadmin/webadmin/config/urls.py:128
+webadmin,상품,design_md,상품별 디자인,운영자(CS·상품),[저장 후 계속 추가] 연속 등록 / 행 [복제]로 유사 디자인 추가,build,,,,STD-ADP-035,완료,raw/webadmin/tools/manual_content.py:780
+webadmin,상품,design_md,상품별 디자인,운영자(CS·상품),디자인 논리삭제(복구 가능),build,,,,STD-ADP-035,완료,raw/webadmin/webadmin/config/urls.py:130
+webadmin,상품,design_md,상품별 디자인,운영자(CS·상품),썸네일 S3 직결 업로드 presign 발급,integrate,s3,webadmin→s3,webadmin,STD-ADP-035,완료,raw/webadmin/webadmin/config/urls.py:126
+webadmin,상품,guide_file_md,상품별 작업가이드 파일,운영자(CS·상품),좌 완제품 목록 + 우 가이드 파일 행 목록 조회,build,,,,STD-ADC-014,완료,raw/webadmin/webadmin/config/urls.py:74
+webadmin,상품,guide_file_md,상품별 작업가이드 파일,운영자(CS·상품),활성 가이드 파일 목록(del_yn=N) 조회,build,,,,STD-ADC-014,완료,raw/webadmin/webadmin/config/urls.py:77
+webadmin,상품,guide_file_md,상품별 작업가이드 파일,운영자(CS·상품),표시명·태그·순서·비고 prd_cd 스코프 부분 upsert 저장(원본파일명·키 불변),build,,,,STD-ADC-014,완료,raw/webadmin/webadmin/config/urls.py:83
+webadmin,상품,guide_file_md,상품별 작업가이드 파일,운영자(CS·상품),가이드 파일 논리삭제(S3 객체는 보존),build,,,,STD-ADC-014,완료,raw/webadmin/webadmin/config/urls.py:86
+webadmin,상품,guide_file_md,상품별 작업가이드 파일,운영자(CS·상품),업로드 presign 발급 — 확장자·크기 fail-closed 검증 후 S3 직결 PUT,integrate,s3,webadmin→s3,webadmin,STD-CAT-020,완료,raw/webadmin/webadmin/config/urls.py:80
+webadmin,상품,guide_file_md,상품별 작업가이드 파일,운영자(CS·상품),저장 안 한 업로드 S3 객체 즉시 정리(discard),integrate,s3,webadmin→s3,webadmin,STD-ADC-014,완료,raw/webadmin/webadmin/config/urls.py:89
+webadmin,상품,main_img_md,상품별 메인이미지,운영자(CS·상품),좌 완제품 목록(이미지 수·대표 썸네일·샵바이 동기화 배지) 조회,build,,,,STD-ADP-014,완료,raw/webadmin/webadmin/config/urls.py:93
+webadmin,상품,main_img_md,상품별 메인이미지,운영자(CS·상품),활성 메인이미지 목록(del_yn=N) 조회,build,,,,STD-ADP-014,완료,raw/webadmin/webadmin/config/urls.py:96
+webadmin,상품,main_img_md,상품별 메인이미지,운영자(CS·상품),메인이미지 부분 upsert 저장 + 대표/목록용 서버 권위 결정,build,,,,STD-ADP-014,완료,raw/webadmin/webadmin/config/urls.py:102
+webadmin,상품,main_img_md,상품별 메인이미지,운영자(CS·상품),메인이미지 논리삭제(S3 객체는 보존),build,,,,STD-ADP-014,완료,raw/webadmin/webadmin/config/urls.py:105
+webadmin,상품,main_img_md,상품별 메인이미지,운영자(CS·상품),업로드 presign 발급(확장자·크기 fail-closed · S3 직결 PUT),integrate,s3,webadmin→s3,webadmin,STD-ADP-014,완료,raw/webadmin/webadmin/config/urls.py:99
+webadmin,상품,main_img_md,상품별 메인이미지,운영자(CS·상품),저장 안 한 업로드 S3 객체 즉시 정리(discard),integrate,s3,webadmin→s3,webadmin,STD-ADP-014,완료,raw/webadmin/webadmin/config/urls.py:108
+webadmin,상품,main_img_md,상품별 메인이미지,시스템(무인),저장 직후 샵바이 상품 이미지 통째 교체 동기화(sync_main_images — 외부 URL 방식·실패해도 관리자 저장 비차단),integrate,shopby,webadmin→shopby,webadmin,T2-3,완료,raw/webadmin/webadmin/catalog/shopby_sync.py:118
+webadmin,상품,main_img_md,상품별 메인이미지,운영자(CS·상품),[샵바이 재시도] — 실패/대기 상태 상품의 이미지 동기화 재호출,integrate,shopby,webadmin→shopby,webadmin,T2-3,완료,raw/webadmin/webadmin/config/urls.py:111
+webadmin,상품,tprdproducts_admin,상품정보 (표준 목록·편집),운영자(CS·상품),상품 마스터 표준 목록·검색·정렬·필터·추가·편집·논리삭제,build,,,,STD-ADP-010,완료,raw/webadmin/tools/manual_content.py:811
+webadmin,상품,tprdproducts_admin,상품정보 (표준 목록·편집),운영자(CS·상품),상품 스위치 설정 — 비규격여부·파일업로드여부·편집기여부·게시여부,build,,,,STD-ADP-014,완료,raw/webadmin/tools/manual_content.py:829
+webadmin,상품,tprdproducts_admin,상품정보 (표준 목록·편집),운영자(CS·상품),상품-카테고리 귀속 편집(다중분류·주카테고리여부),build,,,,STD-ADP-013,완료,raw/webadmin/tools/manual_content.py:97
+webadmin,상품,tprdproducts_admin,상품정보 (표준 목록·편집),시스템(무인),저장 커밋 후 샵바이 전시(front display) 동기화 — on_commit 으로 롤백 저장은 미전송,integrate,shopby,webadmin→shopby,webadmin,T2-3,완료,raw/webadmin/webadmin/catalog/admin.py:2301
+webadmin,상품,tprdproducts_admin,상품정보 (표준 목록·편집),운영자(CS·상품),목록 「자사몰」 전시 동기화 배지 표시 + 동기화 상태 필터,build,,,,T2-3,완료,raw/webadmin/webadmin/catalog/admin.py:690
+webadmin,상품,tprdtemplates_admin,추가상품 템플릿 (표준 목록),운영자(CS·상품),끼워팔기용 추가상품 템플릿 표준 목록·편집(선택값 인라인·논리삭제),build,,,,STD-ADP-020,완료,raw/webadmin/tools/manual_content.py:813
+webadmin,기준정보,paper_management,용지 관리,운영자(CS·상품),좌측 용지 목록 조회·선택(종이 MAT_TYPE.01 한정),build,,,,STD-ADP-003,완료,raw/webadmin/webadmin/config/urls.py:306
+webadmin,기준정보,paper_management,용지 관리,운영자(CS·상품),+ 용지 등록 — 신규 용지 자동채번·종이 유형 고정 생성,build,,,,STD-ADP-003,완료,raw/webadmin/webadmin/config/urls.py:309
+webadmin,기준정보,paper_management,용지 관리,운영자(CS·상품),기본정보 탭 저장 — 용지명·평량·두께(책등계산용 mm)·상위용지,build,,,,STD-ADP-003,완료,raw/webadmin/webadmin/config/urls.py:312
+webadmin,기준정보,paper_management,용지 관리,운영자(CS·상품),단가 탭 — 용지비(COMP_PAPER) mat_cd 스코프 부분 upsert 저장,build,,,,STD-ADP-024,완료,raw/webadmin/webadmin/config/urls.py:315
+webadmin,기준정보,category_master,카테고리 (밀러 칼럼),운영자(CS·상품),대>중>소 3단계 밀러 칼럼 탐색,build,,,,STD-ADP-036,완료,raw/webadmin/webadmin/config/urls.py:363
+webadmin,기준정보,category_master,카테고리 (밀러 칼럼),운영자(CS·상품),단계별 카테고리 추가(상위 자동 지정)·편집 팝업,build,,,,STD-ADP-036,완료,raw/webadmin/tools/manual_content.py:419
+webadmin,기준정보,master_detail,자재·공정 마스터-디테일,운영자(CS·상품),자재 2단 마스터-디테일 — 상위 검색·하위 표 조회·추가·편집,build,,,,STD-ADP-002,완료,raw/webadmin/webadmin/config/urls.py:360
+webadmin,기준정보,master_detail,자재·공정 마스터-디테일,운영자(CS·상품),공정 2단 마스터-디테일 — 상위/하위 공정 관리 + 「사용 상품」 배지(3갈래 중복 제거·상위공정 하위 전개),build,,,,STD-ADP-005,완료,raw/webadmin/tools/manual_content.py:443
+webadmin,기준정보,proc_usage_page,공정 › 사용 상품 팝업,운영자(CS·상품),공정을 쓰는 상품 목록 팝업(상품명·코드·연결 부분 배지 · 읽기 전용),build,,,,STD-ADP-005,완료,raw/webadmin/webadmin/config/urls.py:344
+webadmin,기준정보,basecode_master,기초코드정보 (자기참조 MD),운영자(CS·상품),기초코드 그룹/코드 2단 분할 조회 + 팝업 CRUD,build,,,,STD-ADP-009,완료,raw/webadmin/webadmin/config/urls.py:353
+webadmin,기준정보,basecode_master,기초코드정보 (자기참조 MD),운영자(CS·상품),기초코드 논리삭제(삭제금지 정책상 use_yn 전환 운영),build,,,,STD-ADP-009,완료,raw/webadmin/webadmin/config/urls.py:355
+webadmin,기준정보,master_delete,마스터 제네릭 논리삭제,운영자(CS·상품),기초코드/공정/자재/카테고리 공용 하위 항목 논리삭제,build,,,,STD-ADP-009,완료,raw/webadmin/webadmin/config/urls.py:358
+webadmin,기준정보,spine_page,책등 계산 설정 (공정별 팝업),운영자(CS·상품),공정 목록 책등계산 열 아이콘 → 책등 계산 설정 팝업 페이지 열기,build,,,,STD-ADP-008,완료,raw/webadmin/webadmin/config/urls.py:324
+webadmin,기준정보,spine_page,책등 계산 설정 (공정별 팝업),운영자(CS·상품),공정별 책등 설정 메타 조회,build,,,,STD-ADP-008,완료,raw/webadmin/webadmin/config/urls.py:326
+webadmin,기준정보,spine_page,책등 계산 설정 (공정별 팝업),운영자(CS·상품),책등 설정 저장 — 여유분(mm)·올림 방식(정수/짝수/규격표)·표지 두께 포함 여부,build,,,,STD-ADP-008,완료,raw/webadmin/webadmin/config/urls.py:328
+webadmin,기준정보,spine_page,책등 계산 설정 (공정별 팝업),운영자(CS·상품),규격표 저장 — 색상·직경·길이·자재 행(트윈링 등 부속 규격),build,,,,STD-ADP-008,완료,raw/webadmin/webadmin/config/urls.py:330
+webadmin,기준정보,spine_page,책등 계산 설정 (공정별 팝업),운영자(CS·상품),규격표 자재 검색(정적 경로 materials),build,,,,STD-ADP-008,완료,raw/webadmin/webadmin/config/urls.py:322
+webadmin,기준정보,spine_page,책등 계산 설정 (공정별 팝업),운영자(CS·상품),책등 계산 설정 삭제,build,,,,STD-ADP-008,완료,raw/webadmin/webadmin/config/urls.py:332
+webadmin,기준정보,cover_rule,표지 규칙 (책등 설정과 독립),운영자(CS·상품),표지 규칙 저장 — 권당 조각 수·판 확장(좌상우하)·싸바리 여유(좌상우하),build,,,,STD-ADP-008,완료,raw/webadmin/webadmin/config/urls.py:337
+webadmin,기준정보,cover_rule,표지 규칙 (책등 설정과 독립),운영자(CS·상품),표지 규칙 삭제,build,,,,STD-ADP-008,완료,raw/webadmin/webadmin/config/urls.py:339
+webadmin,기준정보,swatch_stage,스와치 이미지 업로드 (공용),운영자(CS·상품),자재·공정·용지 공용 스와치 이미지 multipart 업로드 스테이징(대상 실재·권한 검사 후 S3 적재),integrate,s3,webadmin→s3,webadmin,STD-ADP-002,완료,raw/webadmin/webadmin/config/urls.py:318
+webadmin,기준정보,tsizsizes_admin,사이즈정보 (표준 목록),운영자(CS·상품),완제품 사이즈(가로×세로)·재단/작업/여백·조판 여부 등록·태그 분류·검색,build,,,,STD-ADP-001,완료,raw/webadmin/tools/manual_content.py:814
+webadmin,기준정보,tclrcolorcounts_admin,도수정보 (표준 목록),운영자(CS·상품),인쇄 도수(색 수) 마스터 등록·편집,build,,,,STD-ADP-004,완료,raw/webadmin/tools/manual_content.py:815
+webadmin,기준정보,printopt_admin,인쇄옵션 (표준 목록),운영자(CS·상품),인쇄 방식·앞뒷면 도수 기준정보 등록·편집,build,,,,STD-ADP-004,완료,raw/webadmin/tools/manual_content.py:816
+webadmin,기준정보,tprocprocesses_admin,공정정보 (표준 목록),운영자(CS·상품),공정 마스터 등록 + 면별선택여부·고객노출설명·스와치이미지·작업여백 설정,build,,,,STD-ADP-005,완료,raw/webadmin/tools/manual_content.py:817
+webadmin,기준정보,tmatmaterials_admin,자재정보 (표준 목록),운영자(CS·상품),자재 마스터 등록·편집(스와치 이미지·태그 지원),build,,,,STD-ADP-002,완료,raw/webadmin/tools/manual_content.py:821
+webadmin,가격 관리,price_viewer,가격 뷰어,운영자(CS·상품),좌측 상품 트리 검색·선택(주카테고리 기준 그룹),build,,,,STD-ADP-032,완료,raw/webadmin/webadmin/config/urls.py:34
+webadmin,가격 관리,price_viewer,가격 뷰어,운영자(CS·상품),상품별 가격 원천 상세 조회 — 직접단가/가격공식/할인테이블 × 적용일자,build,,,,STD-ADP-032,완료,raw/webadmin/webadmin/config/urls.py:156
+webadmin,가격 관리,price_viewer,가격 뷰어,운영자(CS·상품),가격 원천 연결 저장 — 적용일자별 다건 등록(최신 적용분이 현재가),build,,,,STD-ADP-030,완료,raw/webadmin/webadmin/config/urls.py:161
+webadmin,가격 관리,price_viewer,가격 뷰어,운영자(CS·상품),할인 적용 대상 지정 — 전체 금액 할인 / 구성요소별 할인 나란히 연결,build,,,,STD-ADP-027,완료,raw/webadmin/tools/manual_content.py:498
+webadmin,가격 관리,price_viewer,가격 뷰어,운영자(CS·상품),선택 옵션 메타(연결 후보 공식·할인테이블 목록) 조회,build,,,,STD-ADP-023,완료,raw/webadmin/webadmin/config/urls.py:144
+webadmin,가격 관리,price_diagram,가격 구조 다이어그램,운영자(CS·상품),공식→구성요소→단가표 구조 라이브 다이어그램 새 탭 조회·노드 펼침,build,,,,STD-ADP-032,완료,raw/webadmin/webadmin/config/urls.py:159
+webadmin,가격 관리,price_simulator,가격 시뮬레이터,운영자(CS·상품),시뮬레이션 대상 상품 목록 검색,build,,,,STD-ADP-031,완료,raw/webadmin/webadmin/config/urls.py:176
+webadmin,가격 관리,price_simulator,가격 시뮬레이터,운영자(CS·상품),상품별 입력 조건 메타 생성(차원·옵션·공정·수량 폼),build,,,,STD-ADP-031,완료,raw/webadmin/webadmin/config/urls.py:164
+webadmin,가격 관리,price_simulator,가격 시뮬레이터,운영자(CS·상품),가격 계산 실행 — 구성요소별 단가·할인·총합계 리포트(끼워팔기 합산 포함),build,,,,STD-ADP-031,완료,raw/webadmin/webadmin/config/urls.py:166
+webadmin,가격 관리,price_simulator,가격 시뮬레이터,운영자(CS·상품),셋트상품 가격 계산 — 구성원별 사이즈 출처 표기 포함,build,,,,STD-OPT-051,완료,raw/webadmin/webadmin/config/urls.py:171
+webadmin,가격 관리,price_simulator,가격 시뮬레이터,운영자(CS·상품),제약 cascade — 현재 선택 기준 각 차원 불가값 비활성 표시,build,,,,STD-ADP-022,완료,raw/webadmin/webadmin/config/urls.py:169
+webadmin,가격 관리,price_simulator,가격 시뮬레이터,운영자(CS·상품),사이드바 전용 시뮬레이터 페이지 진입,build,,,,STD-ADP-031,완료,raw/webadmin/webadmin/config/urls.py:174
+webadmin,가격 관리,price_sim_products,가격 시뮬레이터 › 상품 목록 API,시스템(무인),시뮬레이터 상품 목록 JSON(위젯빌더 팔레트 소스와 공용) — 매뉴얼 미기술,build,,,,STD-ADP-031,미확인,raw/webadmin/webadmin/config/urls.py:176
+webadmin,가격 관리,price_formula_md,가격공식 (MD),운영자(CS·상품),가격공식 목록 검색·선택(구성요소 수·사용 상품 수 배지),build,,,,STD-ADP-023,완료,raw/webadmin/webadmin/config/urls.py:37
+webadmin,가격 관리,price_formula_md,가격공식 (MD),운영자(CS·상품),+ 새 공식 추가 / 공식 폼·구성요소 구성 저장,build,,,,STD-ADP-023,완료,raw/webadmin/tools/manual_content.py:544
+webadmin,가격 관리,price_formula_md,가격공식 (MD),운영자(CS·상품),공식 삭제 — 살아있는 상품 사용 시 차단 · 삭제된 상품이 남긴 잠든 연결은 고지 후 동반 정리,build,,,,STD-ADP-023,완료,raw/webadmin/tools/manual_content.py:535
+webadmin,가격 관리,price_formula_md,가격공식 (MD),운영자(CS·상품),이 공식을 사용하는 상품 조회(가격뷰어 링크),build,,,,STD-ADP-023,완료,raw/webadmin/webadmin/config/urls.py:133
+webadmin,가격 관리,price_component_md,가격구성요소 (MD),운영자(CS·상품),구성요소 목록 선택(배지=단가표 행 수),build,,,,STD-ADP-024,완료,raw/webadmin/webadmin/config/urls.py:40
+webadmin,가격 관리,price_component_md,가격구성요소 (MD),운영자(CS·상품),구성요소 속성 편집 — 단가유형(단가형/합가형/고정금액)·사용차원(use_dims) 순서 지정,build,,,,STD-ADP-026,완료,raw/webadmin/tools/manual_content.py:557
+webadmin,가격 관리,price_component_md,가격구성요소 (MD),운영자(CS·상품),이 구성요소를 쓰는 가격공식 조회(가격공식MD 링크),build,,,,STD-ADP-024,완료,raw/webadmin/webadmin/config/urls.py:136
+webadmin,가격 관리,price_grid_page,단가표 그리드 편집 (팝업),운영자(CS·상품),구성요소 단가표 그리드 편집기 팝업 열기,build,,,,STD-ADP-025,완료,raw/webadmin/webadmin/config/urls.py:146
+webadmin,가격 관리,price_grid_page,단가표 그리드 편집 (팝업),운영자(CS·상품),차원 조합별 단가 행 조회(엑셀식 정렬·필터),build,,,,STD-ADP-025,완료,raw/webadmin/webadmin/config/urls.py:148
+webadmin,가격 관리,price_grid_page,단가표 그리드 편집 (팝업),운영자(CS·상품),변경분 저장 — 엑셀 복사·붙여넣기 입력분 일괄 반영,build,,,,STD-ADP-025,완료,raw/webadmin/webadmin/config/urls.py:150
+webadmin,가격 관리,price_grid_page,단가표 그리드 편집 (팝업),운영자(CS·상품),선택영역 새 적용일로 개정(시계열 복제),build,,,,STD-ADP-030,완료,raw/webadmin/tools/manual_content.py:594
+webadmin,가격 관리,price_grid_page,단가표 그리드 편집 (팝업),운영자(CS·상품),중복 검사 — 같은 차원 조합에 중복 단가 행 점검,build,,,,STD-ADP-025,완료,raw/webadmin/webadmin/config/urls.py:154
+webadmin,가격 관리,price_grid_page,단가표 그리드 편집 (팝업),운영자(CS·상품),구성요소 사용처(어느 공식·상품에 쓰이는지) 조회,build,,,,STD-ADP-024,완료,raw/webadmin/webadmin/config/urls.py:152
+webadmin,가격 관리,discount_table_md,할인테이블 (수량구간) MD,운영자(CS·상품),할인테이블 목록 검색·선택 / + 새 할인테이블 추가,build,,,,STD-ADP-027,완료,raw/webadmin/webadmin/config/urls.py:139
+webadmin,가격 관리,discount_table_md,할인테이블 (수량구간) MD,운영자(CS·상품),이 할인테이블을 쓰는 상품 조회(가격뷰어 링크),build,,,,STD-ADP-027,완료,raw/webadmin/webadmin/config/urls.py:142
+webadmin,가격 관리,discount_grid_page,할인 구간 그리드 편집 (팝업),운영자(CS·상품),수량 구간 그리드 편집기 팝업 열기,build,,,,STD-ADP-027,완료,raw/webadmin/webadmin/config/urls.py:179
+webadmin,가격 관리,discount_grid_page,할인 구간 그리드 편집 (팝업),운영자(CS·상품),수량 구간 행 조회,build,,,,STD-ADP-027,완료,raw/webadmin/webadmin/config/urls.py:181
+webadmin,가격 관리,discount_grid_page,할인 구간 그리드 편집 (팝업),운영자(CS·상품),수량 구간별 할인(정률 %/정액 원) 변경분 저장,build,,,,STD-ADP-027,완료,raw/webadmin/webadmin/config/urls.py:183
+webadmin,가격 관리,price_std_admin,가격공식·구성요소·할인테이블 (표준 목록),운영자(CS·상품),3종 표준 목록 화면 — 목록 행에서 단가표/수량구간 할인 편집 팝업 직행 버튼,build,,,,STD-ADP-023,완료,raw/webadmin/webadmin/catalog/admin.py:2830
+webadmin,고객관리,tcuscustomers_admin,고객,운영자(CS·상품),고객 마스터 목록·검색·등록·편집·논리삭제,build,,,,NEW,완료,raw/webadmin/tools/manual_content.py:823 || plan_row_id=NEW 사유: _planrows-A.csv·_planrows-misc.csv 에 고객 마스터 관리 화면을 다루는 행 없음
+webadmin,인증 및 권한,auth_user_admin,사용자,관리자,관리자 계정 등록·비밀번호·권한(그룹·개별 permission) 관리,build,,,,NEW,완료,raw/webadmin/webadmin/catalog/admin.py:2929 || plan_row_id=NEW 사유: 계획행에 webadmin 계정·권한 관리 항목 없음
+webadmin,문서,manual,관리자 사용 메뉴얼,운영자(CS·상품),docs/admin-manual.html 을 admin 인증 하에 서빙(새 탭),build,,,,NEW,완료,raw/webadmin/webadmin/config/urls.py:397 || plan_row_id=NEW 사유: 계획행에 webadmin 내장 문서 화면 항목 없음
+webadmin,문서,widget_manual,위젯빌더 메뉴얼,운영자(CS·상품),docs/widget-manual.html 서빙(위젯빌더 사용법 전용 문서·새 탭),build,,,,NEW,완료,raw/webadmin/webadmin/config/urls.py:399 || plan_row_id=NEW 사유: 계획행에 webadmin 내장 문서 화면 항목 없음
+webadmin,문서,quickstart,퀵스타트 가이드,운영자(CS·상품),docs/admin-quickstart.html 서빙 — 예시 상품 1건 종단 따라하기,build,,,,NEW,완료,raw/webadmin/webadmin/config/urls.py:395 || plan_row_id=NEW 사유: 계획행에 webadmin 내장 문서 화면 항목 없음
+webadmin,문서,table_spec,테이블 명세서,관리자,docs/table-spec.html 서빙 — t_* 테이블 명세 조회,build,,,,NEW,완료,raw/webadmin/webadmin/config/urls.py:400 || plan_row_id=NEW 사유: 계획행에 webadmin 내장 문서 화면 항목 없음
+webadmin,도구,assistant_chat,관리자 비서 에이전트,운영자(CS·상품),관리자 화면 질의응답 채팅(SSE 스트리밍 · staff 게이트),build,,,,NEW,완료,raw/webadmin/webadmin/config/urls.py:292 || plan_row_id=NEW 사유: 계획행에 관리자 비서 에이전트 항목 없음
+webadmin,도구,assistant_meta,관리자 비서 에이전트,운영자(CS·상품),비서 메타(가용 컨텍스트) 조회,build,,,,NEW,완료,raw/webadmin/webadmin/config/urls.py:293 || plan_row_id=NEW 사유: 계획행에 관리자 비서 에이전트 항목 없음
+webadmin,도구,assistant_report,이슈 보고 (A-09),운영자(CS·상품),이슈 스크린샷 업로드,build,,,,NEW,완료,raw/webadmin/webadmin/config/urls.py:296 || plan_row_id=NEW 사유: 계획행에 이슈 보고 기능 항목 없음
+webadmin,도구,assistant_report,이슈 보고 (A-09),운영자(CS·상품),업로드된 이슈 스크린샷 조회(admin/ 하위 인증 서빙),build,,,,NEW,완료,raw/webadmin/webadmin/config/urls.py:298 || plan_row_id=NEW 사유: 계획행에 이슈 보고 기능 항목 없음
+webadmin,도구,assistant_report,이슈 보고 (A-09),운영자(CS·상품),이슈 보고 제출,build,,,,NEW,완료,raw/webadmin/webadmin/config/urls.py:300 || plan_row_id=NEW 사유: 계획행에 이슈 보고 기능 항목 없음
+webadmin,도구,assistant_report,이슈 보고 (A-09),운영자(CS·상품),이슈 보고 취소,build,,,,NEW,완료,raw/webadmin/webadmin/config/urls.py:302 || plan_row_id=NEW 사유: 계획행에 이슈 보고 기능 항목 없음
+webadmin,도구,impact_detail,사용처 상세 (영향도),운영자(CS·상품),마스터 값이 어디에 쓰이는지 standalone 사용처 목록 조회(수정 전 영향 확인),build,,,,STD-ADP-009,완료,raw/webadmin/webadmin/config/urls.py:389
+webadmin,연동,wapi_order_register,주문 등록 수신 API,시스템(무인),쇼핑몰이 주문 생성 직후 호출 — 사양·원고를 주문번호에 묶어 저장(서버-투-서버 · site_key),integrate,huni-mall,huni-mall→webadmin,webadmin,STD-PAY-031,완료,raw/webadmin/webadmin/config/urls.py:268
+webadmin,연동,shopby_webhook,샵바이 웹훅 수신,시스템(무인),결제완료·취소·배송지변경 웹훅 수신 — 경로 마지막 조각이 비밀키(불일치 404) · 원문 저장 후 즉시 200,integrate,shopby,shopby→webadmin,webadmin,STD-PAY-031,완료,raw/webadmin/webadmin/config/urls.py:273
+webadmin,연동,wapi_cart_add,장바구니 항목 보관소,시스템(무인),장바구니 항목 등록 — 금액·사양·원고 파일 키 payload 보관(X-Huni-Server-Key 필수·CORS 미개방),integrate,huni-mall,huni-mall→webadmin,webadmin,STD-SYS-045,완료,raw/webadmin/webadmin/config/urls.py:262
+webadmin,연동,wapi_cart_fetch,장바구니 항목 보관소,시스템(무인),보관된 장바구니 항목 일괄 조회(서버-투-서버),integrate,huni-mall,huni-mall→webadmin,webadmin,STD-SYS-045,완료,raw/webadmin/webadmin/config/urls.py:263
+webadmin,연동,wapi_cart_item,장바구니 항목 보관소,시스템(무인),항목 단건 PUT(갱신)·DELETE(정리),integrate,huni-mall,huni-mall→webadmin,webadmin,STD-SYS-045,완료,raw/webadmin/webadmin/config/urls.py:265
+webadmin,연동,wapi_guides,가이드 파일 조회 API,시스템(무인),상품별 작업가이드 파일 목록 제공(자사몰 웹서버 전용 · site_key + gd: rate 버킷),integrate,huni-mall,webadmin→huni-mall,webadmin,STD-CAT-020,완료,raw/webadmin/webadmin/config/urls.py:281
+webadmin,연동,wapi_main_images,메인이미지 조회 API,시스템(무인),상품별 메인이미지 목록 제공(자사몰 웹서버 전용 · site_key + mi: rate 버킷),integrate,huni-mall,webadmin→huni-mall,webadmin,STD-ADP-014,완료,raw/webadmin/webadmin/config/urls.py:286
+webadmin,연동,wapi_main_image,메인이미지 공개 서빙,시스템(무인),활성 행 file_key 정확 일치만 이미지 서빙(키 추측 스캔 차단 · site_key 게이트 없음),integrate,huni-mall,webadmin→huni-mall,webadmin,STD-ADP-014,완료,raw/webadmin/webadmin/config/urls.py:284
+webadmin,연동,wapi_designs,디자인 목록 API,시스템(무인),상품별 디자인 목록 제공(자사몰 디자인 고르기 페이지 데이터원),integrate,huni-mall,webadmin→huni-mall,webadmin,STD-CAT-036,완료,raw/webadmin/webadmin/config/urls.py:288
+webadmin,연동,wapi_design_image,디자인 썸네일 공개 서빙,시스템(무인),디자인 썸네일 이미지 공개 서빙,integrate,huni-mall,webadmin→huni-mall,webadmin,STD-CAT-036,완료,raw/webadmin/webadmin/config/urls.py:290
+webadmin,연동,wapi_swatch_image,스와치 이미지 공개 서빙,시스템(무인),공정/자재 마스터 스와치 이미지 공개 서빙(site_key 게이트 없음),integrate,huni-mall,webadmin→huni-mall,webadmin,STD-ADP-002,완료,raw/webadmin/webadmin/config/urls.py:278

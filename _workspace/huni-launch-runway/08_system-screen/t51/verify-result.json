@@ -1,0 +1,74 @@
+[
+  {
+    "gate": "V1",
+    "name": "행 보존",
+    "verdict": "PASS",
+    "detail": "원천 747 = 통합 747 + 병합흡수 0 (stats.raw_total=747)"
+  },
+  {
+    "gate": "V2",
+    "name": "허용값·근거 필수",
+    "verdict": "PASS",
+    "detail": "위반 0"
+  },
+  {
+    "gate": "V3",
+    "name": "scope 파생",
+    "verdict": "PASS",
+    "detail": "접두 보유 원천 64행 · 통합 out 64행 · 파생 불일치 0"
+  },
+  {
+    "gate": "V4",
+    "name": "integrate 필수열",
+    "verdict": "PASS",
+    "detail": "counterpart 누락 0 · direction 누락 0 · owner_side 미정 11건(결함 아님 · 미결로 보고)"
+  },
+  {
+    "gate": "V4b",
+    "name": "owner_side 미정 집계 일치",
+    "verdict": "PASS",
+    "detail": "양쪽 11건"
+  },
+  {
+    "gate": "V5",
+    "name": "병합 무손실(양쪽 드릴다운 보존)",
+    "verdict": "PASS",
+    "detail": "유령 uid 0 · 상대 시스템 소실 0"
+  },
+  {
+    "gate": "V6",
+    "name": "일정 = 원장 복사(추정 0)",
+    "verdict": "PASS",
+    "detail": "척추 28행 · 원장과 어긋난 값 0"
+  },
+  {
+    "gate": "V7",
+    "name": "미수록 독립 재판정",
+    "verdict": "PASS",
+    "detail": "라우팅 89 · 검증기 미수록 83 · 보고 83"
+  },
+  {
+    "gate": "V8",
+    "name": "산출물·핵심 수치 실재",
+    "verdict": "PASS",
+    "detail": "누락 파일 없음 · 문서에 없는 수치 없음 · HTML 322,566B"
+  },
+  {
+    "gate": "V9",
+    "name": "승계 의무 주석",
+    "verdict": "PASS",
+    "detail": "실린 주석 6/6"
+  },
+  {
+    "gate": "V7b",
+    "name": "미수록 단정 금지",
+    "verdict": "PASS",
+    "detail": "t48 실재 {'쿠폰': 18, '공지': 11} · 단정 표현 없음 · 상·하한 표기 있음 (흔적 전무 6 / 흔적 있음 77)"
+  },
+  {
+    "gate": "V10",
+    "name": "verdict 표 = 계산값",
+    "verdict": "PASS",
+    "detail": "일치"
+  }
+]
