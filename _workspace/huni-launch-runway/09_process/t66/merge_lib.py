@@ -106,15 +106,18 @@ def kind_letter(s):
 
 
 def merged_gaps():
-    """네 카드 gaps.csv 421건을 한 벌 열 이름으로 모은다."""
+    """네 카드 gaps.csv 를 한 벌 열 이름으로 모은다.
+
+    gap_uid 는 **카드별로 매긴다**(`GX-t64-007`). 통번호로 매기면 한 카드의 건수가 바뀔 때
+    뒤 카드의 번호가 통째로 밀려 인용이 깨진다 — 260919 t64 정정(65→169)에서 실제로 겪었다.
+    """
     out = []
-    n = 0
+    n = {c: 0 for c in CARDS}
 
     def push(card, pid, pname, kind, 내용, 담당, 선행, rowref):
-        nonlocal n
-        n += 1
+        n[card] += 1
         out.append(dict(
-            gap_uid='GX-%03d' % n, card=card, process_ref=pid, process_name=pname,
+            gap_uid='GX-%s-%03d' % (card, n[card]), card=card, process_ref=pid, process_name=pname,
             종류=kind, 종류설명=GAP_KIND.get(kind, ''), 내용=내용.strip(),
             제안담당=담당.strip(), 선행=선행.strip(), 관련_row_id=rowref.strip(),
         ))

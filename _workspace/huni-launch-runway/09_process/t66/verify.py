@@ -16,9 +16,12 @@ RUNWAY = os.path.dirname(PROC)
 REPO = os.path.abspath(os.path.join(RUNWAY, '..', '..'))
 LEDGER = os.path.join(RUNWAY, '08_system-screen', 't56', 'rejudge.csv')
 
-CARD_COMMIT = {'t62': 'd50770c9', 't63': '307e6a56', 't64': '36f98e4b', 't65': '21f181ec'}
+# t64 는 260919 에 빠진 곳 집계를 정정했다(65 → 169 · 커밋 9c7476bb). 기준 커밋을 그것으로 옮긴다.
+CARD_COMMIT = {'t62': 'd50770c9', 't63': '307e6a56', 't64': '9c7476bb', 't65': '21f181ec'}
 EXPECT_OWNED = {'t62': 131, 't63': 201, 't64': 178, 't65': 151}
-EXPECT_GAPS = {'t62': 71, 't63': 168, 't64': 65, 't65': 117}
+EXPECT_GAPS = {'t62': 71, 't63': 168, 't64': 169, 't65': 117}
+EXPECT_TOTAL_GAPS = 525
+EXPECT_DECISIONS = 148
 EXPECT_PROC = {'t62': 29, 't63': 24, 't64': 17, 't65': 38}
 JOURNEYS = ['J1-비회원-주문-종단.md', 'J2-회원-가입-첫주문-적립.md',
             'J3-주문-생산-출고-배송.md', 'J4-취소-환불.md', 'J5-재제작.md']
@@ -81,25 +84,34 @@ nproc = len({r['process_uid'] for r in tree if r['card'] != '전제'})
 percard = {c: len({r['process_uid'] for r in tree if r['card'] == c}) for c in EXPECT_PROC}
 gate('V6 프로세스 108', nproc == 108 and percard == EXPECT_PROC, f'{nproc} · {percard}')
 
-# V7 — 빠진 곳 421 + 카드별 분해
+# V7 — 빠진 곳 525 + 카드별 분해
 gcard = {c: sum(1 for g in gaps if g['card'] == c) for c in EXPECT_GAPS}
 kinds = {k: sum(1 for g in gaps if g['종류'] == k) for k in '가나다라'}
-gate('V7 빠진 곳 421', len(gaps) == 421 and gcard == EXPECT_GAPS and sum(kinds.values()) == 421,
+gate(f'V7 빠진 곳 {EXPECT_TOTAL_GAPS}',
+     len(gaps) == EXPECT_TOTAL_GAPS and gcard == EXPECT_GAPS and sum(kinds.values()) == EXPECT_TOTAL_GAPS,
      f'{len(gaps)} · 카드 {gcard} · 종류 {kinds}')
 
-# V8 — 뿌리표가 421 을 남김없이 덮는다
+# V8 — 뿌리표가 525 를 남김없이 덮는다
 rsum = sum(int(r['건수']) for r in roots)
 no_rc = [g['gap_uid'] for g in gaps if not g['root_cause_id']]
 rc_ids = {r['root_cause_id'] for r in roots}
 orphan = {g['root_cause_id'] for g in gaps} - rc_ids
-gate('V8 뿌리 합계 = 421', rsum == 421 and not no_rc and not orphan,
+gate(f'V8 뿌리 합계 = {EXPECT_TOTAL_GAPS}',
+     rsum == EXPECT_TOTAL_GAPS and not no_rc and not orphan,
      f'합 {rsum} · 뿌리 {len(roots)}종 · 빈 root_cause {no_rc or "[]"} · 표 밖 {sorted(orphan) or "[]"}')
 
-# V9 — decisions.md 105건 = 종류 「라」
+# V9 — decisions.md 148건 = 종류 「라」
 dec = open(os.path.join(HERE, 'decisions.md'), encoding='utf-8').read()
 m = re.search(r'\|\s*\*\*합계\*\*\s*\|\s*\*\*(\d+)\*\*\s*\|', dec)
 dec_n = int(m.group(1)) if m else -1
-gate('V9 결정 105건', dec_n == 105 and kinds['라'] == 105, f'decisions.md {dec_n} · 라 {kinds["라"]}')
+gate(f'V9 결정 {EXPECT_DECISIONS}건',
+     dec_n == EXPECT_DECISIONS and kinds['라'] == EXPECT_DECISIONS,
+     f'decisions.md {dec_n} · 라 {kinds["라"]}')
+
+# V9b — gap_uid 는 카드별로 매긴다(통번호 금지 — 한 카드가 바뀌면 인용이 통째로 밀린다)
+badid = [g['gap_uid'] for g in gaps if not re.fullmatch(r'GX-t6[2-5]-\d{3}', g['gap_uid'])]
+gate('V9b gap_uid 카드별 고정', not badid and len({g['gap_uid'] for g in gaps}) == len(gaps),
+     f'형식 위반 {badid[:5] or "[]"} · 고유 {len({g["gap_uid"] for g in gaps})}')
 
 # V10 — 여정 5편 · mermaid · 경계 표 · 인용한 gap_uid 실재
 uids = {g['gap_uid'] for g in gaps}
@@ -114,7 +126,7 @@ for j in JOURNEYS:
         jbad.append(f'{j}: mermaid 없음')
     if '묶음 경계에서 끊기는 지점' not in t:
         jbad.append(f'{j}: 경계 표 없음')
-    ghost = sorted(set(re.findall(r'GX-\d{3}', t)) - uids)
+    ghost = sorted(set(re.findall(r'GX-[A-Za-z0-9]+-\d{3}', t)) - uids)
     if ghost:
         jbad.append(f'{j}: 없는 gap {ghost}')
 gate('V10 여정 5편 · mermaid · 경계표 · 인용 실재', not jbad, str(jbad or '정상'))

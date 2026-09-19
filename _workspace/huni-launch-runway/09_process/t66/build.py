@@ -453,6 +453,12 @@ border:1px solid var(--line);background:var(--card);color:var(--fg)}}
 <h2>빠진 곳의 뿌리 — 건수 순</h2>
 <p class="sub">같은 뿌리에서 나온 것끼리 묶었다. 뿌리를 고르는 규칙표는 <code>merge_lib.py:ROOT_RULES</code>
 한 곳에 있고, 걸린 낱말은 <code>all-gaps.csv</code> 의 <code>걸린낱말</code> 열에 남아 있다.</p>
+<div class="note"><b>⚠ 카드 사이의 건수는 그대로 비교하면 안 된다.</b> 네 카드가 「1건」을 세는 결이 서로 다르다 —
+t62·t65 는 사람이 프로세스마다 쓴 요약 문장 1개(프로세스당 2.4·3.1건),
+t63 은 원장 행 1개당 최대 1건(+원장 밖 제안 7건, 프로세스당 7.0건),
+t64 는 프로세스 문서 §5 항목 1:1(프로세스당 9.9건)이다.
+건수 차이의 일부는 결의 차이이지 문제 크기의 차이가 아니다 — 자세한 것은
+<a href="verdict.md">verdict.md §6</a>.</div>
 <div class="scroll">{roots}</div>
 <div class="note">「공통 뿌리 없음」은 규칙표에 걸리지 않았다는 뜻이지 뿌리가 없다는 뜻이 아니다 —
 사람이 읽어야 하는 줄이다. 억지로 묶지 않았다.</div>
