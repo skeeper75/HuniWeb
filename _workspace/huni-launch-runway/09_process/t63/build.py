@@ -53,7 +53,11 @@ def main():
     info, dropped_frag = {}, {}
     for rid, s in scope.items():
         e = ev_rows.get(rid, {})
-        found = (e.get('found') or '').strip().upper() == 'Y'
+        fv = (e.get('found') or '').strip()
+        # 레인이 「부분」으로 적은 것 = 서버 능력은 있는데 호출측이 안 붙었다.
+        # 근거는 실재하므로 싣고, 갭은 「다 연결 안 됨」으로 못박는다.
+        partial = fv == '부분'
+        found = fv.upper() == 'Y' or partial
         evid = (e.get('evidence') or '').strip()
         system = (e.get('system') or '').strip()
         note = (e.get('note') or '').strip()
@@ -68,7 +72,9 @@ def main():
             basis, has_code = '「미확인」' + (f' — {evid}' if evid else ''), False
 
         decision = bool(DECISION_PAT.search(s['title'])) or '미정' in s['owner']
-        if decision and not has_code:
+        if has_code and partial:
+            gap = '다 코드는 있는데 연결 안 됨'
+        elif decision and not has_code:
             gap = '라 결정 미정'
         elif not has_code:
             gap = '나 행은 있는데 코드 0'
